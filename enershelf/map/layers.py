@@ -85,7 +85,9 @@ if USE_DISTILLED_MVTS:
     SUFFIXES = ["", "_distilled"]
     ALL_SOURCES = (
         [
-            Source(name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"])
+            Source(
+                name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"]
+            )
             for region in REGIONS
             if ZOOM_LEVELS[region].min > MAX_DISTILLED_ZOOM
         ]
@@ -111,7 +113,12 @@ if USE_DISTILLED_MVTS:
 else:
     SUFFIXES = [""]
     ALL_SOURCES = (
-        [Source(name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"]) for region in REGIONS]
+        [
+            Source(
+                name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"]
+            )
+            for region in REGIONS
+        ]
         + [Source(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"])]
         + get_dynamic_sources()
     )
@@ -165,7 +172,9 @@ for layer in LAYERS_DEFINITION:
                 id=f"fill-{layer['source']}{suffix}",
                 color=layer["color"],
                 description=layer["description"],
-                minzoom=MAX_DISTILLED_ZOOM + 1 if suffix == "" and USE_DISTILLED_MVTS else MIN_ZOOM,
+                minzoom=MAX_DISTILLED_ZOOM + 1
+                if suffix == "" and USE_DISTILLED_MVTS
+                else MIN_ZOOM,
                 maxzoom=MAX_ZOOM if suffix == "" else MAX_DISTILLED_ZOOM + 1,
                 name=layer["name"],
                 style=layer["source"],

@@ -28,7 +28,9 @@ class MVTView(BaseMVTView):
         except ValidationError:
             pass
 
-        return Response(mvt, content_type="application/vnd.mapbox-vector-tile", status=status)
+        return Response(
+            mvt, content_type="application/vnd.mapbox-vector-tile", status=status
+        )
 
     def _create_mvt(self, z, x, y, filters):
         if not self.layers:
@@ -57,8 +59,4 @@ class MVTView(BaseMVTView):
 
 
 def mvt_view_factory(classname, layers):
-    return type(
-        f"{classname}MVTView",
-        (MVTView,),
-        {"layers": layers},
-    ).as_view()
+    return type(f"{classname}MVTView", (MVTView,), {"layers": layers},).as_view()

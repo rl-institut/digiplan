@@ -34,7 +34,9 @@ class MVTManager(models.Manager):
         bbox = Polygon.from_bbox(tile_edges(x, y, z))
         bbox.srid = 4326
         query = self.annotate(
-            mvt_geom=AsMVTGeom(Transform(self.geo_col, 3857), Transform(bbox, 3857), 4096, 0, False)
+            mvt_geom=AsMVTGeom(
+                Transform(self.geo_col, 3857), Transform(bbox, 3857), 4096, 0, False
+            )
         )
         intersect = {f"{self.geo_col}__intersects": bbox}
         return query.filter(**intersect)
@@ -78,7 +80,9 @@ class RegionMVTManager(MVTManager):
         return (
             super(RegionMVTManager, self)
             .get_queryset()
-            .annotate(bbox=models.functions.AsGeoJSON(models.functions.Envelope("geom")))
+            .annotate(
+                bbox=models.functions.AsGeoJSON(models.functions.Envelope("geom"))
+            )
         )
 
 
@@ -93,10 +97,18 @@ class LabelMVTManager(MVTManager):
     def _get_mvt_geom_query(self, x, y, z):
         bbox = Polygon.from_bbox(tile_edges(x, y, z))
         bbox.srid = 4326
-        query = self.annotate(mvt_geom=AsMVTGeom(Transform(self.geo_col, 3857), Transform(bbox, 3857), 4096, 0, False))
+        query = self.annotate(
+            mvt_geom=AsMVTGeom(
+                Transform(self.geo_col, 3857), Transform(bbox, 3857), 4096, 0, False
+            )
+        )
 
         intersect = {f"{self.geo_col}__intersects": bbox}
         return query.filter(**intersect)
 
     def get_queryset(self):
-        return super(LabelMVTManager, self).get_queryset().annotate(geom_label=models.functions.Centroid("geom"))
+        return (
+            super(LabelMVTManager, self)
+            .get_queryset()
+            .annotate(geom_label=models.functions.Centroid("geom"))
+        )

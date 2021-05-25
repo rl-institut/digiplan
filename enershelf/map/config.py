@@ -26,7 +26,9 @@ REGIONS = (
     "district",
     "municipality",
 )
-REGION_ZOOMS = RangeKeyDict({zoom: layer for layer, zoom in ZOOM_LEVELS.items() if layer in REGIONS})
+REGION_ZOOMS = RangeKeyDict(
+    {zoom: layer for layer, zoom in ZOOM_LEVELS.items() if layer in REGIONS}
+)
 
 
 # FILTERS
@@ -36,11 +38,7 @@ FILTER_DEFINITION = {}
 
 # STORE
 
-STORE_COLD_INIT = json.dumps(
-    {
-        "version": __version__,
-    }
-)
+STORE_COLD_INIT = json.dumps({"version": __version__})
 
 
 def init_hot_store():
