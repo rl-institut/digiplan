@@ -11,6 +11,14 @@ repos:
 
 -   repo: local
     hooks:
+      - id: black
+        name: black
+        entry: black
+        language: python
+        types: [python]
+
+-   repo: local
+    hooks:
       - id: flake8
         name: flake8
         entry: flake8
