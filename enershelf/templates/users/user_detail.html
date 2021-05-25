@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}User: {{ object.username }}{% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="small-12 columns">
+
+      <h2>{{ object.username }}</h2>
+      {% if object.name %}
+        <p>{{ object.name }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+{% if object == request.user %}
+<!-- Action buttons -->
+<div class="row">
+
+  <div class="small-12 columns">
+    <div class="button-group">
+      <a class="button" href="{% url 'users:update' %}" role="button">My Info</a>
+      <a class="button" href="{% url 'account_email' %}" role="button">E-Mail</a>
+    </div>
+    <!-- Your Stuff: Custom user template urls -->
+  </div>
+
+</div>
+<!-- End Action buttons -->
+{% endif %}
+
+{% endblock content %}
+

@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=enershelf
+POSTGRES_USER=HgrtZkqRteAZOmLLPnkRgEYAimjJelTy
+POSTGRES_PASSWORD=Tf4x9KddtAu73iQslxwjmWC3h8pNRxc7EiZuqrP5JsZwPLSyf7eHD9CH83MieAH4
