@@ -1,0 +1,234 @@
+{
+  "region-line": {
+    "type": "line",
+    "paint": {
+      "line-color": "rgb(115,62,136)",
+      "line-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "feature-state",
+            "hover"
+          ],
+          false
+        ],
+        3,
+        0.25
+      ]
+    }
+  },
+  "region-fill": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "rgb(115,62,136)",
+      "fill-opacity": [
+        "case",
+        [
+          "boolean",
+          [
+            "feature-state",
+            "hover"
+          ],
+          false
+        ],
+        0,
+        0.1
+      ]
+    }
+  },
+  "region-label": {
+    "type": "symbol",
+    "layout": {
+      "text-variable-anchor": [
+        "center",
+        "top"
+      ],
+      "text-radial-offset": 2,
+      "text-field": "{name}",
+      "text-font": [
+        "Flexo Medium"
+      ],
+      "text-letter-spacing": 0.04
+    },
+    "paint": {
+      "text-color": [
+        "case",
+        [
+          "boolean",
+          [
+            "feature-state",
+            "hover"
+          ],
+          false
+        ],
+        "#222222",
+        "#000000"
+      ],
+      "text-halo-color": "hsl(0, 0%, 100%)",
+      "text-halo-width": 0.85,
+      "text-halo-blur": 1.5
+    }
+  },
+  "air_traffic_control": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#ffed6f",
+      "fill-opacity": 0.8
+    }
+  },
+  "aviation": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#b6c0c6",
+      "fill-opacity": 0.8
+    }
+  },
+  "biosphere_reserve": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#fdb462",
+      "fill-opacity": 0.8
+    }
+  },
+  "drinking_water_protection_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#48A8AE",
+      "fill-opacity": 0.8
+    }
+  },
+  "fauna_flora_habitat": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "rgb(173, 134, 176)",
+      "fill-opacity": 0.8
+    }
+  },
+  "floodplain": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#000000",
+      "fill-opacity": 0.8
+    }
+  },
+  "forest": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#b3de69",
+      "fill-opacity": 0.8
+    }
+  },
+  "grid": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "rgb(30, 131, 179)",
+      "fill-opacity": 0.8
+    }
+  },
+  "industry": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#553834",
+      "fill-opacity": 0.8
+    }
+  },
+  "landscape_protection_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "rgb(131, 147, 190)",
+      "fill-opacity": 0.8
+    }
+  },
+  "military": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#758bd0",
+      "fill-opacity": 0.8
+    }
+  },
+  "national_park": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#fb8072",
+      "fill-opacity": 0.8
+    }
+  },
+  "nature_conservation_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#8dd3c7",
+      "fill-opacity": 0.8
+    }
+  },
+  "potential_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "rgb(222, 112, 165)",
+      "fill-opacity": 0.8
+    }
+  },
+  "potential_forest": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#de70a5",
+      "fill-opacity": 1
+    }
+  },
+  "potential_lpa": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#de70a5",
+      "fill-opacity": 1
+    }
+  },
+  "railway": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "rgb(95, 96, 92)",
+      "fill-opacity": 0.8
+    }
+  },
+  "road": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "rgb(97, 116, 148)",
+      "fill-opacity": 0.8
+    }
+  },
+  "settlement": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#bebada",
+      "fill-opacity": 0.8
+    }
+  },
+  "slope": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#fccde5",
+      "fill-opacity": 0.8
+    }
+  },
+  "special_protection_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#ffffb3",
+      "fill-opacity": 0.8
+    }
+  },
+  "water": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#80b1d3",
+      "fill-opacity": 0.8
+    }
+  },
+  "wetland_ramsar": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#88bb3c",
+      "fill-opacity": 0.8
+    }
+  }
+}
