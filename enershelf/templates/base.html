@@ -19,9 +19,9 @@
     {% block css %}
     {% compress css %}
     <link rel="stylesheet" type="text/x-scss" href="{% static 'sass/app.scss' %}">
-    
+
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
-    
+
     {% endcompress %}
     {% endblock %}
 
@@ -38,32 +38,6 @@
       <div class="top-bar-left hide-for-small-only">
         <ul class="dropdown menu">
           <li class="menu-text">EnerShelf</li>
-        </ul>
-      </div>
-
-      <div class="top-bar-right">
-        <ul class="vertical medium-horizontal menu">
-          <li> <a href="{% url 'home' %}">Home</a></li>
-          <li><a href="{% url 'about' %}">About</a></li>
-          {% if request.user.is_authenticated %}
-            <li>
-              {# URL provided by django-allauth/account/urls.py #}
-              <a href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
-            </li>
-            <li>
-              {# URL provided by django-allauth/account/urls.py #}
-              <a href="{% url 'account_logout' %}">{% trans "Sign out" %}</a>
-            </li>
-            {% else %}
-            <li>
-              {# URL provided by django-allauth/account/urls.py #}
-              <a id="sign-up-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
-            </li>
-            <li>
-              {# URL provided by django-allauth/account/urls.py #}
-              <a id="log-in-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
-            </li>
-            {% endif %}
         </ul>
       </div>
 
