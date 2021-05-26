@@ -56,21 +56,21 @@
 
         {% for source in all_sources %}
           map.addSource(
-                  "{{source.name}}",
-                  {
-                    "type": "{{source.type}}",
-                    "promoteId": "id",
-                    {% if source.tiles %}
-                      "tiles": [
-                        {% for tile in source.tiles %}
-                          "{{request.scheme}}://{{request.get_host}}/{{tile|safe}}",
-                        {% endfor %}
-                      ],
-                    {% endif %}
-                    {% if source.url %}
-                      "url": "{{source.url|safe}}",
-                    {% endif %}
-                  }
+            "{{source.name}}",
+            {
+              "type": "{{source.type}}",
+              "promoteId": "id",
+              {% if source.tiles %}
+                "tiles": [
+                  {% for tile in source.tiles %}
+                    "{{request.scheme}}://{{request.get_host}}/{{tile|safe}}",
+                  {% endfor %}
+                ],
+              {% endif %}
+              {% if source.url %}
+                "url": "{{source.url|safe}}",
+              {% endif %}
+            }
           );
         {% endfor %}
 
