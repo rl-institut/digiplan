@@ -1,0 +1,5 @@
+const eventTopics = {
+  // Init
+  MAP_LOADED: "MAP_LOADED",
+  STATES_INITIALIZED: "STATES_INITIALIZED",
+}

@@ -54,9 +54,6 @@
 
       map.on("load", function () {
 
-        // Wake up search endpoint on map load
-        fetch(`${window.location.origin}/search/?query=WakeUp`);
-
         {% for source in all_sources %}
           map.addSource(
                   "{{source.name}}",
