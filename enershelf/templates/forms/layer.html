@@ -1,0 +1,29 @@
+{% load static i18n %}
+
+<form class="layers__item static-layer">
+  <div class="switch-wrap">
+    {{ form.switch }}
+  </div>
+  {% if form.layer.source and form.layer.color %}
+  <style>
+    #fill-{{ form.layer.source }}:checked ~ #fill-{{ form.layer.source }}-label {
+      background-color: {{ form.layer.color }};
+    }
+  </style>
+  {% endif %}
+  <div class="name">
+    <span class="name__text" data-source="{{ form.layer.source }}">{{ form.layer.name }}</span>
+    {% include 'widgets/info_button.html' with description=form.layer.description %}
+  </div>
+
+  {% if form.has_setup %}
+    <div class="line-break"></div>
+    <div class="layer-setup">
+      {% for field in form %}
+        {% if field.name != 'switch' %}
+          {{ field }}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</form>

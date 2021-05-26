@@ -1,0 +1,20 @@
+{% load static %}
+<div class="{{ widget.attrs.filter_class }}">
+  <div class="{{ widget.attrs.header_class }}">
+    {% if widget.attrs.icon %}
+      <svg class="icon">
+        <use xlink:href="{% static 'images/icons/sprite.svg' %}#{{ widget.attrs.icon }}"></use>
+      </svg>
+    {% endif %}
+    <div class="filter--info">
+      {{ widget.attrs.label }}
+      {% if widget.attrs.tooltip %}
+        {% include 'widgets/info_button.html' with description=widget.attrs.tooltip %}
+      {% endif %}
+    </div>
+  </div>
+  <div class="scenario-display">
+    <div class="scenario-display__input"{% if widget.attrs.id %}id="{{ widget.attrs.id }}"{% endif %}>{{ widget.attrs.initial_start }}</div>
+  </div>
+  <div class="scenario-display__unit">%</div>
+</div>

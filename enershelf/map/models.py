@@ -27,7 +27,6 @@ class Country(models.Model):
     geom = models.MultiPolygonField(srid=4326)
 
     region = models.OneToOneField("Region", on_delete=models.DO_NOTHING, null=True)
-    mvt_model = models.OneToOneField("MVTModel", on_delete=models.SET_NULL, null=True)
 
     objects = models.Manager()
     vector_tiles = RegionMVTManager(columns=["id", "name"])
@@ -45,7 +44,6 @@ class State(models.Model):
     geom = models.MultiPolygonField(srid=4326)
 
     region = models.OneToOneField("Region", on_delete=models.DO_NOTHING, null=True)
-    mvt_model = models.OneToOneField("MVTModel", on_delete=models.SET_NULL, null=True)
 
     objects = models.Manager()
     vector_tiles = RegionMVTManager(columns=["id", "name", "bbox"])
@@ -64,7 +62,6 @@ class District(models.Model):
     geom = models.MultiPolygonField(srid=4326)
 
     region = models.OneToOneField("Region", on_delete=models.DO_NOTHING, null=True)
-    mvt_model = models.OneToOneField("MVTModel", on_delete=models.SET_NULL, null=True)
 
     objects = models.Manager()
     vector_tiles = RegionMVTManager(columns=["id", "name", "type", "bbox"])
@@ -84,7 +81,6 @@ class Municipality(models.Model):
     geom = models.MultiPolygonField(srid=4326)
 
     region = models.OneToOneField("Region", on_delete=models.DO_NOTHING, null=True)
-    mvt_model = models.OneToOneField("MVTModel", on_delete=models.SET_NULL, null=True)
 
     objects = models.Manager()
     vector_tiles = RegionMVTManager(columns=["id", "name", "bbox"])

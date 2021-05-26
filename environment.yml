@@ -1,0 +1,6 @@
+name: enershelf
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - gdal=3.2.1

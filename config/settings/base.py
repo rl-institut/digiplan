@@ -9,6 +9,7 @@ ROOT_DIR = (
     environ.Path(__file__) - 3
 )  # (enershelf/config/settings/base.py - 3 = enershelf/)
 APPS_DIR = ROOT_DIR.path("enershelf")
+METADATA_DIR = APPS_DIR.path("metadata")
 
 env = environ.Env()
 
@@ -45,6 +46,8 @@ LOCALE_PATHS = [ROOT_DIR.path("locale")]
 DATABASES = {"default": env.db("DATABASE_URL")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
 # URLS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
@@ -67,15 +70,12 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     "foundation_formtags",  # Form layouts
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
     "rest_framework",
 ]
 
 LOCAL_APPS = [
     "enershelf.users.apps.UsersConfig",
-    # Your stuff: custom apps go here
+    "enershelf.map.apps.MapConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -90,7 +90,6 @@ MIGRATION_MODULES = {"sites": "enershelf.contrib.sites.migrations"}
 # https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = "users.User"
@@ -245,20 +244,6 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
 }
 
-
-# django-allauth
-# ------------------------------------------------------------------------------
-ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_AUTHENTICATION_METHOD = "username"
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_EMAIL_REQUIRED = True
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = "enershelf.users.adapters.AccountAdapter"
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = "enershelf.users.adapters.SocialAccountAdapter"
 
 # django-compressor
 # ------------------------------------------------------------------------------
