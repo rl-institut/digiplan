@@ -54,18 +54,26 @@ class State(models.Model):
 
 
 class District(models.Model):
-    id = models.BigIntegerField(primary_key=True)
-    name = models.CharField(max_length=60)
-    type = models.CharField(max_length=40)
-    nuts = models.CharField(max_length=5)
-    state_id = models.BigIntegerField()
     geom = models.MultiPolygonField(srid=4326)
-
-    region = models.OneToOneField("Region", on_delete=models.DO_NOTHING, null=True)
+    name = models.CharField(max_length=50)
+    area = models.FloatField()
+    population = models.BigIntegerField()
+    hospitals = models.IntegerField()
+    den_p_h_km = models.FloatField(null=True)
 
     objects = models.Manager()
     vector_tiles = RegionMVTManager(columns=["id", "name", "type", "bbox"])
     label_tiles = LabelMVTManager(geo_col="geom_label", columns=["id", "name"])
+
+    data_file = "AdminAreas"
+    mapping = {
+        "name": "DISTRICT",
+        "area": "Shape__Are",
+        "geom": "MULTIPOLYGON",
+        "population": "pop_2020",
+        "hospitals": "NUM_hosp",
+        "den_p_h_km": "den_p_h_km",
+    }
 
     def __str__(self):
         return self.name

@@ -332,3 +332,4 @@ enershelf/media/
 !.envs/.local/
 
 .idea/*
+/enershelf/data/
