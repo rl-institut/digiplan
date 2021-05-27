@@ -19,6 +19,8 @@ services:
       - ./.envs/.local/.postgres
     ports:
       - "8000:8000"
+    networks:
+      enershelf:
     command: /start
 
   postgres:
@@ -26,8 +28,14 @@ services:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
     image: enershelf_production_postgres
+    command: postgres -N 500
+    networks:
+      enershelf:
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
       - local_postgres_data_backups:/backups
     env_file:
       - ./.envs/.local/.postgres
+
+networks:
+  enershelf:

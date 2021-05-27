@@ -3,7 +3,6 @@ version: '3'
 volumes:
   production_postgres_data: {}
   production_postgres_data_backups: {}
-  production_traefik: {}
 
 services:
   django:
@@ -11,6 +10,15 @@ services:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
     image: enershelf_production_django
+    restart: unless-stopped
+      networks:
+        - enershelf_network
+        - caddy_network
+      volumes:
+        - ./enershelf/data:/app/enershelf/data
+        - ./enershelf/static/mvts:/app/staticfiles/mvts
+      expose:
+        - "5000"
     depends_on:
       - postgres
       - redis
@@ -24,26 +32,26 @@ services:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
     image: enershelf_production_postgres
+    command: postgres -N 500
+    restart: always
+      networks:
+        - enershelf_network
     volumes:
       - production_postgres_data:/var/lib/postgresql/data
       - production_postgres_data_backups:/backups
     env_file:
       - ./.envs/.production/.postgres
 
-  traefik:
-    build:
-      context: .
-      dockerfile: ./compose/production/traefik/Dockerfile
-    image: enershelf_production_traefik
-    depends_on:
-      - django
-    volumes:
-      - production_traefik:/etc/traefik/acme
-    ports:
-      - "0.0.0.0:80:80"
-      - "0.0.0.0:443:443"
-
   redis:
     image: redis:5.0
+    restart: always
+      networks:
+        - enershelf_network
 
-  
+networks:
+  enershelf_network:
+  caddy_network:
+    external:
+      name: docker_caddy_network
+
+
