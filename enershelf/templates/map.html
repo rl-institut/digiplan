@@ -18,6 +18,7 @@
 {% block content %}
   <section class="map-content show-for-large off-canvas-content" data-off-canvas-content>
     {% include 'canvases/panels.html' %}
+    <pre id="info"></pre>
     {% include 'canvases/map.html' %}
   </section>
 
@@ -44,9 +45,9 @@
       const map = new mapboxgl.Map({
         container: "map",
         style: "{{mapbox_style_location}}", // stylesheet location
-        center: [10.407237624103573, 51.22757621251938], // starting position [lng, lat]
-        zoom: 5.546712433728557, // starting zoom
-        maxBounds: [[-2.54, 46.35], [23.93, 55.87]] // [[south-west], [north-east]] restrict area
+        center: [-1.137, 7.88], // starting position [lng, lat]
+        zoom: 5, // starting zoom
+<!--        maxBounds: [[-2.54, 46.35], [23.93, 55.87]] // [[south-west], [north-east]] restrict area-->
       });
 
       const nav = new mapboxgl.NavigationControl();
