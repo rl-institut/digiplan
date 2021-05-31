@@ -1,7 +1,7 @@
 from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
 
-from .managers import RegionMVTManager, LabelMVTManager
+from .managers import RegionMVTManager, LabelMVTManager, MVTManager
 
 
 class Region(models.Model):
@@ -53,8 +53,7 @@ class Grid(models.Model):
     source = models.CharField(max_length=100)
 
     objects = models.Manager()
-    vector_tiles = RegionMVTManager(columns=["id", "name", "type", "bbox"])
-    label_tiles = LabelMVTManager(geo_col="geom_label", columns=["id", "name"])
+    vector_tiles = MVTManager(columns=["id"])
 
     data_file = "Electricity_Infrastructure"
     layer = "GridNetwork"

@@ -9,10 +9,9 @@ from django.db.models import IntegerField, BooleanField
 from config.settings.base import USE_DISTILLED_MVTS
 from .config import MAX_ZOOM, MIN_ZOOM, REGIONS, ZOOM_LEVELS, MAX_DISTILLED_ZOOM
 
-with open(
-    os.path.join(os.path.dirname(__file__), "../static/styles/layer_styles.json"),
-    mode="rb",
-) as f:
+from . import models
+
+with open(os.path.join(os.path.dirname(__file__), "../static/styles/layer_styles.json"), mode="rb",) as f:
     LAYER_STYLES = json.loads(f.read())
 
 
@@ -24,8 +23,20 @@ def get_opacity(source_layer):
     return LAYER_STYLES[source_layer]["paint"]["fill-opacity"]
 
 
-LAYERS_DEFINITION = []
-LAYERS_CATEGORIES = {}
+ELECTRICITY = [
+    {
+        "source": "grid",
+        "color": get_color("grid"),
+        "model": models.Grid,
+        "name": "Grids",
+        "name_singular": "Grid",
+        "description": "Electricity grids",
+    },
+]
+LAYERS_DEFINITION = ELECTRICITY
+LAYERS_CATEGORIES = {
+    "Electricty": ELECTRICITY,
+}
 
 
 @dataclass
@@ -85,40 +96,25 @@ if USE_DISTILLED_MVTS:
     SUFFIXES = ["", "_distilled"]
     ALL_SOURCES = (
         [
-            Source(
-                name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"]
-            )
+            Source(name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"])
             for region in REGIONS
             if ZOOM_LEVELS[region].min > MAX_DISTILLED_ZOOM
         ]
         + [
-            Source(
-                name=region,
-                type="vector",
-                tiles=[f"static/mvts/{{z}}/{{x}}/{{y}}/{region}.mvt"],
-            )
+            Source(name=region, type="vector", tiles=[f"static/mvts/{{z}}/{{x}}/{{y}}/{region}.mvt"],)
             for region in REGIONS
             if ZOOM_LEVELS[region].min < MAX_DISTILLED_ZOOM
         ]
         + [
             Source(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"]),
-            Source(
-                name="static_distilled",
-                type="vector",
-                tiles=["static/mvts/{z}/{x}/{y}/static.mvt"],
-            ),
+            Source(name="static_distilled", type="vector", tiles=["static/mvts/{z}/{x}/{y}/static.mvt"],),
         ]
         + get_dynamic_sources()
     )
 else:
     SUFFIXES = [""]
     ALL_SOURCES = (
-        [
-            Source(
-                name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"]
-            )
-            for region in REGIONS
-        ]
+        [Source(name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"]) for region in REGIONS]
         + [Source(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"])]
         + get_dynamic_sources()
     )
@@ -172,9 +168,7 @@ for layer in LAYERS_DEFINITION:
                 id=f"fill-{layer['source']}{suffix}",
                 color=layer["color"],
                 description=layer["description"],
-                minzoom=MAX_DISTILLED_ZOOM + 1
-                if suffix == "" and USE_DISTILLED_MVTS
-                else MIN_ZOOM,
+                minzoom=MAX_DISTILLED_ZOOM + 1 if suffix == "" and USE_DISTILLED_MVTS else MIN_ZOOM,
                 maxzoom=MAX_ZOOM if suffix == "" else MAX_DISTILLED_ZOOM + 1,
                 name=layer["name"],
                 style=layer["source"],
