@@ -2,21 +2,9 @@ from . import models
 from .mvt import MVTLayer
 
 REGION_MVT_LAYERS = {
-    "country": [
-        MVTLayer("country", models.Country.vector_tiles),
-        MVTLayer("countrylabel", models.Country.label_tiles),
-    ],
-    "state": [
-        MVTLayer("state", models.State.vector_tiles),
-        MVTLayer("statelabel", models.State.label_tiles),
-    ],
     "district": [
         MVTLayer("district", models.District.vector_tiles),
         MVTLayer("districtlabel", models.District.label_tiles),
-    ],
-    "municipality": [
-        MVTLayer("municipality", models.Municipality.vector_tiles),
-        MVTLayer("municipalitylabel", models.Municipality.label_tiles),
     ],
 }
 

@@ -12,9 +12,10 @@ def load_data(models=None, verbose=True):
     models = models or MODELS
     for model in models:
         instance = LayerMapping(
-            model,
-            os.path.join(ROOT_DIR, "enershelf", "data", f"{model.data_file}.gpkg",),
-            model.mapping,
+            model=model,
+            data=os.path.join(ROOT_DIR, "enershelf", "data", f"{model.data_file}.gpkg",),
+            mapping=model.mapping,
+            layer=model.layer,
             transform=4326,
         )
         instance.save(strict=True, verbose=verbose)
