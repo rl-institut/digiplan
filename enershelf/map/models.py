@@ -28,7 +28,7 @@ class District(models.Model):
     den_p_h_km = models.FloatField(null=True)
 
     objects = models.Manager()
-    vector_tiles = RegionMVTManager(columns=["id", "name", "type", "bbox"])
+    vector_tiles = RegionMVTManager(columns=["id", "name", "bbox"])
     label_tiles = LabelMVTManager(geo_col="geom_label", columns=["id", "name"])
 
     data_file = "AdminAreas"
