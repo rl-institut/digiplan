@@ -96,3 +96,22 @@ class Municipality(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Grid(models.Model):
+    geom = models.MultiLineStringField(srid=4326)
+    source = models.CharField(max_length=100)
+
+    objects = models.Manager()
+    vector_tiles = RegionMVTManager(columns=["id", "name", "type", "bbox"])
+    label_tiles = LabelMVTManager(geo_col="geom_label", columns=["id", "name"])
+
+    data_file = "Electricity_Infrastructure"
+    layer = "GridNetwork"
+    mapping = {
+        "source": "source",
+        "geom": "MULTILINESTRING",
+    }
+
+    def __str__(self):
+        return self.source
