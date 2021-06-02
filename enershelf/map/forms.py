@@ -1,15 +1,12 @@
 from crispy_forms.helper import FormHelper
-from django.forms import BooleanField, Form, IntegerField
+from django.forms import BooleanField, Form, IntegerField, TextInput, MultiValueField
 
-from .widgets import SliderWidget, SwitchWidget
+from .widgets import SwitchWidget
 
 
 class StaticLayerForm(Form):
     switch = BooleanField(
-        label=False,
-        widget=SwitchWidget(
-            switch_class="switch tiny", switch_input_class="switch-input",
-        ),
+        label=False, widget=SwitchWidget(switch_class="switch tiny", switch_input_class="switch-input",),
     )
 
     def __init__(self, layer, *args, **kwargs):
@@ -17,23 +14,22 @@ class StaticLayerForm(Form):
         self.layer = layer
         self.fields["switch"].widget.attrs["id"] = f"fill-{layer['source']}"
 
-        if hasattr(layer["model"], "setup"):
-            self.has_setup = True
-            setup_model = layer["model"]._meta.get_field("setup").related_model
-            for setup in setup_model._meta.fields:
-                if setup.name == "id":
-                    continue
-                self.fields[setup.name] = IntegerField(
+        if hasattr(layer["model"], "filters"):
+            self.has_filters = True
+            for filter in layer["model"].filters:
+                self.fields[filter] = MultiValueField(
                     label=False,
-                    widget=SliderWidget(
-                        label=setup.verbose_name,
-                        icon=setup.icon,
-                        items=[choice[0] for choice in setup.choices],
-                        id=setup.name,
-                        item_id=f"{setup.name}_items",
-                        filter_class="slider-item",
-                        header_class="slider-item__heading",
-                        item_class="slider-item__numbers",
+                    fields=[IntegerField(), IntegerField()],
+                    widget=TextInput(
+                        attrs={
+                            "class": "js-range-slider",
+                            "data-type": "double",
+                            "data-min": 0,
+                            "data-max": 1000,
+                            "data-from": 200,
+                            "data-to": 500,
+                            "data-grid": True,
+                        }
                     ),
                 )
 

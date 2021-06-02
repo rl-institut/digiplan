@@ -55,6 +55,9 @@ class Grid(models.Model):
     objects = models.Manager()
     vector_tiles = MVTManager(columns=["id"])
 
+    # FIXME: Test only
+    filters = ["source"]
+
     data_file = "Electricity_Infrastructure"
     layer = "GridNetwork"
     mapping = {
@@ -69,6 +72,8 @@ class Grid(models.Model):
 class Nightlight(models.Model):
     geom = models.MultiPolygonField(srid=4326)
     dn = models.IntegerField()
+
+    filters = ["dn"]
 
     objects = models.Manager()
     vector_tiles = RegionMVTManager(columns=["id", "name", "type", "bbox"])

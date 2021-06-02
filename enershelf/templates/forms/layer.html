@@ -16,7 +16,7 @@
     {% include 'widgets/info_button.html' with description=form.layer.description %}
   </div>
 
-  {% if form.has_setup %}
+  {% if form.has_filters %}
     <div class="line-break"></div>
     <div class="layer-setup">
       {% for field in form %}
