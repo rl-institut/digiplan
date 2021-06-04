@@ -53,7 +53,7 @@ class Grid(models.Model):
     source = models.CharField(max_length=100)
 
     objects = models.Manager()
-    vector_tiles = MVTManager(columns=["id"])
+    vector_tiles = MVTManager(columns=["id", "source"])
 
     # FIXME: Test only
     filters = ["source"]
@@ -76,8 +76,7 @@ class Nightlight(models.Model):
     filters = ["dn"]
 
     objects = models.Manager()
-    vector_tiles = RegionMVTManager(columns=["id", "name", "type", "bbox"])
-    label_tiles = LabelMVTManager(geo_col="geom_label", columns=["id", "name"])
+    vector_tiles = RegionMVTManager(columns=["id", "dn"])
 
     data_file = "Electricity_Infrastructure"
     layer = "NightLights_Binary"

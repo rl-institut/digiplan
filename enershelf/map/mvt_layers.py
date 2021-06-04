@@ -9,7 +9,7 @@ REGION_MVT_LAYERS = {
 }
 
 STATIC_MVT_LAYERS = {
-    "static": [MVTLayer("grid", models.Grid.vector_tiles)],
+    "static": [MVTLayer("grid", models.Grid.vector_tiles), MVTLayer("nightlight", models.Nightlight.vector_tiles)],
 }
 
 DYNAMIC_MVT_LAYERS = {}

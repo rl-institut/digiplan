@@ -32,6 +32,14 @@ ELECTRICITY = [
         "name_singular": "Grid",
         "description": "Electricity grids",
     },
+    {
+        "source": "nightlight",
+        "color": get_color("nightlight"),
+        "model": models.Nightlight,
+        "name": "Nightlights",
+        "name_singular": "Nightlight",
+        "description": "See nightlights",
+    },
 ]
 LAYERS_DEFINITION = ELECTRICITY
 LAYERS_CATEGORIES = {
