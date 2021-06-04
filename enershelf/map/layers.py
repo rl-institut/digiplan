@@ -40,6 +40,14 @@ ELECTRICITY = [
         "name_singular": "Nightlight",
         "description": "See nightlights",
     },
+    {
+        "source": "nightlight_test",
+        "color": get_color("nightlight_test"),
+        "model": models.Nightlight,
+        "name": "Nightlights Test",
+        "name_singular": "Nightlight Test",
+        "description": "See nightlights test",
+    },
 ]
 LAYERS_DEFINITION = ELECTRICITY
 LAYERS_CATEGORIES = {
