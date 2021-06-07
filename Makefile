@@ -7,3 +7,6 @@ empty_data:
 
 dump_fixtures:
 	bash enershelf/utils/dump_fixtures.sh
+
+load_fixtures:
+	bash enershelf/utils/load_fixtures.sh
