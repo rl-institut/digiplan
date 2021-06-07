@@ -33,9 +33,9 @@ class District(models.Model):
 
     data_file = "AdminAreas"
     mapping = {
+        "geom": "MULTIPOLYGON",
         "name": "DISTRICT",
         "area": "Shape__Are",
-        "geom": "MULTIPOLYGON",
         "population": "pop_2020",
         "hospitals": "NUM_hosp",
         "den_p_h_km": "den_p_h_km",
@@ -55,14 +55,11 @@ class Grid(models.Model):
     objects = models.Manager()
     vector_tiles = MVTManager(columns=["id", "source"])
 
-    # FIXME: Test only
-    filters = ["source"]
-
     data_file = "Electricity_Infrastructure"
     layer = "GridNetwork"
     mapping = {
-        "source": "source",
         "geom": "MULTILINESTRING",
+        "source": "source",
     }
 
     def __str__(self):
@@ -81,6 +78,23 @@ class Nightlight(models.Model):
     data_file = "Electricity_Infrastructure"
     layer = "NightLights_Binary"
     mapping = {
-        "dn": "DN",
         "geom": "MULTIPOLYGON",
+        "dn": "DN",
+    }
+
+
+class HC_Facilities(models.Model):
+    geom = models.PointField(srid=4326)
+    nightlight_distance = models.IntegerField(null=True)
+
+    # filters = ["nightlight_distance"]
+
+    objects = models.Manager()
+    vector_tiles = RegionMVTManager(columns=["id", "nightlight_distance"])
+
+    data_file = "HealthCare_Insfrastructure"
+    layer = "HC_Facilities"
+    mapping = {
+        "geom": "POINT",
+        "nightlight_distance": "nlj_DN",
     }

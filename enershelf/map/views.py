@@ -17,7 +17,7 @@ from config.settings.base import (
     MAPBOX_STYLE_LOCATION,
 )
 from .forms import StaticLayerForm
-from .config import STORE_COLD_INIT, STORE_HOT_INIT, SOURCES
+from .config import STORE_COLD_INIT, STORE_HOT_INIT, SOURCES, MAP_IMAGES
 
 
 class MapGLView(TemplateView):
@@ -27,11 +27,11 @@ class MapGLView(TemplateView):
         "password": PASSWORD,
         "mapbox_token": MAPBOX_TOKEN,
         "mapbox_style_location": MAPBOX_STYLE_LOCATION,
+        "map_images": MAP_IMAGES,
         "all_layers": ALL_LAYERS,
         "all_sources": ALL_SOURCES,
         "area_switches": {
-            category: [StaticLayerForm(layer) for layer in layers]
-            for category, layers in LAYERS_CATEGORIES.items()
+            category: [StaticLayerForm(layer) for layer in layers] for category, layers in LAYERS_CATEGORIES.items()
         },
         "use_distilled_mvts": USE_DISTILLED_MVTS,
         "store_cold_init": STORE_COLD_INIT,
@@ -42,19 +42,12 @@ class MapGLView(TemplateView):
         session_id = str(uuid.uuid4())
         context = super(MapGLView, self).get_context_data(**kwargs)
         context["session_id"] = session_id
-        with open(
-            settings.APPS_DIR.path("static").path("styles").path("layer_styles.json"),
-            "r",
-        ) as regions:
+        with open(settings.APPS_DIR.path("static").path("styles").path("layer_styles.json"), "r",) as regions:
             context["layer_styles"] = json.loads(regions.read())
 
         # Categorize sources
         categorized_sources = {
-            category: [
-                SOURCES[layer["source"]]
-                for layer in layers
-                if layer["source"] in SOURCES
-            ]
+            category: [SOURCES[layer["source"]] for layer in layers if layer["source"] in SOURCES]
             for category, layers in LAYERS_CATEGORIES.items()
         }
 

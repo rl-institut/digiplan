@@ -73,7 +73,7 @@
   "grid": {
     "type": "fill",
     "paint": {
-      "fill-color": "rgb(30, 131, 179)",
+      "fill-color": "rgb(0, 100, 0)",
       "fill-opacity": 0.8
     }
   },
@@ -89,6 +89,13 @@
     "paint": {
       "fill-color": "rgb(100, 20, 140)",
       "fill-opacity": 0.8
+    }
+  },
+  "hospital": {
+    "type": "symbol",
+    "layout": {
+      "icon-image": "hospital",
+      "icon-size": 0.5
     }
   }
 }

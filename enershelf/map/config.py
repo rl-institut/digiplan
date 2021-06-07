@@ -71,6 +71,11 @@ def init_sources():
 SOURCES = init_sources()
 
 
+# MAP
+
+MAP_IMAGES = {"hospital": "images/icons/hospital.png"}
+
+
 # DISTILL
 
 # Tiles of Germany: At z=4 Germany has width x=8-9 and height y=5-6

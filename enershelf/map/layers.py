@@ -48,6 +48,14 @@ ELECTRICITY = [
         "name_singular": "Nightlight Test",
         "description": "See nightlights test",
     },
+    {
+        "source": "hospital",
+        "color": "red",
+        "model": models.HC_Facilities,
+        "name": "Hospitals",
+        "name_singular": "Hospital",
+        "description": "See nightlights test",
+    },
 ]
 LAYERS_DEFINITION = ELECTRICITY
 LAYERS_CATEGORIES = {

@@ -53,6 +53,13 @@
       const nav = new mapboxgl.NavigationControl();
       map.addControl(nav, "top-right");
 
+      {% for im_name, im_file in map_images.items %}
+        map.loadImage("{% static im_file %}", function(error, image) {
+          if (error) throw error;
+          map.addImage("{{im_name}}", image);
+        });
+      {% endfor %}
+
       map.on("load", function () {
 
         {% for source in all_sources %}
