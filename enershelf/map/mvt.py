@@ -14,6 +14,15 @@ class MVTLayer:
     queryset: QuerySet
 
 
+class MVTResponse(Response):
+    """This class is needed in order to distill empty MVTs, as empty responses does not have a key "Content-Type"."""
+
+    def render(self):
+        retval = super(MVTResponse, self).render()
+        self["Content-Type"] = self.content_type
+        return retval
+
+
 class MVTView(BaseMVTView):
     layers: List[MVTLayer] = []
 
@@ -28,17 +37,16 @@ class MVTView(BaseMVTView):
         except ValidationError:
             pass
 
-        return Response(
-            mvt, content_type="application/vnd.mapbox-vector-tile", status=status
-        )
+        response = MVTResponse(mvt, content_type="application/vnd.mapbox-vector-tile", status=status)
+        response["Content-Type"] = "application/vnd.mapbox-vector-tile"
+        return response
 
     def _create_mvt(self, z, x, y, filters):
         if not self.layers:
             return None
 
         mvt_geom_queries = ", ".join(
-            f"q{i} AS ({layer.queryset.get_mvt_query(x, y, z, filters)})"
-            for i, layer in enumerate(self.layers)
+            f"q{i} AS ({layer.queryset.get_mvt_query(x, y, z, filters)})" for i, layer in enumerate(self.layers)
         )
 
         mvt_select_queries = ", ".join(
@@ -47,8 +55,7 @@ class MVTView(BaseMVTView):
         )
 
         mvt_query = " UNION ALL ".join(
-            f"SELECT ST_AsMVT(s{i}.*, '{layer.name}') FROM s{i}"
-            for i, layer in enumerate(self.layers)
+            f"SELECT ST_AsMVT(s{i}.*, '{layer.name}') FROM s{i}" for i, layer in enumerate(self.layers)
         )
 
         query = f"WITH {mvt_geom_queries}, {mvt_select_queries} {mvt_query};".strip()

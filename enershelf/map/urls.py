@@ -14,8 +14,7 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path(name + "_mvt/<int:z>/<int:x>/<int:y>/", mvt_view_factory(name, layers))
-    for name, layers in MVT_LAYERS.items()
+    path(name + "_mvt/<int:z>/<int:x>/<int:y>/", mvt_view_factory(name, layers)) for name, layers in MVT_LAYERS.items()
 ]
 
 
@@ -32,7 +31,7 @@ if settings.DISTILL:
             mvt_view_factory(name, layers),
             name=name,
             distill_func=get_all_statics_for_state_lod,
-            ignore_errors=True,
+            distill_status_codes=(200, 204, 400),
         )
         for name, layers in DISTILL_MVT_LAYERS.items()
     ]

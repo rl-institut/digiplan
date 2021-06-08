@@ -71,6 +71,7 @@ THIRD_PARTY_APPS = [
     "foundation_formtags",  # Form layouts
     "rest_framework",
     "crispy_forms",
+    "django_distill",
 ]
 
 LOCAL_APPS = [

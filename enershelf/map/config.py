@@ -9,7 +9,7 @@ from enershelf import __version__
 
 # REGIONS
 
-MIN_ZOOM = 4
+MIN_ZOOM = 5
 MAX_ZOOM = 22
 MAX_DISTILLED_ZOOM = 10
 
@@ -78,9 +78,9 @@ MAP_IMAGES = {"hospital": "images/icons/hospital.png"}
 
 # DISTILL
 
-# Tiles of Germany: At z=4 Germany has width x=8-9 and height y=5-6
-X_AT_MIN_Z = 8
-Y_AT_MIN_Z = 5
+# Tiles of Ghana: At z=5 Ghana has width x=15-16 and height y=15(-16)
+X_AT_MIN_Z = 15
+Y_AT_MIN_Z = 15
 
 
 def get_tile_coordinates_for_region(region):
