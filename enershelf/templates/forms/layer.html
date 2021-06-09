@@ -21,6 +21,7 @@
     <div class="layer-setup">
       {% for field in form %}
         {% if field.name != 'switch' %}
+          {{field.label}}
           {{ field }}
         {% endif %}
       {% endfor %}

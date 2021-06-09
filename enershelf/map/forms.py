@@ -21,7 +21,7 @@ class StaticLayerForm(Form):
                 filter_min = layer["model"].objects.aggregate(Min(filter))[f"{filter}__min"]
                 filter_max = layer["model"].objects.aggregate(Max(filter))[f"{filter}__max"]
                 self.fields[filter] = MultiValueField(
-                    label=False,
+                    label=getattr(layer["model"], filter).field.verbose_name,
                     fields=[IntegerField(), IntegerField()],
                     widget=TextInput(
                         attrs={

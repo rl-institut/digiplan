@@ -83,7 +83,7 @@ class Nightlight(models.Model):
 
 class HC_Facilities(models.Model):
     geom = models.PointField(srid=4326)
-    nightlight_distance = models.IntegerField(null=True)
+    nightlight_distance = models.IntegerField(null=True, verbose_name="Distance to nightlights")
 
     filters = ["nightlight_distance"]
 
