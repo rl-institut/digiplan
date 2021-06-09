@@ -2,3 +2,15 @@
 # ------------------------------------------------------------------------------
 USE_DOCKER=yes
 IPYTHONDIR=/app/.ipython
+
+# Redis
+# ------------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/0
+
+# Mapbox
+# ------------------------------------------------------------------------------
+
+MAPBOX_TOKEN=pk.eyJ1IjoiNGxtIiwiYSI6ImNraDZoc3RkMjA5M2IzMGwyY29scGRtMmsifQ.FguTHBtPi_7IB4WEc4jcOg
+MAPBOX_STYLE_LOCATION=mapbox://styles/4lm/ckhz3502k150k19li7zm8t5ns
+
+USE_DISTILLED_MVTS=False
