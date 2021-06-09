@@ -1,5 +1,6 @@
 from crispy_forms.helper import FormHelper
 from django.forms import BooleanField, Form, IntegerField, TextInput, MultiValueField
+from django.db.models import Min, Max
 
 from .widgets import SwitchWidget
 
@@ -17,6 +18,8 @@ class StaticLayerForm(Form):
         if hasattr(layer["model"], "filters"):
             self.has_filters = True
             for filter in layer["model"].filters:
+                filter_min = layer["model"].objects.aggregate(Min(filter))[f"{filter}__min"]
+                filter_max = layer["model"].objects.aggregate(Max(filter))[f"{filter}__max"]
                 self.fields[filter] = MultiValueField(
                     label=False,
                     fields=[IntegerField(), IntegerField()],
@@ -24,10 +27,10 @@ class StaticLayerForm(Form):
                         attrs={
                             "class": "js-range-slider",
                             "data-type": "double",
-                            "data-min": 0,
-                            "data-max": 1000,
-                            "data-from": 200,
-                            "data-to": 500,
+                            "data-min": filter_min,
+                            "data-max": filter_max,
+                            "data-from": filter_min,
+                            "data-to": filter_max,
                             "data-grid": True,
                         }
                     ),

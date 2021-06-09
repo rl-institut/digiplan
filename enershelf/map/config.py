@@ -17,7 +17,7 @@ Zoom = namedtuple("MinMax", ["min", "max"])
 ZOOM_LEVELS = {
     # "country": Zoom(MIN_ZOOM, 5),
     # "state": Zoom(5, 8),
-    "district": Zoom(MIN_ZOOM, MAX_ZOOM),
+    "district": Zoom(MIN_ZOOM, 11),
     # "municipality": Zoom(11, MAX_ZOOM + 1),
 }
 REGIONS = (
@@ -81,13 +81,15 @@ MAP_IMAGES = {"hospital": "images/icons/hospital.png"}
 # Tiles of Ghana: At z=5 Ghana has width x=15-16 and height y=15(-16)
 X_AT_MIN_Z = 15
 Y_AT_MIN_Z = 15
+X_OFFSET = 1
+Y_OFFSET = 0
 
 
 def get_tile_coordinates_for_region(region):
     for z in range(MIN_ZOOM, MAX_DISTILLED_ZOOM + 1):
         z_factor = 2 ** (z - MIN_ZOOM)
-        for x in range(X_AT_MIN_Z * z_factor, (X_AT_MIN_Z + 1) * z_factor):
-            for y in range(Y_AT_MIN_Z * z_factor, (Y_AT_MIN_Z + 1) * z_factor):
+        for x in range(X_AT_MIN_Z * z_factor, (X_AT_MIN_Z + 1) * z_factor + X_OFFSET):
+            for y in range(Y_AT_MIN_Z * z_factor, (Y_AT_MIN_Z + 1) * z_factor + Y_OFFSET):
                 if region in REGIONS and REGION_ZOOMS[z] != region:
                     continue
                 yield x, y, z

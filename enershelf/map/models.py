@@ -70,8 +70,6 @@ class Nightlight(models.Model):
     geom = models.MultiPolygonField(srid=4326)
     dn = models.IntegerField()
 
-    filters = ["dn"]
-
     objects = models.Manager()
     vector_tiles = RegionMVTManager(columns=["id", "dn"])
 
@@ -87,7 +85,7 @@ class HC_Facilities(models.Model):
     geom = models.PointField(srid=4326)
     nightlight_distance = models.IntegerField(null=True)
 
-    # filters = ["nightlight_distance"]
+    filters = ["nightlight_distance"]
 
     objects = models.Manager()
     vector_tiles = RegionMVTManager(columns=["id", "nightlight_distance"])
