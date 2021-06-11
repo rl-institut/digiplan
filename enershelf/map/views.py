@@ -4,11 +4,7 @@ import uuid
 from django.conf import settings
 from django.views.generic import TemplateView
 
-from .layers import (
-    ALL_LAYERS,
-    ALL_SOURCES,
-    LAYERS_CATEGORIES,
-)
+from .layers import ALL_LAYERS, ALL_SOURCES, LAYERS_CATEGORIES, POPUPS
 from config.settings.base import (
     USE_DISTILLED_MVTS,
     PASSWORD_PROTECTION,
@@ -30,6 +26,7 @@ class MapGLView(TemplateView):
         "map_images": MAP_IMAGES,
         "all_layers": ALL_LAYERS,
         "all_sources": ALL_SOURCES,
+        "popups": POPUPS,
         "area_switches": {
             category: [StaticLayerForm(layer) for layer in layers] for category, layers in LAYERS_CATEGORIES.items()
         },

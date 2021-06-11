@@ -55,6 +55,7 @@ ELECTRICITY = [
         "name": "Hospitals",
         "name_singular": "Hospital",
         "description": "See nightlights test",
+        "popup_fields": ["id", "nightlight_distance"],
     },
 ]
 LAYERS_DEFINITION = ELECTRICITY
@@ -182,14 +183,16 @@ REGION_LAYERS = (
     ]
 )
 
+POPUPS = []
 STATIC_LAYERS = []
 for layer in LAYERS_DEFINITION:
     if hasattr(layer["model"], "setup"):
         continue
     for suffix in SUFFIXES:
+        layer_id = f"fill-{layer['source']}{suffix}"
         STATIC_LAYERS.append(
             Layer(
-                id=f"fill-{layer['source']}{suffix}",
+                id=layer_id,
                 color=layer["color"],
                 description=layer["description"],
                 minzoom=MAX_DISTILLED_ZOOM + 1 if suffix == "" and USE_DISTILLED_MVTS else MIN_ZOOM,
@@ -201,6 +204,9 @@ for layer in LAYERS_DEFINITION:
                 type="static",
             )
         )
+        if "popup_fields" in layer:
+            popup_fields = {getattr(layer["model"], field).field.verbose_name: field for field in layer["popup_fields"]}
+            POPUPS.append({layer_id: json.dumps(popup_fields)})
 
 DYNAMIC_LAYERS = [
     Layer(
