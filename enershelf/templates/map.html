@@ -108,15 +108,13 @@
 
       {% for layer in all_layers %}
         // Zoom to feature on click
-        map.on("click", "{{layer.id}}", function (element) {
-          flyOrFit(element);
+        map.on("click", function (element) {
+          flyToElement(element);
         });
       {% endfor %}
 
       {% for popup in popups %}
-        {% for layer_id, fields in popup.items %}
-          add_popup("{{layer_id}}", {{fields|safe}});
-        {% endfor %}
+        add_popup("{{popup.layer_id}}", {{popup.fields|safe}});
       {% endfor %}
 
       {% for layer in all_layers %}

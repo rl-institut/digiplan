@@ -7,3 +7,6 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ## [Unreleased]
 ### Added
 - layers can be filtered by multiple filters
+
+### Changed
+- prevent zoom, if marker is clicked

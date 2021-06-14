@@ -4,7 +4,7 @@ import uuid
 from django.conf import settings
 from django.views.generic import TemplateView
 
-from .layers import ALL_LAYERS, ALL_SOURCES, LAYERS_CATEGORIES, POPUPS
+from .layers import ALL_LAYERS, REGION_LAYERS, ALL_SOURCES, LAYERS_CATEGORIES, POPUPS
 from config.settings.base import (
     USE_DISTILLED_MVTS,
     PASSWORD_PROTECTION,
@@ -31,14 +31,16 @@ class MapGLView(TemplateView):
             category: [StaticLayerForm(layer) for layer in layers] for category, layers in LAYERS_CATEGORIES.items()
         },
         "use_distilled_mvts": USE_DISTILLED_MVTS,
-        "store_cold_init": STORE_COLD_INIT,
         "store_hot_init": STORE_HOT_INIT,
     }
 
     def get_context_data(self, **kwargs):
+        # Add unique session ID
         session_id = str(uuid.uuid4())
         context = super(MapGLView, self).get_context_data(**kwargs)
         context["session_id"] = session_id
+
+        # Add layer styles
         with open(settings.APPS_DIR.path("static").path("styles").path("layer_styles.json"), "r",) as regions:
             context["layer_styles"] = json.loads(regions.read())
 
@@ -47,6 +49,11 @@ class MapGLView(TemplateView):
             category: [SOURCES[layer["source"]] for layer in layers if layer["source"] in SOURCES]
             for category, layers in LAYERS_CATEGORIES.items()
         }
-
         context["sources"] = categorized_sources
+
+        # Add popup-layer IDs to cold store
+        STORE_COLD_INIT["popup_layers"] = [popup.layer_id for popup in POPUPS]
+        STORE_COLD_INIT["region_layers"] = [layer.id for layer in REGION_LAYERS if layer.id.startswith("fill")]
+        context["store_cold_init"] = json.dumps(STORE_COLD_INIT)
+
         return context

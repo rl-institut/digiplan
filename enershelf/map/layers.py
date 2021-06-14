@@ -95,6 +95,12 @@ class Layer:
     color: Optional[str] = None
 
 
+@dataclass
+class Popup:
+    layer_id: str
+    fields: str
+
+
 def get_layer_setups(layer):
     setups = []
     setup_model = layer["model"]._meta.get_field("setup").related_model
@@ -215,7 +221,7 @@ for layer in LAYERS_DEFINITION:
         )
         if "popup_fields" in layer:
             popup_fields = {getattr(layer["model"], field).field.verbose_name: field for field in layer["popup_fields"]}
-            POPUPS.append({layer_id: json.dumps(popup_fields)})
+            POPUPS.append(Popup(layer_id, json.dumps(popup_fields)))
 
 DYNAMIC_LAYERS = [
     Layer(
