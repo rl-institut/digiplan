@@ -72,8 +72,8 @@ SOURCES = init_sources()
 
 
 # MAP
-
-MAP_IMAGES = {"hospital": "images/icons/hospital.png"}
+MapImage = namedtuple("MapImage", ["name", "path"])
+MAP_IMAGES = [MapImage("hospital", "images/icons/hospital.png")]
 
 
 # DISTILL
