@@ -48,20 +48,29 @@ ELECTRICITY = [
         "name_singular": "Nightlight Test",
         "description": "See nightlights test",
     },
+]
+HOSPITALS = [
     {
         "source": "hospital",
         "color": "red",
-        "model": models.HC_Facilities,
+        "model": models.Hospitals,
         "name": "Hospitals",
         "name_singular": "Hospital",
         "description": "See nightlights test",
         "popup_fields": ["id", "nightlight_distance"],
     },
+    {
+        "source": "hospital_simulated",
+        "color": "red",
+        "model": models.HospitalsSimulated,
+        "name": "Simulated Hospitals",
+        "name_singular": "Simulated hospital",
+        "description": "See nightlights test",
+        "popup_fields": ["id", "nightlight_distance", "population"],
+    },
 ]
-LAYERS_DEFINITION = ELECTRICITY
-LAYERS_CATEGORIES = {
-    "Electricty": ELECTRICITY,
-}
+LAYERS_DEFINITION = ELECTRICITY + HOSPITALS
+LAYERS_CATEGORIES = {"Electricty": ELECTRICITY, "Hospitals": HOSPITALS}
 
 
 @dataclass

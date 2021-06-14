@@ -81,7 +81,7 @@ class Nightlight(models.Model):
     }
 
 
-class HC_Facilities(models.Model):
+class Hospitals(models.Model):
     geom = models.PointField(srid=4326)
     nightlight_distance = models.IntegerField(null=True, verbose_name="Distance to nightlights")
 
@@ -96,3 +96,18 @@ class HC_Facilities(models.Model):
         "geom": "POINT",
         "nightlight_distance": "nlj_DN",
     }
+
+
+class HospitalsSimulated(models.Model):
+    geom = models.PointField(srid=4326)
+    nightlight_distance = models.IntegerField(null=True, verbose_name="Distance to nightlights")
+    population = models.FloatField(null=True, verbose_name="Population")
+
+    filters = ["nightlight_distance", "population"]
+
+    objects = models.Manager()
+    vector_tiles = RegionMVTManager(columns=["id", "nightlight_distance", "population"])
+
+    data_file = "HealthCare_Insfrastructure"
+    layer = "SelectedHospitals_Simulation"
+    mapping = {"geom": "POINT", "nightlight_distance": "nlj_DN", "population": "vj_pop_hos"}

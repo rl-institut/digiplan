@@ -13,7 +13,8 @@ STATIC_MVT_LAYERS = {
         MVTLayer("grid", models.Grid.vector_tiles),
         MVTLayer("nightlight", models.Nightlight.vector_tiles),
         MVTLayer("nightlight_test", models.Nightlight.vector_tiles),
-        MVTLayer("hospital", models.HC_Facilities.vector_tiles),
+        MVTLayer("hospital", models.Hospitals.vector_tiles),
+        MVTLayer("hospital_simulated", models.HospitalsSimulated.vector_tiles),
     ],
 }
 

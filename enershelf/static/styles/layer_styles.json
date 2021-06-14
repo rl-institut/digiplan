@@ -97,5 +97,12 @@
       "icon-image": "hospital",
       "icon-size": 0.5
     }
+  },
+  "hospital_simulated": {
+    "type": "symbol",
+    "layout": {
+      "icon-image": "hospital",
+      "icon-size": 1.0
+    }
   }
 }
