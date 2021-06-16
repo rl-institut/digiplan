@@ -1,8 +1,38 @@
 .panel {
   width: 100%;
   height: 100vh;
+  box-shadow: $box-shadow;
 
   @media only screen and (min-width: $medium-screen) {
     width: $panel-width;
+  }
+
+  &__logos {
+    @include flex-row;
+    text-align: center;
+    padding: $padding-normal 0 0;
+    border-bottom: $border-gray;
+
+    .logo {
+      flex: 1;
+    }
+
+    .logo--enershelf {
+      text-align: left;
+      padding-left: $padding-normal;
+
+      img {
+        width: 7rem;
+        transform: translateY(4px);
+      }
+    }
+
+    .logo--bmbf {
+      text-align: right;
+
+      img {
+        width: 8rem;
+      }
+    }
   }
 }

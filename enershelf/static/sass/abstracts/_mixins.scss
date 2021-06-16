@@ -4,15 +4,27 @@
   flex-direction: row;
 }
 
-@mixin flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
 @mixin flex-row-justify-center {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+@mixin flex-row-space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@mixin flex-row-flex-start {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
 }
 
 @mixin flex-column-align-center {
@@ -32,18 +44,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-@mixin flex-row-space-between {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-@mixin flex-row-flex-start {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
 }
 
 // Translate

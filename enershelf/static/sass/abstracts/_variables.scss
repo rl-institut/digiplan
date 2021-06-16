@@ -9,9 +9,7 @@ $enershelf-gray-3: #617494;
 $enershelf-gray-4: #d1d5d6;
 $enershelf-black: #1a171b;
 
-$gray-1: #9D9D9D;
-$gray-2: #636363;
-$light-gray-blue: #e8ebee;
+$gray-1: #F5F5F5;
 
 $white: #fff;
 
@@ -35,7 +33,7 @@ $top-map-height: 2.75rem;
 // LEFT PANEL
 $panel-width: 25rem;
 
-$box-shadow-frame: 0px 0px 16px rgba(31, 86, 125, 0.08);
+$box-shadow: 5px 5px 15px 2px rgba(0,0,0,0.05);
 
 // Media-breaks
 $small-screen: 640px;
@@ -63,6 +61,9 @@ $top-nav-logo-height: 2.5rem;
 $panel-width: 26rem;
 $panel-tabs-height: $top-map-height;
 
+// Padding
+$padding-normal: 1rem;
+$padding-small: 0.5rem;
 
 // Nav
 
@@ -74,6 +75,7 @@ $panel-tabs-height: $top-map-height;
 $button-border-radius: 8px;
 
 // Borders
+$border-gray: 1px solid $gray-1;
 
 // Anchors
 $anchor-hover-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out; // from Bootstrap
