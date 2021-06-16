@@ -1,0 +1,90 @@
+// COLORS
+$enershelf-blue: #008EC0;
+$enershelf-pink: #D05094;
+$enershelf-pink-transparent: rgba(222, 112, 165, 0.8);
+$enershelf-purple: #733E88;
+$enershelf-gray: #eef2f3;
+$enershelf-gray-2: #7a9da7;
+$enershelf-gray-3: #617494;
+$enershelf-gray-4: #d1d5d6;
+$enershelf-black: #1a171b;
+
+$gray-1: #9D9D9D;
+$gray-2: #636363;
+$light-gray-blue: #e8ebee;
+
+$white: #fff;
+
+// GENERAL
+$border-radius: 100px;
+
+// TYPOGRAPHY
+$font-size-xlarge: 1.953rem; // 31.25px
+$font-size-large: 1.563rem; // 25px
+$font-size-medium: 1.25rem; // 20px
+$font-size-normal: 1rem; // 16px
+$font-size-small: .875rem; // 14px
+
+// TOP-NAV
+$top-nav-height: 3.75rem;
+$top-nav-logo-height: 2.5rem;
+
+// top-map
+$top-map-height: 2.75rem;
+
+// LEFT PANEL
+$panel-width-large: 26rem;
+$panel-tabs-height: $top-map-height;
+
+
+
+$box-shadow-frame: 0px 0px 16px rgba(31, 86, 125, 0.08);
+
+// Media-breaks
+$small-screen: 640px;
+$medium-screen: 992px;
+$large-screen: 1250px;
+$xlarge-screen: 1500px;
+
+// Typography {
+$main-font-family: lato, Arial, Helvetica, sans-serif;
+$font-size-large: 1.953rem; // 31.25px
+$font-size-medium-2: 1.563rem; // 25px
+$font-size-medium: 1.25rem; // 20px
+$font-size-normal: 1rem; // 16px
+$font-size-small: 0.875rem; 
+
+$line-height-normal: 1.75rem;
+$letter-spacing-small: 0.01rem;
+$letter-spacing-normal: 0.03rem;
+
+// TOP-NAV
+$top-nav-height: 3.75rem;
+$top-nav-logo-height: 2.5rem;
+
+// LEFT PANEL
+$panel-width: 26rem;
+$panel-tabs-height: $top-map-height;
+
+
+// Nav
+
+// Footer
+
+// Logo
+
+// Buttons
+$button-border-radius: 8px;
+
+// Borders
+
+// Anchors
+$anchor-hover-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out; // from Bootstrap
+$anchor-pseudo-classes: '', ':link', ':hover', ':active', ':visited', ':focus';
+$anchor-pseudo-classes-active-state: ":hover, :focus, :active";
+$anchor-pseudo-classes-inactive-state: ":link, :visited";
+
+
+// Layout
+$section-max-width: 82rem;
+

@@ -1,4 +1,8 @@
 @charset 'utf-8';
 
-@import 'sass/variables';
-@import 'sass/map';
+@import 'sass/abstracts/variables';
+@import 'sass/abstracts/mixins';
+
+@import 'sass/base/normalize';
+
+@import 'sass/components/map';

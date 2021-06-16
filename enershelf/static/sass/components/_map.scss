@@ -15,7 +15,7 @@ $map-info-box-padding: 1rem;
 }
 
 #map {
-  height: calc(100vh - #{$top-nav-height} - #{$top-map-height});
+  height: calc(100vh - #{$top-nav-height});
 
   .info {
     display: inline-block;
