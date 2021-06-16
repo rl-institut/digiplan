@@ -1,9 +1,11 @@
 @charset 'utf-8';
 
 @import 'sass/abstracts/variables';
+@import 'sass/abstracts/fonts';
 @import 'sass/abstracts/mixins';
 
 @import 'sass/base/normalize';
+@import 'sass/base/typography';
 
 @import 'sass/components/map';
 @import 'sass/components/top-nav';

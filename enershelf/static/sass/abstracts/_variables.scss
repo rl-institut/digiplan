@@ -7,7 +7,7 @@ $enershelf-gray: #eef2f3;
 $enershelf-gray-2: #7a9da7;
 $enershelf-gray-3: #617494;
 $enershelf-gray-4: #d1d5d6;
-$enershelf-black: #1a171b;
+$enershelf-black: #141412;
 
 $gray-1: #F5F5F5;
 
@@ -17,11 +17,16 @@ $white: #fff;
 $border-radius: 100px;
 
 // TYPOGRAPHY
+$main-font-family: 'Source Sans Pro', sans-serif;
 $font-size-xlarge: 1.953rem; // 31.25px
 $font-size-large: 1.563rem; // 25px
 $font-size-medium: 1.25rem; // 20px
 $font-size-normal: 1rem; // 16px
 $font-size-small: .875rem; // 14px
+
+$line-height-normal: 1.75rem;
+$letter-spacing-small: 0.01rem;
+$letter-spacing-normal: 0.03rem;
 
 // TOP-NAV
 $top-nav-height: 3.75rem;
@@ -40,18 +45,6 @@ $small-screen: 640px;
 $medium-screen: 992px;
 $large-screen: 1250px;
 $xlarge-screen: 1500px;
-
-// Typography {
-$main-font-family: lato, Arial, Helvetica, sans-serif;
-$font-size-large: 1.953rem; // 31.25px
-$font-size-medium-2: 1.563rem; // 25px
-$font-size-medium: 1.25rem; // 20px
-$font-size-normal: 1rem; // 16px
-$font-size-small: 0.875rem; 
-
-$line-height-normal: 1.75rem;
-$letter-spacing-small: 0.01rem;
-$letter-spacing-normal: 0.03rem;
 
 // TOP-NAV
 $top-nav-height: 3.125rem;
