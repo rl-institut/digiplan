@@ -2,23 +2,38 @@
 {% load crispy_forms_tags %}
 
 <section class="panel">
-  <div class="panel__logos">
-    <div class="logo logo--enershelf">
-      <a href="https://enershelf.de/" target="_blank" rel="noopener noreferrer">
-        <img src="../../static/images/logos/EnerSHelF.jpg" alt="EnerSHelF logo">
-      </a>
+  <div class="panel__content">
+    <div class="panel__logos">
+      <div class="logo logo--enershelf">
+        <a href="https://enershelf.de/" target="_blank" rel="noopener noreferrer">
+          <img src="../../static/images/logos/EnerSHelF.jpg" alt="EnerSHelF logo">
+        </a>
+      </div>
+      <div class="logo logo--bmbf">
+        <a href="https://www.bmbf.de/en/index.html" target="_blank" rel="noopener noreferrer">
+          <img src="../../static/images/logos/BMBF_gefoerdert_2017_en.jpg" alt="German Federal Ministry of Education and Research logo">
+        </a>
+      </div>
     </div>
-    <div class="logo logo--bmbf">
-      <a href="https://www.bmbf.de/en/index.html" target="_blank" rel="noopener noreferrer">
-        <img src="../../static/images/logos/BMBF_gefoerdert_2017_en.jpg" alt="German Federal Ministry of Education and Research logo">
-      </a>
-    </div>
-  </div>
-  {% for category, switches in area_switches.items %}
-    <h3 class="layers__subtitle">{{category}}</h3>
-
-    {% for switch in switches %}
-      {% crispy switch %}
+    {% for category, switches in area_switches.items %}
+      <h3 class="layers__subtitle">{{category}}</h3>
+  
+      {% for switch in switches %}
+        {% crispy switch %}
+      {% endfor %}
     {% endfor %}
-  {% endfor %}
+  </div>
+  <div class="footer">
+    <ul>
+      <li>
+        <a href="#">Contact</a>
+      </li>
+      <li>
+        <a href="#">Imprint</a>
+      </li>
+      <li>
+        <a href="#">Data privacy</a>
+      </li>
+    </ul>
+  </div>
 </section>
