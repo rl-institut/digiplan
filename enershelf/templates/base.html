@@ -62,8 +62,6 @@
 
       {% compress js %}
         <script src="{% static 'js/jquery.min.js' %}"></script>
-        <script src="{% static 'libs/what-input/what-input.min.js' %}"></script>
-        <script src="{% static 'libs/foundation-sites/js/foundation.min.js' %}"></script>
         <script src="{% static 'libs/pubsub/1.9.2/pubsub.js' %}"></script>
         <script src="{% static 'libs/ionrangeslider/ion.rangeSlider.min.js' %}"></script>
       {% endcompress %}
@@ -92,12 +90,8 @@
       {% compress js %}
         <script src="{% static 'js/store.js' %}"></script>
         <script src="{% static 'js/event-topics.js' %}"></script>
-        <script src="{% static 'js/project.js' %}"></script>
       {% endcompress %}
 
-      <script>
-        $(document).foundation();
-      </script>
     {% endblock js_body %}
   </body>
 </html>
