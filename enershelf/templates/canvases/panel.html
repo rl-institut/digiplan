@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 <section class="panel">
-  <div class="panel__content">
+  <section class="panel__content">
     <div class="panel__logos">
       <div class="logo logo--enershelf">
         <a href="https://enershelf.de/" target="_blank" rel="noopener noreferrer">
@@ -22,8 +22,8 @@
         {% crispy switch %}
       {% endfor %}
     {% endfor %}
-  </div>
-  <div class="footer">
+  </section>
+  <footer class="footer">
     <ul>
       <li>
         <a href="#">Contact</a>
@@ -35,5 +35,5 @@
         <a href="#">Data privacy</a>
       </li>
     </ul>
-  </div>
+  </footer>
 </section>
