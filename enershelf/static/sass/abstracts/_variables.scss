@@ -1,15 +1,20 @@
 // COLORS
-$enershelf-black: #141412;
-$enershelf-red: #ce1527;
-$enershelf-yellow: #FAAE1D;
+$enershelf-black: rgb(20, 20, 18);
+$enershelf-red: rgb(206, 21, 39);
+$enershelf-yellow: rgb(250, 174, 29);
 
-$secondary-color-1: #FC8D62;
-$secondary-color-2: #66C2A5;
-$secondary-color-3: #8DA0CB;
+$primary-color: $enershelf-yellow;
 
-$gray-1: #F5F5F5;
+$secondary-color-1: rgb(252, 141, 98);
+$secondary-color-2: rgb(102, 194, 165);
+$secondary-color-3: rgb(141, 160, 203);
 
-$white: #fff;
+$gray-1: rgb(245, 245, 245);
+$gray-2: rgb(207, 207, 207);
+
+$white: rgb(255, 255, 255);
+
+$enershelf-yellow-transparent: rgba($enershelf-yellow, .25);
 
 // GENERAL
 $border-radius: 100px;
@@ -56,11 +61,9 @@ $panel-tabs-height: $top-map-height;
 $padding-normal: 1rem;
 $padding-small: 0.5rem;
 
-// Nav
-
-// Footer
-
-// Logo
+// Forms
+$form-box-shadow: 0 0 0 0.25rem $enershelf-yellow-transparent;
+$controls-bg-color: $gray-2;
 
 // Buttons
 $button-border-radius: 8px;

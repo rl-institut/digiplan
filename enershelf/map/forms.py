@@ -7,7 +7,7 @@ from .widgets import SwitchWidget
 
 class StaticLayerForm(Form):
     switch = BooleanField(
-        label=False, widget=SwitchWidget(switch_class="switch tiny", switch_input_class="switch-input",),
+        label=False, widget=SwitchWidget(switch_class="form-check form-switch", switch_input_class="form-check-input",),
     )
 
     def __init__(self, layer, *args, **kwargs):

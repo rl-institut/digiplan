@@ -14,9 +14,9 @@
       {% endif %}
     </div>
   </div>
-  <div class="{% if widget.attrs.switch_class %}{{widget.attrs.switch_class}}{% else %}switch tiny{% endif %}">
-    <input class="{% if widget.attrs.switch_input_class %}{{widget.attrs.switch_input_class}}{% else %}switch-input{% endif %}" {% if widget.attrs.id %}id="{{widget.attrs.id}}"{% endif %} type="checkbox" name="{{widget.name}}">
-    <label class="switch-paddle" {% if widget.attrs.id %}for="{{widget.attrs.id}}" id="{{widget.attrs.id}}-label"{% endif %}>
+  <div class="{% if widget.attrs.switch_class %}{{widget.attrs.switch_class}}{% else %}form-check form-switch{% endif %}">
+    <input class="{% if widget.attrs.switch_input_class %}{{widget.attrs.switch_input_class}}{% else %}form-check-input{% endif %}" {% if widget.attrs.id %}id="{{widget.attrs.id}}"{% endif %} type="checkbox" name="{{widget.name}}">
+    <label class="form-check-label" {% if widget.attrs.id %}for="{{widget.attrs.id}}" id="{{widget.attrs.id}}-label"{% endif %}>
       {% if widget.attrs.label %}<span class="show-for-sr">{{widget.attrs.label}}</span>{% endif %}
     </label>
   </div>
