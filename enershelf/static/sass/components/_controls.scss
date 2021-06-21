@@ -1,0 +1,45 @@
+/////////////////////////////////////// SWITCHES ///////////////////////////////////////
+.form-check.form-switch .form-check-input {
+  &:checked {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    box-shadow: $form-box-shadow;
+  }
+
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: $form-box-shadow;
+  }
+
+  &:not(:checked):focus {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='rgba%28250, 174, 29, 0.25%29'/></svg>");
+  }
+}
+
+/////////////////////////////////////// SLIDERS ///////////////////////////////////////
+.irs.irs--flat {
+  .irs-line {
+    background-color: $controls-bg-color;
+  }
+
+  .irs-from,
+  .irs-to,
+  .irs-bar,
+  .irs-single {
+    background-color: $primary-color;
+  }
+
+  .irs-from:before, 
+  .irs-to:before,
+  .irs-single:before {
+    border-top-color: $primary-color;
+  }
+
+  .irs-handle {
+    &>i:first-child,
+    &.state_hover>i:first-child,
+    &:hover>i:first-child {
+      background-color: $primary-color;
+    }
+  }
+}

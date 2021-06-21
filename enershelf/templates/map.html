@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block content %}
-  <section class="map-content show-for-large off-canvas-content" data-off-canvas-content>
+  <section class="map-content">
     {% include 'canvases/panel.html' %}
     <pre id="info"></pre>
     {% include 'canvases/map.html' %}
@@ -47,8 +47,8 @@
         container: "map",
         style: "{{mapbox_style_location}}", // stylesheet location
         center: [-1.137, 7.88], // starting position [lng, lat]
-        zoom: 5, // starting zoom
-<!--        maxBounds: [[-2.54, 46.35], [23.93, 55.87]] // [[south-west], [north-east]] restrict area-->
+        zoom: 6, // starting zoom
+        maxBounds: [[-7, 3.5], [5.9, 12]] // [[south-west], [north-east]] restrict area
       });
     </script>
     <script src="{% static 'js/popup.js' %}" type="text/javascript"></script>

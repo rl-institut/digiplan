@@ -1,0 +1,18 @@
+.map-content {
+  @media only screen and (min-width: $medium-screen) {
+    @include flex-row;
+  }
+}
+
+.map-wrap {
+  @include flex-column;
+  width: 100%;
+  
+  @media only screen and (min-width: $medium-screen) {
+    width: calc(100% - #{$panel-width});
+  }
+}
+
+#map {
+  height: calc(100vh - #{$top-nav-height});
+}

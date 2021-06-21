@@ -1,0 +1,63 @@
+.panel {
+  width: 100%;
+  height: auto;
+  box-shadow: $box-shadow;
+  @include flex-column;
+
+  @media only screen and (min-width: $medium-screen) {
+    height: 100vh;
+    width: $panel-width;
+  }
+
+  &__content {
+    flex: 1 0 auto;
+  }
+
+  &__logos {
+    @include flex-row;
+    text-align: center;
+    padding: $padding-normal 0 0;
+    border-bottom: $border-gray;
+
+    .logo {
+      flex: 1;
+    }
+
+    .logo--enershelf {
+      text-align: left;
+      padding-left: $padding-normal;
+
+      img {
+        width: 7rem;
+        transform: translateY(4px);
+      }
+    }
+
+    .logo--bmbf {
+      text-align: right;
+
+      img {
+        width: 8rem;
+      }
+    }
+  }
+
+  .footer {
+    flex-shrink: 0;
+    border-top: $border-gray;
+    padding: $padding-small 0;
+    
+    ul {
+      @include ul-horizontal;
+      @include flex-row-justify-center;
+    }
+
+    li {
+      display: inline-block;
+    }
+
+    li:not(:last-of-type) {
+      padding-right: 1rem;
+    }
+  }
+}
