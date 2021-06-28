@@ -44,7 +44,7 @@ function init_map_location(msg) {
 function get_static_state() {
   let static_state = 0;
   for (let i = 0; i < detailLayers.length; i++) {
-    if ($(detailLayers[i]).find(".switch-input")[0].checked) {
+    if ($(detailLayers[i]).find(layerInputClass)[0].checked) {
       static_state += 2 ** i;
     }
   }

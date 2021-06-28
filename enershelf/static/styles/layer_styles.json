@@ -84,10 +84,10 @@
       "fill-opacity": 0.8
     }
   },
-  "nightlight_test": {
+  "cluster": {
     "type": "fill",
     "paint": {
-      "fill-color": "rgb(100, 20, 140)",
+      "fill-color": "rgb(100, 200, 100)",
       "fill-opacity": 0.8
     }
   },

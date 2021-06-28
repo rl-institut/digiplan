@@ -1,44 +1,49 @@
 from django.contrib.gis.db import models
-from django.utils.translation import gettext_lazy as _
-
 from .managers import RegionMVTManager, LabelMVTManager, MVTManager
-
-
-class Region(models.Model):
-    """Base class for all regions - works as connector to other models"""
-
-    class LayerType(models.TextChoices):
-        COUNTRY = "country", _("Land")
-        STATE = "state", _("Bundesland")
-        DISTRICT = "district", _("Kreis")
-        MUNICIPALITY = "municipality", _("Gemeinde")
-
-    layer_type = models.CharField(max_length=12, choices=LayerType.choices, null=False)
 
 
 # REGIONS
 
 
-class District(models.Model):
+class Region(models.Model):
     geom = models.MultiPolygonField(srid=4326)
-    name = models.CharField(max_length=50)
-    area = models.FloatField()
-    population = models.BigIntegerField()
-    hospitals = models.IntegerField()
-    den_p_h_km = models.FloatField(null=True)
+    name = models.CharField(max_length=50, unique=True)
 
     objects = models.Manager()
     vector_tiles = RegionMVTManager(columns=["id", "name", "bbox"])
     label_tiles = LabelMVTManager(geo_col="geom_label", columns=["id", "name"])
 
-    data_file = "AdminAreas"
+    data_file = "Gha_AdminBoundaries"
+    layer = "Gha_Regions_01"
     mapping = {
         "geom": "MULTIPOLYGON",
-        "name": "DISTRICT",
-        "area": "Shape__Are",
-        "population": "pop_2020",
-        "hospitals": "NUM_hosp",
-        "den_p_h_km": "den_p_h_km",
+        "name": "Region",
+    }
+
+    def __str__(self):
+        return self.name
+
+
+class District(models.Model):
+    geom = models.MultiPolygonField(srid=4326)
+    name = models.CharField(max_length=50, unique=True)
+    area = models.FloatField()
+    population = models.BigIntegerField()
+
+    region = models.ForeignKey("Region", on_delete=models.CASCADE, related_name="districts")
+
+    objects = models.Manager()
+    vector_tiles = RegionMVTManager(columns=["id", "name", "bbox"])
+    label_tiles = LabelMVTManager(geo_col="geom_label", columns=["id", "name"])
+
+    data_file = "Gha_AdminBoundaries"
+    layer = "Gha_Districts_02"
+    mapping = {
+        "geom": "MULTIPOLYGON",
+        "name": "District",
+        "area": "Area_km2",
+        "population": "Pop2020",
+        "region": {"name": "Region"},  # ForeignKey see https://stackoverflow.com/a/46689928/5804947
     }
 
     def __str__(self):
@@ -48,66 +53,127 @@ class District(models.Model):
 # LAYER
 
 
-class Grid(models.Model):
-    geom = models.MultiLineStringField(srid=4326)
-    source = models.CharField(max_length=100)
+class Cluster(models.Model):
+    geom = models.MultiPolygonField(srid=4326)
+    name = models.CharField(max_length=50)
+    area = models.FloatField()
+    population_density = models.FloatField()
+
+    district = models.ForeignKey("District", on_delete=models.CASCADE, related_name="cluster")
+    # closest_hospital = models.ForeignKey("Hospitals", on_delete=models.CASCADE, related_name="cluster")
 
     objects = models.Manager()
-    vector_tiles = MVTManager(columns=["id", "source"])
+    vector_tiles = MVTManager(columns=["id", "name", "area", "population_density"])
 
-    data_file = "Electricity_Infrastructure"
-    layer = "GridNetwork"
+    filters = ["area", "population_density"]
+
+    data_file = "Population_Clusters"
+    layer = "Gha_PopClusters_attributed"
     mapping = {
-        "geom": "MULTILINESTRING",
-        "source": "source",
+        "geom": "MULTIPOLYGON",
+        "name": "District",
+        "area": "cluster_areakm2",
+        "population_density": "cluster_PopDen",
+        "district": {"name": "District"},  # ForeignKey see https://stackoverflow.com/a/46689928/5804947
+        # "closest_hospital": {"name": "closestFacility_(cF)"},
     }
 
     def __str__(self):
-        return self.source
+        return self.name
+
+
+# class Grid(models.Model):
+#     geom = models.MultiLineStringField(srid=4326)
+#     source = models.CharField(max_length=100)
+#
+#     objects = models.Manager()
+#     vector_tiles = MVTManager(columns=["id", "source"])
+#
+#     data_file = "Electricity_Infrastructure"
+#     layer = "GridNetwork"
+#     mapping = {
+#         "geom": "MULTILINESTRING",
+#         "source": "source",
+#     }
+#
+#     def __str__(self):
+#         return self.source
 
 
 class Nightlight(models.Model):
     geom = models.MultiPolygonField(srid=4326)
-    dn = models.IntegerField()
+    distance = models.IntegerField()
 
     objects = models.Manager()
-    vector_tiles = RegionMVTManager(columns=["id", "dn"])
+    vector_tiles = MVTManager(columns=["id", "distance"])
 
-    data_file = "Electricity_Infrastructure"
-    layer = "NightLights_Binary"
+    data_file = "Energy_Infrastructure"
+    layer = "Ghana_Nightlights_Binary"
     mapping = {
         "geom": "MULTIPOLYGON",
-        "dn": "DN",
+        "distance": "DN",
     }
 
 
 class Hospitals(models.Model):
     geom = models.PointField(srid=4326)
-    nightlight_distance = models.IntegerField(null=True, verbose_name="Distance to nightlights")
+    name = models.CharField(max_length=254)
+    type = models.CharField(max_length=254)
+    town = models.CharField(max_length=254, null=True)
+    ownership = models.CharField(max_length=254)
+    population_per_hospital = models.FloatField()
+    catchment_area_hospital = models.FloatField()
+    nightlight = models.IntegerField(null=True)
 
-    filters = ["nightlight_distance"]
+    district = models.ForeignKey("District", on_delete=models.CASCADE, related_name="hospitals", null=True)
 
     objects = models.Manager()
-    vector_tiles = RegionMVTManager(columns=["id", "nightlight_distance"])
+    vector_tiles = MVTManager(
+        columns=["id", "name", "type", "town", "ownership", "population_per_hospital", "catchment_area_hospital"]
+    )
 
-    data_file = "HealthCare_Insfrastructure"
-    layer = "HC_Facilities"
+    filters = ["population_per_hospital", "catchment_area_hospital"]
+
+    data_file = "HealthCare_Infrastructure"
+    layer = "Gha_HealthCareFacilities_total"
     mapping = {
         "geom": "POINT",
-        "nightlight_distance": "nlj_DN",
+        "name": "facility_name",
+        "type": "Type",
+        "town": "Town",
+        "ownership": "Ownership",
+        "population_per_hospital": "Pop_per_hosp",
+        "catchment_area_hospital": "Catchment_area_hosp",
+        "nightlight": "Nightlight_DigitalNumber",
     }
 
 
 class HospitalsSimulated(models.Model):
     geom = models.PointField(srid=4326)
-    nightlight_distance = models.IntegerField(null=True, verbose_name="Distance to nightlights")
-    population = models.FloatField(null=True, verbose_name="Population")
+    name = models.CharField(max_length=254)
+    type = models.CharField(max_length=254)
+    town = models.CharField(max_length=254, null=True)
+    ownership = models.CharField(max_length=254)
+    population_per_hospital = models.FloatField()
+    catchment_area_hospital = models.FloatField()
+    nightlight = models.IntegerField(null=True)
 
-    filters = ["nightlight_distance", "population"]
+    district = models.ForeignKey("District", on_delete=models.CASCADE, related_name="simulated_hospitals", null=True)
 
     objects = models.Manager()
-    vector_tiles = RegionMVTManager(columns=["id", "nightlight_distance", "population"])
+    vector_tiles = MVTManager(columns=["id", "population_per_hospital", "catchment_area_hospital"])
 
-    data_file = "HealthCare_Insfrastructure"
-    layer = "SelectedHospitals_Simulation"
-    mapping = {"geom": "POINT", "nightlight_distance": "nlj_DN", "population": "vj_pop_hos"}
+    filters = ["population_per_hospital", "catchment_area_hospital"]
+
+    data_file = "HealthCare_Infrastructure"
+    layer = "Gha_HealthCareFacilities_SelectedSites"
+    mapping = {
+        "geom": "POINT",
+        "name": "FacilityNa",
+        "type": "Type",
+        "town": "Town",
+        "ownership": "Ownership",
+        "population_per_hospital": "Pop_per_hosp",
+        "catchment_area_hospital": "Catchment_area_hosp",
+        "nightlight": "nightlight_digitalNumber",
+    }

@@ -1,6 +1,7 @@
 // Variables
 
 const detailLayers = Array.from(document.getElementsByClassName("static-layer"));
+const layerInputClass = ".form-check-input";
 
 
 // Event Handler
@@ -33,14 +34,14 @@ PubSub.subscribe(eventTopics.DETAIL_LAYER_SLIDER_CHANGE, filterChanged);
 function hideDetailLayers(msg) {
   detailLayers.map(layer => {
     turn_off_layer(layer);
-    $(layer).find(".switch-input")[0].checked = false;
+    $(layer).find(layerInputClass)[0].checked = false;
   });
   return logMessage(msg);
 }
 
 function showDetailLayers(msg) {
   for (let i = 0; i < detailLayers.length; i++) {
-    $(detailLayers[i]).find(".switch-input")[0].checked = (store.cold.staticState & 2 ** i) === 2 ** i;
+    $(detailLayers[i]).find(layerInputClass)[0].checked = (store.cold.staticState & 2 ** i) === 2 ** i;
     check_layer(detailLayers[i]);
   }
   return logMessage(msg);
@@ -55,7 +56,7 @@ function checkLayerOfGivenLayerForm(msg, {layerForm}) {
 function setDetailLayersOnDetailLayersSwitchClick(msg) {
   detailLayers.map(layer => {
     turn_off_layer(layer);
-    $(layer).find(".switch-input")[0].checked = false;
+    $(layer).find(layerInputClass)[0].checked = false;
   });
   store.cold.staticState = get_static_state();
   return logMessage(msg);
@@ -75,11 +76,11 @@ function filterChanged(msg, {layerForm}) {
 // Helper Functions
 
 function get_layer_id(layer_form) {
-  return $(layer_form).find(".switch-input")[0].id;
+  return $(layer_form).find(layerInputClass)[0].id;
 }
 
 function check_layer(layer_form) {
-  if ($(layer_form).find(".switch-input")[0].checked) {
+  if ($(layer_form).find(layerInputClass)[0].checked) {
     const layer_id = get_layer_id(layer_form)
     const activated_layers = turn_on_layer(layer_form);
     const layers = map.getStyle().layers.filter(layer => layer["id"].startsWith(layer_id));

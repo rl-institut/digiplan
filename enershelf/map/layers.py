@@ -24,14 +24,14 @@ def get_opacity(source_layer):
 
 
 ELECTRICITY = [
-    {
-        "source": "grid",
-        "color": get_color("grid"),
-        "model": models.Grid,
-        "name": "Grids",
-        "name_singular": "Grid",
-        "description": "Electricity grids",
-    },
+    # {
+    #     "source": "grid",
+    #     "color": get_color("grid"),
+    #     "model": models.Grid,
+    #     "name": "Grids",
+    #     "name_singular": "Grid",
+    #     "description": "Electricity grids",
+    # },
     {
         "source": "nightlight",
         "color": get_color("nightlight"),
@@ -40,16 +40,17 @@ ELECTRICITY = [
         "name_singular": "Nightlight",
         "description": "See nightlights",
     },
-    {
-        "source": "nightlight_test",
-        "color": get_color("nightlight_test"),
-        "model": models.Nightlight,
-        "name": "Nightlights Test",
-        "name_singular": "Nightlight Test",
-        "description": "See nightlights test",
-    },
 ]
 HOSPITALS = [
+    {
+        "source": "cluster",
+        "color": get_color("cluster"),
+        "model": models.Cluster,
+        "name": "Cluster",
+        "name_singular": "Cluster",
+        "description": "See cluster",
+        "popup_fields": ["id", "name", "area", "population_density"],
+    },
     {
         "source": "hospital",
         "color": "red",
@@ -57,7 +58,15 @@ HOSPITALS = [
         "name": "Hospitals",
         "name_singular": "Hospital",
         "description": "See nightlights test",
-        "popup_fields": ["id", "nightlight_distance"],
+        "popup_fields": [
+            "id",
+            "name",
+            "type",
+            "town",
+            "ownership",
+            "population_per_hospital",
+            "catchment_area_hospital",
+        ],
     },
     {
         "source": "hospital_simulated",
@@ -66,7 +75,15 @@ HOSPITALS = [
         "name": "Simulated Hospitals",
         "name_singular": "Simulated hospital",
         "description": "See nightlights test",
-        "popup_fields": ["id", "nightlight_distance", "population"],
+        "popup_fields": [
+            "id",
+            "name",
+            "type",
+            "town",
+            "ownership",
+            "population_per_hospital",
+            "catchment_area_hospital",
+        ],
     },
 ]
 LAYERS_DEFINITION = ELECTRICITY + HOSPITALS

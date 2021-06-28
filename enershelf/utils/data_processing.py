@@ -2,15 +2,23 @@ import os
 from django.contrib.gis.utils import LayerMapping
 
 from config.settings.base import ROOT_DIR
-from enershelf.map.models import District, Grid
+from enershelf.map.models import Region, District, Hospitals, HospitalsSimulated, Cluster, Nightlight
 
 
-MODELS = [District, Grid]
+MODELS = [
+    Region,
+    District,
+    Hospitals,
+    HospitalsSimulated,
+    Cluster,
+    Nightlight,
+]
 
 
 def load_data(models=None, verbose=True):
     models = models or MODELS
     for model in models:
+        print(f"Upload data for model '{model.__name__}'")
         instance = LayerMapping(
             model=model,
             data=os.path.join(ROOT_DIR, "enershelf", "data", f"{model.data_file}.gpkg",),
