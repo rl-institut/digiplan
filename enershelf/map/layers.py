@@ -49,7 +49,7 @@ HOSPITALS = [
         "name": "Cluster",
         "name_singular": "Cluster",
         "description": "See cluster",
-        "popup_fields": ["id", "name", "area", "population_density"],
+        "popup_fields": ["id", "area", "population_density"],
     },
     {
         "source": "hospital",

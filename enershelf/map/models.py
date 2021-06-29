@@ -1,5 +1,5 @@
 from django.contrib.gis.db import models
-from .managers import RegionMVTManager, LabelMVTManager, MVTManager
+from .managers import RegionMVTManager, LabelMVTManager, MVTManager, CenterMVTManager
 
 
 # REGIONS
@@ -55,15 +55,17 @@ class District(models.Model):
 
 class Cluster(models.Model):
     geom = models.MultiPolygonField(srid=4326)
-    name = models.CharField(max_length=50)
     area = models.FloatField()
     population_density = models.FloatField()
 
     district = models.ForeignKey("District", on_delete=models.CASCADE, related_name="cluster")
-    # closest_hospital = models.ForeignKey("Hospitals", on_delete=models.CASCADE, related_name="cluster")
+    closest_hospital = models.ForeignKey("Hospitals", on_delete=models.CASCADE, related_name="cluster", null=True)
+    closest_simulated_hospital = models.ForeignKey(
+        "HospitalsSimulated", on_delete=models.CASCADE, related_name="cluster", null=True
+    )
 
     objects = models.Manager()
-    vector_tiles = MVTManager(columns=["id", "name", "area", "population_density"])
+    vector_tiles = CenterMVTManager(columns=["id", "area", "population_density", "lat", "lon"])
 
     filters = ["area", "population_density"]
 
@@ -71,15 +73,27 @@ class Cluster(models.Model):
     layer = "Gha_PopClusters_attributed"
     mapping = {
         "geom": "MULTIPOLYGON",
-        "name": "District",
         "area": "cluster_areakm2",
         "population_density": "cluster_PopDen",
         "district": {"name": "District"},  # ForeignKey see https://stackoverflow.com/a/46689928/5804947
-        # "closest_hospital": {"name": "closestFacility_(cF)"},
+        "closest_hospital": {
+            "name": "closestFacility_(cF)",
+            "type": "Type_cF",
+            "town": "Town_cF",
+            "ownership": "Owner_cF",
+            "district__name": "District",
+        },
+        "closest_simulated_hospital": {
+            "name": "closestFacility_(cF)",
+            "type": "Type_cF",
+            "town": "Town_cF",
+            "ownership": "Owner_cF",
+            "district__name": "District",
+        },
     }
 
     def __str__(self):
-        return self.name
+        return self.district.name
 
 
 # class Grid(models.Model):
@@ -125,7 +139,7 @@ class Hospitals(models.Model):
     catchment_area_hospital = models.FloatField()
     nightlight = models.IntegerField(null=True)
 
-    district = models.ForeignKey("District", on_delete=models.CASCADE, related_name="hospitals", null=True)
+    district = models.ForeignKey("District", on_delete=models.CASCADE, related_name="hospitals")
 
     objects = models.Manager()
     vector_tiles = MVTManager(
@@ -145,6 +159,7 @@ class Hospitals(models.Model):
         "population_per_hospital": "Pop_per_hosp",
         "catchment_area_hospital": "Catchment_area_hosp",
         "nightlight": "Nightlight_DigitalNumber",
+        "district": {"name": "District"},
     }
 
 

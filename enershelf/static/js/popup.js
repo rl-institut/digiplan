@@ -4,7 +4,11 @@ var popup_count = 0;
 
 function add_popup(layer_id, fields) {
   map.on("click", layer_id, function (e) {
-    var coordinates = e.features[0].geometry.coordinates.slice();
+    if ("lat" in e.features[0].properties) {
+      var coordinates = [e.features[0].properties.lat, e.features[0].properties.lon];
+    } else {
+      var coordinates = e.features[0].geometry.coordinates.slice();
+    }
     var template = $($("#popup_template").prop("content")).find("div");
     var clone = template.clone();
     clone.find("h3").text("Header");

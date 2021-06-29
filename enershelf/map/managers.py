@@ -14,6 +14,14 @@ class AsMVTGeom(models.functions.GeomOutputGeoFunc):
     geom_param_pos = (0, 1)
 
 
+class X(models.functions.Func):
+    function = "ST_X"
+
+
+class Y(models.functions.Func):
+    function = "ST_Y"
+
+
 class MVTManager(models.Manager):
     def __init__(self, *args, geo_col="geom", columns=None, **kwargs):
         super(MVTManager, self).__init__(*args, **kwargs)
@@ -90,3 +98,15 @@ class StaticMVTManager(MVTManager):
 class LabelMVTManager(MVTManager):
     def get_queryset(self):
         return super(LabelMVTManager, self).get_queryset().annotate(geom_label=models.functions.Centroid("geom"))
+
+
+class CenterMVTManager(MVTManager):
+    def get_queryset(self):
+        return (
+            super(CenterMVTManager, self)
+            .get_queryset()
+            .annotate(center=models.functions.Centroid("geom"))
+            .annotate(
+                lat=X("center", output_field=models.DecimalField()), lon=Y("center", output_field=models.DecimalField())
+            )
+        )
