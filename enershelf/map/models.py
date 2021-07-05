@@ -60,9 +60,6 @@ class Cluster(models.Model):
 
     district = models.ForeignKey("District", on_delete=models.CASCADE, related_name="cluster")
     closest_hospital = models.ForeignKey("Hospitals", on_delete=models.CASCADE, related_name="cluster", null=True)
-    closest_simulated_hospital = models.ForeignKey(
-        "HospitalsSimulated", on_delete=models.CASCADE, related_name="cluster", null=True
-    )
 
     objects = models.Manager()
     vector_tiles = CenterMVTManager(columns=["id", "area", "population_density", "lat", "lon"])
@@ -76,20 +73,7 @@ class Cluster(models.Model):
         "area": "cluster_areakm2",
         "population_density": "cluster_PopDen",
         "district": {"name": "District"},  # ForeignKey see https://stackoverflow.com/a/46689928/5804947
-        "closest_hospital": {
-            "name": "closestFacility_(cF)",
-            "type": "Type_cF",
-            "town": "Town_cF",
-            "ownership": "Owner_cF",
-            "district__name": "District",
-        },
-        "closest_simulated_hospital": {
-            "name": "closestFacility_(cF)",
-            "type": "Type_cF",
-            "town": "Town_cF",
-            "ownership": "Owner_cF",
-            "district__name": "District",
-        },
+        "closest_hospital": {"id": "id_closestFacility"},
     }
 
     def __str__(self):
@@ -151,6 +135,7 @@ class Hospitals(models.Model):
     data_file = "HealthCare_Infrastructure"
     layer = "Gha_HealthCareFacilities_total"
     mapping = {
+        "id": "FID",
         "geom": "POINT",
         "name": "facility_name",
         "type": "Type",

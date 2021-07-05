@@ -6,6 +6,7 @@ from django.contrib.gis.gdal import (
 from django.core.exceptions import FieldDoesNotExist, ObjectDoesNotExist
 from django.db import models
 from django.contrib.gis.utils.layermapping import LayerMapping, LayerMapError
+from django.contrib.gis.gdal.field import OFTInteger
 
 
 class RelatedModelLayerMapping(LayerMapping):
@@ -99,8 +100,11 @@ class RelatedModelLayerMapping(LayerMapping):
                     raise LayerMapError('Django field type "%s" has no OGR mapping (yet).' % fld_name)
 
                 # Is the OGR field in the Layer?
-                idx = check_ogr_fld(ogr_name)
-                ogr_field = ogr_field_types[idx]
+                if ogr_name == "FID":
+                    ogr_field = OFTInteger
+                else:
+                    idx = check_ogr_fld(ogr_name)
+                    ogr_field = ogr_field_types[idx]
 
                 # Can the OGR field type be mapped to the Django field type?
                 if not issubclass(ogr_field, self.FIELD_TYPES[model_field.__class__]):
@@ -133,3 +137,38 @@ class RelatedModelLayerMapping(LayerMapping):
             return rel_model.objects.using(self.using).get(**fk_kwargs)
         except ObjectDoesNotExist:
             return None
+
+    # Keyword argument retrieval routines ####
+    def feature_kwargs(self, feat):
+        """
+        Given an OGR Feature, return a dictionary of keyword arguments for
+        constructing the mapped model.
+        """
+        # The keyword arguments for model construction.
+        kwargs = {}
+
+        # Incrementing through each model field and OGR field in the
+        # dictionary mapping.
+        for field_name, ogr_name in self.mapping.items():
+            model_field = self.fields[field_name]
+
+            if isinstance(model_field, GeometryField):
+                # Verify OGR geometry.
+                try:
+                    val = self.verify_geom(feat.geom, model_field)
+                except GDALException:
+                    raise LayerMapError("Could not retrieve geometry from feature.")
+            elif isinstance(model_field, models.base.ModelBase):
+                # The related _model_, not a field was passed in -- indicating
+                # another mapping for the related Model.
+                val = self.verify_fk(feat, model_field, ogr_name)
+            elif ogr_name == "FID":
+                val = feat.fid
+            else:
+                val = self.verify_ogr_field(feat[ogr_name], model_field)
+
+            # Setting the keyword arguments for the field name with the
+            # value obtained above.
+            kwargs[field_name] = val
+
+        return kwargs
