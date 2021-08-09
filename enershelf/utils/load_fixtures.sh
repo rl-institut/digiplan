@@ -6,8 +6,10 @@
 
 set -e
 
+python manage.py loaddata enershelf/map/fixtures/region.json
 python manage.py loaddata enershelf/map/fixtures/district.json
 
-python manage.py loaddata enershelf/map/fixtures/grid.json
+python manage.py loaddata enershelf/map/fixtures/cluster.json
 python manage.py loaddata enershelf/map/fixtures/nightlight.json
-python manage.py loaddata enershelf/map/fixtures/hc_facilities.json
+python manage.py loaddata enershelf/map/fixtures/hospitals.json
+python manage.py loaddata enershelf/map/fixtures/hospitalssimulated.json
