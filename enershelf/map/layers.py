@@ -114,6 +114,7 @@ class Layer:
 
 @dataclass
 class Popup:
+    source: str
     layer_id: str
     fields: str
 
@@ -238,7 +239,11 @@ for layer in LAYERS_DEFINITION:
         )
         if "popup_fields" in layer:
             popup_fields = {getattr(layer["model"], field).field.verbose_name: field for field in layer["popup_fields"]}
-            POPUPS.append(Popup(layer_id, json.dumps(popup_fields)))
+            POPUPS.append(Popup(layer["source"], layer_id, json.dumps(popup_fields)))
+
+# Sort popups according to prio:
+POPUP_PRIO = ["hospital", "hospital_simulated"]  # from high to low prio
+POPUPS = sorted(POPUPS, key=lambda x: len(POPUP_PRIO) if x.source not in POPUP_PRIO else POPUP_PRIO.index(x.source))
 
 DYNAMIC_LAYERS = [
     Layer(
