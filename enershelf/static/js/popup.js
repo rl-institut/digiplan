@@ -1,12 +1,14 @@
 
-
-var popup_count = 0;
-
 function add_popup(layer_id, fields) {
   map.on("click", layer_id, function (e) {
+    // Check if popup already exists:
+    if ($('.mapboxgl-popup').length > 0) {return}
+
     if ("lat" in e.features[0].properties) {
+      // Get coordinates from lat/lon:
       var coordinates = [e.features[0].properties.lat, e.features[0].properties.lon];
     } else {
+      // Get coordinates from geometry:
       var coordinates = e.features[0].geometry.coordinates.slice();
     }
     var template = $($("#popup_template").prop("content")).find("div");
