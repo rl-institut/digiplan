@@ -2,13 +2,15 @@ import os
 
 from config.settings.base import ROOT_DIR
 from enershelf.utils.ogr_layer_mapping import RelatedModelLayerMapping
-from enershelf.map.models import Region, District, Hospitals, HospitalsSimulated, Cluster, Nightlight
+from enershelf.map.models import Region, Country, State, District, Hospitals, HospitalsSimulated, Cluster, Nightlight
 
-REGIONS = []
+REGIONS = [
+    Country,
+    State,
+    District,
+]
 
 MODELS = [
-    Region,
-    District,
     Hospitals,
     HospitalsSimulated,
     Cluster,
@@ -21,9 +23,9 @@ def load_regions(regions=None, verbose=True):
     for region in regions:
         print(f"Upload data for region '{region.__name__}'")
         if hasattr(region, "data_folder"):
-            data_path = os.path.join(ROOT_DIR, "egon", "data", region.data_folder, f"{region.data_file}.gpkg")
+            data_path = os.path.join(ROOT_DIR, "enershelf", "data", region.data_folder, f"{region.data_file}.gpkg")
         else:
-            data_path = os.path.join(ROOT_DIR, "egon", "data", f"{region.data_file}.gpkg")
+            data_path = os.path.join(ROOT_DIR, "enershelf", "data", f"{region.data_file}.gpkg")
         region_model = Region(layer_type=region.__name__.lower())
         region_model.save()
         instance = RelatedModelLayerMapping(

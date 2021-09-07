@@ -5,13 +5,13 @@ DISTILL=True
 export
 
 load_regions:
-	python manage.py shell --command="from egon.utils import data_processing; data_processing.load_regions()"
+	python manage.py shell --command="from enershelf.utils import data_processing; data_processing.load_regions()"
 
 load_data:
 	python manage.py shell --command="from enershelf.utils import data_processing; data_processing.load_data()"
 
 empty_regions:
-	python manage.py shell --command="from egon.utils import data_processing; data_processing.empty_data(models=data_processing.REGIONS)"
+	python manage.py shell --command="from enershelf.utils import data_processing; data_processing.empty_data(models=data_processing.REGIONS)"
 
 empty_data:
 	python manage.py shell --command="from enershelf.utils import data_processing; data_processing.empty_data()"
