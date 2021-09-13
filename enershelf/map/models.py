@@ -1,7 +1,7 @@
 from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
 
-from .managers import RegionMVTManager, LabelMVTManager, MVTManager, CenterMVTManager
+from .managers import RegionMVTManager, LabelMVTManager, MVTManager, ClusterMVTManager
 
 
 # REGIONS
@@ -106,7 +106,7 @@ class ClusterModel(models.Model):
     number_of_hospitals = models.IntegerField()
 
     objects = models.Manager()
-    vector_tiles = CenterMVTManager(columns=["id", "area", "population", "number_of_hospitals", "lat", "lon"])
+    vector_tiles = ClusterMVTManager(columns=["id", "area", "population", "number_of_hospitals", "lat", "lon"])
 
     filters = ["area", "number_of_hospitals", "population"]
 
@@ -132,7 +132,7 @@ class BuiltUpAreas(ClusterModel):
 
     district = models.ForeignKey("District", on_delete=models.CASCADE, related_name="built_up_areas")
 
-    vector_tiles = CenterMVTManager(
+    vector_tiles = ClusterMVTManager(
         columns=[
             "id",
             "area",
@@ -142,6 +142,7 @@ class BuiltUpAreas(ClusterModel):
             "distance_to_light",
             "lat",
             "lon",
+            "district_name",
         ]
     )
 
@@ -163,7 +164,7 @@ class Settlements(ClusterModel):
 
     district = models.ForeignKey("District", on_delete=models.CASCADE, related_name="settlements")
 
-    vector_tiles = CenterMVTManager(
+    vector_tiles = ClusterMVTManager(
         columns=[
             "id",
             "area",

@@ -49,7 +49,15 @@ HOSPITALS = [
         "name": "Built Up Areas",
         "name_singular": "Built Up Area",
         "description": "See cluster",
-        "popup_fields": ["id", "area", "population", "number_of_hospitals", "distance_to_grid", "distance_to_light"],
+        "popup_fields": [
+            "id",
+            "area",
+            "population",
+            "number_of_hospitals",
+            "distance_to_grid",
+            "distance_to_light",
+            "district_name",
+        ],
     },
     {
         "source": "settlements",
@@ -256,7 +264,10 @@ for layer in LAYERS_DEFINITION:
             )
         )
         if "popup_fields" in layer:
-            popup_fields = {getattr(layer["model"], field).field.verbose_name: field for field in layer["popup_fields"]}
+            popup_fields = {}
+            for field in layer["popup_fields"]:
+                label = getattr(layer["model"], field).field.verbose_name if hasattr(layer["model"], field) else field
+                popup_fields[label] = field
             POPUPS.append(Popup(layer["source"], layer_id, json.dumps(popup_fields)))
 
 # Sort popups according to prio:

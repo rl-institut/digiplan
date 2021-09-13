@@ -100,12 +100,13 @@ class LabelMVTManager(MVTManager):
         return super(LabelMVTManager, self).get_queryset().annotate(geom_label=models.functions.Centroid("geom"))
 
 
-class CenterMVTManager(MVTManager):
+class ClusterMVTManager(MVTManager):
     def get_queryset(self):
         return (
-            super(CenterMVTManager, self)
+            super(ClusterMVTManager, self)
             .get_queryset()
             .annotate(center=models.functions.Centroid("geom"))
+            .annotate(district_name=models.F("district__name"))
             .annotate(
                 lat=X("center", output_field=models.DecimalField()), lon=Y("center", output_field=models.DecimalField())
             )
