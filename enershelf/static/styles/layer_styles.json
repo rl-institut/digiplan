@@ -84,10 +84,24 @@
       "fill-opacity": 0.8
     }
   },
-  "cluster": {
+  "built_up_areas": {
     "type": "fill",
     "paint": {
       "fill-color": "rgb(100, 200, 100)",
+      "fill-opacity": 0.8
+    }
+  },
+  "settlements": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "rgb(150, 200, 100)",
+      "fill-opacity": 0.8
+    }
+  },
+  "hamlets": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "rgb(200, 200, 100)",
       "fill-opacity": 0.8
     }
   },

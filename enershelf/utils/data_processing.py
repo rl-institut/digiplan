@@ -2,7 +2,17 @@ import os
 
 from config.settings.base import ROOT_DIR
 from enershelf.utils.ogr_layer_mapping import RelatedModelLayerMapping
-from enershelf.map.models import Region, Country, State, District, Hospitals, HospitalsSimulated, Cluster, Nightlight
+from enershelf.map.models import (
+    Region,
+    Country,
+    State,
+    District,
+    Hospitals,
+    BuiltUpAreas,
+    Settlements,
+    Hamlets,
+    Nightlight,
+)
 
 REGIONS = [
     Country,
@@ -12,8 +22,9 @@ REGIONS = [
 
 MODELS = [
     Hospitals,
-    HospitalsSimulated,
-    Cluster,
+    BuiltUpAreas,
+    Settlements,
+    Hamlets,
     Nightlight,
 ]
 
@@ -21,6 +32,9 @@ MODELS = [
 def load_regions(regions=None, verbose=True):
     regions = regions or REGIONS
     for region in regions:
+        if region.objects.exists():
+            print(f"Skipping data for model '{region.__name__}' - Please empty model first if you want to update data.")
+            continue
         print(f"Upload data for region '{region.__name__}'")
         if hasattr(region, "data_folder"):
             data_path = os.path.join(ROOT_DIR, "enershelf", "data", region.data_folder, f"{region.data_file}.gpkg")
@@ -38,6 +52,9 @@ def load_regions(regions=None, verbose=True):
 def load_data(models=None, verbose=True):
     models = models or MODELS
     for model in models:
+        if model.objects.exists():
+            print(f"Skipping data for model '{model.__name__}' - Please empty model first if you want to update data.")
+            continue
         print(f"Upload data for model '{model.__name__}'")
         if hasattr(model, "data_folder"):
             data_path = os.path.join(ROOT_DIR, "enershelf", "data", model.data_folder, f"{model.data_file}.gpkg")
