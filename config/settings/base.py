@@ -72,6 +72,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "crispy_forms",
     "django_distill",
+    "django_select2",
 ]
 
 LOCAL_APPS = [
@@ -258,3 +259,5 @@ if PASSWORD_PROTECTION and PASSWORD is None:
 
 MAPBOX_TOKEN = env.str("MAPBOX_TOKEN", default=None)
 MAPBOX_STYLE_LOCATION = env.str("MAPBOX_STYLE_LOCATION", default=None)
+
+SELECT2_CACHE_BACKEND = "select2"

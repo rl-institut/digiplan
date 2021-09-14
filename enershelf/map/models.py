@@ -1,7 +1,21 @@
+from dataclasses import dataclass
+from enum import Enum
+
 from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
 
 from .managers import RegionMVTManager, LabelMVTManager, MVTManager, ClusterMVTManager
+
+
+class LayerFilterType(Enum):
+    Range = 0
+    Dropdown = 1
+
+
+@dataclass
+class LayerFilter:
+    name: str
+    type: LayerFilterType = LayerFilterType.Range
 
 
 # REGIONS
@@ -108,7 +122,12 @@ class ClusterModel(models.Model):
     objects = models.Manager()
     vector_tiles = ClusterMVTManager(columns=["id", "area", "population", "number_of_hospitals", "lat", "lon"])
 
-    filters = ["area", "number_of_hospitals", "population"]
+    filters = [
+        LayerFilter("area"),
+        LayerFilter("number_of_hospitals"),
+        LayerFilter("population"),
+        LayerFilter("district_name", LayerFilterType.Dropdown),
+    ]
 
     data_file = "Population_Clusters"
     mapping = {
@@ -251,7 +270,7 @@ class Hospitals(models.Model):
         columns=["id", "name", "type", "town", "ownership", "population_per_hospital", "catchment_area_hospital"]
     )
 
-    filters = ["population_per_hospital", "catchment_area_hospital"]
+    filters = [LayerFilter("population_per_hospital"), LayerFilter("catchment_area_hospital")]
 
     data_file = "HealthCare_Infrastructure"
     layer = "Gha_HealthCareFacilities_total"
