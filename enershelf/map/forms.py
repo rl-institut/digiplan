@@ -1,3 +1,4 @@
+from itertools import count
 from crispy_forms.helper import FormHelper
 from django.forms import (
     BooleanField,
@@ -18,6 +19,7 @@ class StaticLayerForm(Form):
     switch = BooleanField(
         label=False, widget=SwitchWidget(switch_class="form-check form-switch", switch_input_class="form-check-input",),
     )
+    counter = count()
 
     def __init__(self, layer, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -54,7 +56,7 @@ class StaticLayerForm(Form):
                     )
                     self.fields[filter_.name] = MultipleChoiceField(
                         choices=[(value, value) for value in filter_values],
-                        widget=Select2MultipleWidget(attrs={"id": f"{layer['source']}_district_name"}),
+                        widget=Select2MultipleWidget(attrs={"id": f"district_name_{next(self.counter)}"}),
                     )
                 else:
                     raise ValueError(f"Unknown filter type '{filter_.type}'")

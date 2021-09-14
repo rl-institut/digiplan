@@ -17,6 +17,10 @@ map.on("load", function () {
     const layerForm = $(this).closest("form");
     PubSub.publish(eventTopics.DETAIL_LAYER_SLIDER_CHANGE, {layerForm});
   });
+  $(".layer-setup").find(".django-select2").change(function() {
+    const layerForm = $(this).closest("form");
+    PubSub.publish(eventTopics.DETAIL_LAYER_SELECT_CHANGE, {layerForm});
+  });
 });
 
 
@@ -28,6 +32,7 @@ PubSub.subscribe(eventTopics.STATES_INITIALIZED, hideDetailLayers);
 // Layers Detail Panel
 PubSub.subscribe(eventTopics.DETAIL_LAYER_SWITCH_CLICK, checkLayerOfGivenLayerForm);
 PubSub.subscribe(eventTopics.DETAIL_LAYER_SLIDER_CHANGE, filterChanged);
+PubSub.subscribe(eventTopics.DETAIL_LAYER_SELECT_CHANGE, filterChanged);
 
 // Subscriber Functions
 
@@ -132,17 +137,34 @@ function get_map_layer_ids(layer_id) {
 
 function get_layer_filters(layer_form) {
   let filters = [];
+
   let sliders = $(layer_form).find(".js-range-slider");
   sliders.each(function (index, slider) {
     filter_name = slider.id.slice(3);
     result = $(slider).data("ionRangeSlider").result;
     filters.push(
       {
+        type: "range",
         name: filter_name,
         from: result.from,
         to: result.to
       }
     )
+  });
+
+  let selects = $(layer_form).find(".django-select2");
+  selects.each(function (index, select) {
+    filter_name = select.id.split("_").slice(0, -1).join("_");  // Remove layer name from filter name
+    result = $(select).val();
+    if (result.length > 0) {
+      filters.push(
+        {
+          type: "dropdown",
+          name: filter_name,
+          values: result
+        }
+      )
+    }
   });
   return filters;
 }
@@ -150,10 +172,16 @@ function get_layer_filters(layer_form) {
 function set_filters(layer, filters) {
   let map_filters = ["all"];
   for (let i = 0; i < filters.length; i++) {
-    lower_bound = [">=", ["get", filters[i].name], filters[i].from];
-    upper_bound = ["<=", ["get", filters[i].name], filters[i].to];
-    map_filters.push(lower_bound);
-    map_filters.push(upper_bound);
+    if (filters[i].type == "range") {
+      lower_bound = [">=", ["get", filters[i].name], filters[i].from];
+      upper_bound = ["<=", ["get", filters[i].name], filters[i].to];
+      map_filters.push(lower_bound);
+      map_filters.push(upper_bound);
+    }
+    if (filters[i].type == "dropdown") {
+      equals = ["match", ["get", filters[i].name], filters[i].values, true, false];
+      map_filters.push(equals);
+    }
   }
   map.setFilter(layer, map_filters);
 }
