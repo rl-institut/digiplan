@@ -43,13 +43,39 @@ ELECTRICITY = [
 ]
 HOSPITALS = [
     {
-        "source": "cluster",
-        "color": get_color("cluster"),
-        "model": models.Cluster,
-        "name": "Cluster",
-        "name_singular": "Cluster",
+        "source": "built_up_areas",
+        "color": get_color("built_up_areas"),
+        "model": models.BuiltUpAreas,
+        "name": "Built Up Areas",
+        "name_singular": "Built Up Area",
         "description": "See cluster",
-        "popup_fields": ["id", "area", "population_density"],
+        "popup_fields": [
+            "id",
+            "area",
+            "population",
+            "number_of_hospitals",
+            "distance_to_grid",
+            "distance_to_light",
+            "district_name",
+        ],
+    },
+    {
+        "source": "settlements",
+        "color": get_color("settlements"),
+        "model": models.Settlements,
+        "name": "Settlements",
+        "name_singular": "Settlement",
+        "description": "See cluster",
+        "popup_fields": ["id", "area", "population", "number_of_hospitals", "distance_to_grid", "distance_to_light"],
+    },
+    {
+        "source": "hamlets",
+        "color": get_color("hamlets"),
+        "model": models.Hamlets,
+        "name": "Hamlets",
+        "name_singular": "Hamlet",
+        "description": "See cluster",
+        "popup_fields": ["id", "area", "population", "number_of_hospitals"],
     },
     {
         "source": "hospital",
@@ -68,23 +94,23 @@ HOSPITALS = [
             "catchment_area_hospital",
         ],
     },
-    {
-        "source": "hospital_simulated",
-        "color": "red",
-        "model": models.HospitalsSimulated,
-        "name": "Simulated Hospitals",
-        "name_singular": "Simulated hospital",
-        "description": "See nightlights test",
-        "popup_fields": [
-            "id",
-            "name",
-            "type",
-            "town",
-            "ownership",
-            "population_per_hospital",
-            "catchment_area_hospital",
-        ],
-    },
+    # {
+    #     "source": "hospital_simulated",
+    #     "color": "red",
+    #     "model": models.HospitalsSimulated,
+    #     "name": "Simulated Hospitals",
+    #     "name_singular": "Simulated hospital",
+    #     "description": "See nightlights test",
+    #     "popup_fields": [
+    #         "id",
+    #         "name",
+    #         "type",
+    #         "town",
+    #         "ownership",
+    #         "population_per_hospital",
+    #         "catchment_area_hospital",
+    #     ],
+    # },
 ]
 LAYERS_DEFINITION = ELECTRICITY + HOSPITALS
 LAYERS_CATEGORIES = {"Electricty": ELECTRICITY, "Hospitals": HOSPITALS}
@@ -114,6 +140,7 @@ class Layer:
 
 @dataclass
 class Popup:
+    source: str
     layer_id: str
     fields: str
 
@@ -237,8 +264,15 @@ for layer in LAYERS_DEFINITION:
             )
         )
         if "popup_fields" in layer:
-            popup_fields = {getattr(layer["model"], field).field.verbose_name: field for field in layer["popup_fields"]}
-            POPUPS.append(Popup(layer_id, json.dumps(popup_fields)))
+            popup_fields = {}
+            for field in layer["popup_fields"]:
+                label = getattr(layer["model"], field).field.verbose_name if hasattr(layer["model"], field) else field
+                popup_fields[label] = field
+            POPUPS.append(Popup(layer["source"], layer_id, json.dumps(popup_fields)))
+
+# Sort popups according to prio:
+POPUP_PRIO = ["hospital", "hospital_simulated"]  # from high to low prio
+POPUPS = sorted(POPUPS, key=lambda x: len(POPUP_PRIO) if x.source not in POPUP_PRIO else POPUP_PRIO.index(x.source))
 
 DYNAMIC_LAYERS = [
     Layer(

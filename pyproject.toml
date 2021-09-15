@@ -35,6 +35,7 @@ django-geojson = "^3.1.0"
 djangorestframework = "^3.12.4"  # https://github.com/encode/django-rest-framework
 coreapi = "^2.3.3"  # https://github.com/core-api/python-client
 djangorestframework-mvt = "^0.2.5"
+django-select2 = "^7.7.1"
 
 [tool.poetry.dev-dependencies]
 Werkzeug = "^2.0.1" # https://github.com/pallets/werkzeug

@@ -15,13 +15,13 @@ MAX_DISTILLED_ZOOM = 10
 
 Zoom = namedtuple("MinMax", ["min", "max"])
 ZOOM_LEVELS = {
-    # "country": Zoom(MIN_ZOOM, 5),
-    "region": Zoom(MIN_ZOOM, 8),
-    "district": Zoom(8, 11),
+    "country": Zoom(MIN_ZOOM, 5),
+    "state": Zoom(MIN_ZOOM, 8),
+    "district": Zoom(8, MAX_ZOOM),
 }
 REGIONS = (
-    # "country",
-    "region",
+    "country",
+    "state",
     "district",
     # "municipality",
 )

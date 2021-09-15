@@ -2,7 +2,8 @@ from . import models
 from .mvt import MVTLayer
 
 REGION_MVT_LAYERS = {
-    "region": [MVTLayer("region", models.Region.vector_tiles), MVTLayer("regionlabel", models.Region.label_tiles)],
+    "country": [MVTLayer("country", models.Country.vector_tiles), MVTLayer("countrylabel", models.Country.label_tiles)],
+    "state": [MVTLayer("state", models.State.vector_tiles), MVTLayer("statelabel", models.State.label_tiles)],
     "district": [
         MVTLayer("district", models.District.vector_tiles),
         MVTLayer("districtlabel", models.District.label_tiles),
@@ -11,11 +12,12 @@ REGION_MVT_LAYERS = {
 
 STATIC_MVT_LAYERS = {
     "static": [
-        # MVTLayer("grid", models.Grid.vector_tiles),
-        MVTLayer("cluster", models.Cluster.vector_tiles),
+        MVTLayer("built_up_areas", models.BuiltUpAreas.vector_tiles),
+        MVTLayer("settlements", models.Settlements.vector_tiles),
+        MVTLayer("hamlets", models.Hamlets.vector_tiles),
         MVTLayer("nightlight", models.Nightlight.vector_tiles),
         MVTLayer("hospital", models.Hospitals.vector_tiles),
-        MVTLayer("hospital_simulated", models.HospitalsSimulated.vector_tiles),
+        # MVTLayer("hospital_simulated", models.HospitalsSimulated.vector_tiles),
     ],
 }
 
