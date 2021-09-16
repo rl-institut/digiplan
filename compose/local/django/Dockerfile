@@ -60,7 +60,7 @@ WORKDIR /tmp
 SHELL ["/bin/bash", "-c"]
 COPY ./pyproject.toml ./poetry.lock ./
 RUN source /venv/bin/activate && python -m pip install --upgrade pip && pip install --no-cache-dir poetry && poetry install --no-root
-RUN source /venv/bin/activate && pip install --trusted-host github.com git+https://github.com/henhuy/django-raster.git@fix/colormap_range_and_entries
+RUN source /venv/bin/activate && pip install --trusted-host github.com git+https://github.com/henhuy/django-raster.git@djagora
 
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint
