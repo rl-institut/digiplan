@@ -10,6 +10,7 @@ from django.forms import (
 )
 from django.db.models import Min, Max
 from django_select2.forms import Select2MultipleWidget
+from raster.models import RasterLayer as RasterModel
 
 from .widgets import SwitchWidget
 from .models import LayerFilterType
@@ -24,7 +25,8 @@ class StaticLayerForm(Form):
     def __init__(self, layer, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.layer = layer
-        self.fields["switch"].widget.attrs["id"] = f"fill-{layer['source']}"
+        layer_id = layer["source"] if issubclass(layer["model"], RasterModel) else f"fill-{layer['source']}"
+        self.fields["switch"].widget.attrs["id"] = layer_id
 
         if hasattr(layer["model"], "filters"):
             self.has_filters = True

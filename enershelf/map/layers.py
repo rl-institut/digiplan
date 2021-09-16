@@ -5,6 +5,7 @@ from itertools import product
 from typing import List, Optional
 
 from django.db.models import IntegerField, BooleanField
+from raster.models import RasterLayer as RasterModel
 
 from config.settings.base import USE_DISTILLED_MVTS
 from .config import MAX_ZOOM, MIN_ZOOM, REGIONS, ZOOM_LEVELS, MAX_DISTILLED_ZOOM
@@ -112,8 +113,18 @@ HOSPITALS = [
     #     ],
     # },
 ]
-LAYERS_DEFINITION = ELECTRICITY + HOSPITALS
-LAYERS_CATEGORIES = {"Electricty": ELECTRICITY, "Hospitals": HOSPITALS}
+SOLAR = [
+    {
+        "source": "solar",
+        "legend": "solar",
+        "model": RasterModel,
+        "name": "Solar",
+        "name_singular": "Solar",
+        "description": "See nightlights test",
+    },
+]
+LAYERS_DEFINITION = ELECTRICITY + HOSPITALS + SOLAR
+LAYERS_CATEGORIES = {"Electricty": ELECTRICITY, "Hospitals": HOSPITALS, "Solar": SOLAR}
 
 
 @dataclass
@@ -136,6 +147,13 @@ class Layer:
     name: Optional[str] = None
     description: Optional[str] = None
     color: Optional[str] = None
+
+
+@dataclass
+class RasterLayer:
+    id: str
+    source: str
+    type: str
 
 
 @dataclass
@@ -176,6 +194,22 @@ def get_dynamic_sources():
     return sources
 
 
+def get_raster_sources(distilled=False):
+    sources = []
+    for layer in LAYERS_DEFINITION:
+        if not issubclass(layer["model"], RasterModel):
+            continue
+        layer_id = RasterModel.objects.get(name=layer["source"]).id
+        sources.append(
+            Source(
+                name=f"{layer['source']}",
+                type="raster",
+                tiles=[f"raster/tiles/{layer_id}/{{z}}/{{x}}/{{y}}.png?legend={layer['legend']}"],
+            )
+        )
+    return sources
+
+
 if USE_DISTILLED_MVTS:
     SUFFIXES = ["", "_distilled"]
     ALL_SOURCES = (
@@ -193,6 +227,7 @@ if USE_DISTILLED_MVTS:
             Source(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"]),
             Source(name="static_distilled", type="vector", tiles=["static/mvts/{z}/{x}/{y}/static.mvt"],),
         ]
+        + get_raster_sources()
         + get_dynamic_sources()
     )
 else:
@@ -200,6 +235,7 @@ else:
     ALL_SOURCES = (
         [Source(name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"]) for region in REGIONS]
         + [Source(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"])]
+        + get_raster_sources()
         + get_dynamic_sources()
     )
 
@@ -242,9 +278,17 @@ REGION_LAYERS = (
     ]
 )
 
+RASTER_LAYERS = [
+    RasterLayer(id=layer["source"], source=layer["source"], type="raster",)
+    for layer in LAYERS_DEFINITION
+    if issubclass(layer["model"], RasterModel)
+]
+
 POPUPS = []
 STATIC_LAYERS = []
 for layer in LAYERS_DEFINITION:
+    if issubclass(layer["model"], RasterModel):
+        continue
     if hasattr(layer["model"], "setup"):
         continue
     for suffix in SUFFIXES:

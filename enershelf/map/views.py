@@ -4,7 +4,7 @@ import uuid
 from django.conf import settings
 from django.views.generic import TemplateView
 
-from .layers import ALL_LAYERS, REGION_LAYERS, ALL_SOURCES, LAYERS_CATEGORIES, POPUPS
+from .layers import ALL_LAYERS, REGION_LAYERS, RASTER_LAYERS, ALL_SOURCES, LAYERS_CATEGORIES, POPUPS
 from config.settings.base import (
     USE_DISTILLED_MVTS,
     PASSWORD_PROTECTION,
@@ -25,6 +25,7 @@ class MapGLView(TemplateView):
         "mapbox_style_location": MAPBOX_STYLE_LOCATION,
         "map_images": MAP_IMAGES,
         "all_layers": ALL_LAYERS,
+        "raster_layers": RASTER_LAYERS,
         "all_sources": ALL_SOURCES,
         "popups": POPUPS,
         "area_switches": {
