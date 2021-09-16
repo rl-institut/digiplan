@@ -24,7 +24,7 @@ MODELS = [
     Hospitals,
     BuiltUpAreas,
     Settlements,
-    Hamlets,
+    #Hamlets,
     Nightlight,
 ]
 
