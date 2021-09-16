@@ -87,6 +87,18 @@
           );
         {% endfor %}
 
+        {% for layer in raster_layers %}
+          {
+            const layer_setup = {
+              "id": "{{layer.id}}",
+              "source": "{{layer.source}}",
+              "type": "{{layer.type}}"
+            };
+            map.addLayer(layer_setup);
+            map.setLayoutProperty("{{ layer.id }}", "visibility", "none");
+          }
+        {% endfor %}
+
         {% for layer in all_layers %}
           {
             const layer_style = JSON.parse(document.getElementById("styles").textContent)["{{layer.style}}"];

@@ -10,6 +10,7 @@ from django.forms import (
 )
 from django.db.models import Min, Max
 from django_select2.forms import Select2MultipleWidget
+from raster.models import RasterLayer as RasterModel
 
 from .widgets import SwitchWidget
 from .models import LayerFilterType
@@ -24,16 +25,17 @@ class StaticLayerForm(Form):
     def __init__(self, layer, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.layer = layer
-        self.fields["switch"].widget.attrs["id"] = f"fill-{layer['source']}"
+        layer_id = layer.source if issubclass(layer.model, RasterModel) else f"fill-{layer.source}"
+        self.fields["switch"].widget.attrs["id"] = layer_id
 
-        if hasattr(layer["model"], "filters"):
+        if hasattr(layer.model, "filters"):
             self.has_filters = True
-            for filter_ in layer["model"].filters:
+            for filter_ in layer.model.filters:
                 if filter_.type == LayerFilterType.Range:
-                    filter_min = layer["model"].vector_tiles.aggregate(Min(filter_.name))[f"{filter_.name}__min"]
-                    filter_max = layer["model"].vector_tiles.aggregate(Max(filter_.name))[f"{filter_.name}__max"]
+                    filter_min = layer.model.vector_tiles.aggregate(Min(filter_.name))[f"{filter_.name}__min"]
+                    filter_max = layer.model.vector_tiles.aggregate(Max(filter_.name))[f"{filter_.name}__max"]
                     self.fields[filter_.name] = MultiValueField(
-                        label=getattr(layer["model"], filter_.name).field.verbose_name,
+                        label=getattr(layer.model, filter_.name).field.verbose_name,
                         fields=[IntegerField(), IntegerField()],
                         widget=TextInput(
                             attrs={
@@ -49,8 +51,7 @@ class StaticLayerForm(Form):
                     )
                 elif filter_.type == LayerFilterType.Dropdown:
                     filter_values = (
-                        layer["model"]
-                        .vector_tiles.values_list("district_name", flat=True)
+                        layer.model.vector_tiles.values_list("district_name", flat=True)
                         .order_by("district_name")
                         .distinct()
                     )

@@ -6,6 +6,8 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- raster layers
+- layers can be filtered by match of keywords
 - layers can be filtered by multiple filters
 
 ### Changed

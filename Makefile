@@ -10,11 +10,17 @@ load_regions:
 load_data:
 	python manage.py shell --command="from enershelf.utils import data_processing; data_processing.load_data()"
 
+load_raster:
+	python manage.py shell --command="from enershelf.utils import data_processing; data_processing.load_raster()"
+
 empty_regions:
 	python manage.py shell --command="from enershelf.utils import data_processing; data_processing.empty_data(models=data_processing.REGIONS)"
 
 empty_data:
 	python manage.py shell --command="from enershelf.utils import data_processing; data_processing.empty_data()"
+
+empty_raster:
+	python manage.py shell --command="from enershelf.utils import data_processing; data_processing.empty_raster()"
 
 dump_fixtures:
 	bash enershelf/utils/dump_fixtures.sh
