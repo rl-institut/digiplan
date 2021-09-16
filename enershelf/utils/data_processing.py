@@ -1,5 +1,7 @@
 import os
 
+from raster.models import RasterLayer as RasterModel
+
 from config.settings.base import ROOT_DIR
 from enershelf.utils.ogr_layer_mapping import RelatedModelLayerMapping
 from enershelf.map.models import (
@@ -13,6 +15,7 @@ from enershelf.map.models import (
     Hamlets,
     Nightlight,
 )
+from enershelf.map.layers import LAYERS_DEFINITION
 
 REGIONS = [
     Country,
@@ -64,6 +67,13 @@ def load_data(models=None, verbose=True):
             model=model, data=data_path, mapping=model.mapping, layer=model.layer, transform=4326,
         )
         instance.save(strict=True, verbose=verbose)
+
+
+def load_raster(layers=LAYERS_DEFINITION):
+    for layer in layers:
+        if not issubclass(layer["model"], RasterModel):
+            continue
+        RasterModel
 
 
 def empty_data(models=None):

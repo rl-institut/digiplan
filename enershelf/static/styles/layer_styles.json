@@ -118,5 +118,10 @@
       "icon-image": "hospital",
       "icon-size": 1.0
     }
+  },
+  "solar": {
+    "continuous": "True",
+    "from": [255, 0, 0],
+    "to": [255, 255, 0]
   }
 }

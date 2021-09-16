@@ -47,7 +47,7 @@ class MapGLView(TemplateView):
 
         # Categorize sources
         categorized_sources = {
-            category: [SOURCES[layer["source"]] for layer in layers if layer["source"] in SOURCES]
+            category: [SOURCES[layer.source] for layer in layers if layer.source in SOURCES]
             for category, layers in LAYERS_CATEGORIES.items()
         }
         context["sources"] = categorized_sources
