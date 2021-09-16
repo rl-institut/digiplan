@@ -1,20 +1,16 @@
 import json
-import os
 from dataclasses import dataclass, field
 from itertools import product
 from typing import List, Optional
 
 from django.contrib.gis.db.models import Model
-from django.db.models import IntegerField, BooleanField
+from django.db.models import IntegerField, BooleanField, ObjectDoesNotExist
 from raster.models import RasterLayer as RasterModel
 
 from config.settings.base import USE_DISTILLED_MVTS
-from .config import MAX_ZOOM, MIN_ZOOM, REGIONS, ZOOM_LEVELS, MAX_DISTILLED_ZOOM
+from .config import LAYER_STYLES, MAX_ZOOM, MIN_ZOOM, REGIONS, ZOOM_LEVELS, MAX_DISTILLED_ZOOM
 
 from . import models
-
-with open(os.path.join(os.path.dirname(__file__), "../static/styles/layer_styles.json"), mode="rb",) as f:
-    LAYER_STYLES = json.loads(f.read())
 
 
 def get_color(source_layer):
@@ -208,7 +204,10 @@ def get_raster_sources(distilled=False):
     for layer in LAYERS_DEFINITION:
         if not issubclass(layer.model, RasterModel):
             continue
-        raster_id = RasterModel.objects.get(name=layer.source).id
+        try:
+            raster_id = RasterModel.objects.get(name=layer.source).id
+        except ObjectDoesNotExist:
+            continue
         sources.append(
             Source(
                 name=f"{layer.source}",

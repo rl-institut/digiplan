@@ -1,3 +1,4 @@
+import os
 import json
 import pathlib
 from collections import namedtuple
@@ -68,6 +69,12 @@ def init_sources():
 
 
 SOURCES = init_sources()
+
+
+# STYLES
+
+with open(os.path.join(os.path.dirname(__file__), "../static/styles/layer_styles.json"), mode="rb",) as f:
+    LAYER_STYLES = json.loads(f.read())
 
 
 # MAP

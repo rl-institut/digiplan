@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 
 ROOT_DIR = environ.Path(__file__) - 3  # (enershelf/config/settings/base.py - 3 = enershelf/)
 APPS_DIR = ROOT_DIR.path("enershelf")
+DATA_DIR = APPS_DIR.path("data")
 METADATA_DIR = APPS_DIR.path("metadata")
 
 env = environ.Env()
@@ -151,7 +152,7 @@ STATICFILES_FINDERS = [
 # MEDIA
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = str(APPS_DIR("media"))
+MEDIA_ROOT = str(APPS_DIR("data"))
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = "/media/"
 
