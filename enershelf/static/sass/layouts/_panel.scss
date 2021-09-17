@@ -2,15 +2,11 @@
   width: 100%;
   height: auto;
   box-shadow: $box-shadow;
-  @include flex-column;
+  overflow-y: scroll;
 
   @media only screen and (min-width: $medium-screen) {
     height: 100vh;
     width: $panel-width;
-  }
-
-  &__content {
-    flex: 1 0 auto;
   }
 
   &__logos {
@@ -42,8 +38,14 @@
     }
   }
 
+  .layers {
+    &__subtitle,
+    &__item {
+      padding: 1rem 1.5rem;
+    }
+  }
+
   .footer {
-    flex-shrink: 0;
     border-top: $border-gray;
     padding: $padding-small 0;
     
