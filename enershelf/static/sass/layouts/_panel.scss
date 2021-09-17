@@ -39,10 +39,17 @@
   }
 
   .layers {
-    &__subtitle,
-    &__item {
-      padding: 1rem 1.5rem;
+    &__subtitle {
+      padding: 1rem 1.5rem 0;
     }
+
+    &__item {
+      padding: 0.5rem 1.5rem;
+    }
+  }
+
+  .layer {
+    @include flex-row-space-between;
   }
 
   .footer {

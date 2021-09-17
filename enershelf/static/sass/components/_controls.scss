@@ -1,5 +1,7 @@
 /////////////////////////////////////// SWITCHES ///////////////////////////////////////
 .form-check.form-switch .form-check-input {
+  margin-left: 0;
+
   &:checked {
     background-color: $primary-color;
     border-color: $primary-color;
@@ -42,4 +44,10 @@
       background-color: $primary-color;
     }
   }
+}
+
+/////////////////////////////////////// CONTAINERS ///////////////////////////////////////
+// Container for selecting different options
+.select2.select2-container {
+  width: 100% !important;
 }
