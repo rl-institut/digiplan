@@ -28,3 +28,11 @@ function flyToElement(element) {
     essential: true
   });
 }
+
+function toggleSatellite() {
+  if (map.getLayoutProperty("satellite", "visibility") == "none") {
+    map.setLayoutProperty("satellite", "visibility", "visible")
+  } else {
+    map.setLayoutProperty("satellite", "visibility", "none")
+  }
+}
