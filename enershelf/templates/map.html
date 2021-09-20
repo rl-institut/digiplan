@@ -21,6 +21,7 @@
     <pre id="info"></pre>
     {% include 'canvases/map.html' %}
   </section>
+  <button onclick="toggleSatellite();">Satellite</button>
 
   {% include 'canvases/popup.html' %}
 {% endblock content %}
@@ -66,6 +67,15 @@
       {% endfor %}
 
       map.on("load", function () {
+
+        map.addLayer(
+          {
+            id: "satellite",
+            source: {"type": "raster",  "url": "mapbox://mapbox.satellite", "tileSize": 256},
+            type: "raster"
+          }
+        );
+        map.setLayoutProperty("satellite", "visibility", "none");
 
         {% for source in all_sources %}
           map.addSource(
