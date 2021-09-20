@@ -22,7 +22,12 @@
     {% include 'canvases/map.html' %}
   </section>
 
-  {% include 'canvases/popup.html' %}
+  {% include 'popups/default.html' %}
+  {% for popup in popups %}
+    {% if popup.template_url %}
+      {% include popup.template_url %}
+    {% endif %}
+  {% endfor %}
 {% endblock content %}
 
 {% block js_body %}
@@ -118,15 +123,17 @@
 
       });
 
-      {% for layer in all_layers %}
-        // Zoom to feature on click
-        map.on("click", function (element) {
-          flyToElement(element);
-        });
-      {% endfor %}
+      // Zoom to feature on click
+      map.on("click", function (element) {
+        flyToElement(element);
+      });
 
       {% for popup in popups %}
-        add_popup("{{popup.layer_id}}", {{popup.fields|safe}});
+        {% if popup.template_url %}
+          add_popup("{{popup.layer_id}}", {{popup.fields|safe}}, "{{popup.source}}");
+        {% else %}
+          add_popup("{{popup.layer_id}}", {{popup.fields|safe}});
+        {% endif %}
       {% endfor %}
 
       {% for layer in all_layers %}

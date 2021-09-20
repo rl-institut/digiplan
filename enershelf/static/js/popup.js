@@ -1,5 +1,5 @@
 
-function add_popup(layer_id, fields) {
+function add_popup(layer_id, fields, template_id="default") {
   map.on("click", layer_id, function (e) {
     // Check if popup already exists:
     if ($('.mapboxgl-popup').length > 0) {return}
@@ -11,9 +11,8 @@ function add_popup(layer_id, fields) {
       // Get coordinates from geometry:
       var coordinates = e.features[0].geometry.coordinates.slice();
     }
-    var template = $($("#popup_template").prop("content")).find("div");
+    var template = $($("#" + template_id + "_popup").prop("content")).find("div");
     var clone = template.clone();
-    clone.find("h3").text("Header");
     var table = clone.find("table");
     for (var label in fields) {
       key = fields[label];

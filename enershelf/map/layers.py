@@ -1,3 +1,4 @@
+import os
 import json
 from dataclasses import dataclass, field
 from itertools import product
@@ -7,7 +8,7 @@ from django.contrib.gis.db.models import Model
 from django.db.models import IntegerField, BooleanField, ObjectDoesNotExist
 from raster.models import RasterLayer as RasterModel
 
-from config.settings.base import USE_DISTILLED_MVTS
+from config.settings.base import APPS_DIR, USE_DISTILLED_MVTS
 from .config import LAYER_STYLES, MAX_ZOOM, MIN_ZOOM, REGIONS, ZOOM_LEVELS, MAX_DISTILLED_ZOOM
 
 from . import models
@@ -166,6 +167,7 @@ class Popup:
     source: str
     layer_id: str
     fields: str
+    template_url: Optional[str] = None
 
 
 def get_layer_setups(layer):
@@ -324,7 +326,12 @@ for layer in LAYERS_DEFINITION:
                     else popup_field
                 )
                 popup_fields[label] = popup_field
-            POPUPS.append(Popup(layer.source, layer_id, json.dumps(popup_fields)))
+            template_url = (
+                f"popups/{layer.source}.html"
+                if os.path.exists(APPS_DIR.path("templates", "popups", f"{layer.source}.html"))
+                else None
+            )
+            POPUPS.append(Popup(layer.source, layer_id, json.dumps(popup_fields), template_url=template_url))
 
 # Sort popups according to prio:
 POPUP_PRIO = ["hospital", "hospital_simulated"]  # from high to low prio
