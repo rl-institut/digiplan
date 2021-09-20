@@ -51,13 +51,11 @@ class StaticLayerForm(Form):
                     )
                 elif filter_.type == LayerFilterType.Dropdown:
                     filter_values = (
-                        layer.model.vector_tiles.values_list("district_name", flat=True)
-                        .order_by("district_name")
-                        .distinct()
+                        layer.model.vector_tiles.values_list(filter_.name, flat=True).order_by(filter_.name).distinct()
                     )
                     self.fields[filter_.name] = MultipleChoiceField(
                         choices=[(value, value) for value in filter_values],
-                        widget=Select2MultipleWidget(attrs={"id": f"district_name_{next(self.counter)}"}),
+                        widget=Select2MultipleWidget(attrs={"id": f"{filter_.name}_{next(self.counter)}"}),
                     )
                 else:
                     raise ValueError(f"Unknown filter type '{filter_.type}'")
