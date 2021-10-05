@@ -20,8 +20,8 @@
     {% include 'canvases/panel.html' %}
     <pre id="info"></pre>
     {% include 'canvases/map.html' %}
+    <button onclick="toggleSatellite();">Satellite</button>
   </section>
-  <button onclick="toggleSatellite();">Satellite</button>
 
   {% include 'popups/default.html' %}
   {% for popup in popups %}
