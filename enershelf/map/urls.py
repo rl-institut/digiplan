@@ -11,6 +11,7 @@ app_name = "map"
 
 urlpatterns = [
     path("", views.MapGLView.as_view(), name="map"),
+    path("search/", view=views.search, name="search"),
 ]
 
 urlpatterns += [

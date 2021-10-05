@@ -1,7 +1,10 @@
 import json
 import uuid
 
+from queryset_sequence import QuerySetSequence
+
 from django.conf import settings
+from django.http import JsonResponse
 from django.views.generic import TemplateView
 
 from .layers import ALL_LAYERS, REGION_LAYERS, RASTER_LAYERS, ALL_SOURCES, LAYERS_CATEGORIES, POPUPS
@@ -14,6 +17,7 @@ from config.settings.base import (
 )
 from .forms import StaticLayerForm
 from .config import STORE_COLD_INIT, STORE_HOT_INIT, SOURCES, MAP_IMAGES
+from . import models
 
 
 class MapGLView(TemplateView):
@@ -58,3 +62,44 @@ class MapGLView(TemplateView):
         context["store_cold_init"] = json.dumps(STORE_COLD_INIT)
 
         return context
+
+
+def search(request):
+    if "query" not in request.GET:
+        return JsonResponse({"error": "query not in correct form, example: ?query=Berlin (GET)"}, status=400,)
+
+    # Get queryset
+    qs = (
+        QuerySetSequence(models.Country.objects.all(), models.State.objects.all(), models.District.objects.all(),)
+        .filter(name__istartswith=request.GET.get("query"))
+        .order_by("name")[:5]
+    )
+
+    # Get duplicate names of features
+    names = [feature.name for feature in qs]
+    duplicate_names = []
+    seen = {}
+    for x in names:
+        if x not in seen:
+            seen[x] = 1
+        else:
+            if seen[x] == 1:
+                duplicate_names.append(x)
+            seen[x] += 1
+
+    # Create suggestions
+    suggestions = [
+        {
+            # If name is duplicate also supply feature type
+            "value": f"{feature.name} ({feature.type})" if feature.name in duplicate_names else feature.name,
+            "data": {"id": feature.id, "name": feature.name, "bbox": f"{feature.geom.extent}"},
+        }
+        for feature in qs
+    ]
+
+    result = {
+        "query": "Unit",
+        "suggestions": suggestions,
+    }
+
+    return JsonResponse(result, safe=False)

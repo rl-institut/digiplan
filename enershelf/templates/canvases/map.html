@@ -3,8 +3,8 @@
 <section class="map-wrap">
   <nav class="top-nav">
     <div class="top-nav__search">
-      <label for="searchLocationInput" class="form-label visually-hidden">Search for location...</label>
-      <input type="search" class="form-control" id="searchLocationInput" placeholder="Search for location...">
+      <input class="top-map__search" type="text" id="autocomplete" placeholder="Region finden..." autocomplete="off"
+           title="Hier können Sie Kommunen, Kreise oder Bundesländer finden, die Sie besonders interessieren">
     </div>
     <div class="top-nav__links">
       <ul>
@@ -23,5 +23,19 @@
     </div>
   </nav>
   <section id="map">
+    <div class="lds-spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </section>
 </section>
