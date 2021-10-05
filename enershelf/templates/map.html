@@ -62,6 +62,7 @@
 
       const nav = new mapboxgl.NavigationControl();
       map.addControl(nav, "top-right");
+      map.addControl(new mapboxgl.ScaleControl({position: 'bottom-right'}));
 
       {% for map_image in map_images %}
         map.loadImage("{% static map_image.path %}", function(error, image) {
