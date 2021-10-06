@@ -8,17 +8,23 @@ from range_key_dict import RangeKeyDict
 from django.conf import settings
 from enershelf import __version__
 
+
+# FILES
+
+CLUSTER_GEOJSON_FILE = settings.DATA_DIR.path("cluster.geojson")
+LAYER_STYLES_FILE = os.path.join(os.path.dirname(__file__), "../static/styles/layer_styles.json")
+
 # REGIONS
 
-MIN_ZOOM = 5
+MIN_ZOOM = 6
 MAX_ZOOM = 22
 MAX_DISTILLED_ZOOM = 10
 
 Zoom = namedtuple("MinMax", ["min", "max"])
 ZOOM_LEVELS = {
-    "country": Zoom(MIN_ZOOM, 5),
-    "state": Zoom(MIN_ZOOM, 8),
-    "district": Zoom(8, MAX_ZOOM),
+    "country": Zoom(MIN_ZOOM, 7),
+    "state": Zoom(7, 9),
+    "district": Zoom(9, MAX_ZOOM),
 }
 REGIONS = (
     "country",
@@ -36,7 +42,10 @@ FILTER_DEFINITION = {}
 
 # STORE
 
-STORE_COLD_INIT = {"version": __version__}
+STORE_COLD_INIT = {
+    "version": __version__,
+    "zoom_levels": ZOOM_LEVELS,
+}
 
 
 def init_hot_store():
@@ -73,7 +82,7 @@ SOURCES = init_sources()
 
 # STYLES
 
-with open(os.path.join(os.path.dirname(__file__), "../static/styles/layer_styles.json"), mode="rb",) as f:
+with open(LAYER_STYLES_FILE, mode="rb",) as f:
     LAYER_STYLES = json.loads(f.read())
 
 

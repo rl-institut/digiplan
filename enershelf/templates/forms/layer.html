@@ -1,6 +1,6 @@
 {% load static i18n %}
 
-<form class="layers__item static-layer">
+<form class="layers__item static-layer {% if form.layer.clustered %}cluster-layer{% endif %}">
   <div class="layer">
     <div class="name">
       <span class="name__text" data-source="{{ form.layer.source }}">{{ form.layer.name }}</span>

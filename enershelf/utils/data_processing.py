@@ -1,5 +1,6 @@
 import json
 import os
+from geojson import FeatureCollection, Feature, Point
 
 from raster.models import Legend, RasterLayer as RasterModel
 
@@ -16,8 +17,8 @@ from enershelf.map.models import (
     Hamlets,
     Nightlight,
 )
-from enershelf.map.layers import LAYERS_DEFINITION
-from enershelf.map.config import LAYER_STYLES
+from enershelf.map.layers import LAYERS_DEFINITION, VectorLayerData
+from enershelf.map.config import LAYER_STYLES, CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
 
 REGIONS = [
     Country,
@@ -29,7 +30,7 @@ MODELS = [
     Hospitals,
     BuiltUpAreas,
     Settlements,
-    #Hamlets,
+    Hamlets,
     Nightlight,
 ]
 
@@ -89,6 +90,27 @@ def load_raster(layers=LAYERS_DEFINITION):
             continue
         legend = Legend(title=layer.legend, json=json.dumps(LAYER_STYLES[layer.legend]))
         legend.save()
+
+
+def build_cluster_geojson(cluster_layers: list[VectorLayerData] = None):
+    cluster_layers = cluster_layers or LAYERS_DEFINITION
+    features = []
+    for region_model in REGIONS[:-1]:
+        region_name = region_model.__name__.lower()
+        zoom_level = ZOOM_LEVELS[region_name].max
+        for region in region_model.objects.all():
+            point = Point(region.geom.point_on_surface.coords)
+            properties = {"zoom_level": zoom_level}
+            for cluster_layer in cluster_layers:
+                if not hasattr(cluster_layer, "clustered") or not cluster_layer.clustered:
+                    continue
+                cluster_count = len(cluster_layer.model.objects.filter(geom__within=region.geom))
+                properties[cluster_layer.source] = cluster_count
+            feature = Feature(geometry=point, properties=properties)
+            features.append(feature)
+    fc = FeatureCollection(features)
+    with open(CLUSTER_GEOJSON_FILE, "w") as geojson_file:
+        json.dump(fc, geojson_file)
 
 
 def empty_data(models=None):

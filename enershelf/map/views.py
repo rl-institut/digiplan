@@ -3,6 +3,7 @@ import uuid
 
 from django.conf import settings
 from django.views.generic import TemplateView
+from django.http import JsonResponse
 
 from .layers import ALL_LAYERS, REGION_LAYERS, RASTER_LAYERS, ALL_SOURCES, LAYERS_CATEGORIES, POPUPS
 from config.settings.base import (
@@ -13,7 +14,7 @@ from config.settings.base import (
     MAPBOX_STYLE_LOCATION,
 )
 from .forms import StaticLayerForm
-from .config import STORE_COLD_INIT, STORE_HOT_INIT, SOURCES, MAP_IMAGES
+from .config import STORE_COLD_INIT, STORE_HOT_INIT, SOURCES, MAP_IMAGES, CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
 
 
 class MapGLView(TemplateView):
@@ -33,6 +34,7 @@ class MapGLView(TemplateView):
         },
         "use_distilled_mvts": USE_DISTILLED_MVTS,
         "store_hot_init": STORE_HOT_INIT,
+        "zoom_levels": ZOOM_LEVELS,
     }
 
     def get_context_data(self, **kwargs):
@@ -58,3 +60,9 @@ class MapGLView(TemplateView):
         context["store_cold_init"] = json.dumps(STORE_COLD_INIT)
 
         return context
+
+
+def get_clusters(request):
+    with open(CLUSTER_GEOJSON_FILE, "r") as geojson_file:
+        clusters = json.load(geojson_file)
+        return JsonResponse(clusters)
