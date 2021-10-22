@@ -12,6 +12,7 @@ app_name = "map"
 urlpatterns = [
     path("", views.MapGLView.as_view(), name="map"),
     path("clusters", views.get_clusters, name="clusters"),
+    path("districts", views.get_districts, name="districts"),
 ]
 
 urlpatterns += [

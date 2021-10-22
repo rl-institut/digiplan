@@ -15,9 +15,10 @@
         </a>
       </div>
     </div>
+    {{region_filter}}
     {% for category, switches in area_switches.items %}
       <h3 class="layers__subtitle">{{category}}</h3>
-  
+
       {% for switch in switches %}
         {% crispy switch %}
       {% endfor %}

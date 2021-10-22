@@ -126,7 +126,6 @@ class ClusterModel(models.Model):
         LayerFilter("area"),
         LayerFilter("number_of_hospitals"),
         LayerFilter("population"),
-        LayerFilter("district_name", LayerFilterType.Dropdown),
     ]
 
     data_file = "Population_Clusters"
@@ -161,6 +160,7 @@ class BuiltUpAreas(ClusterModel):
             "distance_to_light",
             "lat",
             "lon",
+            "state_name",
             "district_name",
         ]
     )
@@ -193,6 +193,8 @@ class Settlements(ClusterModel):
             "distance_to_light",
             "lat",
             "lon",
+            "state_name",
+            "district_name",
         ]
     )
 
