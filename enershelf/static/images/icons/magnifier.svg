@@ -5,11 +5,11 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   height="40"
-   width="40"
-   id="svg9"
+   viewBox="0 0 40 40"
    version="1.1"
-   viewBox="0 0 40 40">
+   id="svg9"
+   width="40"
+   height="40">
   <metadata
      id="metadata13">
     <rdf:RDF>
@@ -28,13 +28,13 @@
        id="style2">.cls-1{fill:#b6c0c6;}</style>
   </defs>
   <g
-     transform="translate(-31.008828,-27.525424)"
+     id="Your_Icons"
      data-name="Your Icons"
-     id="Your_Icons">
+     transform="translate(-31.008828,-27.525424)">
     <path
-       style="fill:#b6c0c6"
-       id="path6"
-       d="M 59.74,28.76 A 15.29,15.29 0 0 0 44.39,54.33 L 31.86,66 a 0.75,0.75 0 0 0 0.52,1.3 0.73,0.73 0 0 0 0.51,-0.21 L 45.53,55.32 A 15.29,15.29 0 1 0 59.74,28.76 Z m 8.31,18.85 a 13.81,13.81 0 1 1 -8.78,-17.42 13.76,13.76 0 0 1 8.78,17.42 z"
-       class="cls-1" />
+       id="path815"
+       transform="translate(31.008828,27.525424)"
+       d="M 16.373047 0.53320312 C 7.7461539 0.53320312 0.72070312 7.5586529 0.72070312 16.185547 C 0.72070312 24.81244 7.7461539 31.839844 16.373047 31.839844 C 19.988945 31.839844 23.314934 30.59486 25.96875 28.525391 L 36.550781 39.105469 A 1.50015 1.50015 0 1 0 38.671875 36.984375 L 28.150391 26.462891 C 30.55669 23.709148 32.025391 20.118412 32.025391 16.185547 C 32.025391 7.5586529 24.999941 0.53320312 16.373047 0.53320312 z M 16.373047 3.5332031 C 23.378621 3.5332031 29.025391 9.1799729 29.025391 16.185547 C 29.025391 23.19112 23.378621 28.839844 16.373047 28.839844 C 9.3674739 28.839844 3.7207031 23.19112 3.7207031 16.185547 C 3.7207031 9.1799729 9.3674739 3.5332031 16.373047 3.5332031 z "
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#b3b3b3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
   </g>
 </svg>

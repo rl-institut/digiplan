@@ -34,7 +34,7 @@
     if (element.isSourceLoaded || element.sourceDataType === "visibility") {
       autocompleteInput.removeAttribute("disabled");
       autocompleteInput.value = inputTextStorage;
-      autocompleteInput.placeholder = "Region finden...";
+      autocompleteInput.placeholder = "Search region...";
       autocompleteInput.style.backgroundImage = "url(/static/images/icons/magnifier.svg)";
       loadingSpinner.style.display = "none";
     } else {

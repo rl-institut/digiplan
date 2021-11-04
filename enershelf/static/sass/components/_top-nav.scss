@@ -27,3 +27,14 @@
     }
   }
 }
+
+#autocomplete {
+  background-size: 1rem;
+  background-repeat: no-repeat;
+  background-position: calc(#{$search-input-width} - 1.75rem) center;
+  width: $search-input-width;
+  border: 1px solid $gray-2;
+  padding-left: 0.5rem;
+  height: 2rem;
+  border-radius: $border-radius-small;
+}
