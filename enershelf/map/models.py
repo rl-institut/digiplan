@@ -220,6 +220,8 @@ class Hamlets(ClusterModel):
         "district": {"name": "District"},  # ForeignKey see https://stackoverflow.com/a/46689928/5804947
     }
 
+    filters = []
+
 
 # class Grid(models.Model):
 #     geom = models.MultiLineStringField(srid=4326)

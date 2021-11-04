@@ -14,7 +14,7 @@ PubSub.subscribe(eventTopics.MAP_LOADED, init_map_location);
 // Subscriber Functions
 
 function init_states(msg) {
-  url_states = get_states_from_url();
+  const url_states = get_states_from_url();
   store.cold.domain = url_states.domain;
 
   // Layers
@@ -27,7 +27,7 @@ function init_states(msg) {
 }
 
 function init_map_location(msg) {
-  url_states = get_states_from_url();
+  const url_states = get_states_from_url();
   if ("x" in url_states && "y" in url_states && "z" in url_states) {
     map.flyTo({
       center: [url_states.x, url_states.y],
