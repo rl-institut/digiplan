@@ -14,7 +14,7 @@ STATIC_MVT_LAYERS = {
     "static": [
         MVTLayer("built_up_areas", models.BuiltUpAreas.vector_tiles),
         MVTLayer("settlements", models.Settlements.vector_tiles),
-        # MVTLayer("hamlets", models.Hamlets.vector_tiles),
+        MVTLayer("hamlets", models.Hamlets.vector_tiles),
         MVTLayer("nightlight", models.Nightlight.vector_tiles),
         MVTLayer("hospital", models.Hospitals.vector_tiles),
         # MVTLayer("hospital_simulated", models.HospitalsSimulated.vector_tiles),

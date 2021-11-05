@@ -13,6 +13,9 @@ load_data:
 load_raster:
 	python manage.py shell --command="from enershelf.utils import data_processing; data_processing.load_raster()"
 
+build_clusters:
+	python manage.py shell --command="from enershelf.utils import data_processing; data_processing.build_cluster_geojson()"
+
 empty_regions:
 	python manage.py shell --command="from enershelf.utils import data_processing; data_processing.empty_data(models=data_processing.REGIONS)"
 

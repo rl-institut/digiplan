@@ -30,6 +30,7 @@ class VectorLayerData:
     name: str
     name_singular: str
     description: str
+    clustered: bool = False
     popup_fields: list = field(default_factory=list)
 
 
@@ -89,6 +90,7 @@ HOSPITALS: list = [
         name="Hamlets",
         name_singular="Hamlet",
         description="See cluster",
+        clustered=True,
         popup_fields=["id", "area", "population", "number_of_hospitals"],
     ),
     VectorLayerData(
@@ -153,6 +155,7 @@ class Layer:
     name: Optional[str] = None
     description: Optional[str] = None
     color: Optional[str] = None
+    clustered: bool = False
 
 
 @dataclass
@@ -302,19 +305,29 @@ for layer in LAYERS_DEFINITION:
     if hasattr(layer.model, "setup"):
         continue
     for suffix in SUFFIXES:
-        layer_id = f"fill-{layer.source}{suffix}"
+        if layer.clustered and suffix == "_distilled":
+            # Clustered layers are not distilled
+            continue
+        layer_id = f"{layer.source}{suffix}"
+        if layer.clustered:
+            min_zoom = list(ZOOM_LEVELS.values())[-1].min  # Show unclustered only at last LOD
+            max_zoom = MAX_ZOOM
+        else:
+            min_zoom = MAX_DISTILLED_ZOOM + 1 if suffix == "" and USE_DISTILLED_MVTS else MIN_ZOOM
+            max_zoom = MAX_ZOOM if suffix == "" else MAX_DISTILLED_ZOOM + 1
         STATIC_LAYERS.append(
             Layer(
                 id=layer_id,
                 color=layer.color,
                 description=layer.description,
-                minzoom=MAX_DISTILLED_ZOOM + 1 if suffix == "" and USE_DISTILLED_MVTS else MIN_ZOOM,
-                maxzoom=MAX_ZOOM if suffix == "" else MAX_DISTILLED_ZOOM + 1,
+                minzoom=min_zoom,
+                maxzoom=max_zoom,
                 name=layer.name,
                 style=layer.source,
                 source=f"static{suffix}",
                 source_layer=layer.source,
                 type="static",
+                clustered=layer.clustered,
             )
         )
         if layer.popup_fields:

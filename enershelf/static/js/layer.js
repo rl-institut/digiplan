@@ -70,9 +70,10 @@ function setDetailLayersOnDetailLayersSwitchClick(msg) {
 function filterChanged(msg, {layerForm}) {
   const layer_id = get_layer_id(layerForm);
   const filters = get_layer_filters(layerForm);
-  const layers = get_map_layer_ids(layer_id);
+  const clustered = $(layer_form).hasClass("cluster-layer");
+  const layers = map.getStyle().layers.filter(layer => layer["id"].startsWith(layer_id));
   $.each(layers, function (i, layer) {
-    set_filters(layer, filters);
+    set_filters(layer["id"], filters, clustered);
   })
   return logMessage(msg);
 }
@@ -105,7 +106,6 @@ function check_layer(layer_form) {
   }
 }
 
-
 function turn_off_layer(layer_form) {
   const layer_id = get_layer_id(layer_form);
   const layers = map.getStyle().layers.filter(layer => layer["id"].startsWith(layer_id));
@@ -117,22 +117,13 @@ function turn_off_layer(layer_form) {
 function turn_on_layer(layer_form) {
   const layer_id = get_layer_id(layer_form);
   const filters = get_layer_filters(layer_form);
-  const layers = get_map_layer_ids(layer_id);
+  const clustered = $(layer_form).hasClass("cluster-layer");
+  const layers = map.getStyle().layers.filter(layer => layer["id"].startsWith(layer_id));
   $.each(layers, function (i, layer) {
-    map.setLayoutProperty(layer, "visibility", "visible");
-    set_filters(layer, filters);
+    map.setLayoutProperty(layer["id"], "visibility", "visible");
+    set_filters(layer["id"], filters, clustered);
   })
-  return layers;
-}
-
-function get_map_layer_ids(layer_id) {
-  let layers;
-  if (store.cold.useDistilledMVTs) {
-    layers = [layer_id, layer_id + "_distilled"];
-  } else {
-    layers = [layer_id];
-  }
-  return layers;
+  return layers.map(layer => layer["id"]);
 }
 
 function get_layer_filters(layer_form) {
@@ -159,7 +150,7 @@ function get_layer_filters(layer_form) {
     if (result.length > 0) {
       filters.push(
         {
-          type: "dropdown",
+          type: "value",
           name: filter_name,
           values: result
         }
@@ -169,18 +160,27 @@ function get_layer_filters(layer_form) {
   return filters;
 }
 
-function set_filters(layer, filters) {
+function set_filters(layer, filters, clustered) {
   let map_filters = ["all"];
-  for (let i = 0; i < filters.length; i++) {
-    if (filters[i].type == "range") {
-      lower_bound = [">=", ["get", filters[i].name], filters[i].from];
-      upper_bound = ["<=", ["get", filters[i].name], filters[i].to];
-      map_filters.push(lower_bound);
-      map_filters.push(upper_bound);
-    }
-    if (filters[i].type == "dropdown") {
-      equals = ["match", ["get", filters[i].name], filters[i].values, true, false];
-      map_filters.push(equals);
+
+  const level = layer.split("_").at(-1);
+  if (level in store.cold.zoom_levels) {
+    // Cluster layer
+    const cluster_filter = ["==", ["get", "zoom_level"], store.cold.zoom_levels[level][1]];
+    map_filters.push(cluster_filter);
+  } else {
+    // Vector layer
+    for (let i = 0; i < filters.length; i++) {
+      if (filters[i].type == "range") {
+        const lower_bound = [">=", ["get", filters[i].name], filters[i].from];
+        const upper_bound = ["<=", ["get", filters[i].name], filters[i].to];
+        map_filters.push(lower_bound);
+        map_filters.push(upper_bound);
+      }
+      if (filters[i].type == "value") {
+        const equals = ["match", ["get", filters[i].name], filters[i].values, true, false];
+        map_filters.push(equals);
+      }
     }
   }
   map.setFilter(layer, map_filters);
