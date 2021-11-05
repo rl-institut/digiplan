@@ -34,6 +34,7 @@ $letter-spacing-normal: 0.03rem;
 // TOP-NAV
 $top-nav-height: 3.75rem;
 $top-nav-logo-height: 2.5rem;
+$search-input-width: 15rem;
 
 // top-map
 $top-map-height: 2.75rem;
@@ -70,13 +71,13 @@ $button-border-radius: 8px;
 
 // Borders
 $border-gray: 1px solid $gray-1;
+$border-radius-small: 4px;
 
 // Anchors
 $anchor-hover-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out; // from Bootstrap
 $anchor-pseudo-classes: '', ':link', ':hover', ':active', ':visited', ':focus';
 $anchor-pseudo-classes-active-state: ":hover, :focus, :active";
 $anchor-pseudo-classes-inactive-state: ":link, :visited";
-
 
 // Layout
 $section-max-width: 82rem;
