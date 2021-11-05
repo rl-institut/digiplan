@@ -15,9 +15,13 @@
         </a>
       </div>
     </div>
+    <div class="region-filters">
+      {{region_filter}}
+      <div class="border-bottom"></div>
+    </div>
     {% for category, switches in area_switches.items %}
       <h3 class="layers__subtitle">{{category}}</h3>
-  
+
       {% for switch in switches %}
         {% crispy switch %}
       {% endfor %}

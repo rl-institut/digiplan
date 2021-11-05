@@ -13,8 +13,9 @@ from config.settings.base import (
     MAPBOX_TOKEN,
     MAPBOX_STYLE_LOCATION,
 )
-from .forms import StaticLayerForm
+from .forms import RegionFilterForm, StaticLayerForm
 from .config import STORE_COLD_INIT, STORE_HOT_INIT, SOURCES, MAP_IMAGES, CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
+from . import models
 
 
 class MapGLView(TemplateView):
@@ -29,6 +30,7 @@ class MapGLView(TemplateView):
         "raster_layers": RASTER_LAYERS,
         "all_sources": ALL_SOURCES,
         "popups": POPUPS,
+        "region_filter": RegionFilterForm(),
         "area_switches": {
             category: [StaticLayerForm(layer) for layer in layers] for category, layers in LAYERS_CATEGORIES.items()
         },
@@ -66,3 +68,9 @@ def get_clusters(request):
     with open(CLUSTER_GEOJSON_FILE, "r") as geojson_file:
         clusters = json.load(geojson_file)
         return JsonResponse(clusters)
+
+
+def get_districts(request):
+    states = request.GET.getlist("states[]")
+    districts = models.District.objects.filter(state__name__in=states).order_by("name").values_list("name", flat=True)
+    return JsonResponse({"districts": list(districts)})

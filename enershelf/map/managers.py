@@ -106,6 +106,7 @@ class ClusterMVTManager(MVTManager):
             super(ClusterMVTManager, self)
             .get_queryset()
             .annotate(center=models.functions.Centroid("geom"))
+            .annotate(state_name=models.F("district__state__name"))
             .annotate(district_name=models.F("district__name"))
             .annotate(
                 lat=X("center", output_field=models.DecimalField()), lon=Y("center", output_field=models.DecimalField())
