@@ -38,6 +38,7 @@ REGION_ZOOMS = RangeKeyDict({zoom: layer for layer, zoom in ZOOM_LEVELS.items() 
 # FILTERS
 
 FILTER_DEFINITION = {}
+REGION_FILTER_LAYERS = ["built_up_areas", "settlements", "hospitals"]
 
 
 # STORE
@@ -45,6 +46,7 @@ FILTER_DEFINITION = {}
 STORE_COLD_INIT = {
     "version": __version__,
     "zoom_levels": ZOOM_LEVELS,
+    "region_filter_layers": REGION_FILTER_LAYERS,
 }
 
 
