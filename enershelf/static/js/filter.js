@@ -13,6 +13,10 @@ PubSub.subscribe(eventTopics.STATE_FILTER_CHANGE, change_districts);
 PubSub.subscribe(eventTopics.DISTRICT_FILTER_CHANGE, change_region_filter);
 
 function change_districts(msg, states) {
+  if (states.length == 0) {
+    district_filter.select2().prop("disabled", true);
+    return logMessage(msg);
+  }
   $.ajax({
     type: "GET",
     url: "districts",
@@ -28,6 +32,7 @@ function change_districts(msg, states) {
           })
         );
       });
+      district_filter.select2().prop("disabled", false);
       PubSub.publish(eventTopics.DISTRICT_FILTER_CHANGE);
     }
   });

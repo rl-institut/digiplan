@@ -14,3 +14,6 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Changed
 - prevent zoom, if marker is clicked
 - district and region filters are now global filters (not per layer)
+
+### Fixed 
+- district filter disabled
