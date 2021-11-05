@@ -7,6 +7,7 @@
 .map-wrap {
   @include flex-column;
   width: 100%;
+  position: relative;
   
   @media only screen and (min-width: $medium-screen) {
     width: calc(100% - #{$panel-width});
@@ -15,4 +16,21 @@
 
 #map {
   height: calc(100vh - #{$top-nav-height});
+}
+
+#satellie-layer {
+  position: absolute;
+  bottom: 2rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: $button-border-radius;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-width: 1px;
+  border-color: #bdbdbd;
+
+  img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }

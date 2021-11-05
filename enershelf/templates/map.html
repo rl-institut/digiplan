@@ -73,6 +73,15 @@
 
       map.on("load", function () {
 
+        map.addLayer(
+          {
+            id: "satellite",
+            source: {"type": "raster",  "url": "mapbox://mapbox.satellite", "tileSize": 256},
+            type: "raster"
+          }
+        );
+        map.setLayoutProperty("satellite", "visibility", "none");
+
         {% for source in all_sources %}
           map.addSource(
             "{{source.name}}",
