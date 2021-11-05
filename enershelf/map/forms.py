@@ -12,7 +12,7 @@ from django.db.models import Min, Max
 from django_select2.forms import Select2MultipleWidget
 
 from .widgets import SwitchWidget
-from .models import LayerFilterType
+from . import models
 
 
 class StaticLayerForm(Form):
@@ -29,7 +29,7 @@ class StaticLayerForm(Form):
         if hasattr(layer.model, "filters"):
             self.has_filters = True
             for filter_ in layer.model.filters:
-                if filter_.type == LayerFilterType.Range:
+                if filter_.type == models.LayerFilterType.Range:
                     filter_min = layer.model.vector_tiles.aggregate(Min(filter_.name))[f"{filter_.name}__min"]
                     filter_max = layer.model.vector_tiles.aggregate(Max(filter_.name))[f"{filter_.name}__max"]
                     self.fields[filter_.name] = MultiValueField(
@@ -47,7 +47,7 @@ class StaticLayerForm(Form):
                             }
                         ),
                     )
-                elif filter_.type == LayerFilterType.Dropdown:
+                elif filter_.type == models.LayerFilterType.Dropdown:
                     filter_values = (
                         layer.model.vector_tiles.values_list(filter_.name, flat=True).order_by(filter_.name).distinct()
                     )
@@ -60,3 +60,13 @@ class StaticLayerForm(Form):
 
         self.helper = FormHelper(self)
         self.helper.template = "forms/layer.html"
+
+
+class RegionFilterForm(Form):
+    state = MultipleChoiceField(
+        choices=[
+            (state, state) for state in models.State.objects.all().order_by("name").values_list("name", flat=True)
+        ],
+        widget=Select2MultipleWidget,
+    )
+    district = MultipleChoiceField(choices=[], widget=Select2MultipleWidget(attrs={"disabled": True}),)

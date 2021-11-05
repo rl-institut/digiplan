@@ -70,7 +70,7 @@ function setDetailLayersOnDetailLayersSwitchClick(msg) {
 function filterChanged(msg, {layerForm}) {
   const layer_id = get_layer_id(layerForm);
   const filters = get_layer_filters(layerForm);
-  const clustered = $(layer_form).hasClass("cluster-layer");
+  const clustered = $(layerForm).hasClass("cluster-layer");
   const layers = map.getStyle().layers.filter(layer => layer["id"].startsWith(layer_id));
   $.each(layers, function (i, layer) {
     set_filters(layer["id"], filters, clustered);
@@ -128,6 +128,28 @@ function turn_on_layer(layer_form) {
 
 function get_layer_filters(layer_form) {
   let filters = [];
+
+  // Add global region filters
+  states = $("#id_state").val();
+  if (states.length > 0) {
+      filters.push(
+        {
+          type: "value",
+          name: "state_name",
+          values: states
+        }
+      )
+    }
+  districts = $("#id_district").val();
+  if (districts.length > 0) {
+      filters.push(
+        {
+          type: "value",
+          name: "district_name",
+          values: districts
+        }
+      )
+    }
 
   let sliders = $(layer_form).find(".js-range-slider");
   sliders.each(function (index, slider) {
