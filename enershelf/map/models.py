@@ -264,20 +264,14 @@ class Hospitals(models.Model):
     type = models.CharField(max_length=254)
     town = models.CharField(max_length=254, null=True)
     ownership = models.CharField(max_length=254)
-    population_per_hospital = models.FloatField()
-    catchment_area_hospital = models.FloatField()
 
     district = models.ForeignKey("District", on_delete=models.CASCADE, related_name="hospitals")
 
     objects = models.Manager()
-    vector_tiles = MVTManager(
-        columns=["id", "name", "type", "town", "ownership", "population_per_hospital", "catchment_area_hospital"]
-    )
-
-    filters = [LayerFilter("population_per_hospital"), LayerFilter("catchment_area_hospital")]
+    vector_tiles = MVTManager(columns=["id", "name", "type", "town", "ownership"])
 
     data_file = "HealthCare_Infrastructure"
-    layer = "Gha_HealthCareFacilities_total"
+    layer = "Gha_HealthCareFacilties_total"
     mapping = {
         "id": "FID",
         "geom": "POINT",
@@ -285,38 +279,45 @@ class Hospitals(models.Model):
         "type": "Type",
         "town": "Town",
         "ownership": "Ownership",
-        "population_per_hospital": "Pop_per_hsp_voronoi",
-        "catchment_area_hospital": "Catchment_area_hosp",
         "district": {"name": "District"},
     }
 
 
-# class HospitalsSimulated(models.Model):
-#     geom = models.PointField(srid=4326)
-#     name = models.CharField(max_length=254)
-#     type = models.CharField(max_length=254)
-#     town = models.CharField(max_length=254, null=True)
-#     ownership = models.CharField(max_length=254)
-#     population_per_hospital = models.FloatField()
-#     catchment_area_hospital = models.FloatField()
-#     nightlight = models.IntegerField(null=True)
-#
-#     district = models.ForeignKey("District", on_delete=models.CASCADE, related_name="simulated_hospitals", null=True)
-#
-#     objects = models.Manager()
-#     vector_tiles = MVTManager(columns=["id", "population_per_hospital", "catchment_area_hospital"])
-#
-#     filters = ["population_per_hospital", "catchment_area_hospital"]
-#
-#     data_file = "HealthCare_Infrastructure"
-#     layer = "Gha_HealthCareFacilities_SelectedSites"
-#     mapping = {
-#         "geom": "POINT",
-#         "name": "FacilityNa",
-#         "type": "Type",
-#         "town": "Town",
-#         "ownership": "Ownership",
-#         "population_per_hospital": "Pop_per_hosp",
-#         "catchment_area_hospital": "Catchment_area_hosp",
-#         "nightlight": "nightlight_digitalNumber",
-#     }
+class HospitalsSimulated(models.Model):
+    geom = models.PointField(srid=4326)
+    name = models.CharField(max_length=254)
+    type = models.CharField(max_length=254)
+    town = models.CharField(max_length=254, null=True)
+    ownership = models.CharField(max_length=254)
+    settlement_area = models.FloatField()
+    settlement_population = models.IntegerField()
+    settlement_type = models.CharField(max_length=254)
+    lcoe = models.FloatField()
+    electricity_demand = models.FloatField()
+    cap_ex = models.FloatField()
+    pv_capacity = models.FloatField()
+
+    district = models.ForeignKey("District", on_delete=models.CASCADE, related_name="simulated_hospitals")
+
+    objects = models.Manager()
+    vector_tiles = MVTManager(columns=["id", "name", "type", "town", "ownership", "settlement_type", "lcoe"])
+
+    filters = [LayerFilter("settlement_type", type=LayerFilterType.Dropdown)]
+
+    data_file = "HealthCare_Infrastructure"
+    layer = "Gha_185_Selected_HFCs"
+    mapping = {
+        "geom": "POINT",
+        "name": "facility_name",
+        "type": "Type",
+        "town": "Town",
+        "ownership": "Ownership",
+        "settlement_area": "Settlement_area",
+        "settlement_population": "Settlement_pop2020",
+        "settlement_type": "Settlement_type",
+        "lcoe": "LCOE_soft",
+        "electricity_demand": "Elct_demand",
+        "cap_ex": "CapEx_soft",
+        "pv_capacity": "PV_capacity",
+        "district": {"name": "District"},
+    }

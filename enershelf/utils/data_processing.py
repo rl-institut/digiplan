@@ -12,6 +12,7 @@ from enershelf.map.models import (
     State,
     District,
     Hospitals,
+    HospitalsSimulated,
     BuiltUpAreas,
     Settlements,
     Hamlets,
@@ -28,6 +29,7 @@ REGIONS = [
 
 MODELS = [
     Hospitals,
+    HospitalsSimulated,
     BuiltUpAreas,
     Settlements,
     Hamlets,

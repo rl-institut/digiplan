@@ -102,23 +102,15 @@ HOSPITALS: list = [
         description="See nightlights test",
         popup_fields=["id", "name", "type", "town", "ownership", "population_per_hospital", "catchment_area_hospital"],
     ),
-    # VectorLayerData(
-    #     source="hospital_simulated",
-    #     color="red",
-    #     model=models.HospitalsSimulated,
-    #     name="Simulated Hospitals",
-    #     name_singular="Simulated hospital",
-    #     description="See nightlights test",
-    #     popup_fields=[
-    #         "id",
-    #         "name",
-    #         "type",
-    #         "town",
-    #         "ownership",
-    #         "population_per_hospital",
-    #         "catchment_area_hospital",
-    #     ],
-    # ),
+    VectorLayerData(
+        source="hospital_simulated",
+        color="red",
+        model=models.HospitalsSimulated,
+        name="Simulated Hospitals",
+        name_singular="Simulated hospital",
+        description="See nightlights test",
+        popup_fields=["id", "name", "type", "town", "ownership", "lcoe", "settlement_type"],
+    ),
 ]
 SOLAR: list = [
     RasterLayerData(
