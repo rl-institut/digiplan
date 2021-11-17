@@ -1,3 +1,5 @@
+'use strict';
+
 const eventTopics = {
   // Init
   MAP_LOADED: "MAP_LOADED",

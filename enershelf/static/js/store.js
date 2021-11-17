@@ -1,3 +1,4 @@
+'use strict';
 
 class Store {
   constructor(cold_init, hot_init) {

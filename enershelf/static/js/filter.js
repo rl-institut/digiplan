@@ -1,3 +1,4 @@
+'use strict';
 
 const state_filter = $("#id_state");
 const district_filter = $("#id_district");

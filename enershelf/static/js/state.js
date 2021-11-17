@@ -1,3 +1,5 @@
+'use strict';
+
 // Events
 
 map.on("load", function () {

@@ -1,3 +1,4 @@
+'use strict';
 
 function add_popup(layer_id, fields, template_id="default") {
   map.on("click", layer_id, function (e) {

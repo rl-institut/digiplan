@@ -1,3 +1,5 @@
+'use strict';
+
 // Variables
 
 const detailLayers = Array.from(document.getElementsByClassName("static-layer"));
@@ -130,7 +132,7 @@ function get_layer_filters(layer_form) {
   let filters = [];
 
   // Add global region filters
-  states = $("#id_state").val();
+  const states = $("#id_state").val();
   if (states.length > 0) {
       filters.push(
         {
@@ -140,7 +142,7 @@ function get_layer_filters(layer_form) {
         }
       )
     }
-  districts = $("#id_district").val();
+  const districts = $("#id_district").val();
   if (districts.length > 0) {
       filters.push(
         {
