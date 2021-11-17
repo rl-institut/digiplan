@@ -45,6 +45,7 @@ REGION_FILTER_LAYERS = ["built_up_areas", "settlements", "hospitals"]
 
 STORE_COLD_INIT = {
     "version": __version__,
+    "debugMode": settings.DEBUG,
     "zoom_levels": ZOOM_LEVELS,
     "region_filter_layers": REGION_FILTER_LAYERS,
 }

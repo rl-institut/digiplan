@@ -58,7 +58,9 @@
     </script>
     <script src="{% static 'js/popup.js' %}" type="text/javascript"></script>
     <script>
-      map.showTileBoundaries = true;
+      if (store.cold.debugMode) {
+        map.showTileBoundaries = true;
+      }
 
       const nav = new mapboxgl.NavigationControl();
       map.addControl(nav, "top-right");

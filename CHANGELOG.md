@@ -18,3 +18,4 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Fixed 
 - district filter disabled
 - undeclared variable error in JS (using strict mode)
+- map grid only shown in debug mode
