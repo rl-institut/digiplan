@@ -10,8 +10,17 @@
   }
 
   button.accordion-button {
-    padding: 1rem $panel-side-padding;
+    padding: 1rem $panel-side-padding 1rem 3rem;
     border-top: 1px solid $gray-1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      background-size: contain;
+      height: 1.25rem;
+      width: 1.25rem;
+      left: 1.25rem;
+    }
   }
 
   button.accordion-button,
@@ -29,4 +38,16 @@
   .accordion-body {
     padding: 1rem $panel-side-padding;
   }
+}
+
+#category_header_1 .accordion-button::before {
+  background-image: url(../images/icons/i_electricity.svg);
+}
+
+#category_header_2 .accordion-button::before {
+  background-image: url(../images/icons/i_hospital.svg);
+}
+
+#category_header_3 .accordion-button::before {
+  background-image: url(../images/icons/i_solar.svg);
 }
