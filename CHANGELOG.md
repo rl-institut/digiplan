@@ -10,6 +10,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - raster layers
 - layers can be filtered by match of keywords
 - layers can be filtered by multiple filters
+- about page
 
 ### Changed
 - prevent zoom, if marker is clicked
