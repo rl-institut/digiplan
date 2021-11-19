@@ -1,0 +1,35 @@
+.modal .modal-fullscreen {
+  .modal-content {
+    height: auto;
+    min-height: 100%;
+  }
+
+  .modal-header .empty {
+    width: calc(#{$modal-header-close-btn-width} + (#{$modal-header-close-btn-padding} * 2));
+  }
+
+  .modal-header h2 {
+    font-size: $font-size-large;
+  }
+
+  .modal-header .btn-close {
+    padding: 0.5rem $modal-header-close-btn-padding;
+    margin: 0;
+    width: $modal-header-close-btn-width;
+  }
+
+  .modal-body {
+    @include flex-row-justify-center;
+    padding-top: 2rem;
+
+    &> div {
+      max-width: $modal-full-content-max-width;
+      padding-bottom: 2rem;
+    }
+
+    p {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
+}
