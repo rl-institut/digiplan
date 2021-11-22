@@ -12,6 +12,12 @@ body {
   }
 }
 
+@each $anchor-pseudo-class in $anchor-pseudo-classes {
+  .modal a#{$anchor-pseudo-class} {
+    color: $enershelf-red;
+  }
+}
+
 // navigation and footer links
 @each $anchor-pseudo-class in $anchor-pseudo-classes {
   nav a#{$anchor-pseudo-class},
