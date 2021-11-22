@@ -1,0 +1,53 @@
+.accordion {
+  .accordion-item {
+    border: none;
+    
+    &:first-of-type,
+    &:last-of-type,
+    &:last-of-type .accordion-button.collapsed {
+      border-radius: 0;
+    }
+  }
+
+  button.accordion-button {
+    padding: 1rem $panel-side-padding 1rem 3rem;
+    border-top: 1px solid $gray-1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      background-size: contain;
+      height: 1.25rem;
+      width: 1.25rem;
+      left: 1.25rem;
+    }
+  }
+
+  button.accordion-button,
+  button.accordion-button:not(.collapsed) {
+    color: $enershelf-black;
+    background-color: $white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+    border-bottom: 2px solid $enershelf-yellow;
+  }
+
+  button.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23141412'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  }
+
+  .accordion-body {
+    padding: 1rem $panel-side-padding;
+  }
+}
+
+#category_header_1 .accordion-button::before {
+  background-image: url(../images/icons/i_electricity.svg);
+}
+
+#category_header_2 .accordion-button::before {
+  background-image: url(../images/icons/i_hospital.svg);
+}
+
+#category_header_3 .accordion-button::before {
+  background-image: url(../images/icons/i_solar.svg);
+}

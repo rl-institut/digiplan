@@ -17,15 +17,25 @@
     </div>
     <div class="region-filters">
       {{region_filter}}
-      <div class="border-bottom"></div>
     </div>
-    {% for category, switches in area_switches.items %}
-      <h3 class="layers__subtitle">{{category}}</h3>
-
-      {% for switch in switches %}
-        {% crispy switch %}
+    <div class="accordion" id="layer_categories">
+      {% for category, switches in area_switches.items %}
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="category_header_{{forloop.counter}}">
+            <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#category_{{forloop.counter}}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="category_{{forloop.counter}}">
+              {{category}}
+            </button>
+          </h2>
+          <div id="category_{{forloop.counter}}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" aria-labelledby="category_header_{{forloop.counter}}" data-bs-parent="#layer_categories">
+            <div class="accordion-body">
+              {% for switch in switches %}
+                {% crispy switch %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
       {% endfor %}
-    {% endfor %}
+    </div>
   </section>
   <footer class="footer">
     <ul>
