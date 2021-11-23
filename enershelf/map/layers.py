@@ -53,7 +53,15 @@ ELECTRICITY: list = [
         name="Nightlights",
         name_singular="Nightlight",
         description="See nightlights",
-    )
+    ),
+    VectorLayerData(
+        source="grid",
+        color=get_color("grid"),
+        model=models.Grid,
+        name="Grid Network",
+        name_singular="Grid Network",
+        description="See grid",
+    ),
 ]
 
 HOSPITALS: list = [
