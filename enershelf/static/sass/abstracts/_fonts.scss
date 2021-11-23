@@ -61,3 +61,29 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Bitter';
+  src: url('../fonts/Bitter-Bold.woff2') format('woff2'),
+      url('../fonts/Bitter-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitter';
+  src: url('../fonts/Bitter-Regular.woff2') format('woff2'),
+      url('../fonts/Bitter-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bitter';
+  src: url('../fonts/Bitter-Light.woff2') format('woff2'),
+      url('../fonts/Bitter-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}

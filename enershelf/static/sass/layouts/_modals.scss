@@ -49,5 +49,9 @@
       border-top-left-radius: calc(#{$intro-modal-border-radius} - 2px);
       border-top-right-radius: calc(#{$intro-modal-border-radius} - 2px);
     }
+
+    &-title {
+      font-family: $second-font-family;
+    }
   }
 }
