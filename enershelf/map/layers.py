@@ -47,14 +47,6 @@ class RasterLayerData:
 
 ELECTRICITY: list = [
     VectorLayerData(
-        source="nightlight",
-        color=get_color("nightlight"),
-        model=models.Nightlight,
-        name="Nightlights",
-        name_singular="Nightlight",
-        description="See nightlights",
-    ),
-    VectorLayerData(
         source="grid",
         color=get_color("grid"),
         model=models.Grid,
@@ -64,7 +56,7 @@ ELECTRICITY: list = [
     ),
 ]
 
-HOSPITALS: list = [
+SETTLEMENTS: list = [
     VectorLayerData(
         source="built_up_areas",
         color=get_color("built_up_areas"),
@@ -101,6 +93,8 @@ HOSPITALS: list = [
         clustered=True,
         popup_fields=["id", "area", "population", "number_of_hospitals"],
     ),
+]
+HEALTH_CARE: list = [
     VectorLayerData(
         source="hospital",
         color="red",
@@ -120,6 +114,7 @@ HOSPITALS: list = [
         popup_fields=["id", "name", "type", "town", "ownership", "lcoe", "settlement_type"],
     ),
 ]
+
 SOLAR: list = [
     RasterLayerData(
         source="solar",
@@ -130,9 +125,22 @@ SOLAR: list = [
         name_singular="Solar",
         description="See nightlights test",
     ),
+    VectorLayerData(
+        source="nightlight",
+        color=get_color("nightlight"),
+        model=models.Nightlight,
+        name="Nightlights",
+        name_singular="Nightlight",
+        description="See nightlights",
+    ),
 ]
-LAYERS_DEFINITION = ELECTRICITY + HOSPITALS + SOLAR
-LAYERS_CATEGORIES = {"Electricty": ELECTRICITY, "Hospitals": HOSPITALS, "Solar": SOLAR}
+LAYERS_DEFINITION = ELECTRICITY + SETTLEMENTS + HEALTH_CARE + SOLAR
+LAYERS_CATEGORIES = {
+    "Electricty": ELECTRICITY,
+    "Settlements": SETTLEMENTS,
+    "Health Care Infrstructure": HEALTH_CARE,
+    "Solar": SOLAR,
+}
 
 
 @dataclass
