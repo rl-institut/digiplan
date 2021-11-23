@@ -33,3 +33,21 @@
     }
   }
 }
+
+#js-intro-modal {
+  .modal {
+    &-content {
+      border-radius: $intro-modal-border-radius;
+    }
+
+    &-header {
+      height: 8rem;
+      background-image: url(../images/pv-banner.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: top;
+      border-top-left-radius: calc(#{$intro-modal-border-radius} - 2px);
+      border-top-right-radius: calc(#{$intro-modal-border-radius} - 2px);
+    }
+  }
+}
