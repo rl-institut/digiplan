@@ -1,7 +1,29 @@
 button {
+  &.btn {
+    border: none;
+    border-radius: $button-border-radius;
+  }
+
   &.btn.btn-primary {
     background-color: $enershelf-yellow;
     color: $enershelf-black;
     text-transform: uppercase;
+    font-size: $font-size-normal;
+    font-weight: 600;
+    letter-spacing: $letter-spacing-small;
+  }
+
+  @each $anchor-pseudo-class-active-state in $anchor-pseudo-classes-active-state {
+    &.btn.btn-primary#{$anchor-pseudo-class-active-state} {
+      box-shadow: 0 0 0 0.15rem rgb(0, 0, 0);
+    }
+  }
+
+  &.btn.btn-large {
+    font-size: $font-size-medium;
+    font-weight: 600;
+    letter-spacing: $letter-spacing-normal;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }

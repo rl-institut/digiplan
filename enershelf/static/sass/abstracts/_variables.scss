@@ -37,6 +37,7 @@ $top-map-height: 2.75rem;
 
 // INTRO MODAL
 $intro-modal-border-radius: 1rem;
+$intro-modal-padding: 6rem;
 
 // LEFT PANEL
 $panel-width: 25rem;
@@ -82,8 +83,8 @@ $border-radius-small: 4px;
 // Anchors
 $anchor-hover-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out; // from Bootstrap
 $anchor-pseudo-classes: '', ':link', ':hover', ':active', ':visited', ':focus';
-$anchor-pseudo-classes-active-state: ":hover, :focus, :active";
-$anchor-pseudo-classes-inactive-state: ":link, :visited";
+$anchor-pseudo-classes-active-state: ':hover', ':focus', ':active';
+$anchor-pseudo-classes-inactive-state: ':link', ':visited';
 
 // Layout
 $section-max-width: 82rem;
