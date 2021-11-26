@@ -11,6 +11,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - layers can be filtered by match of keywords
 - layers can be filtered by multiple filters
 - about page
+- intro modal
 - grid layer
 
 ### Changed

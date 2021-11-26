@@ -33,3 +33,48 @@
     }
   }
 }
+
+#js-intro-modal {
+  .modal {
+    &-content {
+      border-radius: $intro-modal-border-radius;
+    }
+
+    &-header {
+      height: 8rem;
+      background-image: url(../images/pv-banner.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: top;
+      border-top-left-radius: calc(#{$intro-modal-border-radius} - 2px);
+      border-top-right-radius: calc(#{$intro-modal-border-radius} - 2px);
+      border-bottom: none;
+    }
+
+    &-body {
+      padding: $intro-modal-padding $intro-modal-padding 0;
+    }
+
+    &-title {
+      font-family: $second-font-family;
+      font-size: $font-size-large;
+      font-weight: 400;
+      padding-bottom: 1rem;
+    }
+
+    &-text {
+      font-size: $font-size-medium;
+      font-weight: 300;
+    }
+
+    &-footer {
+      justify-content: space-between;
+      padding: 1rem $intro-modal-padding $intro-modal-padding;
+      border-top: none;
+    }
+
+    &-img img {
+      height: 6.25rem;
+    }
+  }
+}

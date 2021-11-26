@@ -26,3 +26,7 @@ function add_popup(layer_id, fields, template_id="default") {
     new mapboxgl.Popup().setLngLat(coordinates).setHTML(clone.html()).addTo(map);
   });
 }
+
+$(document).ready(function() {
+  $('#js-intro-modal').modal('show');
+});

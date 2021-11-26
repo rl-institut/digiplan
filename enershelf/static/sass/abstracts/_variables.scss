@@ -21,6 +21,7 @@ $border-radius: 100px;
 
 // TYPOGRAPHY
 $main-font-family: 'Source Sans Pro', sans-serif;
+$second-font-family: 'Bitter', Georgia, serif;
 $font-size-xlarge: 1.953rem; // 31.25px
 $font-size-large: 1.563rem; // 25px
 $font-size-medium: 1.25rem; // 20px
@@ -33,6 +34,10 @@ $letter-spacing-normal: 0.03rem;
 
 // top-map
 $top-map-height: 2.75rem;
+
+// INTRO MODAL
+$intro-modal-border-radius: 1rem;
+$intro-modal-padding: 6rem;
 
 // LEFT PANEL
 $panel-width: 25rem;
@@ -78,8 +83,8 @@ $border-radius-small: 4px;
 // Anchors
 $anchor-hover-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out; // from Bootstrap
 $anchor-pseudo-classes: '', ':link', ':hover', ':active', ':visited', ':focus';
-$anchor-pseudo-classes-active-state: ":hover, :focus, :active";
-$anchor-pseudo-classes-inactive-state: ":link, :visited";
+$anchor-pseudo-classes-active-state: ':hover', ':focus', ':active';
+$anchor-pseudo-classes-inactive-state: ':link', ':visited';
 
 // Layout
 $section-max-width: 82rem;
