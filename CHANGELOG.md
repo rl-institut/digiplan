@@ -11,11 +11,13 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - layers can be filtered by match of keywords
 - layers can be filtered by multiple filters
 - about page
+- grid layer
 
 ### Changed
 - prevent zoom, if marker is clicked
 - district and region filters are now global filters (not per layer)
 - layer panel to accordion
+- category order and labels
 
 ### Fixed 
 - district filter disabled
