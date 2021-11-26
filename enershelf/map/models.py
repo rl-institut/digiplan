@@ -225,22 +225,22 @@ class Hamlets(ClusterModel):
     filters = []
 
 
-# class Grid(models.Model):
-#     geom = models.MultiLineStringField(srid=4326)
-#     source = models.CharField(max_length=100)
-#
-#     objects = models.Manager()
-#     vector_tiles = MVTManager(columns=["id", "source"])
-#
-#     data_file = "Electricity_Infrastructure"
-#     layer = "GridNetwork"
-#     mapping = {
-#         "geom": "MULTILINESTRING",
-#         "source": "source",
-#     }
-#
-#     def __str__(self):
-#         return self.source
+class Grid(models.Model):
+    geom = models.MultiLineStringField(srid=4326)
+    source = models.CharField(max_length=100)
+
+    objects = models.Manager()
+    vector_tiles = MVTManager(columns=["id", "source"])
+
+    data_file = "Energy_Infrastructure"
+    layer = "Gha_GridNetwork"
+    mapping = {
+        "geom": "MULTILINESTRING",
+        "source": "source",
+    }
+
+    def __str__(self):
+        return self.source
 
 
 class Nightlight(models.Model):

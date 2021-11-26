@@ -17,6 +17,7 @@ from enershelf.map.models import (
     Settlements,
     Hamlets,
     Nightlight,
+    Grid,
 )
 from enershelf.map.layers import LAYERS_DEFINITION, VectorLayerData
 from enershelf.map.config import LAYER_STYLES, CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
@@ -27,14 +28,7 @@ REGIONS = [
     District,
 ]
 
-MODELS = [
-    Hospitals,
-    HospitalsSimulated,
-    BuiltUpAreas,
-    Settlements,
-    Hamlets,
-    Nightlight,
-]
+MODELS = [Hospitals, HospitalsSimulated, BuiltUpAreas, Settlements, Hamlets, Nightlight, Grid]
 
 
 def load_regions(regions=None, verbose=True):
