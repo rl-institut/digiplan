@@ -3,6 +3,9 @@
 const state_filter = $("#id_state");
 const district_filter = $("#id_district");
 
+const default_region_color = "rgb(115,62,136)";
+const highlight_color = "yellow";
+
 state_filter.on("change", function () {
   PubSub.publish(eventTopics.STATE_FILTER_CHANGE, state_filter.val());
 });
@@ -17,6 +20,7 @@ PubSub.subscribe(eventTopics.DISTRICT_FILTER_CHANGE, change_region_filter);
 
 
 function activate_state(msg, state) {
+  highlight_region("state", state);
   if (!state) {
     district_filter.prop("disabled", true);
     return logMessage(msg);
@@ -57,6 +61,7 @@ function activate_state(msg, state) {
 }
 
 function activate_district(msg, district) {
+  highlight_region("district", district);
   if (!district) {
     return logMessage(msg);
   }
@@ -86,4 +91,19 @@ function change_region_filter(msg) {
     }
   });
   return logMessage(msg);
+}
+
+function highlight_region(region, name) {
+  let paint_property;
+  if (name) {
+    paint_property = {
+      "property": "name",
+      "type": "categorical",
+      "stops": [[name, highlight_color]],
+      "default": default_region_color
+    }
+  } else {
+    paint_property = default_region_color;
+  }
+  map.setPaintProperty("fill-" + region, "fill-color", paint_property);
 }
