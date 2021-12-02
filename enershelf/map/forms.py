@@ -66,8 +66,7 @@ class StaticLayerForm(Form):
 
 class RegionFilterForm(Form):
     state = ChoiceField(
-        choices=[
-            (state, state) for state in models.State.objects.all().order_by("name").values_list("name", flat=True)
-        ],
+        choices=[(None, "Select State")]
+        + [(state, state) for state in models.State.objects.all().order_by("name").values_list("name", flat=True)],
     )
-    district = ChoiceField(choices=[], widget=Select(attrs={"disabled": True}),)
+    district = ChoiceField(choices=[(None, "Select District")], widget=Select(attrs={"disabled": True}),)

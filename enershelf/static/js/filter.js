@@ -7,15 +7,17 @@ state_filter.on("change", function () {
   PubSub.publish(eventTopics.STATE_FILTER_CHANGE, state_filter.val());
 });
 district_filter.on("change", function () {
-  PubSub.publish(eventTopics.DISTRICT_FILTER_CHANGE);
+  PubSub.publish(eventTopics.DISTRICT_FILTER_CHANGE, district_filter.val());
 });
 
 PubSub.subscribe(eventTopics.STATE_FILTER_CHANGE, activate_state);
+PubSub.subscribe(eventTopics.STATE_FILTER_CHANGE, change_region_filter);
+PubSub.subscribe(eventTopics.DISTRICT_FILTER_CHANGE, activate_district);
 PubSub.subscribe(eventTopics.DISTRICT_FILTER_CHANGE, change_region_filter);
 
 
 function activate_state(msg, state) {
-  if (state.length == 0) {
+  if (!state) {
     district_filter.prop("disabled", true);
     return logMessage(msg);
   }
@@ -34,6 +36,12 @@ function activate_state(msg, state) {
       );
 
       district_filter.find('option').remove().end();
+      district_filter.append(
+          $('<option>', {
+            value: '',
+            text : 'Select District'
+          })
+        );
       $.each(results.districts, function (i, district) {
         district_filter.append(
           $('<option>', {
@@ -43,7 +51,28 @@ function activate_state(msg, state) {
         );
       });
       district_filter.prop("disabled", false);
-      PubSub.publish(eventTopics.DISTRICT_FILTER_CHANGE);
+    }
+  });
+  return logMessage(msg);
+}
+
+function activate_district(msg, district) {
+  if (!district) {
+    return logMessage(msg);
+  }
+  $.ajax({
+    type: "GET",
+    url: "district",
+    dataType: 'json',
+    data: {"district": district},
+    success: function(results) {
+      map.flyTo(
+        {
+          center: results.center,
+          zoom: store.cold.zoom_levels.district[0],
+          speed: 0.5
+        }
+      );
     }
   });
   return logMessage(msg);
