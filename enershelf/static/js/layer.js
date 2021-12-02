@@ -132,31 +132,31 @@ function get_layer_filters(layer_form) {
   let filters = [];
 
   // Add global region filters
-  const states = $("#id_state").val();
-  if (states.length > 0) {
+  const state = $("#id_state").val();
+  if (state) {
       filters.push(
         {
           type: "value",
           name: "state_name",
-          values: states
+          values: [state]
         }
       )
     }
-  const districts = $("#id_district").val();
-  if (districts.length > 0) {
+  const district = $("#id_district").val();
+  if (district) {
       filters.push(
         {
           type: "value",
           name: "district_name",
-          values: districts
+          values: [district]
         }
       )
     }
 
   let sliders = $(layer_form).find(".js-range-slider");
   sliders.each(function (index, slider) {
-    filter_name = slider.id.slice(3);
-    result = $(slider).data("ionRangeSlider").result;
+    let filter_name = slider.id.slice(3);
+    let result = $(slider).data("ionRangeSlider").result;
     filters.push(
       {
         type: "range",
@@ -169,8 +169,8 @@ function get_layer_filters(layer_form) {
 
   let selects = $(layer_form).find(".django-select2");
   selects.each(function (index, select) {
-    filter_name = select.id.split("_").slice(0, -1).join("_");  // Remove layer name from filter name
-    result = $(select).val();
+    let filter_name = select.id.split("_").slice(0, -1).join("_");  // Remove layer name from filter name
+    let result = $(select).val();
     if (result.length > 0) {
       filters.push(
         {
