@@ -2,7 +2,7 @@
   "region-line": {
     "type": "line",
     "paint": {
-      "line-color": "rgb(115,62,136)",
+      "line-color": "rgb(250, 174,29)",
       "line-width": [
         "case",
         [
@@ -21,7 +21,7 @@
   "region-fill": {
     "type": "fill",
     "paint": {
-      "fill-color": "rgb(115,62,136)",
+      "fill-color": "rgb(250,174,29)",
       "fill-opacity": [
         "case",
         [
