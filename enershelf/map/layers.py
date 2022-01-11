@@ -136,9 +136,9 @@ SOLAR: list = [
 ]
 LAYERS_DEFINITION = ELECTRICITY + SETTLEMENTS + HEALTH_CARE + SOLAR
 LAYERS_CATEGORIES = {
-    "Electricty": ELECTRICITY,
+    "Electricity": ELECTRICITY,
     "Settlements": SETTLEMENTS,
-    "Health Care Infrstructure": HEALTH_CARE,
+    "Health Care Infrastructure": HEALTH_CARE,
     "Solar": SOLAR,
 }
 
