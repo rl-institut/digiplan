@@ -1,8 +1,6 @@
 import json
 import uuid
 
-from queryset_sequence import QuerySetSequence
-
 from django.conf import settings
 from django.views.generic import TemplateView
 from django.http import JsonResponse
@@ -18,6 +16,7 @@ from config.settings.base import (
 from .forms import RegionFilterForm, StaticLayerForm
 from .config import STORE_COLD_INIT, STORE_HOT_INIT, SOURCES, MAP_IMAGES, CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
 from . import models
+from django.contrib.gis.db.models import functions
 
 
 class MapGLView(TemplateView):
@@ -72,48 +71,14 @@ def get_clusters(request):
         return JsonResponse(clusters)
 
 
-def get_districts(request):
-    states = request.GET.getlist("states[]")
-    districts = models.District.objects.filter(state__name__in=states).order_by("name").values_list("name", flat=True)
-    return JsonResponse({"districts": list(districts)})
+def get_state(request):
+    state_name = request.GET["state"]
+    state = models.State.objects.filter(name=state_name).annotate(center=functions.Centroid("geom"))
+    districts = models.District.objects.filter(state__name=state_name).order_by("name").values_list("name", flat=True)
+    return JsonResponse({"center": (state.first().center.x, state.first().center.y), "districts": list(districts)})
 
 
-def search(request):
-    if "query" not in request.GET:
-        return JsonResponse({"error": "query not in correct form, example: ?query=Berlin (GET)"}, status=400,)
-
-    # Get queryset
-    qs = (
-        QuerySetSequence(models.Country.objects.all(), models.State.objects.all(), models.District.objects.all(),)
-        .filter(name__istartswith=request.GET.get("query"))
-        .order_by("name")[:5]
-    )
-
-    # Get duplicate names of features
-    names = [feature.name for feature in qs]
-    duplicate_names = []
-    seen = {}
-    for x in names:
-        if x not in seen:
-            seen[x] = 1
-        else:
-            if seen[x] == 1:
-                duplicate_names.append(x)
-            seen[x] += 1
-
-    # Create suggestions
-    suggestions = [
-        {
-            # If name is duplicate also supply feature type
-            "value": f"{feature.name} ({feature.type})" if feature.name in duplicate_names else feature.name,
-            "data": {"id": feature.id, "name": feature.name, "bbox": f"{feature.geom.extent}"},
-        }
-        for feature in qs
-    ]
-
-    result = {
-        "query": "Unit",
-        "suggestions": suggestions,
-    }
-
-    return JsonResponse(result, safe=False)
+def get_district(request):
+    district_name = request.GET["district"]
+    district = models.District.objects.filter(name=district_name).annotate(center=functions.Centroid("geom"))
+    return JsonResponse({"center": (district.first().center.x, district.first().center.y)})
