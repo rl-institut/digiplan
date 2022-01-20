@@ -30,6 +30,14 @@
   border-color: #bdbdbd;
 }
 
+.legend-key {
+  display: inline-block;
+  border-radius: 20%;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+}
+
 #satellite-layer {
   position: absolute;
   bottom: 2rem;
