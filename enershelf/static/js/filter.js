@@ -19,7 +19,7 @@ PubSub.subscribe(eventTopics.DISTRICT_FILTER_CHANGE, activate_district);
 PubSub.subscribe(eventTopics.DISTRICT_FILTER_CHANGE, change_region_filter);
 
 
-function activate_state(msg, state) {
+function activate_state(msg, state, fly_to=true, async=true) {
   highlight_region("state", state);
   if (!state) {
     district_filter.prop("disabled", true);
@@ -29,15 +29,18 @@ function activate_state(msg, state) {
     type: "GET",
     url: "state",
     dataType: 'json',
+    async: async,
     data: {"state": state},
     success: function(results) {
-      map.flyTo(
-        {
-          center: results.center,
-          zoom: store.cold.zoom_levels.state[0],
-          speed: 0.5
-        }
-      );
+      if (fly_to) {
+        map.flyTo(
+          {
+            center: results.center,
+            zoom: store.cold.zoom_levels.state[0],
+            speed: 0.5
+          }
+        );
+      }
 
       district_filter.find('option').remove().end();
       district_filter.append(

@@ -4,7 +4,7 @@ from enum import Enum
 from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
 
-from .managers import RegionMVTManager, LabelMVTManager, MVTManager, ClusterMVTManager
+from .managers import RegionMVTManager, DistrictMVTManager, LabelMVTManager, MVTManager, ClusterMVTManager
 
 
 class LayerFilterType(Enum):
@@ -93,7 +93,7 @@ class District(models.Model):
     state = models.ForeignKey("State", on_delete=models.CASCADE, related_name="districts")
 
     objects = models.Manager()
-    vector_tiles = RegionMVTManager(columns=["id", "name", "bbox"])
+    vector_tiles = DistrictMVTManager(columns=["id", "name", "bbox", "state_name"])
     label_tiles = LabelMVTManager(geo_col="geom_label", columns=["id", "name"])
 
     data_file = "Gha_AdminBoundaries"
