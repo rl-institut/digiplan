@@ -16,10 +16,10 @@ STATIC_MVT_LAYERS = {
         MVTLayer("settlements", models.Settlements.vector_tiles),
         MVTLayer("hamlets", models.Hamlets.vector_tiles),
         MVTLayer("nightlight", models.Nightlight.vector_tiles),
-        MVTLayer("hospital", models.Hospitals.vector_tiles),
         MVTLayer("hospital_simulated", models.HospitalsSimulated.vector_tiles),
         MVTLayer("grid", models.Grid.vector_tiles),
     ],
+    "hamlets": [MVTLayer("hamlets", models.Hamlets.vector_tiles)],
 }
 
 DYNAMIC_MVT_LAYERS = {}
