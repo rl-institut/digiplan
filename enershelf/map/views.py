@@ -7,6 +7,7 @@ from django.http import JsonResponse
 
 from .layers import ALL_LAYERS, REGION_LAYERS, RASTER_LAYERS, ALL_SOURCES, LAYERS_CATEGORIES, POPUPS
 from config.settings.base import (
+    DEBUG,
     USE_DISTILLED_MVTS,
     PASSWORD_PROTECTION,
     PASSWORD,
@@ -22,6 +23,7 @@ from django.contrib.gis.db.models import functions
 class MapGLView(TemplateView):
     template_name = "map.html"
     extra_context = {
+        "debug": DEBUG,
         "password_protected": PASSWORD_PROTECTION,
         "password": PASSWORD,
         "mapbox_token": MAPBOX_TOKEN,

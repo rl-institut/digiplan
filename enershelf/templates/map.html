@@ -19,7 +19,9 @@
   {% include 'canvases/about.html' %}
 
   <section class="map-content">
-    {% include 'canvases/intro.html' %}
+    {% if not debug %}
+      {% include 'canvases/intro.html' %}
+    {% endif %}
     {% include 'canvases/panel.html' %}
     <pre id="info"></pre>
     {% include 'canvases/map.html' %}

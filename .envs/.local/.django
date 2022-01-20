@@ -1,5 +1,6 @@
 # General
 # ------------------------------------------------------------------------------
+DJANGO_DEBUG=True
 USE_DOCKER=yes
 IPYTHONDIR=/app/.ipython
 DJANGO_ALLOWED_HOSTS=localhost
