@@ -91,7 +91,7 @@ def load_raster(layers=LAYERS_DEFINITION):
 def build_cluster_geojson(cluster_layers: list[VectorLayerData] = None):
     cluster_layers = cluster_layers or LAYERS_DEFINITION
     features = []
-    for region_model in REGIONS[:-1]:
+    for region_model in REGIONS:
         region_name = region_model.__name__.lower()
         zoom_level = ZOOM_LEVELS[region_name].max
         for region in region_model.objects.all():

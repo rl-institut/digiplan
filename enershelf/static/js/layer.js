@@ -132,26 +132,29 @@ function get_layer_filters(layer_form) {
   let filters = [];
 
   // Add global region filters
-  const state = $("#id_state").val();
-  if (state) {
-      filters.push(
-        {
-          type: "value",
-          name: "state_name",
-          values: [state]
-        }
-      )
-    }
-  const district = $("#id_district").val();
-  if (district) {
-      filters.push(
-        {
-          type: "value",
-          name: "district_name",
-          values: [district]
-        }
-      )
-    }
+  const layer_id = get_layer_id(layer_form);
+  if (store.cold.region_filter_layers.includes(layer_id)) {
+    const state = $("#id_state").val();
+    if (state) {
+        filters.push(
+          {
+            type: "value",
+            name: "state_name",
+            values: [state]
+          }
+        )
+      }
+    const district = $("#id_district").val();
+    if (district) {
+        filters.push(
+          {
+            type: "value",
+            name: "district_name",
+            values: [district]
+          }
+        )
+      }
+   }
 
   let sliders = $(layer_form).find(".js-range-slider");
   sliders.each(function (index, slider) {

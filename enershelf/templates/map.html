@@ -143,8 +143,8 @@
             {% endif %}
           }
 
-          // Clustered layers
           {% if layer.clustered %}
+            // Clustered layer
             {% for level, zoom in zoom_levels.items %}
               map.addLayer({
                 id: "{{layer.source_layer}}_{{level}}",
