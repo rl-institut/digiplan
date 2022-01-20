@@ -3,8 +3,8 @@
 const state_filter = $("#id_state");
 const district_filter = $("#id_district");
 
-const default_region_color = "rgb(115,62,136)";
-const highlight_color = "yellow";
+const default_region_color = "rgb(250,174,29)";
+const highlight_color = "red";
 
 state_filter.on("change", function () {
   PubSub.publish(eventTopics.STATE_FILTER_CHANGE, state_filter.val());
