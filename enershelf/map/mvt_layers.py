@@ -14,7 +14,7 @@ STATIC_MVT_LAYERS = {
     "static": [
         MVTLayer("built_up_areas", models.BuiltUpAreas.vector_tiles),
         MVTLayer("settlements", models.Settlements.vector_tiles),
-        MVTLayer("hamlets", models.Hamlets.vector_tiles),
+        MVTLayer("hospitals", models.Hospitals.vector_tiles),
         MVTLayer("nightlight", models.Nightlight.vector_tiles),
         MVTLayer("hospital_simulated", models.HospitalsSimulated.vector_tiles),
         MVTLayer("grid", models.Grid.vector_tiles),
@@ -26,3 +26,4 @@ DYNAMIC_MVT_LAYERS = {}
 
 MVT_LAYERS = dict(**REGION_MVT_LAYERS, **STATIC_MVT_LAYERS, **DYNAMIC_MVT_LAYERS)
 DISTILL_MVT_LAYERS = dict(**REGION_MVT_LAYERS, **STATIC_MVT_LAYERS)
+del DISTILL_MVT_LAYERS["hamlets"]
