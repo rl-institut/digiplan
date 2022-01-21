@@ -33,6 +33,7 @@ PubSub.subscribe(eventTopics.STATES_INITIALIZED, hideDetailLayers);
 
 // Layers Detail Panel
 PubSub.subscribe(eventTopics.DETAIL_LAYER_SWITCH_CLICK, checkLayerOfGivenLayerForm);
+PubSub.subscribe(eventTopics.DETAIL_LAYER_SWITCH_CLICK, updateLegend);
 PubSub.subscribe(eventTopics.DETAIL_LAYER_SLIDER_CHANGE, filterChanged);
 PubSub.subscribe(eventTopics.DETAIL_LAYER_SELECT_CHANGE, filterChanged);
 
@@ -51,6 +52,36 @@ function showDetailLayers(msg) {
     $(detailLayers[i]).find(layerInputClass)[0].checked = (store.cold.staticState & 2 ** i) === 2 ** i;
     check_layer(detailLayers[i]);
   }
+  return logMessage(msg);
+}
+
+function updateLegend(msg) {
+  const legend = document.getElementById('legend');
+  legend.innerHTML = "";
+
+  let legend_entries = 0;
+
+  for (let i = 0; i < detailLayers.length; i++) {
+    if ($(detailLayers[i]).find(layerInputClass)[0].checked) {
+      legend_entries += 1;
+      const layer_id = get_layer_id(detailLayers[i]);
+      const name = $(detailLayers[i]).find(".name__text").html()
+      const color = map.getPaintProperty(layer_id, "fill-color");
+
+      const item = document.createElement('div');
+      const key = document.createElement('span');
+      key.className = 'legend-key';
+      key.style.backgroundColor = color;
+
+      const value = document.createElement('span');
+      value.innerHTML = `${name}`;
+
+      item.appendChild(key);
+      item.appendChild(value);
+      legend.appendChild(item);
+    }
+  }
+  legend.hidden = legend_entries == 0;
   return logMessage(msg);
 }
 
@@ -132,26 +163,29 @@ function get_layer_filters(layer_form) {
   let filters = [];
 
   // Add global region filters
-  const state = $("#id_state").val();
-  if (state) {
-      filters.push(
-        {
-          type: "value",
-          name: "state_name",
-          values: [state]
-        }
-      )
-    }
-  const district = $("#id_district").val();
-  if (district) {
-      filters.push(
-        {
-          type: "value",
-          name: "district_name",
-          values: [district]
-        }
-      )
-    }
+  const layer_id = get_layer_id(layer_form);
+  if (store.cold.region_filter_layers.includes(layer_id)) {
+    const state = $("#id_state").val();
+    if (state) {
+        filters.push(
+          {
+            type: "value",
+            name: "state_name",
+            values: [state]
+          }
+        )
+      }
+    const district = $("#id_district").val();
+    if (district) {
+        filters.push(
+          {
+            type: "value",
+            name: "district_name",
+            values: [district]
+          }
+        )
+      }
+   }
 
   let sliders = $(layer_form).find(".js-range-slider");
   sliders.each(function (index, slider) {

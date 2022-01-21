@@ -31,6 +31,7 @@ class VectorLayerData:
     name_singular: str
     description: str
     clustered: bool = False
+    map_source: str = "static"
     popup_fields: list = field(default_factory=list)
 
 
@@ -85,6 +86,7 @@ SETTLEMENTS: list = [
     ),
     VectorLayerData(
         source="hamlets",
+        map_source="hamlets",
         color=get_color("hamlets"),
         model=models.Hamlets,
         name="Hamlets",
@@ -247,6 +249,7 @@ if USE_DISTILLED_MVTS:
         + [
             Source(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"]),
             Source(name="static_distilled", type="vector", tiles=["static/mvts/{z}/{x}/{y}/static.mvt"],),
+            Source(name="hamlets", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"]),
         ]
         + get_raster_sources()
         + get_dynamic_sources()
@@ -255,7 +258,10 @@ else:
     SUFFIXES = [""]
     ALL_SOURCES = (
         [Source(name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"]) for region in REGIONS]
-        + [Source(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"])]
+        + [
+            Source(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"]),
+            Source(name="hamlets", type="vector", tiles=["hamlets_mvt/{z}/{x}/{y}/"]),
+        ]
         + get_raster_sources()
         + get_dynamic_sources()
     )
@@ -332,7 +338,7 @@ for layer in LAYERS_DEFINITION:
                 maxzoom=max_zoom,
                 name=layer.name,
                 style=layer.source,
-                source=f"static{suffix}",
+                source=f"{layer.map_source}{suffix}",
                 source_layer=layer.source,
                 type="static",
                 clustered=layer.clustered,
