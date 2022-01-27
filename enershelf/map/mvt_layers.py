@@ -16,7 +16,7 @@ STATIC_MVT_LAYERS = {
         MVTLayer("settlements", models.Settlements.vector_tiles),
         MVTLayer("hospitals", models.Hospitals.vector_tiles),
         MVTLayer("nightlight", models.Nightlight.vector_tiles),
-        MVTLayer("hospital_simulated", models.HospitalsSimulated.vector_tiles),
+        MVTLayer("simulated_hospitals", models.HospitalsSimulated.vector_tiles),
         MVTLayer("grid", models.Grid.vector_tiles),
     ],
     "hamlets": [MVTLayer("hamlets", models.Hamlets.vector_tiles)],
