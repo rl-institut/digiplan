@@ -88,6 +88,16 @@ class RegionMVTManager(MVTManager):
         )
 
 
+class DistrictMVTManager(MVTManager):
+    def get_queryset(self):
+        return (
+            super(DistrictMVTManager, self)
+            .get_queryset()
+            .annotate(bbox=models.functions.AsGeoJSON(models.functions.Envelope("geom")))
+            .annotate(state_name=models.F("state__name"))
+        )
+
+
 class StaticMVTManager(MVTManager):
     def _filter_query(self, query, x, y, z, filters):
         query = super(StaticMVTManager, self)._filter_query(query, x, y, z, filters)

@@ -15,7 +15,10 @@ from . import models
 
 
 def get_color(source_layer):
-    return LAYER_STYLES[source_layer]["paint"]["fill-color"]
+    try:
+        return LAYER_STYLES[source_layer]["paint"]["fill-color"]
+    except KeyError:
+        return LAYER_STYLES[source_layer]["paint"]["line-color"]
 
 
 def get_opacity(source_layer):
@@ -98,7 +101,7 @@ SETTLEMENTS: list = [
 ]
 HEALTH_CARE: list = [
     VectorLayerData(
-        source="hospital",
+        source="hospitals",
         color="red",
         model=models.Hospitals,
         name="Hospitals",
@@ -107,7 +110,7 @@ HEALTH_CARE: list = [
         popup_fields=["id", "name", "type", "town", "ownership", "population_per_hospital", "catchment_area_hospital"],
     ),
     VectorLayerData(
-        source="hospital_simulated",
+        source="simulated_hospitals",
         color="red",
         model=models.HospitalsSimulated,
         name="Simulated Hospitals",

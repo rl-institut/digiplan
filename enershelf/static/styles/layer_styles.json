@@ -71,10 +71,10 @@
     }
   },
   "grid": {
-    "type": "fill",
+    "type": "line",
     "paint": {
-      "fill-color": "rgb(0, 100, 0)",
-      "fill-opacity": 0.8
+      "line-color": "rgb(0, 100, 0)",
+      "line-width": 2
     }
   },
   "nightlight": {
@@ -105,14 +105,14 @@
       "fill-opacity": 0.8
     }
   },
-  "hospital": {
+  "hospitals": {
     "type": "symbol",
     "layout": {
       "icon-image": "hospital",
       "icon-size": 0.5
     }
   },
-  "hospital_simulated": {
+  "simulated_hospitals": {
     "type": "symbol",
     "layout": {
       "icon-image": "hospital",

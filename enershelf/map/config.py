@@ -98,10 +98,10 @@ MAP_IMAGES = [MapImage("hospital", "images/icons/hospital.png")]
 # DISTILL
 
 # Tiles of Ghana: At z=5 Ghana has width x=15-16 and height y=15(-16)
-X_AT_MIN_Z = 15
-Y_AT_MIN_Z = 15
+X_AT_MIN_Z = 31
+Y_AT_MIN_Z = 30
 X_OFFSET = 1
-Y_OFFSET = 0
+Y_OFFSET = 1
 
 
 def get_tile_coordinates_for_region(region):

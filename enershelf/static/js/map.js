@@ -18,15 +18,25 @@ function flyToElement(element) {
 
   // Zoom to region
   if (region == null) {return}
-  // Get zoom-to level
-  let zoom = (region.layer.maxzoom < 11) ? region.layer.maxzoom : 11;
+  if (region.source == "state") {
+    state_filter.val(region.properties.name);
+    PubSub.publish(eventTopics.STATE_FILTER_CHANGE, state_filter.val());
+  } else if (region.source == "district") {
+    state_filter.val(region.properties.state_name);
+    activate_state(eventTopics.STATE_FILTER_CHANGE, state_filter.val(), false, false);
+    district_filter.val(region.properties.name);
+    PubSub.publish(eventTopics.DISTRICT_FILTER_CHANGE, region.properties.name);
+  } else {
+    // Get zoom-to level
+    let zoom = (region.layer.maxzoom < 11) ? region.layer.maxzoom : 11;
 
-  // Fly to center of bounding box and zoom to max zoom of layer
-  map.flyTo({
-    center: element.lngLat,
-    zoom: zoom,
-    essential: true
-  });
+    // Fly to center of bounding box and zoom to max zoom of layer
+    map.flyTo({
+      center: element.lngLat,
+      zoom: zoom,
+      essential: true
+    });
+  }
 }
 
 function toggleSatellite() {

@@ -32,4 +32,4 @@ load_fixtures:
 	bash enershelf/utils/load_fixtures.sh
 
 distill:
-	python manage.py distill-local --force --exclude-staticfiles ./distill
+	python manage.py distill-local --force --exclude-staticfiles ./enershelf/static/mvts
