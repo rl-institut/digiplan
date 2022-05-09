@@ -28,6 +28,7 @@
         <link href="{% static 'django_select2/django_select2.css' %}" type="text/css" media="screen" rel="stylesheet">
       {% endcompress %}
       <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css" type="text/css" media="screen" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.js"></script>
     {% endblock %}
 
     {% if password_protected %}
@@ -97,6 +98,7 @@
         <script src="{% static 'js/store.js' %}"></script>
         <script src="{% static 'js/event-topics.js' %}"></script>
         <script src="{% static 'django_select2/django_select2.js' %}"></script>
+        <script src="{% static 'js/charts.js' %}"></script>
       {% endcompress %}
 
     {% endblock js_body %}
