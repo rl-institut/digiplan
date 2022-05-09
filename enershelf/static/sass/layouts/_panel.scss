@@ -1,27 +1,36 @@
 .panel {
-  @include flex-column;
-  width: 100%;
-  height: auto;
-  box-shadow: $box-shadow;
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .h-auto;
+  @extend .shadow;
   overflow-y: scroll;
 
-  @media only screen and (min-width: $medium-screen) {
+  @include media-breakpoint-down(lg) {
+    width: 100%;
+  }
+
+  @include media-breakpoint-up(lg)  {
     height: 100vh;
     width: $panel-width;
   }
 
   &__content {
-    flex: 1 0 auto;
+    @extend .flex-grow-1;
+    @extend .flex-shrink-0;
   }
 
   &__logos {
-    @include flex-row;
-    text-align: center;
-    padding: $padding-normal 0 0;
-    border-bottom: $border-gray;
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .text-center;
+    @extend .pt-2;
+    @extend .pe-0;
+    @extend .pb-0;
+    @extend .ps-0;
+    @extend .border-bottom;
 
     .logo--bmbf {
-      text-align: right;
+      @extend .text-end;
 
       img {
         width: 8rem;
@@ -30,11 +39,11 @@
   }
 
   &__logo {
-    flex: 1;
+    @extend .flex-fill;
 
     &--eaa {
-      text-align: left;
-      padding-left: $padding-normal;
+      @extend .text-start;
+      @extend .ps-2;
 
       img {
         width: 7rem;
@@ -43,8 +52,8 @@
     }
 
     &--rli {
-      text-align: center;
-      padding-left: $padding-normal;
+      @extend .text-center;
+      @extend .ps-2;
 
       img {
         width: 6.5rem;
@@ -53,7 +62,7 @@
     }
 
     &--bmbf {
-      text-align: right;
+      @extend .text-end;
 
       img {
         width: 9rem;
@@ -62,52 +71,27 @@
     }
   }
 
-  .region-filters {
-    padding: 0.75rem $panel-side-padding 0;
-
-    .border-bottom {
-      padding-top: 1.5rem;
-    }
-
-    label {
-      padding-top: 0.5rem;
-    }
-  }
-
-  #layer_categories {
-    padding-top: 2rem;
-  }
-
-  .layers {
-    &__subtitle {
-      padding: 1rem 1.5rem 0;
-    }
-
-    &__item {
-      padding: 1rem 0;
-    }
-  }
-
-  .layer {
-    @include flex-row-space-between;
-  }
-
   .footer {
-    flex-shrink: 0;
-    border-top: $border-gray;
-    padding: $padding-small 0;
+    @extend .flex-shrink-0;
+    @extend .border-top;
+    @extend .pt-2;
+    @extend .pe-0;
+    @extend .pb-2;
+    @extend .ps-0;
     
     ul {
       @include ul-horizontal;
-      @include flex-row-justify-center;
+      @extend .d-flex;
+      @extend .flex-row;
+      @extend .justify-content-center;
     }
 
     li {
-      display: inline-block;
+      @extend .d-inline-block;
     }
 
     li:not(:last-of-type) {
-      padding-right: 1rem;
+      @extend .pe-2;
     }
   }
 }
