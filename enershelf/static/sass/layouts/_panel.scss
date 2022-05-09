@@ -3,7 +3,7 @@
   @extend .flex-column;
   @extend .h-auto;
   @extend .shadow;
-  overflow-y: scroll;
+  @extend .overflow-scroll;
 
   @include media-breakpoint-down(lg) {
     width: 100%;

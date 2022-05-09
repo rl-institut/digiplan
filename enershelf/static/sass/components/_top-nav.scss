@@ -1,11 +1,16 @@
 .top-nav {
-  @include flex-row-space-between;
-  align-items: center;
+  @extend .d-flex;
+  @extend .flex-row;
+  @extend .justify-content-end;
+  @extend .align-items-center;
+  @extend .pt-0;
+  @extend .pe-2;
+  @extend .pb-0;
+  @extend .ps-1;
   height: $top-nav-height;
-  padding: 0 $padding-normal 0 $padding-small;
 
   &__links {
-    @media only screen and (max-width: $medium-screen - 1px) {
+    @include media-breakpoint-down(lg) {
       display: none;
     }
 
