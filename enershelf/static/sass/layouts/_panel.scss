@@ -3,7 +3,7 @@
   @extend .flex-column;
   @extend .h-auto;
   @extend .shadow;
-  @extend .overflow-scroll;
+  overflow-y: scroll;
 
   @include media-breakpoint-down(lg) {
     width: 100%;
@@ -18,15 +18,16 @@
     @extend .flex-grow-1;
     @extend .flex-shrink-0;
   }
+}
+
+.footer {
+  @extend .flex-shrink-0;
+  @extend .border-top;
 
   &__logos {
     @extend .d-flex;
     @extend .flex-row;
     @extend .text-center;
-    @extend .pt-2;
-    @extend .pe-0;
-    @extend .pb-0;
-    @extend .ps-0;
     @extend .border-bottom;
 
     .logo--bmbf {
@@ -46,8 +47,8 @@
       @extend .ps-2;
 
       img {
-        width: 7rem;
-        transform: translateY(4px);
+        width: 5rem;
+        transform: translateY(40px);
       }
     }
 
@@ -56,8 +57,8 @@
       @extend .ps-2;
 
       img {
-        width: 6.5rem;
-        transform: translateY(4px);
+        width: 4.5rem;
+        transform: translateY(40px);
       }
     }
 
@@ -66,30 +67,25 @@
 
       img {
         width: 9rem;
-        transform: translateY(-14px);
       }
     }
   }
 
-  .footer {
-    @extend .flex-shrink-0;
-    @extend .border-top;
-    @extend .pt-2;
-    @extend .pe-0;
-    @extend .pb-2;
-    @extend .ps-0;
-    
+  &__links {
+    height: 1.5rem;
+
     ul {
       @include ul-horizontal;
       @extend .d-flex;
       @extend .flex-row;
       @extend .justify-content-center;
     }
-
+  
     li {
       @extend .d-inline-block;
+      @extend .fs-7;
     }
-
+  
     li:not(:last-of-type) {
       @extend .pe-2;
     }
