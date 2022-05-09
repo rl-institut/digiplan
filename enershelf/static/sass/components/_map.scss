@@ -1,4 +1,6 @@
 .map-content {
+  height: calc(100vh - #{$top-nav-height});
+
   @media only screen and (min-width: $medium-screen) {
     @include flex-row;
   }
@@ -15,7 +17,7 @@
 }
 
 #map {
-  height: calc(100vh - #{$top-nav-height});
+  height: calc(100vh - #{$top-nav-height} - #{$steps-height});
 }
 
 #legend {

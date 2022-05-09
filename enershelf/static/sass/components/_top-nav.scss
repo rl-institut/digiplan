@@ -1,3 +1,12 @@
+.container-test {
+  @extend .d-flex;
+  @extend .flex-column;
+}
+
+.steps {
+  height: $steps-height;
+}
+
 .top-nav {
   @extend .d-flex;
   @extend .flex-row;
@@ -7,6 +16,7 @@
   @extend .pe-2;
   @extend .pb-0;
   @extend .ps-1;
+  @extend .shadow-sm;
   height: $top-nav-height;
 
   &__links {
@@ -31,6 +41,10 @@
       height: 1.5rem;
     }
   }
+}
+
+.wizard {
+  height: $top-nav-height;
 }
 
 #autocomplete {

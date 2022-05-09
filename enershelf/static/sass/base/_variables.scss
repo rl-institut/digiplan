@@ -32,15 +32,12 @@ $line-height-normal: 1.75rem;
 $letter-spacing-small: 0.01rem;
 $letter-spacing-normal: 0.03rem;
 
-// top-map
-$top-map-height: 2.75rem;
-
 // INTRO MODAL
 $intro-modal-border-radius: 1rem;
 $intro-modal-padding: 6rem;
 
 // LEFT PANEL
-$panel-width: 25rem;
+$panel-width: 26rem;
 $panel-side-padding: 1.5rem;
 
 $box-shadow: 5px 5px 15px 2px rgba(0,0,0,0.05);
@@ -53,12 +50,11 @@ $xlarge-screen: 1500px;
 
 // TOP-NAV
 $search-input-width: 15rem;
-$top-nav-height: 3.125rem;
+$top-nav-height: 2.5rem;
 $top-nav-logo-height: 2.5rem;
 
-// LEFT PANEL
-$panel-width: 26rem;
-$panel-tabs-height: $top-map-height;
+// STEPS
+$steps-height: 3.75rem;
 
 // MODAL
 $modal-header-close-btn-width: 2rem;

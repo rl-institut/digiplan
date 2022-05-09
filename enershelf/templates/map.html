@@ -18,14 +18,39 @@
 {% block content %}
   {% include 'canvases/about.html' %}
 
-  <section class="map-content">
-    {% if not debug %}
-      {% include 'canvases/intro.html' %}
-    {% endif %}
-    {% include 'canvases/panel.html' %}
-    <pre id="info"></pre>
-    {% include 'canvases/map.html' %}
-  </section>
+  <div class="container-test">
+    <nav class="top-nav">
+      <div class="top-nav__links">
+        <ul>
+          <li>
+            <a href="#">Dokumentation</a>
+          </li>
+          <li>
+            <a href="#">Quellen</a>
+          </li>
+          <li>
+            <a href="#">Kontakt</a>
+          </li>
+          <li>
+            <a href="#">DE</a>
+          </li>
+          <li>
+            <a href="#">EN</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  
+    <section class="map-content">
+      {% if not debug %}
+        {% include 'canvases/intro.html' %}
+      {% endif %}
+      {% include 'canvases/panel.html' %}
+      <pre id="info"></pre>
+      {% include 'canvases/map.html' %}
+    </section>
+  </div>
+  
 
   {% include 'popups/default.html' %}
   {% for popup in popups %}
