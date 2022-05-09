@@ -4,37 +4,21 @@
 <section class="panel">
   <section class="panel__content">
     <div class="panel__logos">
-      <div class="logo logo--enershelf">
-        <a href="https://enershelf.de/" target="_blank" rel="noopener noreferrer">
-          <img src="../../static/images/logos/EnerSHelF.jpg" alt="EnerSHelF logo">
+      <div class="panel__logo panel__logo--eaa">
+        <a href="https://www.energieavantgarde.de/" target="_blank" rel="noopener noreferrer">
+          <img src="../../static/images/logos/EAA_logo.png" alt="Logo der Energieavantgarde Anhalt">
         </a>
       </div>
-      <div class="logo logo--bmbf">
-        <a href="https://www.bmbf.de/bmbf/en/home/home_node.html" target="_blank" rel="noopener noreferrer">
-          <img src="../../static/images/logos/BMBF_gefoerdert_2017_en.jpg" alt="German Federal Ministry of Education and Research logo">
+      <div class="panel__logo panel__logo--rli">
+        <a href="https://reiner-lemoine-institut.de/" target="_blank" rel="noopener noreferrer">
+          <img src="../../static/images/logos/RLI_logo_weiss.png" alt="Logo des Reiner Lemoine Instituts">
         </a>
       </div>
-    </div>
-    <div class="region-filters">
-      {{region_filter}}
-    </div>
-    <div class="accordion" id="layer_categories">
-      {% for category, switches in area_switches.items %}
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="category_header_{{forloop.counter}}">
-            <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#category_{{forloop.counter}}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="category_{{forloop.counter}}">
-              {{category}}
-            </button>
-          </h2>
-          <div id="category_{{forloop.counter}}" class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" aria-labelledby="category_header_{{forloop.counter}}" data-bs-parent="#layer_categories">
-            <div class="accordion-body">
-              {% for switch in switches %}
-                {% crispy switch %}
-              {% endfor %}
-            </div>
-          </div>
-        </div>
-      {% endfor %}
+      <div class="panel__logo panel__logo--bmbf">
+        <a href="https://www.bmbf.de/" target="_blank" rel="noopener noreferrer">
+          <img src="../../static/images/logos/BMBF_logo.png" alt="Logo des Bundesministeriums für Bildung und Forschung">
+        </a>
+      </div>
     </div>
   </section>
   <footer class="footer">

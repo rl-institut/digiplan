@@ -20,11 +20,23 @@
     padding: $padding-normal 0 0;
     border-bottom: $border-gray;
 
-    .logo {
-      flex: 1;
+    .logo--enershelf {
+      
     }
 
-    .logo--enershelf {
+    .logo--bmbf {
+      text-align: right;
+
+      img {
+        width: 8rem;
+      }
+    }
+  }
+
+  &__logo {
+    flex: 1;
+
+    &--eaa {
       text-align: left;
       padding-left: $padding-normal;
 
@@ -34,11 +46,22 @@
       }
     }
 
-    .logo--bmbf {
+    &--rli {
+      text-align: center;
+      padding-left: $padding-normal;
+
+      img {
+        width: 6.5rem;
+        transform: translateY(4px);
+      }
+    }
+
+    &--bmbf {
       text-align: right;
 
       img {
-        width: 8rem;
+        width: 9rem;
+        transform: translateY(-14px);
       }
     }
   }
