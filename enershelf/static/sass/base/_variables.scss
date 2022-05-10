@@ -1,25 +1,5 @@
 // COLORS
-$enershelf-black: rgb(20, 20, 18);
-$enershelf-red: rgb(206, 21, 39);
-$enershelf-yellow: rgb(250, 174, 29);
-
-$primary-color: $enershelf-yellow;
-
-$secondary-color-1: rgb(252, 141, 98);
-$secondary-color-2: rgb(102, 194, 165);
-$secondary-color-3: rgb(141, 160, 203);
-
-$gray-1: rgb(245, 245, 245);
-$gray-2: rgb(207, 207, 207);
-
-$white: rgb(255, 255, 255);
-
-$enershelf-yellow-transparent: rgba($enershelf-yellow, .25);
-
 $c-color-gray: #CAD3DB;
-
-// GENERAL
-$border-radius: 100px;
 
 // TYPOGRAPHY
 $main-font-family: 'Source Sans Pro', sans-serif;
@@ -30,19 +10,12 @@ $font-size-medium: 1.25rem; // 20px
 $font-size-normal: 1rem; // 16px
 $font-size-small: .875rem; // 14px
 
-$line-height-normal: 1.75rem;
 $letter-spacing-small: 0.01rem;
 $letter-spacing-normal: 0.03rem;
-
-// INTRO MODAL
-$intro-modal-border-radius: 1rem;
-$intro-modal-padding: 6rem;
 
 // LEFT PANEL
 $panel-width: 26rem;
 $panel-side-padding: 1.5rem;
-
-$box-shadow: 5px 5px 15px 2px rgba(0,0,0,0.05);
 
 // Media-breaks
 $small-screen: 640px;
@@ -51,40 +24,9 @@ $large-screen: 1250px;
 $xlarge-screen: 1500px;
 
 // TOP-NAV
-$search-input-width: 15rem;
 $top-nav-height: 2.5rem;
-$top-nav-logo-height: 2.5rem;
 
 // STEPS
 $steps-height: 3.75rem;
 $steps-numbers-size: 2rem;
-
-// MODAL
-$modal-header-close-btn-width: 2rem;
-$modal-header-close-btn-padding: 1.5rem;
-$modal-full-content-max-width: 52rem;
-
-// Padding
-$padding-normal: 1rem;
-$padding-small: 0.5rem;
-
-// Forms
-$form-box-shadow: 0 0 0 0.25rem $enershelf-yellow-transparent;
-$controls-bg-color: $gray-2;
-
-// Buttons
-$button-border-radius: 8px;
-
-// Borders
-$border-gray: 1px solid $gray-1;
-$border-radius-small: 4px;
-
-// Anchors
-$anchor-hover-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out; // from Bootstrap
-$anchor-pseudo-classes: '', ':link', ':hover', ':active', ':visited', ':focus';
-$anchor-pseudo-classes-active-state: ':hover', ':focus', ':active';
-$anchor-pseudo-classes-inactive-state: ':link', ':visited';
-
-// Layout
-$section-max-width: 82rem;
 

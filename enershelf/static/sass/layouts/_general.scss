@@ -1,4 +1,6 @@
 body {
-    height: 100vh;
+    @extend .vh-100;
     overflow-y: hidden;
+    font-family: $main-font-family !important;
+    letter-spacing: $letter-spacing-normal;
 }

@@ -3,14 +3,12 @@
   margin-left: 0;
 
   &:checked {
-    background-color: $primary-color;
-    border-color: $primary-color;
-    box-shadow: $form-box-shadow;
+    background-color: $blue;
+    border-color: $blue;
   }
 
   &:focus {
-    border-color: $primary-color;
-    box-shadow: $form-box-shadow;
+    border-color: $blue;
   }
 
   &:not(:checked):focus {
@@ -21,27 +19,27 @@
 /////////////////////////////////////// SLIDERS ///////////////////////////////////////
 .irs.irs--flat {
   .irs-line {
-    background-color: $controls-bg-color;
+    @extend .bg-light;
   }
 
   .irs-from,
   .irs-to,
   .irs-bar,
   .irs-single {
-    background-color: $primary-color;
+    background-color: $blue;
   }
 
   .irs-from:before, 
   .irs-to:before,
   .irs-single:before {
-    border-top-color: $primary-color;
+    border-top-color: $blue;
   }
 
   .irs-handle {
     &>i:first-child,
     &.state_hover>i:first-child,
     &:hover>i:first-child {
-      background-color: $primary-color;
+      background-color: $blue;
     }
   }
 }
