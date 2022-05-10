@@ -1,7 +1,3 @@
-.steps {
-  height: $steps-height;
-}
-
 .top-nav {
   @extend .d-flex;
   @extend .flex-row;
@@ -38,8 +34,59 @@
   }
 }
 
-.wizard {
-  height: $top-nav-height;
+.steps {
+  @extend .d-flex;
+  @extend .flex-row;
+  @extend .justify-content-center;
+  @extend .align-items-center;
+  height: $steps-height;
+
+  &__list {
+    @extend .list-group;
+    @extend .list-group-item-action;
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .justify-content-around;
+    @extend .align-items-center;
+  }
+
+  &__item {
+    @extend .list-group-item;
+    @extend .list-group-item-action;
+    @extend .text-primary;
+    @extend .border-0;
+    @extend .bg-white;
+    @extend .text-center;
+
+    &.active {
+      @extend .fw-bold;
+      @extend .text-info;
+    }
+
+    &.disabled {
+      @extend .text-muted;
+    }
+  }
+
+  &__number {
+    @extend .d-inline-block;
+    @extend .bg-primary;
+    @extend .text-white;
+    @extend .fw-bold;
+    @extend .rounded-circle;
+    @extend .me-1;
+    width: $steps-numbers-size;
+    height: $steps-numbers-size;
+    padding: 0.25rem;
+  }
+
+  &__item.active .steps__number {
+    @extend .bg-info;
+  }
+
+  &__item.disabled .steps__number {
+    background-color: $c-color-gray !important;
+  }
 }
 
 #autocomplete {
