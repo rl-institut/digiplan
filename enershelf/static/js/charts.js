@@ -1,5 +1,7 @@
 const chart1 = echarts.init(document.getElementById('chart1'));
 const chart2 = echarts.init(document.getElementById('chart2'));
+const chart3 = echarts.init(document.getElementById('chart3'));
+const chart4 = echarts.init(document.getElementById('chart4'));
 
 const option = {
   title: {
@@ -44,10 +46,14 @@ function resizeChart() {
   setTimeout(function () {
     chart1.resize();
     chart2.resize();
+    chart3.resize();
+    chart4.resize();
   }, 200);
 };
 
 chart1.setOption(option);
 chart2.setOption(option);
+chart3.setOption(option);
+chart4.setOption(option);
 
 window.addEventListener('resize', resizeChart);
