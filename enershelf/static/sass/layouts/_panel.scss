@@ -29,10 +29,12 @@
 
   &__settings {
     @extend .px-2;
-    @extend .py-3;
+    @extend .pb-3;
   }
 
   &-item {
+    @extend .pt-4;
+
     &__heading {
       @extend .fs-7;
       @extend .fw-light;
@@ -61,6 +63,10 @@
 .footer {
   @extend .flex-shrink-0;
   @extend .border-top;
+  @extend .bg-white;
+  @extend .position-sticky;
+  @extend .bottom-0;
+  @extend .w-auto;
 
   &__logos {
     @extend .d-flex;
