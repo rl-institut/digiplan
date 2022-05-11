@@ -1,7 +1,7 @@
 .top-nav {
   @extend .d-flex;
   @extend .flex-row;
-  @extend .justify-content-end;
+  @extend .justify-content-between;
   @extend .align-items-center;
   @extend .pt-0;
   @extend .pe-2;
@@ -9,6 +9,15 @@
   @extend .ps-1;
   @extend .shadow-sm;
   height: $top-nav-height;
+
+  &__tool-name {
+    h1 {
+      @extend .fs-4;
+      @extend .fw-bold;
+      @extend .mb-0;
+      @extend .ps-2;
+    }
+  }
 
   &__links {
     @include media-breakpoint-down(lg) {
