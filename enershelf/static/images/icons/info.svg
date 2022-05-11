@@ -5,39 +5,11 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   height="50"
-   width="50"
-   id="svg11"
-   version="1.1"
    viewBox="0 0 50 50"
-   sodipodi:docname="info.svg"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)">
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1853"
-     inkscape:window-height="1025"
-     id="namedview9"
-     showgrid="false"
-     fit-margin-top="5"
-     fit-margin-left="5"
-     fit-margin-bottom="5"
-     fit-margin-right="5"
-     inkscape:zoom="5.9"
-     inkscape:cx="-21.949153"
-     inkscape:cy="25"
-     inkscape:window-x="1987"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg11" />
+   version="1.1"
+   id="svg11"
+   width="50"
+   height="50">
   <metadata
      id="metadata15">
     <rdf:RDF>
@@ -56,20 +28,18 @@
        id="style2">.cls-1{fill:#58595b;}</style>
   </defs>
   <g
-     transform="translate(-19.8,-22.57)"
+     id="Your_Icons"
      data-name="Your Icons"
-     id="Your_Icons">
+     transform="translate(-19.8,-22.57)">
     <path
-       style="fill:#58595b"
-       id="path6"
+       class="cls-1"
        d="m 42.28,38 c 0,-1.77 0.61,-2.41 2.52,-2.41 1.91,0 2.51,0.64 2.51,2.41 0,1.77 -0.59,2.41 -2.51,2.41 -1.92,0 -2.52,-0.62 -2.52,-2.41 z m 0.38,4.43 H 47 v 17.1 h -4.34 z"
-       class="cls-1"
-       inkscape:connector-curvature="0" />
+       id="path6"
+       style="fill:#002c50;fill-opacity:1" />
     <path
-       style="fill:#58595b"
-       id="path8"
-       d="m 44.8,29.07 a 18.5,18.5 0 1 1 -18.5,18.5 18.52,18.52 0 0 1 18.5,-18.5 m 0,-1.5 a 20,20 0 1 0 20,20 20,20 0 0 0 -20,-20 z"
        class="cls-1"
-       inkscape:connector-curvature="0" />
+       d="m 44.8,29.07 a 18.5,18.5 0 1 1 -18.5,18.5 18.52,18.52 0 0 1 18.5,-18.5 m 0,-1.5 a 20,20 0 1 0 20,20 20,20 0 0 0 -20,-20 z"
+       id="path8"
+       style="fill:#002c50;fill-opacity:1" />
   </g>
 </svg>

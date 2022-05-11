@@ -26,6 +26,36 @@
     @extend .bg-light;
     @extend .pt-2;
   }
+
+  &__settings {
+    @extend .px-2;
+    @extend .py-3;
+  }
+
+  &-item {
+    &__heading {
+      @extend .fs-7;
+      @extend .fw-light;
+      @extend .text-uppercase;
+    }
+
+    &__form {
+      @extend .d-flex;
+      @extend .flex-row;
+      @extend .align-items-center;
+      
+      select,
+      img {
+        @extend .d-block;
+      }
+
+      img {
+        @extend .ms-1;
+        height: $info-icon-size;
+        width: $info-icon-size;
+      }
+    }
+  }
 }
 
 .footer {
