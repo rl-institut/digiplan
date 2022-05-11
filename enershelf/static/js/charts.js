@@ -1,8 +1,9 @@
-const dbChart = echarts.init(document.getElementById('mainChart'));
+const chart1 = echarts.init(document.getElementById('chart1'));
+const chart2 = echarts.init(document.getElementById('chart2'));
 
 const option = {
   title: {
-    text: 'Budget in Tsd. €',
+    text: 'Anteil Erneuerbare Energien (%)',
     textStyle: {
       color: '#002C50',
       fontWeight: 'normal',
@@ -18,14 +19,13 @@ const option = {
   },
   dataset: {
     source: [
-      ['Kategorie', 'IST', 'Forecast', 'Abbau Überschüsse, Puffer und Risikobudget in Tsd. €'],
-      ['Personal', -12, -25, -65],
-      ['Eigenmittel', 72, 95, -65],
+      ['Kategorie', '2021'],
+      ['2021', 100]
     ]
   },
   xAxis: { type: 'category' },
   yAxis: {},
-  series: [{ type: 'bar' }, { type: 'bar' }, {'type': 'line'}],
+  series: [{ type: 'bar' }],
   color: [
     '#002C50',
     '#FFE8B3'
@@ -41,11 +41,13 @@ const option = {
 };
 
 function resizeChart() {
-    setTimeout(function () {
-      dbChart.resize();
-    }, 200);
-  };
+  setTimeout(function () {
+    chart1.resize();
+    chart2.resize();
+  }, 200);
+};
 
-dbChart.setOption(option);
+chart1.setOption(option);
+chart2.setOption(option);
 
 window.addEventListener('resize', resizeChart);
