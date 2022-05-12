@@ -17,6 +17,22 @@
 }
 
 /////////////////////////////////////// SLIDERS ///////////////////////////////////////
+.c-slider {
+  @extend .py-2;
+
+  &__label {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .justify-content-between;
+    @extend .fs-7;
+
+    img {
+      height: $info-icon-size;
+      width: $info-icon-size;
+    }
+  }
+}
+
 .irs.irs--flat {
   .irs-line {
     @extend .bg-light;
