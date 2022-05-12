@@ -18,17 +18,17 @@
     </div>
   </div>
   <div class="view-toggle">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+    <ul class="view-toggle__nav-tabs nav nav-tabs" id="myTab" role="tablist">
+      <li class="view-toggle__nav-item" role="presentation">
+        <button class="view-toggle__nav-link active" id="map-view-tab" data-bs-toggle="tab" data-bs-target="#map-view" type="button" role="tab" aria-controls="map-view" aria-selected="true">Karte</button>
       </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+      <li class="view-toggle__nav-item" role="presentation">
+        <button class="view-toggle__nav-link" id="chart-view-tab" data-bs-toggle="tab" data-bs-target="#chart-view" type="button" role="tab" aria-controls="chart-view" aria-selected="false">Charts</button>
       </li>
     </ul>
   </div>
   <div class="tab-content" id="mainTabContent">
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class="tab-pane fade show active" id="map-view" role="tabpanel" aria-labelledby="map-view-tab">
       <section id="map">
         <div class="lds-spinner">
           <div></div>
@@ -46,7 +46,7 @@
         </div>
       </section>
     </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+    <div class="tab-pane fade" id="chart-view" role="tabpanel" aria-labelledby="chart-view-tab">...</div>
   </div>
   <div id='legend' hidden></div>
   <button id="satellite-layer" onclick="toggleSatellite();">

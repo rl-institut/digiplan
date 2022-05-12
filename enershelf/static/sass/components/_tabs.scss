@@ -14,6 +14,7 @@
   &__nav-link {
     @extend .nav-link;
     @extend .text-primary;
+    @extend .border-0;
 
     &:hover {
       @extend .text-info;
@@ -55,4 +56,41 @@
   @extend .rounded;
   top: 6rem;
   z-index: 100;
+
+  &__nav-tabs {
+    @extend .nav;
+    @extend .nav-tabs;
+  }
+
+  &__nav-item {
+    @extend .nav-item;
+
+    &:first-of-type button {
+      @extend .rounded-0;
+      @extend .rounded-start;
+    }
+
+    &:last-of-type button {
+      @extend .rounded-0;
+      @extend .rounded-end;
+    }
+  }
+
+  &__nav-link {
+    @extend .nav-link;
+    @extend .text-primary;
+    @extend .border-0;
+
+    &:hover {
+      @extend .text-info;
+    }
+
+    &.active {
+      @extend .active;
+      @extend .text-info;
+      @extend .border-0;
+      @extend .bg-info;
+      @extend .text-white;
+    }
+  }
 }
