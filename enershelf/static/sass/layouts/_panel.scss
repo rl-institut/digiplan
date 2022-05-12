@@ -68,6 +68,17 @@
   @extend .bottom-0;
   @extend .w-auto;
 
+  &__btns {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .p-2;
+    @extend .border-bottom;
+
+    button {
+      @extend .w-50;
+    }
+  }
+
   &__logos {
     @extend .d-flex;
     @extend .flex-row;
