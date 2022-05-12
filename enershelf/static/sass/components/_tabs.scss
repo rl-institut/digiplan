@@ -46,3 +46,13 @@
     }
   }
 }
+
+.view-toggle {
+  @extend .position-absolute;
+  @extend .start-50;
+  @extend .translate-middle;
+  @extend .bg-white;
+  @extend .rounded;
+  top: 6rem;
+  z-index: 100;
+}

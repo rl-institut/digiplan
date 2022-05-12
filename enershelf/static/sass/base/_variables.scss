@@ -28,5 +28,8 @@ $top-nav-height: 2.5rem;
 $steps-height: 3.75rem;
 $steps-numbers-size: 2rem;
 
+// MAP
+$map-height: calc(100vh - #{$top-nav-height} - #{$steps-height});
+
 // ICONS
 $info-icon-size: 1.25rem;

@@ -16,8 +16,12 @@
   }
 }
 
+#mainTabContent {
+  height: $map-height;
+}
+
 #map {
-  height: calc(100vh - #{$top-nav-height} - #{$steps-height});
+  height: $map-height;
 }
 
 #satellite-layer {
