@@ -67,6 +67,7 @@
   @extend .position-sticky;
   @extend .bottom-0;
   @extend .w-auto;
+  z-index: 9;
 
   &__btns {
     @extend .d-flex;
