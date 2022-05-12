@@ -1,0 +1,48 @@
+.c-tabs {
+  @extend .nav;
+  @extend .nav-tabs;
+  @extend .nav-fill;
+  @extend .border-0;
+  @extend .border-bottom;
+  @extend .border-1;
+  @extend .border-light;
+
+  &__nav-item {
+    @extend .nav-item;
+  }
+
+  &__nav-link {
+    @extend .nav-link;
+    @extend .text-primary;
+
+    &:hover {
+      @extend .text-info;
+    }
+
+    &.active {
+      @extend .active;
+      @extend .text-info;
+      @extend .border-0;
+      @extend .border-bottom;
+      @extend .border-4;
+      @extend .border-info;
+    }
+  }
+
+  &__content {
+    @extend .tab-content;
+  }
+
+  &__pane {
+    @extend .tab-pane;
+    @extend .fade;
+
+    &.show {
+      @extend .show;
+    }
+
+    &.active {
+      @extend .active;
+    }
+  }
+}
