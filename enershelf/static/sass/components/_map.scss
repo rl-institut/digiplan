@@ -63,6 +63,12 @@
     @extend .flex-row;
     @extend .justify-content-end;
   }
+
+  &__layers-heading {
+    @extend .fs-7;
+    @extend .text-uppercase;
+    @extend .fw-bold;
+  }
 }
 
 #satellite-layer {
