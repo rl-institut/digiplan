@@ -71,6 +71,27 @@
   }
 }
 
+.map-layer {
+  @extend .d-flex;
+  @extend .flex-row;
+  @extend .justify-content-between;
+
+  &__legend {
+    &-color {
+      @extend .d-inline-block;
+      @include translateY(2px);
+      width: 1rem;
+      height: 1rem;
+      background-color: blue;
+    }
+
+    &-text {
+      @extend .d-inline-block;
+      @extend .fs-7;
+    }
+  }
+}
+
 #satellite-layer {
   position: absolute;
   bottom: 2rem;
