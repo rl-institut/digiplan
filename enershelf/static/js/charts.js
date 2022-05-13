@@ -2,6 +2,8 @@ const chart1 = echarts.init(document.getElementById('chart1'));
 const chart2 = echarts.init(document.getElementById('chart2'));
 const chart3 = echarts.init(document.getElementById('chart3'));
 const chart4 = echarts.init(document.getElementById('chart4'));
+const chart5 = echarts.init(document.getElementById('chart5'));
+const chart6 = echarts.init(document.getElementById('chart6'));
 
 option = {
   title: {
@@ -60,12 +62,30 @@ option = {
   ]
 };
 
+optionResults = {
+  xAxis: {
+    type: 'category',
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      data: [120, 200, 150, 80, 70, 110, 130],
+      type: 'bar'
+    }
+  ]
+};
+
 function resizeChart() {
   setTimeout(function () {
     chart1.resize();
     chart2.resize();
     chart3.resize();
     chart4.resize();
+    chart5.resize();
+    chart6.resize();
   }, 200);
 };
 
@@ -73,5 +93,7 @@ chart1.setOption(option);
 chart2.setOption(option);
 chart3.setOption(option);
 chart4.setOption(option);
+chart5.setOption(optionResults);
+chart6.setOption(optionResults);
 
 window.addEventListener('resize', resizeChart);
