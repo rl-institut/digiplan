@@ -92,5 +92,10 @@
       @extend .bg-info;
       @extend .text-white;
     }
+
+    svg {
+      @extend .me-1;
+      @include translateY(-2px);
+    }
   }
 }

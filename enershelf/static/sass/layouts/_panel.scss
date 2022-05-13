@@ -39,6 +39,11 @@
       @extend .fs-7;
       @extend .fw-light;
       @extend .text-uppercase;
+
+      svg {
+        @extend .me-1;
+        @include translateY(-2px);
+      }
     }
 
     &__form {
@@ -56,6 +61,10 @@
         height: $info-icon-size;
         width: $info-icon-size;
       }
+    }
+
+    &__chart {
+      @extend .pb-2;
     }
   }
 }
