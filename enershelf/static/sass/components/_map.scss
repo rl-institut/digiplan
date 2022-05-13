@@ -24,6 +24,47 @@
   height: $map-height;
 }
 
+.map {
+  &__layers-btn {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .justify-content-center;
+    @extend .align-items-center;
+    @extend .position-absolute;
+    @extend .rounded-circle;
+    @extend .bg-white;
+    @extend .border;
+    width: $map-layers-btn-size;
+    height: $map-layers-btn-size;
+    top: calc(#{$steps-height} + #{$map-items-padding});
+    right: $map-items-padding;
+    z-index: 9;
+
+    svg {
+      @extend .d-block;
+    }
+  }
+
+  &__layers-box {
+    @extend .position-absolute;
+    @extend .bg-white;
+    @extend .border;
+    @extend .p-2;
+    width: 23rem;
+    height: 60%;
+    top: calc(#{$steps-height} + #{$map-items-padding});
+    right: $map-items-padding;
+    z-index: 9;
+    display: none;
+  }
+
+  &__layers-close {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .justify-content-end;
+  }
+}
+
 #satellite-layer {
   position: absolute;
   bottom: 2rem;

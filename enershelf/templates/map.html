@@ -96,7 +96,7 @@
       }
 
       const nav = new mapboxgl.NavigationControl();
-      map.addControl(nav, "top-right");
+      map.addControl(nav, "bottom-left");
       map.addControl(new mapboxgl.ScaleControl({position: 'bottom-right'}));
 
       {% for map_image in map_images %}
