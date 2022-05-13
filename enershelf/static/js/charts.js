@@ -3,43 +3,61 @@ const chart2 = echarts.init(document.getElementById('chart2'));
 const chart3 = echarts.init(document.getElementById('chart3'));
 const chart4 = echarts.init(document.getElementById('chart4'));
 
-const option = {
+option = {
   title: {
-    text: 'Anteil Erneuerbare Energien (%)',
+    text: 'Anteil Erneuerbare \nEnergien (%)',
     textStyle: {
       color: '#002C50',
-      fontWeight: 'normal',
+      fontWeight: 300,
       fontFamily: 'Roboto',
       fontSize: 14
     }
   },
   tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
+    trigger: 'axis'
+  },
+  legend: {
+    bottom: 10,
+    data: ['2021', '2035']
+  },
+  toolbox: {
+    show: false
+  },
+  calculable: true,
+  xAxis: [
+    {
+      type: 'category',
+      // prettier-ignore
+      data: ['Jahre']
     }
-  },
-  dataset: {
-    source: [
-      ['Kategorie', '2021'],
-      ['2021', 100]
-    ]
-  },
-  xAxis: { type: 'category' },
-  yAxis: {},
-  series: [{ type: 'bar' }],
-  color: [
-    '#002C50',
-    '#FFE8B3'
   ],
-  label: {
-    normal: {
-      position: 'top',
-      distance: 10,
-      show: true,
-      formatter: ['Label Text'].join('\n')
+  yAxis: [
+    {
+      type: 'value',
+      max: 100
     }
-  }
+  ],
+  series: [
+    {
+      name: '2021',
+      type: 'bar',
+      color: '#C3D1DC',
+      data: [
+        60
+      ],
+    },
+    {
+      name: '2035',
+      type: 'bar',
+      color: '#06DFA7',
+      data: [
+        80
+      ],
+      markLine: {
+        data: [{  name: 'Ziel 2035', yAxis: 90}]
+      }
+    }
+  ]
 };
 
 function resizeChart() {
