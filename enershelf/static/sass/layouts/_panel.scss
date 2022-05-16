@@ -106,16 +106,6 @@
   &__logo {
     @extend .flex-fill;
 
-    &--eaa {
-      @extend .text-start;
-      @extend .ps-2;
-
-      img {
-        width: 5rem;
-        transform: translateY(40px);
-      }
-    }
-
     &--rli {
       @extend .text-center;
       @extend .ps-2;
@@ -126,7 +116,17 @@
       }
     }
 
-    &--bmbf {
+    &--eaa {
+      @extend .text-start;
+      @extend .ps-4;
+
+      img {
+        width: 5rem;
+        transform: translateY(40px);
+      }
+    }
+
+    &--bmi {
       @extend .text-end;
 
       img {
