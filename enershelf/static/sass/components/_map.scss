@@ -91,6 +91,20 @@
       @extend .fs-7;
     }
   }
+  &__control {
+    @extend .d-flex;
+    @extend .flex-row;
+
+    &-toggle {
+      height: 2rem;
+    }
+
+    img {
+      @extend .me-1;
+      height: $info-icon-size;
+      width: $info-icon-size;
+    }
+  }
 }
 
 #satellite-layer {

@@ -53,13 +53,35 @@
         <div class="map-layer">
           <div class="map-layer__legend">
             <div class="map-layer__legend-color"></div>
-            <div class="map-layer__legend-text">Grenze des Planungsraumes</div>
+            <div class="map-layer__legend-text">
+              <label class="form-check-label" for="switchPlanningArea">Grenze des Planungsraumes</label>
+            </div>
           </div>
           <div class="map-layer__control">
-            <div class="map-layer__control-i"></div>
+            <div class="map-layer__control-i">
+              <img src="../../static/images/icons/info.svg" alt="Info Icon" data-bs-toggle="tooltip" title="Info über Grenze des Planungsraumes" >
+            </div>
             <div class="map-layer__control-toggle c-switch">
-              <input type="checkbox">
-              <span class="c-slider"></span>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="switchPlanningArea">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="map-layer">
+          <div class="map-layer__legend">
+            <div class="map-layer__legend-color"></div>
+            <div class="map-layer__legend-text">Gemeinden</div>
+          </div>
+          <div class="map-layer__control">
+            <div class="map-layer__control-i">
+              <img src="../../static/images/icons/info.svg" alt="Info Icon" data-bs-toggle="tooltip" title="Info über Gemeinden" >
+            </div>
+            <div class="map-layer__control-toggle c-switch">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+              </div>
             </div>
           </div>
         </div>

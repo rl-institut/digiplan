@@ -17,20 +17,21 @@
 }
 
 /////////////////////////////////////// SLIDERS ///////////////////////////////////////
-.c-slider {
-  @extend .py-2;
-
-  &__label {
-    @extend .d-flex;
-    @extend .flex-row;
-    @extend .justify-content-between;
-    @extend .fs-7;
-
-    img {
-      height: $info-icon-size;
-      width: $info-icon-size;
-    }
+.c-switch {
+  .form-check-input {
+    clear: left;
   }
+  
+  .form-switch.form-switch {
+    @extend .mb-1;
+    @extend .ps-0;
+  }
+  
+  .form-switch.form-switch .form-check-input {
+    @extend .rounded-pill;
+    height: 1rem;
+    width: calc(1rem + 0.75rem);
+  } 
 }
 
 .irs.irs--flat {
