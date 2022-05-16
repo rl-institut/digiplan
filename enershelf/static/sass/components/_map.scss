@@ -34,6 +34,7 @@
     @extend .rounded-circle;
     @extend .bg-white;
     @extend .border;
+    cursor: pointer;
     width: $map-layers-btn-size;
     height: $map-layers-btn-size;
     top: calc(#{$steps-height} + #{$map-items-padding});
