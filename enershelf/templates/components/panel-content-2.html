@@ -1,0 +1,93 @@
+{% load static i18n %}
+
+<div class="panel__settings">
+  <div class="panel-item">
+    <h2 class="panel-item__heading">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16">
+        <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z"/>
+        <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z"/>
+      </svg>
+      Flächen
+    </h2>
+    <div class="panel-item__tabs">
+      <ul class="c-tabs nav nav-tabs" id="myTab" role="tablist">
+        <li class="c-tabs__nav-item" role="presentation">
+          <button class="c-tabs__nav-link active" id="wind-tab" data-bs-toggle="tab" data-bs-target="#wind" type="button" role="tab" aria-controls="wind" aria-selected="true">Windflächen</button>
+        </li>
+        <li class="c-tabs__nav-item" role="presentation">
+          <button class="c-tabs__nav-link" id="pv-tab" data-bs-toggle="tab" data-bs-target="#pv" type="button" role="tab" aria-controls="pv" aria-selected="false">PV-Freiflächen</button>
+        </li>
+      </ul>
+      <div class="c-tabs__content" id="myTabContent">
+        <div class="c-tabs__pane fade show active" id="wind" role="tabpanel" aria-labelledby="wind-tab">
+          <div class="c-slider">
+            <div class="c-slider__label">
+              <span>Photovoltaik (Dachanlagen) [MW]</span>
+              <img src="../../static/images/icons/info.svg" alt="Info Icon" data-bs-toggle="tooltip" title="Info über Parameter" >
+            </div>
+            <input type="text" class="js-rs-wind-roof" name="my_range" value="" />
+          </div>
+          <div class="c-slider">
+            <div class="c-slider__label">
+              <span>Photovoltaik (Freiflächenanlagen) [MW]</span>
+              <img src="../../static/images/icons/info.svg" alt="Info Icon" data-bs-toggle="tooltip" title="Info über Parameter" >
+            </div>
+            <input type="text" class="js-rs-wind-ground" name="my_range" value="" />
+          </div>
+          <div class="c-slider">
+            <div class="c-slider__label">
+              <span>Biomasse und Biogas [MW]</span>
+              <img src="../../static/images/icons/info.svg" alt="Info Icon" data-bs-toggle="tooltip" title="Info über Parameter" >
+            </div>
+            <input type="text" class="js-rs-wind-bio" name="my_range" value="" />
+          </div>
+          <div class="c-slider">
+            <div class="c-slider__label">
+              <span>Konventionelle Kraftwerke [MW]</span>
+              <img src="../../static/images/icons/info.svg" alt="Info Icon" data-bs-toggle="tooltip" title="Info über Parameter" >
+            </div>
+            <input type="text" class="js-rs-wind-kw" name="my_range" value="" />
+          </div>
+        </div>
+        <div class="c-tabs__pane fade" id="pv" role="tabpanel" aria-labelledby="pv-tab">...</div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-item">
+    <h2 class="panel-item__heading">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+      </svg>
+      Energiesystem
+    </h2>
+    <div class="panel-item__tabs">
+      <ul class="c-tabs nav nav-tabs" id="myTab" role="tablist">
+        <li class="c-tabs__nav-item" role="presentation">
+          <button class="c-tabs__nav-link active" id="electricity-prod-tab" data-bs-toggle="tab" data-bs-target="#electricity-prod" type="button" role="tab" aria-controls="electricity-prod" aria-selected="true">Stromerzeugung</button>
+        </li>
+        <li class="c-tabs__nav-item" role="presentation">
+          <button class="c-tabs__nav-link" id="electricity-consumption-tab" data-bs-toggle="tab" data-bs-target="#electricity-consumption" type="button" role="tab" aria-controls="electricity-consumption" aria-selected="false">Strombedarf</button>
+        </li>
+      </ul>
+      <div class="c-tabs__content" id="myTabContent">
+        <div class="c-tabs__pane fade show active" id="electricity-prod" role="tabpanel" aria-labelledby="electricity-prod-tab">
+          <div class="c-slider">
+            <div class="c-slider__label">
+              <span>Strombedarf Haushalte [%]</span>
+              <img src="../../static/images/icons/info.svg" alt="Info Icon" data-bs-toggle="tooltip" title="Info über Parameter" >
+            </div>
+            <input type="text" class="js-rs-wind-roof" name="my_range" value="" />
+          </div>
+          <div class="c-slider">
+            <div class="c-slider__label">
+              <span>Strombedarf GHD + Landwirtschaft [%]</span>
+              <img src="../../static/images/icons/info.svg" alt="Info Icon" data-bs-toggle="tooltip" title="Info über Parameter" >
+            </div>
+            <input type="text" class="js-rs-wind-ground" name="my_range" value="" />
+          </div>
+        </div>
+        <div class="c-tabs__pane fade" id="electricity-consumption" role="tabpanel" aria-labelledby="electricity-consumption-tab">...</div>
+      </div>
+    </div>
+  </div>      
+</div>
