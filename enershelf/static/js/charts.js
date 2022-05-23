@@ -97,15 +97,3 @@ chart5.setOption(optionResults);
 chart6.setOption(optionResults);
 
 window.addEventListener('resize', resizeChart);
-
-
-
-
-
-$('#js-map-layers-btn').on('click', function() {
-  $('#js-map-layers-box').show();
-});
-
-$('#js-map-layers-box-close').on('click', function() {
-  $('#js-map-layers-box').hide();
-});
