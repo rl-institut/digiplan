@@ -61,6 +61,14 @@
   }
 }
 
+.c-slider {
+  @extend .pt-2;
+  
+  &__label {
+    @extend .fs-7;
+  }
+}
+
 /////////////////////////////////////// INFO ICON ///////////////////////////////////////
 img.i-icon {
   width: $info-icon-size;
