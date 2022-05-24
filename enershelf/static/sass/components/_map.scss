@@ -107,10 +107,10 @@
 
 .legend {
   @extend .position-absolute;
-  @extend .bg-white;
   @extend .border;
   @extend .p-2;
   @extend .fs-7;
+  background-color: rgba(255, 255, 255, 0.8);
   width: $map-layers-box-width;
   height: calc(100vh - #{$top-nav-height} - #{$steps-height} - #{$map-layers-box-height} - (2 * #{#{$map-items-padding}}) - #{$map-legend-box-padding-bottom});
   right: $map-items-padding;
