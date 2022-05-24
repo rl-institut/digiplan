@@ -16,7 +16,6 @@
 {% endblock %}
 
 {% block content %}
-  {% include 'canvases/about.html' %}
 
   <div class="main-container">
     <nav class="top-nav">
@@ -45,12 +44,9 @@
     </nav>
   
     <section class="map-content">
-      {% if not debug %}
-        {% include 'canvases/intro.html' %}
-      {% endif %}
-      {% include 'canvases/panel.html' %}
+      {% include 'components/panel.html' %}
       <pre id="info"></pre>
-      {% include 'canvases/map.html' %}
+      {% include 'components/map.html' %}
     </section>
   </div>
   
