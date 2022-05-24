@@ -15,7 +15,7 @@
       @extend .fs-4;
       @extend .fw-bold;
       @extend .mb-0;
-      @extend .ps-2;
+      @extend .ps-4;
     }
   }
 
@@ -44,6 +44,11 @@
       width: 1.5rem;
       height: 1.5rem;
     }
+  }
+
+  &__lang {
+    @extend .form-select;
+    @extend .form-select-sm;
   }
 }
 

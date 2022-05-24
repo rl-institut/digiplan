@@ -28,12 +28,13 @@
   }
 
   &__settings {
-    @extend .px-2;
+    @extend .bg-white;
+    @extend .px-4;
     @extend .pb-3;
   }
 
   &-item {
-    @extend .pt-4;
+    @extend .py-4;
 
     &__heading {
       @extend .fs-7;
@@ -79,7 +80,8 @@
   &__btns {
     @extend .d-flex;
     @extend .flex-row;
-    @extend .p-2;
+    @extend .px-4;
+    @extend .py-2;
     @extend .border-bottom;
 
     button {
