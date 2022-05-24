@@ -30,6 +30,10 @@
 
     li {
       display: inline-block;
+
+      a {
+        @extend .link-primary;
+      }
     }
 
     li:not(:last-of-type) {

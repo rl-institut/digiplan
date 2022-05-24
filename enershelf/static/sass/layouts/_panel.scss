@@ -146,6 +146,10 @@
     li {
       @extend .d-inline-block;
       @extend .fs-7;
+
+      a {
+        @extend .link-primary;
+      }
     }
   
     li:not(:last-of-type) {
