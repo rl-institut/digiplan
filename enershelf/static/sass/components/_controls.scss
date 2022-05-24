@@ -46,6 +46,11 @@
     background-color: $blue;
   }
 
+  .irs-bar,
+  .irs-line {
+    height: 8px;
+  }
+
   .irs-from:before, 
   .irs-to:before,
   .irs-single:before {
@@ -53,6 +58,8 @@
   }
 
   .irs-handle {
+    height: 14px;
+    
     &>i:first-child,
     &.state_hover>i:first-child,
     &:hover>i:first-child {
