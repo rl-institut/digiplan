@@ -93,6 +93,7 @@
     @extend .d-flex;
     @extend .flex-row;
     @extend .text-center;
+    @extend .pt-2;
 
     .logo--bmbf {
       @extend .text-end;
@@ -112,7 +113,6 @@
 
       img {
         width: 4.5rem;
-        transform: translateY(40px);
       }
     }
 
@@ -121,15 +121,16 @@
       @extend .ps-4;
 
       img {
+        @include translateX(1rem);
         width: 5rem;
-        transform: translateY(40px);
       }
     }
 
-    &--bmi {
+    &--rg {
       @extend .text-end;
 
       img {
+        @include translateY(-0.5rem);
         width: 9rem;
       }
     }
