@@ -1,0 +1,18 @@
+.offcanvas-view {
+  @extend .offcanvas-start;
+  @extend .w-100;
+  z-index: 1100;
+  top: $top-nav-height;
+
+  &__header {
+    @extend .offcanvas-header;
+  }
+
+  &__title {
+    @extend .offcanvas-title;
+  }
+
+  &__body {
+    @extend .offcanvas-body;
+  }
+}

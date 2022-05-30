@@ -25,13 +25,16 @@
       <div class="top-nav__links">
         <ul>
           <li>
-            <a href="#">Dokumentation</a>
+            <a href="#" id="mapView">Karte</a>
           </li>
           <li>
-            <a href="#">Quellen</a>
+            <a data-bs-toggle="offcanvas" href="#offcanvasDocumentation" role="button" aria-controls="offcanvasDocumentation">Dokumentation</a>
           </li>
           <li>
-            <a href="#">Kontakt</a>
+            <a data-bs-toggle="offcanvas" href="#offcanvasSources" role="button" aria-controls="offcanvasSources">Quellen</a>
+          </li>
+          <li>
+            <a data-bs-toggle="offcanvas" href="#offcanvasContact" role="button" aria-controls="offcanvasContact">Kontakt</a>
           </li>
           <li>
             <select class="top-nav__lang" aria-label="Sprache auswählen">
@@ -49,7 +52,10 @@
       {% include 'components/map.html' %}
     </section>
   </div>
-  
+
+  {% include 'offcanvas/documentation.html' %}
+  {% include 'offcanvas/sources.html' %}
+  {% include 'offcanvas/contact.html' %}
 
   {% include 'popups/default.html' %}
   {% for popup in popups %}
