@@ -3,7 +3,7 @@
   @extend .w-100;
   @extend .overflow-auto;
   z-index: 1100;
-  top: $top-nav-height;
+  top: calc(#{$top-nav-height} - 2px);
 
   &__wrap {
     @extend .container;
