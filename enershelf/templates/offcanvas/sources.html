@@ -1,10 +1,32 @@
 <section class="offcanvas-view offcanvas" tabindex="-1" id="offcanvasSources" data-bs-backdrop="false" aria-labelledby="offcanvasSourcesLabel">
-  <div class="offcanvas-view__header">
-    <h5 class="offcanvas-view__title" id="offcanvasSourcesLabel">Quellen</h5>
-  </div>
-  <div class="offcanvas-view__body">
-    <div>
-      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+  <div class="offcanvas-view__wrap">
+    <h2 class="offcanvas-view__title" id="offcanvasSourcesLabel">Quellen</h2>
+    <div class="offcanvas-view__body">
+      <h3 class="offcanvas-view__subtitle">
+        Energiebedarf
+        <img src="../../static/images/icons/open.svg" alt="Open Icon" class="i-icon" title="Quellen öffnen" data-bs-toggle="modal" data-bs-target="#sourcesModal">
+      </h3>
+      <ul class="offcanvas-view__list">
+        <li class="source-item">
+          <span class="source-item__title">Zeitreihen elektrisch Industrie :</span>
+          <span class="source-item__subtitle">Zeitreihen elektrisch Industrie in Anhalt-Bitterfeld-Wittenberg</span>
+          <img class="source-item__open" src="../../static/images/icons/open.svg" alt="Open Icon" title="Quellen öffnen" data-bs-toggle="modal" data-bs-target="#sourcesModal">
+        </li>
+      </ul>
     </div>
   </div>
 </section>
+
+<div class="sources-modal modal fade" id="sourcesModal" tabindex="-1" aria-labelledby="sourcesModalLabel" aria-hidden="true">
+  <div class="sources-modal__dialog modal-dialog">
+    <div class="sources-modal__content">
+      <div class="sources-modal__header">
+        <h2 class="sources-modal__title" id="sourcesModalLabel">Zeitreihen elektrisch Industrie in Anhalt-Bitterfeld-Wittenberg</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="sources-modal__body">
+        <p>Zeitreihen elektrisch Industrie in Anhalt-Bitterfeld-Wittenberg</p>
+      </div>
+    </div>
+  </div>
+</div>
