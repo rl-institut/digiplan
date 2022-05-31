@@ -1,0 +1,23 @@
+.sources-modal {
+  z-index: 1200;
+
+  &__dialog {
+    @extend .modal-xl;
+  }
+
+  &__content {
+    @extend .modal-content;
+  }
+
+  &__header {
+    @extend .modal-header;
+  }
+
+  &__title {
+    @extend .modal-title;
+  }
+
+  &__body {
+    @extend .modal-body;
+  }
+}
