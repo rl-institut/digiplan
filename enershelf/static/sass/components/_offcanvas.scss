@@ -1,6 +1,7 @@
 .offcanvas-view {
   @extend .offcanvas-start;
   @extend .w-100;
+  @extend .overflow-auto;
   z-index: 1100;
   top: $top-nav-height;
 
@@ -11,11 +12,17 @@
   }
 
   &__title {
+    @extend .fs-1;
     @extend .fw-bold;
   }
 
+  &__subtitle {
+    @extend .fw-bold;
+    @extend .pt-2;
+  }
+
   &__body {
-    @extend .py-4;
+    @extend .py-3;
   }
 
   &__logos {
