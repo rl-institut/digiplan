@@ -4,15 +4,52 @@
   z-index: 1100;
   top: $top-nav-height;
 
-  &__header {
-    @extend .offcanvas-header;
+  &__wrap {
+    @extend .container;
+    @extend .py-5;
+    max-width: 44rem;
   }
 
   &__title {
-    @extend .offcanvas-title;
+    @extend .fw-bold;
   }
 
   &__body {
-    @extend .offcanvas-body;
+    @extend .py-4;
+  }
+
+  &__logos {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .justify-content-between;
+    @extend .py-2;
+  }
+
+  &__logo {
+    @extend .pe-2;
+
+    &--rli img {
+      width: 8.5rem;
+    }
+
+    &--eaa img {
+      width: 9rem;
+    }
+
+    &--rg img {
+      width: 12rem;
+    }
+
+    &--bbsr img {
+      width: 11.5rem;
+    }
+
+    &--bmwsb img {
+      width: 12.5rem;
+    }
+
+    &--bmi img {
+      width: 10rem;
+    }
   }
 }
