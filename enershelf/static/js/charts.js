@@ -52,10 +52,7 @@ option = {
       color: '#06DFA7',
       data: [
         80
-      ],
-      markLine: {
-        data: [{  name: 'Ziel 2035', yAxis: 90}]
-      }
+      ]
     }
   ]
 };
