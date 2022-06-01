@@ -78,4 +78,8 @@
       }
     }
   }
+
+  &__contact {
+    @extend .pb-2;
+  }
 }
