@@ -11,7 +11,7 @@ from raster.models import RasterLayer as RasterModel
 from config.settings.base import APPS_DIR, USE_DISTILLED_MVTS
 from .config import LAYER_STYLES, MAX_ZOOM, MIN_ZOOM, REGIONS, ZOOM_LEVELS, MAX_DISTILLED_ZOOM
 
-from . import models
+# from . import models
 
 
 def get_color(source_layer):
@@ -49,103 +49,8 @@ class RasterLayerData:
     description: str
 
 
-ELECTRICITY: list = [
-    VectorLayerData(
-        source="grid",
-        color=get_color("grid"),
-        model=models.Grid,
-        name="Grid Network",
-        name_singular="Grid Network",
-        description="See grid",
-    ),
-]
-
-SETTLEMENTS: list = [
-    VectorLayerData(
-        source="built_up_areas",
-        color=get_color("built_up_areas"),
-        model=models.BuiltUpAreas,
-        name="Built Up Areas",
-        name_singular="Built Up Area",
-        description="See cluster",
-        popup_fields=[
-            "id",
-            "area",
-            "population",
-            "number_of_hospitals",
-            "distance_to_grid",
-            "distance_to_light",
-            "district_name",
-        ],
-    ),
-    VectorLayerData(
-        source="settlements",
-        color=get_color("settlements"),
-        model=models.Settlements,
-        name="Settlements",
-        name_singular="Settlement",
-        description="See cluster",
-        popup_fields=["id", "area", "population", "number_of_hospitals", "distance_to_grid", "distance_to_light"],
-    ),
-    VectorLayerData(
-        source="hamlets",
-        map_source="hamlets",
-        color=get_color("hamlets"),
-        model=models.Hamlets,
-        name="Hamlets",
-        name_singular="Hamlet",
-        description="See cluster",
-        clustered=True,
-        popup_fields=["id", "area", "population", "number_of_hospitals"],
-    ),
-]
-HEALTH_CARE: list = [
-    VectorLayerData(
-        source="hospitals",
-        color="red",
-        model=models.Hospitals,
-        name="Hospitals",
-        name_singular="Hospital",
-        description="See nightlights test",
-        popup_fields=["id", "name", "type", "town", "ownership", "population_per_hospital", "catchment_area_hospital"],
-    ),
-    VectorLayerData(
-        source="simulated_hospitals",
-        color="red",
-        model=models.HospitalsSimulated,
-        name="Simulated Hospitals",
-        name_singular="Simulated hospital",
-        description="See nightlights test",
-        popup_fields=["id", "name", "type", "town", "ownership", "lcoe", "settlement_type"],
-    ),
-]
-
-SOLAR: list = [
-    RasterLayerData(
-        source="solar",
-        filepath="Gha_Yearly_Solar_horizontal_irradiation.tif",
-        legend="solar",
-        model=RasterModel,
-        name="Solar",
-        name_singular="Solar",
-        description="See nightlights test",
-    ),
-    VectorLayerData(
-        source="nightlight",
-        color=get_color("nightlight"),
-        model=models.Nightlight,
-        name="Nightlights",
-        name_singular="Nightlight",
-        description="See nightlights",
-    ),
-]
-LAYERS_DEFINITION = ELECTRICITY + SETTLEMENTS + HEALTH_CARE + SOLAR
-LAYERS_CATEGORIES = {
-    "Electricity": ELECTRICITY,
-    "Settlements": SETTLEMENTS,
-    "Health Care Infrastructure": HEALTH_CARE,
-    "Solar": SOLAR,
-}
+LAYERS_DEFINITION = []
+LAYERS_CATEGORIES = {}
 
 
 @dataclass

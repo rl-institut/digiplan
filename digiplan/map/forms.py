@@ -7,8 +7,8 @@ from django.forms import (
     TextInput,
     MultiValueField,
     MultipleChoiceField,
-    ChoiceField,
-    Select,
+    # ChoiceField,
+    # Select,
 )
 from django.db.models import Min, Max
 from django_select2.forms import Select2MultipleWidget
@@ -68,12 +68,12 @@ class StaticLayerForm(Form):
         self.helper.template = "forms/layer.html"
 
 
-class RegionFilterForm(Form):
-    state = ChoiceField(
-        choices=[(None, "Select State")]
-        + [(state, state) for state in models.State.objects.all().order_by("name").values_list("name", flat=True)],
-    )
-    district = ChoiceField(
-        choices=[(None, "Select District")],
-        widget=Select(attrs={"disabled": True}),
-    )
+# class RegionFilterForm(Form):
+#     state = ChoiceField(
+#         choices=[(None, "Select State")]
+#         + [(state, state) for state in models.State.objects.all().order_by("name").values_list("name", flat=True)],
+#     )
+#     district = ChoiceField(
+#         choices=[(None, "Select District")],
+#         widget=Select(attrs={"disabled": True}),
+#     )

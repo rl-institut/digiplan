@@ -14,7 +14,7 @@ from config.settings.base import (
     MAPBOX_TOKEN,
     MAPBOX_STYLE_LOCATION,
 )
-from .forms import RegionFilterForm, StaticLayerForm
+from .forms import StaticLayerForm  # , RegionFilterForm
 from .config import STORE_COLD_INIT, STORE_HOT_INIT, SOURCES, MAP_IMAGES, CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
 from . import models
 from django.contrib.gis.db.models import functions
@@ -33,7 +33,7 @@ class MapGLView(TemplateView):
         "raster_layers": RASTER_LAYERS,
         "all_sources": ALL_SOURCES,
         "popups": POPUPS,
-        "region_filter": RegionFilterForm(),
+        "region_filter": None,  # RegionFilterForm(),
         "area_switches": {
             category: [StaticLayerForm(layer) for layer in layers] for category, layers in LAYERS_CATEGORIES.items()
         },
