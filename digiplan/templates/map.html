@@ -10,7 +10,6 @@
 {% block css %}
   {{ block.super }}
   {% compress css %}
-    <link rel="stylesheet" type="text/x-scss" href="{% static 'sass/map-gl.scss' %}">
     <link href="{% static 'css/mapbox-gl.css' %}" rel='stylesheet'/>
   {% endcompress %}
 {% endblock %}
@@ -47,7 +46,7 @@
         </ul>
       </div>
     </nav>
-  
+
     <section class="map-content">
       {% include 'components/panel.html' %}
       <pre id="info"></pre>
