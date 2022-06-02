@@ -30,7 +30,7 @@ services:
     image: digiplan_production_postgres
     command: postgres -N 500
     networks:
-      enershelf:
+      digiplan:
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
       - local_postgres_data_backups:/backups

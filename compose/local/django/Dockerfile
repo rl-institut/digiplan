@@ -15,7 +15,7 @@ RUN conda install --freeze-installed -c conda-forge conda-pack
 
 # Use conda-pack to create a standalone environment
 # in /venv:
-RUN conda-pack -n enershelf -o /tmp/env.tar && \
+RUN conda-pack -n digiplan -o /tmp/env.tar && \
   mkdir /venv && cd /venv && tar xf /tmp/env.tar && \
   rm /tmp/env.tar
 
