@@ -6,7 +6,7 @@ from django.contrib.gis.db.models.functions import Transform
 from django.contrib.gis.geos import Polygon
 from rest_framework_gis.tilenames import tile_edges
 
-from enershelf.map.config import REGION_ZOOMS
+from digiplan.map.config import REGION_ZOOMS
 
 
 class AsMVTGeom(models.functions.GeomOutputGeoFunc):

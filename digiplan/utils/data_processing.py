@@ -5,8 +5,8 @@ from geojson import FeatureCollection, Feature, Point
 from raster.models import Legend, RasterLayer as RasterModel
 
 from config.settings.base import DATA_DIR
-from enershelf.utils.ogr_layer_mapping import RelatedModelLayerMapping
-from enershelf.map.models import (
+from digiplan.utils.ogr_layer_mapping import RelatedModelLayerMapping
+from digiplan.map.models import (
     Region,
     Country,
     State,
@@ -19,8 +19,8 @@ from enershelf.map.models import (
     Nightlight,
     Grid,
 )
-from enershelf.map.layers import LAYERS_DEFINITION, VectorLayerData
-from enershelf.map.config import LAYER_STYLES, CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
+from digiplan.map.layers import LAYERS_DEFINITION, VectorLayerData
+from digiplan.map.config import LAYER_STYLES, CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
 
 REGIONS = [
     Country,

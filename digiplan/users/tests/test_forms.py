@@ -1,7 +1,7 @@
 import pytest
 
-from enershelf.users.forms import UserCreationForm
-from enershelf.users.tests.factories import UserFactory
+from digiplan.users.forms import UserCreationForm
+from digiplan.users.tests.factories import UserFactory
 
 pytestmark = pytest.mark.django_db
 

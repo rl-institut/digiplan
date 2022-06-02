@@ -6,7 +6,7 @@ from collections import namedtuple
 from range_key_dict import RangeKeyDict
 
 from django.conf import settings
-from enershelf import __version__
+from digiplan import __version__
 
 
 # FILES

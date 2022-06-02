@@ -2,7 +2,7 @@ import pytest
 from django.conf import settings
 from django.test import RequestFactory
 
-from enershelf.users.views import UserRedirectView, UserUpdateView
+from digiplan.users.views import UserRedirectView, UserUpdateView
 
 pytestmark = pytest.mark.django_db
 
