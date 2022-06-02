@@ -45,7 +45,11 @@ def load_regions(regions=None, verbose=True):
         region_model = Region(layer_type=region.__name__.lower())
         region_model.save()
         instance = RelatedModelLayerMapping(
-            model=region, data=data_path, mapping=region.mapping, layer=region.layer, transform=4326,
+            model=region,
+            data=data_path,
+            mapping=region.mapping,
+            layer=region.layer,
+            transform=4326,
         )
         instance.region = region_model
         instance.save(strict=True, verbose=verbose)
@@ -63,7 +67,11 @@ def load_data(models=None, verbose=True):
         else:
             data_path = os.path.join(DATA_DIR, f"{model.data_file}.gpkg")
         instance = RelatedModelLayerMapping(
-            model=model, data=data_path, mapping=model.mapping, layer=model.layer, transform=4326,
+            model=model,
+            data=data_path,
+            mapping=model.mapping,
+            layer=model.layer,
+            transform=4326,
         )
         instance.save(strict=True, verbose=verbose)
 

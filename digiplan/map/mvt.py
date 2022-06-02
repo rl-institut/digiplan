@@ -66,4 +66,8 @@ class MVTView(BaseMVTView):
 
 
 def mvt_view_factory(classname, layers):
-    return type(f"{classname}MVTView", (MVTView,), {"layers": layers},).as_view()
+    return type(
+        f"{classname}MVTView",
+        (MVTView,),
+        {"layers": layers},
+    ).as_view()

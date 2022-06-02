@@ -19,7 +19,11 @@ from . import models
 
 class StaticLayerForm(Form):
     switch = BooleanField(
-        label=False, widget=SwitchWidget(switch_class="form-check form-switch", switch_input_class="form-check-input",),
+        label=False,
+        widget=SwitchWidget(
+            switch_class="form-check form-switch",
+            switch_input_class="form-check-input",
+        ),
     )
     counter = count()
 
@@ -69,4 +73,7 @@ class RegionFilterForm(Form):
         choices=[(None, "Select State")]
         + [(state, state) for state in models.State.objects.all().order_by("name").values_list("name", flat=True)],
     )
-    district = ChoiceField(choices=[(None, "Select District")], widget=Select(attrs={"disabled": True}),)
+    district = ChoiceField(
+        choices=[(None, "Select District")],
+        widget=Select(attrs={"disabled": True}),
+    )

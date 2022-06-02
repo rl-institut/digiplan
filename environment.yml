@@ -1,4 +1,4 @@
-name: enershelf
+name: digiplan
 channels:
   - conda-forge
 dependencies:

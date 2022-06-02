@@ -1,4 +1,4 @@
-# EnerShelf documentation build configuration file, created by
+# digiplan documentation build configuration file, created by
 # sphinx-quickstart.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -39,7 +39,7 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = "EnerShelf"
+project = "digiplan"
 copyright = """2021, Hendrik Huyskens"""
 
 # The version info for the project you're documenting, acts as replacement for
@@ -163,7 +163,7 @@ html_static_path = ["_static"]
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "enershelfdoc"
+htmlhelp_basename = "digiplandoc"
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -182,8 +182,8 @@ latex_elements = {
 latex_documents = [
     (
         "index",
-        "enershelf.tex",
-        "EnerShelf Documentation",
+        "digiplan.tex",
+        "digiplan Documentation",
         """Hendrik Huyskens""",
         "manual",
     )
@@ -215,7 +215,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ("index", "enershelf", "EnerShelf Documentation", ["""Hendrik Huyskens"""], 1,)
+    ("index", "digiplan", "digiplan Documentation", ["""Hendrik Huyskens"""], 1,)
 ]
 
 # If true, show URL addresses after external links.
@@ -230,10 +230,10 @@ man_pages = [
 texinfo_documents = [
     (
         "index",
-        "enershelf",
-        "EnerShelf Documentation",
+        "digiplan",
+        "digiplan Documentation",
         """Hendrik Huyskens""",
-        "EnerShelf",
+        "digiplan",
         """Behold My Awesome Project!""",
         "Miscellaneous",
     )

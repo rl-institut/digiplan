@@ -86,7 +86,10 @@ SOURCES = init_sources()
 
 # STYLES
 
-with open(LAYER_STYLES_FILE, mode="rb",) as f:
+with open(
+    LAYER_STYLES_FILE,
+    mode="rb",
+) as f:
     LAYER_STYLES = json.loads(f.read())
 
 

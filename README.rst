@@ -1,4 +1,4 @@
-EnerShelf
+Digiplan
 =========
 
 Behold My Awesome Project!
@@ -42,7 +42,7 @@ Running type checks with mypy:
 
 ::
 
-  $ mypy enershelf
+  $ mypy digiplan
 
 Test coverage
 ^^^^^^^^^^^^^

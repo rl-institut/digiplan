@@ -49,7 +49,10 @@ class MapGLView(TemplateView):
         context["session_id"] = session_id
 
         # Add layer styles
-        with open(settings.APPS_DIR.path("static").path("styles").path("layer_styles.json"), "r",) as regions:
+        with open(
+            settings.APPS_DIR.path("static").path("styles").path("layer_styles.json"),
+            "r",
+        ) as regions:
             context["layer_styles"] = json.loads(regions.read())
 
         # Categorize sources

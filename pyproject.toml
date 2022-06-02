@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "enershelf"
-version = "0.1.0"
-description = "EnerSHelf"
+name = "digiplan"
+version = "0.0.0"
+description = "Digiplan"
 authors = ["Hendrik Huyskens <hendrik.huyskens@rl-institut.de>"]
 
 [tool.poetry.dependencies]

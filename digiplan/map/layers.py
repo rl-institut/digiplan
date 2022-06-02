@@ -245,13 +245,21 @@ if USE_DISTILLED_MVTS:
             if ZOOM_LEVELS[region].min > MAX_DISTILLED_ZOOM
         ]
         + [
-            Source(name=region, type="vector", tiles=[f"static/mvts/{{z}}/{{x}}/{{y}}/{region}.mvt"],)
+            Source(
+                name=region,
+                type="vector",
+                tiles=[f"static/mvts/{{z}}/{{x}}/{{y}}/{region}.mvt"],
+            )
             for region in REGIONS
             if ZOOM_LEVELS[region].min < MAX_DISTILLED_ZOOM
         ]
         + [
             Source(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"]),
-            Source(name="static_distilled", type="vector", tiles=["static/mvts/{z}/{x}/{y}/static.mvt"],),
+            Source(
+                name="static_distilled",
+                type="vector",
+                tiles=["static/mvts/{z}/{x}/{y}/static.mvt"],
+            ),
             Source(name="hamlets", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"]),
         ]
         + get_raster_sources()
@@ -309,7 +317,11 @@ REGION_LAYERS = (
 )
 
 RASTER_LAYERS = [
-    RasterLayer(id=layer.source, source=layer.source, type="raster",)
+    RasterLayer(
+        id=layer.source,
+        source=layer.source,
+        type="raster",
+    )
     for layer in LAYERS_DEFINITION
     if issubclass(layer.model, RasterModel)
 ]
