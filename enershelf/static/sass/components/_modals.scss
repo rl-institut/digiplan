@@ -1,5 +1,6 @@
-.sources-modal {
-  z-index: 1200;
+.sources-modal,
+.privacy-modal {
+  z-index: 1210;
 
   &__dialog {
     @extend .modal-xl;
@@ -11,6 +12,7 @@
 
   &__header {
     @extend .modal-header;
+    @extend .px-5;
   }
 
   &__title {
@@ -19,5 +21,7 @@
 
   &__body {
     @extend .modal-body;
+    @extend .px-5;
+    @extend .py-4;
   }
 }
