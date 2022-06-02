@@ -9,7 +9,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
-    image: enershelf_local_django
+    image: digiplan_local_django
     depends_on:
       - postgres
     volumes:
@@ -20,14 +20,14 @@ services:
     ports:
       - "8000:8000"
     networks:
-      enershelf:
+      digiplan:
     command: /start
 
   postgres:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: enershelf_production_postgres
+    image: digiplan_production_postgres
     command: postgres -N 500
     networks:
       enershelf:
@@ -38,4 +38,4 @@ services:
       - ./.envs/.local/.postgres
 
 networks:
-  enershelf:
+  digiplan:
