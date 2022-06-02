@@ -150,7 +150,9 @@
       @extend .d-inline-block;
       @extend .fs-7;
 
-      a {
+      button {
+        @extend .bg-white;
+        @extend .border-0;
         @extend .link-primary;
       }
     }
