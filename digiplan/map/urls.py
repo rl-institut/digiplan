@@ -1,11 +1,11 @@
-from django.urls import path
 from django.conf import settings
+from django.urls import path
 from django_distill import distill_path
 
+from . import views
 from .config import get_tile_coordinates_for_region
 from .mvt import mvt_view_factory
-from .mvt_layers import MVT_LAYERS, DISTILL_MVT_LAYERS
-from . import views
+from .mvt_layers import DISTILL_MVT_LAYERS, MVT_LAYERS
 
 app_name = "map"
 

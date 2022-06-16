@@ -1,17 +1,23 @@
-import os
 import json
+import os
 from dataclasses import dataclass, field
 from itertools import product
 from typing import List, Optional
 
 from django.contrib.gis.db.models import Model
-from django.db.models import IntegerField, BooleanField, ObjectDoesNotExist
+from django.db.models import BooleanField, IntegerField, ObjectDoesNotExist
 from raster.models import RasterLayer as RasterModel
 
 from config.settings.base import APPS_DIR, USE_DISTILLED_MVTS
-from .config import LAYER_STYLES, MAX_ZOOM, MIN_ZOOM, REGIONS, ZOOM_LEVELS, MAX_DISTILLED_ZOOM
 
-# from . import models
+from .config import (
+    LAYER_STYLES,
+    MAX_DISTILLED_ZOOM,
+    MAX_ZOOM,
+    MIN_ZOOM,
+    REGIONS,
+    ZOOM_LEVELS,
+)
 
 
 def get_color(source_layer):
@@ -56,20 +62,20 @@ LAYERS_CATEGORIES = {}
 @dataclass
 class Source:
     name: str
-    type: str
+    type: str  # noqa: A003
     tiles: Optional[List[str]] = None
     url: Optional[str] = None
 
 
 @dataclass
 class Layer:
-    id: str
+    id: str  # noqa: A003
     minzoom: int
     maxzoom: int
     style: str
     source: str
     source_layer: str
-    type: str
+    type: str  # noqa: A003
     name: Optional[str] = None
     description: Optional[str] = None
     color: Optional[str] = None
@@ -78,9 +84,9 @@ class Layer:
 
 @dataclass
 class RasterLayer:
-    id: str
+    id: str  # noqa: A003
     source: str
-    type: str
+    type: str  # noqa: A003
 
 
 @dataclass
@@ -111,7 +117,7 @@ def get_dynamic_sources():
             continue
         for combination in get_layer_setups(layer):
             mvt_str = "-".join(combination)
-            filter_str = "&".join(map(lambda x: f"setup__{x}", combination))
+            filter_str = "&".join(map(lambda x: f"setup__{x}", combination))  # noqa: C417
             sources.append(
                 Source(
                     name=f"{layer.source}-{mvt_str}",

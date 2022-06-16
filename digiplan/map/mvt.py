@@ -62,7 +62,7 @@ class MVTView(BaseMVTView):
         with connection.cursor() as cursor:
             cursor.execute(query)
             mvt_rows = cursor.fetchall()
-        return b"".join(map(lambda row: bytes(row[0]), mvt_rows))
+        return b"".join(map(lambda row: bytes(row[0]), mvt_rows))  # noqa: C417
 
 
 def mvt_view_factory(classname, layers):

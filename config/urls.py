@@ -1,19 +1,14 @@
 from django.conf import settings
-from django.urls import include, path
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.urls import include, path
 from django.views import defaults as default_views
 
 urlpatterns = [
     path("", include("digiplan.map.urls", namespace="map")),
-    # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     path("select2/", include("django_select2.urls")),
     path("raster/", include("raster.urls")),
-    # User management
-    # path("users/", include("digiplan.users.urls", namespace="users")),
-    # path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

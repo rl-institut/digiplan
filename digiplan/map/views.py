@@ -2,22 +2,37 @@ import json
 import uuid
 
 from django.conf import settings
-from django.views.generic import TemplateView
+from django.contrib.gis.db.models import functions
 from django.http import JsonResponse
+from django.views.generic import TemplateView
 
-from .layers import ALL_LAYERS, REGION_LAYERS, RASTER_LAYERS, ALL_SOURCES, LAYERS_CATEGORIES, POPUPS
 from config.settings.base import (
     DEBUG,
-    USE_DISTILLED_MVTS,
-    PASSWORD_PROTECTION,
-    PASSWORD,
-    MAPBOX_TOKEN,
     MAPBOX_STYLE_LOCATION,
+    MAPBOX_TOKEN,
+    PASSWORD,
+    PASSWORD_PROTECTION,
+    USE_DISTILLED_MVTS,
+)
+
+from . import models
+from .config import (
+    CLUSTER_GEOJSON_FILE,
+    MAP_IMAGES,
+    SOURCES,
+    STORE_COLD_INIT,
+    STORE_HOT_INIT,
+    ZOOM_LEVELS,
 )
 from .forms import StaticLayerForm  # , RegionFilterForm
-from .config import STORE_COLD_INIT, STORE_HOT_INIT, SOURCES, MAP_IMAGES, CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
-from . import models
-from django.contrib.gis.db.models import functions
+from .layers import (
+    ALL_LAYERS,
+    ALL_SOURCES,
+    LAYERS_CATEGORIES,
+    POPUPS,
+    RASTER_LAYERS,
+    REGION_LAYERS,
+)
 
 
 class MapGLView(TemplateView):

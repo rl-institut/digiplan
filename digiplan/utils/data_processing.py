@@ -1,26 +1,27 @@
 import json
 import os
-from geojson import FeatureCollection, Feature, Point
 
-from raster.models import Legend, RasterLayer as RasterModel
+from geojson import Feature, FeatureCollection, Point
+from raster.models import Legend
+from raster.models import RasterLayer as RasterModel
 
 from config.settings.base import DATA_DIR
-from digiplan.utils.ogr_layer_mapping import RelatedModelLayerMapping
+from digiplan.map.config import CLUSTER_GEOJSON_FILE, LAYER_STYLES, ZOOM_LEVELS
+from digiplan.map.layers import LAYERS_DEFINITION, VectorLayerData
 from digiplan.map.models import (
-    Region,
+    BuiltUpAreas,
     Country,
-    State,
     District,
+    Grid,
+    Hamlets,
     Hospitals,
     HospitalsSimulated,
-    BuiltUpAreas,
-    Settlements,
-    Hamlets,
     Nightlight,
-    Grid,
+    Region,
+    Settlements,
+    State,
 )
-from digiplan.map.layers import LAYERS_DEFINITION, VectorLayerData
-from digiplan.map.config import LAYER_STYLES, CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
+from digiplan.utils.ogr_layer_mapping import RelatedModelLayerMapping
 
 REGIONS = [
     Country,

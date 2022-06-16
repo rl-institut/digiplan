@@ -1,13 +1,12 @@
-import os
 import json
+import os
 import pathlib
 from collections import namedtuple
 
+from django.conf import settings
 from range_key_dict import RangeKeyDict
 
-from django.conf import settings
 from digiplan import __version__
-
 
 # FILES
 
@@ -54,14 +53,7 @@ STORE_COLD_INIT = {
 
 def init_hot_store():
     # Filter booleans have to be stored as str:
-    filter_init = {}
-    for filter_, data in FILTER_DEFINITION.items():
-        initial = data["initial"]
-        if initial is True:
-            initial = "True"
-        elif initial is False:
-            initial = "False"
-        filter_init[data["js_event_name"]] = initial
+    filter_init = {data["js_event_name"]: "True" if data["initial"] else "False" for data in FILTER_DEFINITION.values()}
     return json.dumps(filter_init)
 
 

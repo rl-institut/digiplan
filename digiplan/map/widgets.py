@@ -1,29 +1,5 @@
-from django.forms.renderers import get_default_renderer
 from django.forms.widgets import Widget
 from django.utils.safestring import mark_safe
-
-
-class CustomWidget:
-    template_name = None
-    extra_context = None
-
-    def get_context_data(self, **kwargs):
-        if self.extra_context is not None:
-            kwargs.update(self.extra_context)
-        return kwargs
-
-    def render(self, renderer=None):
-        context = self.get_context_data()
-        return self._render(self.template_name, context, renderer)
-
-    @staticmethod
-    def _render(template_name, context, renderer=None):
-        if renderer is None:
-            renderer = get_default_renderer()
-        return mark_safe(renderer.render(template_name, context))
-
-    def __str__(self):
-        return self.render()
 
 
 class SliderWidget(Widget):
@@ -115,4 +91,4 @@ class JsonWidget:
             header += f'<p class="lead">{self.json["title"]}</p>'
         if self.json["description"] != "":
             header += f'<p>{self.json["description"]}</p>'
-        return mark_safe(header + self.__convert_to_html(data=self.json))
+        return mark_safe(header + self.__convert_to_html(data=self.json))  # noqa: S703,S308

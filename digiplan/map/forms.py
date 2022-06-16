@@ -1,20 +1,19 @@
 from itertools import count
+
 from crispy_forms.helper import FormHelper
+from django.db.models import Max, Min
 from django.forms import (
     BooleanField,
     Form,
     IntegerField,
-    TextInput,
-    MultiValueField,
     MultipleChoiceField,
-    # ChoiceField,
-    # Select,
+    MultiValueField,
+    TextInput,
 )
-from django.db.models import Min, Max
 from django_select2.forms import Select2MultipleWidget
 
-from .widgets import SwitchWidget
 from . import models
+from .widgets import SwitchWidget
 
 
 class StaticLayerForm(Form):
@@ -66,14 +65,3 @@ class StaticLayerForm(Form):
 
         self.helper = FormHelper(self)
         self.helper.template = "forms/layer.html"
-
-
-# class RegionFilterForm(Form):
-#     state = ChoiceField(
-#         choices=[(None, "Select State")]
-#         + [(state, state) for state in models.State.objects.all().order_by("name").values_list("name", flat=True)],
-#     )
-#     district = ChoiceField(
-#         choices=[(None, "Select District")],
-#         widget=Select(attrs={"disabled": True}),
-#     )

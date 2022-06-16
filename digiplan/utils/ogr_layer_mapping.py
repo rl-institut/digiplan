@@ -1,21 +1,18 @@
 from django.contrib.gis.db.models import GeometryField
-from django.contrib.gis.gdal import (
-    GDALException,
-    OGRGeomType,
-)
+from django.contrib.gis.gdal import GDALException, OGRGeomType
+from django.contrib.gis.gdal.field import OFTInteger
+from django.contrib.gis.utils.layermapping import LayerMapError, LayerMapping
 from django.core.exceptions import FieldDoesNotExist, ObjectDoesNotExist
 from django.db import models
-from django.contrib.gis.utils.layermapping import LayerMapping, LayerMapError
-from django.contrib.gis.gdal.field import OFTInteger
 
 
 class RelatedModelLayerMapping(LayerMapping):
-    def check_layer(self):
+    def check_layer(self):  # noqa: C901
         """
         Check the Layer metadata and ensure that it's compatible with the
         mapping information and model. Unlike previous revisions, there is no
         need to increment through each feature in the Layer.
-        """
+        """  # noqa: DAR401,DAR101,DAR201
         # The geometry field of the model is set here.
         # TODO: Support more than one geometry field / model.  However, this
         # depends on the GDAL Driver in use.
@@ -120,7 +117,7 @@ class RelatedModelLayerMapping(LayerMapping):
         """
         Given an OGR Feature, the related model and its dictionary mapping,
         retrieve the related model for the ForeignKey mapping.
-        """
+        """  # noqa: DAR401,DAR101,DAR201
         # TODO: It is expensive to retrieve a model for every record --
         #  explore if an efficient mechanism exists for caching related
         #  ForeignKey models.
@@ -143,7 +140,7 @@ class RelatedModelLayerMapping(LayerMapping):
         """
         Given an OGR Feature, return a dictionary of keyword arguments for
         constructing the mapped model.
-        """
+        """  # noqa: DAR401,DAR101,DAR201
         # The keyword arguments for model construction.
         kwargs = {}
 
