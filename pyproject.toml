@@ -64,6 +64,14 @@ django-debug-toolbar = "^3.2.1"  # https://github.com/jazzband/django-debug-tool
 django-extensions = "^3.1.3"  # https://github.com/django-extensions/django-extensions
 # django-coverage-plugin = "^1.6.0"  # https://github.com/nedbat/django_coverage_plugin
 pytest-django = "^4.3.0"  # https://github.com/pytest-dev/pytest-django
+flake8-bandit = "^3.0.0"
+flake8-bugbear = "^22.4.25"
+flake8-builtins = "^1.5.3"
+flake8-comprehensions = "^3.10.0"
+darglint = "^1.8.1"
+flake8-eradicate = "^1.2.1"
+flake8-isort = "^4.1.1"
+flake8-pytest-style = "^1.6.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
