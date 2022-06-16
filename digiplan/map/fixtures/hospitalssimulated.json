@@ -1,1532 +1,1532 @@
 [
-{
-  "model": "map.hospitalssimulated",
-  "pk": 307,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.40863 11.07824)",
-    "name": "Sapelliga Health Centre",
-    "type": "Health Centre",
-    "town": "Sapelliga",
-    "ownership": "Government",
-    "population_per_hospital": 4501.70458984375,
-    "catchment_area_hospital": 24.3931,
-    "nightlight": 2,
-    "district": null
+  {
+    "fields": {
+      "catchment_area_hospital": 24.3931,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.40863 11.07824)",
+      "name": "Sapelliga Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 4501.70458984375,
+      "town": "Sapelliga",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 307
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 6.10671111111111,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.06369 10.91361)",
+      "name": "Pungu South CHPS",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 4220.30729166667,
+      "town": "Pungu South",
+      "type": "CHPS"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 308
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 18.1742666666667,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.05298 10.96497)",
+      "name": "Navio CHPS",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 2333.64274088542,
+      "town": "Navio",
+      "type": "CHPS"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 309
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 129.615,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.55772 10.6926)",
+      "name": "Ullo Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 7902.69873046875,
+      "town": "Ullo",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 310
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 97.3052,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.46862 10.38618)",
+      "name": "Fian Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 2294.46875,
+      "town": "Fian",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 311
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 48.5644,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.6503 10.21344)",
+      "name": "Takpo Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 3849.20361328125,
+      "town": "Takpo",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 312
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 60.03465,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.45978 10.19736)",
+      "name": "Jang Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 2679.63061523438,
+      "town": "Jang",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 313
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 510.9829,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.26769 9.767049999999999)",
+      "name": "Kpatinga Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 23711.662109375,
+      "town": "Kpatinga",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 314
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 559.8613,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.66509 9.54879)",
+      "name": "Kalba  Health Centre",
+      "nightlight": 1,
+      "ownership": "CHAG",
+      "population_per_hospital": 15577.939453125,
+      "town": "Kalba",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 315
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 257.4654,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.0012 9.113340000000001)",
+      "name": "Binchera  Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 17716.60546875,
+      "town": "Binchera",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 316
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 283.8445,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.18494 8.687749999999999)",
+      "name": "Damanko Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 32493.85546875,
+      "town": "Damanko",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 317
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 248.0366,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.00315 8.55814)",
+      "name": "Lungni Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 21286.255859375,
+      "town": "Lungni",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 318
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 174.6624,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.03478 8.15676)",
+      "name": "Borae Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 9265.9990234375,
+      "town": "Borae",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 319
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 173.1019,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.06178 7.99807999999999)",
+      "name": "Ehiamankyene Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 5074.158203125,
+      "town": "Ehiamankyene",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 320
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 619.2116,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.54873 7.99955)",
+      "name": "Perpetual Health Maternity Home",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 15285.306640625,
+      "town": "Apesika",
+      "type": "Maternity Home"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 321
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 192.3979,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.53924 7.8959)",
+      "name": "Debibi Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 14367.90234375,
+      "town": "Debibi",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 322
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 262.7043,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.50692 7.82116)",
+      "name": "Dodo Amanfrom Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 10736.3916015625,
+      "town": "Dodo Amanfrom",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 323
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 123.5893,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.5668 7.81128)",
+      "name": "Pampawie Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 3509.25610351562,
+      "town": "Pampawie",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 324
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 176.7007,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.87129 7.78398)",
+      "name": "Amoma Rural Clinic",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 8915.185546875,
+      "town": "Amoma",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 325
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 9.79468333333333,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.80623 7.74365)",
+      "name": "St. Micheal Maternity Home",
+      "nightlight": 1,
+      "ownership": "Private",
+      "population_per_hospital": 2416.39892578125,
+      "town": "Adamsu",
+      "type": "Maternity Home"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 326
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 457.9315,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.75332 7.71152)",
+      "name": "Bantama CHPS",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 10065.5166015625,
+      "town": "Bantama",
+      "type": "CHPS"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 327
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 81.0435,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.55005 7.725617)",
+      "name": "Ahamansu Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 5228.62744140625,
+      "town": "Ahamansu",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 328
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 41.2614,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.78094 7.68138)",
+      "name": "Dwenem Rural Clinic",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 5248.65771484375,
+      "town": "Dwenem",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 329
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 41.2614,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.78494 7.68227)",
+      "name": "Elizabeth Maternity Home",
+      "nightlight": 2,
+      "ownership": "CHAG",
+      "population_per_hospital": 5248.65771484375,
+      "town": "Dwenem",
+      "type": "Maternity Home"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 330
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 87.4147,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.96107 7.66606)",
+      "name": "Buoyem Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 6067.59423828125,
+      "town": "Buotem",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 331
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 35.73205,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.51971 7.6507)",
+      "name": "Poase Cement Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 3276.67919921875,
+      "town": "Poase Cement",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 332
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 35.007,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.90541 7.63643)",
+      "name": "Vida's Maternity Home",
+      "nightlight": 2,
+      "ownership": "Private",
+      "population_per_hospital": 3886.50317382812,
+      "town": "Kwameseikrom",
+      "type": "Maternity Home"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 333
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 228.0958,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.65995 7.43477)",
+      "name": "Donkro-Nkwanta Rural Clinic",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 16993.27734375,
+      "town": "Donkro-Nkwanta",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 334
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 111.9974,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.81142 7.66729)",
+      "name": "Kranka Rural Clinic",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 11738.013671875,
+      "town": "Kranka",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 335
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 20.2572,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.508517 7.303633)",
+      "name": "Teteman Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 1141.85831705729,
+      "town": "Teteman",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 336
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 20.2572,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.50848 7.30353)",
+      "name": "Teteman CHPS",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 1141.85831705729,
+      "town": "New Teteman",
+      "type": "CHPS"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 337
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 30.7313,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.47742 7.27607)",
+      "name": "Akpafu Adomi Community Clinic",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 7762.8447265625,
+      "town": "Akpafu Odomi",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 338
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 121.7949,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.13179 7.2628)",
+      "name": "Adrobaa Rural Clinic",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 6062.07666015625,
+      "town": "Adrobaa",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 339
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 47.9361,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.60788 7.203)",
+      "name": "Likpe Bala Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 7299.6083984375,
+      "town": "Likpe Bala",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 340
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 78.5641,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.81057 7.20647)",
+      "name": "Aboabo Presby Clinic",
+      "nightlight": 1,
+      "ownership": "CHAG",
+      "population_per_hospital": 18632.22265625,
+      "town": "Aboabo",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 341
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 132.507,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.55514 7.08676)",
+      "name": "Sacred Heart Maternity Clinic",
+      "nightlight": 1,
+      "ownership": "CHAG",
+      "population_per_hospital": 17187.9765625,
+      "town": "Bepoase",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 342
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 16.6242,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.48741 7.03482)",
+      "name": "Boanim Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 4717.925,
+      "town": "Boanim",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 343
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 138.6037,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.70874 7.01484)",
+      "name": "Anyinasusu SDA Centre",
+      "nightlight": 2,
+      "ownership": "CHAG",
+      "population_per_hospital": 11634.201171875,
+      "town": "Anyinasusu",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 344
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 22.51408,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.21651 6.99615)",
+      "name": "Matang Clinic",
+      "nightlight": 2,
+      "ownership": "Private",
+      "population_per_hospital": 9187.784375,
+      "town": "Matang",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 345
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 28.64365,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.50873 6.94912)",
+      "name": "Afamaso Maternity Home",
+      "nightlight": 2,
+      "ownership": "Private",
+      "population_per_hospital": 17618.759765625,
+      "town": "Afamaso",
+      "type": "Maternity Home"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 346
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 523.9952,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.50408 6.75602)",
+      "name": "Ekye Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 29033.103515625,
+      "town": "Ekye Amanfram",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 347
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 19.3889,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.52185 6.69613)",
+      "name": "Tanyigbe Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 4784.7021484375,
+      "town": "Tanyigbe",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 348
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 184.7239,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.90327 6.64692)",
+      "name": "Bethel Maternity Home",
+      "nightlight": 2,
+      "ownership": "Private",
+      "population_per_hospital": 15013.9375,
+      "town": "Enyinamoso",
+      "type": "Maternity Home"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 349
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 97.3205,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.42445 6.6507)",
+      "name": "Vic Maternity Home",
+      "nightlight": 1,
+      "ownership": "Private",
+      "population_per_hospital": 14545.052734375,
+      "town": "Norbeko",
+      "type": "Maternity Home"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 350
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 140.0413,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.96908 6.54907)",
+      "name": "Ahmadiyya Clinic",
+      "nightlight": 1,
+      "ownership": "Private",
+      "population_per_hospital": 9640.888671875,
+      "town": "Asuonta",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 351
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 199.1124,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.17473 6.54199)",
+      "name": "Barniekrom maternity home",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 12752.7412109375,
+      "town": "Barniekrom",
+      "type": "Maternity Home"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 352
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 44.0016666666667,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.86502 6.53656)",
+      "name": "Essuowin Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 6088.84830729167,
+      "town": "Assuowin",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 353
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 437.5818,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.15349 6.5169)",
+      "name": "Akateng RCH",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 18010.25,
+      "town": "Akateng",
+      "type": "RCH"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 354
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 34.6965,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.47681 6.77545)",
+      "name": "Dzolo Gbogame Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 5169.47314453125,
+      "town": "Dzolo Gbogame",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 355
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 30.7313,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.4825 7.249967)",
+      "name": "Akpafu Mempeasem Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 7762.8447265625,
+      "town": "Akpafu Mempeasem",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 356
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 93.72705,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.34725 6.4841)",
+      "name": "Abutia Kloe Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 3515.0263671875,
+      "town": "Abutia Kloe",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 357
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 94.5446,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.19674 6.47584)",
+      "name": "Banso SDA Clinic",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 11014.7783203125,
+      "town": "Banso",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 358
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 48.15745,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.73793 6.4216)",
+      "name": "Ziope Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 4738.14501953125,
+      "town": "Ziope",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 359
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 43.7326,
+      "district": null,
+      "geom": "SRID=4326;POINT (-3.19942 6.40582)",
+      "name": "Lizzy's Maternity Home",
+      "nightlight": 1,
+      "ownership": "Private",
+      "population_per_hospital": 1970.28833007812,
+      "town": "Akaatiso",
+      "type": "Maternity Home"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 360
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 43.7326,
+      "district": null,
+      "geom": "SRID=4326;POINT (-3.19761 6.40912)",
+      "name": "Gina's Maternity Home",
+      "nightlight": 1,
+      "ownership": "Private",
+      "population_per_hospital": 1970.28833007812,
+      "town": "Akaatiso",
+      "type": "Maternity Home"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 361
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 31.66975,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.31004 6.45543)",
+      "name": "Achiase Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 4561.58544921875,
+      "town": "Achiase",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 362
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 154.3256,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.65779 6.39401)",
+      "name": "St. Johns Of God Hospital",
+      "nightlight": 1,
+      "ownership": "CHAG",
+      "population_per_hospital": 18599.76953125,
+      "town": "Asafo",
+      "type": "Hospital"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 363
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 59.1476,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.0784 6.34166)",
+      "name": "Ntronang St. Michael's Clinic",
+      "nightlight": 2,
+      "ownership": "CHAG",
+      "population_per_hospital": 10113.9189453125,
+      "town": "Ntronang",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 364
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 106.0607,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.70416 6.33553)",
+      "name": "Asunafo Adom Wo Wim Clinic",
+      "nightlight": 1,
+      "ownership": "Private",
+      "population_per_hospital": 11762.578125,
+      "town": "Asunafo",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 365
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 101.9364,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.34982 6.22393)",
+      "name": "Aboabo Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 7770.70068359375,
+      "town": "Aboabo No 2",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 366
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 82.6248,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.91382 6.22437)",
+      "name": "Otumi RCH",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 9437.8076171875,
+      "town": "Otumi",
+      "type": "RCH"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 367
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 115.8812,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.26865 6.15581)",
+      "name": "Humjibre Clinic",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 6958.8193359375,
+      "town": "Humjibre",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 368
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 70.0985,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.05762 6.14982)",
+      "name": "Akokooso RCH",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 9733.12890625,
+      "town": "Akokooso",
+      "type": "RCH"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 369
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 26.9491,
+      "district": null,
+      "geom": "SRID=4326;POINT (1.07472 6.09247)",
+      "name": "Berith Clinic",
+      "nightlight": 2,
+      "ownership": "Private",
+      "population_per_hospital": 8518.998046875,
+      "town": "Nogokpo",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 370
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 95.2747,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.21437 6.09323)",
+      "name": "Juabo Community Clinic",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 5871.6630859375,
+      "town": "Wassa Juabo",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 371
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 48.5748,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.97503 6.08257)",
+      "name": "Wheta Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 8821.60546875,
+      "town": "Wheta",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 372
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 206.6233,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.28546 6.0336)",
+      "name": "Adjakaa Manso Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 11718.8857421875,
+      "town": "Adjakaa Manso",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 373
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 26.9806,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.21067 5.94825)",
+      "name": "Adawso Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 5370.4921875,
+      "town": "Adawso",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 374
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 26.9806,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.21217 5.9492)",
+      "name": "Semehyia Maternity Home",
+      "nightlight": 2,
+      "ownership": "Private",
+      "population_per_hospital": 5370.4921875,
+      "town": "Adwaso",
+      "type": "Maternity Home"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 375
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 330.0776,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.32037 5.9501)",
+      "name": "Agona Amenfi Community Clinic",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 13255.43359375,
+      "town": "Agona Amenfi",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 376
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 42.5563,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.83103 5.940039)",
+      "name": "Ntoaboase Maternity Home",
+      "nightlight": 2,
+      "ownership": "Private",
+      "population_per_hospital": 4181.82763671875,
+      "town": "Atiankama Nkwanta",
+      "type": "Maternity Home"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 377
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 42.5563,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.83211 5.94025)",
+      "name": "Atiankama Nkwanta RCH",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 4181.82763671875,
+      "town": "Atiankama",
+      "type": "RCH"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 378
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 80.2451,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.807683 5.9505)",
+      "name": "Hatorgodo E. P. Clinic",
+      "nightlight": 1,
+      "ownership": "CHAG",
+      "population_per_hospital": 7748.62744140625,
+      "town": "Hatorgodo",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 379
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 35.90215,
+      "district": null,
+      "geom": "SRID=4326;POINT (1.0292 5.987383)",
+      "name": "Blekusu Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 6108.3857421875,
+      "town": "Blekusu",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 380
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 35.90215,
+      "district": null,
+      "geom": "SRID=4326;POINT (1.04302 6.00546)",
+      "name": "Agavedzi Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 6108.3857421875,
+      "town": "Agavedzi",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 381
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 22.8257,
+      "district": null,
+      "geom": "SRID=4326;POINT (1.07422 6.04202)",
+      "name": "Adina Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 2498.8984375,
+      "town": "Adina",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 382
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 26.9491,
+      "district": null,
+      "geom": "SRID=4326;POINT (1.07023 6.09083)",
+      "name": "Nogokpo RCH",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 8518.998046875,
+      "town": "Nogokpo",
+      "type": "RCH"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 383
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 48.5241333333333,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.9055 5.8776)",
+      "name": "Anamase RCH",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 10046.3372395833,
+      "town": "Anamase",
+      "type": "RCH"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 384
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 52.9897,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.052133 5.994167)",
+      "name": "Anyinase Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 12139.41796875,
+      "town": "Anyinase",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 385
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 18.0721,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.0152 5.98137)",
+      "name": "Oda Nkwanta CHPS",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 2387.31070963542,
+      "town": "Oda Nkwanta",
+      "type": "CHPS"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 386
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 70.299,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.36983 5.79134)",
+      "name": "Anyamam Clinic",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 21317.41015625,
+      "town": "Anyamam",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 387
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 335.7942,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.84361 5.69689)",
+      "name": "Oppon Valley Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 12135.681640625,
+      "town": "Oppon Valley",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 388
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 50.3531,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.83284 5.6306)",
+      "name": "Nkum Health Centre",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 8359.0400390625,
+      "town": "Nkum",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 389
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 336.4264,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.7221 5.55545)",
+      "name": "Boinso Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 16295.01953125,
+      "town": "Boinso",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 390
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 38.2672,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.93238 5.48024)",
+      "name": "Ann's Maternity Home",
+      "nightlight": 2,
+      "ownership": "Private",
+      "population_per_hospital": 1213.01037597656,
+      "town": "Ajumako Entumbil",
+      "type": "Maternity Home"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 391
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 137.5148,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.5573 5.35319)",
+      "name": "Atobiase Community Clinic",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 10111.3955078125,
+      "town": "Atobiase",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 392
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 90.8044,
+      "district": null,
+      "geom": "SRID=4326;POINT (-2.80707 5.05367)",
+      "name": "Takinta CHPS",
+      "nightlight": 2,
+      "ownership": "Government",
+      "population_per_hospital": 20516.869140625,
+      "town": "Takinta",
+      "type": "CHPS"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 393
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 19.7269,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.7413999999999999 5.77699)",
+      "name": "Agbledome Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 2479.116796875,
+      "town": "Agbledome",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 394
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 19.7269,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.72263 5.78283)",
+      "name": "Crowns Maternity Home",
+      "nightlight": 1,
+      "ownership": "Private",
+      "population_per_hospital": 2479.116796875,
+      "town": "Keta",
+      "type": "Maternity Home"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 395
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 19.7269,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.73077 5.77996)",
+      "name": "St. Franscis Clinic",
+      "nightlight": 1,
+      "ownership": "Private",
+      "population_per_hospital": 2479.116796875,
+      "town": "Anyanui",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 396
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 19.7269,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.7295700000000001 5.78153)",
+      "name": "Anyanui Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 2479.116796875,
+      "town": "Anyanui",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 397
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 73.27,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.319083 5.905683)",
+      "name": "Pakro Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 10899.7216796875,
+      "town": "Pakro",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 398
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 94.5593,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.84368 5.35125)",
+      "name": "Ngyiresi CHPS",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 24586.0078125,
+      "town": "Ngyiresi",
+      "type": "CHPS"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 399
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 98.9061,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.81471 5.42001)",
+      "name": "Oguaa Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 40807.28515625,
+      "town": "Ogua",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 400
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 114.7401,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.72171 5.90198)",
+      "name": "Vision View Herbal Clinic",
+      "nightlight": 1,
+      "ownership": "Private",
+      "population_per_hospital": 18119.763671875,
+      "town": "Ekoso",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 401
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 9.61642,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.97764 6.44627)",
+      "name": "Manso Abore Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 730.228564453125,
+      "town": "Manso Abore",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 402
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 193.4514,
+      "district": null,
+      "geom": "SRID=4326;POINT (0.19677 6.29884)",
+      "name": "Podoe Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 5477.4365234375,
+      "town": "Podoe",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 403
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 88.4153,
+      "district": null,
+      "geom": "SRID=4326;POINT (-0.73329 6.46902)",
+      "name": "Asubone RCH",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 10169.0185546875,
+      "town": "Asubone",
+      "type": "RCH"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 404
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 25.7963,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.34849 6.51291)",
+      "name": "SDA Clinic Konkoma",
+      "nightlight": 1,
+      "ownership": "CHAG",
+      "population_per_hospital": 4078.49658203125,
+      "town": "Konkoma",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 405
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 35.03285,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.37465 6.92692)",
+      "name": "Sekyere Health Centre",
+      "nightlight": 1,
+      "ownership": "Government",
+      "population_per_hospital": 7282.201171875,
+      "town": "Sekyere",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 406
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 35.03285,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.37494 6.92646)",
+      "name": "Sekyere Methodist Clinic",
+      "nightlight": 1,
+      "ownership": "CHAG",
+      "population_per_hospital": 7282.201171875,
+      "town": "Sekyere",
+      "type": "Clinic"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 407
+  },
+  {
+    "fields": {
+      "catchment_area_hospital": 432.7343,
+      "district": null,
+      "geom": "SRID=4326;POINT (-1.01533 6.91527)",
+      "name": "Ananekrom Health Centre",
+      "nightlight": 0,
+      "ownership": "Government",
+      "population_per_hospital": 7026.72021484375,
+      "town": "Ananekrom",
+      "type": "Health Centre"
+    },
+    "model": "map.hospitalssimulated",
+    "pk": 408
   }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 308,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.06369 10.91361)",
-    "name": "Pungu South CHPS",
-    "type": "CHPS",
-    "town": "Pungu South",
-    "ownership": "Government",
-    "population_per_hospital": 4220.30729166667,
-    "catchment_area_hospital": 6.10671111111111,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 309,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.05298 10.96497)",
-    "name": "Navio CHPS",
-    "type": "CHPS",
-    "town": "Navio",
-    "ownership": "Government",
-    "population_per_hospital": 2333.64274088542,
-    "catchment_area_hospital": 18.1742666666667,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 310,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.55772 10.6926)",
-    "name": "Ullo Health Centre",
-    "type": "Health Centre",
-    "town": "Ullo",
-    "ownership": "Government",
-    "population_per_hospital": 7902.69873046875,
-    "catchment_area_hospital": 129.615,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 311,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.46862 10.38618)",
-    "name": "Fian Health Centre",
-    "type": "Health Centre",
-    "town": "Fian",
-    "ownership": "Government",
-    "population_per_hospital": 2294.46875,
-    "catchment_area_hospital": 97.3052,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 312,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.6503 10.21344)",
-    "name": "Takpo Health Centre",
-    "type": "Health Centre",
-    "town": "Takpo",
-    "ownership": "Government",
-    "population_per_hospital": 3849.20361328125,
-    "catchment_area_hospital": 48.5644,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 313,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.45978 10.19736)",
-    "name": "Jang Health Centre",
-    "type": "Health Centre",
-    "town": "Jang",
-    "ownership": "Government",
-    "population_per_hospital": 2679.63061523438,
-    "catchment_area_hospital": 60.03465,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 314,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.26769 9.767049999999999)",
-    "name": "Kpatinga Health Centre",
-    "type": "Health Centre",
-    "town": "Kpatinga",
-    "ownership": "Government",
-    "population_per_hospital": 23711.662109375,
-    "catchment_area_hospital": 510.9829,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 315,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.66509 9.54879)",
-    "name": "Kalba  Health Centre",
-    "type": "Health Centre",
-    "town": "Kalba",
-    "ownership": "CHAG",
-    "population_per_hospital": 15577.939453125,
-    "catchment_area_hospital": 559.8613,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 316,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.0012 9.113340000000001)",
-    "name": "Binchera  Health Centre",
-    "type": "Health Centre",
-    "town": "Binchera",
-    "ownership": "Government",
-    "population_per_hospital": 17716.60546875,
-    "catchment_area_hospital": 257.4654,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 317,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.18494 8.687749999999999)",
-    "name": "Damanko Health Centre",
-    "type": "Health Centre",
-    "town": "Damanko",
-    "ownership": "Government",
-    "population_per_hospital": 32493.85546875,
-    "catchment_area_hospital": 283.8445,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 318,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.00315 8.55814)",
-    "name": "Lungni Health Centre",
-    "type": "Health Centre",
-    "town": "Lungni",
-    "ownership": "Government",
-    "population_per_hospital": 21286.255859375,
-    "catchment_area_hospital": 248.0366,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 319,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.03478 8.15676)",
-    "name": "Borae Health Centre",
-    "type": "Health Centre",
-    "town": "Borae",
-    "ownership": "Government",
-    "population_per_hospital": 9265.9990234375,
-    "catchment_area_hospital": 174.6624,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 320,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.06178 7.99807999999999)",
-    "name": "Ehiamankyene Health Centre",
-    "type": "Health Centre",
-    "town": "Ehiamankyene",
-    "ownership": "Government",
-    "population_per_hospital": 5074.158203125,
-    "catchment_area_hospital": 173.1019,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 321,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.54873 7.99955)",
-    "name": "Perpetual Health Maternity Home",
-    "type": "Maternity Home",
-    "town": "Apesika",
-    "ownership": "Government",
-    "population_per_hospital": 15285.306640625,
-    "catchment_area_hospital": 619.2116,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 322,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.53924 7.8959)",
-    "name": "Debibi Health Centre",
-    "type": "Health Centre",
-    "town": "Debibi",
-    "ownership": "Government",
-    "population_per_hospital": 14367.90234375,
-    "catchment_area_hospital": 192.3979,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 323,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.50692 7.82116)",
-    "name": "Dodo Amanfrom Health Centre",
-    "type": "Health Centre",
-    "town": "Dodo Amanfrom",
-    "ownership": "Government",
-    "population_per_hospital": 10736.3916015625,
-    "catchment_area_hospital": 262.7043,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 324,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.5668 7.81128)",
-    "name": "Pampawie Health Centre",
-    "type": "Health Centre",
-    "town": "Pampawie",
-    "ownership": "Government",
-    "population_per_hospital": 3509.25610351562,
-    "catchment_area_hospital": 123.5893,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 325,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.87129 7.78398)",
-    "name": "Amoma Rural Clinic",
-    "type": "Clinic",
-    "town": "Amoma",
-    "ownership": "Government",
-    "population_per_hospital": 8915.185546875,
-    "catchment_area_hospital": 176.7007,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 326,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.80623 7.74365)",
-    "name": "St. Micheal Maternity Home",
-    "type": "Maternity Home",
-    "town": "Adamsu",
-    "ownership": "Private",
-    "population_per_hospital": 2416.39892578125,
-    "catchment_area_hospital": 9.79468333333333,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 327,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.75332 7.71152)",
-    "name": "Bantama CHPS",
-    "type": "CHPS",
-    "town": "Bantama",
-    "ownership": "Government",
-    "population_per_hospital": 10065.5166015625,
-    "catchment_area_hospital": 457.9315,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 328,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.55005 7.725617)",
-    "name": "Ahamansu Health Centre",
-    "type": "Health Centre",
-    "town": "Ahamansu",
-    "ownership": "Government",
-    "population_per_hospital": 5228.62744140625,
-    "catchment_area_hospital": 81.0435,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 329,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.78094 7.68138)",
-    "name": "Dwenem Rural Clinic",
-    "type": "Clinic",
-    "town": "Dwenem",
-    "ownership": "Government",
-    "population_per_hospital": 5248.65771484375,
-    "catchment_area_hospital": 41.2614,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 330,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.78494 7.68227)",
-    "name": "Elizabeth Maternity Home",
-    "type": "Maternity Home",
-    "town": "Dwenem",
-    "ownership": "CHAG",
-    "population_per_hospital": 5248.65771484375,
-    "catchment_area_hospital": 41.2614,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 331,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.96107 7.66606)",
-    "name": "Buoyem Health Centre",
-    "type": "Health Centre",
-    "town": "Buotem",
-    "ownership": "Government",
-    "population_per_hospital": 6067.59423828125,
-    "catchment_area_hospital": 87.4147,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 332,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.51971 7.6507)",
-    "name": "Poase Cement Health Centre",
-    "type": "Health Centre",
-    "town": "Poase Cement",
-    "ownership": "Government",
-    "population_per_hospital": 3276.67919921875,
-    "catchment_area_hospital": 35.73205,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 333,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.90541 7.63643)",
-    "name": "Vida's Maternity Home",
-    "type": "Maternity Home",
-    "town": "Kwameseikrom",
-    "ownership": "Private",
-    "population_per_hospital": 3886.50317382812,
-    "catchment_area_hospital": 35.007,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 334,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.65995 7.43477)",
-    "name": "Donkro-Nkwanta Rural Clinic",
-    "type": "Clinic",
-    "town": "Donkro-Nkwanta",
-    "ownership": "Government",
-    "population_per_hospital": 16993.27734375,
-    "catchment_area_hospital": 228.0958,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 335,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.81142 7.66729)",
-    "name": "Kranka Rural Clinic",
-    "type": "Clinic",
-    "town": "Kranka",
-    "ownership": "Government",
-    "population_per_hospital": 11738.013671875,
-    "catchment_area_hospital": 111.9974,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 336,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.508517 7.303633)",
-    "name": "Teteman Health Centre",
-    "type": "Health Centre",
-    "town": "Teteman",
-    "ownership": "Government",
-    "population_per_hospital": 1141.85831705729,
-    "catchment_area_hospital": 20.2572,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 337,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.50848 7.30353)",
-    "name": "Teteman CHPS",
-    "type": "CHPS",
-    "town": "New Teteman",
-    "ownership": "Government",
-    "population_per_hospital": 1141.85831705729,
-    "catchment_area_hospital": 20.2572,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 338,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.47742 7.27607)",
-    "name": "Akpafu Adomi Community Clinic",
-    "type": "Clinic",
-    "town": "Akpafu Odomi",
-    "ownership": "Government",
-    "population_per_hospital": 7762.8447265625,
-    "catchment_area_hospital": 30.7313,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 339,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.13179 7.2628)",
-    "name": "Adrobaa Rural Clinic",
-    "type": "Clinic",
-    "town": "Adrobaa",
-    "ownership": "Government",
-    "population_per_hospital": 6062.07666015625,
-    "catchment_area_hospital": 121.7949,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 340,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.60788 7.203)",
-    "name": "Likpe Bala Health Centre",
-    "type": "Health Centre",
-    "town": "Likpe Bala",
-    "ownership": "Government",
-    "population_per_hospital": 7299.6083984375,
-    "catchment_area_hospital": 47.9361,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 341,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.81057 7.20647)",
-    "name": "Aboabo Presby Clinic",
-    "type": "Clinic",
-    "town": "Aboabo",
-    "ownership": "CHAG",
-    "population_per_hospital": 18632.22265625,
-    "catchment_area_hospital": 78.5641,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 342,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.55514 7.08676)",
-    "name": "Sacred Heart Maternity Clinic",
-    "type": "Clinic",
-    "town": "Bepoase",
-    "ownership": "CHAG",
-    "population_per_hospital": 17187.9765625,
-    "catchment_area_hospital": 132.507,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 343,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.48741 7.03482)",
-    "name": "Boanim Health Centre",
-    "type": "Health Centre",
-    "town": "Boanim",
-    "ownership": "Government",
-    "population_per_hospital": 4717.925,
-    "catchment_area_hospital": 16.6242,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 344,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.70874 7.01484)",
-    "name": "Anyinasusu SDA Centre",
-    "type": "Clinic",
-    "town": "Anyinasusu",
-    "ownership": "CHAG",
-    "population_per_hospital": 11634.201171875,
-    "catchment_area_hospital": 138.6037,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 345,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.21651 6.99615)",
-    "name": "Matang Clinic",
-    "type": "Clinic",
-    "town": "Matang",
-    "ownership": "Private",
-    "population_per_hospital": 9187.784375,
-    "catchment_area_hospital": 22.51408,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 346,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.50873 6.94912)",
-    "name": "Afamaso Maternity Home",
-    "type": "Maternity Home",
-    "town": "Afamaso",
-    "ownership": "Private",
-    "population_per_hospital": 17618.759765625,
-    "catchment_area_hospital": 28.64365,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 347,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.50408 6.75602)",
-    "name": "Ekye Health Centre",
-    "type": "Health Centre",
-    "town": "Ekye Amanfram",
-    "ownership": "Government",
-    "population_per_hospital": 29033.103515625,
-    "catchment_area_hospital": 523.9952,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 348,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.52185 6.69613)",
-    "name": "Tanyigbe Health Centre",
-    "type": "Health Centre",
-    "town": "Tanyigbe",
-    "ownership": "Government",
-    "population_per_hospital": 4784.7021484375,
-    "catchment_area_hospital": 19.3889,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 349,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.90327 6.64692)",
-    "name": "Bethel Maternity Home",
-    "type": "Maternity Home",
-    "town": "Enyinamoso",
-    "ownership": "Private",
-    "population_per_hospital": 15013.9375,
-    "catchment_area_hospital": 184.7239,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 350,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.42445 6.6507)",
-    "name": "Vic Maternity Home",
-    "type": "Maternity Home",
-    "town": "Norbeko",
-    "ownership": "Private",
-    "population_per_hospital": 14545.052734375,
-    "catchment_area_hospital": 97.3205,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 351,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.96908 6.54907)",
-    "name": "Ahmadiyya Clinic",
-    "type": "Clinic",
-    "town": "Asuonta",
-    "ownership": "Private",
-    "population_per_hospital": 9640.888671875,
-    "catchment_area_hospital": 140.0413,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 352,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.17473 6.54199)",
-    "name": "Barniekrom maternity home",
-    "type": "Maternity Home",
-    "town": "Barniekrom",
-    "ownership": "Government",
-    "population_per_hospital": 12752.7412109375,
-    "catchment_area_hospital": 199.1124,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 353,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.86502 6.53656)",
-    "name": "Essuowin Health Centre",
-    "type": "Health Centre",
-    "town": "Assuowin",
-    "ownership": "Government",
-    "population_per_hospital": 6088.84830729167,
-    "catchment_area_hospital": 44.0016666666667,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 354,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.15349 6.5169)",
-    "name": "Akateng RCH",
-    "type": "RCH",
-    "town": "Akateng",
-    "ownership": "Government",
-    "population_per_hospital": 18010.25,
-    "catchment_area_hospital": 437.5818,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 355,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.47681 6.77545)",
-    "name": "Dzolo Gbogame Health Centre",
-    "type": "Health Centre",
-    "town": "Dzolo Gbogame",
-    "ownership": "Government",
-    "population_per_hospital": 5169.47314453125,
-    "catchment_area_hospital": 34.6965,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 356,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.4825 7.249967)",
-    "name": "Akpafu Mempeasem Health Centre",
-    "type": "Health Centre",
-    "town": "Akpafu Mempeasem",
-    "ownership": "Government",
-    "population_per_hospital": 7762.8447265625,
-    "catchment_area_hospital": 30.7313,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 357,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.34725 6.4841)",
-    "name": "Abutia Kloe Health Centre",
-    "type": "Health Centre",
-    "town": "Abutia Kloe",
-    "ownership": "Government",
-    "population_per_hospital": 3515.0263671875,
-    "catchment_area_hospital": 93.72705,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 358,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.19674 6.47584)",
-    "name": "Banso SDA Clinic",
-    "type": "Clinic",
-    "town": "Banso",
-    "ownership": "Government",
-    "population_per_hospital": 11014.7783203125,
-    "catchment_area_hospital": 94.5446,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 359,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.73793 6.4216)",
-    "name": "Ziope Health Centre",
-    "type": "Health Centre",
-    "town": "Ziope",
-    "ownership": "Government",
-    "population_per_hospital": 4738.14501953125,
-    "catchment_area_hospital": 48.15745,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 360,
-  "fields": {
-    "geom": "SRID=4326;POINT (-3.19942 6.40582)",
-    "name": "Lizzy's Maternity Home",
-    "type": "Maternity Home",
-    "town": "Akaatiso",
-    "ownership": "Private",
-    "population_per_hospital": 1970.28833007812,
-    "catchment_area_hospital": 43.7326,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 361,
-  "fields": {
-    "geom": "SRID=4326;POINT (-3.19761 6.40912)",
-    "name": "Gina's Maternity Home",
-    "type": "Maternity Home",
-    "town": "Akaatiso",
-    "ownership": "Private",
-    "population_per_hospital": 1970.28833007812,
-    "catchment_area_hospital": 43.7326,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 362,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.31004 6.45543)",
-    "name": "Achiase Health Centre",
-    "type": "Health Centre",
-    "town": "Achiase",
-    "ownership": "Government",
-    "population_per_hospital": 4561.58544921875,
-    "catchment_area_hospital": 31.66975,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 363,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.65779 6.39401)",
-    "name": "St. Johns Of God Hospital",
-    "type": "Hospital",
-    "town": "Asafo",
-    "ownership": "CHAG",
-    "population_per_hospital": 18599.76953125,
-    "catchment_area_hospital": 154.3256,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 364,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.0784 6.34166)",
-    "name": "Ntronang St. Michael's Clinic",
-    "type": "Clinic",
-    "town": "Ntronang",
-    "ownership": "CHAG",
-    "population_per_hospital": 10113.9189453125,
-    "catchment_area_hospital": 59.1476,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 365,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.70416 6.33553)",
-    "name": "Asunafo Adom Wo Wim Clinic",
-    "type": "Clinic",
-    "town": "Asunafo",
-    "ownership": "Private",
-    "population_per_hospital": 11762.578125,
-    "catchment_area_hospital": 106.0607,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 366,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.34982 6.22393)",
-    "name": "Aboabo Health Centre",
-    "type": "Health Centre",
-    "town": "Aboabo No 2",
-    "ownership": "Government",
-    "population_per_hospital": 7770.70068359375,
-    "catchment_area_hospital": 101.9364,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 367,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.91382 6.22437)",
-    "name": "Otumi RCH",
-    "type": "RCH",
-    "town": "Otumi",
-    "ownership": "Government",
-    "population_per_hospital": 9437.8076171875,
-    "catchment_area_hospital": 82.6248,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 368,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.26865 6.15581)",
-    "name": "Humjibre Clinic",
-    "type": "Clinic",
-    "town": "Humjibre",
-    "ownership": "Government",
-    "population_per_hospital": 6958.8193359375,
-    "catchment_area_hospital": 115.8812,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 369,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.05762 6.14982)",
-    "name": "Akokooso RCH",
-    "type": "RCH",
-    "town": "Akokooso",
-    "ownership": "Government",
-    "population_per_hospital": 9733.12890625,
-    "catchment_area_hospital": 70.0985,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 370,
-  "fields": {
-    "geom": "SRID=4326;POINT (1.07472 6.09247)",
-    "name": "Berith Clinic",
-    "type": "Clinic",
-    "town": "Nogokpo",
-    "ownership": "Private",
-    "population_per_hospital": 8518.998046875,
-    "catchment_area_hospital": 26.9491,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 371,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.21437 6.09323)",
-    "name": "Juabo Community Clinic",
-    "type": "Clinic",
-    "town": "Wassa Juabo",
-    "ownership": "Government",
-    "population_per_hospital": 5871.6630859375,
-    "catchment_area_hospital": 95.2747,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 372,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.97503 6.08257)",
-    "name": "Wheta Health Centre",
-    "type": "Health Centre",
-    "town": "Wheta",
-    "ownership": "Government",
-    "population_per_hospital": 8821.60546875,
-    "catchment_area_hospital": 48.5748,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 373,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.28546 6.0336)",
-    "name": "Adjakaa Manso Health Centre",
-    "type": "Health Centre",
-    "town": "Adjakaa Manso",
-    "ownership": "Government",
-    "population_per_hospital": 11718.8857421875,
-    "catchment_area_hospital": 206.6233,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 374,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.21067 5.94825)",
-    "name": "Adawso Health Centre",
-    "type": "Health Centre",
-    "town": "Adawso",
-    "ownership": "Government",
-    "population_per_hospital": 5370.4921875,
-    "catchment_area_hospital": 26.9806,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 375,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.21217 5.9492)",
-    "name": "Semehyia Maternity Home",
-    "type": "Maternity Home",
-    "town": "Adwaso",
-    "ownership": "Private",
-    "population_per_hospital": 5370.4921875,
-    "catchment_area_hospital": 26.9806,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 376,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.32037 5.9501)",
-    "name": "Agona Amenfi Community Clinic",
-    "type": "Clinic",
-    "town": "Agona Amenfi",
-    "ownership": "Government",
-    "population_per_hospital": 13255.43359375,
-    "catchment_area_hospital": 330.0776,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 377,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.83103 5.940039)",
-    "name": "Ntoaboase Maternity Home",
-    "type": "Maternity Home",
-    "town": "Atiankama Nkwanta",
-    "ownership": "Private",
-    "population_per_hospital": 4181.82763671875,
-    "catchment_area_hospital": 42.5563,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 378,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.83211 5.94025)",
-    "name": "Atiankama Nkwanta RCH",
-    "type": "RCH",
-    "town": "Atiankama",
-    "ownership": "Government",
-    "population_per_hospital": 4181.82763671875,
-    "catchment_area_hospital": 42.5563,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 379,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.807683 5.9505)",
-    "name": "Hatorgodo E. P. Clinic",
-    "type": "Health Centre",
-    "town": "Hatorgodo",
-    "ownership": "CHAG",
-    "population_per_hospital": 7748.62744140625,
-    "catchment_area_hospital": 80.2451,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 380,
-  "fields": {
-    "geom": "SRID=4326;POINT (1.0292 5.987383)",
-    "name": "Blekusu Health Centre",
-    "type": "Health Centre",
-    "town": "Blekusu",
-    "ownership": "Government",
-    "population_per_hospital": 6108.3857421875,
-    "catchment_area_hospital": 35.90215,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 381,
-  "fields": {
-    "geom": "SRID=4326;POINT (1.04302 6.00546)",
-    "name": "Agavedzi Health Centre",
-    "type": "Health Centre",
-    "town": "Agavedzi",
-    "ownership": "Government",
-    "population_per_hospital": 6108.3857421875,
-    "catchment_area_hospital": 35.90215,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 382,
-  "fields": {
-    "geom": "SRID=4326;POINT (1.07422 6.04202)",
-    "name": "Adina Health Centre",
-    "type": "Health Centre",
-    "town": "Adina",
-    "ownership": "Government",
-    "population_per_hospital": 2498.8984375,
-    "catchment_area_hospital": 22.8257,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 383,
-  "fields": {
-    "geom": "SRID=4326;POINT (1.07023 6.09083)",
-    "name": "Nogokpo RCH",
-    "type": "RCH",
-    "town": "Nogokpo",
-    "ownership": "Government",
-    "population_per_hospital": 8518.998046875,
-    "catchment_area_hospital": 26.9491,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 384,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.9055 5.8776)",
-    "name": "Anamase RCH",
-    "type": "RCH",
-    "town": "Anamase",
-    "ownership": "Government",
-    "population_per_hospital": 10046.3372395833,
-    "catchment_area_hospital": 48.5241333333333,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 385,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.052133 5.994167)",
-    "name": "Anyinase Health Centre",
-    "type": "Health Centre",
-    "town": "Anyinase",
-    "ownership": "Government",
-    "population_per_hospital": 12139.41796875,
-    "catchment_area_hospital": 52.9897,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 386,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.0152 5.98137)",
-    "name": "Oda Nkwanta CHPS",
-    "type": "CHPS",
-    "town": "Oda Nkwanta",
-    "ownership": "Government",
-    "population_per_hospital": 2387.31070963542,
-    "catchment_area_hospital": 18.0721,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 387,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.36983 5.79134)",
-    "name": "Anyamam Clinic",
-    "type": "Clinic",
-    "town": "Anyamam",
-    "ownership": "Government",
-    "population_per_hospital": 21317.41015625,
-    "catchment_area_hospital": 70.299,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 388,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.84361 5.69689)",
-    "name": "Oppon Valley Health Centre",
-    "type": "Health Centre",
-    "town": "Oppon Valley",
-    "ownership": "Government",
-    "population_per_hospital": 12135.681640625,
-    "catchment_area_hospital": 335.7942,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 389,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.83284 5.6306)",
-    "name": "Nkum Health Centre",
-    "type": "Health Centre",
-    "town": "Nkum",
-    "ownership": "Government",
-    "population_per_hospital": 8359.0400390625,
-    "catchment_area_hospital": 50.3531,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 390,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.7221 5.55545)",
-    "name": "Boinso Health Centre",
-    "type": "Health Centre",
-    "town": "Boinso",
-    "ownership": "Government",
-    "population_per_hospital": 16295.01953125,
-    "catchment_area_hospital": 336.4264,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 391,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.93238 5.48024)",
-    "name": "Ann's Maternity Home",
-    "type": "Maternity Home",
-    "town": "Ajumako Entumbil",
-    "ownership": "Private",
-    "population_per_hospital": 1213.01037597656,
-    "catchment_area_hospital": 38.2672,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 392,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.5573 5.35319)",
-    "name": "Atobiase Community Clinic",
-    "type": "Clinic",
-    "town": "Atobiase",
-    "ownership": "Government",
-    "population_per_hospital": 10111.3955078125,
-    "catchment_area_hospital": 137.5148,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 393,
-  "fields": {
-    "geom": "SRID=4326;POINT (-2.80707 5.05367)",
-    "name": "Takinta CHPS",
-    "type": "CHPS",
-    "town": "Takinta",
-    "ownership": "Government",
-    "population_per_hospital": 20516.869140625,
-    "catchment_area_hospital": 90.8044,
-    "nightlight": 2,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 394,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.7413999999999999 5.77699)",
-    "name": "Agbledome Health Centre",
-    "type": "Health Centre",
-    "town": "Agbledome",
-    "ownership": "Government",
-    "population_per_hospital": 2479.116796875,
-    "catchment_area_hospital": 19.7269,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 395,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.72263 5.78283)",
-    "name": "Crowns Maternity Home",
-    "type": "Maternity Home",
-    "town": "Keta",
-    "ownership": "Private",
-    "population_per_hospital": 2479.116796875,
-    "catchment_area_hospital": 19.7269,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 396,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.73077 5.77996)",
-    "name": "St. Franscis Clinic",
-    "type": "Clinic",
-    "town": "Anyanui",
-    "ownership": "Private",
-    "population_per_hospital": 2479.116796875,
-    "catchment_area_hospital": 19.7269,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 397,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.7295700000000001 5.78153)",
-    "name": "Anyanui Health Centre",
-    "type": "Health Centre",
-    "town": "Anyanui",
-    "ownership": "Government",
-    "population_per_hospital": 2479.116796875,
-    "catchment_area_hospital": 19.7269,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 398,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.319083 5.905683)",
-    "name": "Pakro Health Centre",
-    "type": "Health Centre",
-    "town": "Pakro",
-    "ownership": "Government",
-    "population_per_hospital": 10899.7216796875,
-    "catchment_area_hospital": 73.27,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 399,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.84368 5.35125)",
-    "name": "Ngyiresi CHPS",
-    "type": "CHPS",
-    "town": "Ngyiresi",
-    "ownership": "Government",
-    "population_per_hospital": 24586.0078125,
-    "catchment_area_hospital": 94.5593,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 400,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.81471 5.42001)",
-    "name": "Oguaa Health Centre",
-    "type": "Health Centre",
-    "town": "Ogua",
-    "ownership": "Government",
-    "population_per_hospital": 40807.28515625,
-    "catchment_area_hospital": 98.9061,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 401,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.72171 5.90198)",
-    "name": "Vision View Herbal Clinic",
-    "type": "Clinic",
-    "town": "Ekoso",
-    "ownership": "Private",
-    "population_per_hospital": 18119.763671875,
-    "catchment_area_hospital": 114.7401,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 402,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.97764 6.44627)",
-    "name": "Manso Abore Health Centre",
-    "type": "Health Centre",
-    "town": "Manso Abore",
-    "ownership": "Government",
-    "population_per_hospital": 730.228564453125,
-    "catchment_area_hospital": 9.61642,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 403,
-  "fields": {
-    "geom": "SRID=4326;POINT (0.19677 6.29884)",
-    "name": "Podoe Health Centre",
-    "type": "Health Centre",
-    "town": "Podoe",
-    "ownership": "Government",
-    "population_per_hospital": 5477.4365234375,
-    "catchment_area_hospital": 193.4514,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 404,
-  "fields": {
-    "geom": "SRID=4326;POINT (-0.73329 6.46902)",
-    "name": "Asubone RCH",
-    "type": "RCH",
-    "town": "Asubone",
-    "ownership": "Government",
-    "population_per_hospital": 10169.0185546875,
-    "catchment_area_hospital": 88.4153,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 405,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.34849 6.51291)",
-    "name": "SDA Clinic Konkoma",
-    "type": "Clinic",
-    "town": "Konkoma",
-    "ownership": "CHAG",
-    "population_per_hospital": 4078.49658203125,
-    "catchment_area_hospital": 25.7963,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 406,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.37465 6.92692)",
-    "name": "Sekyere Health Centre",
-    "type": "Health Centre",
-    "town": "Sekyere",
-    "ownership": "Government",
-    "population_per_hospital": 7282.201171875,
-    "catchment_area_hospital": 35.03285,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 407,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.37494 6.92646)",
-    "name": "Sekyere Methodist Clinic",
-    "type": "Clinic",
-    "town": "Sekyere",
-    "ownership": "CHAG",
-    "population_per_hospital": 7282.201171875,
-    "catchment_area_hospital": 35.03285,
-    "nightlight": 1,
-    "district": null
-  }
-},
-{
-  "model": "map.hospitalssimulated",
-  "pk": 408,
-  "fields": {
-    "geom": "SRID=4326;POINT (-1.01533 6.91527)",
-    "name": "Ananekrom Health Centre",
-    "type": "Health Centre",
-    "town": "Ananekrom",
-    "ownership": "Government",
-    "population_per_hospital": 7026.72021484375,
-    "catchment_area_hospital": 432.7343,
-    "nightlight": 0,
-    "district": null
-  }
-}
 ]
