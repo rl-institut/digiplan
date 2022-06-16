@@ -52,7 +52,6 @@ pytest-sugar = "^0.9.4"  # https://github.com/Frozenball/pytest-sugar
 # Code quality
 # ------------------------------------------------------------------------------
 flake8 = "^3.9.2"  # https://github.com/PyCQA/flake8
-black = "^19.10b0"  # https://github.com/ambv/black
 pylint-django = "^2.4.4"  # https://github.com/PyCQA/pylint-django
 pre-commit = "^2.13.0"  # https://github.com/pre-commit/pre-commit
 
@@ -72,6 +71,7 @@ darglint = "^1.8.1"
 flake8-eradicate = "^1.2.1"
 flake8-isort = "^4.1.1"
 flake8-pytest-style = "^1.6.0"
+black = "^22.3.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
