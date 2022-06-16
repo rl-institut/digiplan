@@ -86,9 +86,12 @@ class MapGLView(TemplateView):
 
 
 def get_clusters(request):
-    with open(CLUSTER_GEOJSON_FILE, "r") as geojson_file:
-        clusters = json.load(geojson_file)
-        return JsonResponse(clusters)
+    try:
+        with open(CLUSTER_GEOJSON_FILE, "r") as geojson_file:
+            clusters = json.load(geojson_file)
+    except FileNotFoundError:
+        clusters = {}
+    return JsonResponse(clusters)
 
 
 def get_state(request):
