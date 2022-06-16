@@ -21,7 +21,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - category order and labels
 - regions are filtered in panel (not in search)
 
-### Fixed 
+### Fixed
 - district filter disabled
 - undeclared variable error in JS (using strict mode)
 - map grid only shown in debug mode
