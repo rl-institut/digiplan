@@ -24,7 +24,7 @@ from .config import (
     STORE_HOT_INIT,
     ZOOM_LEVELS,
 )
-from .forms import StaticLayerForm  # , RegionFilterForm
+from .forms import StaticLayerForm, WindAreaForm
 from .layers import (
     ALL_LAYERS,
     ALL_SOURCES,
@@ -52,6 +52,7 @@ class MapGLView(TemplateView):
         "area_switches": {
             category: [StaticLayerForm(layer) for layer in layers] for category, layers in LAYERS_CATEGORIES.items()
         },
+        "energysystem": WindAreaForm(),
         "use_distilled_mvts": USE_DISTILLED_MVTS,
         "store_hot_init": STORE_HOT_INIT,
         "zoom_levels": ZOOM_LEVELS,
@@ -60,13 +61,12 @@ class MapGLView(TemplateView):
     def get_context_data(self, **kwargs):
         # Add unique session ID
         session_id = str(uuid.uuid4())
-        context = super(MapGLView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["session_id"] = session_id
 
         # Add layer styles
         with open(
-            settings.APPS_DIR.path("static").path("styles").path("layer_styles.json"),
-            "r",
+            settings.APPS_DIR.path("static").path("styles").path("layer_styles.json"), "r", encoding="utf-8"
         ) as regions:
             context["layer_styles"] = json.loads(regions.read())
 
@@ -87,7 +87,7 @@ class MapGLView(TemplateView):
 
 def get_clusters(request):
     try:
-        with open(CLUSTER_GEOJSON_FILE, "r") as geojson_file:
+        with open(CLUSTER_GEOJSON_FILE, "r", encoding="utf-8") as geojson_file:
             clusters = json.load(geojson_file)
     except FileNotFoundError:
         clusters = {}

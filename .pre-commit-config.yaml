@@ -30,7 +30,7 @@ repos:
         types: [python]
       - id: pylint
         name: pylint
-        entry: pylint
+        entry: env DATABASE_URL=null env PROJ_LIB=null USE_DOCKER=null pylint
         language: system
         types: [python]
         args:

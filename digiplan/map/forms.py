@@ -65,3 +65,18 @@ class StaticLayerForm(Form):
 
         self.helper = FormHelper(self)
         self.helper.template = "forms/layer.html"
+
+
+class WindAreaForm(Form):
+    pv_power = IntegerField(
+        label="Photvoltaikanlagen [MW]",
+        widget=TextInput(
+            attrs={
+                "class": "js-range-slider",
+                "data-min": 0,
+                "data-max": 100,
+                "data-from": 50,
+                "data-grid": True,
+            }
+        ),
+    )
