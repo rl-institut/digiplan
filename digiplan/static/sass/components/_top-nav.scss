@@ -67,10 +67,17 @@
     @extend .justify-content-around;
     @extend .align-items-center;
     @extend .border-0;
+    max-width: 42rem;
 
     &:hover {
       @extend .bg-white;
     }
+  }
+
+  .nav-item--separator {
+    flex: 1;
+    height: 1px;
+    background-color: $gray-300;
   }
 
   &__item {
