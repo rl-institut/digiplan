@@ -66,6 +66,11 @@
     @extend .flex-row;
     @extend .justify-content-around;
     @extend .align-items-center;
+    @extend .border-0;
+
+    &:hover {
+      @extend .bg-white;
+    }
   }
 
   &__item {
@@ -75,9 +80,9 @@
     @extend .border-0;
     @extend .bg-white;
     @extend .text-center;
+    @extend .fw-bold;
 
     &.active {
-      @extend .fw-bold;
       @extend .text-info;
     }
 
