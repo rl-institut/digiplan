@@ -3,11 +3,17 @@
 
 <section class="panel">
   <section class="panel__content">
-
-    {% include 'components/panel-content-1.html' %}
-    <!-- {% include 'components/panel-content-2.html' %} -->
-    <!-- {% include 'components/panel-content-3.html' %} -->
-
+    <div class="tab-content">
+      <div class="tab-pane active" id="panel_1_today" role="tabpanel" aria-labelledby="panel_1_today_tab">
+        {% include 'components/panel_1_today.html' %}
+      </div>
+      <div class="tab-pane" id="panel_2_settings" role="tabpanel" aria-labelledby="panel_2_settings_tab">
+        {% include 'components/panel_2_settings.html' %}
+      </div>
+      <div class="tab-pane" id="panel_3_results" role="tabpanel" aria-labelledby="panel_3_results_tab">
+        {% include 'components/panel_3_results.html' %}
+      </div>
+    </div>
   </section>
   <footer class="footer">
     <div class="footer__btns">

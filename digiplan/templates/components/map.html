@@ -2,27 +2,33 @@
 
 <section class="map-wrap">
   <div class="steps">
-    <div class="steps__list">
-      <a href="#" class="steps__item">
-        <span class="steps__number">1</span>
-        <span class="steps__text">Region heute</span>
-      </a>
-      <a href="#" class="steps__item active" aria-current="true">
-        <span class="steps__number">2</span>
-        <span class="steps__text">Einstellungen</span>
-      </a>
-      <a href="#" class="steps__item disabled" tabindex="-1" aria-disabled="true">
-        <span class="steps__number">3</span>
-        <span class="steps__text">Ergebnisse</span>
-      </a>
-    </div>
+    <ul class="steps__list nav nav-tabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="steps__item nav-link active" id="panel_1_today_tab" data-bs-toggle="tab" data-bs-target="#panel_1_today" type="button" role="tab" aria-controls="panel_1_today" aria-selected="true">
+          <span class="steps__number">1</span>
+          <span class="steps__text">Region heute</span>
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="steps__item nav-link" id="panel_2_settings_tab" data-bs-toggle="tab" data-bs-target="#panel_2_settings" type="button" role="tab" aria-controls="panel_2_settings" aria-selected="false">
+          <span class="steps__number">2</span>
+          <span class="steps__text">Einstellungen</span>
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="steps__item nav-link" id="panel_3_results_tab" data-bs-toggle="tab" data-bs-target="#panel_3_results" type="button" role="tab" aria-controls="panel_3_results" aria-selected="false">
+          <span class="steps__number">3</span>
+          <span class="steps__text">Ergebnisse</span>
+        </button>
+      </li>
+    </ul>
   </div>
 
   <!-- Toggle map/results views -->
-  {% include 'components/toggle-view.html' %}
+  {% include 'components/toggle_view.html' %}
 
   <!-- Show only map view -->
-  <!-- {% include 'components/map-view.html' %} -->
+  <!-- {% include 'components/map_view.html' %} -->
 
   <div id='legend' hidden></div>
   <!--
