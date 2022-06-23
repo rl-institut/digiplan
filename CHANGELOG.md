@@ -15,6 +15,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - grid layer
 
 ### Changed
+- exchanged mapbox with maplibre (open source)
 - prevent zoom, if marker is clicked
 - district and region filters are now global filters (not per layer)
 - layer panel to accordion
