@@ -1,12 +1,10 @@
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib import admin
 from django.urls import include, path
 from django.views import defaults as default_views
 
 urlpatterns = [
     path("", include("digiplan.map.urls", namespace="map")),
-    path(settings.ADMIN_URL, admin.site.urls),
     path("select2/", include("django_select2.urls")),
     path("raster/", include("raster.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
