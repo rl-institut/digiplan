@@ -1,4 +1,12 @@
-REGION_MVT_LAYERS = {}
+from digiplan.map import models
+from digiplan.map.mvt import MVTLayer
+
+REGION_MVT_LAYERS = {
+    "municipality": [
+        MVTLayer("municipality", models.Municipality.vector_tiles),
+        MVTLayer("municipalitylabel", models.Municipality.label_tiles),
+    ],
+}
 
 STATIC_MVT_LAYERS = {
     "static": [],

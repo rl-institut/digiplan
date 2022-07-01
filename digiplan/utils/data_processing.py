@@ -8,28 +8,12 @@ from raster.models import RasterLayer as RasterModel
 from config.settings.base import DATA_DIR
 from digiplan.map.config import CLUSTER_GEOJSON_FILE, LAYER_STYLES, ZOOM_LEVELS
 from digiplan.map.layers import LAYERS_DEFINITION, VectorLayerData
-from digiplan.map.models import (
-    BuiltUpAreas,
-    Country,
-    District,
-    Grid,
-    Hamlets,
-    Hospitals,
-    HospitalsSimulated,
-    Nightlight,
-    Region,
-    Settlements,
-    State,
-)
+from digiplan.map.models import Municipality, Region
 from digiplan.utils.ogr_layer_mapping import RelatedModelLayerMapping
 
-REGIONS = [
-    Country,
-    State,
-    District,
-]
+REGIONS = [Municipality]
 
-MODELS = [Hospitals, HospitalsSimulated, BuiltUpAreas, Settlements, Hamlets, Nightlight, Grid]
+MODELS = []
 
 
 def load_regions(regions=None, verbose=True):
@@ -77,7 +61,8 @@ def load_data(models=None, verbose=True):
         instance.save(strict=True, verbose=verbose)
 
 
-def load_raster(layers=LAYERS_DEFINITION):
+def load_raster(layers=None):
+    layers = layers or LAYERS_DEFINITION
     for layer in layers:
         if not issubclass(layer.model, RasterModel):
             continue
@@ -114,7 +99,7 @@ def build_cluster_geojson(cluster_layers: list[VectorLayerData] = None):
             feature = Feature(geometry=point, properties=properties)
             features.append(feature)
     fc = FeatureCollection(features)
-    with open(CLUSTER_GEOJSON_FILE, "w") as geojson_file:
+    with open(CLUSTER_GEOJSON_FILE, "w", encoding="utf-8") as geojson_file:
         json.dump(fc, geojson_file)
 
 

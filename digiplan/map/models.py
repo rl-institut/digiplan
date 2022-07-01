@@ -4,7 +4,7 @@ from enum import Enum
 from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
 
-from .managers import DistrictMVTManager, LabelMVTManager, RegionMVTManager
+from .managers import LabelMVTManager, RegionMVTManager
 
 
 class LayerFilterType(Enum):
@@ -33,11 +33,9 @@ class Region(models.Model):
     layer_type = models.CharField(max_length=12, choices=LayerType.choices, null=False)
 
 
-class Country(models.Model):
+class Municipality(models.Model):
     geom = models.MultiPolygonField(srid=4326)
     name = models.CharField(max_length=50, unique=True)
-    area = models.FloatField()
-    population = models.BigIntegerField()
 
     region = models.OneToOneField("Region", on_delete=models.DO_NOTHING, null=True)
 
@@ -45,65 +43,11 @@ class Country(models.Model):
     vector_tiles = RegionMVTManager(columns=["id", "name", "bbox"])
     label_tiles = LabelMVTManager(geo_col="geom_label", columns=["id", "name"])
 
-    data_file = "Gha_AdminBoundaries"
-    layer = "Gha_NationalBoundary_00"
+    data_file = "municipality"
+    layer = "municipality"
     mapping = {
         "geom": "MULTIPOLYGON",
-        "name": "Country",
-        "area": "AreaKm2",
-        "population": "Pop2020",
-    }
-
-    def __str__(self):
-        return self.name
-
-
-class State(models.Model):
-    geom = models.MultiPolygonField(srid=4326)
-    name = models.CharField(max_length=50, unique=True)
-    area = models.FloatField()
-    population = models.BigIntegerField()
-
-    region = models.OneToOneField("Region", on_delete=models.DO_NOTHING, null=True)
-
-    objects = models.Manager()
-    vector_tiles = RegionMVTManager(columns=["id", "name", "bbox"])
-    label_tiles = LabelMVTManager(geo_col="geom_label", columns=["id", "name"])
-
-    data_file = "Gha_AdminBoundaries"
-    layer = "Gha_Regions_01"
-    mapping = {
-        "geom": "MULTIPOLYGON",
-        "name": "Region",
-        "area": "Area_km2",
-        "population": "Pop2020",
-    }
-
-    def __str__(self):
-        return self.name
-
-
-class District(models.Model):
-    geom = models.MultiPolygonField(srid=4326)
-    name = models.CharField(max_length=50, unique=True)
-    area = models.FloatField()
-    population = models.BigIntegerField()
-
-    region = models.OneToOneField("Region", on_delete=models.DO_NOTHING, null=True)
-    state = models.ForeignKey("State", on_delete=models.CASCADE, related_name="districts")
-
-    objects = models.Manager()
-    vector_tiles = DistrictMVTManager(columns=["id", "name", "bbox", "state_name"])
-    label_tiles = LabelMVTManager(geo_col="geom_label", columns=["id", "name"])
-
-    data_file = "Gha_AdminBoundaries"
-    layer = "Gha_Districts_02"
-    mapping = {
-        "geom": "MULTIPOLYGON",
-        "name": "District",
-        "area": "Area_km2",
-        "population": "Pop2020",
-        "state": {"name": "Region"},  # ForeignKey see https://stackoverflow.com/a/46689928/5804947
+        "name": "name",
     }
 
     def __str__(self):

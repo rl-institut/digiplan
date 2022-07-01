@@ -21,17 +21,9 @@ MAX_DISTILLED_ZOOM = 10
 
 Zoom = namedtuple("MinMax", ["min", "max"])
 ZOOM_LEVELS = {
-    "country": Zoom(MIN_ZOOM, 7),
-    "state": Zoom(7, 9),
-    "district": Zoom(9, 11),
-    "municipality": Zoom(11, MAX_ZOOM),
+    "municipality": Zoom(8, MAX_ZOOM),
 }
-REGIONS = (
-    "country",
-    "state",
-    "district",
-    # "municipality",
-)
+REGIONS = ("municipality",)
 REGION_ZOOMS = RangeKeyDict({zoom: layer for layer, zoom in ZOOM_LEVELS.items() if layer in REGIONS})
 
 
@@ -69,7 +61,7 @@ def init_sources():
     for metafile in metadata_path.iterdir():
         if metafile.suffix != ".json":
             continue
-        with open(metafile, "r") as metadata_raw:
+        with open(metafile, "r", encoding="utf-8") as metadata_raw:
             metadata = json.loads(metadata_raw.read())
             sources[metadata["id"]] = metadata
     return sources

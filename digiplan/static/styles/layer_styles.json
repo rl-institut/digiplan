@@ -46,9 +46,6 @@
       ],
       "text-radial-offset": 2,
       "text-field": "{name}",
-      "text-font": [
-        "Flexo Medium"
-      ],
       "text-letter-spacing": 0.04
     },
     "paint": {
