@@ -1,5 +1,5 @@
-from digiplan.map import models
-from digiplan.map.mvt import MVTLayer
+from . import models
+from .mvt import MVTLayer
 
 REGION_MVT_LAYERS = {
     "municipality": [
@@ -10,6 +10,7 @@ REGION_MVT_LAYERS = {
 
 STATIC_MVT_LAYERS = {
     "static": [],
+    "results": [MVTLayer("results", models.Municipality.vector_tiles)],
 }
 
 DYNAMIC_MVT_LAYERS = {}
