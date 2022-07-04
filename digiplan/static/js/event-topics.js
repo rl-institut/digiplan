@@ -1,4 +1,3 @@
-'use strict';
 
 const eventTopics = {
   // Init
@@ -11,4 +10,7 @@ const eventTopics = {
 
   STATE_FILTER_CHANGE: "STATE_FILTER_CHANGE",
   DISTRICT_FILTER_CHANGE: "DISTRICT_FILTER_CHANGE",
-}
+
+  RESULTS_TAB_CLICKED: "RESULTS_TAB_CLICKED",
+  RESULT_VIEW_CHANGED: "RESULT_VIEW_CHANGED",
+};

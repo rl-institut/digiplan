@@ -12,12 +12,11 @@ app_name = "map"
 urlpatterns = [
     path("", views.MapGLView.as_view(), name="map"),
     path("clusters", views.get_clusters, name="clusters"),
-    path("state", views.get_state, name="state"),
-    path("district", views.get_district, name="district"),
+    path("results", views.get_results, name="results"),
 ]
 
 urlpatterns += [
-    path(name + "_mvt/<int:z>/<int:x>/<int:y>/", mvt_view_factory(name, layers)) for name, layers in MVT_LAYERS.items()
+    path(f"{name}_mvt/<int:z>/<int:x>/<int:y>/", mvt_view_factory(name, layers)) for name, layers in MVT_LAYERS.items()
 ]
 
 

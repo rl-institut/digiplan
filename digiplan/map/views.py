@@ -1,8 +1,8 @@
 import json
+import random
 import uuid
 
 from django.conf import settings
-from django.contrib.gis.db.models import functions
 from django.http import JsonResponse
 from django.views.generic import TemplateView
 
@@ -64,11 +64,17 @@ class MapGLView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["session_id"] = session_id
 
-        # Add layer styles
+        # Add layer styles (used in map.html)
         with open(
             settings.APPS_DIR.path("static").path("styles").path("layer_styles.json"), "r", encoding="utf-8"
-        ) as regions:
-            context["layer_styles"] = json.loads(regions.read())
+        ) as layer_styles:
+            context["layer_styles"] = json.loads(layer_styles.read())
+
+        # Add result styles (loaded in map.html, used in results.js)
+        with open(
+            settings.APPS_DIR.path("static").path("styles").path("result_styles.json"), "r", encoding="utf-8"
+        ) as result_styles:
+            context["result_styles"] = json.loads(result_styles.read())
 
         # Categorize sources
         categorized_sources = {
@@ -80,6 +86,7 @@ class MapGLView(TemplateView):
         # Add popup-layer IDs to cold store
         STORE_COLD_INIT["popup_layers"] = [popup.layer_id for popup in POPUPS]
         STORE_COLD_INIT["region_layers"] = [layer.id for layer in REGION_LAYERS if layer.id.startswith("fill")]
+        STORE_COLD_INIT["result_views"] = []  # Placeholder for already downloaded results (used in results.js)
         context["store_cold_init"] = json.dumps(STORE_COLD_INIT)
 
         return context
@@ -94,14 +101,42 @@ def get_clusters(request):
     return JsonResponse(clusters)
 
 
-def get_state(request):
-    state_name = request.GET["state"]
-    state = models.State.objects.filter(name=state_name).annotate(center=functions.Centroid("geom"))
-    districts = models.District.objects.filter(state__name=state_name).order_by("name").values_list("name", flat=True)
-    return JsonResponse({"center": (state.first().center.x, state.first().center.y), "districts": list(districts)})
+def get_results(request):
+    """
+    Reads scenario results from database, aggregates data according to results view and sends back data
+    related to municipality.
 
+    Parameters
+    ----------
+    request : HttpRequest
+        Request must contain GET variables "scenario_id" and "result_view"
 
-def get_district(request):
-    district_name = request.GET["district"]
-    district = models.District.objects.filter(name=district_name).annotate(center=functions.Centroid("geom"))
-    return JsonResponse({"center": (district.first().center.x, district.first().center.y)})
+    Returns
+    -------
+    dict
+        Containing key-value pairs of municipality_ids and values
+
+    Raises
+    ------
+    ValueError
+        If result view is unknown
+    """
+    # pylint: disable=W0511,W0612
+    scenario_id = request.GET["scenario_id"]  # noqa: F841
+    result_view = request.GET["result_view"]
+    # FIXME: Replace dummy data with actual data
+    if result_view == "re_power_percentage":
+        return JsonResponse(
+            {
+                municipality.id: random.randint(0, 100) / 100  # noqa: S311
+                for municipality in models.Municipality.objects.all()
+            }
+        )
+    if result_view == "re_power":
+        return JsonResponse(
+            {
+                municipality.id: random.randint(0, 50) / 100  # noqa: S311
+                for municipality in models.Municipality.objects.all()
+            }
+        )
+    raise ValueError(f"Unknown result view '{result_view}'")

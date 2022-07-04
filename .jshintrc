@@ -1,0 +1,10 @@
+{
+  "esversion": 7,
+  "globals": {
+    "$": false,
+    "PubSub": false,
+    "document": false,
+    "mapboxgl": false
+  },
+  "strict": "implied"
+}

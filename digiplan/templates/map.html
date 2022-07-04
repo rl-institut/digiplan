@@ -71,7 +71,7 @@
   {{ block.super }}
 
   {{ layer_styles|json_script:"styles" }}
-  {{ layer_colors|json_script:"layer-colors" }}
+  {{ result_styles|json_script:"result_styles" }}
 
   {% compress js inline %}
     <script>
@@ -340,5 +340,6 @@
     <script src="{% static 'js/layer.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/state.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/filter.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/results.js' %}"></script>
   {% endcompress %}
 {% endblock js_body %}

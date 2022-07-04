@@ -1,4 +1,4 @@
-'use strict';
+/* global eventTopics, map, logMessage, store, get_static_state, requestAnimationFrame */
 
 // Variables
 
@@ -65,7 +65,7 @@ function updateLegend(msg) {
     if ($(detailLayers[i]).find(layerInputClass)[0].checked) {
       legend_entries += 1;
       const layer_id = get_layer_id(detailLayers[i]);
-      const name = $(detailLayers[i]).find(".name__text").html()
+      const name = $(detailLayers[i]).find(".name__text").html();
       const color = map.getPaintProperty(layer_id, "fill-color");
 
       const item = document.createElement('div');
@@ -104,10 +104,10 @@ function filterChanged(msg, {layerForm}) {
   const layer_id = get_layer_id(layerForm);
   const filters = get_layer_filters(layerForm);
   const clustered = $(layerForm).hasClass("cluster-layer");
-  const layers = map.getStyle().layers.filter(layer => layer["id"].startsWith(layer_id));
+  const layers = map.getStyle().layers.filter(layer => layer.id.startsWith(layer_id));
   $.each(layers, function (i, layer) {
-    set_filters(layer["id"], filters, clustered);
-  })
+    set_filters(layer.id, filters, clustered);
+  });
   return logMessage(msg);
 }
 
@@ -120,17 +120,17 @@ function get_layer_id(layer_form) {
 
 function check_layer(layer_form) {
   if ($(layer_form).find(layerInputClass)[0].checked) {
-    const layer_id = get_layer_id(layer_form)
+    const layer_id = get_layer_id(layer_form);
     const activated_layers = turn_on_layer(layer_form);
-    const layers = map.getStyle().layers.filter(layer => layer["id"].startsWith(layer_id));
-    const deactivatedLayers = layers.filter(layer => !activated_layers.includes(layer["id"]));
+    const layers = map.getStyle().layers.filter(layer => layer.id.startsWith(layer_id));
+    const deactivatedLayers = layers.filter(layer => !activated_layers.includes(layer.id));
     const waiting = () => {
       if (!map.isStyleLoaded()) {
         requestAnimationFrame(waiting);
       } else {
         $.each(deactivatedLayers, function (i, layer) {
-          map.setLayoutProperty(layer["id"], "visibility", "none");
-        })
+          map.setLayoutProperty(layer.id, "visibility", "none");
+        });
       }
     };
     waiting();
@@ -141,22 +141,22 @@ function check_layer(layer_form) {
 
 function turn_off_layer(layer_form) {
   const layer_id = get_layer_id(layer_form);
-  const layers = map.getStyle().layers.filter(layer => layer["id"].startsWith(layer_id));
+  const layers = map.getStyle().layers.filter(layer => layer.id.startsWith(layer_id));
   $.each(layers, function (i, layer) {
-    map.setLayoutProperty(layer["id"], "visibility", "none");
-  })
+    map.setLayoutProperty(layer.id, "visibility", "none");
+  });
 }
 
 function turn_on_layer(layer_form) {
   const layer_id = get_layer_id(layer_form);
   const filters = get_layer_filters(layer_form);
   const clustered = $(layer_form).hasClass("cluster-layer");
-  const layers = map.getStyle().layers.filter(layer => layer["id"].startsWith(layer_id));
+  const layers = map.getStyle().layers.filter(layer => layer.id.startsWith(layer_id));
   $.each(layers, function (i, layer) {
-    map.setLayoutProperty(layer["id"], "visibility", "visible");
-    set_filters(layer["id"], filters, clustered);
-  })
-  return layers.map(layer => layer["id"]);
+    map.setLayoutProperty(layer.id, "visibility", "visible");
+    set_filters(layer.id, filters, clustered);
+  });
+  return layers.map(layer => layer.id);
 }
 
 function get_layer_filters(layer_form) {
@@ -173,7 +173,7 @@ function get_layer_filters(layer_form) {
             name: "state_name",
             values: [state]
           }
-        )
+        );
       }
     const district = $("#id_district").val();
     if (district) {
@@ -183,7 +183,7 @@ function get_layer_filters(layer_form) {
             name: "district_name",
             values: [district]
           }
-        )
+        );
       }
    }
 
@@ -198,7 +198,7 @@ function get_layer_filters(layer_form) {
         from: result.from,
         to: result.to
       }
-    )
+    );
   });
 
   let selects = $(layer_form).find(".django-select2");
@@ -212,7 +212,7 @@ function get_layer_filters(layer_form) {
           name: filter_name,
           values: result
         }
-      )
+      );
     }
   });
   return filters;
