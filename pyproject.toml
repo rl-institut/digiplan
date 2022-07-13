@@ -37,6 +37,7 @@ coreapi = "^2.3.3"  # https://github.com/core-api/python-client
 djangorestframework-mvt = "^0.2.5"
 django-select2 = "^7.7.1"
 geojson = "^2.5.0"
+crispy-bootstrap5 = "^0.6"
 
 [tool.poetry.dev-dependencies]
 Werkzeug = "^2.0.1" # https://github.com/pallets/werkzeug
@@ -71,7 +72,7 @@ darglint = "^1.8.1"
 flake8-eradicate = "^1.2.1"
 flake8-isort = "^4.1.1"
 flake8-pytest-style = "^1.6.0"
-black = "^22.3.0"
+black = "^22.6.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

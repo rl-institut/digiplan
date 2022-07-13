@@ -11,9 +11,7 @@ from django.db.models import BooleanField, IntegerField, ObjectDoesNotExist
 from raster.models import RasterLayer as RasterModel
 
 from config.settings.base import APPS_DIR, USE_DISTILLED_MVTS
-
-from . import models
-from .config import (
+from digiplan.map.config.config import (
     LAYER_STYLES,
     MAX_DISTILLED_ZOOM,
     MAX_ZOOM,
@@ -21,6 +19,8 @@ from .config import (
     REGIONS,
     ZOOM_LEVELS,
 )
+
+from . import models
 
 POPUP_PRIO = ["hospital", "hospital_simulated"]  # from high to low prio
 

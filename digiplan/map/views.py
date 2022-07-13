@@ -14,9 +14,7 @@ from config.settings.base import (
     PASSWORD_PROTECTION,
     USE_DISTILLED_MVTS,
 )
-
-from . import models
-from .config import (
+from digiplan.map.config.config import (
     CLUSTER_GEOJSON_FILE,
     MAP_IMAGES,
     SOURCES,
@@ -24,6 +22,8 @@ from .config import (
     STORE_HOT_INIT,
     ZOOM_LEVELS,
 )
+
+from . import models
 from .forms import StaticLayerForm, WindAreaForm
 from .layers import (
     ALL_LAYERS,

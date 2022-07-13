@@ -1,0 +1,10 @@
+{
+  "pv_power": {
+    "label": "Photvoltaikanlagen [MW]",
+    "max": 400,
+    "min": 100,
+    "start": 200,
+    "tooltip": "Wieviele Leistung soll durch Photovoltaikanlagen bereit gestellt werden?",
+    "type": "slider"
+  }
+}

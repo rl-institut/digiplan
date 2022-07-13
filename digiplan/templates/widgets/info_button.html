@@ -1,10 +1,2 @@
 {% load static %}
-<span class="name__info has-tip right"
-      aria-haspopup="true"
-      data-allow-html="true"
-      data-disable-hover="false"
-      data-tooltip
-      style="background: url('{% static "images/icons/info.svg" %}') no-repeat center center / contain;"
-      {% if data_open %}data-open="{{data_open}}"{% endif %}
-      title="{{description}}"
-></span>
+<img src="{% static 'images/icons/info.svg' %}" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="{{description}}">

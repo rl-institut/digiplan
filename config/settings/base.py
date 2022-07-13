@@ -71,6 +71,7 @@ THIRD_PARTY_APPS = [
     "foundation_formtags",  # Form layouts
     "rest_framework",
     "crispy_forms",
+    "crispy_bootstrap5",
     "django_distill",
     "django_select2",
     "raster",
@@ -236,3 +237,6 @@ MAPBOX_TOKEN = env.str("MAPBOX_TOKEN", default=None)
 MAPBOX_STYLE_LOCATION = env.str("MAPBOX_STYLE_LOCATION", default=None)
 
 SELECT2_CACHE_BACKEND = "select2"
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"

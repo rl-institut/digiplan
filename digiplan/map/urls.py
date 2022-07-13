@@ -2,8 +2,9 @@ from django.conf import settings
 from django.urls import path
 from django_distill import distill_path
 
+from digiplan.map.config.config import get_tile_coordinates_for_region
+
 from . import views
-from .config import get_tile_coordinates_for_region
 from .mvt import mvt_view_factory
 from .mvt_layers import DISTILL_MVT_LAYERS, MVT_LAYERS
 

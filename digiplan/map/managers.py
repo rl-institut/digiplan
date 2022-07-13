@@ -6,25 +6,28 @@ from django.db import connection
 from rest_framework.serializers import ValidationError
 from rest_framework_gis.tilenames import tile_edges
 
-from digiplan.map.config import REGION_ZOOMS
+from digiplan.map.config.config import REGION_ZOOMS
 
 
+# pylint: disable=W0223
 class AsMVTGeom(models.functions.GeomOutputGeoFunc):
     function = "ST_AsMVTGeom"
     geom_param_pos = (0, 1)
 
 
+# pylint: disable=W0223
 class X(models.functions.Func):
     function = "ST_X"
 
 
+# pylint: disable=W0223
 class Y(models.functions.Func):
     function = "ST_Y"
 
 
 class MVTManager(models.Manager):
     def __init__(self, *args, geo_col="geom", columns=None, **kwargs):
-        super(MVTManager, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.geo_col = geo_col
         self.columns = columns
 
@@ -35,6 +38,7 @@ class MVTManager(models.Manager):
     def get_columns(self):
         return self.columns or self._get_non_geom_columns()
 
+    # pylint: disable=W0613,R0913
     def _filter_query(self, query, x, y, z, filters):
         return query.filter(**filters)
 
@@ -102,17 +106,13 @@ class MVTManager(models.Manager):
 
 class RegionMVTManager(MVTManager):
     def get_queryset(self):
-        return (
-            super(RegionMVTManager, self)
-            .get_queryset()
-            .annotate(bbox=models.functions.AsGeoJSON(models.functions.Envelope("geom")))
-        )
+        return super().get_queryset().annotate(bbox=models.functions.AsGeoJSON(models.functions.Envelope("geom")))
 
 
 class DistrictMVTManager(MVTManager):
     def get_queryset(self):
         return (
-            super(DistrictMVTManager, self)
+            super()
             .get_queryset()
             .annotate(bbox=models.functions.AsGeoJSON(models.functions.Envelope("geom")))
             .annotate(state_name=models.F("state__name"))
@@ -120,21 +120,22 @@ class DistrictMVTManager(MVTManager):
 
 
 class StaticMVTManager(MVTManager):
+    # pylint: disable=R0913
     def _filter_query(self, query, x, y, z, filters):
-        query = super(StaticMVTManager, self)._filter_query(query, x, y, z, filters)
+        query = super()._filter_query(query, x, y, z, filters)
         region = REGION_ZOOMS[z]
         return query.filter(region__layer_type=region)
 
 
 class LabelMVTManager(MVTManager):
     def get_queryset(self):
-        return super(LabelMVTManager, self).get_queryset().annotate(geom_label=models.functions.Centroid("geom"))
+        return super().get_queryset().annotate(geom_label=models.functions.Centroid("geom"))
 
 
 class ClusterMVTManager(MVTManager):
     def get_queryset(self):
         return (
-            super(ClusterMVTManager, self)
+            super()
             .get_queryset()
             .annotate(center=models.functions.Centroid("geom"))
             .annotate(state_name=models.F("district__state__name"))

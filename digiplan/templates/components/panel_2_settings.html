@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load static i18n crispy_forms_tags %}
 
 <div class="panel__settings">
   <div class="panel-item">
@@ -20,7 +20,7 @@
       </ul>
       <div class="c-tabs__content">
         <div class="c-tabs__pane fade show active" id="wind" role="tabpanel" aria-labelledby="wind-tab">
-          {{energysystem}}
+          {% crispy energysystem %}
           <div class="c-slider">
             <div class="c-slider__label">
               <span>Photovoltaik (Dachanlagen) [MW]</span>
