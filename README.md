@@ -24,7 +24,7 @@ All packages are justed dropped into this folder (no hierarchy).
 Prerequisite: _conda_ ([Anaconda](https://docs.anaconda.com/anaconda/install/)/[Miniconda](https://conda.io/en/latest/miniconda.html))
 Enter repo folder and set up a conda environment and activate it:
 ```
-conda env create -f environment.yaml
+conda env create -f environment.yml
 conda activate digiplan
 ```
 Install [poetry](https://python-poetry.org/) (python dependency manager used in this project) and dependencies for the project:
