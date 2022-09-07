@@ -30,7 +30,7 @@ conda activate digiplan
 Install [poetry](https://python-poetry.org/) (python dependency manager used in this project) and dependencies for the project:
 ```
 pip install poetry
-poetry install --dev
+poetry install
 ```
 The project uses [pre-commit](https://pre-commit.com/) in order to check for errors and linting bugs before commits.
 To activate pre-commit simply run:
