@@ -1,6 +1,7 @@
 """
 Base settings to build other settings files upon.
 """
+import os
 
 import environ
 from django.core.exceptions import ValidationError
@@ -42,7 +43,17 @@ LOCALE_PATHS = [ROOT_DIR.path("locale")]
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {"default": env.db("DATABASE_URL")}
+if os.environ.get("DATABASE_URL"):
+    DATABASES = {"default": env.db("DATABASE_URL")}
+else:
+    POSTGRES_USER = env.str("POSTGRES_USER")
+    POSTGRES_PASSWORD = env.str("POSTGRES_PASSWORD")
+    POSTGRES_HOST = env.str("POSTGRES_HOST")
+    POSTGRES_PORT = env.str("POSTGRES_PORT")
+    POSTGRES_DB = env.str("POSTGRES_DB")
+    DATABASE_URL = f"postgis://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+    os.environ["DATABASE_URL"] = DATABASE_URL
+    DATABASES = {"default": env.db("DATABASE_URL")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"

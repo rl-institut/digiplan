@@ -33,3 +33,6 @@ load_fixtures:
 
 distill:
 	python manage.py distill-local --force --exclude-staticfiles ./digiplan/static/mvts
+
+local_env_file:
+	python merge_local_dotenvs_in_dotenv.py

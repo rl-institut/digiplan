@@ -9,7 +9,12 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - results layer with customizable result views
 
 ### Changed
+- use modern (v2) node package lock format
+- make local development without Docker possible out of the box
 - removed users and admin apps
+
+### Fixed
+- remove unneeded option flag in poetry install section in readme
 
 ## [0.0.0] - 2022-06-30
 ### Added
