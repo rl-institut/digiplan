@@ -9,6 +9,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - results layer with customizable result views
 
 ### Changed
+- install patched custom django-raster version via pyproject.toml
 - use modern (v2) node package lock format
 - make local development without Docker possible out of the box
 - removed users and admin apps
