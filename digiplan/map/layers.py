@@ -73,6 +73,7 @@ LAYERS_CATEGORIES = {
             name="Ergebnisse",
             name_singular="Ergebnis",
             description="",
+            popup_fields=["name"],
         )
     ]
 }
