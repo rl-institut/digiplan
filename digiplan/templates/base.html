@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="{% static 'libs/ionrangeslider/ion.rangeSlider.min.css' %}"/>
         <link href="{% static 'django_select2/django_select2.css' %}" type="text/css" media="screen" rel="stylesheet">
       {% endcompress %}
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css" type="text/css" media="screen" rel="stylesheet">
+      <link href="{%  static 'vendors/select2/css/select2.min.css' %}" type="text/css" media="screen" rel="stylesheet">
       <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.js"></script>
     {% endblock %}
 
@@ -92,7 +92,7 @@
         </script>
       {% endcompress %}
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
+      <script src="{% static 'vendors/select2/js/select2.min.js' %}"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/i18n/de.js"></script>
       {% compress js %}
         <script src="{% static 'js/store.js' %}"></script>

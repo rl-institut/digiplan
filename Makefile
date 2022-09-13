@@ -36,3 +36,10 @@ distill:
 
 local_env_file:
 	python merge_local_dotenvs_in_dotenv.py
+
+update_vendor_assets:
+	# Select2: https://select2.org/
+	rm -r digiplan/static/vendors/select2/css/*
+	cp node_modules/select2/dist/css/select2.min.css digiplan/static/vendors/select2/css/
+	rm -r digiplan/static/vendors/select2/js/*
+	cp node_modules/select2/dist/js/select2.min.js digiplan/static/vendors/select2/js/

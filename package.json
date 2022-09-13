@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "bootstrap": "^5.1.3",
-    "maplibre-gl": ">=1.15.2"
+    "maplibre-gl": ">=1.15.2",
+    "select2": "^4.0.13"
   },
   "name": "digiplan"
 }
