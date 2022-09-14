@@ -93,7 +93,7 @@
       {% endcompress %}
 
       <script src="{% static 'vendors/select2/js/select2.min.js' %}"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/i18n/de.js"></script>
+      <script src="{% static 'vendors/select2/js/i18n/de.js' %}"></script>
       {% compress js %}
         <script src="{% static 'js/store.js' %}"></script>
         <script src="{% static 'js/event-topics.js' %}"></script>

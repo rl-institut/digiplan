@@ -54,5 +54,7 @@ update_vendor_assets:
 	cp node_modules/select2/dist/css/select2.min.css digiplan/static/vendors/select2/css/
 	rm -r digiplan/static/vendors/select2/js/*
 	cp node_modules/select2/dist/js/select2.min.js digiplan/static/vendors/select2/js/
+	mkdir -p digiplan/static/vendors/select2/js/i18n/ && \
+	cp node_modules/select2/dist/js/i18n/de.js digiplan/static/vendors/select2/js/i18n/
 
 	# Done
