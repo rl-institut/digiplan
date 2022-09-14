@@ -49,6 +49,10 @@ update_vendor_assets:
 	rm -r digiplan/static/vendors/echarts/js/*
 	cp node_modules/echarts/dist/echarts.min.js digiplan/static/vendors/echarts/js/
 
+	# jQuery https://github.com/jquery/jquery
+	rm -r digiplan/static/vendors/jquery/js/*
+	cp node_modules/jquery/dist/jquery.min.* digiplan/static/vendors/jquery/js/
+
 	# Select2: https://select2.org/
 	rm -r digiplan/static/vendors/select2/css/*
 	cp node_modules/select2/dist/css/select2.min.css digiplan/static/vendors/select2/css/
