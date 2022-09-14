@@ -242,6 +242,7 @@
         flyToElement(element);
       });
 
+      /* Popup start */
       {% for popup in popups %}
         {% if popup.template_url %}
           add_popup("{{popup.layer_id}}", {{popup.fields|safe}}, "{{popup.source}}");
@@ -249,6 +250,7 @@
           add_popup("{{popup.layer_id}}", {{popup.fields|safe}});
         {% endif %}
       {% endfor %}
+      /* Popup end */
 
       {% for layer in all_layers %}
         {% if layer.style == "region-fill" %}
