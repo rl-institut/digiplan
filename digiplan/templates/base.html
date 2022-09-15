@@ -25,10 +25,9 @@
         <link rel="stylesheet" type="text/x-scss" href="{% static 'scss/app.scss' %}">
         <link href="{% static 'css/project.css' %}" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'vendors/ionrangeslider/css/ion.rangeSlider.min.css' %}"/>
+        <link href="{%  static 'vendors/select2/css/select2.min.css' %}" type="text/css" media="screen" rel="stylesheet">
         <link href="{% static 'django_select2/django_select2.css' %}" type="text/css" media="screen" rel="stylesheet">
       {% endcompress %}
-      <link href="{%  static 'vendors/select2/css/select2.min.css' %}" type="text/css" media="screen" rel="stylesheet">
-      <script src="{% static 'vendors/echarts/js/echarts.min.js' %}"></script>
     {% endblock %}
 
     {% if password_protected %}
@@ -66,10 +65,14 @@
     {% block js_body %}
 
       {% compress js %}
+        <script src="{% static 'vendors/echarts/js/echarts.min.js' %}"></script>
         <script src="{% static 'vendors/bootstrap/js/bootstrap.min.js' %}"></script>
         <script src="{% static 'vendors/jquery/js/jquery.min.js' %}"></script>
         <script src="{% static 'vendors/pubsub/js/pubsub.js' %}"></script>
         <script src="{% static 'vendors/ionrangeslider/js/ion.rangeSlider.min.js' %}"></script>
+        <script src="{% static 'vendors/select2/js/select2.min.js' %}"></script>
+        <script src="{% static 'vendors/select2/js/i18n/de.js' %}"></script>
+        <script src="{% static 'django_select2/django_select2.js' %}"></script>
       {% endcompress %}
 
       {% compress js inline %}
@@ -92,12 +95,9 @@
         </script>
       {% endcompress %}
 
-      <script src="{% static 'vendors/select2/js/select2.min.js' %}"></script>
-      <script src="{% static 'vendors/select2/js/i18n/de.js' %}"></script>
       {% compress js %}
         <script src="{% static 'js/store.js' %}"></script>
         <script src="{% static 'js/event-topics.js' %}"></script>
-        <script src="{% static 'django_select2/django_select2.js' %}"></script>
         <script src="{% static 'js/charts.js' %}"></script>
         <script src="{% static 'js/layers-box.js' %}"></script>
         <script src="{% static 'js/offcanvas.js' %}"></script>
