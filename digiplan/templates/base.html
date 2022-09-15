@@ -22,7 +22,7 @@
 
     {% block css %}
       {% compress css %}
-        <link rel="stylesheet" type="text/x-scss" href="{% static 'sass/app.scss' %}">
+        <link rel="stylesheet" type="text/x-scss" href="{% static 'scss/app.scss' %}">
         <link href="{% static 'css/project.css' %}" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'vendors/ionrangeslider/css/ion.rangeSlider.min.css' %}"/>
         <link href="{% static 'django_select2/django_select2.css' %}" type="text/css" media="screen" rel="stylesheet">
@@ -67,7 +67,6 @@
 
       {% compress js %}
         <script src="{% static 'vendors/jquery/js/jquery.min.js' %}"></script>
-        <script src="{% static 'libs/bootstrap/bootstrap.bundle.min.js' %}"></script>
         <script src="{% static 'vendors/pubsub/js/pubsub.js' %}"></script>
         <script src="{% static 'vendors/ionrangeslider/js/ion.rangeSlider.min.js' %}"></script>
       {% endcompress %}
