@@ -14,6 +14,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - use modern (v2) node package lock format
 - make local development without Docker possible out of the box
 - removed users and admin apps
+- change license to GNU AGPL v3
 
 ### Fixed
 - remove unneeded option flag in poetry install section in readme
