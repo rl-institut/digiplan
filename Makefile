@@ -49,6 +49,8 @@ update_vendor_assets:
 	# Bootstrap https://github.com/twbs/bootstrap
 	rm -r digiplan/static/vendors/bootstrap/scss/*
 	cp -r node_modules/bootstrap/scss/* digiplan/static/vendors/bootstrap/scss/
+	rm -r digiplan/static/vendors/bootstrap/js/*
+	cp node_modules/bootstrap/dist/js/bootstrap.min.js* digiplan/static/vendors/bootstrap/js/
 
 	# eCharts https://echarts.apache.org/en/index.html
 	rm -r digiplan/static/vendors/echarts/js/*
