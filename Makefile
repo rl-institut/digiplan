@@ -49,6 +49,12 @@ update_vendor_assets:
 	rm -r digiplan/static/vendors/echarts/js/*
 	cp node_modules/echarts/dist/echarts.min.js digiplan/static/vendors/echarts/js/
 
+	# Ion.RangeSlider https://github.com/IonDen/ion.rangeSlider
+	rm -r digiplan/static/vendors/ionrangeslider/js/*
+	cp node_modules/ion-rangeslider/js/ion.rangeSlider.min.js digiplan/static/vendors/ionrangeslider/js/
+	rm -r digiplan/static/vendors/ionrangeslider/css/*
+	cp node_modules/ion-rangeslider/css/ion.rangeSlider.min.css digiplan/static/vendors/ionrangeslider/css/
+
 	# jQuery https://github.com/jquery/jquery
 	rm -r digiplan/static/vendors/jquery/js/*
 	cp node_modules/jquery/dist/jquery.min.* digiplan/static/vendors/jquery/js/
