@@ -66,6 +66,13 @@ update_vendor_assets:
 	rm -r digiplan/static/vendors/jquery/js/*
 	cp node_modules/jquery/dist/jquery.min.* digiplan/static/vendors/jquery/js/
 
+	# MapLibre GL JS https://github.com/maplibre/maplibre-gl-js
+	rm -r digiplan/static/vendors/maplibre/js/*
+	cp node_modules/maplibre-gl/dist/maplibre-gl.js digiplan/static/vendors/maplibre/js/
+	cp node_modules/maplibre-gl/dist/maplibre-gl.js.map digiplan/static/vendors/maplibre/js/
+	rm -r digiplan/static/vendors/maplibre/css/*
+	cp node_modules/maplibre-gl/dist/maplibre-gl.css digiplan/static/vendors/maplibre/css/
+
 	# PubSubJS https://github.com/mroderick/PubSubJS
 	rm -r digiplan/static/vendors/pubsub/js/*
 	cp node_modules/pubsub-js/src/pubsub.js digiplan/static/vendors/pubsub/js/

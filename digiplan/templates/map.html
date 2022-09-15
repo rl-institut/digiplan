@@ -3,7 +3,7 @@
 
 {% block js_head %}
   {% compress js %}
-    <script src="{% static 'libs/maplibre/maplibre-gl.js' %}"></script>
+    <script src="{% static 'vendors/maplibre/js/maplibre-gl.js' %}"></script>
 
   {% endcompress %}
 {% endblock %}
@@ -11,14 +11,14 @@
 {% block css %}
   {{ block.super }}
   {% compress css %}
-    <link href="{% static 'libs/maplibre/maplibre-gl.css' %}" rel='stylesheet'/>
+    <link href="{% static 'vendors/maplibre/css/maplibre-gl.css' %}" rel='stylesheet'/>
   {% endcompress %}
 {% endblock %}
 
 {% block content %}
 
-{% include 'modals/imprint.html' %}
-{% include 'modals/privacy.html' %}
+  {% include 'modals/imprint.html' %}
+  {% include 'modals/privacy.html' %}
   <div class="main-container">
     <nav class="top-nav">
       <div class="top-nav__tool-name">
@@ -30,13 +30,16 @@
             <a href="#" id="mapView">Karte</a>
           </li>
           <li>
-            <a data-bs-toggle="offcanvas" href="#offcanvasDocumentation" role="button" aria-controls="offcanvasDocumentation">Dokumentation</a>
+            <a data-bs-toggle="offcanvas" href="#offcanvasDocumentation" role="button"
+               aria-controls="offcanvasDocumentation">Dokumentation</a>
           </li>
           <li>
-            <a data-bs-toggle="offcanvas" href="#offcanvasSources" role="button" aria-controls="offcanvasSources">Quellen</a>
+            <a data-bs-toggle="offcanvas" href="#offcanvasSources" role="button"
+               aria-controls="offcanvasSources">Quellen</a>
           </li>
           <li>
-            <a data-bs-toggle="offcanvas" href="#offcanvasContact" role="button" aria-controls="offcanvasContact">Kontakt</a>
+            <a data-bs-toggle="offcanvas" href="#offcanvasContact" role="button"
+               aria-controls="offcanvasContact">Kontakt</a>
           </li>
           <li>
             <select class="top-nav__lang" aria-label="Sprache auswählen">
@@ -90,7 +93,7 @@
         style: "{{mapbox_style_location}}", // stylesheet location
         center: [12.4, 51.7], // starting position [lng, lat]
         zoom: 10, // starting zoom
-<!--        maxBounds: [[4.7, 46.9], [15.3, 55.1]] // [[south-west], [north-east]] restrict area-->
+        // maxBounds: [[4.7, 46.9], [15.3, 55.1]] // [[south-west], [north-east]] restrict area
       });
     </script>
     <script src="{% static 'js/popup.js' %}" type="text/javascript"></script>
@@ -104,7 +107,7 @@
       map.addControl(new maplibregl.ScaleControl({position: 'bottom-right'}));
 
       {% for map_image in map_images %}
-        map.loadImage("{% static map_image.path %}", function(error, image) {
+        map.loadImage("{% static map_image.path %}", function (error, image) {
           if (error) throw error;
           map.addImage("{{map_image.name}}", image);
         });
@@ -115,7 +118,11 @@
         map.addLayer(
           {
             id: "satellite",
-            source: {"type": "raster",  "url": "mapbox://mapbox.satellite", "tileSize": 256},
+            source: {
+              "type": "raster",
+              "url": "mapbox://mapbox.satellite",
+              "tileSize": 256
+            },
             type: "raster"
           }
         );
