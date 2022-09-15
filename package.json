@@ -4,6 +4,7 @@
     "echarts": "^5.3.3",
     "jquery": "^3.6.1",
     "maplibre-gl": ">=1.15.2",
+    "pubsub-js": "^1.9.4",
     "select2": "^4.0.13"
   },
   "name": "digiplan"

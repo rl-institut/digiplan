@@ -53,6 +53,10 @@ update_vendor_assets:
 	rm -r digiplan/static/vendors/jquery/js/*
 	cp node_modules/jquery/dist/jquery.min.* digiplan/static/vendors/jquery/js/
 
+	# PubSubJS https://github.com/mroderick/PubSubJS
+	rm -r digiplan/static/vendors/pubsub/js/*
+	cp node_modules/pubsub-js/src/pubsub.js digiplan/static/vendors/pubsub/js/
+
 	# Select2: https://select2.org/
 	rm -r digiplan/static/vendors/select2/css/*
 	cp node_modules/select2/dist/css/select2.min.css digiplan/static/vendors/select2/css/
