@@ -7,6 +7,7 @@ urlpatterns = [
     path("", include("digiplan.map.urls", namespace="map")),
     path("select2/", include("django_select2.urls")),
     path("raster/", include("raster.urls")),
+    path("oemof/", include("django_oemof.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

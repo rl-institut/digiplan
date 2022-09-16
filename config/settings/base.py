@@ -88,9 +88,7 @@ THIRD_PARTY_APPS = [
     "raster",
 ]
 
-LOCAL_APPS = [
-    "digiplan.map.apps.MapConfig",
-]
+LOCAL_APPS = ["digiplan.map.apps.MapConfig", "django_oemof"]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
