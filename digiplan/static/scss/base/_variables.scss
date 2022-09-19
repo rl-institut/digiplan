@@ -1,5 +1,15 @@
+// Padding
+$padding-large: 1.5rem;
+$padding-normal: 1rem;
+$padding-small: 0.5rem;
+
+// Buttons
+$button-border-radius: 8px;
+
 // COLORS
 $c-color-gray: #CAD3DB;
+$c-color-yellow: rgb(250, 174, 29);
+$gray-3: rgb(98, 98, 98);
 
 // TYPOGRAPHY
 $font-size-xlarge: 1.953rem; // 31.25px
@@ -37,6 +47,17 @@ $map-layers-box-height: 60vh;
 $map-layers-box-width: 23rem;
 $map-layers-box-z-index: 200;
 $map-legend-box-padding-bottom: 2rem;
+
+// Map controls
+$map-control-position: absolute;
+$map-control-img-size: 3rem;
+$map-control-text-height: 1rem;
+$map-control-total-height: calc((#{$padding-small} * 2) + #{$map-control-img-size} + #{$map-control-text-height});
+$map-control-position-top: 5rem;
+$map-control-position-right: 1rem;
+$map-control-position-left: 1rem;
+$map-control-z-index: 9;
+$map-control-bg-color: rgba(255, 255, 255, 1);
 
 // ICONS
 $info-icon-size: 1.25rem;

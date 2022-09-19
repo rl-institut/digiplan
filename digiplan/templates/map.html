@@ -87,10 +87,9 @@
       }
     </script>
     <script>
-      maplibregl.accessToken = "{{mapbox_token}}";
       const map = new maplibregl.Map({
-        container: "map",
-        style: "{{mapbox_style_location}}", // stylesheet location
+        container: 'map',
+        style: 'https://api.maptiler.com/maps/{{tiling_service_style_id}}/style.json?key={{tiling_service_token}}',
         center: [12.4, 51.7], // starting position [lng, lat]
         zoom: 10, // starting zoom
         // maxBounds: [[4.7, 46.9], [15.3, 55.1]] // [[south-west], [north-east]] restrict area
@@ -114,16 +113,17 @@
       {% endfor %}
 
       map.on("load", function () {
-
+        map.addSource("satellite", {
+          type: "raster",
+          tiles: [
+            "https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key={{tiling_service_token}}"
+          ]
+        });
         map.addLayer(
           {
             id: "satellite",
-            source: {
-              "type": "raster",
-              "url": "mapbox://mapbox.satellite",
-              "tileSize": 256
-            },
-            type: "raster"
+            type: "raster",
+            source: "satellite"
           }
         );
         map.setLayoutProperty("satellite", "visibility", "none");
@@ -345,6 +345,7 @@
 
   {% compress js %}
     <script src="{% static 'js/map.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/basemaps.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/helper.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/layer.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/state.js' %}" type="text/javascript"></script>
