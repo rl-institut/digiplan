@@ -6,10 +6,11 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
-- Enable basic popup on results layer
+- enable basic popup on results layer
 - results layer with customizable result views
 
 ### Changed
+- make JS imports programmatic and clean base and map html
 - install patched custom django-raster version via pyproject.toml
 - use modern (v2) node package lock format
 - make local development without Docker possible out of the box
