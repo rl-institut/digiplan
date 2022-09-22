@@ -244,8 +244,8 @@ PASSWORD = env.str("PASSWORD", default=None)
 if PASSWORD_PROTECTION and PASSWORD is None:
     raise ValidationError("Password protection is on, but no password is given")
 
-MAPBOX_TOKEN = env.str("MAPBOX_TOKEN", default=None)
-MAPBOX_STYLE_LOCATION = env.str("MAPBOX_STYLE_LOCATION", default=None)
+TILING_SERVICE_TOKEN = env.str("TILING_SERVICE_TOKEN", default=None)
+TILING_SERVICE_STYLE_ID = env.str("TILING_SERVICE_STYLE_ID", default=None)
 
 SELECT2_CACHE_BACKEND = "select2"
 

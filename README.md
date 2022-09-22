@@ -67,8 +67,8 @@ environment variables (for database, redis, etc.).
 Environment variables have to be set using the following structure:
 
 - `DATABASE_URL=postgis://<user>:<password>@<host>:<port>/<database>`
-- `MAPBOX_STYLE_LOCATION=<URL to mapbox style>`
-- `MAPBOX_TOKEN=<token>`
+- `TILING_SERVICE_STYLE_ID=<URL to mapbox style>`
+- `TILING_SERVICE_TOKEN=<token>`
 - `PROJ_LIB=<path to folder _proj/_, needed for GDAL>`
 - `REDIS_URL=redis://<host>:<port>` (if REDIS is used)
 - `USE_DISTILLED_MVTS=<True/False>` (should be set to False at first)
