@@ -17,6 +17,11 @@
       @extend .mb-0;
       @extend .ps-4;
     }
+
+    img {
+      height: 1.5rem;
+      @extend .ps-1;
+    }
   }
 
   &__links {
