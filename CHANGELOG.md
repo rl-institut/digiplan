@@ -19,6 +19,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - change license to GNU AGPL v3
 
 ### Fixed
+- Fix Postgis on Mac by improving Docker postgis install
 - remove unneeded option flag in poetry install section in readme
 
 ## [0.0.0] - 2022-06-30
