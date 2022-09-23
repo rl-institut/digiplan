@@ -1,4 +1,5 @@
 @use '../base' as *;
+@use '../base/mixins' as *;
 
 .c-tabs {
   @extend .nav;

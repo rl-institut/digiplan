@@ -11,10 +11,8 @@
   $gray-800: v.$gray-800,
   $gray-900: v.$gray-900,
   $blue: v.$blue,
-  $green: v.$green,
-  $yellow: v.$yellow,
   $black: v.$black,
-  $info: v.$info,
+  $cyan: v.$cyan,
   $spacer: v.$spacer,
   $spacers: v.$spacers,
   $body-color: v.$body-color,
@@ -37,13 +35,16 @@
   $font-sizes: v.$font-sizes,
   $text-muted: v.$text-muted,
   $btn-font-weight: v.$btn-font-weight,
+  $zindex-modal: v.$zindex-modal,
+  $zindex-modal-backdrop: v.$zindex-modal-backdrop,
   $navbar-nav-link-padding-x: v.$navbar-nav-link-padding-x,
   $navbar-light-color: v.$navbar-light-color,
   $navbar-light-hover-color: v.$navbar-light-hover-color,
   $navbar-light-active-color: v.$navbar-light-active-color,
   $navbar-light-disabled-color: v.$navbar-light-disabled-color,
   $navbar-light-toggler-icon-bg: v.$navbar-light-toggler-icon-bg,
-  $navbar-light-toggler-border-color: v.$navbar-light-toggler-border-color
+  $navbar-light-toggler-border-color: v.$navbar-light-toggler-border-color,
+  $offcanvas-transition-duration: v.$offcanvas-transition-duration
 );
 
 @forward 'variables';

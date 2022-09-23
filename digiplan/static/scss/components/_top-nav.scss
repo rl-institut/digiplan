@@ -1,4 +1,5 @@
 @use '../base' as *;
+@use '../base/mixins' as *;
 
 .top-nav {
   @extend .d-flex;

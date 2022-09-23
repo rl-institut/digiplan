@@ -1,4 +1,5 @@
 @use '../base' as *;
+@use '../base/mixins' as *;
 
 .offcanvas-view {
   @extend .offcanvas-start;
