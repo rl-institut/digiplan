@@ -11,6 +11,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - results layer with customizable result views
 
 ### Changed
+- switch to Digiplan favicon set
 - make JS imports programmatic and clean base and map html
 - install patched custom django-raster version via pyproject.toml
 - use modern (v2) node package lock format
@@ -32,7 +33,6 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - grid layer
 
 ### Changed
-- switch to Digiplan favicon set
 - exchanged mapbox with maplibre (open source)
 - prevent zoom, if marker is clicked
 - district and region filters are now global filters (not per layer)
