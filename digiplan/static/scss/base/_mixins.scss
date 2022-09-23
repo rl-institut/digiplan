@@ -86,3 +86,22 @@
   cursor: pointer;
   vertical-align: middle;
 }
+
+// User select
+@mixin user-select-none {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+// Map controls and legends
+@mixin map-control-legend {
+  position: $map-control-position;
+  padding: $padding-small;
+  border-radius: $button-border-radius;
+  background-color: $map-control-bg-color;
+  box-shadow: $box-shadow;
+  z-index: $map-control-z-index;
+  @include user-select-none;
+}

@@ -6,6 +6,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- switch to different tiling service, add satellite base map layer, and toggle controls #25
 - enable basic popup on results layer
 - results layer with customizable result views
 
@@ -18,6 +19,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - change license to GNU AGPL v3
 
 ### Fixed
+- Fix Postgis on Mac by improving Docker postgis install
 - remove unneeded option flag in poetry install section in readme
 
 ## [0.0.0] - 2022-06-30

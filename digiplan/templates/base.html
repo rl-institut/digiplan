@@ -79,7 +79,7 @@
         <script>
           $(".js-range-slider").ionRangeSlider();
 
-          var store_cold_init = {
+          let store_cold_init = {
             session_id: "{{session_id}}",
             allowedSwitches: ["wind_distance"],
             debugModeVerbose: false,
@@ -88,7 +88,8 @@
             },
             hoveredStateId: null,
             staticState: 0,
-            useDistilledMVTs: "{{ use_distilled_mvts }}" === "True"
+            useDistilledMVTs: "{{ use_distilled_mvts }}" === "True",
+            basemapFocusElement: "basemaps__default",
           }
           store_cold_init = { ...store_cold_init, ...{{store_cold_init|safe}} };
           var store_hot_init = {{store_hot_init|safe}};
