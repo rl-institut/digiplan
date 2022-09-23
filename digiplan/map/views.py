@@ -8,10 +8,10 @@ from django.views.generic import TemplateView
 
 from config.settings.base import (
     DEBUG,
-    MAPBOX_STYLE_LOCATION,
-    MAPBOX_TOKEN,
     PASSWORD,
     PASSWORD_PROTECTION,
+    TILING_SERVICE_STYLE_ID,
+    TILING_SERVICE_TOKEN,
     USE_DISTILLED_MVTS,
 )
 from digiplan.map.config.config import (
@@ -41,8 +41,8 @@ class MapGLView(TemplateView):
         "debug": DEBUG,
         "password_protected": PASSWORD_PROTECTION,
         "password": PASSWORD,
-        "mapbox_token": MAPBOX_TOKEN,
-        "mapbox_style_location": MAPBOX_STYLE_LOCATION,
+        "tiling_service_token": TILING_SERVICE_TOKEN,
+        "tiling_service_style_id": TILING_SERVICE_STYLE_ID,
         "map_images": MAP_IMAGES,
         "all_layers": ALL_LAYERS,
         "raster_layers": RASTER_LAYERS,
