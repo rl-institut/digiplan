@@ -1,3 +1,5 @@
+@use 'index' as *;
+
 // Flex
 @mixin flex-row {
   display: flex;

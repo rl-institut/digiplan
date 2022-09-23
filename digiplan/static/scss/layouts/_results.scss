@@ -1,3 +1,5 @@
+@use '../base' as *;
+
 .results {
   @extend .h-100;
   @extend .w-100;

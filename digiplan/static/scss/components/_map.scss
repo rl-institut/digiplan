@@ -1,3 +1,5 @@
+@use '../base' as *;
+
 .map-content {
   height: calc(100vh - #{$top-nav-height});
 

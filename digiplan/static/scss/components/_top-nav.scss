@@ -1,3 +1,5 @@
+@use '../base' as *;
+
 .top-nav {
   @extend .d-flex;
   @extend .flex-row;
