@@ -17,6 +17,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - make local development without Docker possible out of the box
 - removed users and admin apps
 - change license to GNU AGPL v3
+- replace sass import with use and forward
 
 ### Fixed
 - Fix Postgis on Mac by improving Docker postgis install
