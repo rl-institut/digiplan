@@ -32,6 +32,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - grid layer
 
 ### Changed
+- switch top left logo for final version
 - exchanged mapbox with maplibre (open source)
 - prevent zoom, if marker is clicked
 - district and region filters are now global filters (not per layer)
