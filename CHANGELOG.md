@@ -11,6 +11,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - results layer with customizable result views
 
 ### Changed
+- load satellite layer beneath symbol layers #43
 - switch top left logo for final version
 - switch to Digiplan favicon set
 - make JS imports programmatic and clean base and map html
