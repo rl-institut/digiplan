@@ -4,7 +4,7 @@ section.offcanvas {
     @extend .w-100;
     @extend .overflow-auto;
     z-index: 1100;
-    top: calc(#{$top-nav-height} - 2px) !important;
+    top: calc(#{$top-nav-height} + 4px) !important;
   }
 
   .offcanvas-view__wrap {

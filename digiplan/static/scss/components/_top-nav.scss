@@ -1,41 +1,10 @@
 .top-nav {
-  
+  box-shadow: $box-shadow-sm;
+
   &__brand {
     img {
       height: calc(#{$top-nav-height} - 1.5rem);
     }
-  }
-
-  &__links {
-    @include media-breakpoint-down(lg) {
-      display: none;
-    }
-
-    ul {
-      @include ul-horizontal;
-    }
-
-    li {
-      display: inline-block;
-
-      a {
-        @extend .link-primary;
-      }
-    }
-
-    li:not(:last-of-type) {
-      padding-right: 1.5rem;
-    }
-
-    .logo img {
-      width: 1.5rem;
-      height: 1.5rem;
-    }
-  }
-
-  &__lang {
-    @extend .form-select;
-    @extend .form-select-sm;
   }
 }
 
@@ -75,9 +44,11 @@
     @extend .bg-white;
     @extend .text-center;
     @extend .fw-bold;
+    z-index: -2;
 
     &.active {
       @extend .text-info;
+      z-index: -2;
     }
 
     &.disabled {
