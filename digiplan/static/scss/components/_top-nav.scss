@@ -4,9 +4,8 @@
   @extend .justify-content-between;
   @extend .align-items-center;
   @extend .pt-0;
-  @extend .pe-2;
   @extend .pb-0;
-  @extend .ps-1;
+  @extend .px-3;
   @extend .shadow-sm;
   height: $top-nav-height;
 
@@ -19,8 +18,7 @@
     }
 
     img {
-      height: 1.5rem;
-      @extend .ps-1;
+      height: calc(#{$top-nav-height} - 1.5rem);
     }
   }
 
@@ -110,9 +108,15 @@
     @extend .fw-bold;
     @extend .rounded-circle;
     @extend .me-1;
+    @extend .fs-7;
     width: $steps-numbers-size;
     height: $steps-numbers-size;
-    padding: 0.25rem;
+    padding: 0.125rem;
+  }
+
+  &__text {
+    @extend .fs-7;
+    letter-spacing: $letter-spacing-small;
   }
 
   &__item.active .steps__number {
