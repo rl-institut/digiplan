@@ -6,6 +6,15 @@
       height: calc(#{$top-nav-height} - 1.5rem);
     }
   }
+
+  &__lang {
+
+    @include media-breakpoint-up(sm) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
 }
 
 .steps {
