@@ -1,22 +1,24 @@
-.offcanvas-view {
-  @extend .offcanvas-start;
-  @extend .w-100;
-  @extend .overflow-auto;
-  z-index: 1100;
-  top: calc(#{$top-nav-height} - 2px);
+section.offcanvas {
+  &.offcanvas-view {
+    @extend .offcanvas-start;
+    @extend .w-100;
+    @extend .overflow-auto;
+    z-index: 1100;
+    top: calc(#{$top-nav-height} + 4px) !important;
+  }
 
-  &__wrap {
+  .offcanvas-view__wrap {
     @extend .container;
     @extend .py-5;
     max-width: 44rem;
   }
 
-  &__title {
+  .offcanvas-view__title {
     @extend .fs-1;
     @extend .fw-bold;
   }
 
-  &__subtitle {
+  .offcanvas-view__subtitle {
     @extend .fw-bold;
     @extend .pt-2;
 
@@ -26,18 +28,18 @@
     }
   }
 
-  &__body {
+  .offcanvas-view__body {
     @extend .py-3;
   }
 
-  &__logos {
+  .offcanvas-view__logos {
     @extend .d-flex;
     @extend .flex-row;
     @extend .justify-content-between;
     @extend .pt-4;
   }
 
-  &__logo {
+  .offcanvas-view__logo {
     @extend .pe-2;
 
     &--rli img {
@@ -65,7 +67,7 @@
     }
   }
 
-  &__list {
+  .offcanvas-view__list {
     .source-item {
       &__title {
         @extend .fw-bold;
@@ -79,7 +81,7 @@
     }
   }
 
-  &__contact {
+  .offcanvas-view__contact {
     @extend .pb-2;
   }
 }
