@@ -20,35 +20,38 @@
   {% include 'modals/imprint.html' %}
   {% include 'modals/privacy.html' %}
   <div class="main-container">
-    <nav class="top-nav">
-      <div class="top-nav__tool-name">
-        <img src="{% static 'images/logos/digiplan-logo-horizontal.svg' %}"
-             alt="Digiplan">
-      </div>
-      <div class="top-nav__links">
-        <ul>
-          <li>
-            <a href="#" id="mapView">Karte</a>
-          </li>
-          <li>
-            <a data-bs-toggle="offcanvas" href="#offcanvasDocumentation" role="button"
-               aria-controls="offcanvasDocumentation">Dokumentation</a>
-          </li>
-          <li>
-            <a data-bs-toggle="offcanvas" href="#offcanvasSources" role="button"
-               aria-controls="offcanvasSources">Quellen</a>
-          </li>
-          <li>
-            <a data-bs-toggle="offcanvas" href="#offcanvasContact" role="button"
-               aria-controls="offcanvasContact">Kontakt</a>
-          </li>
-          <li>
-            <select class="top-nav__lang" aria-label="Sprache auswählen">
-              <option value="de" selected>DE</option>
-              <option value="en">EN</option>
-            </select>
-          </li>
-        </ul>
+
+    <nav class="top-nav navbar navbar-expand-sm navbar-light bg-body" aria-label="Navbar mit Links zu den anderen Seiten">
+      <div class="container-fluid">
+        <a class="top-nav__brand navbar-brand" href="#">
+          <img src="{% static 'images/logos/digiplan-logo-horizontal.svg' %}" alt="Digiplan">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarsExample03">
+          <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
+            <li class="nav-item">
+              <a class="nav-link active" id="mapView" aria-current="page" href="#">Karte</a>
+            </li>
+            <li class="nav-item" data-bs-toggle="offcanvas" href="#offcanvasDocumentation" role="button" aria-controls="offcanvasDocumentation">
+              <a class="nav-link" href="#">Dokumentation</a>
+            </li>
+            <li class="nav-item" data-bs-toggle="offcanvas" href="#offcanvasSources" role="button" aria-controls="offcanvasSources">
+              <a class="nav-link" href="#">Quellen</a>
+            </li>
+            <li class="nav-item" data-bs-toggle="offcanvas" href="#offcanvasContact" role="button" aria-controls="offcanvasContact">
+              <a class="nav-link" href="#">Kontakt</a>
+            </li>
+            <li class="top-nav__lang" >
+              <select aria-label="Sprache auswählen">
+                <option value="de" selected>DE</option>
+                <option value="en">EN</option>
+              </select>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
 
