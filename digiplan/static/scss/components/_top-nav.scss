@@ -53,11 +53,9 @@
     @extend .bg-white;
     @extend .text-center;
     @extend .fw-bold;
-    z-index: -2;
 
     &.active {
       @extend .text-info;
-      z-index: -2;
     }
 
     &.disabled {
