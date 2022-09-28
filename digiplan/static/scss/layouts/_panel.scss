@@ -3,16 +3,16 @@
   @extend .flex-column;
   @extend .h-auto;
   @extend .shadow;
-  width: 100%;
+  @extend .w-100;
 
   @include media-breakpoint-up(md) {
-    width: $panel-width-sm;
+    width: $panel-width-sm !important;
     overflow-y: scroll;
   }
 
   @include media-breakpoint-up(lg)  {
     height: 100vh;
-    width: $panel-width;
+    width: $panel-width !important;
   }
 
   &__content {

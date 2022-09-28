@@ -1,22 +1,22 @@
 .map-content {
   height: calc(100vh - #{$top-nav-height});
 
-  @media only screen and (min-width: $medium-screen) {
+  @include media-breakpoint-up(md) {
     @include flex-row;
   }
 }
 
 .map-wrap {
   @include flex-column;
-  width: 100%;
+  @extend .w-100;
   position: relative;
 
-  @media only screen and (min-width: $medium-screen) {
-    width: calc(100% - #{$panel-width-sm});
+  @include media-breakpoint-up(md) {
+    width: calc(100% - #{$panel-width-sm}) !important;
   }
 
-  @media only screen and (min-width: $large-screen) {
-    width: calc(100% - #{$panel-width});
+  @include media-breakpoint-up(lg) {
+    width: calc(100% - #{$panel-width}) !important;
   }
 }
 
