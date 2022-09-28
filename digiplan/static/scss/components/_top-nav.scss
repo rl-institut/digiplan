@@ -78,6 +78,8 @@
 
   &__text {
     @extend .fs-7;
+    @extend .d-none;
+    @extend .d-sm-inline;
     @extend .d-md-none;
     @extend .d-lg-inline;
     letter-spacing: $letter-spacing-small;
