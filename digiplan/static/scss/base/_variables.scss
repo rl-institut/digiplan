@@ -17,6 +17,7 @@ $font-size-large: 1.563rem; // 25px
 $font-size-medium: 1.25rem; // 20px
 $font-size-normal: 1rem; // 16px
 $font-size-small: .875rem; // 14px
+$font-size-xsmall: .75rem; // 12px
 
 $letter-spacing-small: 0.01rem;
 $letter-spacing-normal: 0.03rem;
@@ -55,7 +56,7 @@ $map-control-position: absolute;
 $map-control-img-size: 3rem;
 $map-control-text-height: 1rem;
 $map-control-total-height: calc((#{$padding-small} * 2) + #{$map-control-img-size} + #{$map-control-text-height});
-$map-control-position-top: 5rem;
+$map-control-position-top: calc(#{$steps-height} + #{$map-items-padding});
 $map-control-position-right: 1rem;
 $map-control-position-left: 1rem;
 $map-control-z-index: 9;

@@ -1,5 +1,6 @@
 .map-content {
   height: calc(100vh - #{$top-nav-height});
+  overflow-x: hidden;
 
   @include media-breakpoint-up(md) {
     @include flex-row;
@@ -41,7 +42,7 @@
     cursor: pointer;
     width: $map-layers-btn-size;
     height: $map-layers-btn-size;
-    top: calc(#{$steps-height} + #{$map-items-padding});
+    top: $map-control-position-top;
     right: $map-items-padding;
     z-index: 9;
 
@@ -113,13 +114,20 @@
   @extend .position-absolute;
   @extend .border;
   @extend .p-2;
-  @extend .fs-7;
+  @extend .fs-8;
   background-color: rgba(255, 255, 255, 0.8);
-  width: $map-layers-box-width;
-  height: calc(100vh - #{$top-nav-height} - #{$steps-height} - #{$map-layers-box-height} - (2 * #{#{$map-items-padding}}) - #{$map-legend-box-padding-bottom});
+  width: calc(100% - 7rem);
+  height: 10rem;
   right: $map-items-padding;
-  bottom: 2rem;
+  bottom: 3rem;
   z-index: $map-layers-box-z-index;
+
+  @include media-breakpoint-up(sm) {
+    font-size: $font-size-small !important;
+    width: $map-layers-box-width;
+    height: calc(100vh - #{$top-nav-height} - #{$steps-height} - #{$map-layers-box-height} - (2 * #{#{$map-items-padding}}) - #{$map-legend-box-padding-bottom});
+    bottom: 2rem;
+  }
 
   &__heading {
     @extend .d-flex;

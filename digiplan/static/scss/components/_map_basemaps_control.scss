@@ -32,6 +32,7 @@
   left: calc(#{$map-control-position-left} + #{$map-control-total-height} + 0.5rem);
   width: auto;
   height: auto;
+  z-index: 101;
 
   &__btn:not(:last-of-type) {
     padding-right: 0.5rem;
