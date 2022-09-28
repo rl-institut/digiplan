@@ -1,16 +1,20 @@
 .map-content {
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .flex-md-row;
   height: calc(100vh - #{$top-nav-height});
   overflow-x: hidden;
-
-  @include media-breakpoint-up(md) {
-    @include flex-row;
-  }
 }
 
 .map-wrap {
   @include flex-column;
   @extend .w-100;
   position: relative;
+
+  @include media-breakpoint-down(md) {
+    order: 1;
+    padding: 0 2rem 2rem;
+  }
 
   @include media-breakpoint-up(md) {
     width: calc(100% - #{$panel-width-sm}) !important;

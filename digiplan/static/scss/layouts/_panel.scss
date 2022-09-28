@@ -5,6 +5,10 @@
   @extend .shadow;
   @extend .w-100;
 
+  @include media-breakpoint-down(md) {
+    order: 2;
+  }
+
   @include media-breakpoint-up(md) {
     width: $panel-width-sm !important;
     overflow-y: scroll;
