@@ -4,9 +4,10 @@
   @extend .h-auto;
   @extend .shadow;
   overflow-y: scroll;
+  width: 100%;
 
-  @include media-breakpoint-down(lg) {
-    width: 100%;
+  @include media-breakpoint-up(md) {
+    width: $panel-width-sm;
   }
 
   @include media-breakpoint-up(lg)  {

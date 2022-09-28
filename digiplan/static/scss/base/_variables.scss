@@ -22,14 +22,16 @@ $letter-spacing-small: 0.01rem;
 $letter-spacing-normal: 0.03rem;
 
 // LEFT PANEL
+$panel-width-sm: 22rem;
 $panel-width: 26rem;
 $panel-side-padding: 1.5rem;
 
 // Media-breaks
-$small-screen: 640px;
-$medium-screen: 992px;
-$large-screen: 1250px;
-$xlarge-screen: 1500px;
+$small-screen: 576px;
+$medium-screen: 768px;
+$large-screen: 992px;
+$xlarge-screen: 1200px;
+$xxlarge-screen: 1400px;
 
 // TOP-NAV
 $top-nav-height: 3.5rem;
