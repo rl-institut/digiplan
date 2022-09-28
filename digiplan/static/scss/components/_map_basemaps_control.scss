@@ -3,12 +3,17 @@
   border: 1px solid $c-color-gray;
   top: $map-control-position-top;
   left: $map-control-position-left;
-  height: $map-control-total-height;
-  width: $map-control-total-height;
+  height: 3.5rem;
+  width: 3rem;
   background-image: url(/static/images/icons/map.svg);
   background-position: center 35%;
   background-size: 35%;
   background-repeat: no-repeat;
+
+  @include media-breakpoint-up(sm) {
+    height: $map-control-total-height;
+    width: $map-control-total-height;
+  }
 
   & > div {
     position: relative;
@@ -29,10 +34,16 @@
   @include map-control-legend;
   @include flex-row;
   top: $map-control-position-top;
-  left: calc(#{$map-control-position-left} + #{$map-control-total-height} + 0.5rem);
+  left: 4.5rem;
   width: auto;
   height: auto;
   z-index: 101;
+
+  @include media-breakpoint-up(sm) {
+    height: $map-control-total-height;
+    width: $map-control-total-height;
+    left: calc(#{$map-control-position-left} + #{$map-control-total-height} + 0.5rem);
+  }
 
   &__btn:not(:last-of-type) {
     padding-right: 0.5rem;
