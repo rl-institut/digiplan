@@ -117,6 +117,15 @@
       {% endfor %}
 
       map.on("load", function () {
+        const layers = map.getStyle().layers;
+        // Find the index of the first symbol layer in the map style
+        let firstSymbolId;
+        for (let i = 0; i < layers.length; i++) {
+          if (layers[i].type === "symbol") {
+            firstSymbolId = layers[i].id;
+            break;
+          }
+        }
         map.addSource("satellite", {
           type: "raster",
           tiles: [
@@ -128,7 +137,8 @@
             id: "satellite",
             type: "raster",
             source: "satellite"
-          }
+          },
+          firstSymbolId
         );
         map.setLayoutProperty("satellite", "visibility", "none");
 
