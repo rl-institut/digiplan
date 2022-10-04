@@ -41,7 +41,6 @@
 
   @include media-breakpoint-up(sm) {
     height: $map-control-total-height;
-    width: $map-control-total-height;
     left: calc(#{$map-control-position-left} + #{$map-control-total-height} + 0.5rem);
   }
 
