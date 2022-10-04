@@ -29,7 +29,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-  
+
         <div class="collapse navbar-collapse" id="navbarsExample03">
           <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
             <li class="nav-item">
@@ -94,9 +94,9 @@
       const map = new maplibregl.Map({
         container: 'map',
         style: 'https://api.maptiler.com/maps/{{tiling_service_style_id}}/style.json?key={{tiling_service_token}}',
-        center: [12.4, 51.7], // starting position [lng, lat]
-        zoom: 10, // starting zoom
-        // maxBounds: [[4.7, 46.9], [15.3, 55.1]] // [[south-west], [north-east]] restrict area
+        center: [12.55714393313076, 51.755450140519315], // starting position [lng, lat]
+        zoom: 9, // starting zoom
+        maxBounds: [[11.180733017118229, 51.02918643452503], [13.716574868700604, 52.45515806663738]] // [[south-west], [north-east]] restrict area
       });
     </script>
     <script src="{% static 'js/popup.js' %}" type="text/javascript"></script>
