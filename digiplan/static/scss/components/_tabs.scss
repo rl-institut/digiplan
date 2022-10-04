@@ -54,8 +54,13 @@
   @extend .translate-middle;
   @extend .bg-white;
   @extend .rounded;
-  top: 6rem;
+  @extend .fs-7;
+  top: 5rem;
   z-index: 100;
+
+  @include media-breakpoint-down(sm) {
+    font-size: $font-size-xsmall;
+  }
 
   &__nav-tabs {
     @extend .nav;
@@ -80,6 +85,10 @@
     @extend .nav-link;
     @extend .text-primary;
     @extend .border-0;
+
+    @include media-breakpoint-down(sm) {
+      padding: 0.5rem;
+    }
 
     &:hover {
       @extend .text-info;

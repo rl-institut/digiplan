@@ -17,19 +17,22 @@ $font-size-large: 1.563rem; // 25px
 $font-size-medium: 1.25rem; // 20px
 $font-size-normal: 1rem; // 16px
 $font-size-small: .875rem; // 14px
+$font-size-xsmall: .75rem; // 12px
 
 $letter-spacing-small: 0.01rem;
 $letter-spacing-normal: 0.03rem;
 
 // LEFT PANEL
+$panel-width-sm: 22rem;
 $panel-width: 26rem;
 $panel-side-padding: 1.5rem;
 
 // Media-breaks
-$small-screen: 640px;
-$medium-screen: 992px;
-$large-screen: 1250px;
-$xlarge-screen: 1500px;
+$small-screen: 576px;
+$medium-screen: 768px;
+$large-screen: 992px;
+$xlarge-screen: 1200px;
+$xxlarge-screen: 1400px;
 
 // TOP-NAV
 $top-nav-height: 3.5rem;
@@ -40,6 +43,7 @@ $steps-numbers-size: 1.5rem;
 
 // MAP
 $map-height: calc(100vh - #{$top-nav-height} - #{$steps-height});
+$map-padding-x-small: 2rem;
 $map-layers-btn-size: 3rem;
 $map-items-padding: 1rem;
 $map-layers-box-legend-color-size: 0.875rem;
@@ -53,7 +57,7 @@ $map-control-position: absolute;
 $map-control-img-size: 3rem;
 $map-control-text-height: 1rem;
 $map-control-total-height: calc((#{$padding-small} * 2) + #{$map-control-img-size} + #{$map-control-text-height});
-$map-control-position-top: 5rem;
+$map-control-position-top: calc(#{$steps-height} + #{$map-items-padding});
 $map-control-position-right: 1rem;
 $map-control-position-left: 1rem;
 $map-control-z-index: 9;
