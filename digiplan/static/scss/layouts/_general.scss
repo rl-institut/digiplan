@@ -2,4 +2,8 @@ body {
   @extend .vh-100;
   overflow-y: hidden;
   letter-spacing: $letter-spacing-normal;
+
+  .main-container {
+    @extend .overflow-auto;
+  }
 }

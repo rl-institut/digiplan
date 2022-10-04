@@ -53,11 +53,9 @@
     @extend .bg-white;
     @extend .text-center;
     @extend .fw-bold;
-    z-index: -2;
 
     &.active {
       @extend .text-info;
-      z-index: -2;
     }
 
     &.disabled {
@@ -80,6 +78,10 @@
 
   &__text {
     @extend .fs-7;
+    @extend .d-none;
+    @extend .d-sm-inline;
+    @extend .d-md-none;
+    @extend .d-lg-inline;
     letter-spacing: $letter-spacing-small;
   }
 

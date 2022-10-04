@@ -1,18 +1,27 @@
 .map-content {
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .flex-md-row;
   height: calc(100vh - #{$top-nav-height});
-
-  @media only screen and (min-width: $medium-screen) {
-    @include flex-row;
-  }
+  overflow-x: hidden;
 }
 
 .map-wrap {
   @include flex-column;
-  width: 100%;
+  @extend .w-100;
   position: relative;
 
-  @media only screen and (min-width: $medium-screen) {
-    width: calc(100% - #{$panel-width});
+  @include media-breakpoint-down(md) {
+    order: 1;
+    padding: 0 $map-padding-x-small $map-padding-x-small;
+  }
+
+  @include media-breakpoint-up(md) {
+    width: calc(100% - #{$panel-width-sm}) !important;
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: calc(100% - #{$panel-width}) !important;
   }
 }
 
@@ -37,7 +46,7 @@
     cursor: pointer;
     width: $map-layers-btn-size;
     height: $map-layers-btn-size;
-    top: calc(#{$steps-height} + #{$map-items-padding});
+    top: $map-control-position-top;
     right: $map-items-padding;
     z-index: 9;
 
@@ -109,13 +118,21 @@
   @extend .position-absolute;
   @extend .border;
   @extend .p-2;
-  @extend .fs-7;
+  @extend .fs-8;
   background-color: rgba(255, 255, 255, 0.8);
-  width: $map-layers-box-width;
-  height: calc(100vh - #{$top-nav-height} - #{$steps-height} - #{$map-layers-box-height} - (2 * #{#{$map-items-padding}}) - #{$map-legend-box-padding-bottom});
-  right: $map-items-padding;
-  bottom: 2rem;
+  width: calc(100% - 7rem);
+  height: 10rem;
+  right: $map-padding-x-small;
+  bottom: 5rem;
   z-index: $map-layers-box-z-index;
+
+  @include media-breakpoint-up(sm) {
+    font-size: $font-size-small !important;
+    width: $map-layers-box-width;
+    height: calc(100vh - #{$top-nav-height} - #{$steps-height} - #{$map-layers-box-height} - (2 * #{#{$map-items-padding}}) - #{$map-legend-box-padding-bottom});
+    right: $map-items-padding;
+    bottom: 2rem;
+  }
 
   &__heading {
     @extend .d-flex;
