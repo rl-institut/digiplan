@@ -36,7 +36,7 @@ Install [poetry](https://python-poetry.org/) (python dependency manager used in 
 project) and dependencies for the project:
 
 ```
-pip install poetry
+curl -sSL https://install.python-poetry.org | python3 -
 poetry install
 ```
 
