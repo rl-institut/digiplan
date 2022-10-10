@@ -1,0 +1,272 @@
+{
+  "$id": "https://raw.githubusercontent.com/rl-institut/digiplan/main/digiplan/metadata/schema/v1-0-0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The default JSON schema for use in popups on maps",
+  "properties": {
+    "application": {
+      "description": "The application the concerning JSON is meant for.",
+      "enum": [
+        "popup"
+      ],
+      "title": "Application",
+      "type": "string"
+    },
+    "chartType": {
+      "description": "The chart type that shall be used. If no chart shall be used, set value to (JSON type) null. Also look at following source for more info on chart types: https://echarts.apache.org/en/option.html#series",
+      "enum": [
+        "line",
+        "bar",
+        "pie",
+        "scatter",
+        "effectScatter",
+        "radar",
+        "tree",
+        "treemap",
+        "sunburst",
+        "boxplot",
+        "candlestick",
+        "heatmap",
+        "map",
+        "parallel",
+        "lines",
+        "graph",
+        "sankey",
+        "funnel",
+        "gauge",
+        "pictorialBar",
+        "themeRiver",
+        "custom"
+      ],
+      "title": "Chart Type",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "language": {
+      "description": "The used language. Follows ISO 639-1.",
+      "enum": [
+        "de",
+        "en"
+      ],
+      "title": "Language",
+      "type": "string"
+    },
+    "lookup": {
+      "description": "Lookup name used in the request. Example: ?lookup=<lookup_name>&municipality=12",
+      "title": "Lookup Name",
+      "type": "string"
+    },
+    "name": {
+      "description": "Human-readable name. Used in popup heading",
+      "title": "Human-Readable Name",
+      "type": "string"
+    },
+    "payload": {
+      "description": "A list of one or more municipality objects",
+      "items": {
+        "additionalProperties": false,
+        "description": "Municipality object which itself contains a data series",
+        "properties": {
+          "data": {
+            "additionalProperties": false,
+            "description": "Data object of one municipality with key value definitions and items list",
+            "properties": {
+              "definition": {
+                "additionalProperties": false,
+                "description": "Key-value definition for lookup and human-readable names",
+                "properties": {
+                  "key": {
+                    "additionalProperties": false,
+                    "description": "Key lookup and name definition",
+                    "properties": {
+                      "lookup": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "description": "Possible types, defined by JSON Schema type names",
+                        "enum": [
+                          "string",
+                          "number",
+                          "integer",
+                          "object",
+                          "array",
+                          "boolean",
+                          "null"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "lookup",
+                      "name",
+                      "type"
+                    ],
+                    "title": "Key Definition",
+                    "type": "object"
+                  },
+                  "value": {
+                    "additionalProperties": false,
+                    "description": "Value lookup and name definition",
+                    "properties": {
+                      "lookup": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "description": "Possible types, defined by JSON Schema type names",
+                        "enum": [
+                          "string",
+                          "number",
+                          "integer",
+                          "object",
+                          "array",
+                          "boolean",
+                          "null"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "lookup",
+                      "name",
+                      "type"
+                    ],
+                    "title": "Value Definition",
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "key",
+                  "value"
+                ],
+                "title": "Key-Value Definition",
+                "type": "object"
+              },
+              "series": {
+                "description": "Municipality data series of key-value objects",
+                "items": {
+                  "additionalProperties": false,
+                  "description": "Key-value list item object",
+                  "properties": {
+                    "key": {
+                      "type": [
+                        "string",
+                        "number",
+                        "integer",
+                        "object",
+                        "array",
+                        "boolean",
+                        "null"
+                      ]
+                    },
+                    "value": {
+                      "type": [
+                        "string",
+                        "number",
+                        "integer",
+                        "object",
+                        "array",
+                        "boolean",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "key",
+                    "value"
+                  ],
+                  "title": "Key-Value Item",
+                  "type": "object"
+                },
+                "maxItems": 1000,
+                "minItems": 1,
+                "title": "Key-Value List",
+                "type": "array"
+              }
+            },
+            "required": [
+              "definition",
+              "series"
+            ],
+            "title": "Key-Value List",
+            "type": "object"
+          },
+          "description": {
+            "description": "User facing short description for informational purposes",
+            "maxLength": 280,
+            "minLength": 0,
+            "title": "Description",
+            "type": "string"
+          },
+          "id": {
+            "description": "Unique ID of the municipality",
+            "title": "Id",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Name of the municipality",
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "description",
+          "id",
+          "name"
+        ],
+        "title": "Municipality",
+        "type": "object"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Municipalities List",
+      "type": "array"
+    },
+    "sources": {
+      "description": "List of data sources",
+      "items": {
+        "additionalProperties": false,
+        "description": "Name and identifier of data source",
+        "properties": {
+          "iri": {
+            "description": "identifier can be either URI or IRI (IRI is superset of URI). More info: https://json-schema.org/understanding-json-schema/reference/string.html#id7",
+            "format": "iri",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "iri"
+        ],
+        "title": "Source Item",
+        "type": "object"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    }
+  },
+  "required": [
+    "application",
+    "chartType",
+    "language",
+    "lookup",
+    "name",
+    "payload",
+    "sources"
+  ],
+  "title": "Popup Default Schema",
+  "type": "object"
+}
