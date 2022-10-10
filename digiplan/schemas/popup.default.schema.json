@@ -1,0 +1,75 @@
+{
+  "$id": "https://wam.rl-institut.de/digiplan/schemas/popup.default.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "The default JSON schema for use in popups on maps",
+  "properties": {
+    "application": {
+      "description": "The application the concerning JSON is meant for.",
+      "enum": [
+        "popup"
+      ],
+      "title": "Application",
+      "type": "string"
+    },
+    "chart": {
+      "$ref": "atom.chart.example.json"
+    },
+    "language": {
+      "description": "The used language. Follows ISO 639-1.",
+      "enum": [
+        "de",
+        "en"
+      ],
+      "title": "Language",
+      "type": "string"
+    },
+    "lookup": {
+      "description": "Lookup name used in the request. Example: ?lookup=<lookup_name>&municipality=12",
+      "title": "Lookup Name",
+      "type": "string"
+    },
+    "name": {
+      "description": "Human-readable name. Used in popup heading",
+      "title": "Human-Readable Name",
+      "type": "string"
+    },
+    "sources": {
+      "description": "List of data sources",
+      "items": {
+        "additionalProperties": false,
+        "description": "Name and identifier of data source",
+        "properties": {
+          "iri": {
+            "description": "identifier can be either URI or IRI (IRI is superset of URI). More info: https://json-schema.org/understanding-json-schema/reference/string.html#id7",
+            "format": "iri",
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "iri"
+        ],
+        "title": "Source Item",
+        "type": "object"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    }
+  },
+  "required": [
+    "application",
+    "chart",
+    "language",
+    "lookup",
+    "name",
+    "sources"
+  ],
+  "title": "Popup Default Schema",
+  "type": "object"
+}

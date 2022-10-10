@@ -1,17 +1,9 @@
 {
-  "$id": "https://raw.githubusercontent.com/rl-institut/digiplan/main/digiplan/metadata/schema/v1-0-0",
+  "$id": "https://wam.rl-institut.de/digiplan/schemas/atom.chart.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
-  "description": "The default JSON schema for use in popups on maps",
+  "description": "Atom Chart Schema. This schema is to be referenced by other schemas",
   "properties": {
-    "application": {
-      "description": "The application the concerning JSON is meant for.",
-      "enum": [
-        "popup"
-      ],
-      "title": "Application",
-      "type": "string"
-    },
     "chartType": {
       "description": "The chart type that shall be used. If no chart shall be used, set value to (JSON type) null. Also look at following source for more info on chart types: https://echarts.apache.org/en/option.html#series",
       "enum": [
@@ -44,34 +36,15 @@
         "null"
       ]
     },
-    "language": {
-      "description": "The used language. Follows ISO 639-1.",
-      "enum": [
-        "de",
-        "en"
-      ],
-      "title": "Language",
-      "type": "string"
-    },
-    "lookup": {
-      "description": "Lookup name used in the request. Example: ?lookup=<lookup_name>&municipality=12",
-      "title": "Lookup Name",
-      "type": "string"
-    },
-    "name": {
-      "description": "Human-readable name. Used in popup heading",
-      "title": "Human-Readable Name",
-      "type": "string"
-    },
     "payload": {
-      "description": "A list of one or more municipality objects",
+      "description": "A list of one or more objects",
       "items": {
         "additionalProperties": false,
-        "description": "Municipality object which itself contains a data series",
+        "description": "Object which itself contains a data series",
         "properties": {
           "data": {
             "additionalProperties": false,
-            "description": "Data object of one municipality with key value definitions and items list",
+            "description": "Data object of one entry with key value definitions and items list",
             "properties": {
               "definition": {
                 "additionalProperties": false,
@@ -150,7 +123,7 @@
                 "type": "object"
               },
               "series": {
-                "description": "Municipality data series of key-value objects",
+                "description": "Entry data series of key-value objects",
                 "items": {
                   "additionalProperties": false,
                   "description": "Key-value list item object",
@@ -206,12 +179,12 @@
             "type": "string"
           },
           "id": {
-            "description": "Unique ID of the municipality",
+            "description": "Unique ID of the entry",
             "title": "Id",
             "type": "integer"
           },
           "name": {
-            "description": "Name of the municipality",
+            "description": "Name of the entry",
             "title": "Name",
             "type": "string"
           }
@@ -222,51 +195,19 @@
           "id",
           "name"
         ],
-        "title": "Municipality",
+        "title": "Entry",
         "type": "object"
       },
       "maxItems": 20,
       "minItems": 1,
       "title": "Municipalities List",
       "type": "array"
-    },
-    "sources": {
-      "description": "List of data sources",
-      "items": {
-        "additionalProperties": false,
-        "description": "Name and identifier of data source",
-        "properties": {
-          "iri": {
-            "description": "identifier can be either URI or IRI (IRI is superset of URI). More info: https://json-schema.org/understanding-json-schema/reference/string.html#id7",
-            "format": "iri",
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "name",
-          "iri"
-        ],
-        "title": "Source Item",
-        "type": "object"
-      },
-      "maxItems": 20,
-      "minItems": 1,
-      "title": "Sources",
-      "type": "array"
     }
   },
   "required": [
-    "application",
     "chartType",
-    "language",
-    "lookup",
-    "name",
-    "payload",
-    "sources"
+    "payload"
   ],
-  "title": "Popup Default Schema",
+  "title": "Atom Chart",
   "type": "object"
 }
