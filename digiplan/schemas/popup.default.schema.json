@@ -13,7 +13,7 @@
       "type": "string"
     },
     "chart": {
-      "$ref": "atom.chart.example.json"
+      "$ref": "atom.chart.schema.json"
     },
     "language": {
       "description": "The used language. Follows ISO 639-1.",
