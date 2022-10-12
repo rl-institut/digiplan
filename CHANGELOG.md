@@ -6,6 +6,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- add default schema, example, and tests
 - switch to different tiling service, add satellite base map layer, and toggle controls #25
 - enable basic popup on results layer
 - results layer with customizable result views
