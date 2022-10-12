@@ -52,82 +52,105 @@ function add_popup(layer_id, fields, template_id = "default") {
     */
     const coordinates = createCoordinates(event);
 
-    /*
-      Construct Popup From Event And Params
-    */
-    const template = document.getElementById(template_id + "_popup");
-    const clone = template.content.cloneNode(true);
-    const html = clone.getElementById("popup_div");
-    const table = html.querySelector("table");
-    let tableRows = "";
-    for (const label in fields) {
-      const key = fields[label];
-      const value = event.features[0].properties[key];
-      tableRows += `<tr><td>${label}</td><td>${value}</td></tr>`;
-    }
-    table.innerHTML = tableRows;
-
-    /*
-      Init Chart
-    */
-    const chartDom = html.querySelector("#popup_chart");
-    const myChart = echarts.init(chartDom, null, {renderer: 'svg'});
-
     // TODO: construct dynamically via emitted id by event
     const url = "/static/tests/api/popup.json??lookup=population&municipality=12lang=en";
 
     fetchGetJson(url).then(
       // TODO: for now we assume response has chart. Later determine dynamically.
-      (data) => {
+      (response) => {
         /*
-          Construct Chart
+          Construct Popup From Event And Params
         */
-        // TODO: use chartType in payload to construct chart dynamically. For now we assume bar chart type.
-        // TODO: In this fetch we always expect one payload item. Make failsafe.
-        const series = data.chart.payload[0].data.series;
-        const xAxisData = createListByName("key", series);
-        const yAxisData = createListByName("value", series);
-        const option = {
-          animation: false,
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-              type: 'shadow'
+        const template = document.getElementById(template_id + "_popup");
+        const clone = template.content.cloneNode(true);
+        const html = clone.getElementById("popup");
+        for (const field in fields) {
+          if (field === "title") {
+            const titleElement = html.querySelector("#popup__title");
+            const {payload: {title}} = response;
+            titleElement.innerHTML = title;
+          }
+          if (field === "municipality") {
+            const municipalityElement = html.querySelector("#popup__municipality");
+            const {payload: {municipality}} = response;
+            municipalityElement.innerHTML = municipality;
+          }
+          if (field === "description") {
+            const descriptionElement = html.querySelector("#popup__description");
+            const {payload: {description}} = response;
+            descriptionElement.innerHTML = description;
+          }
+          if (field === "chart") {
+
+            // Chart Title
+            const chartTitleElement = html.querySelector("#popup__chart-title");
+            const {payload: {chart: {title}}} = response;
+            chartTitleElement.innerHTML = title;
+
+            // Chart
+            const chartElement = html.querySelector("#popup__chart");
+            const chart = echarts.init(chartElement, null, {renderer: 'svg'});
+            // TODO: use chartType in payload to construct chart dynamically. For now we assume bar chart type.
+            // TODO: In this fetch we always expect one payload item. Make failsafe.
+            const {payload: {chart: {data: {series}}}} = response;
+            const xAxisData = createListByName("key", series);
+            const yAxisData = createListByName("value", series);
+            const option = {
+              animation: false,
+              tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                  type: 'shadow'
+                }
+              },
+              grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+              },
+              xAxis: [
+                {
+                  type: 'category',
+                  data: xAxisData,
+                  axisTick: {
+                    alignWithLabel: true
+                  }
+                }
+              ],
+              yAxis: [
+                {
+                  type: 'value'
+                }
+              ],
+              series: [
+                {
+                  name: 'Direct',
+                  type: 'bar',
+                  barWidth: '60%',
+                  data: yAxisData,
+                }
+              ]
+            };
+            chart.setOption(option);
+            requestAnimationFrame(() => {
+              new maplibregl.Popup({
+                // https://maplibre.org/maplibre-gl-js-docs/api/markers/#popup-parameters
+                maxWidth: "280px",
+              }).setLngLat(coordinates).setHTML(html.innerHTML).addTo(map);
+            });
+          }
+          if (field === "sources") {
+            const sourcesElement = html.querySelector("#popup__sources");
+            let links = [];
+            for (const index in response.payload.sources) {
+              const url = response.payload.sources[index].url;
+              const name = response.payload.sources[index].name;
+              links.push(`<a href="${url}">${name}</a>`);
             }
-          },
-          grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-          },
-          xAxis: [
-            {
-              type: 'category',
-              data: xAxisData,
-              axisTick: {
-                alignWithLabel: true
-              }
-            }
-          ],
-          yAxis: [
-            {
-              type: 'value'
-            }
-          ],
-          series: [
-            {
-              name: 'Direct',
-              type: 'bar',
-              barWidth: '60%',
-              data: yAxisData,
-            }
-          ]
-        };
-        myChart.setOption(option);
-        requestAnimationFrame(() => {
-          new maplibregl.Popup().setLngLat(coordinates).setHTML(html.innerHTML).addTo(map);
-        });
+            sourcesElement.innerHTML = links.join(", ");
+          }
+        }
       }
     );
   });

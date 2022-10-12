@@ -1,58 +1,57 @@
 {
-  "application": "popup",
-  "chart": {
-    "chartType": "bar",
-    "payload": [
-      {
-        "data": {
-          "definition": {
-            "key": {
-              "lookup": "year",
-              "name": "Year",
-              "type": "integer"
+    "application": "popup",
+    "language": "en",
+    "lookup": "population",
+    "payload": {
+        "chart": {
+            "chartType": "bar",
+            "data": {
+                "definition": {
+                    "key": {
+                        "lookup": "year",
+                        "name": "Year",
+                        "type": "integer"
+                    },
+                    "value": {
+                        "lookup": "population",
+                        "name": "Population",
+                        "type": "integer"
+                    }
+                },
+                "series": [
+                    {
+                        "key": 2022,
+                        "value": 9311
+                    },
+                    {
+                        "key": 2030,
+                        "value": 9182
+                    },
+                    {
+                        "key": 2045,
+                        "value": 8903
+                    }
+                ]
             },
-            "value": {
-              "lookup": "population",
-              "name": "Population",
-              "type": "integer"
-            }
-          },
-          "series": [
-            {
-              "key": 2022,
-              "value": 9311
-            },
-            {
-              "key": 2030,
-              "value": 9182
-            },
-            {
-              "key": 2045,
-              "value": 8903
-            }
-          ]
+            "title": "Population Forecast"
         },
-        "description": "The population in 2022 of Z\u00f6rbig was 9,311 inhabitants. The entire ABW region had 370,190 inhabitants at that time. The following chart shows a forecast of the population development for the years 2022, 2030, and 2045.",
+        "description": "The population in 2022 of Zörbig was 9,311 inhabitants. The entire ABW region had 370,190 inhabitants at that time. The following chart shows a forecast of the population development for the years 2022, 2030, and 2045.",
         "id": 12,
-        "name": "Z\u00f6rbig"
-      }
-    ]
-  },
-  "language": "en",
-  "lookup": "population",
-  "name": "Population Forecast",
-  "sources": [
-    {
-      "iri": "https://wam.rl-institut.de/digiplan/sources#11",
-      "name": "Bev\u00f6lkerungz\u00e4hlung Anhalt, 2021"
-    },
-    {
-      "iri": "https://wam.rl-institut.de/digiplan/sources#12",
-      "name": "Bev\u00f6lkerungsprognose Anhalt, 2030"
-    },
-    {
-      "iri": "https://wam.rl-institut.de/digiplan/sources#13",
-      "name": "Bev\u00f6lkerungsprognose Anhalt, 2050"
+        "municipality": "Zörbig",
+        "sources": [
+            {
+                "url": "https://wam.rl-institut.de/digiplan/sources#11",
+                "name": "Bevölkerungzählung Anhalt 2021"
+            },
+            {
+                "url": "https://wam.rl-institut.de/digiplan/sources#12",
+                "name": "Bevölkerungsprognose Anhalt 2030"
+            },
+            {
+                "url": "https://wam.rl-institut.de/digiplan/sources#13",
+                "name": "Bevölkerungsprognose Anhalt 2050"
+            }
+        ],
+        "title": "Population"
     }
-  ]
 }

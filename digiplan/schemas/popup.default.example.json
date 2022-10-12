@@ -106,7 +106,7 @@
   },
   "language": "en",
   "lookup": "population",
-  "name": "Population Forecast",
+  "name": "Population",
   "sources": [
     {
       "iri": "https://wam.rl-institut.de/digiplan/sources#11",
