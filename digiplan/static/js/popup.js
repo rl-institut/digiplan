@@ -61,34 +61,34 @@ function add_popup(layer_id, fields, template_id = "default") {
         /*
           Construct Popup From Event And Params
         */
-        const template = document.getElementById(template_id + "_popup");
+        const template = document.getElementById("js-"+ template_id + "_popup");
         const clone = template.content.cloneNode(true);
-        const html = clone.getElementById("popup");
+        const html = clone.getElementById("js-"+ "popup");
         for (const field in fields) {
           if (field === "title") {
-            const titleElement = html.querySelector("#popup__title");
+            const titleElement = html.querySelector("#js-popup__title");
             const {payload: {title}} = response;
             titleElement.innerHTML = title;
           }
           if (field === "municipality") {
-            const municipalityElement = html.querySelector("#popup__municipality");
+            const municipalityElement = html.querySelector("#js-popup__municipality");
             const {payload: {municipality}} = response;
             municipalityElement.innerHTML = municipality;
           }
           if (field === "description") {
-            const descriptionElement = html.querySelector("#popup__description");
+            const descriptionElement = html.querySelector("#js-popup__description");
             const {payload: {description}} = response;
             descriptionElement.innerHTML = description;
           }
           if (field === "chart") {
 
             // Chart Title
-            const chartTitleElement = html.querySelector("#popup__chart-title");
+            const chartTitleElement = html.querySelector("#js-popup__chart-title");
             const {payload: {chart: {title}}} = response;
             chartTitleElement.innerHTML = title;
 
             // Chart
-            const chartElement = html.querySelector("#popup__chart");
+            const chartElement = html.querySelector("#js-popup__chart");
             const chart = echarts.init(chartElement, null, {renderer: 'svg'});
             // TODO: use chartType in payload to construct chart dynamically. For now we assume bar chart type.
             // TODO: In this fetch we always expect one payload item. Make failsafe.
@@ -141,7 +141,7 @@ function add_popup(layer_id, fields, template_id = "default") {
             });
           }
           if (field === "sources") {
-            const sourcesElement = html.querySelector("#popup__sources");
+            const sourcesElement = html.querySelector("#js-popup__sources");
             let links = [];
             for (const index in response.payload.sources) {
               const url = response.payload.sources[index].url;
