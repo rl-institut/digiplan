@@ -1,0 +1,25 @@
+{
+  "$id": "https://wam.rl-institut.de/digiplan/schemas/components/sources.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "List of data sources",
+  "items": {
+    "additionalProperties": false,
+    "description": "Name and URL (IRI) of data source",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "url": {
+        "description": "identifier can be either URI or IRI (IRI is superset of URI). More info: https://json-schema.org/understanding-json-schema/reference/string.html#id7",
+        "format": "iri",
+        "type": "string"
+      }
+    },
+    "required": [
+      "name",
+      "url"
+    ],
+    "type": "object"
+  },
+  "type": "array"
+}

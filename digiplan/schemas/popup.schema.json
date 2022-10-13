@@ -1,0 +1,42 @@
+{
+  "$id": "https://wam.rl-institut.de/digiplan/schemas/popup.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Popup payload, contains popup components",
+  "properties": {
+    "chart": {
+      "$ref": "https://wam.rl-institut.de/digiplan/schemas/components/chart.schema.json"
+    },
+    "description": {
+      "description": "User facing short description for informational purposes",
+      "maxLength": 280,
+      "type": "string"
+    },
+    "id": {
+      "description": "ID of the entry",
+      "type": "integer"
+    },
+    "municipality": {
+      "description": "Name of the municipality",
+      "maxLength": 50,
+      "type": "string"
+    },
+    "sources": {
+      "$ref": "https://wam.rl-institut.de/digiplan/schemas/components/sources.schema.json"
+    },
+    "title": {
+      "description": "Title",
+      "maxLength": 50,
+      "type": "string"
+    }
+  },
+  "required": [
+    "chart",
+    "description",
+    "id",
+    "municipality",
+    "sources",
+    "title"
+  ],
+  "type": "object"
+}
