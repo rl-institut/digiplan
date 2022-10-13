@@ -61,30 +61,30 @@ function add_popup(layer_id, fields, template_id = "default") {
         /*
           Construct Popup From Event And Params
         */
-        const template = document.getElementById("js-"+ template_id + "_popup");
+        const template = document.getElementById("js-" + template_id + "_popup");
         const clone = template.content.cloneNode(true);
-        const html = clone.getElementById("js-"+ "popup");
+        const html = clone.getElementById("js-" + "popup");
         for (const field in fields) {
           if (field === "title") {
             const titleElement = html.querySelector("#js-popup__title");
-            const {payload: {title}} = response;
+            const {title} = response;
             titleElement.innerHTML = title;
           }
           if (field === "municipality") {
             const municipalityElement = html.querySelector("#js-popup__municipality");
-            const {payload: {municipality}} = response;
+            const {municipality} = response;
             municipalityElement.innerHTML = municipality;
           }
           if (field === "description") {
             const descriptionElement = html.querySelector("#js-popup__description");
-            const {payload: {description}} = response;
+            const {description} = response;
             descriptionElement.innerHTML = description;
           }
           if (field === "chart") {
 
             // Chart Title
             const chartTitleElement = html.querySelector("#js-popup__chart-title");
-            const {payload: {chart: {title}}} = response;
+            const {chart: {title}} = response;
             chartTitleElement.innerHTML = title;
 
             // Chart
@@ -92,7 +92,7 @@ function add_popup(layer_id, fields, template_id = "default") {
             const chart = echarts.init(chartElement, null, {renderer: 'svg'});
             // TODO: use chartType in payload to construct chart dynamically. For now we assume bar chart type.
             // TODO: In this fetch we always expect one payload item. Make failsafe.
-            const {payload: {chart: {data: {series}}}} = response;
+            const {chart: {data: {series}}} = response;
             const xAxisData = createListByName("key", series);
             const yAxisData = createListByName("value", series);
             const option = {
@@ -143,9 +143,9 @@ function add_popup(layer_id, fields, template_id = "default") {
           if (field === "sources") {
             const sourcesElement = html.querySelector("#js-popup__sources");
             let links = [];
-            for (const index in response.payload.sources) {
-              const url = response.payload.sources[index].url;
-              const name = response.payload.sources[index].name;
+            for (const index in response.sources) {
+              const url = response.sources[index].url;
+              const name = response.sources[index].name;
               links.push(`<a href="${url}">${name}</a>`);
             }
             sourcesElement.innerHTML = links.join(", ");
