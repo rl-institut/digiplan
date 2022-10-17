@@ -1,0 +1,172 @@
+{
+  "$id": "https://wam.rl-institut.de/digiplan/schemas/components/chart.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Chart Schema. This schema is always referenced by other schemas and can't be standalone",
+  "properties": {
+    "chartType": {
+      "description": "The chart type that shall be used. If no chart shall be used, set value to (JSON type) null. Also look at following source for more info on chart types: https://echarts.apache.org/en/option.html#series",
+      "enum": [
+        "line",
+        "bar",
+        "pie",
+        "scatter",
+        "effectScatter",
+        "radar",
+        "tree",
+        "treemap",
+        "sunburst",
+        "boxplot",
+        "candlestick",
+        "heatmap",
+        "map",
+        "parallel",
+        "lines",
+        "graph",
+        "sankey",
+        "funnel",
+        "gauge",
+        "pictorialBar",
+        "themeRiver",
+        "custom"
+      ],
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "data": {
+      "additionalProperties": false,
+      "description": "Data object of chart with key value definitions and items list",
+      "properties": {
+        "definition": {
+          "additionalProperties": false,
+          "description": "Key-value definition for lookup and human-readable names",
+          "properties": {
+            "key": {
+              "additionalProperties": false,
+              "description": "Key lookup and name definition",
+              "properties": {
+                "lookup": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "description": "Possible types, defined by JSON Schema type names",
+                  "enum": [
+                    "string",
+                    "number",
+                    "integer",
+                    "object",
+                    "array",
+                    "boolean",
+                    "null"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "lookup",
+                "name",
+                "type"
+              ],
+              "type": "object"
+            },
+            "value": {
+              "additionalProperties": false,
+              "description": "Value lookup and name definition",
+              "properties": {
+                "lookup": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "description": "Possible types, defined by JSON Schema type names",
+                  "enum": [
+                    "string",
+                    "number",
+                    "integer",
+                    "object",
+                    "array",
+                    "boolean",
+                    "null"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "lookup",
+                "name",
+                "type"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "key",
+            "value"
+          ],
+          "type": "object"
+        },
+        "series": {
+          "description": "Chart data series of key-value objects",
+          "items": {
+            "additionalProperties": false,
+            "description": "Key-value list item object",
+            "properties": {
+              "key": {
+                "type": [
+                  "string",
+                  "number",
+                  "integer",
+                  "object",
+                  "array",
+                  "boolean",
+                  "null"
+                ]
+              },
+              "value": {
+                "type": [
+                  "string",
+                  "number",
+                  "integer",
+                  "object",
+                  "array",
+                  "boolean",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "key",
+              "value"
+            ],
+            "type": "object"
+          },
+          "maxItems": 1000,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "definition",
+        "series"
+      ],
+      "type": "object"
+    },
+    "title": {
+      "description": "Title of the chart",
+      "type": "string"
+    }
+  },
+  "required": [
+    "chartType",
+    "data",
+    "title"
+  ],
+  "type": "object"
+}
