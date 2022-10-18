@@ -73,7 +73,7 @@ function add_popup(layer_id, fields, template_id = "default") {
           if (field === "municipality") {
             const municipalityElement = html.querySelector("#js-popup__municipality");
             const {municipality} = response;
-            municipalityElement.innerHTML = municipality;
+            municipalityElement.innerHTML = `(${municipality})`;
           }
           if (field === "description") {
             const descriptionElement = html.querySelector("#js-popup__description");
@@ -83,9 +83,9 @@ function add_popup(layer_id, fields, template_id = "default") {
           if (field === "chart") {
 
             // Chart Title
-            const chartTitleElement = html.querySelector("#js-popup__chart-title");
+            /* const chartTitleElement = html.querySelector("#js-popup__chart-title");
             const {chart: {title}} = response;
-            chartTitleElement.innerHTML = title;
+            chartTitleElement.innerHTML = title; */
 
             // Chart
             const chartElement = html.querySelector("#js-popup__chart");
@@ -96,6 +96,9 @@ function add_popup(layer_id, fields, template_id = "default") {
             const xAxisData = createListByName("key", series);
             const yAxisData = createListByName("value", series);
             const option = {
+              title: {
+                text: 'this is a test'
+              },
               animation: false,
               tooltip: {
                 trigger: 'axis',

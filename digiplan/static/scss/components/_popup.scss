@@ -1,3 +1,32 @@
 .mapboxgl-popup-content, .maplibregl-popup-content {
-    background: red;
+  @extend .p-0;
+  width: 28rem;
+
+  .popup {
+    &__header {
+      @extend .bg-light;
+      @extend .py-1;
+      @include flex-row-justify-center;
+    }
+
+    &__title,
+    &__municipality {
+      @extend .fs-4;
+      @extend .fw-light;
+      @extend .mb-0;
+      letter-spacing: $letter-spacing-large;
+    }
+
+    &__municipality {
+      @extend .ps-1;
+    }
+  }
+
+  .maplibregl-popup-close-button,
+    .mapboxgl-popup-close-button {
+      @extend .fs-3;
+      @extend .fw-light;
+      @extend .px-2;
+      @extend .py-1;
+    }
 }
