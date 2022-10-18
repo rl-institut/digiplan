@@ -1,7 +1,7 @@
 from itertools import count
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Field, Layout
+from crispy_forms.layout import Field
 from django.db.models import Max, Min
 from django.forms import (
     BooleanField,
@@ -85,8 +85,7 @@ class TooltipField(Field):
 class WindAreaForm(Form):
     def __init__(self):
         super().__init__()
-        self.helper = FormHelper(self)
-        self.helper.layout = Layout()
+
         for identifier, parameters in config.PARAMETERS.items():
             if parameters["type"] == "slider":
                 attrs = {
@@ -99,11 +98,7 @@ class WindAreaForm(Form):
                 if "to" in parameters:
                     attrs["data-to"] = parameters["to"]
                 field = IntegerField(
-                    label=parameters["label"],
-                    widget=TextInput(attrs=attrs),
-                )
-                self.helper.layout.append(
-                    TooltipField(identifier, tooltip=parameters["tooltip"], template="widgets/slider.html")
+                    label=parameters["label"], widget=TextInput(attrs=attrs), help_text=parameters["tooltip"]
                 )
             elif parameters["type"] == "switch":
                 field = BooleanField(label=parameters["label"])

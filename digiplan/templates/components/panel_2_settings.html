@@ -20,35 +20,7 @@
       </ul>
       <div class="c-tabs__content">
         <div class="c-tabs__pane fade show active" id="wind" role="tabpanel" aria-labelledby="wind-tab">
-          {% crispy energysystem %}
-          <div class="c-slider">
-            <div class="c-slider__label">
-              <span>Photovoltaik (Dachanlagen) [MW]</span>
-              <img src="../../static/images/icons/info.svg" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="Info über Parameter" >
-            </div>
-            <input type="text" class="js-rs-wind-roof" name="my_range" value="" />
-          </div>
-          <div class="c-slider">
-            <div class="c-slider__label">
-              <span>Photovoltaik (Freiflächenanlagen) [MW]</span>
-              <img src="../../static/images/icons/info.svg" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="Info über Parameter" >
-            </div>
-            <input type="text" class="js-rs-wind-ground" name="my_range" value="" />
-          </div>
-          <div class="c-slider">
-            <div class="c-slider__label">
-              <span>Biomasse und Biogas [MW]</span>
-              <img src="../../static/images/icons/info.svg" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="Info über Parameter" >
-            </div>
-            <input type="text" class="js-rs-wind-bio" name="my_range" value="" />
-          </div>
-          <div class="c-slider">
-            <div class="c-slider__label">
-              <span>Konventionelle Kraftwerke [MW]</span>
-              <img src="../../static/images/icons/info.svg" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="Info über Parameter" >
-            </div>
-            <input type="text" class="js-rs-wind-kw" name="my_range" value="" />
-          </div>
+          {% include "../widgets/parameters.html" %}
         </div>
         <div class="c-tabs__pane fade" id="pv" role="tabpanel" aria-labelledby="pv-tab">...</div>
       </div>
