@@ -6,7 +6,7 @@
   .popup {
     &__header {
       @extend .bg-light;
-      @extend .py-1;
+      @extend .py-2;
       @include flex-row-justify-center;
     }
 
@@ -29,6 +29,44 @@
       padding: $padding-normal;
     }
 
+    &__key-values {
+      @extend .d-flex;
+      @extend .flex-row;
+      @extend .justify-content-between;
+      @extend .fs-7;
+      @extend .border-bottom;
+
+      .key-values {
+        & > span {
+          @extend .d-block;
+        }
+
+        &__municipality {
+          @extend .fw-bold;
+        }
+
+        &__region {
+          color: $gray-600;
+        }
+
+        &__region-value {
+          @extend .bg-primary;
+          @extend .text-white;
+          @extend .rounded;
+          margin-left: 4px;
+        }
+
+        &__municipality-value {
+          @extend .bg-light;
+        }
+
+        &__region-value,
+        &__municipality-value {
+          padding: 4px 8px;
+        }
+      }
+    }
+
     &__description {
       @extend .fw-light;
       @extend .fs-7;
@@ -36,6 +74,11 @@
 
     &__sources {
       @extend .border-top;
+      @extend .lh-sm;
+
+      a {
+        @extend .fw-bold;
+      }
     }
   }
 

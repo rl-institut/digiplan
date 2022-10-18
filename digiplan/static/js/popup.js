@@ -85,11 +85,15 @@ function add_popup(layer_id, fields, template_id = "default") {
               }
             } = response;
             keyValuesElement.innerHTML = `
-              <span class="key-values__unit">${unit}</span>
-              <span class="key-values__year">${year}</span>
-              <span class="key-values__region-value">${municipalityValue}</span>
-              <span class="key-values__municipality-title">${regionTitle}</span>:
-              <span class="key-values__municipality-value">${regionValue}</span>
+              <span class="key-values__municipality">
+                <span class="key-values__unit">${unit}</span>
+                <span class="key-values__year">${year}</span>
+                <span class="key-values__region-value">${municipalityValue}</span>
+              </span>
+              <span class="key-values__region">
+                <span class="key-values__municipality-title">${regionTitle}</span>:
+                <span class="key-values__municipality-value">${regionValue}</span>
+              </span>
             `;
           }
           if (field === "description") {
