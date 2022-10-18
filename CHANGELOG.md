@@ -12,6 +12,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - results layer with customizable result views
 
 ### Changed
+- update test API JSON and dependent JS implementation to reflect changes made in #77
 - load satellite layer beneath symbol layers #43
 - switch top left logo for final version
 - switch to Digiplan favicon set

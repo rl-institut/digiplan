@@ -10,8 +10,7 @@ async function fetchGetJson(url) {
       credentials: "same-origin", // include, *same-origin, omit
       headers: {
         "Content-Type": "application/json",
-      },
-      redirect: "follow", // manual, *follow, error
+      }, redirect: "follow", // manual, *follow, error
       referrerPolicy: "no-referrer", // no-referrer, *client
     });
     return await response.json(); // parses JSON response into native JavaScript objects
@@ -55,8 +54,7 @@ function add_popup(layer_id, fields, template_id = "default") {
     // TODO: construct dynamically via emitted id by event
     const url = "/static/tests/api/popup.json??lookup=population&municipality=12lang=en";
 
-    fetchGetJson(url).then(
-      // TODO: for now we assume response has chart. Later determine dynamically.
+    fetchGetJson(url).then(// TODO: for now we assume response has chart. Later determine dynamically.
       (response) => {
         /*
           Construct Popup From Event And Params
@@ -74,6 +72,25 @@ function add_popup(layer_id, fields, template_id = "default") {
             const municipalityElement = html.querySelector("#js-popup__municipality");
             const {municipality} = response;
             municipalityElement.innerHTML = municipality;
+          }
+          if (field === "key-values") {
+            const keyValuesElement = html.querySelector("#js-popup__key-values");
+            const {
+              keyValues: {
+                unit,
+                year,
+                municipalityValue,
+                regionTitle,
+                regionValue,
+              }
+            } = response;
+            keyValuesElement.innerHTML = `
+              <span class="key-values__unit">${unit}</span>
+              <span class="key-values__year">${year}</span>
+              <span class="key-values__region-value">${municipalityValue}</span>
+              <span class="key-values__municipality-title">${regionTitle}</span>:
+              <span class="key-values__municipality-value">${regionValue}</span>
+            `;
           }
           if (field === "description") {
             const descriptionElement = html.querySelector("#js-popup__description");
@@ -96,41 +113,21 @@ function add_popup(layer_id, fields, template_id = "default") {
             const xAxisData = createListByName("key", series);
             const yAxisData = createListByName("value", series);
             const option = {
-              animation: false,
-              tooltip: {
-                trigger: 'axis',
-                axisPointer: {
+              animation: false, tooltip: {
+                trigger: 'axis', axisPointer: {
                   type: 'shadow'
                 }
-              },
-              grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-              },
-              xAxis: [
-                {
-                  type: 'category',
-                  data: xAxisData,
-                  axisTick: {
-                    alignWithLabel: true
-                  }
+              }, grid: {
+                left: '3%', right: '4%', bottom: '3%', containLabel: true
+              }, xAxis: [{
+                type: 'category', data: xAxisData, axisTick: {
+                  alignWithLabel: true
                 }
-              ],
-              yAxis: [
-                {
-                  type: 'value'
-                }
-              ],
-              series: [
-                {
-                  name: 'Direct',
-                  type: 'bar',
-                  barWidth: '60%',
-                  data: yAxisData,
-                }
-              ]
+              }], yAxis: [{
+                type: 'value'
+              }], series: [{
+                name: 'Direct', type: 'bar', barWidth: '60%', data: yAxisData,
+              }]
             };
             chart.setOption(option);
             requestAnimationFrame(() => {
@@ -151,8 +148,7 @@ function add_popup(layer_id, fields, template_id = "default") {
             sourcesElement.innerHTML = links.join(", ");
           }
         }
-      }
-    );
+      });
   });
 }
 
