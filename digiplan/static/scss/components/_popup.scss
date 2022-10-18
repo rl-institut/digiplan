@@ -1,6 +1,7 @@
 .mapboxgl-popup-content, .maplibregl-popup-content {
   @extend .p-0;
   width: $popup-width;
+  font-family: $font-family-sans-serif;
 
   .popup {
     &__header {
@@ -26,6 +27,11 @@
     &__description,
     &__sources {
       padding: $padding-normal;
+    }
+
+    &__description {
+      @extend .fw-light;
+      @extend .fs-7;
     }
 
     &__sources {
