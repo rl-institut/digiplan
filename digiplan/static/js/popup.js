@@ -114,7 +114,14 @@ function add_popup(layer_id, fields, template_id = "default") {
             const yAxisData = createListByName("value", series);
             const option = {
               title: {
-                text: 'this is a test'
+                text: 'Population growth forecast',
+                textStyle: {
+                  color: '#002E50',
+                  fontSize: 14,
+                  fontWeight: 400,
+                  lineHeight: 16
+                },
+                left: 'center'
               },
               animation: false,
               tooltip: {
@@ -124,18 +131,49 @@ function add_popup(layer_id, fields, template_id = "default") {
                 }
               }, 
               grid: {
-                left: '3%', right: '4%', bottom: '3%', containLabel: true
+                left: 16, 
+                right: 0, 
+                bottom: 32,
+                top: 48,
+                containLabel: true
               }, 
+              textStyle: {
+                color: '#002E50'
+              },
               xAxis: [{
-                type: 'category', data: xAxisData, axisTick: {
-                  alignWithLabel: true
-                }
+                type: 'category', 
+                data: xAxisData,
+                axisTick: {
+                  show: false
+                },
+                axisLine: {
+                  show: true,
+                  lineStyle: {
+                    color: '#ECF2F6'
+                  }
+                },
               }], 
               yAxis: [{
-                type: 'value'
+                type: 'value',
+                splitLine: {
+                  show: true,
+                  lineStyle: {
+                    color: '#ECF2F6'
+                  }
+                }
               }], 
               series: [{
-                name: 'Direct', type: 'bar', barWidth: '60%', data: yAxisData,
+                name: 'Direct', 
+                type: 'line', 
+                symbol: 'circle',
+                symbolSize: 6,
+                data: yAxisData,
+                lineStyle: {
+                  color: '#002E50'
+                },
+                itemStyle: {
+                  color: '#002E50'
+                }
               }]
             };
             chart.setOption(option);

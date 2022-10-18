@@ -1,6 +1,6 @@
 .mapboxgl-popup-content, .maplibregl-popup-content {
   @extend .p-0;
-  width: 28rem;
+  width: $popup-width;
 
   .popup {
     &__header {
@@ -19,6 +19,19 @@
 
     &__municipality {
       @extend .ps-1;
+    }
+
+    &__key-values,
+    &__chart,
+    &__description,
+    &__sources {
+      padding: $padding-normal;
+    }
+
+    &__chart {
+      width: 26rem;
+      //width: calc(#{$popup-width} - (2 * #{$padding-normal}));
+      height: 13rem;
     }
   }
 
