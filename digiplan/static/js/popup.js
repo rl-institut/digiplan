@@ -192,7 +192,7 @@ function add_popup(layer_id, fields, template_id = "default") {
               const name = response.sources[index].name;
               links.push(`<a href="${url}">${name}</a>`);
             }
-            sourcesElement.innerHTML = links.join(", ");
+            sourcesElement.innerHTML = `Quellen: ${links.join(", ")}`;
           }
         }
       });

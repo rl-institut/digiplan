@@ -28,10 +28,8 @@
       padding: $padding-normal;
     }
 
-    &__chart {
-      width: 26rem;
-      //width: calc(#{$popup-width} - (2 * #{$padding-normal}));
-      height: 13rem;
+    &__sources {
+      @extend .border-top;
     }
   }
 
