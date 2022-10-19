@@ -8,6 +8,7 @@
       @extend .bg-light;
       @extend .py-2;
       @include flex-row-justify-center;
+      @include user-select-none;
     }
 
     &__title,
@@ -35,6 +36,7 @@
       @extend .justify-content-between;
       @extend .fs-7;
       @extend .border-bottom;
+      @include user-select-none;
 
       .key-values {
         & > span {
