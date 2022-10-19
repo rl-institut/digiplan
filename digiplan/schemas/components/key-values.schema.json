@@ -1,0 +1,36 @@
+{
+  "$id": "https://wam.rl-institut.de/digiplan/schemas/components/key-values.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Key values for concerning municipality in comparison with ABW region",
+  "properties": {
+    "municipalityValue": {
+      "description": "Value for Municipality",
+      "type": "number"
+    },
+    "regionTitle": {
+      "description": "Title for region, e.g.: AWB region",
+      "type": "string"
+    },
+    "regionValue": {
+      "description": "Value for Municipality",
+      "type": "number"
+    },
+    "unit": {
+      "description": "Human readable name for unit in question, e.g.: population, kW/h, GW, etc.",
+      "type": "string"
+    },
+    "year": {
+      "description": "Year of key indicator values in question",
+      "type": "number"
+    }
+  },
+  "required": [
+    "unit",
+    "year",
+    "municipalityValue",
+    "regionTitle",
+    "regionValue"
+  ],
+  "type": "object"
+}
