@@ -104,9 +104,7 @@ function add_popup(layer_id, fields, template_id = "default") {
           if (field === "chart") {
 
             // Chart Title
-            /* const chartTitleElement = html.querySelector("#js-popup__chart-title");
             const {chart: {title}} = response;
-            chartTitleElement.innerHTML = title; */
 
             // Chart
             const chartElement = html.querySelector("#js-popup__chart");
@@ -118,7 +116,7 @@ function add_popup(layer_id, fields, template_id = "default") {
             const yAxisData = createListByName("value", series);
             const option = {
               title: {
-                text: 'Population growth forecast',
+                text: title,
                 textStyle: {
                   color: '#002E50',
                   fontSize: 14,
