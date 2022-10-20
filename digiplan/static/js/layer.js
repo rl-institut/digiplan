@@ -1,5 +1,3 @@
-/* global eventTopics, map, logMessage, store, get_static_state, requestAnimationFrame */
-
 // Variables
 
 const detailLayers = Array.from(document.getElementsByClassName("static-layer"));

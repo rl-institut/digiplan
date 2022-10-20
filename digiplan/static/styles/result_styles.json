@@ -1,23 +1,13 @@
 {
-  "re_power_percentage": [
-    "interpolate",
-    ["linear"],
-    ["feature-state", "re_power_percentage"],
-    0.3,
-    "#fef0d9",
-    0.6,
-    "#fdcc8a",
-    0.8,
-    "#fc8d59",
-    0.9,
-    "#e34a33",
-    1,
-    "#b30000"
-  ],
   "re_power": [
     "interpolate",
-    ["linear"],
-    ["feature-state", "re_power"],
+    [
+      "linear"
+    ],
+    [
+      "feature-state",
+      "re_power"
+    ],
     0.3,
     "#e34a33",
     0.6,
@@ -28,5 +18,25 @@
     "#eeea33",
     1,
     "#aacc00"
+  ],
+  "re_power_percentage": [
+    "interpolate",
+    [
+      "linear"
+    ],
+    [
+      "feature-state",
+      "re_power_percentage"
+    ],
+    0.3,
+    "#fef0d9",
+    0.6,
+    "#fdcc8a",
+    0.8,
+    "#fc8d59",
+    0.9,
+    "#e34a33",
+    1,
+    "#b30000"
   ]
 }

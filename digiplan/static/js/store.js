@@ -1,9 +1,7 @@
-'use strict';
-
 class Store {
   constructor(cold_init, hot_init) {
-    this.cold =cold_init || {}
-    this.hot =hot_init || {}
+    this.cold =cold_init || {};
+    this.hot =hot_init || {};
   }
 
   set (key, value, silent=false) {

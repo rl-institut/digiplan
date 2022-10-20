@@ -1,5 +1,3 @@
-'use strict';
-
 const mapView = document.getElementById("mapView");
 const newOffcanvasDocumentation = new bootstrap.Offcanvas(document.getElementById('offcanvasDocumentation'));
 const newOffcanvasSources = new bootstrap.Offcanvas(document.getElementById('offcanvasSources'));
@@ -12,4 +10,4 @@ mapView.onclick = function() {
   newOffcanvasDocumentation.hide(offcanvasDocumentation);
   newOffcanvasSources.hide(offcanvassSources);
   newOffcanvasContact.hide(offcanvasContact);
-}
+};

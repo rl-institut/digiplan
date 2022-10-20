@@ -1,9 +1,8 @@
 // Global Helper Functions
 
-
 function logMessage(msg) {
   if (store.cold.debugMode) {
-    let caller = arguments.callee.caller;
+    let caller = logMessage.caller;
     if (typeof caller === "function") {
       caller = caller.toString().substr("function ".length);
       caller = caller.substr(0, caller.indexOf("("));

@@ -1,5 +1,3 @@
-"use strict";
-
 // Disable zoom on double click
 map.doubleClickZoom.disable();
 
@@ -12,12 +10,14 @@ function flyToElement(element) {
       region = features[i];
     }
     if (store.cold.popup_layers.includes(features[i].layer.id)) {
-      return
+      return;
     }
   }
 
   // Zoom to region
-  if (region == null) {return}
+  if (region == null) {
+    return;
+  }
   if (region.source == "state") {
     state_filter.val(region.properties.name);
     PubSub.publish(eventTopics.STATE_FILTER_CHANGE, state_filter.val());
@@ -41,8 +41,8 @@ function flyToElement(element) {
 
 function toggleSatellite() {
   if (map.getLayoutProperty("satellite", "visibility") == "none") {
-    map.setLayoutProperty("satellite", "visibility", "visible")
+    map.setLayoutProperty("satellite", "visibility", "visible");
   } else {
-    map.setLayoutProperty("satellite", "visibility", "none")
+    map.setLayoutProperty("satellite", "visibility", "none");
   }
 }

@@ -56,7 +56,7 @@
       @extend .d-flex;
       @extend .flex-row;
       @extend .align-items-center;
-      
+
       select,
       img {
         @extend .d-block;
@@ -150,7 +150,7 @@
       @extend .flex-row;
       @extend .justify-content-center;
     }
-  
+
     li {
       @extend .d-inline-block;
       @extend .fs-7;
@@ -161,7 +161,7 @@
         @extend .link-primary;
       }
     }
-  
+
     li:not(:last-of-type) {
       @extend .pe-2;
     }
