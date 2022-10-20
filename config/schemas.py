@@ -6,6 +6,12 @@ from config.settings.base import APPS_DIR
 SCHEMAS_DIR = APPS_DIR.path("schemas")
 COMPONENTS_DIR = SCHEMAS_DIR.path("components")
 
+with open(os.path.join(SCHEMAS_DIR, "legend.schema.json"), "rb") as f:
+    LEGEND_SCHEMA = json.loads(f.read())
+
+with open(os.path.join(SCHEMAS_DIR, "legend.example.json"), "rb") as f:
+    LEGEND_EXAMPLE = json.loads(f.read())
+
 with open(os.path.join(SCHEMAS_DIR, "popup.schema.json"), "rb") as f:
     POPUP_SCHEMA = json.loads(f.read())
 
