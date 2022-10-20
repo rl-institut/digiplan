@@ -1,0 +1,145 @@
+[
+    {
+        "lookup": "population",
+        "de": {
+            "name": "EinwohnerInnen",
+            "unit": "EinwohnerInnen"
+        },
+        "en": {
+            "name": "Population",
+            "unit": "population"
+        }
+    },
+    {
+        "lookup": "population_density",
+        "de": {
+            "name": "Bevölkerungsdichte",
+            "unit": "km²"
+        },
+        "en": {
+            "name": "Population Density",
+            "unit": "km²"
+        }
+    },
+    {
+        "lookup": "demand_share",
+        "de": {
+            "name": "Anteil Energie aus EE an Strombedarf",
+            "unit": "%"
+        },
+        "en": {
+            "name": "Renewable Energy Share of Demand",
+            "unit": "%"
+        }
+    },
+    {
+        "lookup": "production",
+        "de": {
+            "name": "Gewonnene Energie aus EE",
+            "unit": "GWh"
+        },
+        "en": {
+            "name": "Renewable Electricity Production",
+            "unit": "GWh"
+        }
+    },
+    {
+        "lookup": "production_capita",
+        "de": {
+            "name": "Gewonnene Energie aus EE je EinwohnerIn",
+            "unit": "MWh"
+        },
+        "en": {
+            "name": "Renewable Electricity Production per Inhabitant",
+            "unit": "MWh"
+        }
+    },
+    {
+        "lookup": "production_square_km",
+        "de": {
+            "name": "Gewonnene Energie aus EE je km²",
+            "unit": "MWh"
+        },
+        "en": {
+            "name": "Renewable Electricity Production per km²",
+            "unit": "MWh"
+        }
+    },
+    {
+        "lookup": "capacity",
+        "de": {
+            "name": "Installierte Leistung EE",
+            "unit": "MW"
+        },
+        "en": {
+            "name": "Installed Renewable Capacity",
+            "unit": "MW"
+        }
+    },
+    {
+        "lookup": "capacity_square_km",
+        "de": {
+            "name": "Installierte Leistung EE je km²",
+            "unit": "MW"
+        },
+        "en": {
+            "name": "Installed Renewable Capacity per km²",
+            "unit": "MW"
+        }
+    },
+    {
+        "lookup": "wind_turbines",
+        "de": {
+            "name": "Anzahl Windenergieanlagen je km²",
+            "unit": "Windenergieanlagen"
+        },
+        "en": {
+            "name": "Number of Wind Turbines per km²",
+            "unit": "wind turbines"
+        }
+    },
+    {
+        "lookup": "energy_demand",
+        "de": {
+            "name": "Strombedarf",
+            "unit": "GWh"
+        },
+        "en": {
+            "name": "Electricity Demand",
+            "unit": "GWh"
+        }
+    },
+    {
+        "lookup": "energy_demand_capita",
+        "de": {
+            "name": "Strombedarf je EinwohnerIn",
+            "unit": "kWh"
+        },
+        "en": {
+            "name": "Electricity Demand per Inhabitant",
+            "unit": "kWh"
+        }
+    },
+    {
+        "lookup": "head_demand",
+        "de": {
+            "name": "Wärmebedarf",
+            "unit": "GWh"
+        },
+        "en": {
+            "name": " Demand",
+            "unit": "GWh"
+        }
+    },
+    {
+        "lookup": "head_demand_capita",
+        "de": {
+            "name": "Wärmebedarf je EinwohnerIn",
+            "unit": "kWh"
+        },
+        "en": {
+            "name": "Heat Demand per Inhabitant",
+            "unit": "kWh"
+        }
+    }
+]
