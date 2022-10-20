@@ -13,6 +13,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ### Changed
 - update test API JSON and dependent JS implementation to reflect changes made in #77
+- make data in legend dynamically and add legend schema and example
 - extend popup schema with key values component
 - load satellite layer beneath symbol layers #43
 - switch top left logo for final version
