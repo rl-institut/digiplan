@@ -1,6 +1,18 @@
 const legendElement = document.getElementById("legend");
 
-const createLegend = (title, colors, values, divider = 3) => {
+/**
+ * Returns a legend HTML element as a string.
+ *
+ * Uses nextColumnStartIndex numeric value to determine
+ * which legend item belongs in which of two columns
+ *
+ * @param {string} title The number to raise.
+ * @param {Array<string>} colors 6 hex (with #) or rgb(a) color values as string array.
+ * @param {Array<string>} valueRanges 6 value range strings as string array.
+ * @param {number} nextColumnStartIndex start index of item in the second column.
+ * @return {string} HTML element as a string.
+ */
+const createLegend = (title, colors, valueRanges, nextColumnStartIndex = 3) => {
   return `
     <div class="legend__heading">
       <span class="legend__title">Legend -&nbsp;</span>
@@ -8,10 +20,10 @@ const createLegend = (title, colors, values, divider = 3) => {
     </div>
     <div class="legend__wrap">
       <div class="legend__column">
-        ${values.filter((value, idx) => idx < divider).map((value, idx) => `<div class="legend__item" id="legend__item__color-${idx}">${value}</div>`).join(' ')}
+        ${valueRanges.filter((value, idx) => idx < nextColumnStartIndex).map((value, idx) => `<div class="legend__item" id="legend__item__color-${idx}">${value}</div>`).join(' ')}
       </div>
       <div class="legend__column">
-        ${values.filter((value, idx) => idx >= divider).map((value, idx) => `<div class="legend__item" id="legend__item__color-${idx + divider}">${value}</div>`).join(' ')}
+        ${valueRanges.filter((value, idx) => idx >= nextColumnStartIndex).map((value, idx) => `<div class="legend__item" id="legend__item__color-${idx + nextColumnStartIndex}">${value}</div>`).join(' ')}
       </div>
     </div>
     <style>
