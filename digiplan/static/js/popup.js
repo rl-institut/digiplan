@@ -74,6 +74,7 @@ function add_popup(layer_id, fields, template_id = "default") {
             municipalityElement.innerHTML = `(${municipality})`;
           }
           if (field === "key-values") {
+            const lang = getLanguage();
             const keyValuesElement = html.querySelector("#js-popup__key-values");
             const {
               keyValues: {
@@ -88,11 +89,11 @@ function add_popup(layer_id, fields, template_id = "default") {
               <span class="key-values__municipality">
                 <span class="key-values__unit">${unit}</span>
                 <span class="key-values__year">${year}</span>
-                <span class="key-values__region-value">${municipalityValue}</span>
+                <span class="key-values__region-value">${municipalityValue.toLocaleString(lang)}</span>
               </span>
               <span class="key-values__region">
                 <span class="key-values__municipality-title">${regionTitle}</span>:
-                <span class="key-values__municipality-value">${regionValue}</span>
+                <span class="key-values__municipality-value">${regionValue.toLocaleString(lang)}</span>
               </span>
             `;
           }
@@ -127,23 +128,23 @@ function add_popup(layer_id, fields, template_id = "default") {
               },
               animation: false,
               tooltip: {
-                trigger: 'axis', 
+                trigger: 'axis',
                 axisPointer: {
                   type: 'shadow'
                 }
-              }, 
+              },
               grid: {
-                left: 16, 
-                right: 0, 
+                left: 16,
+                right: 0,
                 bottom: 32,
                 top: 48,
                 containLabel: true
-              }, 
+              },
               textStyle: {
                 color: '#002E50'
               },
               xAxis: [{
-                type: 'category', 
+                type: 'category',
                 data: xAxisData,
                 axisTick: {
                   show: false
@@ -154,7 +155,7 @@ function add_popup(layer_id, fields, template_id = "default") {
                     color: '#ECF2F6'
                   }
                 },
-              }], 
+              }],
               yAxis: [{
                 type: 'value',
                 splitLine: {
@@ -163,10 +164,10 @@ function add_popup(layer_id, fields, template_id = "default") {
                     color: '#ECF2F6'
                   }
                 }
-              }], 
+              }],
               series: [{
-                name: 'Direct', 
-                type: 'line', 
+                name: 'Direct',
+                type: 'line',
                 symbol: 'circle',
                 symbolSize: 6,
                 data: yAxisData,
