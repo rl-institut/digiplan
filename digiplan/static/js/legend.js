@@ -6,12 +6,12 @@ const legendElement = document.getElementById("legend");
  * Uses nextColumnStartIndex numeric value to determine
  * which legend item belongs in which of two columns
  *
- * @param {string} title The title of the legend.
- * @param {string} unit The unit name concerning the value range.
- * @param {Array<string>} colors 6 hex (with #) or rgb(a) color values as string array.
- * @param {Array<string>} valueRanges 6 value range strings as string array.
- * @param {number} nextColumnStartIndex start index of item in the second column.
- * @return {string} HTML element as a string.
+ * @param {string} title - the title of the legend.
+ * @param {string} unit - the unit name concerning the value range.
+ * @param {Array<string>} colors - 6 hex (with #) or rgb(a) color values as string array.
+ * @param {Array<string>} valueRanges - 6 value range strings as string array.
+ * @param {number} nextColumnStartIndex - start index of item in the second column.
+ * @return {string} - HTML element as a string.
  */
 const createLegend = (title, unit, colors, valueRanges, nextColumnStartIndex = 3) => {
   return `
