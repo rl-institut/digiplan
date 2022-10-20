@@ -12,11 +12,7 @@
   {% compress css %}
     <link href="{% static 'vendors/maplibre/css/maplibre-gl.css' %}" rel='stylesheet'/>
   {% endcompress %}
-
   {{ block.super }}
-
-  {% compress css %}
-  {% endcompress %}
 {% endblock %}
 
 {% block content %}
