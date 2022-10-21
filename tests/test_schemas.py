@@ -31,7 +31,16 @@ def test_if_sources_example_validates():
     assert jsonschema.validate(SOURCES_EXAMPLE, SOURCES_SCHEMA) is None  # noqa: S101
 
 
-# Popup Schema Test
+# Schema Tests
+
+
+def test_if_legend_example_validates():
+    import jsonschema
+
+    from config.schemas import LEGEND_SCHEMA  # noqa: I001
+    from config.schemas import LEGEND_EXAMPLE  # noqa: I001
+
+    assert jsonschema.validate(LEGEND_EXAMPLE, LEGEND_SCHEMA) is None  # noqa: S101
 
 
 def test_if_popup_example_validates():
