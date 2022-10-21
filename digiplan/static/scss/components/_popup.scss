@@ -1,0 +1,94 @@
+.mapboxgl-popup-content, .maplibregl-popup-content {
+  @extend .p-0;
+  width: $popup-width;
+  font-family: $font-family-sans-serif;
+
+  .popup {
+    &__header {
+      @extend .bg-light;
+      @extend .py-2;
+      @include flex-row-justify-center;
+      @include user-select-none;
+    }
+
+    &__title,
+    &__municipality {
+      @extend .fs-4;
+      @extend .fw-light;
+      @extend .mb-0;
+      letter-spacing: $letter-spacing-large;
+    }
+
+    &__municipality {
+      @extend .ps-1;
+    }
+
+    &__key-values,
+    &__chart,
+    &__description,
+    &__sources {
+      padding: $padding-normal;
+    }
+
+    &__key-values {
+      @extend .d-flex;
+      @extend .flex-row;
+      @extend .justify-content-between;
+      @extend .fs-7;
+      @extend .border-bottom;
+      @include user-select-none;
+
+      .key-values {
+        & > span {
+          @extend .d-block;
+        }
+
+        &__municipality {
+          @extend .fw-bold;
+        }
+
+        &__region {
+          color: $gray-600;
+        }
+
+        &__region-value {
+          @extend .bg-primary;
+          @extend .text-white;
+          margin-left: 4px;
+        }
+
+        &__municipality-value {
+          @extend .bg-light;
+        }
+
+        &__region-value,
+        &__municipality-value {
+          padding: 4px 8px;
+          @extend .rounded;
+        }
+      }
+    }
+
+    &__description {
+      @extend .fw-light;
+      @extend .fs-7;
+    }
+
+    &__sources {
+      @extend .border-top;
+      @extend .lh-sm;
+
+      a {
+        @extend .fw-bold;
+      }
+    }
+  }
+
+  .maplibregl-popup-close-button,
+    .mapboxgl-popup-close-button {
+      @extend .fs-3;
+      @extend .fw-light;
+      @extend .px-2;
+      @extend .py-1;
+    }
+}

@@ -14,6 +14,13 @@ function logMessage(msg) {
   }
 }
 
+function getLanguage() {
+  // TODO: implement dynamic language determination
+  // In the future this will properly be implement.
+  // For now, this function always returns "en"
+  return "en-US";
+}
+
 // TODO: there is another unmerged branch with this util function (popup.js).
 // Remove duplicate entry in popup.js after merge.
 async function fetchGetJson(url) {

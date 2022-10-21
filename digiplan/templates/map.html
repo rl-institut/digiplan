@@ -9,10 +9,10 @@
 {% endblock %}
 
 {% block css %}
-  {{ block.super }}
   {% compress css %}
     <link href="{% static 'vendors/maplibre/css/maplibre-gl.css' %}" rel='stylesheet'/>
   {% endcompress %}
+  {{ block.super }}
 {% endblock %}
 
 {% block content %}
@@ -358,7 +358,7 @@
       {% if debug %}
         {% for layer in all_layers %}
           map.on("click", "{{layer.id}}", function (e) {
-            console.log(e.features[0].properties.name, e.features[0]);
+            console.log("{{layer.id}}:", e.features[0].properties.name, e.features[0]);
           });
         {% endfor %}
         setDebugMode(true);
