@@ -73,7 +73,8 @@ LAYERS_CATEGORIES = {
             name="Ergebnisse",
             name_singular="Ergebnis",
             description="",
-            popup_fields=["name"],
+            popup_fields=("title", "municipality", "key-values", "chart", "description", "sources"),
+            # order matters
         )
     ]
 }

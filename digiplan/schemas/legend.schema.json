@@ -17,7 +17,12 @@
       "uniqueItems": true
     },
     "title": {
-      "description": "Title of legend",
+      "description": "The title of the legend",
+      "maxLength": 50,
+      "type": "string"
+    },
+    "unit": {
+      "description": "The unit name concerning the value range",
       "maxLength": 50,
       "type": "string"
     },

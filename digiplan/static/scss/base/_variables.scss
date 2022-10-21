@@ -21,6 +21,7 @@ $font-size-xsmall: .75rem; // 12px
 
 $letter-spacing-small: 0.01rem;
 $letter-spacing-normal: 0.03rem;
+$letter-spacing-large: 0.06rem;
 
 // LEFT PANEL
 $panel-width-sm: 22rem;
@@ -62,6 +63,9 @@ $map-control-position-right: 1rem;
 $map-control-position-left: 1rem;
 $map-control-z-index: 9;
 $map-control-bg-color: rgba(255, 255, 255, 1);
+
+// POPUP
+$popup-width: 28rem;
 
 // ICONS
 $info-icon-size: 1rem;
