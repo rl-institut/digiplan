@@ -14,11 +14,11 @@
         "lookup": "population_density",
         "de": {
             "name": "Bevölkerungsdichte",
-            "unit": "km²"
+            "unit": "EinwohnerInnen je km²"
         },
         "en": {
             "name": "Population Density",
-            "unit": "km²"
+            "unit": "inhabitants per km²"
         }
     },
     {
@@ -50,7 +50,7 @@
             "unit": "MWh"
         },
         "en": {
-            "name": "Renewable Electricity Production per Inhabitant",
+            "name": "Renewable Electricity Production per Capita",
             "unit": "MWh"
         }
     },
@@ -99,7 +99,7 @@
         }
     },
     {
-        "lookup": "energy_demand",
+        "lookup": "electricity_demand",
         "de": {
             "name": "Strombedarf",
             "unit": "GWh"
@@ -110,35 +110,35 @@
         }
     },
     {
-        "lookup": "energy_demand_capita",
+        "lookup": "electricity_demand_capita",
         "de": {
             "name": "Strombedarf je EinwohnerIn",
             "unit": "kWh"
         },
         "en": {
-            "name": "Electricity Demand per Inhabitant",
+            "name": "Electricity Demand per Capita",
             "unit": "kWh"
         }
     },
     {
-        "lookup": "head_demand",
+        "lookup": "heat_demand",
         "de": {
             "name": "Wärmebedarf",
             "unit": "GWh"
         },
         "en": {
-            "name": " Demand",
+            "name": "Heat Demand",
             "unit": "GWh"
         }
     },
     {
-        "lookup": "head_demand_capita",
+        "lookup": "heat_demand_capita",
         "de": {
             "name": "Wärmebedarf je EinwohnerIn",
             "unit": "kWh"
         },
         "en": {
-            "name": "Heat Demand per Inhabitant",
+            "name": "Heat Demand per Capita",
             "unit": "kWh"
         }
     }

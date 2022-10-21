@@ -10,6 +10,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - switch to different tiling service, add satellite base map layer, and toggle controls #25
 - enable basic popup on results layer
 - results layer with customizable result views
+- add names and lookups for layers
 
 ### Changed
 - make data in legend dynamically and add legend schema and example
