@@ -6,11 +6,16 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- add default schema, example, and tests
 - switch to different tiling service, add satellite base map layer, and toggle controls #25
 - enable basic popup on results layer
 - results layer with customizable result views
 
 ### Changed
+- update and add new icons
+- update test API JSON and dependent JS implementation to reflect changes made in #77
+- make data in legend dynamically and add legend schema and example
+- extend popup schema with key values component
 - load satellite layer beneath symbol layers #43
 - switch top left logo for final version
 - switch to Digiplan favicon set

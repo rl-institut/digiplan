@@ -47,8 +47,8 @@
       @extend .text-uppercase;
 
       svg {
-        @extend .me-1;
         @include translateY(-2px);
+        margin-right: $icon-margin-right;
       }
     }
 
@@ -69,6 +69,11 @@
 
     &__chart {
       @extend .pb-2;
+    }
+
+    button svg {
+      @include translateY(-2px);
+      margin-right: $icon-margin-right;
     }
   }
 }
