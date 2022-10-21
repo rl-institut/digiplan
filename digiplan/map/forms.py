@@ -1,7 +1,5 @@
 from itertools import count
 
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Field
 from django.db.models import Max, Min
 from django.forms import (
     BooleanField,
@@ -10,7 +8,9 @@ from django.forms import (
     MultipleChoiceField,
     MultiValueField,
     TextInput,
+    renderers,
 )
+from django.utils.safestring import mark_safe
 from django_select2.forms import Select2MultipleWidget
 
 from . import models
@@ -18,7 +18,18 @@ from .config import config
 from .widgets import SwitchWidget
 
 
-class StaticLayerForm(Form):
+class TemplateForm(Form):
+    template_name = None
+
+    def __str__(self):
+        if self.template_name:
+            renderer = renderers.get_default_renderer()
+            return mark_safe(renderer.render(self.template_name, {"form": self}))  # noqa: S703, S308
+        return super().__str__()
+
+
+class StaticLayerForm(TemplateForm):
+    template_name = "forms.layer.html"
     switch = BooleanField(
         label=False,
         widget=SwitchWidget(
@@ -67,22 +78,10 @@ class StaticLayerForm(Form):
                 else:
                     raise ValueError(f"Unknown filter type '{filter_.type}'")
 
-        self.helper = FormHelper(self)
-        self.helper.template = "forms/layer.html"
 
+class WindAreaForm(TemplateForm):
+    template_name = "forms/parameters.html"
 
-class TooltipField(Field):
-    def __init__(self, *args, tooltip, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.tooltip = tooltip
-
-    def render(self, *args, **kwargs):
-        extra_context = kwargs.pop("extra_context", {})
-        extra_context["tooltip"] = self.tooltip
-        return super().render(*args, extra_context=extra_context, **kwargs)
-
-
-class WindAreaForm(Form):
     def __init__(self):
         super().__init__()
 

@@ -1,0 +1,9 @@
+{% for field in form %}
+  <div class="c-slider">
+    <div class="c-slider__label">
+      <span>{{ field.label_tag }}</span>
+      {% if field.help_text %}{% include 'widgets/info_button.html' with description=field.help_text %}{% endif %}
+    </div>
+    {{ field }}
+  </div>
+{% endfor %}
