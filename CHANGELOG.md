@@ -11,6 +11,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - enable basic popup on results layer
 - results layer with customizable result views
 - add names and lookups for layers
+- add color palettes for map
 
 ### Changed
 - update and add new icons
