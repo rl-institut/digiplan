@@ -1,7 +1,4 @@
-/* global map, store, eventTopics, logMessage, console*/
-
 const RESULT_STYLES = JSON.parse(document.getElementById("result_styles").textContent);
-
 const results_tab = document.getElementById("panel_3_results_tab");
 const result_views = document.getElementById("result_views");
 

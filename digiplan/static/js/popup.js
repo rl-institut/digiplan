@@ -1,5 +1,3 @@
-"use strict";
-
 async function fetchGetJson(url) {
   try {
     // Default options are marked with *

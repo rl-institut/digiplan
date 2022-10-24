@@ -1,5 +1,3 @@
-'use strict';
-
 const state_filter = $("#id_state");
 const district_filter = $("#id_district");
 
@@ -104,7 +102,7 @@ function highlight_region(region, name) {
       "type": "categorical",
       "stops": [[name, highlight_color]],
       "default": default_region_color
-    }
+    };
   } else {
     paint_property = default_region_color;
   }
