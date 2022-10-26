@@ -11,6 +11,7 @@
 
 import os
 import sys
+import sphinx_material
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -24,7 +25,14 @@ import sys
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = []
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.extlinks',
+    'sphinx.ext.graphviz',
+    'm2r2'
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -90,7 +98,114 @@ pygments_style = "sphinx"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "default"
+extensions.append("sphinx_material")
+html_theme_path = sphinx_material.html_theme_path()
+html_context = sphinx_material.get_html_context()
+html_theme = "sphinx_material"
+html_logo = "img/logos/RLI_DigiPlan_logos_horizontal.png"
+
+
+# material theme options (see theme.conf for more information)
+html_theme_options = {
+    "repo_url": "https://github.com/rl-institut-private/digiplan",
+    "repo_name": "See source code on GitHub",
+    "html_minify": False,
+    "html_prettify": True,
+    "css_minify": True,
+    # "logo_icon": "&#xe869",
+    "repo_type": "github",
+    "color_primary": "blue-grey",
+    #"color_accent": "orange",
+    "globaltoc_depth": 3,
+    #"touch_icon": "img/logos/digiplan-logo-horizontal.png",
+    "theme_color": "002C50",
+    "master_doc": False,
+    "nav_links": [
+        {
+            "href": "index",
+            "internal": True,
+            "title": "DigiPlan"
+        },
+        {
+            "href": "about",
+            "internal": True,
+            "title": "Über digiplan",
+        },
+        {
+            "href": "stemp",
+            "internal": True,
+            "title": "Was ist ein StEmp-Tool?",
+        },
+        {
+            "href": "usage",
+            "internal": True,
+            "title": "Verwendung",
+        },
+        {
+            "href": "installation_and_setup",
+            "internal": True,
+            "title": "Installation",
+        },
+{
+            "href": "energy_system",
+            "internal": True,
+            "title": "Energiesystem",
+        },
+{
+            "href": "scenarios_and_methods",
+            "internal": True,
+            "title": "Szenarien & Methoden",
+        },
+{
+            "href": "areas_and_potentials",
+            "internal": True,
+            "title": "EE-Flächen und -Potenziale",
+        },
+        {
+            "href": "data",
+            "internal": True,
+            "title": "Datengrundlage",
+        },
+        {
+            "href": "tool_transfer",
+            "internal": True,
+            "title": "Tooltransfer",
+        },
+        {
+            "href": "developer",
+            "internal": True,
+            "title": "Für EntwicklerInnen",
+        },
+{
+            "href": "whats_new",
+            "internal": True,
+            "title": "What’s New",
+        }
+    ],
+    "heroes": {
+        "index": "digiplan als Stakeholder-Empowerment-Tool für die Region Anhalt-Bitterfeld-Wittenberg",
+        "about": "",
+        "stemp": "",
+        "usage": "",
+        "installation_and_setup": "Installation und Setup",
+        "energy_system": "",
+        "scenarios_and_methods": "",
+        "areas_and_potentials": "",
+        "data": "Datengrundlage",
+        "tool_transfer": "",
+        "developer": "",
+        "whats_new": ""
+    },
+    "version_dropdown": True,
+    "version_json": "_static/versions.json",
+    "version_info": {
+        "Release": "https://bashtage.github.io/sphinx-material/",
+        "Development": "https://bashtage.github.io/sphinx-material/devel/",
+        "Release (rel)": "/sphinx-material/",
+        "Development (rel)": "/sphinx-material/devel/",
+    },
+    "table_classes": ["plain"],
+}
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
