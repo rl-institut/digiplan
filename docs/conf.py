@@ -151,15 +151,15 @@ html_theme_options = {
             "internal": True,
             "title": "Energiesystem",
         },
-{
+        {
             "href": "scenarios_and_methods",
             "internal": True,
             "title": "Szenarien & Methoden",
         },
-{
+        {
             "href": "areas_and_potentials",
             "internal": True,
-            "title": "EE-Flächen und -Potenziale",
+            "title": "EE-Flächen & -Potenziale",
         },
         {
             "href": "data",
@@ -184,17 +184,17 @@ html_theme_options = {
     ],
     "heroes": {
         "index": "digiplan als Stakeholder-Empowerment-Tool für die Region Anhalt-Bitterfeld-Wittenberg",
-        "about": "",
-        "stemp": "",
-        "usage": "",
+        "about": "Über digiplan",
+        "stemp": "Was ist ein StEmp-Tool?",
+        "usage": "Verwendung",
         "installation_and_setup": "Installation und Setup",
-        "energy_system": "",
-        "scenarios_and_methods": "",
-        "areas_and_potentials": "",
+        "energy_system": "Energiesystem",
+        "scenarios_and_methods": "Szenarien und Methoden",
+        "areas_and_potentials": "EE-Flächen und -Potenziale",
         "data": "Datengrundlage",
-        "tool_transfer": "",
-        "developer": "",
-        "whats_new": ""
+        "tool_transfer": "Übertragung des Tools auf andere Regionen",
+        "developer": "Für EntwicklerInnen",
+        "whats_new": "What’s New"
     },
     "version_dropdown": True,
     "version_json": "_static/versions.json",
