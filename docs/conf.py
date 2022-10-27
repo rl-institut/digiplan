@@ -48,7 +48,8 @@ master_doc = "index"
 
 # General information about the project.
 project = "digiplan"
-copyright = """2021, Hendrik Huyskens"""
+copyright = "2022, Reiner Lemoine Institut"
+author = 'Reiner Lemoine Institut'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
