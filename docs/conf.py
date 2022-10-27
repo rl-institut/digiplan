@@ -137,16 +137,11 @@ html_theme_options = {
             "title": "Was ist ein StEmp-Tool?",
         },
         {
-            "href": "usage",
+            "href": "usage_and_installation",
             "internal": True,
-            "title": "Verwendung",
+            "title": "Verwendung und Installation",
         },
         {
-            "href": "installation_and_setup",
-            "internal": True,
-            "title": "Installation",
-        },
-{
             "href": "energy_system",
             "internal": True,
             "title": "Energiesystem",
@@ -186,8 +181,7 @@ html_theme_options = {
         "index": "digiplan als Stakeholder-Empowerment-Tool für die Region Anhalt-Bitterfeld-Wittenberg",
         "about": "Über digiplan",
         "stemp": "Was ist ein StEmp-Tool?",
-        "usage": "Verwendung",
-        "installation_and_setup": "Installation und Setup",
+        "usage_and_installation": "Verwendung und Installation",
         "energy_system": "Energiesystem",
         "scenarios_and_methods": "Szenarien und Methoden",
         "areas_and_potentials": "EE-Flächen und -Potenziale",

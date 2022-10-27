@@ -2,3 +2,5 @@
 
 Verwendung
 ##########
+
+.. mdinclude:: ../README.md

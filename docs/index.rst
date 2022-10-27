@@ -20,8 +20,7 @@ Anleitungen.
 
    about
    stemp
-   usage
-   installation_and_setup
+   usage_and_installation
    energy_system
    scenarios_and_methods
    areas_and_potentials
