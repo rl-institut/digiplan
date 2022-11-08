@@ -33,6 +33,12 @@ FILTER_DEFINITION = {}
 REGION_FILTER_LAYERS = ["built_up_areas", "settlements", "hospitals"]
 
 
+# PARAMETERS
+
+with open(PARAMETERS_FILE, "r", encoding="utf-8") as param_file:
+    PARAMETERS = json.load(param_file)
+
+
 # STORE
 
 STORE_COLD_INIT = {
@@ -40,6 +46,11 @@ STORE_COLD_INIT = {
     "debugMode": settings.DEBUG,
     "zoom_levels": ZOOM_LEVELS,
     "region_filter_layers": REGION_FILTER_LAYERS,
+    "slider_marks": {
+        param_name: [("Status Quo", param_data["status_quo"])]
+        for param_name, param_data in PARAMETERS.items()
+        if "status_quo" in param_data
+    },
 }
 
 
@@ -68,12 +79,6 @@ def init_sources():
 
 
 SOURCES = init_sources()
-
-
-# PARAMETERS
-
-with open(PARAMETERS_FILE, "r", encoding="utf-8") as param_file:
-    PARAMETERS = json.load(param_file)
 
 
 # STYLES
