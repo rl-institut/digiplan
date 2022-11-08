@@ -1,10 +1,32 @@
 {
-  "esversion": 7,
+  "esversion": 8,
   "globals": {
     "$": false,
     "PubSub": false,
+    "activate_state": false,
+    "bootstrap": false,
+    "console": false,
+    "detailLayers": true,
+    "district_filter": true,
     "document": false,
-    "mapboxgl": false
+    "echarts": false,
+    "eventTopics": true,
+    "fetch": false,
+    "fetchGetJson": false,
+    "getLanguage": false,
+    "get_layer_id": false,
+    "get_static_state": false,
+    "layerInputClass": true,
+    "logMessage": false,
+    "map": false,
+    "maplibregl": false,
+    "requestAnimationFrame": false,
+    "setTimeout": false,
+    "state_filter": true,
+    "store": true,
+    "store_cold_init": false,
+    "store_hot_init": false,
+    "window": false
   },
   "strict": "implied"
 }

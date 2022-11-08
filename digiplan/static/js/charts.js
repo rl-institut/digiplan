@@ -3,7 +3,7 @@ const chart4 = echarts.init(document.getElementById('chart4'));
 const chart5 = echarts.init(document.getElementById('chart5'));
 const chart6 = echarts.init(document.getElementById('chart6'));
 
-option = {
+const option = {
   title: {
     text: 'Anteil Erneuerbare \nEnergien (%)',
     textStyle: {
@@ -57,7 +57,7 @@ option = {
   ]
 };
 
-optionResults = {
+const optionResults = {
   xAxis: {
     type: 'category',
     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -80,7 +80,7 @@ function resizeChart() {
     chart5.resize();
     chart6.resize();
   }, 200);
-};
+}
 
 chart3.setOption(option);
 chart4.setOption(option);

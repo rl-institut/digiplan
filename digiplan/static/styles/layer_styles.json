@@ -1,25 +1,5 @@
 {
-  "region-line": {
-    "type": "line",
-    "paint": {
-      "line-color": "rgb(250, 174,29)",
-      "line-width": [
-        "case",
-        [
-          "boolean",
-          [
-            "feature-state",
-            "hover"
-          ],
-          false
-        ],
-        3,
-        0.25
-      ]
-    }
-  },
   "region-fill": {
-    "type": "fill",
     "paint": {
       "fill-color": "rgb(250,174,29)",
       "fill-opacity": [
@@ -35,18 +15,18 @@
         0,
         0.1
       ]
-    }
+    },
+    "type": "fill"
   },
   "region-label": {
-    "type": "symbol",
     "layout": {
+      "text-field": "{name}",
+      "text-letter-spacing": 0.04,
+      "text-radial-offset": 2,
       "text-variable-anchor": [
         "center",
         "top"
-      ],
-      "text-radial-offset": 2,
-      "text-field": "{name}",
-      "text-letter-spacing": 0.04
+      ]
     },
     "paint": {
       "text-color": [
@@ -62,18 +42,42 @@
         "#222222",
         "#000000"
       ],
+      "text-halo-blur": 1.5,
       "text-halo-color": "hsl(0, 0%, 100%)",
-      "text-halo-width": 0.85,
-      "text-halo-blur": 1.5
-    }
+      "text-halo-width": 0.85
+    },
+    "type": "symbol"
+  },
+  "region-line": {
+    "paint": {
+      "line-color": "rgb(250, 174,29)",
+      "line-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "feature-state",
+            "hover"
+          ],
+          false
+        ],
+        3,
+        0.25
+      ]
+    },
+    "type": "line"
   },
   "results": {
-    "type": "fill",
     "paint": {
       "fill-color": [
         "interpolate",
-        ["linear"],
-        ["feature-state", "value"],
+        [
+          "linear"
+        ],
+        [
+          "feature-state",
+          "value"
+        ],
         0.3,
         "#fef0d9",
         0.6,
@@ -86,6 +90,7 @@
         "#b30000"
       ],
       "fill-opacity": 0.8
-    }
+    },
+    "type": "fill"
   }
 }

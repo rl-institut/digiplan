@@ -1,5 +1,3 @@
-'use strict';
-
 // Events
 
 map.on("load", function () {
@@ -50,14 +48,12 @@ function get_static_state() {
       static_state += 2 ** i;
     }
   }
-  return static_state
+  return static_state;
 }
 
 function get_states_from_url() {
   // Read url and split into domain and GET parameters
-  const url = (window.location != window.parent.location)
-    ? document.referrer
-    : document.location.href;
+  const url = window.location !== window.parent.location ? document.referrer : document.location.href;
   let params_raw = url.split("?");
   const params = {"domain": params_raw[0]};
   if (params_raw.length < 2) {

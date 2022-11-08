@@ -20,17 +20,17 @@
   .form-check-input {
     clear: left;
   }
-  
+
   .form-switch.form-switch {
     @extend .mb-1;
     @extend .ps-0;
   }
-  
+
   .form-switch.form-switch .form-check-input {
     @extend .rounded-pill;
     height: 1rem;
     width: calc(1rem + 0.75rem);
-  } 
+  }
 }
 
 /////////////////////////////////////// SLIDERS ///////////////////////////////////////
@@ -51,7 +51,7 @@
     height: 8px;
   }
 
-  .irs-from:before, 
+  .irs-from:before,
   .irs-to:before,
   .irs-single:before {
     border-top-color: $blue;
@@ -59,7 +59,7 @@
 
   .irs-handle {
     height: 14px;
-    
+
     &>i:first-child,
     &.state_hover>i:first-child,
     &:hover>i:first-child {
@@ -70,7 +70,7 @@
 
 .c-slider {
   @extend .pt-2;
-  
+
   &__label {
     @extend .fs-7;
   }
