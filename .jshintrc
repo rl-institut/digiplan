@@ -13,6 +13,7 @@
     "eventTopics": true,
     "fetch": false,
     "fetchGetJson": false,
+    "getLanguage": false,
     "get_layer_id": false,
     "get_static_state": false,
     "layerInputClass": true,
