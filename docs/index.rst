@@ -36,13 +36,6 @@ Anleitungen.
 
    api/modules
 
-Indices & Tables
-================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
 |
 
 .. image:: img/logos/RLI_DigiPlan_logos.png
