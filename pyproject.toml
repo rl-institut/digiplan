@@ -2,7 +2,7 @@
 name = "digiplan"
 version = "0.0.0"
 description = "Digiplan"
-authors = ["Hendrik Huyskens <hendrik.huyskens@rl-institut.de>"]
+authors = ["Hendrik Huyskens <hendrik.huyskens@rl-institut.de>", "Marie-Claire Gering <marie-claire.gering@rl-institut.de>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -43,7 +43,10 @@ jsonschema = "^4.16.0"
 [tool.poetry.dev-dependencies]
 Werkzeug = "^2.0.1" # https://github.com/pallets/werkzeug
 ipdb = "^0.13.7"  # https://github.com/gotcha/ipdb
-Sphinx = "^4.0.2"  # https://github.com/sphinx-doc/sphinx
+sphinx = "^5.3.0"  # https://github.com/sphinx-doc/sphinx
+sphinx-material = "^0.0.35"
+m2r2 = "^0.3.3"
+
 
 # Testing
 # ------------------------------------------------------------------------------

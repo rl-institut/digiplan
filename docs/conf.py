@@ -11,6 +11,7 @@
 
 import os
 import sys
+import sphinx_material
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -24,7 +25,14 @@ import sys
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = []
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.extlinks',
+    'sphinx.ext.graphviz',
+    'm2r2'
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -40,7 +48,8 @@ master_doc = "index"
 
 # General information about the project.
 project = "digiplan"
-copyright = """2021, Hendrik Huyskens"""
+copyright = "2022, Reiner Lemoine Institut"
+author = 'Reiner Lemoine Institut'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -90,7 +99,108 @@ pygments_style = "sphinx"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "default"
+extensions.append("sphinx_material")
+html_theme_path = sphinx_material.html_theme_path()
+html_context = sphinx_material.get_html_context()
+html_theme = "sphinx_material"
+html_logo = "img/logos/RLI_DigiPlan_logos_horizontal.png"
+
+
+# material theme options (see theme.conf for more information)
+html_theme_options = {
+    "repo_url": "https://github.com/rl-institut-private/digiplan",
+    "repo_name": "See source code on GitHub",
+    "html_minify": False,
+    "html_prettify": True,
+    "css_minify": True,
+    # "logo_icon": "&#xe869",
+    "repo_type": "github",
+    "color_primary": "blue-grey",
+    #"color_accent": "orange",
+    "globaltoc_depth": 3,
+    #"touch_icon": "img/logos/digiplan-logo-horizontal.png",
+    "theme_color": "002C50",
+    "master_doc": False,
+    "nav_links": [
+        {
+            "href": "index",
+            "internal": True,
+            "title": "DigiPlan"
+        },
+        {
+            "href": "about",
+            "internal": True,
+            "title": "Über digiplan",
+        },
+        {
+            "href": "stemp",
+            "internal": True,
+            "title": "Was ist ein StEmp-Tool?",
+        },
+        {
+            "href": "usage_and_installation",
+            "internal": True,
+            "title": "Verwendung und Installation",
+        },
+        {
+            "href": "energy_system",
+            "internal": True,
+            "title": "Energiesystem",
+        },
+        {
+            "href": "scenarios_and_methods",
+            "internal": True,
+            "title": "Szenarien & Methoden",
+        },
+        {
+            "href": "areas_and_potentials",
+            "internal": True,
+            "title": "EE-Flächen & -Potenziale",
+        },
+        {
+            "href": "data",
+            "internal": True,
+            "title": "Datengrundlage",
+        },
+        {
+            "href": "tool_transfer",
+            "internal": True,
+            "title": "Tooltransfer",
+        },
+        {
+            "href": "developer",
+            "internal": True,
+            "title": "Für EntwicklerInnen",
+        },
+{
+            "href": "whats_new",
+            "internal": True,
+            "title": "What’s New",
+        }
+    ],
+    "heroes": {
+        "index": "digiplan als Stakeholder-Empowerment-Tool für die Region Anhalt-Bitterfeld-Wittenberg",
+        "about": "Über digiplan",
+        "stemp": "Was ist ein StEmp-Tool?",
+        "usage_and_installation": "Verwendung und Installation",
+        "energy_system": "Energiesystem",
+        "scenarios_and_methods": "Szenarien und Methoden",
+        "areas_and_potentials": "EE-Flächen und -Potenziale",
+        "data": "Datengrundlage",
+        "tool_transfer": "Übertragung des Tools auf andere Regionen",
+        "developer": "Für EntwicklerInnen",
+        "whats_new": "What’s New"
+    },
+    "version_dropdown": True,
+    "version_json": "_static/versions.json",
+    "version_info": {
+        "Release": "https://bashtage.github.io/sphinx-material/",
+        "Development": "https://bashtage.github.io/sphinx-material/devel/",
+        "Release (rel)": "/sphinx-material/",
+        "Development (rel)": "/sphinx-material/devel/",
+    },
+    "table_classes": ["plain"],
+}
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -119,7 +229,7 @@ html_theme = "default"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static"]
+html_static_path = []
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
