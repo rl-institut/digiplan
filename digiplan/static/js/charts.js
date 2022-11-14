@@ -1,10 +1,10 @@
-const chart3Element = document.getElementById('chart3');
+const chart3Element = document.getElementById("chart3");
 const chart3 = echarts.init(chart3Element);
-const chart4Element = document.getElementById('chart4');
+const chart4Element = document.getElementById("chart4");
 const chart4 = echarts.init(chart4Element);
-const chart5Element = document.getElementById('chart5');
+const chart5Element = document.getElementById("chart5");
 const chart5 = echarts.init(chart5Element);
-const chart6Element = document.getElementById('chart6');
+const chart6Element = document.getElementById("chart6");
 const chart6 = echarts.init(chart6Element);
 
 const option = {
@@ -96,4 +96,5 @@ chart4.setOption(option);
 chart5.setOption(optionResults);
 chart6.setOption(optionResults);
 
-window.addEventListener('resize', resizeChart);
+window.addEventListener("resize", resizeChart);
+document.addEventListener("show.bs.tab", resizeChart);
