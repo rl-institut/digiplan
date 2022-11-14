@@ -12,4 +12,9 @@
   &__item {
     @extend .col-xl-6;
   }
+
+  &__chart {
+    height: 400px;
+    width: 100%;
+  }
 }
