@@ -73,12 +73,17 @@ const optionResults = {
   ]
 };
 
+function isVisible(element) {
+  const style = window.getComputedStyle(element);
+  return (style.display !== "none");
+}
+
 function resizeChart() {
   setTimeout(function () {
-    chart3.resize();
-    chart4.resize();
-    chart5.resize();
-    chart6.resize();
+    if (isVisible(chart3)) chart3.resize();
+    if (isVisible(chart4)) chart4.resize();
+    if (isVisible(chart5)) chart5.resize();
+    if (isVisible(chart6)) chart6.resize();
   }, 200);
 }
 
