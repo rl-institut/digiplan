@@ -1,7 +1,11 @@
-const chart3 = echarts.init(document.getElementById('chart3'));
-const chart4 = echarts.init(document.getElementById('chart4'));
-const chart5 = echarts.init(document.getElementById('chart5'));
-const chart6 = echarts.init(document.getElementById('chart6'));
+const chart3Element = document.getElementById("chart3");
+const chart3 = echarts.init(chart3Element);
+const chart4Element = document.getElementById("chart4");
+const chart4 = echarts.init(chart4Element);
+const chart5Element = document.getElementById("chart5");
+const chart5 = echarts.init(chart5Element);
+const chart6Element = document.getElementById("chart6");
+const chart6 = echarts.init(chart6Element);
 
 const option = {
   title: {
@@ -73,12 +77,17 @@ const optionResults = {
   ]
 };
 
+function isVisible(element) {
+  if (element.offsetParent) return true;
+  return false;
+}
+
 function resizeChart() {
   setTimeout(function () {
-    chart3.resize();
-    chart4.resize();
-    chart5.resize();
-    chart6.resize();
+    if (isVisible(chart3Element)) chart3.resize();
+    if (isVisible(chart4Element)) chart4.resize();
+    if (isVisible(chart5Element)) chart5.resize();
+    if (isVisible(chart6Element)) chart6.resize();
   }, 200);
 }
 
@@ -87,4 +96,5 @@ chart4.setOption(option);
 chart5.setOption(optionResults);
 chart6.setOption(optionResults);
 
-window.addEventListener('resize', resizeChart);
+window.addEventListener("resize", resizeChart);
+document.addEventListener("show.bs.tab", resizeChart);
