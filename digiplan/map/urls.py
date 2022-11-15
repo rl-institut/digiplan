@@ -14,6 +14,7 @@ urlpatterns = [
     path("", views.MapGLView.as_view(), name="map"),
     path("clusters", views.get_clusters, name="clusters"),
     path("results", views.get_results, name="results"),
+    path("visualization", views.get_visualization, name="visualization"),
 ]
 
 urlpatterns += [
