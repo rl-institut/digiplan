@@ -23,7 +23,7 @@ from digiplan.map.config.config import (
     ZOOM_LEVELS,
 )
 
-from . import models
+from . import models, results
 from .forms import StaticLayerForm, WindAreaForm
 from .layers import (
     ALL_LAYERS,
@@ -140,3 +140,14 @@ def get_results(request):
             }
         )
     raise ValueError(f"Unknown result view '{result_view}'")
+
+
+def get_visualization(request):
+    scenario_name = request.GET["scenario"]
+    parameters = request.GET.get("parameters", {})
+    visualization = request.GET["visualization"]
+    scenario = results.Scenario(scenario_name, parameters)
+    vh = results.VisualizationHandler([scenario])
+    vh.add(visualization)
+    vh.run()
+    return JsonResponse(vh[visualization])
