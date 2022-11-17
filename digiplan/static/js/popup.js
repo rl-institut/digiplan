@@ -108,9 +108,9 @@ function add_popup(layer_id, fields, template_id = "default") {
             // Chart
             const chartElement = html.querySelector("#js-popup__chart");
             const chart = echarts.init(chartElement, null, {renderer: 'svg'});
-            // TODO: use chartType in payload to construct chart dynamically. For now we assume bar chart type.
+            // TODO: use lookup property in payload to construct chart dynamically. For now we assume bar chart type.
             // TODO: In this fetch we always expect one payload item. Make failsafe.
-            const {chart: {data: {series}}} = response;
+            const {chart: {series}} = response;
             const xAxisData = createListByName("key", series);
             const yAxisData = createListByName("value", series);
             const option = {

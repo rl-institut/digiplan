@@ -61,17 +61,11 @@ class TotalCosts(Visualization):
 
     def _render(self):
         return {
-            "chartType": "bar",
-            "data": {
-                "definition": {
-                    "key": {"lookup": "scenario", "name": "Scenario", "type": "string"},
-                    "value": {"lookup": "costs", "name": "Costs", "type": "number"},
-                },
-                "series": [
-                    {"key": self.handler.scenarios[scenario_index].name, "value": result.sum().sum()}
-                    for scenario_index, result in enumerate(self._result)
-                ],
-            },
+            "lookup": self.name,
+            "series": [
+                {"key": self.handler.scenarios[scenario_index].name, "value": result.sum().sum()}
+                for scenario_index, result in enumerate(self._result)
+            ],
             "title": "Total costs",
         }
 

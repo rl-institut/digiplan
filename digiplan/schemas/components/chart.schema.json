@@ -4,159 +4,65 @@
   "additionalProperties": false,
   "description": "Chart Schema. This schema is always referenced by other schemas and can't be standalone",
   "properties": {
-    "chartType": {
-      "description": "The chart type that shall be used. If no chart shall be used, set value to (JSON type) null. Also look at following source for more info on chart types: https://echarts.apache.org/en/option.html#series",
+    "lookup": {
+      "description": "Lookup names (see also static/json/names.json). If no chart shall be used, set value to (JSON type) null.",
       "enum": [
-        "line",
-        "bar",
-        "pie",
-        "scatter",
-        "effectScatter",
-        "radar",
-        "tree",
-        "treemap",
-        "sunburst",
-        "boxplot",
-        "candlestick",
-        "heatmap",
-        "map",
-        "parallel",
-        "lines",
-        "graph",
-        "sankey",
-        "funnel",
-        "gauge",
-        "pictorialBar",
-        "themeRiver",
-        "custom"
+        "population",
+        "population_density",
+        "demand_share",
+        "production",
+        "production_capita",
+        "production_square_km",
+        "capacity",
+        "capacity_square_km",
+        "wind_turbines",
+        "electricity_demand",
+        "electricity_demand_capita",
+        "heat_demand",
+        "heat_demand_capita",
+        "energy_consumption",
+        "total_system_costs"
       ],
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": "string"
     },
-    "data": {
-      "additionalProperties": false,
-      "description": "Data object of chart with key value definitions and items list",
-      "properties": {
-        "definition": {
-          "additionalProperties": false,
-          "description": "Key-value definition for lookup and human-readable names",
-          "properties": {
-            "key": {
-              "additionalProperties": false,
-              "description": "Key lookup and name definition",
-              "properties": {
-                "lookup": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "type": {
-                  "description": "Possible types, defined by JSON Schema type names",
-                  "enum": [
-                    "string",
-                    "number",
-                    "integer",
-                    "object",
-                    "array",
-                    "boolean",
-                    "null"
-                  ],
-                  "type": "string"
-                }
-              },
-              "required": [
-                "lookup",
-                "name",
-                "type"
-              ],
-              "type": "object"
-            },
-            "value": {
-              "additionalProperties": false,
-              "description": "Value lookup and name definition",
-              "properties": {
-                "lookup": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "type": {
-                  "description": "Possible types, defined by JSON Schema type names",
-                  "enum": [
-                    "string",
-                    "number",
-                    "integer",
-                    "object",
-                    "array",
-                    "boolean",
-                    "null"
-                  ],
-                  "type": "string"
-                }
-              },
-              "required": [
-                "lookup",
-                "name",
-                "type"
-              ],
-              "type": "object"
-            }
+    "series": {
+      "description": "Chart data series of key-value objects",
+      "items": {
+        "additionalProperties": false,
+        "description": "Key-value list item object",
+        "properties": {
+          "key": {
+            "type": [
+              "string",
+              "number",
+              "integer",
+              "object",
+              "array",
+              "boolean",
+              "null"
+            ]
           },
-          "required": [
-            "key",
-            "value"
-          ],
-          "type": "object"
+          "value": {
+            "type": [
+              "string",
+              "number",
+              "integer",
+              "object",
+              "array",
+              "boolean",
+              "null"
+            ]
+          }
         },
-        "series": {
-          "description": "Chart data series of key-value objects",
-          "items": {
-            "additionalProperties": false,
-            "description": "Key-value list item object",
-            "properties": {
-              "key": {
-                "type": [
-                  "string",
-                  "number",
-                  "integer",
-                  "object",
-                  "array",
-                  "boolean",
-                  "null"
-                ]
-              },
-              "value": {
-                "type": [
-                  "string",
-                  "number",
-                  "integer",
-                  "object",
-                  "array",
-                  "boolean",
-                  "null"
-                ]
-              }
-            },
-            "required": [
-              "key",
-              "value"
-            ],
-            "type": "object"
-          },
-          "maxItems": 1000,
-          "minItems": 1,
-          "type": "array"
-        }
+        "required": [
+          "key",
+          "value"
+        ],
+        "type": "object"
       },
-      "required": [
-        "definition",
-        "series"
-      ],
-      "type": "object"
+      "maxItems": 1000,
+      "minItems": 1,
+      "type": "array"
     },
     "title": {
       "description": "Title of the chart",
@@ -164,8 +70,8 @@
     }
   },
   "required": [
-    "chartType",
-    "data",
+    "lookup",
+    "series",
     "title"
   ],
   "type": "object"
