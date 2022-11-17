@@ -66,7 +66,7 @@ class TotalCosts(Visualization):
                 {"key": self.handler.scenarios[scenario_index].name, "value": result.sum().sum()}
                 for scenario_index, result in enumerate(self._result)
             ],
-            "title": "Total costs",
+            "title": "Total Costs",
         }
 
 
