@@ -21,8 +21,11 @@ with open(os.path.join(SCHEMAS_DIR, "popup.example.json"), "rb") as f:
 with open(os.path.join(COMPONENTS_DIR, "chart.schema.json"), "rb") as f:
     CHART_SCHEMA = json.loads(f.read())
 
-with open(os.path.join(COMPONENTS_DIR, "chart.example.json"), "rb") as f:
-    CHART_EXAMPLE = json.loads(f.read())
+with open(os.path.join(COMPONENTS_DIR, "chart.energy_consumption.example.json"), "rb") as f:
+    CHART_ENERGY_CONSUMPTION_EXAMPLE = json.loads(f.read())
+
+with open(os.path.join(COMPONENTS_DIR, "chart.population.example.json"), "rb") as f:
+    CHART_POPULATION_EXAMPLE = json.loads(f.read())
 
 with open(os.path.join(COMPONENTS_DIR, "key-values.schema.json"), "rb") as f:
     KEY_VALUES_SCHEMA = json.loads(f.read())

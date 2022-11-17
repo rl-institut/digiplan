@@ -3,16 +3,21 @@
     "lookup": "population",
     "series": [
       {
-        "key": 2022,
-        "value": 9311
-      },
-      {
-        "key": 2030,
-        "value": 9182
-      },
-      {
-        "key": 2045,
-        "value": 8903
+        "data": [
+          {
+            "key": 2022,
+            "value": 9311
+          },
+          {
+            "key": 2030,
+            "value": 9182
+          },
+          {
+            "key": 2045,
+            "value": 8903
+          }
+        ],
+        "name": null
       }
     ],
     "title": "Population Growth"

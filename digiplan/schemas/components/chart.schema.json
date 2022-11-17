@@ -26,39 +26,57 @@
       "type": "string"
     },
     "series": {
-      "description": "Chart data series of key-value objects",
+      "description": "Series list",
       "items": {
-        "additionalProperties": false,
-        "description": "Key-value list item object",
+        "description": "Series item",
         "properties": {
-          "key": {
-            "type": [
-              "string",
-              "number",
-              "integer",
-              "object",
-              "array",
-              "boolean",
-              "null"
-            ]
+          "data": {
+            "description": "Series item list",
+            "items": {
+              "additionalProperties": false,
+              "description": "Series item list item",
+              "properties": {
+                "key": {
+                  "type": [
+                    "string",
+                    "number",
+                    "integer",
+                    "object",
+                    "array",
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "integer",
+                    "object",
+                    "array",
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ],
+              "type": "object"
+            },
+            "maxItems": 1000,
+            "minItems": 1,
+            "type": "array"
           },
-          "value": {
+          "name": {
+            "description": "Series item name",
             "type": [
               "string",
-              "number",
-              "integer",
-              "object",
-              "array",
-              "boolean",
               "null"
             ]
           }
-        },
-        "required": [
-          "key",
-          "value"
-        ],
-        "type": "object"
+        }
       },
       "maxItems": 1000,
       "minItems": 1,

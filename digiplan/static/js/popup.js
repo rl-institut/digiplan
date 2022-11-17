@@ -111,8 +111,8 @@ function add_popup(layer_id, fields, template_id = "default") {
             // TODO: use lookup property in payload to construct chart dynamically. For now we assume bar chart type.
             // TODO: In this fetch we always expect one payload item. Make failsafe.
             const {chart: {series}} = response;
-            const xAxisData = createListByName("key", series);
-            const yAxisData = createListByName("value", series);
+            const xAxisData = createListByName("key", series[0].data);
+            const yAxisData = createListByName("value", series[0].data);
             const option = {
               title: {
                 text: title,

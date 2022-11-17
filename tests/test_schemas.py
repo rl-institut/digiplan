@@ -4,13 +4,22 @@
 # Components Schema Tests
 
 
-def test_if_chart_example_validates():
+def test_if_chart_energy_consumption_example_validates():
     import jsonschema
 
     from config.schemas import CHART_SCHEMA  # noqa: I001
-    from config.schemas import CHART_EXAMPLE  # noqa: I001
+    from config.schemas import CHART_ENERGY_CONSUMPTION_EXAMPLE  # noqa: I001
 
-    assert jsonschema.validate(CHART_EXAMPLE, CHART_SCHEMA) is None  # noqa: S101
+    assert jsonschema.validate(CHART_ENERGY_CONSUMPTION_EXAMPLE, CHART_SCHEMA) is None  # noqa: S101
+
+
+def test_if_chart_population_example_validates():
+    import jsonschema
+
+    from config.schemas import CHART_SCHEMA  # noqa: I001
+    from config.schemas import CHART_POPULATION_EXAMPLE  # noqa: I001
+
+    assert jsonschema.validate(CHART_POPULATION_EXAMPLE, CHART_SCHEMA) is None  # noqa: S101
 
 
 def test_if_key_values_example_validates():
