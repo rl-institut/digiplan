@@ -3,6 +3,7 @@ from collections import namedtuple
 from typing import List
 
 import jsonschema
+from django.utils.translation import gettext_lazy as _
 from django_oemof.results import get_results
 from oemoflex.postprocessing import core, postprocessing
 
@@ -71,7 +72,7 @@ class TotalCosts(Visualization):
                     ],
                 }
             ],
-            "title": "Total Costs",
+            "title": _("Total Costs"),
         }
 
 
