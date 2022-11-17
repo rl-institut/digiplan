@@ -63,8 +63,13 @@ class TotalCosts(Visualization):
         return {
             "lookup": self.name,
             "series": [
-                {"key": self.handler.scenarios[scenario_index].name, "value": result.sum().sum()}
-                for scenario_index, result in enumerate(self._result)
+                {
+                    "name": None,
+                    "data": [
+                        {"key": self.handler.scenarios[scenario_index].name, "value": result.sum().sum()}
+                        for scenario_index, result in enumerate(self._result)
+                    ],
+                }
             ],
             "title": "Total Costs",
         }
