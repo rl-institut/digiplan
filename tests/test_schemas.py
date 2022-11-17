@@ -44,7 +44,7 @@ def test_if_legend_example_validates():
 
 
 def test_if_popup_example_validates():
-    from jsonschema import Draft202012Validator, RefResolver
+    from jsonschema import Draft4Validator, RefResolver
 
     from config.schemas import CHART_SCHEMA  # noqa: I001
     from config.schemas import KEY_VALUES_SCHEMA  # noqa: I001
@@ -59,6 +59,6 @@ def test_if_popup_example_validates():
         SOURCES_SCHEMA["$id"]: SOURCES_SCHEMA,
     }
     resolver = RefResolver.from_schema(POPUP_SCHEMA, store=schema_store)
-    validator = Draft202012Validator(POPUP_SCHEMA, resolver=resolver)
+    validator = Draft4Validator(POPUP_SCHEMA, resolver=resolver)
 
     assert validator.validate(POPUP_EXAMPLE) is None  # noqa: S101
