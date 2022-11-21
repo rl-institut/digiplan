@@ -3,6 +3,7 @@ from collections import namedtuple
 from typing import List
 
 import jsonschema
+from django.utils.translation import gettext_lazy as _
 from django_oemof.results import get_results
 from oemoflex.postprocessing import core, postprocessing
 
@@ -61,18 +62,17 @@ class TotalCosts(Visualization):
 
     def _render(self):
         return {
-            "chartType": "bar",
-            "data": {
-                "definition": {
-                    "key": {"lookup": "scenario", "name": "Scenario", "type": "string"},
-                    "value": {"lookup": "costs", "name": "Costs", "type": "number"},
-                },
-                "series": [
-                    {"key": self.handler.scenarios[scenario_index].name, "value": result.sum().sum()}
-                    for scenario_index, result in enumerate(self._result)
-                ],
-            },
-            "title": "Total costs",
+            "lookup": self.name,
+            "series": [
+                {
+                    "name": None,
+                    "data": [
+                        {"key": self.handler.scenarios[scenario_index].name, "value": result.sum().sum()}
+                        for scenario_index, result in enumerate(self._result)
+                    ],
+                }
+            ],
+            "title": _("Total Costs"),
         }
 
 
