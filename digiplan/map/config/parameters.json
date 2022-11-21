@@ -1,4 +1,3 @@
-{% load i18n %}
 {
   "bio": {
     "label": "Biomasse und Biogas [MW]",

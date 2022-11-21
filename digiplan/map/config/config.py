@@ -3,7 +3,7 @@ import pathlib
 from collections import namedtuple
 
 from django.conf import settings
-from django.template import Template, Context
+from django.template import Context, Template
 from range_key_dict import RangeKeyDict
 
 from digiplan import __version__
@@ -37,7 +37,7 @@ REGION_FILTER_LAYERS = ["built_up_areas", "settlements", "hospitals"]
 # PARAMETERS
 
 with open(PARAMETERS_FILE, "r", encoding="utf-8") as param_file:
-    t = Template(param_file.read())
+    t = Template("{% load i18n %}" + param_file.read())
     c = Context({})
     translated_json = t.render(c)
     PARAMETERS = json.loads(translated_json)
