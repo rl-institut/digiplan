@@ -2,7 +2,6 @@ import json
 import random
 import uuid
 
-from django.conf import settings
 from django.http import JsonResponse
 from django.views.generic import TemplateView
 
@@ -16,7 +15,9 @@ from config.settings.base import (
 )
 from digiplan.map.config.config import (
     CLUSTER_GEOJSON_FILE,
+    LAYER_STYLES,
     MAP_IMAGES,
+    RESULT_STYLES,
     SOURCES,
     STORE_COLD_INIT,
     STORE_HOT_INIT,
@@ -65,16 +66,9 @@ class MapGLView(TemplateView):
         context["session_id"] = session_id
 
         # Add layer styles (used in map.html)
-        with open(
-            settings.APPS_DIR.path("static").path("styles").path("layer_styles.json"), "r", encoding="utf-8"
-        ) as layer_styles:
-            context["layer_styles"] = json.loads(layer_styles.read())
-
+        context["layer_styles"] = LAYER_STYLES
         # Add result styles (loaded in map.html, used in results.js)
-        with open(
-            settings.APPS_DIR.path("static").path("styles").path("result_styles.json"), "r", encoding="utf-8"
-        ) as result_styles:
-            context["result_styles"] = json.loads(result_styles.read())
+        context["result_styles"] = RESULT_STYLES
 
         # Categorize sources
         categorized_sources = {

@@ -2,6 +2,7 @@ import json
 import pathlib
 from collections import namedtuple
 
+import colorbrewer
 from django.conf import settings
 from range_key_dict import RangeKeyDict
 
@@ -9,8 +10,12 @@ from digiplan import __version__
 
 # FILES
 
+STYLES_DIR = settings.APPS_DIR.path("static").path("styles")
+
 CLUSTER_GEOJSON_FILE = settings.DATA_DIR.path("cluster.geojson")
-LAYER_STYLES_FILE = settings.APPS_DIR.path("static/styles/layer_styles.json")
+LAYER_STYLES_FILE = STYLES_DIR.path("layer_styles.json")
+RESULT_STYLES_FILE = STYLES_DIR.path("result_styles.json")
+CHOROPLETH_STYLES_FILE = STYLES_DIR.path("choropleth_styles.json")
 PARAMETERS_FILE = pathlib.Path(__file__).parent / "parameters.json"
 
 # REGIONS
@@ -83,11 +88,34 @@ SOURCES = init_sources()
 
 # STYLES
 
-with open(
-    LAYER_STYLES_FILE,
-    mode="rb",
-) as f:
-    LAYER_STYLES = json.loads(f.read())
+CHOROPLETH_STYLES = {}
+with open(CHOROPLETH_STYLES_FILE, mode="r", encoding="utf-8") as choropleth_styles_file:
+    choropleths = json.load(choropleth_styles_file)
+    for name, choropleth_config in choropleths.items():
+        if choropleth_config["color_palette"] not in colorbrewer.sequential["multihue"]:
+            raise KeyError(f"Invalid color palette for choropleth {name=}.")
+        if len(choropleth_config["values"]) > 6:
+            raise IndexError(f"Too many choropleth values given for {name=}.")
+        colors = colorbrewer.sequential["multihue"][choropleth_config["color_palette"]][
+            len(choropleth_config["values"])
+        ]
+        fill_color = [
+            "interpolate",
+            ["linear"],
+            ["feature-state", name],
+        ]
+        for value, color in zip(choropleth_config["values"], colors):
+            fill_color.append(value)
+            rgb_color = f"rgb({color[0]}, {color[1]}, {color[2]})"
+            fill_color.append(rgb_color)
+        CHOROPLETH_STYLES[name] = fill_color
+
+with open(LAYER_STYLES_FILE, mode="r", encoding="utf-8") as layer_styles_file:
+    LAYER_STYLES = json.load(layer_styles_file)
+
+with open(RESULT_STYLES_FILE, mode="r", encoding="utf-8") as result_styles_file:
+    RESULT_STYLES = json.load(result_styles_file)
+RESULT_STYLES.update(CHOROPLETH_STYLES)
 
 
 # MAP

@@ -29,6 +29,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - change license to GNU AGPL v3
 - make top nav responsive
 - update horizontal padding on left panel for better use of bg-colors individual items
+- colors for choropleth are rendered by colorbrewer
 
 ### Fixed
 - fix clunky sidebar resizing of sidebar chart #68
