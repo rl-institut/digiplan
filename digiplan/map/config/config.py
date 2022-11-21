@@ -10,8 +10,8 @@ from digiplan import __version__
 # FILES
 
 CLUSTER_GEOJSON_FILE = settings.DATA_DIR.path("cluster.geojson")
-LAYER_STYLES_FILE = settings.APPS_DIR.path("static/styles/layer_styles.json")
-PARAMETERS_FILE = pathlib.Path(__file__).parent / "parameters.json"
+LAYER_STYLES_FILE = settings.APPS_DIR.path("static/config/layer_styles.json")
+PARAMETERS_FILE = settings.APPS_DIR.path("static/config/parameters.json")
 
 # REGIONS
 

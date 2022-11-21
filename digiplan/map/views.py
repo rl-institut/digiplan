@@ -65,15 +65,11 @@ class MapGLView(TemplateView):
         context["session_id"] = session_id
 
         # Add layer styles (used in map.html)
-        with open(
-            settings.APPS_DIR.path("static").path("styles").path("layer_styles.json"), "r", encoding="utf-8"
-        ) as layer_styles:
+        with open(settings.APPS_DIR.path("static/config/layer_styles.json"), "r", encoding="utf-8") as layer_styles:
             context["layer_styles"] = json.loads(layer_styles.read())
 
         # Add result styles (loaded in map.html, used in results.js)
-        with open(
-            settings.APPS_DIR.path("static").path("styles").path("result_styles.json"), "r", encoding="utf-8"
-        ) as result_styles:
+        with open(settings.APPS_DIR.path("static/config/result_styles.json"), "r", encoding="utf-8") as result_styles:
             context["result_styles"] = json.loads(result_styles.read())
 
         # Categorize sources
