@@ -72,6 +72,12 @@ class MapGLView(TemplateView):
         with open(settings.APPS_DIR.path("static/config/result_styles.json"), "r", encoding="utf-8") as result_styles:
             context["result_styles"] = json.loads(result_styles.read())
 
+        # Add settings parameters (loaded in map.html, used in slider.js)
+        with open(
+            settings.APPS_DIR.path("static/config/settings_parameters.json"), "r", encoding="utf-8"
+        ) as settings_parameters:
+            context["settings_parameters"] = json.loads(settings_parameters.read())
+
         # Categorize sources
         categorized_sources = {
             category: [SOURCES[layer.source] for layer in layers if layer.source in SOURCES]

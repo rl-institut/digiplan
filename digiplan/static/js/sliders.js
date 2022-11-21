@@ -1,6 +1,7 @@
 // Variables
 const rangeSliders = document.getElementsByClassName("js-range-slider");
 const energyMix = document.getElementById("js-energy-mix");
+const SETTINGS_PARAMETERS = JSON.parse(document.getElementById("settings_parameters").textContent);
 
 // Setup
 $(".js-range-slider").ionRangeSlider({
@@ -49,15 +50,10 @@ function updateSliderMarks(msg) {
 // Helper Functions
 
 function getColorsByIds(ids) {
-  const colorsById = {
-    "id_bio": "#bae6fd",
-    "id_conventional": "#fecdd3",
-    "id_pv_ground": "#fef08a",
-    "id_pv_roof": "#a7f3d0",
-  };
   let colors = [];
   for (let id of ids) {
-    colors.push(colorsById[id]);
+    const cleanedId = id.replace(/^id_/, "");
+    colors.push(SETTINGS_PARAMETERS[cleanedId].color);
   }
   return colors;
 }
