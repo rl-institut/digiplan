@@ -1,3 +1,4 @@
+{% load i18n %}
 {
   "bio": {
     "label": "Biomasse und Biogas [MW]",
@@ -17,7 +18,7 @@
     "type": "slider"
   },
   "pv_ground": {
-    "label": "Photovoltaik (Freifl\u00e4chenanlagen) [MW]",
+    "label": "{% trans 'Photovoltaik (Freifl\u00e4chenanlagen) [MW]' %}",
     "max": 2125,
     "min": 0,
     "start": 71,
