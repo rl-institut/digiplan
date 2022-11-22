@@ -24,6 +24,7 @@
   @extend .flex-row;
   @extend .justify-content-center;
   @extend .align-items-center;
+  @extend .px-2;
   height: $steps-height;
 
   &__list {
