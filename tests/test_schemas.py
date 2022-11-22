@@ -4,13 +4,22 @@
 # Components Schema Tests
 
 
-def test_if_chart_example_validates():
+def test_if_chart_energy_consumption_example_validates():
     import jsonschema
 
     from config.schemas import CHART_SCHEMA  # noqa: I001
-    from config.schemas import CHART_EXAMPLE  # noqa: I001
+    from config.schemas import CHART_ENERGY_CONSUMPTION_EXAMPLE  # noqa: I001
 
-    assert jsonschema.validate(CHART_EXAMPLE, CHART_SCHEMA) is None  # noqa: S101
+    assert jsonschema.validate(CHART_ENERGY_CONSUMPTION_EXAMPLE, CHART_SCHEMA) is None  # noqa: S101
+
+
+def test_if_chart_population_example_validates():
+    import jsonschema
+
+    from config.schemas import CHART_SCHEMA  # noqa: I001
+    from config.schemas import CHART_POPULATION_EXAMPLE  # noqa: I001
+
+    assert jsonschema.validate(CHART_POPULATION_EXAMPLE, CHART_SCHEMA) is None  # noqa: S101
 
 
 def test_if_key_values_example_validates():
@@ -44,7 +53,7 @@ def test_if_legend_example_validates():
 
 
 def test_if_popup_example_validates():
-    from jsonschema import Draft202012Validator, RefResolver
+    from jsonschema import Draft4Validator, RefResolver
 
     from config.schemas import CHART_SCHEMA  # noqa: I001
     from config.schemas import KEY_VALUES_SCHEMA  # noqa: I001
@@ -59,6 +68,6 @@ def test_if_popup_example_validates():
         SOURCES_SCHEMA["$id"]: SOURCES_SCHEMA,
     }
     resolver = RefResolver.from_schema(POPUP_SCHEMA, store=schema_store)
-    validator = Draft202012Validator(POPUP_SCHEMA, resolver=resolver)
+    validator = Draft4Validator(POPUP_SCHEMA, resolver=resolver)
 
     assert validator.validate(POPUP_EXAMPLE) is None  # noqa: S101

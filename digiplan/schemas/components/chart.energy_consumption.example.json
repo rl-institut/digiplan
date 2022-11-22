@@ -1,0 +1,48 @@
+{
+  "lookup": "energy_consumption",
+  "series": [
+    {
+      "data": [
+        {
+          "key": "Households",
+          "value": 931
+        },
+        {
+          "key": "GHD",
+          "value": 918
+        },
+        {
+          "key": "Industry",
+          "value": 890
+        },
+        {
+          "key": "Export",
+          "value": 237
+        }
+      ],
+      "name": "Status Quo"
+    },
+    {
+      "data": [
+        {
+          "key": "Households",
+          "value": 1931
+        },
+        {
+          "key": "GHD",
+          "value": 1918
+        },
+        {
+          "key": "Industry",
+          "value": 1890
+        },
+        {
+          "key": "Export",
+          "value": 1237
+        }
+      ],
+      "name": "Your Scenario"
+    }
+  ],
+  "title": "Energy Consumption"
+}
