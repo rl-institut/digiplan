@@ -231,7 +231,7 @@ COMPRESS_CACHEABLE_PRECOMPILERS = (("text/x-scss", "django_libsass.SassCompiler"
 # ------------------------------------------------------------------------------
 
 # If given, use local PROJ_LIB environment variable
-if env("PROJ_LIB"):
+if env("PROJ_LIB", default=False):
     PROJ_LIB = env("PROJ_LIB")
 
 DISTILL = env.bool("DISTILL", False)
