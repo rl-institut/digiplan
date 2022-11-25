@@ -17,7 +17,7 @@ from digiplan.map.config.config import (
     CLUSTER_GEOJSON_FILE,
     LAYER_STYLES,
     MAP_IMAGES,
-    RESULT_STYLES,
+    RESULTS_CHOROPLETHS,
     SOURCES,
     STORE_COLD_INIT,
     STORE_HOT_INIT,
@@ -67,8 +67,6 @@ class MapGLView(TemplateView):
 
         # Add layer styles (used in map.html)
         context["layer_styles"] = LAYER_STYLES
-        # Add result styles (loaded in map.html, used in results.js)
-        context["result_styles"] = RESULT_STYLES
 
         # Categorize sources
         categorized_sources = {
@@ -80,7 +78,7 @@ class MapGLView(TemplateView):
         # Add popup-layer IDs to cold store
         STORE_COLD_INIT["popup_layers"] = [popup.layer_id for popup in POPUPS]
         STORE_COLD_INIT["region_layers"] = [layer.id for layer in REGION_LAYERS if layer.id.startswith("fill")]
-        STORE_COLD_INIT["result_views"] = []  # Placeholder for already downloaded results (used in results.js)
+        STORE_COLD_INIT["result_views"] = {}  # Placeholder for already downloaded results (used in results.js)
         context["store_cold_init"] = json.dumps(STORE_COLD_INIT)
 
         return context
@@ -120,19 +118,19 @@ def get_results(request):
     result_view = request.GET["result_view"]
     # FIXME: Replace dummy data with actual data
     if result_view == "re_power_percentage":
-        return JsonResponse(
-            {
-                municipality.id: random.randint(0, 100) / 100  # noqa: S311
-                for municipality in models.Municipality.objects.all()
-            }
-        )
+        values = {
+            municipality.id: random.randint(0, 100) / 100  # noqa: S311
+            for municipality in models.Municipality.objects.all()
+        }
+        fill_color = RESULTS_CHOROPLETHS.get_fill_color(result_view)
+        return JsonResponse({"values": values, "fill_color": fill_color})
     if result_view == "re_power":
-        return JsonResponse(
-            {
-                municipality.id: random.randint(0, 50) / 100  # noqa: S311
-                for municipality in models.Municipality.objects.all()
-            }
-        )
+        values = {
+            municipality.id: random.randint(0, 100) / 100  # noqa: S311
+            for municipality in models.Municipality.objects.all()
+        }
+        fill_color = RESULTS_CHOROPLETHS.get_fill_color(result_view, list(values.values()))
+        return JsonResponse({"values": values, "fill_color": fill_color})
     raise ValueError(f"Unknown result view '{result_view}'")
 
 

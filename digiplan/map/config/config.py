@@ -2,11 +2,11 @@ import json
 import pathlib
 from collections import namedtuple
 
-import colorbrewer
 from django.conf import settings
 from range_key_dict import RangeKeyDict
 
 from digiplan import __version__
+from digiplan.map import utils
 
 # FILES
 
@@ -88,34 +88,12 @@ SOURCES = init_sources()
 
 # STYLES
 
-CHOROPLETH_STYLES = {}
-with open(CHOROPLETH_STYLES_FILE, mode="r", encoding="utf-8") as choropleth_styles_file:
-    choropleths = json.load(choropleth_styles_file)
-    for name, choropleth_config in choropleths.items():
-        if choropleth_config["color_palette"] not in colorbrewer.sequential["multihue"]:
-            raise KeyError(f"Invalid color palette for choropleth {name=}.")
-        if len(choropleth_config["values"]) > 6:
-            raise IndexError(f"Too many choropleth values given for {name=}.")
-        colors = colorbrewer.sequential["multihue"][choropleth_config["color_palette"]][
-            len(choropleth_config["values"])
-        ]
-        fill_color = [
-            "interpolate",
-            ["linear"],
-            ["feature-state", name],
-        ]
-        for value, color in zip(choropleth_config["values"], colors):
-            fill_color.append(value)
-            rgb_color = f"rgb({color[0]}, {color[1]}, {color[2]})"
-            fill_color.append(rgb_color)
-        CHOROPLETH_STYLES[name] = fill_color
+RESULTS_CHOROPLETHS = utils.Choropleth(RESULT_STYLES_FILE)
+STATIC_CHOROPLETHS = utils.Choropleth(CHOROPLETH_STYLES_FILE)
 
 with open(LAYER_STYLES_FILE, mode="r", encoding="utf-8") as layer_styles_file:
     LAYER_STYLES = json.load(layer_styles_file)
-
-with open(RESULT_STYLES_FILE, mode="r", encoding="utf-8") as result_styles_file:
-    RESULT_STYLES = json.load(result_styles_file)
-RESULT_STYLES.update(CHOROPLETH_STYLES)
+LAYER_STYLES.update(STATIC_CHOROPLETHS.get_all_styles())
 
 
 # MAP
