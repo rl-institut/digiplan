@@ -3,12 +3,12 @@
   @extend .nav-tabs;
   @extend .nav-fill;
   @extend .border-0;
-  @extend .border-bottom;
-  @extend .border-1;
-  @extend .border-light;
 
   &__nav-item {
     @extend .nav-item;
+    @extend .border-0;
+    @extend .border-bottom;
+    @extend .border-1;
   }
 
   &__nav-link {

@@ -34,7 +34,6 @@
 
   &__settings {
     @extend .bg-white;
-    @extend .px-4;
     @extend .pb-3;
   }
 
@@ -42,6 +41,7 @@
     @extend .py-4;
 
     &__heading {
+      @extend .px-4;
       @extend .fs-7;
       @extend .fw-light;
       @extend .text-uppercase;
@@ -52,10 +52,15 @@
       }
     }
 
+    &__tabs .nav-tabs {
+      @extend .px-4;
+    }
+
     &__form {
       @extend .d-flex;
       @extend .flex-row;
       @extend .align-items-center;
+      @extend .px-4;
 
       select,
       img {
@@ -69,6 +74,11 @@
 
     &__chart {
       @extend .pb-2;
+      @extend .px-4;
+    }
+
+    .c-slider {
+      @extend .px-4;
     }
 
     button svg {
