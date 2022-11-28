@@ -5,6 +5,7 @@
     "PubSub": false,
     "activate_state": false,
     "bootstrap": false,
+    "chart3Element": false,
     "console": false,
     "detailLayers": true,
     "district_filter": true,
