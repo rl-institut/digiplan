@@ -8,5 +8,16 @@
     "pubsub-js": "^1.9.4",
     "select2": "^4.0.13"
   },
-  "name": "digiplan"
+  "devDependencies": {
+    "vite": "^3.2.3"
+  },
+  "name": "digiplan",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "type": "module",
+  "version": "0.0.0"
 }

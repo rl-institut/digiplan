@@ -1,4 +1,4 @@
-{% load static i18n compress %}
+{% load static i18n compress django_vite %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -98,6 +98,10 @@
         <script src="{% static 'js/offcanvas.js' %}"></script>
         <script src="{% static 'js/sliders.js' %}"></script>
       {% endcompress %}
+
+      {# ECMAScript modules #}
+      {% vite_hmr_client %}
+      {% vite_asset "js/main.js" %}
 
     {% endblock js_body %}
   </body>

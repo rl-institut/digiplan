@@ -30,6 +30,7 @@ django-redis = "^4.12.1"  # https://github.com/niwinz/django-redis
 django-distill = "^2.6"
 django-crispy-forms = "^1.11.2"
 django-geojson = "^3.1.0"
+django-vite = "^2.0.2"
 
 # Django REST Framework
 djangorestframework = "^3.12.4"  # https://github.com/encode/django-rest-framework

@@ -86,6 +86,7 @@ THIRD_PARTY_APPS = [
     "django_distill",
     "django_select2",
     "raster",
+    "django_vite",
 ]
 
 LOCAL_APPS = ["digiplan.map.apps.MapConfig", "django_oemof"]
@@ -118,6 +119,11 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+# DJANGO-VITE
+DJANGO_VITE_ASSETS_PATH = str(ROOT_DIR("digiplan/static/dist/"))
+# If in DEBUG mode, uses hot-module reloading (HMR)
+DJANGO_VITE_DEV_MODE = DEBUG
+
 # STATIC
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-root
@@ -125,7 +131,7 @@ STATIC_ROOT = str(ROOT_DIR("staticfiles"))
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
-STATICFILES_DIRS = [str(APPS_DIR.path("static"))]
+STATICFILES_DIRS = [str(APPS_DIR.path("static")), DJANGO_VITE_ASSETS_PATH]
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
