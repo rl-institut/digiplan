@@ -87,7 +87,6 @@
   {{ block.super }}
 
   {{ layer_styles|json_script:"styles" }}
-  {{ result_styles|json_script:"result_styles" }}
 
   {% compress js inline %}
     <script>

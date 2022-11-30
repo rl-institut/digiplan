@@ -40,6 +40,7 @@ geojson = "^2.5.0"
 crispy-bootstrap5 = "^0.6"
 jsonschema = "^2.5"
 django-oemof = {git = "https://github.com/rl-institut/django-oemof.git"}
+colorbrewer = {git = "https://github.com/henhuy/colorbrewer-python.git"}
 
 [tool.poetry.dev-dependencies]
 Werkzeug = "^2.0.1" # https://github.com/pallets/werkzeug

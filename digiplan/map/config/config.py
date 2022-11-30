@@ -6,11 +6,16 @@ from django.conf import settings
 from range_key_dict import RangeKeyDict
 
 from digiplan import __version__
+from digiplan.map import utils
 
 # FILES
 
+STYLES_DIR = settings.APPS_DIR.path("static").path("styles")
+
 CLUSTER_GEOJSON_FILE = settings.DATA_DIR.path("cluster.geojson")
-LAYER_STYLES_FILE = settings.APPS_DIR.path("static/styles/layer_styles.json")
+LAYER_STYLES_FILE = STYLES_DIR.path("layer_styles.json")
+RESULT_STYLES_FILE = STYLES_DIR.path("result_styles.json")
+CHOROPLETH_STYLES_FILE = STYLES_DIR.path("choropleth_styles.json")
 PARAMETERS_FILE = pathlib.Path(__file__).parent / "parameters.json"
 
 # REGIONS
@@ -83,11 +88,12 @@ SOURCES = init_sources()
 
 # STYLES
 
-with open(
-    LAYER_STYLES_FILE,
-    mode="rb",
-) as f:
-    LAYER_STYLES = json.loads(f.read())
+RESULTS_CHOROPLETHS = utils.Choropleth(RESULT_STYLES_FILE)
+STATIC_CHOROPLETHS = utils.Choropleth(CHOROPLETH_STYLES_FILE)
+
+with open(LAYER_STYLES_FILE, mode="r", encoding="utf-8") as layer_styles_file:
+    LAYER_STYLES = json.load(layer_styles_file)
+LAYER_STYLES.update(STATIC_CHOROPLETHS.get_all_styles())
 
 
 # MAP

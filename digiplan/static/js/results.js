@@ -1,4 +1,3 @@
-const RESULT_STYLES = JSON.parse(document.getElementById("result_styles").textContent);
 const results_tab = document.getElementById("panel_3_results_tab");
 const result_views = document.getElementById("result_views");
 
@@ -21,7 +20,7 @@ function loadResults(msg) {
 
 function changeResultView(msg) {
   const view = result_views.value;
-  if (!(store.cold.result_views.includes(view))) {
+  if (!(view in store.cold.result_views)) {
     $.ajax({
       type: "GET",
       url: "results",
@@ -29,23 +28,26 @@ function changeResultView(msg) {
       data: {"scenario_id": 1, "result_view": view},
       success: function(results) {
         updateResultsLayer(view, results);
+        map.setPaintProperty("results", "fill-color", results.fill_color);
       }
     });
   }
-  map.setPaintProperty("results", "fill-color", RESULT_STYLES[view]);
+  else {
+    map.setPaintProperty("results", "fill-color", store.cold.result_views[view]);
+  }
   return logMessage(msg);
 }
 
 function updateResultsLayer(view, results) {
-  for (var feature_id in results) {
-    const result_feature_state = map.getFeatureState(
+  for (var feature_id in results.values) {
+    let result_feature_state = map.getFeatureState(
       {
         source: "results",
         sourceLayer: "results",
         id: feature_id,
       }
     );
-    result_feature_state[view] = results[feature_id];
+    result_feature_state[view] = results.values[feature_id];
     map.setFeatureState(
       {
         source: "results",
@@ -55,5 +57,5 @@ function updateResultsLayer(view, results) {
       result_feature_state
     );
   }
-  store.cold.result_views.push(view);
+  store.cold.result_views[view] = results.fill_color;
 }
