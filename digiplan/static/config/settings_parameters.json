@@ -1,6 +1,6 @@
 {
   "bio": {
-    "color": "#bae6fd",
+    "color": "#99D8C9",
     "label": "Biomasse und Biogas [MW]",
     "max": 100,
     "min": 0,
@@ -10,7 +10,7 @@
     "type": "slider"
   },
   "conventional": {
-    "color": "#fecdd3",
+    "color": "#A6BDDB",
     "label": "Konventionelle Kraftwerke [MW]",
     "max": 216,
     "min": 0,
@@ -19,7 +19,7 @@
     "type": "slider"
   },
   "pv_ground": {
-    "color": "#fef08a",
+    "color": "#FA9FB5",
     "label": "Photovoltaik (Freifl\u00e4chenanlagen) [MW]",
     "max": 2125,
     "min": 0,
@@ -28,7 +28,7 @@
     "type": "slider"
   },
   "pv_roof": {
-    "color": "#a7f3d0",
+    "color": "#FEC44F",
     "label": "Photvoltaik (Dachanlagen) [MW]",
     "max": 400,
     "min": 100,

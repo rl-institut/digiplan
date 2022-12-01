@@ -68,14 +68,6 @@
   }
 }
 
-.c-slider {
-  @extend .py-2;
-
-  &__label {
-    @extend .fs-7;
-  }
-}
-
 /////////////////////////////////////// INFO ICON ///////////////////////////////////////
 img.i-icon {
   margin-left: $info-icon-margin-left;

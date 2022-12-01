@@ -14,7 +14,7 @@
     overflow-y: scroll;
   }
 
-  @include media-breakpoint-up(lg)  {
+  @include media-breakpoint-up(lg) {
     height: 100vh;
     width: $panel-width !important;
   }
@@ -41,7 +41,7 @@
     @extend .py-4;
 
     &__heading {
-      @extend .px-4;
+      @extend .px-3;
       @extend .fs-7;
       @extend .fw-light;
       @extend .text-uppercase;
@@ -52,15 +52,67 @@
       }
     }
 
-    &__tabs .nav-tabs {
-      @extend .px-4;
+    &__tabs {
+      .nav-tabs,
+      .c-slider {
+        @extend .px-3;
+      }
+
+      .c-slider {
+        @extend .position-relative;
+        height: $panel-slider-height;
+        @extend .border-start;
+        @extend .border-5;
+        border-color: rgba(0, 0, 0, 0) !important;
+      }
+
+      .c-slider.active {
+        @extend .px-3;
+        @extend .bg-light;
+      }
+
+      .c-slider.conventional.active {
+        border-color: #A6BDDB !important;
+      }
+
+      .c-slider.pv_ground.active {
+        border-color: #FA9FB5 !important;
+      }
+
+      .c-slider.pv_roof.active {
+        border-color: #FEC44F !important;
+      }
+
+      .c-slider.bio.active {
+        border-color: #99D8C9 !important;
+      }
+
+      .c-slider + .sidepanel {
+        display: none;
+      }
+
+      .c-slider.active + .sidepanel {
+        display: block;
+      }
+
+      .c-slider__label {
+        @extend .d-flex;
+        @extend .flex-row;
+        @extend .justify-content-between;
+        @extend .pb-2;
+
+        &--more button {
+          @extend .text-primary;
+          @extend .fs-7;
+          @extend .fw-bold;
+        }
+      }
     }
 
     &__form {
       @extend .d-flex;
       @extend .flex-row;
       @extend .align-items-center;
-      @extend .px-4;
 
       select,
       img {
@@ -74,39 +126,33 @@
 
     &__chart {
       @extend .pb-2;
-      @extend .px-4;
-    }
-
-    .c-slider {
-      @extend .border-start;
-      padding: 0 2rem 0 1.5rem;
-      border-width: 0.5rem !important;
-      border-color: $white  !important;
-
-      &.active {
-        background-color: $gray-100;
-      }
-
-      &.bio.active {
-        border-color: $c-color-biomass !important;
-      }
-
-      &.conventional.active {
-        border-color: $c-color-conventional !important;
-      }
-
-      &.pv_ground.active {
-        border-color: $c-color-pvground !important;
-      }
-
-      &.pv_roof.active {
-        border-color: $c-color-pvroof !important;
-      }
     }
 
     button svg {
       @include translateY(-2px);
       margin-right: $icon-margin-right;
+    }
+  }
+
+  .sidepanel {
+    @extend .position-absolute;
+    @extend .bg-light;
+    @extend .p-3;
+    @include translateY(-$panel-slider-height);
+    width: 24rem;
+    left: $panel-width;
+
+    &__heading {
+      @extend .fs-7;
+      @extend .fw-bold;
+    }
+
+    &__slider {
+      @extend .pb-3;
+    }
+
+    &__label {
+      @extend .fs-7;
     }
   }
 }

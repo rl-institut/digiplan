@@ -17,6 +17,7 @@ $c-color-pvground: #FA9FB5;
 $c-color-pvroof: #FEC44F;
 
 // TYPOGRAPHY
+$c-letter-spacing: 0.03rem;
 $font-size-xlarge: 1.953rem; // 31.25px
 $font-size-large: 1.563rem; // 25px
 $font-size-medium: 1.25rem; // 20px
@@ -32,6 +33,7 @@ $letter-spacing-large: 0.06rem;
 $panel-width-sm: 22rem;
 $panel-width: 26rem;
 $panel-side-padding: 1.5rem;
+$panel-slider-height: 7rem;
 
 // Media-breaks
 $small-screen: 576px;

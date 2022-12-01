@@ -1,9 +1,10 @@
 // Variables
 const rangeSliders = document.getElementsByClassName("js-range-slider");
+const sliderLabelButtons = document.querySelectorAll(".c-slider__label--more > .button");
 const energyMix = document.getElementById("js-energy-mix");
 const SETTINGS_PARAMETERS = JSON.parse(document.getElementById("settings_parameters").textContent);
 
-// Setup
+// Actions
 $(".js-range-slider").ionRangeSlider({
     onChange: function (data) {
       const msg = eventTopics.SLIDER_CHANGE;
@@ -12,13 +13,35 @@ $(".js-range-slider").ionRangeSlider({
   }
 );
 
+Array.from(sliderLabelButtons).forEach(sliderLabelButton => {
+  sliderLabelButton.addEventListener("click", () => {
+    const sliderLabel = sliderLabelButton.parentNode.parentNode.parentNode;
+    PubSub.publish(eventTopics.SLIDER_LABEL_CLICK, sliderLabel);
+  });
+});
+
 
 // Subscriptions
 PubSub.subscribe(eventTopics.STATES_INITIALIZED, updateSliderMarks);
 PubSub.subscribe(eventTopics.STATES_INITIALIZED, createPercentagesOfPowerSources);
 PubSub.subscribe(eventTopics.SLIDER_CHANGE, createPercentagesOfPowerSources);
+PubSub.subscribe(eventTopics.SLIDER_CHANGE, showActivesSliderOnSliderChange);
+PubSub.subscribe(eventTopics.SLIDER_LABEL_CLICK, showActivesSliderOnSliderLabelClick);
 
 // Subscriber Functions
+
+function showActivesSliderOnSliderLabelClick(msg, sliderLabel) {
+  Array.from(sliderLabelButtons).forEach(item => item.parentNode.parentNode.parentNode.classList.remove("active"));
+  sliderLabel.classList.add("active");
+  return logMessage(msg);
+}
+
+function showActivesSliderOnSliderChange(msg, data) {
+  Array.from(sliderLabelButtons).forEach(item => item.parentNode.parentNode.parentNode.classList.remove("active"));
+  const sliderLabel = data.input[0].parentNode;
+  sliderLabel.classList.add("active");
+  return logMessage(msg);
+}
 
 function createPercentagesOfPowerSources(msg) {
   let ids = [];
