@@ -85,7 +85,7 @@ class WindAreaForm(TemplateForm):
     def __init__(self):
         super().__init__()
 
-        for identifier, parameters in config.PARAMETERS.items():
+        for identifier, parameters in config.SETTINGS_PARAMETERS.items():
             if parameters["type"] == "slider":
                 attrs = {
                     "class": "js-range-slider",

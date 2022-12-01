@@ -36,7 +36,7 @@
 /////////////////////////////////////// SLIDERS ///////////////////////////////////////
 .irs.irs--flat {
   .irs-line {
-    @extend .bg-light;
+    background-color: $gray-200;
   }
 
   .irs-from,
@@ -69,7 +69,7 @@
 }
 
 .c-slider {
-  @extend .pt-2;
+  @extend .py-2;
 
   &__label {
     @extend .fs-7;

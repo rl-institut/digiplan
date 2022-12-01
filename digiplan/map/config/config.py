@@ -6,15 +6,16 @@ from django.conf import settings
 from range_key_dict import RangeKeyDict
 
 from digiplan import __version__
+from digiplan.map import utils
 
 # FILES
-
 CLUSTER_GEOJSON_FILE = settings.DATA_DIR.path("cluster.geojson")
 LAYER_STYLES_FILE = settings.APPS_DIR.path("static/config/layer_styles.json")
-PARAMETERS_FILE = settings.APPS_DIR.path("static/config/settings_parameters.json")
+RESULT_STYLES_FILE = settings.APPS_DIR.path("static/config/result_styles.json")
+CHOROPLETH_STYLES_FILE = settings.APPS_DIR.path("static/config/choropleth_styles.json")
+SETTINGS_PARAMETERS_FILE = settings.APPS_DIR.path("static/config/settings_parameters.json")
 
 # REGIONS
-
 MIN_ZOOM = 6
 MAX_ZOOM = 22
 MAX_DISTILLED_ZOOM = 10
@@ -26,21 +27,15 @@ ZOOM_LEVELS = {
 REGIONS = ("municipality",)
 REGION_ZOOMS = RangeKeyDict({zoom: layer for layer, zoom in ZOOM_LEVELS.items() if layer in REGIONS})
 
-
 # FILTERS
-
 FILTER_DEFINITION = {}
 REGION_FILTER_LAYERS = ["built_up_areas", "settlements", "hospitals"]
 
-
 # PARAMETERS
-
-with open(PARAMETERS_FILE, "r", encoding="utf-8") as param_file:
-    PARAMETERS = json.load(param_file)
-
+with open(SETTINGS_PARAMETERS_FILE, "r", encoding="utf-8") as param_file:
+    SETTINGS_PARAMETERS = json.load(param_file)
 
 # STORE
-
 STORE_COLD_INIT = {
     "version": __version__,
     "debugMode": settings.DEBUG,
@@ -48,7 +43,7 @@ STORE_COLD_INIT = {
     "region_filter_layers": REGION_FILTER_LAYERS,
     "slider_marks": {
         param_name: [("Status Quo", param_data["status_quo"])]
-        for param_name, param_data in PARAMETERS.items()
+        for param_name, param_data in SETTINGS_PARAMETERS.items()
         if "status_quo" in param_data
     },
 }
@@ -64,8 +59,6 @@ STORE_HOT_INIT = init_hot_store()
 
 
 # SOURCES
-
-
 def init_sources():
     sources = {}
     metadata_path = pathlib.Path(settings.METADATA_DIR)
@@ -82,12 +75,12 @@ SOURCES = init_sources()
 
 
 # STYLES
+RESULTS_CHOROPLETHS = utils.Choropleth(RESULT_STYLES_FILE)
+STATIC_CHOROPLETHS = utils.Choropleth(CHOROPLETH_STYLES_FILE)
 
-with open(
-    LAYER_STYLES_FILE,
-    mode="rb",
-) as f:
-    LAYER_STYLES = json.loads(f.read())
+with open(LAYER_STYLES_FILE, mode="r", encoding="utf-8") as layer_styles_file:
+    LAYER_STYLES = json.load(layer_styles_file)
+LAYER_STYLES.update(STATIC_CHOROPLETHS.get_all_styles())
 
 
 # MAP
@@ -96,7 +89,6 @@ MAP_IMAGES = [MapImage("hospital", "images/icons/hospital.png")]
 
 
 # DISTILL
-
 # Tiles of Ghana: At z=5 Ghana has width x=15-16 and height y=15(-16)
 X_AT_MIN_Z = 31
 Y_AT_MIN_Z = 30
