@@ -78,8 +78,8 @@
     }
 
     .c-slider {
-      @extend .px-4;
       @extend .border-start;
+      padding: 0 2rem 0 1.5rem;
       border-width: 0.5rem !important;
       border-color: $white  !important;
 
