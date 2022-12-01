@@ -2,7 +2,7 @@ import {resolve} from "path";
 
 export default {
   plugins: [],
-  root: resolve("./digiplan/static/src"),
+  root: resolve("./digiplan/static/"),
   base: "/static/",
   server: {
     host: "localhost",
@@ -17,14 +17,14 @@ export default {
     extensions: [".js", ".json"],
   },
   build: {
-    outDir: resolve("./digiplan/static/dist"),
+    outDir: resolve("./dist/"),
     assetsDir: "",
     manifest: true,
     emptyOutDir: true,
     target: "es2015",
     rollupOptions: {
       input: {
-        main: resolve("./digiplan/static/src/js/main.js"),
+        popup: resolve("./digiplan/static/js/popup.js"),
       },
       output: {
         chunkFileNames: undefined,

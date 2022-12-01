@@ -1,10 +1,9 @@
 {% extends "base.html" %}
-{% load static i18n compress %}
+{% load static i18n compress django_vite %}
 
 {% block js_head %}
   {% compress js %}
     <script src="{% static 'vendors/maplibre/js/maplibre-gl.js' %}"></script>
-
   {% endcompress %}
 {% endblock %}
 
@@ -108,8 +107,12 @@
         maxBounds: [[11.280733017118229, 51.22918643452503], [13.616574868700604, 52.35515806663738]] // [[south-west], [north-east]] restrict area
       });
     </script>
-    <script src="{% static 'js/popup.js' %}" type="text/javascript"></script>
-    <script>
+   {% endcompress %}
+
+    {% vite_asset "js/popup.js" %}
+    <script type="module">
+      import { add_popup } from "../static/js/popup.js";
+
       if (store.cold.debugMode) {
         map.showTileBoundaries = true;
       }
@@ -364,7 +367,6 @@
         setDebugMode(true);
       {% endif %}
     </script>
-  {% endcompress %}
 
   {% compress js %}
     <script src="{% static 'js/map.js' %}" type="text/javascript"></script>

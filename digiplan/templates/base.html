@@ -58,6 +58,8 @@
 
     {% block js_body %}
 
+      {% vite_hmr_client %}
+
       {% compress js %}
         <script src="{% static 'vendors/echarts/js/echarts.min.js' %}"></script>
         <script src="{% static 'vendors/bootstrap/js/bootstrap.min.js' %}"></script>
@@ -98,10 +100,6 @@
         <script src="{% static 'js/offcanvas.js' %}"></script>
         <script src="{% static 'js/sliders.js' %}"></script>
       {% endcompress %}
-
-      {# ECMAScript modules #}
-      {% vite_hmr_client %}
-      {% vite_asset "js/main.js" %}
 
     {% endblock js_body %}
   </body>
