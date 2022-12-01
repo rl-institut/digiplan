@@ -79,6 +79,29 @@
 
     .c-slider {
       @extend .px-4;
+      @extend .border-start;
+      border-width: 0.5rem !important;
+      border-color: $white  !important;
+
+      &.active {
+        background-color: $gray-100;
+      }
+
+      &.bio.active {
+        border-color: $c-color-biomass !important;
+      }
+
+      &.conventional.active {
+        border-color: $c-color-conventional !important;
+      }
+
+      &.pv_ground.active {
+        border-color: $c-color-pvground !important;
+      }
+
+      &.pv_roof.active {
+        border-color: $c-color-pvroof !important;
+      }
     }
 
     button svg {
