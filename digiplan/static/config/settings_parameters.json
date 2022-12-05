@@ -4,6 +4,29 @@
     "label": "Biomasse und Biogas [MW]",
     "max": 100,
     "min": 0,
+    "sidepanel": {
+      "forest_usage": {
+        "label": "Waldnutzung [%]",
+        "max": 100,
+        "min": 0,
+        "start": 20,
+        "tooltip": "Waldnutzung [%]",
+        "type": "slider"
+      },
+      "lsg_usage": {
+        "label": "LSG-Nutzung",
+        "tooltip": "LSG-Nutzung",
+        "type": "switch"
+      },
+      "settlement_distance": {
+        "label": "Abstand zu Siedlungen [m]",
+        "max": 1000,
+        "min": 0,
+        "start": 400,
+        "tooltip": "Abstand zu Siedlungen [m]",
+        "type": "slider"
+      }
+    },
     "start": 71,
     "status_quo": 50,
     "tooltip": "Beispiel3",
