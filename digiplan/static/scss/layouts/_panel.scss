@@ -91,7 +91,7 @@
         display: none;
       }
 
-      .c-slider.active + .sidepanel {
+      .c-slider.active-sidepanel + .sidepanel {
         display: block;
         z-index: 10;
       }
