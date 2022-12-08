@@ -33,13 +33,13 @@ PubSub.subscribe(eventTopics.SLIDER_LABEL_CLICK, showActivesSliderOnSliderLabelC
 // Subscriber Functions
 
 function showActivesSliderOnSliderLabelClick(msg, sliderLabel) {
-  Array.from(sliderLabelButtons).forEach(item => item.parentNode.parentNode.parentNode.classList.remove("active", "active-sidepanel"));
+  Array.from(rangeSliders).forEach(item => item.parentNode.classList.remove("active", "active-sidepanel"));
   sliderLabel.classList.add("active", "active-sidepanel");
   return logMessage(msg);
 }
 
 function showActivesSliderOnSliderChange(msg, data) {
-  Array.from(sliderLabelButtons).forEach(item => item.parentNode.parentNode.parentNode.classList.remove("active", "active-sidepanel"));
+  Array.from(rangeSliders).forEach(item => item.parentNode.classList.remove("active", "active-sidepanel"));
   const sliderLabel = data.input[0].parentNode;
   sliderLabel.classList.add("active");
   return logMessage(msg);
