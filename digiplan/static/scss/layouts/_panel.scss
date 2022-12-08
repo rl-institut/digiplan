@@ -145,7 +145,11 @@
     @extend .p-3;
     transform: translateY(calc(-#{$panel-slider-height} - var(--scrollPosition)));
     width: 24rem;
-    left: $panel-width;
+    left: $panel-width-sm;
+
+    @include media-breakpoint-up(lg) {
+      left: $panel-width;
+    }
 
     &__heading {
       @extend .fs-7;
