@@ -26,7 +26,7 @@ from digiplan.map.config.config import (
 )
 
 from . import models, results
-from .forms import StaticLayerForm, WindAreaForm
+from .forms import PanelForm, StaticLayerForm
 from .layers import (
     ALL_LAYERS,
     ALL_SOURCES,
@@ -54,7 +54,7 @@ class MapGLView(TemplateView):
         "area_switches": {
             category: [StaticLayerForm(layer) for layer in layers] for category, layers in LAYERS_CATEGORIES.items()
         },
-        "energysystem": WindAreaForm(SETTINGS_PARAMETERS),
+        "energysystem": PanelForm(SETTINGS_PARAMETERS),
         "use_distilled_mvts": USE_DISTILLED_MVTS,
         "store_hot_init": STORE_HOT_INIT,
         "zoom_levels": ZOOM_LEVELS,

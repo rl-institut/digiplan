@@ -79,8 +79,8 @@ class StaticLayerForm(TemplateForm):
                     raise ValueError(f"Unknown filter type '{filter_.type}'")
 
 
-class WindAreaForm(TemplateForm):
-    template_name = "forms/parameters.html"
+class PanelForm(TemplateForm):
+    template_name = "forms/panel.html"
     sidepanels = {}
 
     def __init__(self, parameters):
@@ -104,7 +104,7 @@ class WindAreaForm(TemplateForm):
                 field = IntegerField(label=item["label"], widget=TextInput(attrs=attrs), help_text=item["tooltip"])
                 yield {"name": name, "field": field}
                 if "sidepanel" in item:
-                    self.sidepanels[name] = WindAreaForm(item["sidepanel"])
+                    self.sidepanels[name] = PanelForm(item["sidepanel"])
             elif item["type"] == "switch":
                 attrs = {
                     "class": item["class"],
