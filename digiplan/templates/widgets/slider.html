@@ -1,7 +1,11 @@
+{% load helper_tags %}
+
 <div class="c-slider {{ field.name }}">
   <div class="c-slider__label">
-    <span>{{ field.label }}{% if tooltip %} {% include 'widgets/info_button.html' with description=tooltip %}{% endif %}</span>
-    <span class="c-slider__label--more">
+    <span>{{ field.label }}{% if tooltip %}
+      {% include 'widgets/info_button.html' with description=tooltip %}{% endif %}</span>
+    {% if field.field.widget.attrs|dict_lookup_filter:"data-has-sidepanel" == "true" %}
+      <span class="c-slider__label--more">
       <button class="button button--transparent">
         <span class="px-1">mehr</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -12,6 +16,7 @@
         </svg>
       </button>
     </span>
+    {% endif %}
   </div>
   {{ field }}
 </div>

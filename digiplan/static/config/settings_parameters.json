@@ -1,11 +1,13 @@
 {
   "bio": {
+    "class": "js-range-slider",
     "color": "#99D8C9",
     "label": "Biomasse und Biogas [MW]",
     "max": 100,
     "min": 0,
     "sidepanel": {
       "forest_usage": {
+        "class": "js-sidepanel-range-slider",
         "label": "Waldnutzung [%]",
         "max": 100,
         "min": 0,
@@ -14,11 +16,13 @@
         "type": "slider"
       },
       "lsg_usage": {
+        "class": "js-sidepanel-switch",
         "label": "LSG-Nutzung",
         "tooltip": "LSG-Nutzung",
         "type": "switch"
       },
       "settlement_distance": {
+        "class": "js-sidepanel-range-slider",
         "label": "Abstand zu Siedlungen [m]",
         "max": 1000,
         "min": 0,
@@ -33,15 +37,43 @@
     "type": "slider"
   },
   "conventional": {
+    "class": "js-range-slider",
     "color": "#A6BDDB",
     "label": "Konventionelle Kraftwerke [MW]",
     "max": 216,
     "min": 0,
+    "sidepanel": {
+      "forest_usage": {
+        "class": "js-sidepanel-range-slider",
+        "label": "Waldnutzung [%]",
+        "max": 100,
+        "min": 0,
+        "start": 20,
+        "tooltip": "Waldnutzung [%]",
+        "type": "slider"
+      },
+      "lsg_usage": {
+        "class": "js-sidepanel-switch",
+        "label": "LSG-Nutzung",
+        "tooltip": "LSG-Nutzung",
+        "type": "switch"
+      },
+      "settlement_distance": {
+        "class": "js-sidepanel-range-slider",
+        "label": "Abstand zu Siedlungen [m]",
+        "max": 1000,
+        "min": 0,
+        "start": 400,
+        "tooltip": "Abstand zu Siedlungen [m]",
+        "type": "slider"
+      }
+    },
     "start": 71,
     "tooltip": "Beispiel4",
     "type": "slider"
   },
   "pv_ground": {
+    "class": "js-range-slider",
     "color": "#FA9FB5",
     "label": "Photovoltaik (Freifl\u00e4chenanlagen) [MW]",
     "max": 2125,
@@ -51,12 +83,13 @@
     "type": "slider"
   },
   "pv_roof": {
+    "class": "js-range-slider",
     "color": "#FEC44F",
     "label": "Photvoltaik (Dachanlagen) [MW]",
     "max": 400,
     "min": 100,
     "start": 200,
-    "tooltip": "Wieviele Leistung soll durch Photovoltaikanlagen bereit gestellt werden?",
+    "tooltip": "Wieviel Leistung soll durch Photovoltaikanlagen bereit gestellt werden?",
     "type": "slider"
   }
 }

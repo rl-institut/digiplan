@@ -4,7 +4,7 @@ const sliderLabelButtons = document.querySelectorAll(".c-slider__label--more > .
 const energyMix = document.getElementById("js-energy-mix");
 const SETTINGS_PARAMETERS = JSON.parse(document.getElementById("settings_parameters").textContent);
 
-// Actions
+// Setup
 $(".js-range-slider").ionRangeSlider({
     onChange: function (data) {
       const msg = eventTopics.SLIDER_CHANGE;
@@ -12,6 +12,8 @@ $(".js-range-slider").ionRangeSlider({
     }
   }
 );
+
+$(".js-sidepanel-range-slider").ionRangeSlider();
 
 Array.from(sliderLabelButtons).forEach(sliderLabelButton => {
   sliderLabelButton.addEventListener("click", () => {
@@ -31,13 +33,13 @@ PubSub.subscribe(eventTopics.SLIDER_LABEL_CLICK, showActivesSliderOnSliderLabelC
 // Subscriber Functions
 
 function showActivesSliderOnSliderLabelClick(msg, sliderLabel) {
-  Array.from(sliderLabelButtons).forEach(item => item.parentNode.parentNode.parentNode.classList.remove("active", "active-sidepanel"));
+  Array.from(rangeSliders).forEach(item => item.parentNode.classList.remove("active", "active-sidepanel"));
   sliderLabel.classList.add("active", "active-sidepanel");
   return logMessage(msg);
 }
 
 function showActivesSliderOnSliderChange(msg, data) {
-  Array.from(sliderLabelButtons).forEach(item => item.parentNode.parentNode.parentNode.classList.remove("active", "active-sidepanel"));
+  Array.from(rangeSliders).forEach(item => item.parentNode.classList.remove("active", "active-sidepanel"));
   const sliderLabel = data.input[0].parentNode;
   sliderLabel.classList.add("active");
   return logMessage(msg);

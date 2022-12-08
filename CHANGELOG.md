@@ -14,6 +14,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - add color palettes for map
 
 ### Changed
+- make creation of sidepanel menus programmatic
 - update and add new icons
 - update test API JSON and dependent JS implementation to reflect changes made in #77
 - make data in legend dynamically and add legend schema and example
