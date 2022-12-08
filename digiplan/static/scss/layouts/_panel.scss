@@ -135,11 +135,15 @@
     }
   }
 
+  .js-sidepanel {
+    top: 0;
+  }
+
   .sidepanel {
     @extend .position-absolute;
     @extend .bg-light;
     @extend .p-3;
-    @include translateY(-$panel-slider-height);
+    transform: translateY(calc(-#{$panel-slider-height} - var(--scrollPosition)));
     width: 24rem;
     left: $panel-width;
 

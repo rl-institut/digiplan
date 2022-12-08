@@ -125,3 +125,16 @@ function addMarks(data, marks) {
 
   data.slider.append(html);
 }
+
+// Side panel
+const wind = document.getElementById('wind');
+const sidePanel = document.getElementById('js-sidepanel');
+const panelContainer = document.getElementById('js-panel-container');
+
+panelContainer.addEventListener('scroll', (e) => {
+  console.log(panelContainer.scrollTop);
+  document.documentElement.style.setProperty('--scrollPosition', panelContainer.scrollTop + 'px');
+  
+  //let positionTop = wind.getBoundingClientRect().top;
+  //sidePanel.style.setProperty('top', positionTop + 'px');
+});
