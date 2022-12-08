@@ -4,7 +4,7 @@ const sliderLabelButtons = document.querySelectorAll(".c-slider__label--more > .
 const energyMix = document.getElementById("js-energy-mix");
 const SETTINGS_PARAMETERS = JSON.parse(document.getElementById("settings_parameters").textContent);
 
-// Actions
+// Setup
 $(".js-range-slider").ionRangeSlider({
     onChange: function (data) {
       const msg = eventTopics.SLIDER_CHANGE;
@@ -12,6 +12,8 @@ $(".js-range-slider").ionRangeSlider({
     }
   }
 );
+
+$(".js-sidepanel-range-slider").ionRangeSlider();
 
 Array.from(sliderLabelButtons).forEach(sliderLabelButton => {
   sliderLabelButton.addEventListener("click", () => {
