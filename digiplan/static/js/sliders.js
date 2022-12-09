@@ -28,13 +28,20 @@ PubSub.subscribe(eventTopics.STATES_INITIALIZED, updateSliderMarks);
 PubSub.subscribe(eventTopics.STATES_INITIALIZED, createPercentagesOfPowerSources);
 PubSub.subscribe(eventTopics.SLIDER_CHANGE, createPercentagesOfPowerSources);
 PubSub.subscribe(eventTopics.SLIDER_CHANGE, showActivesSliderOnSliderChange);
-PubSub.subscribe(eventTopics.SLIDER_LABEL_CLICK, showActivesSliderOnSliderLabelClick);
+PubSub.subscribe(eventTopics.SLIDER_LABEL_CLICK, showOrHideActivesSliderOnSliderLabelClick);
 
 // Subscriber Functions
 
-function showActivesSliderOnSliderLabelClick(msg, sliderLabel) {
-  Array.from(rangeSliders).forEach(item => item.parentNode.classList.remove("active", "active-sidepanel"));
-  sliderLabel.classList.add("active", "active-sidepanel");
+function showOrHideActivesSliderOnSliderLabelClick(msg, sliderLabel) {
+  const classes = ["active", "active-sidepanel"];
+  const hide = sliderLabel.classList.contains(classes[0]) && sliderLabel.classList.contains(classes[1]);
+  if (hide) {
+    sliderLabel.classList.remove(...classes);
+  } else {
+    Array.from(rangeSliders).forEach(item => item.parentNode.classList.remove(...classes));
+    sliderLabel.classList.add(...classes);
+  }
+
   return logMessage(msg);
 }
 
