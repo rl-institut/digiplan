@@ -6,6 +6,7 @@
     <div class="sidepanel">
       <p class="sidepanel__heading">
         Detaileinstellungen
+        <button type="button" class="sidepanel__close" aria-label="Close"></button>
       </p>
       {% for field in form.sidepanels|dict_lookup_filter:field.name %}
         {% include "widgets/slider.html" with field=field %}

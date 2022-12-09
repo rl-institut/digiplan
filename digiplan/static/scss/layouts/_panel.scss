@@ -104,7 +104,7 @@
         @extend .pb-1;
 
         &--more button {
-          @extend .text-primary;
+          @extend .text-info;
           @extend .fs-7;
           @extend .fw-bold;
         }
@@ -153,8 +153,15 @@
     }
 
     &__heading {
+      @extend .d-flex;
+      @extend .flex-row;
+      @extend .justify-content-between;
       @extend .fs-7;
       @extend .fw-bold;
+    }
+
+    &__close {
+      @extend .btn-close;
     }
 
     .c-slider {
