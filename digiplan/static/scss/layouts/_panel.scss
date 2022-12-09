@@ -102,7 +102,7 @@
 
       .c-slider.active-sidepanel + .sidepanel {
         display: block;
-        z-index: 10;
+        z-index: 999;
       }
 
       .c-slider__label {
@@ -166,7 +166,7 @@
     @extend .bg-light;
     @extend .p-3;
     transform: translateY(calc(-#{$panel-slider-height} - var(--scrollPosition)));
-    width: 24rem;
+    width: 18rem;
     left: $panel-width-sm;
 
     @include media-breakpoint-up(lg) {

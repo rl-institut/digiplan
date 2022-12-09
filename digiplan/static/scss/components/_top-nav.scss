@@ -1,5 +1,6 @@
 .top-nav {
   box-shadow: $box-shadow-sm;
+  z-index: 1000;
 
   &__brand {
     img {
