@@ -3,7 +3,6 @@ from itertools import count
 from django.db.models import Max, Min
 from django.forms import (
     BooleanField,
-    CheckboxInput,
     Form,
     IntegerField,
     MultipleChoiceField,
@@ -109,7 +108,7 @@ class PanelForm(TemplateForm):
                 attrs = {
                     "class": item["class"],
                 }
-                field = BooleanField(label=item["label"], widget=CheckboxInput(attrs=attrs), help_text=item["tooltip"])
+                field = BooleanField(label=item["label"], widget=SwitchWidget(attrs=attrs), help_text=item["tooltip"])
                 yield {"name": name, "field": field}
             else:
                 raise ValueError(f"Unknown parameter type '{item['type']}'")
