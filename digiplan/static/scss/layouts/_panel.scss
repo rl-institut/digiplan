@@ -117,6 +117,19 @@
           @extend .fw-bold;
         }
       }
+
+      // replace with a more general class for checkboxes
+      .c-slider.lsg_usage {
+        @extend .d-flex;
+        @extend .flex-row;
+        @extend .align-items-center;
+        @extend .h-auto;
+
+        .c-slider__label {
+          @extend .p-0;
+          @extend .pe-1;
+        }
+      }
     }
 
     &__form {
