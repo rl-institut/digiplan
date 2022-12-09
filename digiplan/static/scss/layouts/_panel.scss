@@ -55,6 +55,7 @@
     &__tabs {
       .nav-tabs,
       .c-slider {
+        @extend .pt-1;
         @extend .px-3;
       }
 
@@ -62,7 +63,7 @@
         @extend .position-relative;
         height: $panel-slider-height;
         @extend .border-start;
-        @extend .border-5;
+        @extend .border-7;
         border-color: rgba(0, 0, 0, 0) !important;
       }
 
@@ -100,7 +101,7 @@
         @extend .d-flex;
         @extend .flex-row;
         @extend .justify-content-between;
-        @extend .pb-2;
+        @extend .pb-1;
 
         &--more button {
           @extend .text-primary;
@@ -156,12 +157,14 @@
       @extend .fw-bold;
     }
 
-    &__slider {
+    .c-slider {
+      @extend .p-0;
       @extend .pb-3;
-    }
+      @extend .border-0;
 
-    &__label {
-      @extend .fs-7;
+      &__label {
+        @extend .fs-7;
+      }
     }
   }
 }
