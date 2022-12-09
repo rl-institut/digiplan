@@ -96,7 +96,7 @@ class PanelForm(TemplateForm):
                     "data-min": item["min"],
                     "data-max": item["max"],
                     "data-from": item["start"],
-                    "data-grid": "true",
+                    "data-grid": "true" if "grid" in item and item["grid"] else "false",
                     "data-has-sidepanel": "true" if "sidepanel" in item else "false",
                 }
                 if "to" in item:

@@ -39,6 +39,7 @@
   "conventional": {
     "class": "js-range-slider",
     "color": "#A6BDDB",
+    "grid": true,
     "label": "Konventionelle Kraftwerke [MW]",
     "max": 216,
     "min": 0,
