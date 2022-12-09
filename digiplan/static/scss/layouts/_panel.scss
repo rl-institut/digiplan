@@ -88,6 +88,14 @@
         border-color: #99D8C9 !important;
       }
 
+      .c-slider button svg {
+        transform: translateX(2px) translateY(-1px);
+      }
+
+      .c-slider.active button svg {
+        transform: rotate(180deg) translateX(-2px) translateY(1px);
+      }
+
       .c-slider + .sidepanel {
         display: none;
       }
