@@ -72,22 +72,6 @@
         @extend .bg-light;
       }
 
-      .c-slider.conventional.active {
-        border-color: #A6BDDB !important;
-      }
-
-      .c-slider.pv_ground.active {
-        border-color: #FA9FB5 !important;
-      }
-
-      .c-slider.pv_roof.active {
-        border-color: #FEC44F !important;
-      }
-
-      .c-slider.bio.active {
-        border-color: #99D8C9 !important;
-      }
-
       .c-slider button svg {
         transform: translateX(2px) translateY(-1px);
       }

@@ -97,6 +97,7 @@ class PanelForm(TemplateForm):
                     "data-from": item["start"],
                     "data-grid": "true" if "grid" in item and item["grid"] else "false",
                     "data-has-sidepanel": "true" if "sidepanel" in item else "false",
+                    "data-color": item["color"] if "color" in item else "",
                 }
                 if "to" in item:
                     attrs["data-to"] = item["to"]

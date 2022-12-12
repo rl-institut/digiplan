@@ -1,5 +1,12 @@
 {% load helper_tags %}
 
+{% if field.field.widget.attrs|dict_lookup_filter:"data-color" %}
+  <style>
+    .c-slider.{{ field.name }}.active {
+      border-color: {{ field.field.widget.attrs|dict_lookup_filter:"data-color" }} !important;
+    }
+  </style>
+{% endif %}
 <div class="c-slider {{ field.name }}">
   <div class="c-slider__label">
     <span>{{ field.label }}{% if tooltip %}

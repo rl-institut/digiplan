@@ -1,16 +1,78 @@
 {
-  "s_b_1": {
+  "a__s_w_1": {
     "class": "js-range-slider",
-    "color": "#FA9FB5",
-    "label": "Bioenergie (MW)",
-    "max": 800,
+    "color": "#99D8C9",
+    "grid": false,
+    "label": "Windenergie (MW)",
+    "max": 1500,
     "min": 0,
+    "sidepanel": {
+      "s_w_2": {
+        "class": "js-slider",
+        "label": "Siedlungsabstand (m)",
+        "max": 1000,
+        "min": 400,
+        "start": 1000,
+        "tooltip": "Siedlungsabstand (m)",
+        "type": "slider"
+      },
+      "s_w_3": {
+        "class": "js-slider",
+        "label": "Waldfl\u00e4chennutzung (%)",
+        "max": 100,
+        "min": 0,
+        "start": 0,
+        "tooltip": "Waldfl\u00e4chennutzung (%)",
+        "type": "slider"
+      },
+      "s_w_4": {
+        "class": "js-slider",
+        "label": "LSG-Nutzung (%)",
+        "max": 100,
+        "min": 0,
+        "start": 0,
+        "tooltip": "LSG-Nutzung (%)",
+        "type": "slider"
+      }
+    },
     "start": 33,
     "status_quo": 50,
-    "tooltip": "Bioenergie (MW)",
+    "tooltip": "Windenergie (MW)",
     "type": "slider"
   },
-  "s_pvd_1": {
+  "b__s_pvf_1": {
+    "class": "js-range-slider",
+    "color": "#A6BDDB",
+    "grid": false,
+    "label": "Freifl\u00e4chen-PV (MW)",
+    "max": 1200,
+    "min": 0,
+    "sidepanel": {
+      "s_pvf_2": {
+        "class": "js-sidepanel-switch",
+        "label": "Fl\u00e4chen entlang BAB und Schienenwegen",
+        "tooltip": "Fl\u00e4chen entlang BAB und Schienenwegen",
+        "type": "switch"
+      },
+      "s_pvf_3": {
+        "class": "js-sidepanel-switch",
+        "label": "Nutzung von Agrar- und Gr\u00fcnlandfl\u00e4chen",
+        "tooltip": "Nutzung von Agrar- und Gr\u00fcnlandfl\u00e4chen",
+        "type": "switch"
+      },
+      "s_pvf_4": {
+        "class": "js-sidepanel-switch",
+        "label": "Begrenzung auf benachteiligte Gebiete aufheben",
+        "tooltip": "Begrenzung auf benachteiligte Gebiete aufheben",
+        "type": "switch"
+      }
+    },
+    "start": 33,
+    "status_quo": 50,
+    "tooltip": "Freifl\u00e4chen-PV (MW)",
+    "type": "slider"
+  },
+  "c__s_pvd_1": {
     "class": "js-range-slider",
     "color": "#FEC44F",
     "grid": false,
@@ -69,39 +131,18 @@
     "tooltip": "Aufdach-PV",
     "type": "slider"
   },
-  "s_pvf_1": {
+  "d__s_b_1": {
     "class": "js-range-slider",
-    "color": "#A6BDDB",
-    "grid": false,
-    "label": "Freifl\u00e4chen-PV (MW)",
-    "max": 1200,
+    "color": "#FA9FB5",
+    "label": "Bioenergie (MW)",
+    "max": 800,
     "min": 0,
-    "sidepanel": {
-      "s_pvf_2": {
-        "class": "js-sidepanel-switch",
-        "label": "Fl\u00e4chen entlang BAB und Schienenwegen",
-        "tooltip": "Fl\u00e4chen entlang BAB und Schienenwegen",
-        "type": "switch"
-      },
-      "s_pvf_3": {
-        "class": "js-sidepanel-switch",
-        "label": "Nutzung von Agrar- und Gr\u00fcnlandfl\u00e4chen",
-        "tooltip": "Nutzung von Agrar- und Gr\u00fcnlandfl\u00e4chen",
-        "type": "switch"
-      },
-      "s_pvf_4": {
-        "class": "js-sidepanel-switch",
-        "label": "Begrenzung auf benachteiligte Gebiete aufheben",
-        "tooltip": "Begrenzung auf benachteiligte Gebiete aufheben",
-        "type": "switch"
-      }
-    },
     "start": 33,
     "status_quo": 50,
-    "tooltip": "Freifl\u00e4chen-PV (MW)",
+    "tooltip": "Bioenergie (MW)",
     "type": "slider"
   },
-  "s_s_1": {
+  "e__s_s_1": {
     "class": "js-slider",
     "color": "#AA9AB5",
     "label": "Anteil Haushalts-PVA mit Stromspeicher (%)",
@@ -112,7 +153,7 @@
     "tooltip": "Anteil Haushalts-PVA mit Stromspeicher (%)",
     "type": "slider"
   },
-  "s_s_2": {
+  "f__s_s_2": {
     "class": "js-slider",
     "color": "#BACAD5",
     "label": "Kapazit\u00e4t Gro\u00dfspeicher (MWh)",
@@ -121,47 +162,6 @@
     "start": 0,
     "status_quo": 50,
     "tooltip": "Kapazit\u00e4t Gro\u00dfspeicher (MWh)",
-    "type": "slider"
-  },
-  "s_w_1": {
-    "class": "js-range-slider",
-    "color": "#99D8C9",
-    "grid": false,
-    "label": "Windenergie (MW)",
-    "max": 1500,
-    "min": 0,
-    "sidepanel": {
-      "s_w_2": {
-        "class": "js-slider",
-        "label": "Siedlungsabstand (m)",
-        "max": 1000,
-        "min": 400,
-        "start": 1000,
-        "tooltip": "Siedlungsabstand (m)",
-        "type": "slider"
-      },
-      "s_w_3": {
-        "class": "js-slider",
-        "label": "Waldfl\u00e4chennutzung (%)",
-        "max": 100,
-        "min": 0,
-        "start": 0,
-        "tooltip": "Waldfl\u00e4chennutzung (%)",
-        "type": "slider"
-      },
-      "s_w_4": {
-        "class": "js-slider",
-        "label": "LSG-Nutzung (%)",
-        "max": 100,
-        "min": 0,
-        "start": 0,
-        "tooltip": "LSG-Nutzung (%)",
-        "type": "slider"
-      }
-    },
-    "start": 33,
-    "status_quo": 50,
-    "tooltip": "Windenergie (MW)",
     "type": "slider"
   }
 }
