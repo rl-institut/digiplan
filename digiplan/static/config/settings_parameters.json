@@ -1,6 +1,6 @@
 {
   "a__s_w_1": {
-    "class": "js-range-slider",
+    "class": "js-slider js-slider-panel js-power-mix",
     "color": "#99D8C9",
     "grid": false,
     "label": "Windenergie (MW)",
@@ -41,7 +41,7 @@
     "type": "slider"
   },
   "b__s_pvf_1": {
-    "class": "js-range-slider",
+    "class": "js-slider js-slider-panel js-power-mix",
     "color": "#A6BDDB",
     "grid": false,
     "label": "Freifl\u00e4chen-PV (MW)",
@@ -73,7 +73,7 @@
     "type": "slider"
   },
   "c__s_pvd_1": {
-    "class": "js-range-slider",
+    "class": "js-slider js-slider-panel js-power-mix",
     "color": "#FEC44F",
     "grid": false,
     "label": "Aufdach-PV (MW)",
@@ -132,7 +132,7 @@
     "type": "slider"
   },
   "d__s_b_1": {
-    "class": "js-range-slider",
+    "class": "js-slider js-slider-panel js-power-mix",
     "color": "#FA9FB5",
     "label": "Bioenergie (MW)",
     "max": 800,
@@ -143,8 +143,7 @@
     "type": "slider"
   },
   "e__s_s_1": {
-    "class": "js-slider",
-    "color": "#AA9AB5",
+    "class": "js-slider js-slider-panel",
     "label": "Anteil Haushalts-PVA mit Stromspeicher (%)",
     "max": 100,
     "min": 0,
@@ -154,8 +153,7 @@
     "type": "slider"
   },
   "f__s_s_2": {
-    "class": "js-slider",
-    "color": "#BACAD5",
+    "class": "js-slider js-slider-panel",
     "label": "Kapazit\u00e4t Gro\u00dfspeicher (MWh)",
     "max": 800,
     "min": 0,

@@ -56,7 +56,7 @@ class StaticLayerForm(TemplateForm):
                         fields=[IntegerField(), IntegerField()],
                         widget=TextInput(
                             attrs={
-                                "class": "js-range-slider",
+                                "class": "js-slider",
                                 "data-type": "double",
                                 "data-min": filter_min,
                                 "data-max": filter_max,

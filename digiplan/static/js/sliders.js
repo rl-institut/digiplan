@@ -1,24 +1,26 @@
 // Variables
-const rangeSliders = document.getElementsByClassName("js-range-slider");
-const sliderLabelButtons = document.querySelectorAll(".c-slider__label--more > .button");
-const energyMix = document.getElementById("js-energy-mix");
+const panelSliders = document.querySelectorAll(".js-slider.js-slider-panel");
+const powerSliders = document.querySelectorAll(".js-slider.js-slider-panel.js-power-mix");
+const sliderMoreLabels = document.querySelectorAll(".c-slider__label--more > .button");
+const powerMixInfoBanner = document.getElementById("js-power-mix");
 const SETTINGS_PARAMETERS = JSON.parse(document.getElementById("settings_parameters").textContent);
 
 // Setup
-$(".js-range-slider").ionRangeSlider({
+
+// Order matters. Start with specific, and end with general sliders.
+$(".js-slider.js-slider-panel").ionRangeSlider({
     onChange: function (data) {
-      const msg = eventTopics.SLIDER_CHANGE;
+      const msg = eventTopics.PANEL_SLIDER_CHANGE;
       PubSub.publish(msg, data);
     }
   }
 );
-
 $(".js-slider").ionRangeSlider();
 
-Array.from(sliderLabelButtons).forEach(sliderLabelButton => {
-  sliderLabelButton.addEventListener("click", () => {
-    const sliderLabel = sliderLabelButton.parentNode.parentNode.parentNode;
-    PubSub.publish(eventTopics.SLIDER_LABEL_CLICK, sliderLabel);
+Array.from(sliderMoreLabels).forEach(moreLabel => {
+  moreLabel.addEventListener("click", () => {
+    const sliderLabel = moreLabel.parentNode.parentNode.parentNode;
+    PubSub.publish(eventTopics.MORE_LABEL_CLICK, sliderLabel);
   });
 });
 
@@ -26,27 +28,27 @@ Array.from(sliderLabelButtons).forEach(sliderLabelButton => {
 // Subscriptions
 PubSub.subscribe(eventTopics.STATES_INITIALIZED, updateSliderMarks);
 PubSub.subscribe(eventTopics.STATES_INITIALIZED, createPercentagesOfPowerSources);
-PubSub.subscribe(eventTopics.SLIDER_CHANGE, createPercentagesOfPowerSources);
-PubSub.subscribe(eventTopics.SLIDER_CHANGE, showActivesSliderOnSliderChange);
-PubSub.subscribe(eventTopics.SLIDER_LABEL_CLICK, showOrHideActivesSliderOnSliderLabelClick);
+PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, createPercentagesOfPowerSources);
+PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, showActivesSliderOnSliderChange);
+PubSub.subscribe(eventTopics.MORE_LABEL_CLICK, showOrHideSidepanelsOnMoreLabelClick);
 
 // Subscriber Functions
 
-function showOrHideActivesSliderOnSliderLabelClick(msg, sliderLabel) {
+function showOrHideSidepanelsOnMoreLabelClick(msg, moreLabel) {
   const classes = ["active", "active-sidepanel"];
-  const hide = sliderLabel.classList.contains(classes[0]) && sliderLabel.classList.contains(classes[1]);
+  const hide = moreLabel.classList.contains(classes[0]) && moreLabel.classList.contains(classes[1]);
   if (hide) {
-    sliderLabel.classList.remove(...classes);
+    moreLabel.classList.remove(...classes);
   } else {
-    Array.from(rangeSliders).forEach(item => item.parentNode.classList.remove(...classes));
-    sliderLabel.classList.add(...classes);
+    Array.from(panelSliders).forEach(item => item.parentNode.classList.remove(...classes));
+    moreLabel.classList.add(...classes);
   }
 
   return logMessage(msg);
 }
 
 function showActivesSliderOnSliderChange(msg, data) {
-  Array.from(rangeSliders).forEach(item => item.parentNode.classList.remove("active", "active-sidepanel"));
+  Array.from(panelSliders).forEach(item => item.parentNode.classList.remove("active", "active-sidepanel"));
   const sliderLabel = data.input[0].parentNode;
   sliderLabel.classList.add("active");
   return logMessage(msg);
@@ -55,14 +57,14 @@ function showActivesSliderOnSliderChange(msg, data) {
 function createPercentagesOfPowerSources(msg) {
   let ids = [];
   let values = [];
-  Array.from(rangeSliders).forEach(function (item) {
+  Array.from(powerSliders).forEach(function (item) {
     ids.push(item.id);
     values.push($("#" + item.id).data().from);
   });
   const total = getTotalOfValues(values);
   const weights = getWeightsInPercent(values, total);
   const colors = getColorsByIds(ids);
-  updateEnergyMix(weights, colors);
+  updatePowerMix(weights, colors);
   return logMessage(msg);
 }
 
@@ -90,7 +92,7 @@ function getColorsByIds(ids) {
   return colors;
 }
 
-function updateEnergyMix(weights, colors) {
+function updatePowerMix(weights, colors) {
   const msg = "Unequal amount of weights and colors";
   if (weights.length !== colors.length) throw new Error(msg);
   let html = "";
@@ -99,7 +101,7 @@ function updateEnergyMix(weights, colors) {
     html += `<span style="width: ${weights[index]}%; background-color: ${colors[index]}; text-align: center; height: 1rem;"></span>`;
   }
 
-  energyMix.innerHTML = html;
+  powerMixInfoBanner.innerHTML = html;
 }
 
 function getWeightsInPercent(values, total) {
