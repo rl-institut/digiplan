@@ -8,15 +8,14 @@
        </svg>
       Flächen
     </h2>
-    <div id="js-energy-mix" class="my-2 px-4" style="display: flex;"></div>
     <div class="panel-item__tabs">
       <ul class="c-tabs nav nav-tabs" id="settings_area_tab" role="tablist">
         <li class="c-tabs__nav-item" role="presentation">
           <button class="c-tabs__nav-link active" id="wind-tab" data-bs-toggle="tab" data-bs-target="#wind" type="button" role="tab" aria-controls="wind" aria-selected="true">
             <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
-              <path d="m8.4667 0.025321v4.2762c-0.89922 0.23858-1.5663 1.0686-1.5663 2.0423 0 0.1682 0.019787 0.33204 0.057361 0.48938l-3.3874 1.956 0.52917 0.91571 3.3548-1.9358c0.26835 0.29432 0.61807 0.51241 1.0123 0.61702v7.4889h-6.35v1.0583h6.35v5.17e-4h1.0589v-5.17e-4h6.3495v-1.0583h-6.3495v-7.4889c0.41594-0.11036 0.7822-0.34745 1.0557-0.66663l3.4422 1.9854 0.52917-0.91571-3.5037-2.0226c3.4e-5 -1.65e-4 -3.4e-5 -3.517e-4 0-5.168e-4 0.027938-0.13666 0.042891-0.27777 0.042891-0.4222 0-0.97361-0.66709-1.8037-1.5663-2.0423v-4.2762h-1.0589zm0.52968 5.2658c0.5765 2e-7 1.0366 0.46232 1.0366 1.0526s-0.46013 1.0526-1.0366 1.0526c-0.5765 0-1.0371-0.46232-1.0371-1.0526-1e-7 -0.59033 0.46065-1.0526 1.0371-1.0526z"/>
+              <path d="m8.2021 0.025372-5.4677 8.4414h9.5898l-4.9159 8.4665h1.3229l5.4035-9.5251h-9.4609l4.8512-7.3828z"/>
             </svg>
-            Windflächen
+            Strom
           </button>
         </li>
         <li class="c-tabs__nav-item" role="presentation">
@@ -24,12 +23,21 @@
             <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
               <path d="m4.3692 1.0589-3.4923 11.64h0.71107 2.6443v3.176h1.0589v-3.176h6.3516v3.176h1.0563v-3.176h3.3574l-3.4918-11.64h-8.1954zm0.78703 1.0583h2.7812v2.1151h-3.4163l0.6351-2.1151zm3.8401 0h2.7812l0.6351 2.1151h-3.4163v-2.1151zm-4.793 3.174h3.7341v2.1172h-4.3692l0.6351-2.1172zm4.793 0h3.7341l0.6351 2.1172h-4.3692v-2.1172zm-5.7459 3.1755h4.6871v3.176h-5.6405l0.95343-3.176zm5.7459 0h4.6871l0.95343 3.176h-5.6405v-3.176z"/>
             </svg>
-            PV-Freiflächen
+            Wärme
+          </button>
+        </li>
+        <li class="c-tabs__nav-item" role="presentation">
+          <button class="c-tabs__nav-link" id="pv-tab" data-bs-toggle="tab" data-bs-target="#pv" type="button" role="tab" aria-controls="pv" aria-selected="false">
+            <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
+              <path d="m4.3692 1.0589-3.4923 11.64h0.71107 2.6443v3.176h1.0589v-3.176h6.3516v3.176h1.0563v-3.176h3.3574l-3.4918-11.64h-8.1954zm0.78703 1.0583h2.7812v2.1151h-3.4163l0.6351-2.1151zm3.8401 0h2.7812l0.6351 2.1151h-3.4163v-2.1151zm-4.793 3.174h3.7341v2.1172h-4.3692l0.6351-2.1172zm4.793 0h3.7341l0.6351 2.1172h-4.3692v-2.1172zm-5.7459 3.1755h4.6871v3.176h-5.6405l0.95343-3.176zm5.7459 0h4.6871l0.95343 3.176h-5.6405v-3.176z"/>
+            </svg>
+            Verkehr
           </button>
         </li>
       </ul>
       <div class="c-tabs__content">
         <div class="c-tabs__pane fade show active" id="wind" role="tabpanel" aria-labelledby="wind-tab">
+          <div id="js-energy-mix" class="my-2 px-4" style="display: flex;"></div>
           {{energysystem}}
         </div>
         <div class="c-tabs__pane fade" id="pv" role="tabpanel" aria-labelledby="pv-tab">...</div>
