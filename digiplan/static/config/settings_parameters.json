@@ -1,96 +1,167 @@
 {
-  "bio": {
-    "class": "js-range-slider",
-    "color": "#99D8C9",
-    "label": "Biomasse und Biogas [MW]",
-    "max": 100,
-    "min": 0,
-    "sidepanel": {
-      "forest_usage": {
-        "class": "js-sidepanel-range-slider",
-        "label": "Waldnutzung [%]",
-        "max": 100,
-        "min": 0,
-        "start": 20,
-        "tooltip": "Waldnutzung [%]",
-        "type": "slider"
-      },
-      "lsg_usage": {
-        "class": "js-sidepanel-switch",
-        "label": "LSG-Nutzung",
-        "tooltip": "LSG-Nutzung",
-        "type": "switch"
-      },
-      "settlement_distance": {
-        "class": "js-sidepanel-range-slider",
-        "label": "Abstand zu Siedlungen [m]",
-        "max": 1000,
-        "min": 0,
-        "start": 400,
-        "tooltip": "Abstand zu Siedlungen [m]",
-        "type": "slider"
-      }
-    },
-    "start": 71,
-    "status_quo": 50,
-    "tooltip": "Beispiel3",
-    "type": "slider"
-  },
-  "conventional": {
-    "class": "js-range-slider",
-    "color": "#A6BDDB",
-    "grid": true,
-    "label": "Konventionelle Kraftwerke [MW]",
-    "max": 216,
-    "min": 0,
-    "sidepanel": {
-      "forest_usage": {
-        "class": "js-sidepanel-range-slider",
-        "label": "Waldnutzung [%]",
-        "max": 100,
-        "min": 0,
-        "start": 20,
-        "tooltip": "Waldnutzung [%]",
-        "type": "slider"
-      },
-      "lsg_usage": {
-        "class": "js-sidepanel-switch",
-        "label": "LSG-Nutzung",
-        "tooltip": "LSG-Nutzung",
-        "type": "switch"
-      },
-      "settlement_distance": {
-        "class": "js-sidepanel-range-slider",
-        "label": "Abstand zu Siedlungen [m]",
-        "max": 1000,
-        "min": 0,
-        "start": 400,
-        "tooltip": "Abstand zu Siedlungen [m]",
-        "type": "slider"
-      }
-    },
-    "start": 71,
-    "tooltip": "Beispiel4",
-    "type": "slider"
-  },
-  "pv_ground": {
+  "s_b_1": {
     "class": "js-range-slider",
     "color": "#FA9FB5",
-    "label": "Photovoltaik (Freifl\u00e4chenanlagen) [MW]",
-    "max": 2125,
+    "label": "Bioenergie (MW)",
+    "max": 800,
     "min": 0,
-    "start": 71,
-    "tooltip": "Beispiel2",
+    "start": 33,
+    "status_quo": 50,
+    "tooltip": "Bioenergie (MW)",
     "type": "slider"
   },
-  "pv_roof": {
+  "s_pvd_1": {
     "class": "js-range-slider",
     "color": "#FEC44F",
-    "label": "Photvoltaik (Dachanlagen) [MW]",
+    "grid": false,
+    "label": "Aufdach-PV (MW)",
     "max": 400,
-    "min": 100,
-    "start": 200,
-    "tooltip": "Wieviel Leistung soll durch Photovoltaikanlagen bereit gestellt werden?",
+    "min": 0,
+    "sidepanel": {
+      "s_pvd_2": {
+        "class": "js-slider",
+        "label": "Nutzung S\u00fcdd\u00e4cher (%)",
+        "max": 1000,
+        "min": 400,
+        "start": 1000,
+        "tooltip": "Nutzung S\u00fcdd\u00e4cher (%)",
+        "type": "slider"
+      },
+      "s_pvd_3": {
+        "class": "js-slider",
+        "label": "Nutzung Westd\u00e4cher (%)",
+        "max": 100,
+        "min": 0,
+        "start": 0,
+        "tooltip": "Nutzung Westd\u00e4cher (%)",
+        "type": "slider"
+      },
+      "s_pvd_4": {
+        "class": "js-slider",
+        "label": "Nutzung Nordd\u00e4cher (%)",
+        "max": 100,
+        "min": 0,
+        "start": 0,
+        "tooltip": "Nutzung Nordd\u00e4cher (%)",
+        "type": "slider"
+      },
+      "s_pvd_5": {
+        "class": "js-slider",
+        "label": "Nutzung Ostd\u00e4cher (%)",
+        "max": 100,
+        "min": 0,
+        "start": 0,
+        "tooltip": "Nutzung Ostd\u00e4cher (%)",
+        "type": "slider"
+      },
+      "s_pvd_6": {
+        "class": "js-slider",
+        "label": "Nutzung denkmalgesch\u00fctzer Gebaude (%)",
+        "max": 100,
+        "min": 0,
+        "start": 0,
+        "tooltip": "Nutzung denkmalgesch\u00fctzer Gebaude (%)",
+        "type": "slider"
+      }
+    },
+    "start": 33,
+    "status_quo": 50,
+    "tooltip": "Aufdach-PV",
+    "type": "slider"
+  },
+  "s_pvf_1": {
+    "class": "js-range-slider",
+    "color": "#A6BDDB",
+    "grid": false,
+    "label": "Freifl\u00e4chen-PV (MW)",
+    "max": 1200,
+    "min": 0,
+    "sidepanel": {
+      "s_pvf_2": {
+        "class": "js-sidepanel-switch",
+        "label": "Fl\u00e4chen entlang BAB und Schienenwegen",
+        "tooltip": "Fl\u00e4chen entlang BAB und Schienenwegen",
+        "type": "switch"
+      },
+      "s_pvf_3": {
+        "class": "js-sidepanel-switch",
+        "label": "Nutzung von Agrar- und Gr\u00fcnlandfl\u00e4chen",
+        "tooltip": "Nutzung von Agrar- und Gr\u00fcnlandfl\u00e4chen",
+        "type": "switch"
+      },
+      "s_pvf_4": {
+        "class": "js-sidepanel-switch",
+        "label": "Begrenzung auf benachteiligte Gebiete aufheben",
+        "tooltip": "Begrenzung auf benachteiligte Gebiete aufheben",
+        "type": "switch"
+      }
+    },
+    "start": 33,
+    "status_quo": 50,
+    "tooltip": "Freifl\u00e4chen-PV (MW)",
+    "type": "slider"
+  },
+  "s_s_1": {
+    "class": "js-slider",
+    "color": "#AA9AB5",
+    "label": "Anteil Haushalts-PVA mit Stromspeicher (%)",
+    "max": 100,
+    "min": 0,
+    "start": 0,
+    "status_quo": 50,
+    "tooltip": "Anteil Haushalts-PVA mit Stromspeicher (%)",
+    "type": "slider"
+  },
+  "s_s_2": {
+    "class": "js-slider",
+    "color": "#BACAD5",
+    "label": "Kapazit\u00e4t Gro\u00dfspeicher (MWh)",
+    "max": 800,
+    "min": 0,
+    "start": 0,
+    "status_quo": 50,
+    "tooltip": "Kapazit\u00e4t Gro\u00dfspeicher (MWh)",
+    "type": "slider"
+  },
+  "s_w_1": {
+    "class": "js-range-slider",
+    "color": "#99D8C9",
+    "grid": false,
+    "label": "Windenergie (MW)",
+    "max": 1500,
+    "min": 0,
+    "sidepanel": {
+      "s_w_2": {
+        "class": "js-slider",
+        "label": "Siedlungsabstand (m)",
+        "max": 1000,
+        "min": 400,
+        "start": 1000,
+        "tooltip": "Siedlungsabstand (m)",
+        "type": "slider"
+      },
+      "s_w_3": {
+        "class": "js-slider",
+        "label": "Waldfl\u00e4chennutzung (%)",
+        "max": 100,
+        "min": 0,
+        "start": 0,
+        "tooltip": "Waldfl\u00e4chennutzung (%)",
+        "type": "slider"
+      },
+      "s_w_4": {
+        "class": "js-slider",
+        "label": "LSG-Nutzung (%)",
+        "max": 100,
+        "min": 0,
+        "start": 0,
+        "tooltip": "LSG-Nutzung (%)",
+        "type": "slider"
+      }
+    },
+    "start": 33,
+    "status_quo": 50,
+    "tooltip": "Windenergie (MW)",
     "type": "slider"
   }
 }

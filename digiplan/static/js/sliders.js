@@ -13,7 +13,7 @@ $(".js-range-slider").ionRangeSlider({
   }
 );
 
-$(".js-sidepanel-range-slider").ionRangeSlider();
+$(".js-slider").ionRangeSlider();
 
 Array.from(sliderLabelButtons).forEach(sliderLabelButton => {
   sliderLabelButton.addEventListener("click", () => {
