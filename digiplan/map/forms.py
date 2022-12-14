@@ -3,6 +3,7 @@ from itertools import count
 from django.db.models import Max, Min
 from django.forms import (
     BooleanField,
+    CharField,
     Form,
     IntegerField,
     MultipleChoiceField,
@@ -14,7 +15,7 @@ from django.utils.safestring import mark_safe
 from django_select2.forms import Select2MultipleWidget
 
 from . import models
-from .widgets import SwitchWidget
+from .widgets import BoxWidget, SwitchWidget
 
 
 class TemplateForm(Form):
@@ -110,6 +111,14 @@ class PanelForm(TemplateForm):
                     "class": item["class"],
                 }
                 field = BooleanField(label=item["label"], widget=SwitchWidget(attrs=attrs), help_text=item["tooltip"])
+                yield {"name": name, "field": field}
+            elif item["type"] == "box":
+                attrs = {
+                    "class": item["class"],
+                }
+                field = CharField(
+                    label=item["label"], widget=BoxWidget(attrs=attrs), help_text=item["tooltip"], initial=item["text"]
+                )
                 yield {"name": name, "field": field}
             else:
                 raise ValueError(f"Unknown parameter type '{item['type']}'")
