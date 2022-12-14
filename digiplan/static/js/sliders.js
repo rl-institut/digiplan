@@ -1,13 +1,22 @@
 // Variables
+const SETTINGS_PARAMETERS = JSON.parse(document.getElementById("settings_parameters").textContent);
+const panelContainer = document.getElementById("js-panel-container");
 const panelSliders = document.querySelectorAll(".js-slider.js-slider-panel");
-const powerSliders = document.querySelectorAll(".js-slider.js-slider-panel.js-power-mix");
+const powerPanelSliders = document.querySelectorAll(".js-slider.js-slider-panel.js-power-mix");
 const sliderMoreLabels = document.querySelectorAll(".c-slider__label--more > .button");
 const powerMixInfoBanner = document.getElementById("js-power-mix");
-const SETTINGS_PARAMETERS = JSON.parse(document.getElementById("settings_parameters").textContent);
+
 
 // Setup
 
-// Order matters. Start with specific, and end with general sliders.
+// Order matters. Start with the most specific, and end with most general sliders.
+$(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
+    onChange: function (data) {
+      const msg = eventTopics.POWER_PANEL_SLIDER_CHANGE;
+      PubSub.publish(msg, data);
+    }
+  }
+);
 $(".js-slider.js-slider-panel").ionRangeSlider({
     onChange: function (data) {
       const msg = eventTopics.PANEL_SLIDER_CHANGE;
@@ -24,13 +33,23 @@ Array.from(sliderMoreLabels).forEach(moreLabel => {
   });
 });
 
+panelContainer.addEventListener("scroll", (e) => {
+  document.documentElement.style.setProperty("--scrollPosition", panelContainer.scrollTop + "px");
+});
+
 
 // Subscriptions
 PubSub.subscribe(eventTopics.STATES_INITIALIZED, updateSliderMarks);
-PubSub.subscribe(eventTopics.STATES_INITIALIZED, createPercentagesOfPowerSources);
-PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, createPercentagesOfPowerSources);
-PubSub.subscribe(eventTopics.PANEL_SLIDER_CHANGE, showActivesSliderOnSliderChange);
+subscribeToEventTopicsGroup(
+  [eventTopics.STATES_INITIALIZED, eventTopics.POWER_PANEL_SLIDER_CHANGE],
+  createPercentagesOfPowerSources
+);
+subscribeToEventTopicsGroup(
+  [eventTopics.POWER_PANEL_SLIDER_CHANGE, eventTopics.PANEL_SLIDER_CHANGE],
+  showActivePanelSliderOnPanelSliderChange
+);
 PubSub.subscribe(eventTopics.MORE_LABEL_CLICK, showOrHideSidepanelsOnMoreLabelClick);
+
 
 // Subscriber Functions
 
@@ -47,7 +66,7 @@ function showOrHideSidepanelsOnMoreLabelClick(msg, moreLabel) {
   return logMessage(msg);
 }
 
-function showActivesSliderOnSliderChange(msg, data) {
+function showActivePanelSliderOnPanelSliderChange(msg, data) {
   Array.from(panelSliders).forEach(item => item.parentNode.classList.remove("active", "active-sidepanel"));
   const sliderLabel = data.input[0].parentNode;
   sliderLabel.classList.add("active");
@@ -57,7 +76,7 @@ function showActivesSliderOnSliderChange(msg, data) {
 function createPercentagesOfPowerSources(msg) {
   let ids = [];
   let values = [];
-  Array.from(powerSliders).forEach(function (item) {
+  Array.from(powerPanelSliders).forEach(function (item) {
     ids.push(item.id);
     values.push($("#" + item.id).data().from);
   });
@@ -136,10 +155,3 @@ function addMarks(data, marks) {
 
   data.slider.append(html);
 }
-
-// Side panel
-const panelContainer = document.getElementById('js-panel-container');
-
-panelContainer.addEventListener('scroll', (e) => {
-  document.documentElement.style.setProperty('--scrollPosition', panelContainer.scrollTop + 'px');
-});
