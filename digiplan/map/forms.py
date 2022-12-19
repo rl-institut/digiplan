@@ -102,8 +102,12 @@ class PanelForm(TemplateForm):
                 }
                 if "to" in item:
                     attrs["data-to"] = item["to"]
+                if "step" in item:
+                    attrs["data-step"] = item["step"]
+
                 field = IntegerField(label=item["label"], widget=TextInput(attrs=attrs), help_text=item["tooltip"])
                 yield {"name": name, "field": field}
+
                 if "sidepanel" in item:
                     self.sidepanels[name] = PanelForm(item["sidepanel"])
             elif item["type"] == "switch":

@@ -15,9 +15,11 @@ from config.settings.base import (
 )
 from digiplan.map.config.config import (
     CLUSTER_GEOJSON_FILE,
+    DEPENDENCY_PARAMETERS,
     LAYER_STYLES,
     MAP_IMAGES,
     RESULTS_CHOROPLETHS,
+    SETTINGS_DEPENDENCY_MAP,
     SETTINGS_PARAMETERS,
     SOURCES,
     STORE_COLD_INIT,
@@ -67,6 +69,8 @@ class MapGLView(TemplateView):
         context["session_id"] = session_id
         context["layer_styles"] = LAYER_STYLES
         context["settings_parameters"] = SETTINGS_PARAMETERS
+        context["settings_dependency_map"] = SETTINGS_DEPENDENCY_MAP
+        context["dependency_parameters"] = DEPENDENCY_PARAMETERS
 
         # Categorize sources
         categorized_sources = {

@@ -14,6 +14,8 @@ LAYER_STYLES_FILE = settings.APPS_DIR.path("static/config/layer_styles.json")
 RESULT_STYLES_FILE = settings.APPS_DIR.path("static/config/result_styles.json")
 CHOROPLETH_STYLES_FILE = settings.APPS_DIR.path("static/config/choropleth_styles.json")
 SETTINGS_PARAMETERS_FILE = settings.APPS_DIR.path("static/config/settings_parameters.json")
+SETTINGS_DEPENDENCY_MAP_FILE = settings.APPS_DIR.path("static/config/settings_dependency_map.json")
+DEPENDENCY_PARAMETERS_FILE = settings.APPS_DIR.path("static/config/dependency_parameters.json")
 
 # REGIONS
 MIN_ZOOM = 6
@@ -34,6 +36,13 @@ REGION_FILTER_LAYERS = ["built_up_areas", "settlements", "hospitals"]
 # PARAMETERS
 with open(SETTINGS_PARAMETERS_FILE, "r", encoding="utf-8") as param_file:
     SETTINGS_PARAMETERS = json.load(param_file)
+
+with open(SETTINGS_DEPENDENCY_MAP_FILE, "r", encoding="utf-8") as param_file:
+    SETTINGS_DEPENDENCY_MAP = json.load(param_file)
+
+with open(DEPENDENCY_PARAMETERS_FILE, "r", encoding="utf-8") as param_file:
+    DEPENDENCY_PARAMETERS = json.load(param_file)
+
 
 # STORE
 STORE_COLD_INIT = {

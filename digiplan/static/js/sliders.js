@@ -1,5 +1,7 @@
 // Variables
 const SETTINGS_PARAMETERS = JSON.parse(document.getElementById("settings_parameters").textContent);
+const SETTINGS_DEPENDENCY_MAP = JSON.parse(document.getElementById("settings_dependency_map").textContent);
+const DEPENDENCY_PARAMETERS = JSON.parse(document.getElementById("dependency_parameters").textContent);
 const panelContainer = document.getElementById("js-panel-container");
 const panelSliders = document.querySelectorAll(".js-slider.js-slider-panel");
 const powerPanelSliders = document.querySelectorAll(".js-slider.js-slider-panel.js-power-mix");
@@ -10,6 +12,22 @@ const powerMixInfoBanner = document.getElementById("js-power-mix");
 // Setup
 
 // Order matters. Start with the most specific, and end with most general sliders.
+Array.from(Object.keys(SETTINGS_DEPENDENCY_MAP)).forEach(dependent_name => {
+  const dependency_names = SETTINGS_DEPENDENCY_MAP[dependent_name];
+  Array.from(dependency_names).forEach(dependency_name => {
+    $("#id_" + dependency_name).ionRangeSlider({
+        onChange: function (data) {
+          const msg = eventTopics.DEPENDENCY_PANEL_SLIDER_CHANGE;
+          PubSub.publish(msg, {
+            dependent: dependent_name,
+            dependency: dependency_name,
+            data
+          });
+        }
+      }
+    );
+  });
+});
 $(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
     onChange: function (data) {
       const msg = eventTopics.POWER_PANEL_SLIDER_CHANGE;
@@ -49,6 +67,12 @@ subscribeToEventTopicsGroup(
   showActivePanelSliderOnPanelSliderChange
 );
 PubSub.subscribe(eventTopics.MORE_LABEL_CLICK, showOrHideSidepanelsOnMoreLabelClick);
+PubSub.subscribe(eventTopics.DEPENDENCY_PANEL_SLIDER_CHANGE, (msg, payload) => {
+  const {dependent, dependency, data} = payload;
+  const value = DEPENDENCY_PARAMETERS[dependency][dependent][data.from];
+  const dependentDataElement = $("#id_" + dependent).data("ionRangeSlider");
+  dependentDataElement.update({max: value});
+});
 
 
 // Subscriber Functions

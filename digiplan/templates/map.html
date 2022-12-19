@@ -89,6 +89,8 @@
   {{ layer_styles|json_script:"styles" }}
   {{ result_styles|json_script:"result_styles" }}
   {{ settings_parameters|json_script:"settings_parameters" }}
+  {{ settings_dependency_map|json_script:"settings_dependency_map" }}
+  {{ dependency_parameters|json_script:"dependency_parameters" }}
 
   {% compress js inline %}
     <script>
