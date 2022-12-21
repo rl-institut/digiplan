@@ -55,13 +55,13 @@
     &__tabs {
       .nav-tabs,
       .c-slider {
-        @extend .pt-1;
+        @extend .pt-2;
+        @extend .pb-4;
         @extend .px-3;
       }
 
       .c-slider {
         @extend .position-relative;
-        height: $panel-slider-height;
         @extend .border-start;
         @extend .border-7;
         border-color: rgba(0, 0, 0, 0) !important;
@@ -149,9 +149,16 @@
     @extend .position-absolute;
     @extend .bg-light;
     @extend .p-3;
-    transform: translateY(calc(-#{$panel-slider-height} - var(--scrollPosition)));
+    @extend .overflow-auto;
     width: 18rem;
     left: $panel-width-sm;
+    padding-top: $padding-large !important;
+
+    @include media-breakpoint-up(md) {
+      height: calc(100% - #{$top-nav-height} - #{$steps-height});
+      top: calc(#{$top-nav-height} + #{$steps-height});
+      left: $panel-width-sm;
+    }
 
     @include media-breakpoint-up(lg) {
       left: $panel-width;
