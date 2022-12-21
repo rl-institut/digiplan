@@ -13,7 +13,9 @@ CLUSTER_GEOJSON_FILE = settings.DATA_DIR.path("cluster.geojson")
 LAYER_STYLES_FILE = settings.APPS_DIR.path("static/config/layer_styles.json")
 RESULT_STYLES_FILE = settings.APPS_DIR.path("static/config/result_styles.json")
 CHOROPLETH_STYLES_FILE = settings.APPS_DIR.path("static/config/choropleth_styles.json")
-SETTINGS_PARAMETERS_FILE = settings.APPS_DIR.path("static/config/settings_parameters.json")
+ENERGY_SETTINGS_PANEL_FILE = settings.APPS_DIR.path("static/config/energy_settings_panel.json")
+HEAT_SETTINGS_PANEL_FILE = settings.APPS_DIR.path("static/config/heat_settings_panel.json")
+TRAFFIC_SETTINGS_PANEL_FILE = settings.APPS_DIR.path("static/config/traffic_settings_panel.json")
 SETTINGS_DEPENDENCY_MAP_FILE = settings.APPS_DIR.path("static/config/settings_dependency_map.json")
 DEPENDENCY_PARAMETERS_FILE = settings.APPS_DIR.path("static/config/dependency_parameters.json")
 
@@ -34,8 +36,14 @@ FILTER_DEFINITION = {}
 REGION_FILTER_LAYERS = ["built_up_areas", "settlements", "hospitals"]
 
 # PARAMETERS
-with open(SETTINGS_PARAMETERS_FILE, "r", encoding="utf-8") as param_file:
-    SETTINGS_PARAMETERS = json.load(param_file)
+with open(ENERGY_SETTINGS_PANEL_FILE, "r", encoding="utf-8") as param_file:
+    ENERGY_SETTINGS_PANEL = json.load(param_file)
+
+with open(HEAT_SETTINGS_PANEL_FILE, "r", encoding="utf-8") as param_file:
+    HEAT_SETTINGS_PANEL = json.load(param_file)
+
+with open(TRAFFIC_SETTINGS_PANEL_FILE, "r", encoding="utf-8") as param_file:
+    TRAFFIC_SETTINGS_PANEL = json.load(param_file)
 
 with open(SETTINGS_DEPENDENCY_MAP_FILE, "r", encoding="utf-8") as param_file:
     SETTINGS_DEPENDENCY_MAP = json.load(param_file)
@@ -52,7 +60,7 @@ STORE_COLD_INIT = {
     "region_filter_layers": REGION_FILTER_LAYERS,
     "slider_marks": {
         param_name: [("Status Quo", param_data["status_quo"])]
-        for param_name, param_data in SETTINGS_PARAMETERS.items()
+        for param_name, param_data in ENERGY_SETTINGS_PANEL.items()
         if "status_quo" in param_data
     },
 }

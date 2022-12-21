@@ -231,7 +231,6 @@
     },
     "s_s_k_1": {
         "class": "js-slider js-slider-panel js-power-mix",
-        "color": "#964b00",
         "label": "Heimspeicher (%)",
         "max": 100,
         "min": 0,
@@ -252,7 +251,6 @@
     },
     "s_s_g_1": {
         "class": "js-slider js-slider-panel js-power-mix",
-        "color": "#964b00",
         "label": "Großspeicher (GWh)",
         "max": 10,
         "min": 0,

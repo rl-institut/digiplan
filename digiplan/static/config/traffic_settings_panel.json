@@ -1,0 +1,38 @@
+{
+    "v_iv_1": {
+        "class": "js-slider js-slider-panel",
+        "grid": false,
+        "label": "Anteil privater batterieelektrischer Fahrzeuge (%)",
+        "max": 100,
+        "min": 0,
+        "start": 30,
+        "status_quo": 50,
+        "step": 5,
+        "tooltip": "Anteil privater batterieelektrischer Fahrzeuge (%)",
+        "type": "slider"
+    },
+    "v_iv_2": {
+        "class": "js-slider js-slider-panel",
+        "grid": false,
+        "label": "Anteil privater Plugin-Hybrid-Fahrzeuge (%)",
+        "max": 100,
+        "min": 0,
+        "start": 25,
+        "status_quo": 45,
+        "step": 5,
+        "tooltip": "Anteil privater Plugin-Hybrid-Fahrzeuge (%)",
+        "type": "slider"
+    },
+    "v_sl_1": {
+        "class": "js-slider js-slider-panel",
+        "grid": false,
+        "label": "Anteil schwerer LKW mit Brennstoffzelle (%)",
+        "max": 100,
+        "min": 0,
+        "start": 10,
+        "status_quo": 40,
+        "step": 5,
+        "tooltip": "Anteil schwerer LKW mit Brennstoffzelle (%)",
+        "type": "slider"
+    }
+}

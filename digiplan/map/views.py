@@ -16,14 +16,16 @@ from config.settings.base import (
 from digiplan.map.config.config import (
     CLUSTER_GEOJSON_FILE,
     DEPENDENCY_PARAMETERS,
+    ENERGY_SETTINGS_PANEL,
+    HEAT_SETTINGS_PANEL,
     LAYER_STYLES,
     MAP_IMAGES,
     RESULTS_CHOROPLETHS,
     SETTINGS_DEPENDENCY_MAP,
-    SETTINGS_PARAMETERS,
     SOURCES,
     STORE_COLD_INIT,
     STORE_HOT_INIT,
+    TRAFFIC_SETTINGS_PANEL,
     ZOOM_LEVELS,
 )
 
@@ -56,7 +58,9 @@ class MapGLView(TemplateView):
         "area_switches": {
             category: [StaticLayerForm(layer) for layer in layers] for category, layers in LAYERS_CATEGORIES.items()
         },
-        "energysystem": PanelForm(SETTINGS_PARAMETERS),
+        "energy_settings_panel": PanelForm(ENERGY_SETTINGS_PANEL),
+        "heat_settings_panel": PanelForm(HEAT_SETTINGS_PANEL),
+        "traffic_settings_panel": PanelForm(TRAFFIC_SETTINGS_PANEL),
         "use_distilled_mvts": USE_DISTILLED_MVTS,
         "store_hot_init": STORE_HOT_INIT,
         "zoom_levels": ZOOM_LEVELS,
@@ -68,7 +72,7 @@ class MapGLView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["session_id"] = session_id
         context["layer_styles"] = LAYER_STYLES
-        context["settings_parameters"] = SETTINGS_PARAMETERS
+        context["settings_parameters"] = ENERGY_SETTINGS_PANEL
         context["settings_dependency_map"] = SETTINGS_DEPENDENCY_MAP
         context["dependency_parameters"] = DEPENDENCY_PARAMETERS
 
