@@ -55,13 +55,13 @@
     &__tabs {
       .nav-tabs,
       .c-slider {
-        @extend .pt-1;
+        @extend .pt-2;
+        @extend .pb-4;
         @extend .px-3;
       }
 
       .c-slider {
         @extend .position-relative;
-        height: $panel-slider-height;
         @extend .border-start;
         @extend .border-7;
         border-color: rgba(0, 0, 0, 0) !important;
