@@ -15,7 +15,7 @@ from django.utils.safestring import mark_safe
 from django_select2.forms import Select2MultipleWidget
 
 from . import models
-from .widgets import BoxWidget, SwitchWidget
+from .widgets import BoxWidget, SwitchWidget, TitleWidget
 
 
 class TemplateForm(Form):
@@ -122,6 +122,11 @@ class PanelForm(TemplateForm):
                 }
                 field = CharField(
                     label=item["label"], widget=BoxWidget(attrs=attrs), help_text=item["tooltip"], initial=item["text"]
+                )
+                yield {"name": name, "field": field}
+            elif item["type"] == "title":
+                field = CharField(
+                    label=item["label"], widget=TitleWidget(), help_text=item["tooltip"], initial=item["text"]
                 )
                 yield {"name": name, "field": field}
             else:

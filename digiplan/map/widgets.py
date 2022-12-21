@@ -55,3 +55,13 @@ class BoxWidget(Widget):
         if attrs:
             default_attrs.update(attrs)
         super().__init__(default_attrs)
+
+
+class TitleWidget(Widget):
+    template_name = "widgets/title.html"
+
+    def __init__(self, attrs=None):
+        default_attrs = {"class": "title-widget"}
+        if attrs:
+            default_attrs.update(attrs)
+        super().__init__(default_attrs)
