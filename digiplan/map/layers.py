@@ -27,7 +27,7 @@ POPUP_PRIO = ["hospital", "hospital_simulated"]  # from high to low prio
 
 def get_color(source_layer):
     if source_layer not in LAYER_STYLES:
-        raise KeyError(f"Could not find layer '{source_layer}' in layer styles (static/styles/layer_styles.json)")
+        raise KeyError(f"Could not find layer '{source_layer}' in layer styles (static/config/layer_styles.json)")
     try:
         return LAYER_STYLES[source_layer]["paint"]["fill-color"]
     except KeyError:

@@ -14,7 +14,7 @@
     overflow-y: scroll;
   }
 
-  @include media-breakpoint-up(lg)  {
+  @include media-breakpoint-up(lg) {
     height: 100vh;
     width: $panel-width !important;
   }
@@ -41,7 +41,7 @@
     @extend .py-4;
 
     &__heading {
-      @extend .px-4;
+      @extend .px-3;
       @extend .fs-7;
       @extend .fw-light;
       @extend .text-uppercase;
@@ -52,15 +52,74 @@
       }
     }
 
-    &__tabs .nav-tabs {
-      @extend .px-4;
+    &__tabs {
+      .nav-tabs,
+      .c-slider {
+        @extend .pt-2;
+        @extend .pb-4;
+        @extend .px-3;
+      }
+
+      .c-slider {
+        @extend .position-relative;
+        @extend .border-start;
+        @extend .border-7;
+        border-color: rgba(0, 0, 0, 0) !important;
+      }
+
+      .c-slider.active {
+        @extend .px-3;
+        @extend .bg-light;
+      }
+
+      .c-slider button svg {
+        transform: translateX(2px) translateY(-1px);
+      }
+
+      .c-slider.active-sidepanel button svg {
+        transform: rotate(180deg) translateX(-2px) translateY(1px);
+      }
+
+      .c-slider + .sidepanel {
+        display: none;
+      }
+
+      .c-slider.active-sidepanel + .sidepanel {
+        display: block;
+        z-index: 999;
+      }
+
+      .c-slider__label {
+        @extend .d-flex;
+        @extend .flex-row;
+        @extend .justify-content-between;
+        @extend .pb-1;
+
+        &--more button {
+          @extend .text-info;
+          @extend .fs-7;
+          @extend .fw-bold;
+        }
+      }
+
+      // replace with a more general class for checkboxes
+      .c-slider.lsg_usage {
+        @extend .d-flex;
+        @extend .flex-row;
+        @extend .align-items-center;
+        @extend .h-auto;
+
+        .c-slider__label {
+          @extend .p-0;
+          @extend .pe-1;
+        }
+      }
     }
 
     &__form {
       @extend .d-flex;
       @extend .flex-row;
       @extend .align-items-center;
-      @extend .px-4;
 
       select,
       img {
@@ -74,39 +133,57 @@
 
     &__chart {
       @extend .pb-2;
-      @extend .px-4;
-    }
-
-    .c-slider {
-      @extend .px-4;
-      @extend .border-start;
-      border-width: 0.5rem !important;
-      border-color: $white  !important;
-
-      &.active {
-        background-color: $gray-100;
-      }
-
-      &.bio.active {
-        border-color: $c-color-biomass !important;
-      }
-
-      &.conventional.active {
-        border-color: $c-color-conventional !important;
-      }
-
-      &.pv_ground.active {
-        border-color: $c-color-pvground !important;
-      }
-
-      &.pv_roof.active {
-        border-color: $c-color-pvroof !important;
-      }
     }
 
     button svg {
       @include translateY(-2px);
       margin-right: $icon-margin-right;
+    }
+  }
+
+  .js-sidepanel {
+    top: 0;
+  }
+
+  .sidepanel {
+    @extend .position-absolute;
+    @extend .bg-light;
+    @extend .p-3;
+    @extend .overflow-auto;
+    width: 18rem;
+    left: $panel-width-sm;
+    padding-top: $padding-large !important;
+
+    @include media-breakpoint-up(md) {
+      height: calc(100% - #{$top-nav-height} - #{$steps-height});
+      top: calc(#{$top-nav-height} + #{$steps-height});
+      left: $panel-width-sm;
+    }
+
+    @include media-breakpoint-up(lg) {
+      left: $panel-width;
+    }
+
+    &__heading {
+      @extend .d-flex;
+      @extend .flex-row;
+      @extend .justify-content-between;
+      @extend .fs-7;
+      @extend .fw-bold;
+    }
+
+    &__close {
+      @extend .btn-close;
+    }
+
+    .c-slider {
+      @extend .p-0;
+      @extend .pb-3;
+      @extend .border-0;
+
+      &__label {
+        @extend .fs-7;
+      }
     }
   }
 }

@@ -43,3 +43,9 @@ async function fetchGetJson(url) {
     throw err;
   }
 }
+
+function subscribeToEventTopicsGroup(eventTopicsList, subscriberFunction) {
+  Array.from(eventTopicsList).forEach(eventTopic => {
+    PubSub.subscribe(eventTopic, subscriberFunction);
+  });
+}

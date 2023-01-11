@@ -15,17 +15,22 @@ from config.settings.base import (
 )
 from digiplan.map.config.config import (
     CLUSTER_GEOJSON_FILE,
+    DEPENDENCY_PARAMETERS,
+    ENERGY_SETTINGS_PANEL,
+    HEAT_SETTINGS_PANEL,
     LAYER_STYLES,
     MAP_IMAGES,
     RESULTS_CHOROPLETHS,
+    SETTINGS_DEPENDENCY_MAP,
     SOURCES,
     STORE_COLD_INIT,
     STORE_HOT_INIT,
+    TRAFFIC_SETTINGS_PANEL,
     ZOOM_LEVELS,
 )
 
 from . import models, results
-from .forms import StaticLayerForm, WindAreaForm
+from .forms import PanelForm, StaticLayerForm
 from .layers import (
     ALL_LAYERS,
     ALL_SOURCES,
@@ -53,7 +58,9 @@ class MapGLView(TemplateView):
         "area_switches": {
             category: [StaticLayerForm(layer) for layer in layers] for category, layers in LAYERS_CATEGORIES.items()
         },
-        "energysystem": WindAreaForm(),
+        "energy_settings_panel": PanelForm(ENERGY_SETTINGS_PANEL),
+        "heat_settings_panel": PanelForm(HEAT_SETTINGS_PANEL),
+        "traffic_settings_panel": PanelForm(TRAFFIC_SETTINGS_PANEL),
         "use_distilled_mvts": USE_DISTILLED_MVTS,
         "store_hot_init": STORE_HOT_INIT,
         "zoom_levels": ZOOM_LEVELS,
@@ -64,9 +71,10 @@ class MapGLView(TemplateView):
         session_id = str(uuid.uuid4())
         context = super().get_context_data(**kwargs)
         context["session_id"] = session_id
-
-        # Add layer styles (used in map.html)
         context["layer_styles"] = LAYER_STYLES
+        context["settings_parameters"] = ENERGY_SETTINGS_PANEL
+        context["settings_dependency_map"] = SETTINGS_DEPENDENCY_MAP
+        context["dependency_parameters"] = DEPENDENCY_PARAMETERS
 
         # Categorize sources
         categorized_sources = {

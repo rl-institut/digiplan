@@ -1,9 +1,31 @@
-{% load crispy_forms_field %}
+{% load helper_tags %}
 
-<div class="c-slider">
-  <div class="c-slider__label">
-    <span>{{field.label}}</span>
-    {% if tooltip %}{% include 'widgets/info_button.html' with description=tooltip %}{% endif %}
-  </div>
-  {{field}}
+{% if field.field.widget.attrs|dict_lookup_filter:"data-color" %}
+  <style>
+    .c-slider.{{ field.name }}.active {
+      border-color: {{ field.field.widget.attrs|dict_lookup_filter:"data-color" }} !important;
+    }
+  </style>
+{% endif %}
+<div class="c-slider {{ field.name }}">
+  {% if field.label %}
+    <div class="c-slider__label">
+    <span>{{ field.label }}{% if tooltip %}
+      {% include 'widgets/info_button.html' with description=tooltip %}{% endif %}</span>
+      {% if field.field.widget.attrs|dict_lookup_filter:"data-has-sidepanel" == "true" %}
+        <span class="c-slider__label--more">
+      <button class="button button--transparent">
+        <span>mehr</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+             fill="currentColor" class="bi bi-arrow-right-circle-fill"
+             viewBox="0 0 6.35 6.35">
+          <path
+            d="m2.096.18-.561.561 2.432 2.432-2.432 2.433.561.56 2.993-2.992-.56-.562z"/>
+        </svg>
+      </button>
+    </span>
+      {% endif %}
+    </div>
+  {% endif %}
+  {{ field }}
 </div>

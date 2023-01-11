@@ -71,8 +71,6 @@
 
       {% compress js inline %}
         <script>
-          $(".js-range-slider").ionRangeSlider();
-
           let store_cold_init = {
             session_id: "{{session_id}}",
             allowedSwitches: ["wind_distance"],
@@ -96,7 +94,6 @@
         <script src="{% static 'js/charts.js' %}"></script>
         <script src="{% static 'js/layers-box.js' %}"></script>
         <script src="{% static 'js/offcanvas.js' %}"></script>
-        <script src="{% static 'js/sliders.js' %}"></script>
       {% endcompress %}
 
     {% endblock js_body %}

@@ -3,6 +3,7 @@ from itertools import count
 from django.db.models import Max, Min
 from django.forms import (
     BooleanField,
+    CharField,
     Form,
     IntegerField,
     MultipleChoiceField,
@@ -14,8 +15,7 @@ from django.utils.safestring import mark_safe
 from django_select2.forms import Select2MultipleWidget
 
 from . import models
-from .config import config
-from .widgets import SwitchWidget
+from .widgets import BoxWidget, SwitchWidget, TitleWidget
 
 
 class TemplateForm(Form):
@@ -57,7 +57,7 @@ class StaticLayerForm(TemplateForm):
                         fields=[IntegerField(), IntegerField()],
                         widget=TextInput(
                             attrs={
-                                "class": "js-range-slider",
+                                "class": "js-slider",
                                 "data-type": "double",
                                 "data-min": filter_min,
                                 "data-max": filter_max,
@@ -79,28 +79,55 @@ class StaticLayerForm(TemplateForm):
                     raise ValueError(f"Unknown filter type '{filter_.type}'")
 
 
-class WindAreaForm(TemplateForm):
-    template_name = "forms/parameters.html"
+class PanelForm(TemplateForm):
+    template_name = "forms/panel.html"
+    sidepanels = {}
 
-    def __init__(self):
+    def __init__(self, parameters):
         super().__init__()
 
-        for identifier, parameters in config.PARAMETERS.items():
-            if parameters["type"] == "slider":
+        self.fields = {item["name"]: item["field"] for item in self.generate_fields(parameters)}
+
+    def generate_fields(self, parameters):
+        for name, item in parameters.items():
+            if item["type"] == "slider":
                 attrs = {
-                    "class": "js-range-slider",
-                    "data-min": parameters["min"],
-                    "data-max": parameters["max"],
-                    "data-from": parameters["start"],
-                    "data-grid": True,
+                    "class": item["class"],
+                    "data-min": item["min"],
+                    "data-max": item["max"],
+                    "data-from": item["start"],
+                    "data-grid": "true" if "grid" in item and item["grid"] else "false",
+                    "data-has-sidepanel": "true" if "sidepanel" in item else "false",
+                    "data-color": item["color"] if "color" in item else "",
                 }
-                if "to" in parameters:
-                    attrs["data-to"] = parameters["to"]
-                field = IntegerField(
-                    label=parameters["label"], widget=TextInput(attrs=attrs), help_text=parameters["tooltip"]
+                if "to" in item:
+                    attrs["data-to"] = item["to"]
+                if "step" in item:
+                    attrs["data-step"] = item["step"]
+
+                field = IntegerField(label=item["label"], widget=TextInput(attrs=attrs), help_text=item["tooltip"])
+                yield {"name": name, "field": field}
+
+                if "sidepanel" in item:
+                    self.sidepanels[name] = PanelForm(item["sidepanel"])
+            elif item["type"] == "switch":
+                attrs = {
+                    "class": item["class"],
+                }
+                field = BooleanField(label=item["label"], widget=SwitchWidget(attrs=attrs), help_text=item["tooltip"])
+                yield {"name": name, "field": field}
+            elif item["type"] == "box":
+                attrs = {
+                    "class": item["class"],
+                }
+                field = CharField(
+                    label=item["label"], widget=BoxWidget(attrs=attrs), help_text=item["tooltip"], initial=item["text"]
                 )
-            elif parameters["type"] == "switch":
-                field = BooleanField(label=parameters["label"])
+                yield {"name": name, "field": field}
+            elif item["type"] == "title":
+                field = CharField(
+                    label=item["label"], widget=TitleWidget(), help_text=item["tooltip"], initial=item["text"]
+                )
+                yield {"name": name, "field": field}
             else:
-                raise ValueError(f"Unknown parameter type '{parameters['type']}'")
-            self.fields[identifier] = field
+                raise ValueError(f"Unknown parameter type '{item['type']}'")

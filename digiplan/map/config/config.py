@@ -9,17 +9,17 @@ from digiplan import __version__
 from digiplan.map import utils
 
 # FILES
-
-STYLES_DIR = settings.APPS_DIR.path("static").path("styles")
-
 CLUSTER_GEOJSON_FILE = settings.DATA_DIR.path("cluster.geojson")
-LAYER_STYLES_FILE = STYLES_DIR.path("layer_styles.json")
-RESULT_STYLES_FILE = STYLES_DIR.path("result_styles.json")
-CHOROPLETH_STYLES_FILE = STYLES_DIR.path("choropleth_styles.json")
-PARAMETERS_FILE = pathlib.Path(__file__).parent / "parameters.json"
+LAYER_STYLES_FILE = settings.APPS_DIR.path("static/config/layer_styles.json")
+RESULT_STYLES_FILE = settings.APPS_DIR.path("static/config/result_styles.json")
+CHOROPLETH_STYLES_FILE = settings.APPS_DIR.path("static/config/choropleth_styles.json")
+ENERGY_SETTINGS_PANEL_FILE = settings.APPS_DIR.path("static/config/energy_settings_panel.json")
+HEAT_SETTINGS_PANEL_FILE = settings.APPS_DIR.path("static/config/heat_settings_panel.json")
+TRAFFIC_SETTINGS_PANEL_FILE = settings.APPS_DIR.path("static/config/traffic_settings_panel.json")
+SETTINGS_DEPENDENCY_MAP_FILE = settings.APPS_DIR.path("static/config/settings_dependency_map.json")
+DEPENDENCY_PARAMETERS_FILE = settings.APPS_DIR.path("static/config/dependency_parameters.json")
 
 # REGIONS
-
 MIN_ZOOM = 6
 MAX_ZOOM = 22
 MAX_DISTILLED_ZOOM = 10
@@ -31,21 +31,28 @@ ZOOM_LEVELS = {
 REGIONS = ("municipality",)
 REGION_ZOOMS = RangeKeyDict({zoom: layer for layer, zoom in ZOOM_LEVELS.items() if layer in REGIONS})
 
-
 # FILTERS
-
 FILTER_DEFINITION = {}
 REGION_FILTER_LAYERS = ["built_up_areas", "settlements", "hospitals"]
 
-
 # PARAMETERS
+with open(ENERGY_SETTINGS_PANEL_FILE, "r", encoding="utf-8") as param_file:
+    ENERGY_SETTINGS_PANEL = json.load(param_file)
 
-with open(PARAMETERS_FILE, "r", encoding="utf-8") as param_file:
-    PARAMETERS = json.load(param_file)
+with open(HEAT_SETTINGS_PANEL_FILE, "r", encoding="utf-8") as param_file:
+    HEAT_SETTINGS_PANEL = json.load(param_file)
+
+with open(TRAFFIC_SETTINGS_PANEL_FILE, "r", encoding="utf-8") as param_file:
+    TRAFFIC_SETTINGS_PANEL = json.load(param_file)
+
+with open(SETTINGS_DEPENDENCY_MAP_FILE, "r", encoding="utf-8") as param_file:
+    SETTINGS_DEPENDENCY_MAP = json.load(param_file)
+
+with open(DEPENDENCY_PARAMETERS_FILE, "r", encoding="utf-8") as param_file:
+    DEPENDENCY_PARAMETERS = json.load(param_file)
 
 
 # STORE
-
 STORE_COLD_INIT = {
     "version": __version__,
     "debugMode": settings.DEBUG,
@@ -53,7 +60,7 @@ STORE_COLD_INIT = {
     "region_filter_layers": REGION_FILTER_LAYERS,
     "slider_marks": {
         param_name: [("Status Quo", param_data["status_quo"])]
-        for param_name, param_data in PARAMETERS.items()
+        for param_name, param_data in ENERGY_SETTINGS_PANEL.items()
         if "status_quo" in param_data
     },
 }
@@ -69,8 +76,6 @@ STORE_HOT_INIT = init_hot_store()
 
 
 # SOURCES
-
-
 def init_sources():
     sources = {}
     metadata_path = pathlib.Path(settings.METADATA_DIR)
@@ -87,7 +92,6 @@ SOURCES = init_sources()
 
 
 # STYLES
-
 RESULTS_CHOROPLETHS = utils.Choropleth(RESULT_STYLES_FILE)
 STATIC_CHOROPLETHS = utils.Choropleth(CHOROPLETH_STYLES_FILE)
 
@@ -102,7 +106,6 @@ MAP_IMAGES = [MapImage("hospital", "images/icons/hospital.png")]
 
 
 # DISTILL
-
 # Tiles of Ghana: At z=5 Ghana has width x=15-16 and height y=15(-16)
 X_AT_MIN_Z = 31
 Y_AT_MIN_Z = 30

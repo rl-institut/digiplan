@@ -13,7 +13,7 @@ map.on("load", function () {
       PubSub.publish(eventTopics.DETAIL_LAYER_SWITCH_CLICK, {layerForm});
     });
   });
-  $(".layer-setup").find(".js-range-slider").change(function() {
+  $(".layer-setup").find(".js-slider").change(function() {
     const layerForm = $(this).closest("form");
     PubSub.publish(eventTopics.DETAIL_LAYER_SLIDER_CHANGE, {layerForm});
   });
@@ -185,7 +185,7 @@ function get_layer_filters(layer_form) {
       }
    }
 
-  let sliders = $(layer_form).find(".js-range-slider");
+  let sliders = $(layer_form).find(".js-slider");
   sliders.each(function (index, slider) {
     let filter_name = slider.id.slice(3);
     let result = $(slider).data("ionRangeSlider").result;

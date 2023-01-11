@@ -1,9 +1,48 @@
-button {
-  &.btn {
-    letter-spacing: $letter-spacing-normal;
+.bs-btn {
+  @extend .btn;
+}
 
-    svg {
-      @include translateY(-2px);
-    }
+.bs-btn-primary {
+  @extend .btn-primary;
+}
+
+.button {
+  @extend .btn;
+  letter-spacing: $c-letter-spacing;
+
+  &--primary {
+    @extend .btn-primary;
+  }
+
+  &--secondary {
+    @extend .btn-info;
+  }
+
+  &--ghost {
+    @extend .btn-outline-primary;
+  }
+
+  &--link {
+    @extend .btn-link;
+  }
+
+  &--transparent {
+    @extend .btn-link;
+    @extend .p-0;
+    @extend .d-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  &--danger {
+    @extend .btn-danger;
+  }
+
+  &--sm {
+    @extend .btn-sm;
+  }
+
+  &--lg {
+    @extend .btn-lg;
   }
 }

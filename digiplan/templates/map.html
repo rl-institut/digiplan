@@ -87,6 +87,10 @@
   {{ block.super }}
 
   {{ layer_styles|json_script:"styles" }}
+  {{ result_styles|json_script:"result_styles" }}
+  {{ settings_parameters|json_script:"settings_parameters" }}
+  {{ settings_dependency_map|json_script:"settings_dependency_map" }}
+  {{ dependency_parameters|json_script:"dependency_parameters" }}
 
   {% compress js inline %}
     <script>
@@ -374,5 +378,6 @@
     <script src="{% static 'js/state.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/filter.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/results.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/sliders.js' %}" type="text/javascript"></script>
   {% endcompress %}
 {% endblock js_body %}

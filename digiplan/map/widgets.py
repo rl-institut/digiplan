@@ -45,3 +45,23 @@ class JsonWidget:
         if self.json["description"] != "":
             header += f'<p>{self.json["description"]}</p>'
         return mark_safe(header + self.__convert_to_html(data=self.json))  # noqa: S703,S308
+
+
+class BoxWidget(Widget):
+    template_name = "widgets/box.html"
+
+    def __init__(self, attrs=None):
+        default_attrs = {"class": "box-widget"}
+        if attrs:
+            default_attrs.update(attrs)
+        super().__init__(default_attrs)
+
+
+class TitleWidget(Widget):
+    template_name = "widgets/title.html"
+
+    def __init__(self, attrs=None):
+        default_attrs = {"class": "title-widget"}
+        if attrs:
+            default_attrs.update(attrs)
+        super().__init__(default_attrs)
