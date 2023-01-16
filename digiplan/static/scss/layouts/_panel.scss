@@ -68,7 +68,26 @@
         @extend .position-relative;
         @extend .border-start;
         @extend .border-7;
+        @include user-select-none;
         border-color: rgba(0, 0, 0, 0) !important;
+      }
+
+      .c-slider.energy_category_1,
+      .c-slider.energy_category_2,
+      .c-slider.energy_category_3 {
+        @extend .pb-1;
+        @extend .border-0;
+      }
+
+      .c-slider.energy_category_2,
+      .c-slider.energy_category_3 {
+        @extend .pt-3;
+        @extend .border-1;
+        @extend .border-top;
+      }
+
+      .c-slider .title-widget {
+        @extend .fs-6;
       }
 
       .c-slider.active {
@@ -98,6 +117,8 @@
         @extend .flex-row;
         @extend .justify-content-between;
         @extend .pb-1;
+        @extend .fs-7;
+        @include user-select-none;
 
         &--more button {
           @extend .text-info;
