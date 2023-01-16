@@ -6,39 +6,43 @@
 </div>
 <div class="panel__settings">
   <div class="panel-item">
-    <h2 class="panel-item__heading">
-      <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
-        <path d="m12.7 0.025321v13.733h1.0583v-13.733h-1.0583zm-5.2917 4.208v9.525h1.0583v-9.525h-1.0583zm-5.2917 2.1167v7.4083h1.0583v-7.4083h-1.0583zm-2.1167 9.4821v1.1012h16.933v-1.1012h-16.933z"/>
-      </svg>
-      Ergebnisse
-    </h2>
-    <div class="panel-item__form">
-      <select id="result_views" class="form-select" aria-label="Default select example">
-        <optgroup label="Planungsregion">
-          <option value="EinwohnerInnen" selected>EinwohnerInnen</option>
-          <option value="Bevölkerungsdichte">Bevölkerungsdichte</option>
-        </optgroup>
-        <optgroup label="Erneuerbare Energien (EE)">
-          <option value="re_power_percentage">Anteil Energie aus EE an Strombedarf</option>
-          <option value="re_power">Gewonnene Energie aus EE</option>
-          <option value="Gewonnene Energie aus EE je EinwohnerIn">Gewonnene Energie aus EE je EinwohnerIn</option>
-          <option value="Gewonnene Energie aus EE je km²">Gewonnene Energie aus EE je km²</option>
-          <option value="Installierte Leistung EE">Installierte Leistung EE</option>
-          <option value="Installierte Leistung EE je km²">Installierte Leistung EE je km²</option>
-          <option value="Anzahl Windenergieanlagen je km²">Anzahl Windenergieanlagen je km²</option>
-        </optgroup>
-        <optgroup label="Energiebedarf">
-          <option value="Strombedarf">Strombedarf</option>
-          <option value="Strombedarf je EinwohnerIn">Strombedarf je EinwohnerIn</option>
-          <option value="Wärmebedarf">Wärmebedarf</option>
-          <option value="Wärmebedarf je EinwohnerIn">Wärmebedarf je EinwohnerIn</option>
-        </optgroup>
-      </select>
-      <img src="{% static 'images/icons/i_info.svg' %}" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="Einwohner im Jahr 2021" >
+    <div class="panel-item__padding">
+      <h2 class="panel-item__heading">
+        <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
+          <path d="m12.7 0.025321v13.733h1.0583v-13.733h-1.0583zm-5.2917 4.208v9.525h1.0583v-9.525h-1.0583zm-5.2917 2.1167v7.4083h1.0583v-7.4083h-1.0583zm-2.1167 9.4821v1.1012h16.933v-1.1012h-16.933z"/>
+        </svg>
+        Ergebnisse
+      </h2>
+      <div class="panel-item__form">
+        <select id="result_views" class="form-select" aria-label="Default select example">
+          <optgroup label="Planungsregion">
+            <option value="EinwohnerInnen" selected>EinwohnerInnen</option>
+            <option value="Bevölkerungsdichte">Bevölkerungsdichte</option>
+          </optgroup>
+          <optgroup label="Erneuerbare Energien (EE)">
+            <option value="re_power_percentage">Anteil Energie aus EE an Strombedarf</option>
+            <option value="re_power">Gewonnene Energie aus EE</option>
+            <option value="Gewonnene Energie aus EE je EinwohnerIn">Gewonnene Energie aus EE je EinwohnerIn</option>
+            <option value="Gewonnene Energie aus EE je km²">Gewonnene Energie aus EE je km²</option>
+            <option value="Installierte Leistung EE">Installierte Leistung EE</option>
+            <option value="Installierte Leistung EE je km²">Installierte Leistung EE je km²</option>
+            <option value="Anzahl Windenergieanlagen je km²">Anzahl Windenergieanlagen je km²</option>
+          </optgroup>
+          <optgroup label="Energiebedarf">
+            <option value="Strombedarf">Strombedarf</option>
+            <option value="Strombedarf je EinwohnerIn">Strombedarf je EinwohnerIn</option>
+            <option value="Wärmebedarf">Wärmebedarf</option>
+            <option value="Wärmebedarf je EinwohnerIn">Wärmebedarf je EinwohnerIn</option>
+          </optgroup>
+        </select>
+        <img src="{% static 'images/icons/i_info.svg' %}" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="Einwohner im Jahr 2021" >
+      </div>
     </div>
   </div>
   <div class="panel-item">
-    <div id="chart3" class="panel-item__chart"></div>
-    <div id="chart4" class="panel-item__chart"></div>
+    <div class="panel-item__padding">
+      <div id="chart3" class="panel-item__chart"></div>
+      <div id="chart4" class="panel-item__chart"></div>
+    </div>
   </div>
 </div>

@@ -40,6 +40,10 @@
   &-item {
     @extend .py-4;
 
+    &__padding {
+      @extend .px-3;
+    }
+
     &__heading {
       @extend .px-3;
       @extend .fs-7;
