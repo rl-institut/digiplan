@@ -8,12 +8,12 @@ from raster.models import RasterLayer as RasterModel
 from config.settings.base import DATA_DIR
 from digiplan.map.config.config import CLUSTER_GEOJSON_FILE, LAYER_STYLES, ZOOM_LEVELS
 from digiplan.map.layers import LAYERS_DEFINITION, VectorLayerData
-from digiplan.map.models import Municipality, Region, WindTurbine
+from digiplan.map.models import Municipality, PVground, PVroof, Region, WindTurbine
 from digiplan.utils.ogr_layer_mapping import RelatedModelLayerMapping
 
 REGIONS = [Municipality]
 
-MODELS = [WindTurbine]
+MODELS = [WindTurbine, PVroof, PVground]
 
 
 def load_regions(regions=None, verbose=True):
