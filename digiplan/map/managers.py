@@ -6,8 +6,6 @@ from django.db import connection
 from rest_framework.serializers import ValidationError
 from rest_framework_gis.tilenames import tile_edges
 
-from digiplan.map.config.config import REGION_ZOOMS
-
 
 # pylint: disable=W0223
 class AsMVTGeom(models.functions.GeomOutputGeoFunc):
@@ -123,8 +121,7 @@ class StaticMVTManager(MVTManager):
     # pylint: disable=R0913
     def _filter_query(self, query, x, y, z, filters):
         query = super()._filter_query(query, x, y, z, filters)
-        region = REGION_ZOOMS[z]
-        return query.filter(region__layer_type=region)
+        return query
 
 
 class LabelMVTManager(MVTManager):
