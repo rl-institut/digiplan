@@ -9,11 +9,7 @@ REGION_MVT_LAYERS = {
 }
 
 STATIC_MVT_LAYERS = {
-    "static": [
-        MVTLayer("results", models.WindTurbine.vector_tiles),
-        MVTLayer("results", models.PVroof.vector_tiles),
-        MVTLayer("results", models.PVground.vector_tiles),
-    ],
+    "static": [MVTLayer("wind", models.WindTurbine.vector_tiles), MVTLayer("pvroof", models.PVroof.vector_tiles)],
     "results": [MVTLayer("results", models.Municipality.vector_tiles)],
 }
 

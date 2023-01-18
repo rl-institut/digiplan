@@ -73,6 +73,14 @@ LAYERS_CATEGORIES = {
             name_singular="Wind Turbine",
             description="Wind Turbines",
         ),
+        VectorLayerData(
+            source="pvroof",
+            color="blue",
+            model=models.PVroof,
+            name="roof Photovoltaics",
+            name_singular="roof Photovoltaic",
+            description="roof Photovoltaics",
+        ),
     ],
     "Results": [
         VectorLayerData(
