@@ -78,6 +78,28 @@
           "icon-color": "blue"
         }
   },
+  "pvroof": {
+    "type": "symbol",
+      "layout": {
+        "icon-image": "pvroof",
+        "icon-size": 0.5,
+        "icon-allow-overlap": true
+      },
+      "paint": {
+        "icon-color": "blue"
+      }
+  },
+  "pvground": {
+    "type": "symbol",
+      "layout": {
+        "icon-image": "pvground",
+        "icon-size": 0.5,
+        "icon-allow-overlap": true
+      },
+      "paint": {
+        "icon-color": "blue"
+      }
+  },
   "results": {
     "paint": {
       "fill-color": [

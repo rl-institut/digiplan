@@ -81,6 +81,14 @@ LAYERS_CATEGORIES = {
             name_singular="roof Photovoltaic",
             description="roof Photovoltaics",
         ),
+        VectorLayerData(
+            source="pvground",
+            color="blue",
+            model=models.PVground,
+            name="ground Photovoltaics",
+            name_singular="ground Photovoltaic",
+            description="ground Photovoltaics",
+        ),
     ],
     "Results": [
         VectorLayerData(
