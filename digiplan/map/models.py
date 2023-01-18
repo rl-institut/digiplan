@@ -4,7 +4,7 @@ from enum import Enum
 from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
 
-from .managers import LabelMVTManager, RegionMVTManager
+from .managers import LabelMVTManager, RegionMVTManager, StaticMVTManager
 
 
 class LayerFilterType(Enum):
@@ -48,6 +48,38 @@ class Municipality(models.Model):
     mapping = {
         "geom": "MULTIPOLYGON",
         "name": "name",
+    }
+
+    def __str__(self):
+        return self.name
+
+
+class WindTurbine(models.Model):
+    geom = models.PointField(srid=4326)  # maybe MultiPointField
+    name = models.CharField(max_length=50, null=True)
+    name_park = models.CharField(max_length=50, null=True)
+    geometry_approximated = models.BooleanField()
+    unit_count = models.BigIntegerField(null=True)
+    capacity_net = models.FloatField(null=True)
+    hub_height = models.FloatField(null=True)
+    zip_code = models.CharField(max_length=50, null=True)
+    rotor_diameter = models.FloatField(null=True)
+
+    objects = models.Manager()
+    static_tiles = StaticMVTManager(geo_col="geom_label", columns=["id", "name"])
+
+    data_file = "bnetza_mastr_wind_agg_abw"
+    layer = "bnetza_mastr_wind_abw"
+    mapping = {
+        "geom": "POINT",
+        "name": "name",
+        "name_park": "name_park",
+        "geometry_approximated": "geometry_approximated",
+        "unit_count": "unit_count",
+        "capacity_net": "capacity_net",
+        "hub_height": "hub_height",
+        "rotor_diameter": "rotor_diameter",
+        "zip_code": "zip_code",
     }
 
     def __str__(self):

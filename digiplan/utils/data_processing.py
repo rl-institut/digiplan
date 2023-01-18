@@ -8,12 +8,12 @@ from raster.models import RasterLayer as RasterModel
 from config.settings.base import DATA_DIR
 from digiplan.map.config.config import CLUSTER_GEOJSON_FILE, LAYER_STYLES, ZOOM_LEVELS
 from digiplan.map.layers import LAYERS_DEFINITION, VectorLayerData
-from digiplan.map.models import Municipality, Region
+from digiplan.map.models import Municipality, Region, WindTurbine
 from digiplan.utils.ogr_layer_mapping import RelatedModelLayerMapping
 
 REGIONS = [Municipality]
 
-MODELS = []
+MODELS = [WindTurbine]
 
 
 def load_regions(regions=None, verbose=True):
@@ -40,7 +40,7 @@ def load_regions(regions=None, verbose=True):
         instance.save(strict=True, verbose=verbose)
 
 
-def load_data(models=None, verbose=True):
+def load_data(models=None):
     models = models or MODELS
     for model in models:
         if model.objects.exists():
@@ -58,7 +58,7 @@ def load_data(models=None, verbose=True):
             layer=model.layer,
             transform=4326,
         )
-        instance.save(strict=True, verbose=verbose)
+        instance.save(strict=True)
 
 
 def load_raster(layers=None):
