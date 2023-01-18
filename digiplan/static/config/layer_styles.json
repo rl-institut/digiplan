@@ -67,6 +67,17 @@
     },
     "type": "line"
   },
+  "wind": {
+      "type": "symbol",
+        "layout": {
+          "icon-image": "wind",
+          "icon-size": 0.5,
+          "icon-allow-overlap": true
+        },
+        "paint": {
+          "icon-color": "blue"
+        }
+  },
   "results": {
     "paint": {
       "fill-color": [
