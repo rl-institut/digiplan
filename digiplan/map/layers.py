@@ -64,6 +64,16 @@ class RasterLayerData:
 
 
 LAYERS_CATEGORIES = {
+    "Renewables": [
+        VectorLayerData(
+            source="wind",
+            color="blue",
+            model=models.WindTurbine,
+            name="Wind Turbines",
+            name_singular="Wind Turbine",
+            description="Wind Turbines",
+        ),
+    ],
     "Results": [
         VectorLayerData(
             source="results",
@@ -76,7 +86,7 @@ LAYERS_CATEGORIES = {
             popup_fields=("title", "municipality", "key-values", "chart", "description", "sources"),
             # order matters
         )
-    ]
+    ],
 }
 LAYERS_DEFINITION = reduce(operator.add, list(LAYERS_CATEGORIES.values()))
 

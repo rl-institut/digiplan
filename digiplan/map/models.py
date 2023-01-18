@@ -66,7 +66,7 @@ class WindTurbine(models.Model):
     rotor_diameter = models.FloatField(null=True)
 
     objects = models.Manager()
-    static_tiles = StaticMVTManager(geo_col="geom_label", columns=["id", "name"])
+    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name"])
 
     data_file = "bnetza_mastr_wind_agg_abw"
     layer = "bnetza_mastr_wind_abw"
