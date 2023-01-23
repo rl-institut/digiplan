@@ -89,6 +89,30 @@ LAYERS_CATEGORIES = {
             name_singular="ground Photovoltaic",
             description="ground Photovoltaics",
         ),
+        VectorLayerData(
+            source="hydro",
+            color="blue",
+            model=models.Hydro,
+            name="Hydro",
+            name_singular="Hydro",
+            description="",
+        ),
+        VectorLayerData(
+            source="biomass",
+            color="blue",
+            model=models.Biomass,
+            name="Biomass",
+            name_singular="Biomass",
+            description="",
+        ),
+        VectorLayerData(
+            source="combustion",
+            color="blue",
+            model=models.Combustion,
+            name="Combustion",
+            name_singular="Combustion",
+            description="",
+        ),
     ],
     "Results": [
         VectorLayerData(

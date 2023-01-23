@@ -139,3 +139,81 @@ class PVground(models.Model):
         "capacity_net": "capacity_net",
         "power_limitation": "power_limitation",
     }
+
+
+class Hydro(models.Model):
+    geom = models.PointField(srid=4326)
+    name = models.CharField(max_length=255, null=True)
+    zip_code = models.CharField(max_length=50, null=True)
+    geometry_approximated = models.BooleanField()
+    unit_count = models.BigIntegerField(null=True)
+    capacity_net = models.FloatField(null=True)
+    water_origin = models.CharField(max_length=255, null=True)
+
+    objects = models.Manager()
+    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name"])
+
+    data_file = "bnetza_mastr_hydro_agg_abw"
+    layer = "bnetza_mastr_hydro_abw"
+
+    mapping = {
+        "geom": "POINT",
+        "name": "name",
+        "zip_code": "zip_code",
+        "geometry_approximated": "geometry_approximated",
+        "unit_count": "unit_count",
+        "capacity_net": "capacity_net",
+        "water_origin": "water_origin",
+    }
+
+
+class Biomass(models.Model):
+    geom = models.PointField(srid=4326)
+    name = models.CharField(max_length=255, null=True)
+    zip_code = models.CharField(max_length=50, null=True)
+    geometry_approximated = models.BooleanField()
+    unit_count = models.BigIntegerField(null=True)
+    capacity_net = models.FloatField(null=True)
+    fuel_type = models.CharField(max_length=50, null=True)
+
+    objects = models.Manager()
+    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name"])
+
+    data_file = "bnetza_mastr_biomass_agg_abw"
+    layer = "bnetza_mastr_biomass_abw"
+
+    mapping = {
+        "geom": "POINT",
+        "name": "name",
+        "zip_code": "zip_code",
+        "geometry_approximated": "geometry_approximated",
+        "unit_count": "unit_count",
+        "capacity_net": "capacity_net",
+        "fuel_type": "fuel_type",
+    }
+
+
+class Combustion(models.Model):
+    geom = models.PointField(srid=4326)
+    name = models.CharField(max_length=255, null=True)
+    name_block = models.CharField(max_length=255, null=True)
+    zip_code = models.CharField(max_length=50, null=True)
+    geometry_approximated = models.BooleanField()
+    unit_count = models.BigIntegerField(null=True)
+    capacity_net = models.FloatField(null=True)
+
+    objects = models.Manager()
+    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name"])
+
+    data_file = "bnetza_mastr_combustion_agg_abw"
+    layer = "bnetza_mastr_combustion_abw"
+
+    mapping = {
+        "geom": "POINT",
+        "name": "name",
+        "name_block": "block_name",
+        "zip_code": "zip_code",
+        "geometry_approximated": "geometry_approximated",
+        "unit_count": "unit_count",
+        "capacity_net": "capacity_net",
+    }
