@@ -71,7 +71,24 @@
       "type": "symbol",
         "layout": {
           "icon-image": "wind",
-          "icon-size": 0.5,
+          "icon-size": [
+            "interpolate",
+            [
+              "linear"
+            ],
+            [
+              "get",
+              "unit_count"
+            ],
+            0,
+            0.5,
+            10,
+            1.0,
+            100,
+            1.25,
+            1000,
+            1.5
+          ],
           "icon-allow-overlap": true
         },
         "paint": {
@@ -82,7 +99,24 @@
     "type": "symbol",
       "layout": {
         "icon-image": "pvroof",
-        "icon-size": 0.5,
+        "icon-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "get",
+            "unit_count"
+          ],
+          0,
+          0.5,
+          10,
+          1.0,
+          100,
+          1.25,
+          1000,
+          1.5
+        ],
         "icon-allow-overlap": true
       },
       "paint": {
@@ -93,7 +127,108 @@
     "type": "symbol",
       "layout": {
         "icon-image": "pvground",
-        "icon-size": 0.5,
+        "icon-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "get",
+            "unit_count"
+          ],
+          0,
+          0.5,
+          10,
+          1.0,
+          100,
+          1.25,
+          1000,
+          1.5
+        ],
+        "icon-allow-overlap": true
+      },
+      "paint": {
+        "icon-color": "blue"
+      }
+  },
+  "hydro": {
+    "type": "symbol",
+      "layout": {
+        "icon-image": "hydro",
+        "icon-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "get",
+            "unit_count"
+          ],
+          0,
+          0.5,
+          10,
+          1.0,
+          100,
+          1.25,
+          1000,
+          1.5
+        ],
+        "icon-allow-overlap": true
+      },
+      "paint": {
+        "icon-color": "blue"
+      }
+  },
+  "biomass": {
+    "type": "symbol",
+      "layout": {
+        "icon-image": "biomass",
+        "icon-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "get",
+            "unit_count"
+          ],
+          0,
+          0.5,
+          10,
+          1.0,
+          100,
+          1.25,
+          1000,
+          1.5
+        ],
+        "icon-allow-overlap": true
+      },
+      "paint": {
+        "icon-color": "blue"
+      }
+  },
+  "combustion": {
+    "type": "symbol",
+      "layout": {
+        "icon-image": "combustion",
+        "icon-size": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "get",
+            "unit_count"
+          ],
+          0,
+          0.5,
+          10,
+          1.0,
+          100,
+          1.25,
+          1000,
+          1.5
+        ],
         "icon-allow-overlap": true
       },
       "paint": {

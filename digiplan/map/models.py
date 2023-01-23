@@ -66,7 +66,7 @@ class WindTurbine(models.Model):
     rotor_diameter = models.FloatField(null=True)
 
     objects = models.Manager()
-    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name"])
+    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name", "unit_count"])
 
     data_file = "bnetza_mastr_wind_agg_abw"
     layer = "bnetza_mastr_wind_abw"
@@ -96,7 +96,7 @@ class PVroof(models.Model):
     power_limitation = models.CharField(max_length=50, null=True)
 
     objects = models.Manager()
-    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name"])
+    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name", "unit_count"])
 
     data_file = "bnetza_mastr_pv_roof_agg_abw"
     layer = "bnetza_mastr_pv_roof_abw"
@@ -125,7 +125,7 @@ class PVground(models.Model):
     power_limitation = models.CharField(max_length=50, null=True)
 
     objects = models.Manager()
-    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name"])
+    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name", "unit_count"])
 
     data_file = "bnetza_mastr_pv_ground_agg_abw"
     layer = "bnetza_mastr_pv_ground_abw"
@@ -151,7 +151,7 @@ class Hydro(models.Model):
     water_origin = models.CharField(max_length=255, null=True)
 
     objects = models.Manager()
-    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name"])
+    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name", "unit_count"])
 
     data_file = "bnetza_mastr_hydro_agg_abw"
     layer = "bnetza_mastr_hydro_abw"
@@ -177,7 +177,7 @@ class Biomass(models.Model):
     fuel_type = models.CharField(max_length=50, null=True)
 
     objects = models.Manager()
-    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name"])
+    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name", "unit_count"])
 
     data_file = "bnetza_mastr_biomass_agg_abw"
     layer = "bnetza_mastr_biomass_abw"
@@ -203,7 +203,7 @@ class Combustion(models.Model):
     capacity_net = models.FloatField(null=True)
 
     objects = models.Manager()
-    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name"])
+    vector_tiles = StaticMVTManager(geo_col="geom", columns=["id", "name", "unit_count"])
 
     data_file = "bnetza_mastr_combustion_agg_abw"
     layer = "bnetza_mastr_combustion_abw"
