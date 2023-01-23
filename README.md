@@ -179,8 +179,8 @@ In order to add new layers to the application following steps must be made:
       Normally, a `StaticMVTManager` (which activates filtering of vector tiles by given
       zoom level) should be chosen.
 
-- run `makemigration` and `migrate` (see commands above),
-- add an entry for new layer in `STATIC_OVERLAYS` in `digiplan/utils/data_processing.py`
+- run `makemigrations` and `migrate` (see commands above),
+- add an entry for new layer in `MODELS` in `digiplan/utils/data_processing.py`
   ,
 - load layer data into DB by running `load_data` or by loading only specific data.
 
