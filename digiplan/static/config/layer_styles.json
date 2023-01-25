@@ -68,171 +68,189 @@
     "type": "line"
   },
   "wind": {
-      "type": "symbol",
-        "layout": {
-          "icon-image": "wind",
-          "icon-size": [
-            "interpolate",
-            [
-              "linear"
-            ],
-            [
-              "get",
-              "unit_count"
-            ],
-            0,
-            0.5,
-            10,
-            1.0,
-            100,
-            1.25,
-            1000,
-            1.5
-          ],
-          "icon-allow-overlap": true
-        },
-        "paint": {
-          "icon-color": "blue"
-        }
-  },
-  "pvroof": {
-    "type": "symbol",
-      "layout": {
-        "icon-image": "pvroof",
-        "icon-size": [
-          "interpolate",
-          [
-            "linear"
-          ],
+      "type": "circle",
+      "paint": {
+        "circle-color": "navy",
+        "circle-radius": [
+          "step",
           [
             "get",
-            "unit_count"
+            "capacity_net"
           ],
-          0,
-          0.5,
-          10,
-          1.0,
-          100,
-          1.25,
-          1000,
-          1.5
+          4,
+          55.0,
+          [
+            "ln",
+            [
+              "get",
+              "capacity_net"
+            ]
+          ]
         ],
-        "icon-allow-overlap": true
-      },
+        "circle-stroke-width": [
+          "case",
+          [
+            "boolean",
+            [
+              "get",
+              "geometry_approximated"
+            ],
+            false
+          ],
+          1,
+          0
+        ]
+      }
+  },
+  "pvroof": {
+    "type": "circle",
       "paint": {
-        "icon-color": "blue"
+        "circle-color": "yellow",
+        "circle-radius": [
+          "step",
+          [
+            "get",
+            "capacity_net"
+          ],
+          4,
+          55.0,
+          [
+            "ln",
+            [
+              "get",
+              "capacity_net"
+            ]
+          ]
+        ],
+        "circle-stroke-width": [
+          "case",
+          [
+            "boolean",
+            [
+              "get",
+              "geometry_approximated"
+            ],
+            false
+          ],
+          1.5,
+          0
+        ],
+        "circle-stroke-opacity": 0.4
       }
   },
   "pvground": {
-    "type": "symbol",
-      "layout": {
-        "icon-image": "pvground",
-        "icon-size": [
-          "interpolate",
-          [
-            "linear"
-          ],
+    "type": "circle",
+      "paint": {
+        "circle-color": "lime",
+        "circle-radius": [
+          "step",
           [
             "get",
-            "unit_count"
+            "capacity_net"
           ],
-          0,
-          0.5,
-          10,
-          1.0,
-          100,
-          1.25,
-          1000,
-          1.5
+          4,
+          55.0,
+          [
+            "ln",
+            [
+              "get",
+              "capacity_net"
+            ]
+          ]
         ],
-        "icon-allow-overlap": true
-      },
-      "paint": {
-        "icon-color": "blue"
+        "circle-stroke-opacity": [
+          "case",
+          [
+            "boolean",
+            [
+              "get",
+              "geometry_approximated"
+            ],
+            false
+          ],
+          0.6,
+          0.15
+        ],
+        "circle-stroke-width": 1.5
       }
   },
   "hydro": {
-    "type": "symbol",
-      "layout": {
-        "icon-image": "hydro",
-        "icon-size": [
-          "interpolate",
-          [
-            "linear"
-          ],
+    "type": "circle",
+      "paint": {
+        "circle-color": "aqua",
+        "circle-radius": [
+          "step",
           [
             "get",
-            "unit_count"
+            "capacity_net"
           ],
-          0,
-          0.5,
-          10,
-          1.0,
-          100,
-          1.25,
-          1000,
-          1.5
-        ],
-        "icon-allow-overlap": true
-      },
-      "paint": {
-        "icon-color": "blue"
+          4,
+          55.0,
+          [
+            "ln",
+            [
+              "get",
+              "capacity_net"
+            ]
+          ]
+        ]
       }
   },
   "biomass": {
-    "type": "symbol",
-      "layout": {
-        "icon-image": "biomass",
-        "icon-size": [
-          "interpolate",
-          [
-            "linear"
-          ],
+    "type": "circle",
+      "paint": {
+        "circle-color": "teal",
+        "circle-radius": [
+          "step",
           [
             "get",
-            "unit_count"
+            "capacity_net"
           ],
-          0,
-          0.5,
-          10,
-          1.0,
-          100,
-          1.25,
-          1000,
-          1.5
-        ],
-        "icon-allow-overlap": true
-      },
-      "paint": {
-        "icon-color": "blue"
+          4,
+          55.0,
+          [
+            "ln",
+            [
+              "get",
+              "capacity_net"
+            ]
+          ]
+        ]
       }
   },
   "combustion": {
-    "type": "symbol",
-      "layout": {
-        "icon-image": "combustion",
-        "icon-size": [
-          "interpolate",
-          [
-            "linear"
-          ],
+    "type": "circle",
+      "paint": {
+        "circle-color": "maroon",
+        "circle-radius": [
+          "step",
           [
             "get",
-            "unit_count"
+            "capacity_net"
           ],
-          0,
-          0.5,
-          10,
-          1.0,
-          100,
-          1.25,
-          1000,
-          1.5
+          4,
+          55.0,
+          [
+            "ln",
+            [
+              "get",
+              "capacity_net"
+            ]
+          ]
         ],
-        "icon-allow-overlap": true
-      },
-      "paint": {
-        "icon-color": "blue"
+        "circle-opacity": [
+          "case",
+          [
+            "boolean",
+            [
+              "get",
+              "geometry_approximated"
+            ],
+            false
+          ],
+          0.6,
+          1
+        ]
       }
   },
   "results": {
