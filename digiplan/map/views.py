@@ -3,6 +3,8 @@ import random
 import uuid
 
 from django.http import JsonResponse
+from django.template.exceptions import TemplateDoesNotExist
+from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 
 from config.settings.base import (
@@ -94,6 +96,47 @@ def get_clusters(request):
     except FileNotFoundError:
         clusters = {}
     return JsonResponse(clusters)
+
+
+def get_popup(request):
+    lookup = request.GET["lookup"]
+    data = {
+        # pylint: disable=C0301
+        "description": "The population in 2022 of Z\u00f6rbig was 9,311 inhabitants. The entire ABW region had 370,190 inhabitants at that time. The following chart shows a forecast of the population development for the years 2022, 2030, and 2045.",  # noqa: E501
+        "id": 12,
+        "data": {
+            "municipality_value": 9311,
+            "region_title": "ABW region",
+            "region_value": 370190,
+            "unit": "Population",
+            "year": 2022,
+        },
+        "municipality": "Z\u00f6rbig",
+        "sources": [
+            {
+                "name": "Bev\u00f6lkerungz\u00e4hlung Anhalt 2021",
+                "url": "https://wam.rl-institut.de/digiplan/sources#11",
+            },
+            {"name": "Bev\u00f6lkerungsprognose Anhalt 2030", "url": "https://wam.rl-institut.de/digiplan/sources#12"},
+            {"name": "Bev\u00f6lkerungsprognose Anhalt 2050", "url": "https://wam.rl-institut.de/digiplan/sources#13"},
+        ],
+        "title": "Population",
+    }
+    chart = {
+        "lookup": "population",
+        "series": [
+            {
+                "data": [{"key": 2022, "value": 9311}, {"key": 2030, "value": 9182}, {"key": 2045, "value": 8903}],
+                "name": None,
+            }
+        ],
+        "title": "Population Growth",
+    }
+    try:
+        html = render_to_string(f"popups/{lookup}.html", context=data)
+    except TemplateDoesNotExist:
+        html = render_to_string("popups/default.html", context=data)
+    return JsonResponse({"html": html, "chart": chart})
 
 
 def get_results(request):

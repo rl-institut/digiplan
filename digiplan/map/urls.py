@@ -15,6 +15,7 @@ urlpatterns = [
     path("clusters", views.get_clusters, name="clusters"),
     path("results", views.get_results, name="results"),
     path("visualization", views.get_visualization, name="visualization"),
+    path("popup", views.get_popup, name="popup"),
 ]
 
 urlpatterns += [
