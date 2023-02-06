@@ -8,6 +8,7 @@ from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 
 from config.settings.base import (
+    APPS_DIR,
     DEBUG,
     PASSWORD,
     PASSWORD_PROTECTION,
@@ -100,37 +101,36 @@ def get_clusters(request):
 
 def get_popup(request):
     lookup = request.GET["lookup"]
+    region = request.GET["region"]  # regionID
+
+    # eigentlich so was wie: APPS_DIR.path("schemas").path(lookup + ".json") ?
+    with open(APPS_DIR.path("schemas").path("popup.example.json"), "r", encoding="utf-8") as file:
+        json_data = json.load(file)
+
     data = {
         # pylint: disable=C0301
-        "description": "The population in 2022 of Z\u00f6rbig was 9,311 inhabitants. The entire ABW region had 370,190 inhabitants at that time. The following chart shows a forecast of the population development for the years 2022, 2030, and 2045.",  # noqa: E501
-        "id": 12,
+        "description": json_data["description"],  # noqa: E501
+        "id": region,
         "data": {
             "municipality_value": 9311,
-            "region_title": "ABW region",
+            "region_title": json_data["keyValues"]["regionTitle"],
             "region_value": 370190,
-            "unit": "Population",
-            "year": 2022,
+            "unit": json_data["keyValues"]["unit"],
+            "year": json_data["keyValues"]["year"],
         },
-        "municipality": "Z\u00f6rbig",
-        "sources": [
-            {
-                "name": "Bev\u00f6lkerungz\u00e4hlung Anhalt 2021",
-                "url": "https://wam.rl-institut.de/digiplan/sources#11",
-            },
-            {"name": "Bev\u00f6lkerungsprognose Anhalt 2030", "url": "https://wam.rl-institut.de/digiplan/sources#12"},
-            {"name": "Bev\u00f6lkerungsprognose Anhalt 2050", "url": "https://wam.rl-institut.de/digiplan/sources#13"},
-        ],
-        "title": "Population",
+        "municipality": json_data["municipality"],
+        "sources": json_data["sources"],
+        "title": json_data["title"],
     }
+    # maybe actually APPS_DIR.path("schemas").path("components").path("chart." + lookup + ".example.json")
+    with open(
+        APPS_DIR.path("schemas").path("components").path("chart.population.example.json"), "r", encoding="utf-8"
+    ) as file:
+        json_chart = json.load(file)
     chart = {
-        "lookup": "population",
-        "series": [
-            {
-                "data": [{"key": 2022, "value": 9311}, {"key": 2030, "value": 9182}, {"key": 2045, "value": 8903}],
-                "name": None,
-            }
-        ],
-        "title": "Population Growth",
+        "lookup": lookup,
+        "series": json_chart["series"],
+        "title": json_chart["title"],
     }
     try:
         html = render_to_string(f"popups/{lookup}.html", context=data)
