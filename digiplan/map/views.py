@@ -28,6 +28,7 @@ from digiplan.map.config.config import (
     TRAFFIC_SETTINGS_PANEL,
     ZOOM_LEVELS,
 )
+from digiplan.map.results import core
 
 from . import models
 from .forms import PanelForm, StaticLayerForm
@@ -39,7 +40,6 @@ from .layers import (
     RASTER_LAYERS,
     REGION_LAYERS,
 )
-from .results import visualizations
 
 
 class MapGLView(TemplateView):
@@ -147,8 +147,8 @@ def get_visualization(request):
     scenario_name = request.GET["scenario"]
     parameters = request.GET.get("parameters", {})
     visualization = request.GET["visualization"]
-    scenario = visualizations.Scenario(scenario_name, parameters)
-    vh = visualizations.VisualizationHandler([scenario])
+    scenario = core.Scenario(scenario_name, parameters)
+    vh = core.VisualizationHandler([scenario])
     vh.add(visualization)
     vh.run()
     return JsonResponse(vh[visualization])
