@@ -774,7 +774,7 @@ oemoflex = {git = "https://github.com/rl-institut/oemoflex.git", rev = "feature/
 type = "git"
 url = "https://github.com/rl-institut/django-oemof.git"
 reference = "HEAD"
-resolved_reference = "1092ed62d65d6be845e1ac838f7b2f05e48b0175"
+resolved_reference = "e7e887e9d7a17d8594e0b1e72f0fde48b4b27980"
 
 [[package]]
 name = "django-raster"
@@ -1716,7 +1716,7 @@ dev = ["black (==20.8b1)", "coverage", "flake8", "pytest"]
 type = "git"
 url = "https://github.com/rl-institut/oemoflex.git"
 reference = "feature/refactor_postprocessing"
-resolved_reference = "94820fea9b7ab0fc965feff647bea885f09638cf"
+resolved_reference = "0c73b45a0ce4d9cb84700233f064e585dd232165"
 
 [[package]]
 name = "openpyxl"
