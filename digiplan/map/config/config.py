@@ -102,7 +102,7 @@ LAYER_STYLES.update(STATIC_CHOROPLETHS.get_all_styles())
 
 # MAP
 MapImage = namedtuple("MapImage", ["name", "path"])
-MAP_IMAGES = [MapImage("hospital", "images/icons/hospital.png")]
+MAP_IMAGES = []
 
 
 # DISTILL
