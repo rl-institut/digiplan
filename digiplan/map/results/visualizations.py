@@ -26,9 +26,9 @@ class TotalCosts(core.Visualization):
         }
 
 
-class Demand(core.Visualization):
-    name = "demand"
-    title = _("Demand")
+class ElectricityDemand(core.Visualization):
+    name = "electricity_demand"
+    title = _("Electricity Demand")
     calculation = results_core.ParametrizedCalculation(
         postprocessing.AggregatedFlows,
         {
