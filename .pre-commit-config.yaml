@@ -16,6 +16,12 @@ repos:
     hooks:
       - id: jshint
 
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    # Ruff version.
+    rev: 'v0.0.244'
+    hooks:
+      - id: ruff
+
   - repo: local
     hooks:
       - id: black
