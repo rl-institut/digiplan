@@ -9,14 +9,14 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
-    image: enershelf_production_django
+    image: digiplan_production_django
     restart: unless-stopped
     networks:
-      - enershelf_network
+      - digiplan_network
       - caddy_network
     volumes:
-      - ./enershelf/data:/app/enershelf/data
-      - ./enershelf/static/mvts:/app/staticfiles/mvts
+      - ./digiplan/data:/app/digiplan/data
+      - ./digiplan/static/mvts:/app/staticfiles/mvts
     expose:
       - "5000"
     depends_on:
@@ -30,11 +30,11 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: enershelf_production_postgres
+    image: digiplan_production_postgres
     command: postgres -N 500
     restart: always
     networks:
-      - enershelf_network
+      - digiplan_network
     volumes:
       - production_postgres_data:/var/lib/postgresql/data
       - production_postgres_data_backups:/backups
@@ -42,7 +42,7 @@ services:
       - ./.envs/.production/.postgres
 
 networks:
-  enershelf_network:
+  digiplan_network:
   caddy_network:
     external:
       name: docker_caddy_network
