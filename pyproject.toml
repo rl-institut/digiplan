@@ -2,7 +2,12 @@
 name = "digiplan"
 version = "0.0.0"
 description = "Digiplan"
-authors = ["Hendrik Huyskens <hendrik.huyskens@rl-institut.de>", "Marie-Claire Gering <marie-claire.gering@rl-institut.de>"]
+authors = [
+  "Hendrik Huyskens <hendrik.huyskens@rl-institut.de>",
+  "Marie-Claire Gering <marie-claire.gering@rl-institut.de>",
+  "Josephine Stolle <josephine.stolle@rl-institut.de>",
+  "Josefine Hoppe <josefine.hoppe@rl-institut.de>",
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
