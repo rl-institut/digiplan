@@ -65,8 +65,7 @@ class Visualization(abc.ABC):
         if not self._result:
             self._result = [result[core.get_dependency_name(self.calculation)] for result in self.handler.results]
         rendered = self._render()
-        if not settings.DEBUG:
-            self.validate(rendered)
+        self.validate(rendered)
         return rendered
 
     @abc.abstractmethod
