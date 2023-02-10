@@ -145,7 +145,8 @@ def get_results(request):
 
 def get_visualization(request):
     scenario_name = request.GET["scenario"]
-    parameters = request.GET.get("parameters", {})
+    parameters_raw = request.GET.get("parameters")
+    parameters = json.loads(parameters_raw) if parameters_raw else {}
     visualization = request.GET["visualization"]
     scenario = core.Scenario(scenario_name, parameters)
     vh = core.VisualizationHandler([scenario])
