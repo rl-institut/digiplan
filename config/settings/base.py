@@ -85,7 +85,7 @@ THIRD_PARTY_APPS = [
     "crispy_bootstrap5",
     "django_distill",
     "django_select2",
-    "raster",
+    # "raster",
 ]
 
 LOCAL_APPS = ["digiplan.map.apps.MapConfig", "django_oemof"]

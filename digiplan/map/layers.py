@@ -7,8 +7,7 @@ from itertools import product
 from typing import List, Optional
 
 from django.contrib.gis.db.models import Model
-from django.db.models import BooleanField, IntegerField, ObjectDoesNotExist
-from raster.models import RasterLayer as RasterModel
+from django.db.models import BooleanField, IntegerField
 
 from config.settings.base import APPS_DIR, USE_DISTILLED_MVTS
 from digiplan.map.config.config import (
@@ -50,17 +49,6 @@ class VectorLayerData:
     clustered: bool = False
     map_source: str = "static"
     popup_fields: list = field(default_factory=list)
-
-
-@dataclass
-class RasterLayerData:
-    source: str
-    filepath: str
-    legend: str
-    model: RasterModel.__class__
-    name: str
-    name_singular: str
-    description: str
 
 
 LAYERS_CATEGORIES = {
@@ -201,25 +189,6 @@ def get_dynamic_sources():
     return sources
 
 
-def get_raster_sources():
-    sources = []
-    for layer in LAYERS_DEFINITION:
-        if not issubclass(layer.model, RasterModel):
-            continue
-        try:
-            raster_id = RasterModel.objects.get(name=layer.source).id
-        except ObjectDoesNotExist:
-            continue
-        sources.append(
-            Source(
-                name=f"{layer.source}",
-                type="raster",
-                tiles=[f"raster/tiles/{raster_id}/{{z}}/{{x}}/{{y}}.png?legend={layer.legend}"],
-            )
-        )
-    return sources
-
-
 if USE_DISTILLED_MVTS:
     SUFFIXES = ["", "_distilled"]
     ALL_SOURCES = (
@@ -246,7 +215,6 @@ if USE_DISTILLED_MVTS:
             ),
             Source(name="results", type="vector", tiles=["results_mvt/{z}/{x}/{y}/"]),
         ]
-        + get_raster_sources()
         + get_dynamic_sources()
     )
 else:
@@ -257,7 +225,6 @@ else:
             Source(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"]),
             Source(name="results", type="vector", tiles=["results_mvt/{z}/{x}/{y}/"]),
         ]
-        + get_raster_sources()
         + get_dynamic_sources()
     )
 
@@ -303,22 +270,9 @@ def get_region_layers():
     )
 
 
-RASTER_LAYERS = [
-    RasterLayer(
-        id=layer.source,
-        source=layer.source,
-        type="raster",
-    )
-    for layer in LAYERS_DEFINITION
-    if issubclass(layer.model, RasterModel)
-]
-
-
 def get_static_layers():
     static_layers = []
     for layer in LAYERS_DEFINITION:
-        if issubclass(layer.model, RasterModel):
-            continue
         if hasattr(layer.model, "setup"):
             continue
         for suffix in SUFFIXES:

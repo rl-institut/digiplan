@@ -32,14 +32,7 @@ from digiplan.map.results import core
 
 from . import models
 from .forms import PanelForm, StaticLayerForm
-from .layers import (
-    ALL_LAYERS,
-    ALL_SOURCES,
-    LAYERS_CATEGORIES,
-    POPUPS,
-    RASTER_LAYERS,
-    REGION_LAYERS,
-)
+from .layers import ALL_LAYERS, ALL_SOURCES, LAYERS_CATEGORIES, POPUPS, REGION_LAYERS
 
 
 class MapGLView(TemplateView):
@@ -52,7 +45,6 @@ class MapGLView(TemplateView):
         "tiling_service_style_id": TILING_SERVICE_STYLE_ID,
         "map_images": MAP_IMAGES,
         "all_layers": ALL_LAYERS,
-        "raster_layers": RASTER_LAYERS,
         "all_sources": ALL_SOURCES,
         "popups": POPUPS,
         "region_filter": None,  # RegionFilterForm(),
