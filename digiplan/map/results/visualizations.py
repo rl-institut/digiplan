@@ -29,7 +29,19 @@ class TotalCosts(core.Visualization):
 class Demand(core.Visualization):
     name = "demand"
     title = _("Demand")
-    calculation = results_core.ParametrizedCalculation(postprocessing.AggregatedFlows, {"to_nodes": ["demand"]})
+    calculation = results_core.ParametrizedCalculation(
+        postprocessing.AggregatedFlows,
+        {
+            "to_nodes": [
+                "ABW-ch4-demand",
+                "ABW-electricity-demand",
+                "ABW-heat_central-demand",
+                "ABW-heat_decentral-demand",
+                "ABW-lignite-demand",
+                "ABW-wood-demand",
+            ]
+        },
+    )
 
     def _render(self):
         return {
