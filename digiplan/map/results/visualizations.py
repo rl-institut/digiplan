@@ -1,5 +1,4 @@
 from django.utils.translation import gettext as _
-from django_oemof import results
 from oemoflex.postprocessing import core as results_core
 from oemoflex.postprocessing import postprocessing
 
@@ -46,10 +45,3 @@ class Demand(core.Visualization):
             ],
             "title": self.title,
         }
-
-
-results.register_calculation(
-    results_core.ParametrizedCalculation(postprocessing.AggregatedFlows, {"to_nodes": ["demand"]})
-)
-core.add_visualization(TotalCosts)
-core.add_visualization(Demand)
