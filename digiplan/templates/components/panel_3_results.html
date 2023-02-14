@@ -36,6 +36,22 @@
       </select>
       <img src="{% static 'images/icons/i_info.svg' %}" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="Einwohner im Jahr 2021" >
     </div>
+    <div class="panel-item__nav">
+      <ul class="nav nav-pills flex-column" id="results_nav" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="pill" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Allgemein</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="pill" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Strom</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="messages-tab" data-bs-toggle="pill" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Wärme</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="settings-tab" data-bs-toggle="pill" data-bs-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Verkehr</button>
+        </li>
+      </ul>
+    </div>
   </div>
   <div class="panel-item">
     <div id="chart3" class="panel-item__chart"></div>
