@@ -35,6 +35,10 @@
   &__settings {
     @extend .bg-white;
     @extend .pb-3;
+
+    &--padding {
+      @extend .px-3;
+    }
   }
 
   &-item {
