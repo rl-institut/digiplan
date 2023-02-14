@@ -135,6 +135,19 @@
       }
     }
 
+    &__nav {
+      @extend .py-3;
+
+      &-header {
+        @extend .fs-7;
+        @extend .mb-1;
+      }
+
+      button {
+        @extend .w-100;
+      }
+    }
+
     &__chart {
       @extend .pb-2;
     }
