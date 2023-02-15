@@ -147,8 +147,31 @@
         @extend .mb-1;
       }
 
-      button {
+      .nav-item {
+        width: 50%;
+        padding-bottom: $panel-results-nav-button-padding;
+      }
+
+      .nav-item:nth-of-type(odd) {
+        padding-right: calc(#{$panel-results-nav-button-padding} / 2);
+      }
+
+      .nav-item:nth-of-type(even) {
+        padding-left: calc(#{$panel-results-nav-button-padding} / 2);
+      }
+
+      .nav-link {
         @extend .w-100;
+        @extend .bg-light;
+        @extend .text-primary;
+        @extend .text-center;
+        height: 4.25rem;
+        border-radius: $button-border-radius;
+      }
+
+      .nav-link.active {
+        @extend .bg-primary;
+        @extend .text-white;
       }
     }
 
