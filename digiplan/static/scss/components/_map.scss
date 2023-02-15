@@ -65,7 +65,6 @@
     top: calc(#{$steps-height} + #{$map-items-padding});
     right: $map-items-padding;
     z-index: $map-layers-box-z-index;
-    display: none;
   }
 
   &__layers-close {
