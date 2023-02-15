@@ -68,190 +68,298 @@
     "type": "line"
   },
   "wind": {
-      "type": "circle",
-      "paint": {
-        "circle-color": "navy",
-        "circle-radius": [
-          "step",
+    "type": "circle",
+    "paint": {
+      "circle-color": "navy",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "step",
+        [
+          "get",
+          "capacity_net"
+        ],
+        4,
+        55.0,
+        [
+          "ln",
           [
             "get",
             "capacity_net"
-          ],
-          4,
-          55.0,
-          [
-            "ln",
-            [
-              "get",
-              "capacity_net"
-            ]
           ]
-        ],
-        "circle-stroke-width": [
-          "case",
-          [
-            "boolean",
-            [
-              "get",
-              "geometry_approximated"
-            ],
-            false
-          ],
-          1,
-          0
         ]
-      }
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0,
+        1
+      ],
+      "circle-blur": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0.5,
+        0
+      ]
+    }
   },
   "pvroof": {
     "type": "circle",
-      "paint": {
-        "circle-color": "yellow",
-        "circle-radius": [
-          "step",
+    "paint": {
+      "circle-color": "yellow",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "step",
+        [
+          "get",
+          "capacity_net"
+        ],
+        4,
+        55.0,
+        [
+          "ln",
           [
             "get",
             "capacity_net"
-          ],
-          4,
-          55.0,
-          [
-            "ln",
-            [
-              "get",
-              "capacity_net"
-            ]
           ]
-        ],
-        "circle-stroke-width": [
-          "case",
+        ]
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
           [
-            "boolean",
-            [
-              "get",
-              "geometry_approximated"
-            ],
-            false
+            "get",
+            "geometry_approximated"
           ],
-          1.5,
-          0
+          false
         ],
-        "circle-stroke-opacity": 0.4
-      }
+        0,
+        1
+      ],
+      "circle-blur": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0.5,
+        0
+      ]
+    }
   },
   "pvground": {
     "type": "circle",
-      "paint": {
-        "circle-color": "lime",
-        "circle-radius": [
-          "step",
+    "paint": {
+      "circle-color": "lime",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "step",
+        [
+          "get",
+          "capacity_net"
+        ],
+        4,
+        55.0,
+        [
+          "ln",
           [
             "get",
             "capacity_net"
-          ],
-          4,
-          55.0,
-          [
-            "ln",
-            [
-              "get",
-              "capacity_net"
-            ]
           ]
-        ],
-        "circle-stroke-opacity": [
-          "case",
+        ]
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
           [
-            "boolean",
-            [
-              "get",
-              "geometry_approximated"
-            ],
-            false
+            "get",
+            "geometry_approximated"
           ],
-          0.6,
-          0.15
+          false
         ],
-        "circle-stroke-width": 1.5
-      }
+        0,
+        1
+      ],
+      "circle-blur": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0.5,
+        0
+      ]
+    }
   },
   "hydro": {
     "type": "circle",
-      "paint": {
-        "circle-color": "aqua",
-        "circle-radius": [
-          "step",
+    "paint": {
+      "circle-color": "aqua",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "step",
+        [
+          "get",
+          "capacity_net"
+        ],
+        4,
+        55.0,
+        [
+          "ln",
           [
             "get",
             "capacity_net"
-          ],
-          4,
-          55.0,
-          [
-            "ln",
-            [
-              "get",
-              "capacity_net"
-            ]
           ]
         ]
-      }
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0,
+        1
+      ],
+      "circle-blur": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0.5,
+        0
+      ]
+    }
   },
   "biomass": {
     "type": "circle",
-      "paint": {
-        "circle-color": "teal",
-        "circle-radius": [
-          "step",
+    "paint": {
+      "circle-color": "teal",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "step",
+        [
+          "get",
+          "capacity_net"
+        ],
+        4,
+        55.0,
+        [
+          "ln",
           [
             "get",
             "capacity_net"
-          ],
-          4,
-          55.0,
-          [
-            "ln",
-            [
-              "get",
-              "capacity_net"
-            ]
           ]
         ]
-      }
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0,
+        1
+      ],
+      "circle-blur": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0.5,
+        0
+      ]
+    }
   },
   "combustion": {
     "type": "circle",
-      "paint": {
-        "circle-color": "maroon",
-        "circle-radius": [
-          "step",
+    "paint": {
+      "circle-color": "maroon",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "step",
+        [
+          "get",
+          "capacity_net"
+        ],
+        4,
+        55.0,
+        [
+          "ln",
           [
             "get",
             "capacity_net"
-          ],
-          4,
-          55.0,
-          [
-            "ln",
-            [
-              "get",
-              "capacity_net"
-            ]
           ]
-        ],
-        "circle-opacity": [
-          "case",
-          [
-            "boolean",
-            [
-              "get",
-              "geometry_approximated"
-            ],
-            false
-          ],
-          0.6,
-          1
         ]
-      }
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0,
+        1
+      ],
+      "circle-blur": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0.5,
+        0
+      ]
+    }
   },
   "results": {
     "paint": {
