@@ -33,6 +33,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - make top nav responsive
 - update horizontal padding on left panel for better use of bg-colors individual items
 - colors for choropleth are rendered by colorbrewer
+- make layers box visible on start
 
 ### Fixed
 - fix clunky sidebar resizing of sidebar chart #68
