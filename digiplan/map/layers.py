@@ -27,10 +27,12 @@ POPUP_PRIO = ["hospital", "hospital_simulated"]  # from high to low prio
 def get_color(source_layer):
     if source_layer not in LAYER_STYLES:
         raise KeyError(f"Could not find layer '{source_layer}' in layer styles (static/config/layer_styles.json)")
-    try:
-        return LAYER_STYLES[source_layer]["paint"]["fill-color"]
-    except KeyError:
-        return LAYER_STYLES[source_layer]["paint"]["line-color"]
+    for color_key in ("fill-color", "line-color", "circle-color"):
+        try:
+            return LAYER_STYLES[source_layer]["paint"][color_key]
+        except KeyError:
+            continue
+    return None
 
 
 def get_opacity(source_layer):
@@ -55,7 +57,7 @@ LAYERS_CATEGORIES = {
     "Renewables": [
         VectorLayerData(
             source="wind",
-            color="blue",
+            color=get_color("wind"),
             model=models.WindTurbine,
             name="Wind Turbines",
             name_singular="Wind Turbine",
@@ -63,7 +65,7 @@ LAYERS_CATEGORIES = {
         ),
         VectorLayerData(
             source="pvroof",
-            color="blue",
+            color=get_color("pvroof"),
             model=models.PVroof,
             name="roof Photovoltaics",
             name_singular="roof Photovoltaic",
@@ -71,7 +73,7 @@ LAYERS_CATEGORIES = {
         ),
         VectorLayerData(
             source="pvground",
-            color="blue",
+            color=get_color("pvground"),
             model=models.PVground,
             name="ground Photovoltaics",
             name_singular="ground Photovoltaic",
@@ -79,7 +81,7 @@ LAYERS_CATEGORIES = {
         ),
         VectorLayerData(
             source="hydro",
-            color="blue",
+            color=get_color("hydro"),
             model=models.Hydro,
             name="Hydro",
             name_singular="Hydro",
@@ -87,7 +89,7 @@ LAYERS_CATEGORIES = {
         ),
         VectorLayerData(
             source="biomass",
-            color="blue",
+            color=get_color("biomass"),
             model=models.Biomass,
             name="Biomass",
             name_singular="Biomass",
@@ -95,7 +97,7 @@ LAYERS_CATEGORIES = {
         ),
         VectorLayerData(
             source="combustion",
-            color="blue",
+            color=get_color("combustion"),
             model=models.Combustion,
             name="Combustion",
             name_singular="Combustion",
