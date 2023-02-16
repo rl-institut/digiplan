@@ -29,7 +29,7 @@ class TemplateForm(Form):
 
 
 class StaticLayerForm(TemplateForm):
-    template_name = "forms.layer.html"
+    template_name = "forms/layer.html"
     switch = BooleanField(
         label=False,
         widget=SwitchWidget(
