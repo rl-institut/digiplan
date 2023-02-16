@@ -70,7 +70,7 @@
   "wind": {
     "type": "circle",
     "paint": {
-      "circle-color": "navy",
+      "circle-color": "#6A89CC",
       "circle-opacity": 0.5,
       "circle-radius": [
         "step",
@@ -119,7 +119,7 @@
   "pvroof": {
     "type": "circle",
     "paint": {
-      "circle-color": "yellow",
+      "circle-color": "#FFD660",
       "circle-opacity": 0.5,
       "circle-radius": [
         "step",
@@ -168,7 +168,7 @@
   "pvground": {
     "type": "circle",
     "paint": {
-      "circle-color": "lime",
+      "circle-color": "#F6B93B",
       "circle-opacity": 0.5,
       "circle-radius": [
         "step",
@@ -217,7 +217,7 @@
   "hydro": {
     "type": "circle",
     "paint": {
-      "circle-color": "aqua",
+      "circle-color": "#9CC4D9",
       "circle-opacity": 0.5,
       "circle-radius": [
         "step",
@@ -266,7 +266,7 @@
   "biomass": {
     "type": "circle",
     "paint": {
-      "circle-color": "teal",
+      "circle-color": "#52C41A",
       "circle-opacity": 0.5,
       "circle-radius": [
         "step",
@@ -315,7 +315,7 @@
   "combustion": {
     "type": "circle",
     "paint": {
-      "circle-color": "maroon",
+      "circle-color": "#1A1A1A",
       "circle-opacity": 0.5,
       "circle-radius": [
         "step",
