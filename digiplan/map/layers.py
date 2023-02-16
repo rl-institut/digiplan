@@ -141,7 +141,6 @@ class Layer:
     type: str  # noqa: A003
     name: Optional[str] = None
     description: Optional[str] = None
-    color: Optional[str] = None
     clustered: bool = False
 
 
@@ -291,7 +290,6 @@ def get_static_layers():
             static_layers.append(
                 Layer(
                     id=layer_id,
-                    color=layer.color,
                     description=layer.description,
                     minzoom=min_zoom,
                     maxzoom=max_zoom,
@@ -310,7 +308,6 @@ def get_dynamic_layers():
     return [
         Layer(
             id=f"fill-{layer.source}-{'-'.join(combination)}",
-            color=layer.color,
             description=layer.description,
             minzoom=MIN_ZOOM,
             maxzoom=MAX_ZOOM,
