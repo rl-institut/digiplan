@@ -49,7 +49,9 @@ class MapGLView(TemplateView):
         "popups": POPUPS,
         "region_filter": None,  # RegionFilterForm(),
         "area_switches": {
-            category: [StaticLayerForm(layer) for layer in layers] for category, layers in LAYERS_CATEGORIES.items()
+            category: [StaticLayerForm(layer) for layer in layers]
+            for category, layers in LAYERS_CATEGORIES.items()
+            if category != "Results"
         },
         "energy_settings_panel": PanelForm(ENERGY_SETTINGS_PANEL),
         "heat_settings_panel": PanelForm(HEAT_SETTINGS_PANEL),
