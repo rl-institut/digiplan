@@ -77,6 +77,7 @@
     @extend .fs-7;
     @extend .text-uppercase;
     @extend .fw-bold;
+    @extend .mb-1;
   }
 }
 
@@ -141,7 +142,7 @@
 
   &__title {
     @extend .text-uppercase;
-    @extend .pb-2;
+    @extend .pb-1;
   }
 
   &__unit {
@@ -156,6 +157,7 @@
 
   &__column {
     @extend .col-6;
+    @extend .fs-8;
   }
 
   &__item {
