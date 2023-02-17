@@ -1,5 +1,5 @@
-import operator
-from functools import reduce
+from dataclasses import dataclass
+from typing import Optional
 
 from django.conf import settings
 
@@ -7,53 +7,40 @@ from digiplan.map import models
 from digiplan.map.config import config
 from digiplan.map.mapset import layers, popups, sources, utils
 
-LAYERS_CATEGORIES = {
+STATIC_LAYERS = {
+    "wind": layers.StaticLayer(id="wind", model=models.WindTurbine, type="circle", source="static"),
+    "pvroof": layers.StaticLayer(id="pvroof", model=models.PVroof, type="circle", source="static"),
+    "pvground": layers.StaticLayer(id="pvground", model=models.PVground, type="circle", source="static"),
+    "hydro": layers.StaticLayer(id="hydro", model=models.Hydro, type="circle", source="static"),
+    "biomass": layers.StaticLayer(id="biomass", model=models.Biomass, type="circle", source="static"),
+    "combustion": layers.StaticLayer(id="combustion", model=models.Combustion, type="circle", source="static"),
+}
+
+
+@dataclass
+class LegendLayer:
+    name: str
+    description: str
+    layer: layers.StaticLayer
+    color: Optional[str] = None
+
+    def get_color(self):
+        if self.color:
+            return self.color
+        return utils.get_color(self.layer.id)
+
+
+LEGEND = {
     "Renewables": [
-        layers.VectorLayerData(
-            source="wind",
-            color=utils.get_color("wind"),
-            model=models.WindTurbine,
-            name="Wind Turbines",
-            description="Wind Turbines",
-        ),
-        layers.VectorLayerData(
-            source="pvroof",
-            color=utils.get_color("pvroof"),
-            model=models.PVroof,
-            name="roof Photovoltaics",
-            description="roof Photovoltaics",
-        ),
-        layers.VectorLayerData(
-            source="pvground",
-            color=utils.get_color("pvground"),
-            model=models.PVground,
-            name="ground Photovoltaics",
-            description="ground Photovoltaics",
-        ),
-        layers.VectorLayerData(
-            source="hydro",
-            color=utils.get_color("hydro"),
-            model=models.Hydro,
-            name="Hydro",
-            description="",
-        ),
-        layers.VectorLayerData(
-            source="biomass",
-            color=utils.get_color("biomass"),
-            model=models.Biomass,
-            name="Biomass",
-            description="",
-        ),
-        layers.VectorLayerData(
-            source="combustion",
-            color=utils.get_color("combustion"),
-            model=models.Combustion,
-            name="Combustion",
-            description="",
-        ),
+        LegendLayer("Windturbinen", "", STATIC_LAYERS["wind"]),
+        LegendLayer("Aufdach-PV", "", STATIC_LAYERS["pvroof"]),
+        LegendLayer("Boden-PV", "", STATIC_LAYERS["pvground"]),
+        LegendLayer("Hydro", "", STATIC_LAYERS["hydro"]),
+        LegendLayer("Biomasse", "", STATIC_LAYERS["biomass"]),
+        LegendLayer("Fossile Kraftwerke", "", STATIC_LAYERS["combustion"]),
     ],
 }
-LAYERS_DEFINITION = reduce(operator.add, list(LAYERS_CATEGORIES.values()))
+LAYERS_DEFINITION = []
 
 if settings.USE_DISTILLED_MVTS:
     SUFFIXES = ["", "_distilled"]
@@ -109,12 +96,13 @@ ALL_SOURCES += [
     sources.MapSource("cluster", type="geojson", url="clusters"),
 ]
 
-
-STATIC_LAYERS = layers.get_static_layers(LAYERS_DEFINITION)
 DYNAMIC_LAYERS = layers.get_dynamic_layers(LAYERS_DEFINITION)
 REGION_LAYERS = layers.get_region_layers()
 
-ALL_LAYERS = STATIC_LAYERS + DYNAMIC_LAYERS + REGION_LAYERS
+ALL_LAYERS = []
+for static_layer in STATIC_LAYERS.values():
+    ALL_LAYERS.extend(static_layer.get_map_layers())
+ALL_LAYERS += DYNAMIC_LAYERS + REGION_LAYERS
 ALL_LAYERS.append(
     layers.MapLayer(
         id="results", type="fill", source="results", source_layer="results", style=config.LAYER_STYLES["results"]

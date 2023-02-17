@@ -3,7 +3,7 @@ from typing import List, Optional
 
 from django.http import HttpRequest
 
-from digiplan.map.mapset.layers import get_layer_setups
+from digiplan.map.mapset import utils
 
 
 @dataclass
@@ -43,7 +43,7 @@ def get_dynamic_sources(layers):
     for layer in layers:
         if not hasattr(layer.model, "setup"):
             continue
-        for combination in get_layer_setups(layer):
+        for combination in utils.get_layer_setups(layer):
             mvt_str = "-".join(combination)
             filter_str = "&".join(map(lambda x: f"setup__{x}", combination))  # noqa: C417
             sources.append(

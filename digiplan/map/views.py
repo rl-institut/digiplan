@@ -48,8 +48,7 @@ class MapGLView(TemplateView):
         "layers_at_startup": setup.LAYERS_AT_STARTUP,
         "popups": setup.POPUPS,
         "area_switches": {
-            category: [StaticLayerForm(layer) for layer in layers]
-            for category, layers in setup.LAYERS_CATEGORIES.items()
+            category: [StaticLayerForm(layer) for layer in layers] for category, layers in setup.LEGEND.items()
         },
         "energy_settings_panel": PanelForm(ENERGY_SETTINGS_PANEL),
         "heat_settings_panel": PanelForm(HEAT_SETTINGS_PANEL),
@@ -76,8 +75,8 @@ class MapGLView(TemplateView):
 
         # Categorize sources
         categorized_sources = {
-            category: [SOURCES[layer.source] for layer in layers if layer.source in SOURCES]
-            for category, layers in setup.LAYERS_CATEGORIES.items()
+            category: [SOURCES[layer.layer.id] for layer in layers if layer.layer.id in SOURCES]
+            for category, layers in setup.LEGEND.items()
         }
         context["sources"] = categorized_sources
 

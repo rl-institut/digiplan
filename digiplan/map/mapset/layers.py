@@ -1,25 +1,11 @@
-from dataclasses import dataclass, field
-from itertools import product
+from dataclasses import dataclass
 from typing import Optional
 
 from django.conf import settings
 from django.contrib.gis.db.models import Model
-from django.db.models import BooleanField, IntegerField
 
 from digiplan.map.config import config
-
-
-@dataclass
-class VectorLayerData:
-    # pylint: disable=too-many-instance-attributes
-    source: str
-    color: str
-    model: Model.__class__
-    name: str
-    description: str
-    clustered: bool = False
-    map_source: str = "static"
-    popup_fields: list = field(default_factory=list)
+from digiplan.map.mapset import utils
 
 
 @dataclass
@@ -42,22 +28,46 @@ class MapLayer:
         return layer
 
 
+@dataclass
+class StaticLayer:
+    id: str  # noqa: A003
+    model: Model.__class__
+    type: str  # noqa: A003
+    source: str
+
+    @staticmethod
+    def min_zoom(distill=False):
+        return config.MAX_DISTILLED_ZOOM + 1 if not distill and settings.USE_DISTILLED_MVTS else config.MIN_ZOOM
+
+    @staticmethod
+    def max_zoom(distill=False):
+        return config.MAX_ZOOM if not distill else config.MAX_DISTILLED_ZOOM + 1
+
+    def get_map_layers(self):
+        yield MapLayer(
+            id=self.id,
+            type=self.type,
+            source=self.source,
+            source_layer=self.id,
+            minzoom=self.min_zoom(),
+            maxzoom=self.max_zoom(),
+            style=config.LAYER_STYLES[self.id],
+        )
+        if settings.USE_DISTILLED_MVTS:
+            yield MapLayer(
+                id=f"{self.id}_distilled",
+                type=self.type,
+                source=f"{self.source}_distilled",
+                source_layer=self.id,
+                minzoom=self.min_zoom(),
+                maxzoom=self.max_zoom(),
+                style=config.LAYER_STYLES[self.id],
+            )
+
+
 # pylint: disable=R0903
 class MapClusterLayer(MapLayer):
     pass
-
-
-def get_layer_setups(layer):
-    setups = []
-    setup_model = layer.model._meta.get_field("setup").related_model
-    for setup in setup_model._meta.fields:
-        if setup.name == "id":
-            continue
-        if isinstance(setup, IntegerField):
-            setups.append([f"{setup.name}={choice[0]}" for choice in setup.choices])
-        elif isinstance(setup, BooleanField):
-            setups.append([f"{setup.name}=True", f"{setup.name}=False"])
-    return product(*setups)
 
 
 def get_region_layers():
@@ -101,39 +111,6 @@ def get_region_layers():
     )
 
 
-def get_static_layers(layers):
-    suffixes = ["", "_distilled"] if settings.USE_DISTILLED_MVTS else [""]
-    static_layers = []
-    for layer in layers:
-        if hasattr(layer.model, "setup"):
-            continue
-        for suffix in suffixes:
-            if layer.clustered and suffix == "_distilled":
-                # Clustered layers are not distilled
-                continue
-            layer_id = f"{layer.source}{suffix}"
-            if layer.clustered:
-                min_zoom = list(config.ZOOM_LEVELS.values())[-1].min  # Show unclustered only at last LOD
-                max_zoom = config.MAX_ZOOM
-            else:
-                min_zoom = (
-                    config.MAX_DISTILLED_ZOOM + 1 if suffix == "" and settings.USE_DISTILLED_MVTS else config.MIN_ZOOM
-                )
-                max_zoom = config.MAX_ZOOM if suffix == "" else config.MAX_DISTILLED_ZOOM + 1
-            static_layers.append(
-                MapLayer(
-                    id=layer_id,
-                    type="circle",
-                    source=f"{layer.map_source}{suffix}",
-                    source_layer=layer.source,
-                    minzoom=min_zoom,
-                    maxzoom=max_zoom,
-                    style=config.LAYER_STYLES[layer.source],
-                )
-            )
-    return static_layers
-
-
 def get_dynamic_layers(layers):
     return [
         MapLayer(
@@ -147,5 +124,5 @@ def get_dynamic_layers(layers):
         )
         for layer in layers
         if hasattr(layer.model, "setup")
-        for combination in get_layer_setups(layer)
+        for combination in utils.get_layer_setups(layer)
     ]

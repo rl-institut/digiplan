@@ -1,3 +1,7 @@
+from itertools import product
+
+from django.db.models import BooleanField, IntegerField
+
 from digiplan.map.config import config
 
 
@@ -10,3 +14,16 @@ def get_color(source_layer):
         except KeyError:
             continue
     return None
+
+
+def get_layer_setups(layer):
+    setups = []
+    setup_model = layer.model._meta.get_field("setup").related_model
+    for setup in setup_model._meta.fields:
+        if setup.name == "id":
+            continue
+        if isinstance(setup, IntegerField):
+            setups.append([f"{setup.name}={choice[0]}" for choice in setup.choices])
+        elif isinstance(setup, BooleanField):
+            setups.append([f"{setup.name}=True", f"{setup.name}=False"])
+    return product(*setups)
