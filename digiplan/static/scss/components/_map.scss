@@ -144,6 +144,11 @@
     @extend .pb-2;
   }
 
+  &__unit {
+    @extend .fw-light;
+    @extend .ps-1;
+  }
+
   &__wrap {
     @extend .d-flex;
     @extend .flex-row;
