@@ -51,9 +51,7 @@ function loadLegend(){
 
     if (typeof(current) == "number") {
       if (Number.isInteger(current) === false){
-        if (current.toString().split('.')[1].length > 3) {
-          current = current.toFixed(3);
-        }
+        current = current.toFixed(2);
       }
 
       if (values.length === 0) {
