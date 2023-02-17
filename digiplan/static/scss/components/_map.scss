@@ -173,6 +173,16 @@
   }
 }
 
+@media only screen and (max-height: 700px) {
+  .map__layers-box {
+    height: 55vh;
+  }
+
+  .legend {
+    height: calc(100vh - #{$top-nav-height} - #{$steps-height} - 55vh - (2 * #{#{$map-items-padding}}) - #{$map-legend-box-padding-bottom});
+  }
+}
+
 #satellite-layer {
   position: absolute;
   bottom: 2rem;
