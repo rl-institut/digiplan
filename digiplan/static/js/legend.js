@@ -1,4 +1,5 @@
 const legendElement = document.getElementById("legend");
+const result_views_dropdown = document.getElementById("result_views");
 
 PubSub.subscribe(eventTopics.RESULT_VIEW_UPDATED, loadLegend);
 
@@ -37,25 +38,25 @@ const createLegend = (title, unit, colors, valueRanges, nextColumnStartIndex = 3
 };
 
 
-function loadLegend(){ 
-  const title = result_views.value;
+function loadLegend(){
+  const title = result_views_dropdown.value;
   const unit = "unit"; //need value!
-  let data_raw = store.cold.result_views[title][2];
+  const data_raw = store.cold.result_views[title][2];
 
-  var colors = [];
-  var values = [];
+  let colors = [];
+  let values = [];
 
-  for (element in data_raw) {
-    var current = data_raw[element];
+  for (const element in data_raw) {
+    let current = data_raw[element];
 
     if (typeof(current) == "number") {
-      if (Number.isInteger(current) == false){
+      if (Number.isInteger(current) === false){
         if (current.toString().split('.')[1].length > 3) {
           current = current.toFixed(3);
         }
       }
 
-      if (values.length == 0) {
+      if (values.length === 0) {
         values.push("0 - " + String(current));
       }
       else {
@@ -63,19 +64,16 @@ function loadLegend(){
       }
     }
 
-    if (typeof(current) == "string" && current.slice(0,3) == "rgb") {
+    if (typeof(current) == "string" && current.slice(0,3) === "rgb") {
       colors.push(current);
-    }
-    else{
-      continue
     }
   }
   if (colors.length > 6 || values.length > 6) {
     console.log("Error: more than 6 values cannot get displayed in legend!");
-    return
+    return;
   }
   legendElement.innerHTML = createLegend(title, unit, colors, values);
-};
+}
 
 
 
