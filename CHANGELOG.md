@@ -7,6 +7,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ## [Unreleased]
 ### Added
 - layer switches to map legend
+- legend for choropleths
 
 ## [0.1.0] - 2023-02-10
 ### Added
