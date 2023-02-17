@@ -44,13 +44,11 @@ class MapGLView(TemplateView):
         "tiling_service_token": TILING_SERVICE_TOKEN,
         "tiling_service_style_id": TILING_SERVICE_STYLE_ID,
         "map_images": MAP_IMAGES,
-        "all_layers": ALL_LAYERS,
+        "map_layers": [layer.get_layer() for layer in ALL_LAYERS],
         "popups": POPUPS,
         "region_filter": None,  # RegionFilterForm(),
         "area_switches": {
-            category: [StaticLayerForm(layer) for layer in layers]
-            for category, layers in LAYERS_CATEGORIES.items()
-            if category != "Results"
+            category: [StaticLayerForm(layer) for layer in layers] for category, layers in LAYERS_CATEGORIES.items()
         },
         "energy_settings_panel": PanelForm(ENERGY_SETTINGS_PANEL),
         "heat_settings_panel": PanelForm(HEAT_SETTINGS_PANEL),

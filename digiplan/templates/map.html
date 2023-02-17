@@ -87,6 +87,7 @@
   {{ block.super }}
 
   {{ map_sources|json_script:"map_sources" }}
+  {{ map_layers|json_script:"map_layers" }}
   {{ layer_styles|json_script:"styles" }}
   {{ result_styles|json_script:"result_styles" }}
   {{ settings_parameters|json_script:"settings_parameters" }}
@@ -132,97 +133,71 @@
       PubSub.subscribe(eventTopics.MAP_SOURCES_LOADED, add_layers);
 
       function add_layers(msg) {
+        const layers = JSON.parse(document.getElementById("map_layers").textContent);
+        for (const layer of layers) {
+          map.addLayer(layer);
+          map.setLayoutProperty(layer.id, "visibility", "none");
+        }
 
-        {% for layer in raster_layers %}
-          {
-            const layer_setup = {
-              "id": "{{layer.id}}",
-              "source": "{{layer.source}}",
-              "type": "{{layer.type}}"
-            };
-            map.addLayer(layer_setup);
-            map.setLayoutProperty("{{ layer.id }}", "visibility", "none");
-          }
-        {% endfor %}
-
-        {% for layer in all_layers %}
-          {
-            const layer_style = JSON.parse(document.getElementById("styles").textContent)["{{layer.style}}"];
-            const layer_setup = {
-              "id": "{{layer.id}}",
-              "source": "{{layer.source}}",
-              "source-layer": "{{layer.source_layer}}",
-              "minzoom": {{layer.minzoom}},
-              "maxzoom": {{layer.maxzoom}},
-            };
-            map.addLayer({...layer_setup, ...layer_style});
-            {% if layer.type == "static" %}
-              map.setLayoutProperty("{{ layer.id }}", "visibility", "none");
-            {% endif %}
-          }
-
-          {% if layer.clustered %}
-            // Clustered layer
-            {% for level, zoom in zoom_levels.items %}
-              map.addLayer({
-                id: "{{layer.source_layer}}_{{level}}",
-                type: "circle",
+        {% if layer.clustered %}
+          // Clustered layer
+          {% for level, zoom in zoom_levels.items %}
+            map.addLayer({
+              id: "{{layer.source_layer}}_{{level}}",
+              type: "circle",
+              source: "clusters",
+              minzoom: {{zoom.min}},
+              maxzoom: {{zoom.max}},
+              filter: ["==", ["get", "zoom_level"], {{zoom.max}}],
+              paint: {
+                // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
+                // with three steps to implement three types of circles:
+                //   * Blue, 20px circles when point count is less than 100
+                //   * Yellow, 30px circles when point count is between 100 and 750
+                //   * Pink, 40px circles when point count is greater than or equal to 750
+                "circle-color": [
+                  "step",
+                  ["get", "{{layer.source_layer}}"],
+                  "#51bbd6",
+                  100,
+                  "#f1f075",
+                  750,
+                  "#f28cb1"
+                ],
+                "circle-radius": [
+                  "step",
+                  ["get", "{{layer.source_layer}}"],
+                  20,
+                  100,
+                  30,
+                  750,
+                  40
+                ]
+              }
+            });
+            map.addLayer(
+              {
+                id: "{{layer.source_layer}}_counter_{{level}}",
+                type: "symbol",
                 source: "clusters",
                 minzoom: {{zoom.min}},
                 maxzoom: {{zoom.max}},
                 filter: ["==", ["get", "zoom_level"], {{zoom.max}}],
-                paint: {
-                  // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-                  // with three steps to implement three types of circles:
-                  //   * Blue, 20px circles when point count is less than 100
-                  //   * Yellow, 30px circles when point count is between 100 and 750
-                  //   * Pink, 40px circles when point count is greater than or equal to 750
-                  "circle-color": [
-                    "step",
-                    ["get", "{{layer.source_layer}}"],
-                    "#51bbd6",
-                    100,
-                    "#f1f075",
-                    750,
-                    "#f28cb1"
-                  ],
-                  "circle-radius": [
-                    "step",
-                    ["get", "{{layer.source_layer}}"],
-                    20,
-                    100,
-                    30,
-                    750,
-                    40
-                  ]
+                layout: {
+                  "text-field": ["get", "{{layer.source_layer}}"],
+                  "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+                  "text-size": 12,
+                  "text-allow-overlap": true
                 }
-              });
-              map.addLayer(
-                {
-                  id: "{{layer.source_layer}}_counter_{{level}}",
-                  type: "symbol",
-                  source: "clusters",
-                  minzoom: {{zoom.min}},
-                  maxzoom: {{zoom.max}},
-                  filter: ["==", ["get", "zoom_level"], {{zoom.max}}],
-                  layout: {
-                    "text-field": ["get", "{{layer.source_layer}}"],
-                    "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
-                    "text-size": 12,
-                    "text-allow-overlap": true
-                  }
-                }
-              );
-              map.setLayoutProperty("{{layer.source_layer}}_{{level}}", "visibility", "none");
-              map.setLayoutProperty("{{layer.source_layer}}_counter_{{level}}", "visibility", "none");
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
+              }
+            );
+            map.setLayoutProperty("{{layer.source_layer}}_{{level}}", "visibility", "none");
+            map.setLayoutProperty("{{layer.source_layer}}_counter_{{level}}", "visibility", "none");
+          {% endfor %}
+        {% endif %}
 
-      PubSub.publish(eventTopics.MAP_LAYERS_LOADED);
-
-      return logMessage(msg);
-
+        PubSub.publish(eventTopics.MAP_LAYERS_LOADED);
+        return logMessage(msg);
       }
 
       // Zoom to feature on click

@@ -98,18 +98,6 @@ LAYERS_CATEGORIES = {
             description="",
         ),
     ],
-    "Results": [
-        VectorLayerData(
-            source="results",
-            map_source="results",
-            color=get_color("results"),
-            model=models.Municipality,
-            name="Ergebnisse",
-            description="",
-            popup_fields=["title", "municipality", "key-values", "chart", "description", "sources"],
-            # order matters
-        )
-    ],
 }
 LAYERS_DEFINITION = reduce(operator.add, list(LAYERS_CATEGORIES.values()))
 
@@ -148,17 +136,27 @@ class MapSource:
 
 @dataclass
 class MapLayer:
-    # pylint: disable=too-many-instance-attributes
     id: str  # noqa: A003
-    minzoom: int
-    maxzoom: int
-    style: str
-    source: str
-    source_layer: str
     type: str  # noqa: A003
-    name: Optional[str] = None
-    description: Optional[str] = None
-    clustered: bool = False
+    source: str
+    style: dict
+    source_layer: Optional[str] = None
+    minzoom: Optional[int] = None
+    maxzoom: Optional[int] = None
+
+    def get_layer(self):
+        layer = {"id": self.id, "type": self.type, "source": self.source, **self.style}
+        if self.source_layer:
+            layer["source-layer"] = self.source_layer
+        for attr_name in ("minzoom", "maxzoom"):
+            if attr := getattr(self, attr_name):
+                layer[attr_name] = attr
+        return layer
+
+
+# pylint: disable=R0903
+class MapClusterLayer(MapLayer):
+    pass
 
 
 @dataclass
@@ -255,36 +253,36 @@ def get_region_layers():
         [
             MapLayer(
                 id=f"line-{layer}",
-                minzoom=ZOOM_LEVELS[layer].min,
-                maxzoom=ZOOM_LEVELS[layer].max,
-                style="region-line",
+                type="line",
                 source=layer,
                 source_layer=layer,
-                type="region",
+                minzoom=ZOOM_LEVELS[layer].min,
+                maxzoom=ZOOM_LEVELS[layer].max,
+                style=LAYER_STYLES["region-line"],
             )
             for layer in REGIONS
         ]
         + [
             MapLayer(
                 id=f"fill-{layer}",
-                minzoom=ZOOM_LEVELS[layer].min,
-                maxzoom=ZOOM_LEVELS[layer].max,
-                style="region-fill",
+                type="fill",
                 source=layer,
                 source_layer=layer,
-                type="region",
+                minzoom=ZOOM_LEVELS[layer].min,
+                maxzoom=ZOOM_LEVELS[layer].max,
+                style=LAYER_STYLES["region-fill"],
             )
             for layer in REGIONS
         ]
         + [
             MapLayer(
                 id=f"label-{layer}",
-                maxzoom=ZOOM_LEVELS[layer].max,
-                minzoom=ZOOM_LEVELS[layer].min,
-                style="region-label",
+                type="symbol",
                 source=layer,
                 source_layer=f"{layer}label",
-                type="region",
+                maxzoom=ZOOM_LEVELS[layer].max,
+                minzoom=ZOOM_LEVELS[layer].min,
+                style=LAYER_STYLES["region-label"],
             )
             for layer in REGIONS
         ]
@@ -310,15 +308,12 @@ def get_static_layers():
             static_layers.append(
                 MapLayer(
                     id=layer_id,
-                    description=layer.description,
-                    minzoom=min_zoom,
-                    maxzoom=max_zoom,
-                    name=layer.name,
-                    style=layer.source,
+                    type="circle",
                     source=f"{layer.map_source}{suffix}",
                     source_layer=layer.source,
-                    type="static",
-                    clustered=layer.clustered,
+                    minzoom=min_zoom,
+                    maxzoom=max_zoom,
+                    style=LAYER_STYLES[layer.source],
                 )
             )
     return static_layers
@@ -328,14 +323,12 @@ def get_dynamic_layers():
     return [
         MapLayer(
             id=f"fill-{layer.source}-{'-'.join(combination)}",
-            description=layer.description,
-            minzoom=MIN_ZOOM,
-            maxzoom=MAX_ZOOM,
-            name=layer.name,
-            style=layer.source,
+            type="fill",
             source=f"{layer.source}-{'-'.join(combination)}",
             source_layer=layer.source,
-            type="static",
+            minzoom=MIN_ZOOM,
+            maxzoom=MAX_ZOOM,
+            style=LAYER_STYLES[layer.source],
         )
         for layer in LAYERS_DEFINITION
         if hasattr(layer.model, "setup")
@@ -377,5 +370,10 @@ DYNAMIC_LAYERS = get_dynamic_layers()
 REGION_LAYERS = get_region_layers()
 
 ALL_LAYERS = STATIC_LAYERS + DYNAMIC_LAYERS + REGION_LAYERS
+ALL_LAYERS.append(
+    MapLayer(id="results", type="fill", source="results", source_layer="results", style=LAYER_STYLES["results"])
+)
+# pylint:disable=W0511
+# FIXME: Build results layer before!
 
 POPUPS = get_popups()
