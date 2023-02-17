@@ -5,7 +5,8 @@ from geojson import Feature, FeatureCollection, Point
 
 from config.settings.base import DATA_DIR
 from digiplan.map.config.config import CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
-from digiplan.map.layers import LAYERS_DEFINITION, VectorLayerData
+from digiplan.map.mapset.layers import VectorLayerData
+from digiplan.map.mapset.setup import LAYERS_DEFINITION
 from digiplan.map.models import (
     Biomass,
     Combustion,

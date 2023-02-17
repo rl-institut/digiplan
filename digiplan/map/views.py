@@ -32,7 +32,7 @@ from digiplan.map.results import core
 
 from . import models
 from .forms import PanelForm, StaticLayerForm
-from .layers import ALL_LAYERS, ALL_SOURCES, LAYERS_CATEGORIES, POPUPS, REGION_LAYERS
+from .mapset import setup
 
 
 class MapGLView(TemplateView):
@@ -44,11 +44,12 @@ class MapGLView(TemplateView):
         "tiling_service_token": TILING_SERVICE_TOKEN,
         "tiling_service_style_id": TILING_SERVICE_STYLE_ID,
         "map_images": MAP_IMAGES,
-        "map_layers": [layer.get_layer() for layer in ALL_LAYERS],
-        "popups": POPUPS,
+        "map_layers": [layer.get_layer() for layer in setup.ALL_LAYERS],
+        "popups": setup.POPUPS,
         "region_filter": None,  # RegionFilterForm(),
         "area_switches": {
-            category: [StaticLayerForm(layer) for layer in layers] for category, layers in LAYERS_CATEGORIES.items()
+            category: [StaticLayerForm(layer) for layer in layers]
+            for category, layers in setup.LAYERS_CATEGORIES.items()
         },
         "energy_settings_panel": PanelForm(ENERGY_SETTINGS_PANEL),
         "heat_settings_panel": PanelForm(HEAT_SETTINGS_PANEL),
@@ -69,18 +70,20 @@ class MapGLView(TemplateView):
         context["dependency_parameters"] = DEPENDENCY_PARAMETERS
 
         # Sources need valid URL (containing host and port), thus they have to be defined using request:
-        context["map_sources"] = {map_source.name: map_source.get_source(self.request) for map_source in ALL_SOURCES}
+        context["map_sources"] = {
+            map_source.name: map_source.get_source(self.request) for map_source in setup.ALL_SOURCES
+        }
 
         # Categorize sources
         categorized_sources = {
             category: [SOURCES[layer.source] for layer in layers if layer.source in SOURCES]
-            for category, layers in LAYERS_CATEGORIES.items()
+            for category, layers in setup.LAYERS_CATEGORIES.items()
         }
         context["sources"] = categorized_sources
 
         # Add popup-layer IDs to cold store
-        STORE_COLD_INIT["popup_layers"] = [popup.layer_id for popup in POPUPS]
-        STORE_COLD_INIT["region_layers"] = [layer.id for layer in REGION_LAYERS if layer.id.startswith("fill")]
+        STORE_COLD_INIT["popup_layers"] = [popup.layer_id for popup in setup.POPUPS]
+        STORE_COLD_INIT["region_layers"] = [layer.id for layer in setup.REGION_LAYERS if layer.id.startswith("fill")]
         STORE_COLD_INIT["result_views"] = {}  # Placeholder for already downloaded results (used in results.js)
         context["store_cold_init"] = json.dumps(STORE_COLD_INIT)
 
