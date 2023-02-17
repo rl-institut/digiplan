@@ -51,18 +51,18 @@
           color: $gray-600;
         }
 
-        &__region-value {
+        &__region_value {
           @extend .bg-primary;
           @extend .text-white;
           margin-left: 4px;
         }
 
-        &__municipality-value {
+        &__municipality_value {
           @extend .bg-light;
         }
 
-        &__region-value,
-        &__municipality-value {
+        &__region_value,
+        &__municipality_value {
           padding: 4px 8px;
           @extend .rounded;
         }

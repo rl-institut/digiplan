@@ -20,11 +20,11 @@
   "description": "The population in 2022 of Z\u00f6rbig was 9,311 inhabitants. The entire ABW region had 370,190 inhabitants at that time. The following chart shows a forecast of the population development for the years 2022, 2030, and 2045.",
   "id": 12,
   "keyValues": {
-    "municipalityValue": 9311,
-    "regionTitle": "ABW region",
-    "regionValue": 370190,
     "unit": "Population",
-    "year": 2022
+    "year": 2022,
+    "region_value": 370190,
+    "region_title": "ABW region",
+    "municipality_value": 9311
   },
   "municipality": "Z\u00f6rbig",
   "sources": [

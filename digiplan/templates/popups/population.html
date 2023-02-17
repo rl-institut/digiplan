@@ -4,14 +4,32 @@
     <h2 id="js-popup__municipality" class="popup__municipality">{{ municipality }}</h2>
   </div>
   <div id="js-popup__key-values" class="popup__key-values">
-    <span class="key-values__municipality">
-      <span class="key-values__unit">{{ data.unit }}</span>
-      <span class="key-values__year">{{ data.year }}</span>
-      <span class="key-values__region-value">{{ data.municipality_value }}</span>
+    <!-- <span class="key-values__municipality">
+        <span class="key-values__unit">{{ data.unit }}</span>
+        <span class="key-values__year">{{ data.year }}</span>
+        <span class="key-values__region-value">{{ data.municipality_value }}</span>
     </span>
     <span class="key-values__region">
-      <span class="key-values__municipality-title">{{ data.region_title }}</span>:
-      <span class="key-values__municipality-value">{{ data.region_value }}</span>
+        <span class="key-values__municipality-title">{{ data.region_title }}</span>
+        <span class="key-values__municipality-value">{{ data.region_value }}</span>
+    </span> -->
+    <span class="key-values__municipality"></span>
+      {% for key, value in data.items %}
+        {% if "region" not in key %}
+          {% if value %}
+          <span class="key-values__{{ key }}">{{ value }}</span>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </span>
+    <span class="key-values__region">
+      {% for key, value in data.items%}
+        {% if "region" in key %}
+          {% if value %}
+          <span class="key-values__{{ key }}">{{ value }}</span>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
     </span>
   </div>
   <div id="js-popup__chart" class="popup__chart" style="width: 416px; height: 200px;"></div>

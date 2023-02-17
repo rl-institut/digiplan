@@ -111,13 +111,7 @@ def get_popup(request):
         # pylint: disable=C0301
         "description": json_data["description"],  # noqa: E501
         "id": region,
-        "data": {
-            "municipality_value": 9311,
-            "region_title": json_data["keyValues"]["regionTitle"],
-            "region_value": 370190,
-            "unit": json_data["keyValues"]["unit"],
-            "year": json_data["keyValues"]["year"],
-        },
+        "data": json_data["keyValues"],
         "municipality": json_data["municipality"],
         "sources": json_data["sources"],
         "title": json_data["title"],
