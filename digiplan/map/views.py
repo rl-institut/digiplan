@@ -45,7 +45,6 @@ class MapGLView(TemplateView):
         "tiling_service_style_id": TILING_SERVICE_STYLE_ID,
         "map_images": MAP_IMAGES,
         "all_layers": ALL_LAYERS,
-        "all_sources": ALL_SOURCES,
         "popups": POPUPS,
         "region_filter": None,  # RegionFilterForm(),
         "area_switches": {
@@ -70,6 +69,9 @@ class MapGLView(TemplateView):
         context["settings_parameters"] = ENERGY_SETTINGS_PANEL
         context["settings_dependency_map"] = SETTINGS_DEPENDENCY_MAP
         context["dependency_parameters"] = DEPENDENCY_PARAMETERS
+
+        # Sources need valid URL (containing host and port), thus they have to be defined using request:
+        context["map_sources"] = {map_source.name: map_source.get_source(self.request) for map_source in ALL_SOURCES}
 
         # Categorize sources
         categorized_sources = {

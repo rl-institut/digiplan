@@ -8,8 +8,9 @@ from typing import List, Optional
 
 from django.contrib.gis.db.models import Model
 from django.db.models import BooleanField, IntegerField
+from django.http import HttpRequest
 
-from config.settings.base import APPS_DIR, USE_DISTILLED_MVTS
+from config.settings.base import APPS_DIR, TILING_SERVICE_TOKEN, USE_DISTILLED_MVTS
 from digiplan.map.config.config import (
     LAYER_STYLES,
     MAX_DISTILLED_ZOOM,
@@ -46,7 +47,6 @@ class VectorLayerData:
     color: str
     model: Model.__class__
     name: str
-    name_singular: str
     description: str
     clustered: bool = False
     map_source: str = "static"
@@ -60,7 +60,6 @@ LAYERS_CATEGORIES = {
             color=get_color("wind"),
             model=models.WindTurbine,
             name="Wind Turbines",
-            name_singular="Wind Turbine",
             description="Wind Turbines",
         ),
         VectorLayerData(
@@ -68,7 +67,6 @@ LAYERS_CATEGORIES = {
             color=get_color("pvroof"),
             model=models.PVroof,
             name="roof Photovoltaics",
-            name_singular="roof Photovoltaic",
             description="roof Photovoltaics",
         ),
         VectorLayerData(
@@ -76,7 +74,6 @@ LAYERS_CATEGORIES = {
             color=get_color("pvground"),
             model=models.PVground,
             name="ground Photovoltaics",
-            name_singular="ground Photovoltaic",
             description="ground Photovoltaics",
         ),
         VectorLayerData(
@@ -84,7 +81,6 @@ LAYERS_CATEGORIES = {
             color=get_color("hydro"),
             model=models.Hydro,
             name="Hydro",
-            name_singular="Hydro",
             description="",
         ),
         VectorLayerData(
@@ -92,7 +88,6 @@ LAYERS_CATEGORIES = {
             color=get_color("biomass"),
             model=models.Biomass,
             name="Biomass",
-            name_singular="Biomass",
             description="",
         ),
         VectorLayerData(
@@ -100,7 +95,6 @@ LAYERS_CATEGORIES = {
             color=get_color("combustion"),
             model=models.Combustion,
             name="Combustion",
-            name_singular="Combustion",
             description="",
         ),
     ],
@@ -111,9 +105,8 @@ LAYERS_CATEGORIES = {
             color=get_color("results"),
             model=models.Municipality,
             name="Ergebnisse",
-            name_singular="Ergebnis",
             description="",
-            popup_fields=("title", "municipality", "key-values", "chart", "description", "sources"),
+            popup_fields=["title", "municipality", "key-values", "chart", "description", "sources"],
             # order matters
         )
     ],
@@ -122,15 +115,39 @@ LAYERS_DEFINITION = reduce(operator.add, list(LAYERS_CATEGORIES.values()))
 
 
 @dataclass
-class Source:
+class MapSource:
     name: str
     type: str  # noqa: A003
+    promote_id: str = "id"
     tiles: Optional[List[str]] = None
     url: Optional[str] = None
 
+    def get_source(self, request: HttpRequest) -> dict:
+        """
+        Returns source data/tiles using current host and port from request
+
+        Parameters
+        ----------
+        request: HttpRequest
+            Django request holding host and port
+
+        Returns
+        -------
+        dict
+            Containing source data for map
+        """
+        source = {"type": self.type, "promoteId": self.promote_id}
+        if self.type in ("vector", "raster"):
+            source["tiles"] = [
+                tile if tile.startswith("http") else f"{request.get_raw_uri()}{tile}" for tile in self.tiles
+            ]
+        else:
+            source["data"] = self.url if self.url.startswith("http") else f"{request.get_raw_uri()}{self.url}"
+        return source
+
 
 @dataclass
-class Layer:
+class MapLayer:
     # pylint: disable=too-many-instance-attributes
     id: str  # noqa: A003
     minzoom: int
@@ -142,13 +159,6 @@ class Layer:
     name: Optional[str] = None
     description: Optional[str] = None
     clustered: bool = False
-
-
-@dataclass
-class RasterLayer:
-    id: str  # noqa: A003
-    source: str
-    type: str  # noqa: A003
 
 
 @dataclass
@@ -181,7 +191,7 @@ def get_dynamic_sources():
             mvt_str = "-".join(combination)
             filter_str = "&".join(map(lambda x: f"setup__{x}", combination))  # noqa: C417
             sources.append(
-                Source(
+                MapSource(
                     name=f"{layer.source}-{mvt_str}",
                     type="vector",
                     tiles=[f"{layer.source}_mvt/{{z}}/{{x}}/{{y}}/?{filter_str}"],
@@ -194,12 +204,12 @@ if USE_DISTILLED_MVTS:
     SUFFIXES = ["", "_distilled"]
     ALL_SOURCES = (
         [
-            Source(name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"])
+            MapSource(name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"])
             for region in REGIONS
             if ZOOM_LEVELS[region].min > MAX_DISTILLED_ZOOM
         ]
         + [
-            Source(
+            MapSource(
                 name=region,
                 type="vector",
                 tiles=[f"static/mvts/{{z}}/{{x}}/{{y}}/{region}.mvt"],
@@ -208,32 +218,42 @@ if USE_DISTILLED_MVTS:
             if ZOOM_LEVELS[region].min < MAX_DISTILLED_ZOOM
         ]
         + [
-            Source(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"]),
-            Source(
+            MapSource(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"]),
+            MapSource(
                 name="static_distilled",
                 type="vector",
                 tiles=["static/mvts/{z}/{x}/{y}/static.mvt"],
             ),
-            Source(name="results", type="vector", tiles=["results_mvt/{z}/{x}/{y}/"]),
+            MapSource(name="results", type="vector", tiles=["results_mvt/{z}/{x}/{y}/"]),
         ]
         + get_dynamic_sources()
     )
 else:
     SUFFIXES = [""]
     ALL_SOURCES = (
-        [Source(name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"]) for region in REGIONS]
+        [MapSource(name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"]) for region in REGIONS]
         + [
-            Source(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"]),
-            Source(name="results", type="vector", tiles=["results_mvt/{z}/{x}/{y}/"]),
+            MapSource(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"]),
+            MapSource(name="results", type="vector", tiles=["results_mvt/{z}/{x}/{y}/"]),
         ]
         + get_dynamic_sources()
     )
 
 
+ALL_SOURCES += [
+    MapSource(
+        "satellite",
+        type="raster",
+        tiles=[f"https://api.maptiler.com/tiles/satellite-v2/{{z}}/{{x}}/{{y}}.jpg?key={TILING_SERVICE_TOKEN}"],
+    ),
+    MapSource("cluster", type="geojson", url="clusters"),
+]
+
+
 def get_region_layers():
     return (
         [
-            Layer(
+            MapLayer(
                 id=f"line-{layer}",
                 minzoom=ZOOM_LEVELS[layer].min,
                 maxzoom=ZOOM_LEVELS[layer].max,
@@ -245,7 +265,7 @@ def get_region_layers():
             for layer in REGIONS
         ]
         + [
-            Layer(
+            MapLayer(
                 id=f"fill-{layer}",
                 minzoom=ZOOM_LEVELS[layer].min,
                 maxzoom=ZOOM_LEVELS[layer].max,
@@ -257,7 +277,7 @@ def get_region_layers():
             for layer in REGIONS
         ]
         + [
-            Layer(
+            MapLayer(
                 id=f"label-{layer}",
                 maxzoom=ZOOM_LEVELS[layer].max,
                 minzoom=ZOOM_LEVELS[layer].min,
@@ -288,7 +308,7 @@ def get_static_layers():
                 min_zoom = MAX_DISTILLED_ZOOM + 1 if suffix == "" and USE_DISTILLED_MVTS else MIN_ZOOM
                 max_zoom = MAX_ZOOM if suffix == "" else MAX_DISTILLED_ZOOM + 1
             static_layers.append(
-                Layer(
+                MapLayer(
                     id=layer_id,
                     description=layer.description,
                     minzoom=min_zoom,
@@ -306,7 +326,7 @@ def get_static_layers():
 
 def get_dynamic_layers():
     return [
-        Layer(
+        MapLayer(
             id=f"fill-{layer.source}-{'-'.join(combination)}",
             description=layer.description,
             minzoom=MIN_ZOOM,
