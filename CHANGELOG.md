@@ -43,6 +43,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - fix clunky sidebar resizing of sidebar chart #68
 - fix Postgis on Mac by improving Docker postgis install
 - remove unneeded option flag in poetry install section in readme
+- fix legend lower part hidden on smaller screens
 
 ## [0.0.0] - 2022-06-30
 ### Added
