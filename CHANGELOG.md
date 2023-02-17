@@ -13,6 +13,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - results layer with customizable result views
 - add names and lookups for layers
 - add color palettes for map
+- add category bbuttons to results side panel as placeholder
 
 ### Changed
 - make dependent slider values update dynamically on dependency slider changes
