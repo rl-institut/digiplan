@@ -1,5 +1,7 @@
 const legendElement = document.getElementById("legend");
 
+PubSub.subscribe(eventTopics.RESULT_VIEW_UPDATED, loadLegend);
+
 /**
  * Returns a legend HTML element as a string.
  *
@@ -33,6 +35,48 @@ const createLegend = (title, unit, colors, valueRanges, nextColumnStartIndex = 3
     </style>
   `;
 };
+
+
+function loadLegend(){ 
+  const title = result_views.value;
+  const unit = "unit"; //need value!
+  let data_raw = store.cold.result_views[title][2];
+
+  var colors = [];
+  var values = [];
+
+  for (element in data_raw) {
+    var current = data_raw[element];
+
+    if (typeof(current) == "number") {
+      if (Number.isInteger(current) == false){
+        if (current.toString().split('.')[1].length > 3) {
+          current = current.toFixed(3);
+        }
+      }
+
+      if (values.length == 0) {
+        values.push("0 - " + String(current));
+      }
+      else {
+        values.push(values[values.length-1].split(" ").slice(-1)[0] + " - " + String(current));
+      }
+    }
+
+    if (typeof(current) == "string" && current.slice(0,3) == "rgb") {
+      colors.push(current);
+    }
+    else{
+      continue
+    }
+  }
+  if (colors.length > 6 || values.length > 6) {
+    console.log("Error: more than 6 values cannot get displayed in legend!");
+  }
+  legendElement.innerHTML = createLegend(title, unit, colors, values);
+};
+
+
 
 window.onload = () => {
   const onLoadUrl = "/static/tests/api/legend.json??lookup=population&lang=en";

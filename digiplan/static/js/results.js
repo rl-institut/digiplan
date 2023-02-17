@@ -29,11 +29,13 @@ function changeResultView(msg) {
       success: function(results) {
         updateResultsLayer(view, results);
         map.setPaintProperty("results", "fill-color", results.fill_color);
+        PubSub.publish(eventTopics.RESULT_VIEW_UPDATED);
       }
     });
   }
   else {
     map.setPaintProperty("results", "fill-color", store.cold.result_views[view]);
+    PubSub.publish(eventTopics.RESULT_VIEW_UPDATED);
   }
   return logMessage(msg);
 }
