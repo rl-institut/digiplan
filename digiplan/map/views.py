@@ -45,8 +45,8 @@ class MapGLView(TemplateView):
         "tiling_service_style_id": TILING_SERVICE_STYLE_ID,
         "map_images": MAP_IMAGES,
         "map_layers": [layer.get_layer() for layer in setup.ALL_LAYERS],
+        "layers_at_startup": setup.LAYERS_AT_STARTUP,
         "popups": setup.POPUPS,
-        "region_filter": None,  # RegionFilterForm(),
         "area_switches": {
             category: [StaticLayerForm(layer) for layer in layers]
             for category, layers in setup.LAYERS_CATEGORIES.items()

@@ -123,5 +123,7 @@ ALL_LAYERS.append(
 # pylint:disable=W0511
 # FIXME: Build results layer before!
 
+LAYERS_AT_STARTUP = [layer.id for layer in REGION_LAYERS]
+
 POPUP_PRIO = ["hospital", "hospital_simulated"]  # from high to low prio
 POPUPS = popups.get_popups(LAYERS_DEFINITION, POPUP_PRIO)

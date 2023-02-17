@@ -88,6 +88,7 @@
 
   {{ map_sources|json_script:"map_sources" }}
   {{ map_layers|json_script:"map_layers" }}
+  {{ layers_at_startup|json_script:"layers_at_startup" }}
   {{ layer_styles|json_script:"styles" }}
   {{ result_styles|json_script:"result_styles" }}
   {{ settings_parameters|json_script:"settings_parameters" }}
@@ -130,15 +131,9 @@
         });
       {% endfor %}
 
-      PubSub.subscribe(eventTopics.MAP_SOURCES_LOADED, add_layers);
+      PubSub.subscribe(eventTopics.MAP_SOURCES_LOADED, add_cluster_layers);
 
-      function add_layers(msg) {
-        const layers = JSON.parse(document.getElementById("map_layers").textContent);
-        for (const layer of layers) {
-          map.addLayer(layer);
-          map.setLayoutProperty(layer.id, "visibility", "none");
-        }
-
+      function add_cluster_layers(msg) {
         {% if layer.clustered %}
           // Clustered layer
           {% for level, zoom in zoom_levels.items %}
@@ -195,9 +190,6 @@
             map.setLayoutProperty("{{layer.source_layer}}_counter_{{level}}", "visibility", "none");
           {% endfor %}
         {% endif %}
-
-        PubSub.publish(eventTopics.MAP_LAYERS_LOADED);
-        return logMessage(msg);
       }
 
       // Zoom to feature on click

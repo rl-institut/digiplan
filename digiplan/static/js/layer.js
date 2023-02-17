@@ -28,6 +28,7 @@ map.on("load", function () {
 
 // On Initial Load
 PubSub.subscribe(eventTopics.STATES_INITIALIZED, hideDetailLayers);
+PubSub.subscribe(eventTopics.MAP_SOURCES_LOADED, add_layers);
 
 // Layers Detail Panel
 PubSub.subscribe(eventTopics.DETAIL_LAYER_SWITCH_CLICK, checkLayerOfGivenLayerForm);
@@ -35,6 +36,22 @@ PubSub.subscribe(eventTopics.DETAIL_LAYER_SLIDER_CHANGE, filterChanged);
 PubSub.subscribe(eventTopics.DETAIL_LAYER_SELECT_CHANGE, filterChanged);
 
 // Subscriber Functions
+
+function add_layers(msg)
+{
+  const layers = JSON.parse(document.getElementById("map_layers").textContent);
+  const layers_at_startup = JSON.parse(document.getElementById("layers_at_startup").textContent);
+  for (const layer of layers) {
+    map.addLayer(layer);
+    if (layers_at_startup.includes(layer.id)) {
+      map.setLayoutProperty(layer.id, "visibility", "visible");
+    } else {
+      map.setLayoutProperty(layer.id, "visibility", "none");
+    }
+  }
+  PubSub.publish(eventTopics.MAP_LAYERS_LOADED);
+  return logMessage(msg);
+}
 
 function hideDetailLayers(msg) {
   detailLayers.map(layer => {
