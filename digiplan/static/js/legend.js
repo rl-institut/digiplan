@@ -72,6 +72,7 @@ function loadLegend(){
   }
   if (colors.length > 6 || values.length > 6) {
     console.log("Error: more than 6 values cannot get displayed in legend!");
+    return
   }
   legendElement.innerHTML = createLegend(title, unit, colors, values);
 };
