@@ -66,7 +66,8 @@ function loadLegend(){
       colors.push(current);
     }
   }
-  legendElement.innerHTML = createLegend(title, unit, colors, values);
+  const entriesPerColumn = Math.floor(values.length / 2);
+  legendElement.innerHTML = createLegend(title, unit, colors, values, entriesPerColumn);
 }
 
 
