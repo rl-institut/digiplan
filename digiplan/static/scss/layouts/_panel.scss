@@ -165,13 +165,15 @@
         @extend .bg-light;
         @extend .text-primary;
         @extend .text-center;
+        @include user-select-none;
         height: 4.25rem;
         border-radius: $button-border-radius;
       }
 
       .nav-link.active {
-        @extend .bg-primary;
-        @extend .text-white;
+        @extend .border;
+        @extend .border-primary;
+        @extend .border-2;
       }
     }
 
