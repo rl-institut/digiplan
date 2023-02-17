@@ -69,9 +69,7 @@ class MapGLView(TemplateView):
         context["dependency_parameters"] = DEPENDENCY_PARAMETERS
 
         # Sources need valid URL (containing host and port), thus they have to be defined using request:
-        context["map_sources"] = {
-            map_source.name: map_source.get_source(self.request) for map_source in setup.ALL_SOURCES
-        }
+        context["map_sources"] = {map_source.name: map_source.get_source(self.request) for map_source in setup.SOURCES}
 
         # Categorize sources
         categorized_sources = {
