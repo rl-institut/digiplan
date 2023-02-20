@@ -2,15 +2,31 @@
   @extend .h-100;
   @extend .w-100;
   @extend .bg-light;
-  @extend .p-5;
+  @extend .p-4;
   padding-top: 6rem !important;
+
+  &__header {
+    @extend .row;
+
+    h2 {
+      @extend .fs-6;
+      @extend .ps-0;
+    }
+  }
 
   &__row {
     @extend .row;
+    @extend .mb-4;
+    @extend .bg-white;
   }
 
   &__item {
     @extend .col-xl-6;
+    padding: $padding-large;
+
+    @include media-breakpoint-up(xl) {
+      border-right: 1px solid $gray-200;
+    }
   }
 
   &__chart {
