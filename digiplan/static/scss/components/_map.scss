@@ -26,7 +26,9 @@
 }
 
 #mainTabContent {
+  @extend .bg-light;
   height: $map-height;
+  overflow-y: auto;
 }
 
 #map {

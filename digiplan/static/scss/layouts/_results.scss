@@ -1,7 +1,6 @@
 .results {
   @extend .h-100;
   @extend .w-100;
-  @extend .bg-light;
   @extend .p-5;
   padding-top: 6rem !important;
 
@@ -11,6 +10,7 @@
 
   &__item {
     @extend .col-xl-6;
+    @extend .pb-5;
   }
 
   &__chart {
