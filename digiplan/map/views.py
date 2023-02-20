@@ -119,6 +119,15 @@ def get_results(request):
     # pylint: disable=W0511,W0612
     scenario_id = request.GET["scenario_id"]  # noqa: F841
     result_view = request.GET["result_view"]
+
+    if result_view == "EinwohnerInnen":
+        values = {
+            row.municipality_id: row.value
+            for row in models.Population.objects.filter(year=2022)
+        }
+        fill_color = RESULTS_CHOROPLETHS.get_fill_color(result_view, list(values.values()))
+        return JsonResponse({"values": values, "fill_color": fill_color})
+
     # FIXME: Replace dummy data with actual data
     if result_view == "re_power_percentage":
         values = {

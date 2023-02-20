@@ -1,4 +1,8 @@
 {
+  "EinwohnerInnen": {
+    "color_palette": "YlGnBu",
+    "num_colors": 6
+  },
   "re_power": {
     "color_palette": "YlGnBu",
     "num_colors": 6
