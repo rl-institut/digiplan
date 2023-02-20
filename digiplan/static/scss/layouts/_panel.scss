@@ -35,6 +35,10 @@
   &__settings {
     @extend .bg-white;
     @extend .pb-3;
+
+    &--padding {
+      @extend .px-3;
+    }
   }
 
   &-item {
@@ -54,6 +58,10 @@
         @include translateY(-2px);
         margin-right: $icon-margin-right;
       }
+    }
+
+    &__heading.panel-item__heading--nopadding {
+      @extend .px-0;
     }
 
     &__tabs {
@@ -153,6 +161,44 @@
 
       img {
         @extend .ms-1;
+      }
+    }
+
+    &__nav {
+      @extend .py-3;
+
+      &-header {
+        @extend .fs-7;
+        @extend .mb-1;
+      }
+
+      .nav-item {
+        width: 50%;
+        padding-bottom: $panel-results-nav-button-padding;
+      }
+
+      .nav-item:nth-of-type(odd) {
+        padding-right: calc(#{$panel-results-nav-button-padding} / 2);
+      }
+
+      .nav-item:nth-of-type(even) {
+        padding-left: calc(#{$panel-results-nav-button-padding} / 2);
+      }
+
+      .nav-link {
+        @extend .w-100;
+        @extend .bg-light;
+        @extend .text-primary;
+        @extend .text-center;
+        @include user-select-none;
+        height: 4.25rem;
+        border-radius: $button-border-radius;
+      }
+
+      .nav-link.active {
+        @extend .border;
+        @extend .border-primary;
+        @extend .border-2;
       }
     }
 
