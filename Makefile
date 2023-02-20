@@ -10,6 +10,9 @@ load_regions:
 load_data:
 	python manage.py shell --command="from digiplan.utils import data_processing; data_processing.load_data()"
 
+load_population:
+	python manage.py shell --command="from digiplan.utils import data_processing; data_processing.load_population()"
+
 load_raster:
 	python manage.py shell --command="from digiplan.utils import data_processing; data_processing.load_raster()"
 

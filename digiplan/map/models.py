@@ -53,6 +53,12 @@ class Municipality(models.Model):
     def __str__(self):
         return self.name
 
+class Population(models.Model):
+    year = models.IntegerField()
+    value = models.IntegerField()
+    entry_type = models.CharField(max_length=13)
+    municipality = models.ForeignKey(Municipality, on_delete=models.CASCADE)
+
 
 class WindTurbine(models.Model):
     geom = models.PointField(srid=4326)  # maybe MultiPointField

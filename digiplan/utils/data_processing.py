@@ -1,5 +1,7 @@
 import json
 import os
+import pandas
+import math
 
 from geojson import Feature, FeatureCollection, Point
 
@@ -8,6 +10,7 @@ from digiplan.map.config.config import CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
 from digiplan.map.mapset.layers import VectorLayerData
 from digiplan.map.mapset.setup import LAYERS_DEFINITION
 from digiplan.map.models import (
+    Population,
     Biomass,
     Combustion,
     Hydro,
@@ -67,6 +70,30 @@ def load_data(models=None):
             transform=4326,
         )
         instance.save(strict=True)
+
+def load_population():
+    filename = "population.csv"
+    years = [2010,2015,2020,2021,2022,2025,2030,2035,2040,2045]
+
+    path = os.path.join(DATA_DIR, filename)
+    municipalities = Municipality.objects.all()
+    dataframe = pandas.read_csv(path, header=[0, 1], index_col=0)
+
+    for municipality in municipalities:
+        for year in years:
+            series = dataframe.loc[municipality.id, str(year)]
+
+            value = list(series.values)[0] 
+            if math.isnan(value):
+                continue
+            else:
+                entry = Population(
+                    year=year,
+                    value=int(value),
+                    entry_type=list(series.index.values)[0],
+                    municipality=municipality
+                )
+                entry.save()
 
 
 def build_cluster_geojson(cluster_layers: list[VectorLayerData] = None):
