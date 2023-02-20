@@ -1,20 +1,20 @@
 import json
-import os
-import pandas
 import math
+import os
 
+import pandas
 from geojson import Feature, FeatureCollection, Point
 
 from config.settings.base import DATA_DIR
 from digiplan.map.config.config import CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
-from digiplan.map.mapset.layers import VectorLayerData
+from digiplan.map.mapset.layers import StaticLayer
 from digiplan.map.mapset.setup import LAYERS_DEFINITION
 from digiplan.map.models import (
-    Population,
     Biomass,
     Combustion,
     Hydro,
     Municipality,
+    Population,
     PVground,
     PVroof,
     Region,
@@ -71,9 +71,10 @@ def load_data(models=None):
         )
         instance.save(strict=True)
 
+
 def load_population():
     filename = "population.csv"
-    years = [2010,2015,2020,2021,2022,2025,2030,2035,2040,2045]
+    years = [2010, 2015, 2020, 2021, 2022, 2025, 2030, 2035, 2040, 2045]
 
     path = os.path.join(DATA_DIR, filename)
     municipalities = Municipality.objects.all()
@@ -81,22 +82,19 @@ def load_population():
 
     for municipality in municipalities:
         for year in years:
-            series = dataframe.loc[municipality.id, str(year)]
+            series = dataframe.loc[municipality.id - 1, str(year)]
 
-            value = list(series.values)[0] 
+            value = list(series.values)[0]
             if math.isnan(value):
                 continue
-            else:
-                entry = Population(
-                    year=year,
-                    value=int(value),
-                    entry_type=list(series.index.values)[0],
-                    municipality=municipality
-                )
-                entry.save()
+
+            entry = Population(
+                year=year, value=int(value), entry_type=list(series.index.values)[0], municipality=municipality
+            )
+            entry.save()
 
 
-def build_cluster_geojson(cluster_layers: list[VectorLayerData] = None):
+def build_cluster_geojson(cluster_layers: list[StaticLayer] = None):
     cluster_layers = cluster_layers or LAYERS_DEFINITION
     features = []
     for region_model in REGIONS:
