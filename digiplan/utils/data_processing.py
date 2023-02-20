@@ -2,18 +2,25 @@ import json
 import os
 
 from geojson import Feature, FeatureCollection, Point
-from raster.models import Legend
-from raster.models import RasterLayer as RasterModel
 
 from config.settings.base import DATA_DIR
-from digiplan.map.config.config import CLUSTER_GEOJSON_FILE, LAYER_STYLES, ZOOM_LEVELS
+from digiplan.map.config.config import CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
 from digiplan.map.layers import LAYERS_DEFINITION, VectorLayerData
-from digiplan.map.models import Municipality, Region
+from digiplan.map.models import (
+    Biomass,
+    Combustion,
+    Hydro,
+    Municipality,
+    PVground,
+    PVroof,
+    Region,
+    WindTurbine,
+)
 from digiplan.utils.ogr_layer_mapping import RelatedModelLayerMapping
 
 REGIONS = [Municipality]
 
-MODELS = []
+MODELS = [WindTurbine, PVroof, PVground, Hydro, Biomass, Combustion]
 
 
 def load_regions(regions=None, verbose=True):
@@ -40,7 +47,7 @@ def load_regions(regions=None, verbose=True):
         instance.save(strict=True, verbose=verbose)
 
 
-def load_data(models=None, verbose=True):
+def load_data(models=None):
     models = models or MODELS
     for model in models:
         if model.objects.exists():
@@ -58,28 +65,7 @@ def load_data(models=None, verbose=True):
             layer=model.layer,
             transform=4326,
         )
-        instance.save(strict=True, verbose=verbose)
-
-
-def load_raster(layers=None):
-    layers = layers or LAYERS_DEFINITION
-    for layer in layers:
-        if not issubclass(layer.model, RasterModel):
-            continue
-        if RasterModel.objects.filter(name=layer.source).exists():
-            print(f"Skipping data for raster '{layer.name}' - Please empty raster first if you want to update data.")
-            continue
-        print(f"Upload data for raster '{layer.name}'")
-        rm = RasterModel(name=layer.source, rasterfile=layer.filepath)
-        rm.save()
-        if Legend.objects.filter(title=layer.legend).exists():
-            print(
-                f"Skipping legend '{layer.legend}' for raster '{layer.name}' - "
-                f"Please remove raster legend first if you want to update it."
-            )
-            continue
-        legend = Legend(title=layer.legend, json=json.dumps(LAYER_STYLES[layer.legend]))
-        legend.save()
+        instance.save(strict=True)
 
 
 def build_cluster_geojson(cluster_layers: list[VectorLayerData] = None):
@@ -107,12 +93,3 @@ def empty_data(models=None):
     models = models or MODELS
     for model in models:
         model.objects.all().delete()
-
-
-def empty_raster(layers=None):
-    layers = layers or LAYERS_DEFINITION
-    for layer in layers:
-        if not issubclass(layer.model, RasterModel):
-            continue
-        RasterModel.objects.filter(name=layer.source).delete()
-        Legend.objects.filter(title=layer.legend).delete()

@@ -12,44 +12,14 @@
     <button type="button" class="btn-close" id="js-map-layers-box-close"
             aria-label="Close"></button>
   </div>
-  <p class="map__layers-heading">Flächennutzung</p>
-  <div class="map-layer">
-    <div class="map-layer__legend">
-      <div class="map-layer__legend-color"></div>
-      <div class="map-layer__legend-text">
-        <label class="form-check-label" for="switchPlanningArea">Grenze des
-          Planungsraumes</label>
-      </div>
-    </div>
-    <div class="map-layer__control">
-      <div class="map-layer__control-i">
-        <img src="{% static 'images/icons/i_info.svg' %}" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="Info über Grenze des Planungsraumes" >
-      </div>
-      <div class="map-layer__control-toggle c-switch">
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="switchPlanningArea">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="map-layer">
-    <div class="map-layer__legend">
-      <div class="map-layer__legend-color"></div>
-      <div class="map-layer__legend-text">Gemeinden</div>
-    </div>
-    <div class="map-layer__control">
-      <div class="map-layer__control-i">
-        <img src="{% static 'images/icons/i_info.svg' %}" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="Info über Gemeinden" >
-      </div>
-      <div class="map-layer__control-toggle c-switch">
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
-                 checked>
-          <label class="form-check-label" for="flexSwitchCheckChecked"></label>
-        </div>
-      </div>
-    </div>
-  </div>
+
+  {% for category, layers in area_switches.items %}
+    <p class="map__layers-heading">{{ category }}</p>
+
+    {% for layer in layers %}
+      {{ layer }}
+    {% endfor %}
+  {% endfor %}
 </div>
 
 <div id="legend" class="legend"></div>

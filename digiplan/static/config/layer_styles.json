@@ -67,6 +67,192 @@
     },
     "type": "line"
   },
+  "wind": {
+    "type": "circle",
+    "paint": {
+      "circle-color": "#6A89CC",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "*",
+        5,
+        [
+          "log10",
+          [
+            "get",
+            "capacity_net"
+          ]
+        ]
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0,
+        1
+      ]
+    }
+  },
+  "pvroof": {
+    "type": "circle",
+    "paint": {
+      "circle-color": "#FFD660",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "*",
+        5,
+        [
+          "log10",
+          [
+            "get",
+            "capacity_net"
+          ]
+        ]
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0,
+        1
+      ]
+    }
+  },
+  "pvground": {
+    "type": "circle",
+    "paint": {
+      "circle-color": "#F6B93B",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "*",
+        5,
+        [
+          "log10",
+          [
+            "get",
+            "capacity_net"
+          ]
+        ]
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0,
+        1
+      ]
+    }
+  },
+  "hydro": {
+    "type": "circle",
+    "paint": {
+      "circle-color": "#9CC4D9",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "*",
+        5,
+        [
+          "log10",
+          [
+            "get",
+            "capacity_net"
+          ]
+        ]
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0,
+        1
+      ]
+    }
+  },
+  "biomass": {
+    "type": "circle",
+    "paint": {
+      "circle-color": "#52C41A",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "*",
+        5,
+        [
+          "log10",
+          [
+            "get",
+            "capacity_net"
+          ]
+        ]
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0,
+        1
+      ]
+    }
+  },
+  "combustion": {
+    "type": "circle",
+    "paint": {
+      "circle-color": "#1A1A1A",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "*",
+        5,
+        [
+          "log10",
+          [
+            "get",
+            "capacity_net"
+          ]
+        ]
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0,
+        1
+      ]
+    }
+  },
   "results": {
     "paint": {
       "fill-color": [

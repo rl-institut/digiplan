@@ -7,8 +7,7 @@ from itertools import product
 from typing import List, Optional
 
 from django.contrib.gis.db.models import Model
-from django.db.models import BooleanField, IntegerField, ObjectDoesNotExist
-from raster.models import RasterLayer as RasterModel
+from django.db.models import BooleanField, IntegerField
 
 from config.settings.base import APPS_DIR, USE_DISTILLED_MVTS
 from digiplan.map.config.config import (
@@ -28,10 +27,12 @@ POPUP_PRIO = ["hospital", "hospital_simulated"]  # from high to low prio
 def get_color(source_layer):
     if source_layer not in LAYER_STYLES:
         raise KeyError(f"Could not find layer '{source_layer}' in layer styles (static/config/layer_styles.json)")
-    try:
-        return LAYER_STYLES[source_layer]["paint"]["fill-color"]
-    except KeyError:
-        return LAYER_STYLES[source_layer]["paint"]["line-color"]
+    for color_key in ("fill-color", "line-color", "circle-color"):
+        try:
+            return LAYER_STYLES[source_layer]["paint"][color_key]
+        except KeyError:
+            continue
+    return None
 
 
 def get_opacity(source_layer):
@@ -52,18 +53,57 @@ class VectorLayerData:
     popup_fields: list = field(default_factory=list)
 
 
-@dataclass
-class RasterLayerData:
-    source: str
-    filepath: str
-    legend: str
-    model: RasterModel.__class__
-    name: str
-    name_singular: str
-    description: str
-
-
 LAYERS_CATEGORIES = {
+    "Renewables": [
+        VectorLayerData(
+            source="wind",
+            color=get_color("wind"),
+            model=models.WindTurbine,
+            name="Wind Turbines",
+            name_singular="Wind Turbine",
+            description="Wind Turbines",
+        ),
+        VectorLayerData(
+            source="pvroof",
+            color=get_color("pvroof"),
+            model=models.PVroof,
+            name="roof Photovoltaics",
+            name_singular="roof Photovoltaic",
+            description="roof Photovoltaics",
+        ),
+        VectorLayerData(
+            source="pvground",
+            color=get_color("pvground"),
+            model=models.PVground,
+            name="ground Photovoltaics",
+            name_singular="ground Photovoltaic",
+            description="ground Photovoltaics",
+        ),
+        VectorLayerData(
+            source="hydro",
+            color=get_color("hydro"),
+            model=models.Hydro,
+            name="Hydro",
+            name_singular="Hydro",
+            description="",
+        ),
+        VectorLayerData(
+            source="biomass",
+            color=get_color("biomass"),
+            model=models.Biomass,
+            name="Biomass",
+            name_singular="Biomass",
+            description="",
+        ),
+        VectorLayerData(
+            source="combustion",
+            color=get_color("combustion"),
+            model=models.Combustion,
+            name="Combustion",
+            name_singular="Combustion",
+            description="",
+        ),
+    ],
     "Results": [
         VectorLayerData(
             source="results",
@@ -76,7 +116,7 @@ LAYERS_CATEGORIES = {
             popup_fields=("title", "municipality", "key-values", "chart", "description", "sources"),
             # order matters
         )
-    ]
+    ],
 }
 LAYERS_DEFINITION = reduce(operator.add, list(LAYERS_CATEGORIES.values()))
 
@@ -151,25 +191,6 @@ def get_dynamic_sources():
     return sources
 
 
-def get_raster_sources():
-    sources = []
-    for layer in LAYERS_DEFINITION:
-        if not issubclass(layer.model, RasterModel):
-            continue
-        try:
-            raster_id = RasterModel.objects.get(name=layer.source).id
-        except ObjectDoesNotExist:
-            continue
-        sources.append(
-            Source(
-                name=f"{layer.source}",
-                type="raster",
-                tiles=[f"raster/tiles/{raster_id}/{{z}}/{{x}}/{{y}}.png?legend={layer.legend}"],
-            )
-        )
-    return sources
-
-
 if USE_DISTILLED_MVTS:
     SUFFIXES = ["", "_distilled"]
     ALL_SOURCES = (
@@ -196,7 +217,6 @@ if USE_DISTILLED_MVTS:
             ),
             Source(name="results", type="vector", tiles=["results_mvt/{z}/{x}/{y}/"]),
         ]
-        + get_raster_sources()
         + get_dynamic_sources()
     )
 else:
@@ -207,7 +227,6 @@ else:
             Source(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"]),
             Source(name="results", type="vector", tiles=["results_mvt/{z}/{x}/{y}/"]),
         ]
-        + get_raster_sources()
         + get_dynamic_sources()
     )
 
@@ -253,22 +272,9 @@ def get_region_layers():
     )
 
 
-RASTER_LAYERS = [
-    RasterLayer(
-        id=layer.source,
-        source=layer.source,
-        type="raster",
-    )
-    for layer in LAYERS_DEFINITION
-    if issubclass(layer.model, RasterModel)
-]
-
-
 def get_static_layers():
     static_layers = []
     for layer in LAYERS_DEFINITION:
-        if issubclass(layer.model, RasterModel):
-            continue
         if hasattr(layer.model, "setup"):
             continue
         for suffix in SUFFIXES:

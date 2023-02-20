@@ -139,6 +139,11 @@ Depending on your deployment (local/production), the server should be available
 under `localhost:8000` (local) or
 at docker container at port 5000 (production server needs to be forwarded by a proxy
 server).
+Sometimes the CSS is not loaded correctly in production mode, restarting the production server can help:
+```
+docker-compose -f production.yml restart
+```
+
 By now, no data is visible, as the geometries have to be loaded into database first by
 the following steps.
 

@@ -1,4 +1,7 @@
 const legendElement = document.getElementById("legend");
+const result_views_dropdown = document.getElementById("result_views");
+
+PubSub.subscribe(eventTopics.RESULT_VIEW_UPDATED, loadLegend);
 
 /**
  * Returns a legend HTML element as a string.
@@ -18,8 +21,8 @@ const createLegend = (title, unit, colors, valueRanges, nextColumnStartIndex = 3
     <div class="legend__heading">
       <span class="legend__title">Legend -&nbsp;</span>
       <span class="legend__detail">${title}</span>
+      <div class="legend__unit">(${unit})</div>
     </div>
-    <div class="legend__detail">${unit}:</div>
     <div class="legend__wrap">
       <div class="legend__column">
         ${valueRanges.filter((value, idx) => idx < nextColumnStartIndex).map((value, idx) => `<div class="legend__item" id="legend__item__color-${idx}">${value}</div>`).join(' ')}
@@ -33,6 +36,41 @@ const createLegend = (title, unit, colors, valueRanges, nextColumnStartIndex = 3
     </style>
   `;
 };
+
+
+function loadLegend(){
+  const title = result_views_dropdown.value;
+  const unit = "unit"; //need value!
+  const data_raw = store.cold.result_views[title][2];
+
+  let colors = [];
+  let values = [];
+
+  for (const element in data_raw) {
+    let current = data_raw[element];
+
+    if (typeof(current) == "number") {
+      if (Number.isInteger(current) === false){
+        current = current.toFixed(2);
+      }
+
+      if (values.length === 0) {
+        values.push("0 - " + String(current));
+      }
+      else {
+        values.push(values[values.length-1].split(" ").slice(-1)[0] + " - " + String(current));
+      }
+    }
+
+    if (typeof(current) == "string" && current.slice(0,3) === "rgb") {
+      colors.push(current);
+    }
+  }
+  const entriesPerColumn = Math.floor(values.length / 2);
+  legendElement.innerHTML = createLegend(title, unit, colors, values, entriesPerColumn);
+}
+
+
 
 window.onload = () => {
   const onLoadUrl = "/static/tests/api/legend.json??lookup=population&lang=en";

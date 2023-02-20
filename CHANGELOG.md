@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Added
+- layer switches to map legend
+- legend for choropleths
+
 ## [0.1.0] - 2023-02-10
 ### Added
 - integrated django-oemof app
@@ -40,6 +45,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - fix clunky sidebar resizing of sidebar chart #68
 - fix Postgis on Mac by improving Docker postgis install
 - remove unneeded option flag in poetry install section in readme
+- fix legend lower part hidden on smaller screens
 
 ## [0.0.0] - 2022-06-30
 ### Added
