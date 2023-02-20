@@ -43,15 +43,17 @@ class Municipality(models.Model):
     vector_tiles = RegionMVTManager(columns=["id", "name", "bbox"])
     label_tiles = LabelMVTManager(geo_col="geom_label", columns=["id", "name"])
 
-    data_file = "municipality"
-    layer = "municipality"
+    data_file = "bkg_vg250_muns_abw"
+    layer = "vg250_gem"
     mapping = {
+        "id": "FID",
         "geom": "MULTIPOLYGON",
         "name": "name",
     }
 
     def __str__(self):
         return self.name
+
 
 class Population(models.Model):
     year = models.IntegerField()
