@@ -45,7 +45,7 @@ def load_regions(regions=None, verbose=True):
             data=data_path,
             mapping=region.mapping,
             layer=region.layer,
-            transform=4326,
+            transform=4326,ja
         )
         instance.region = region_model
         instance.save(strict=True, verbose=verbose)
@@ -74,22 +74,22 @@ def load_data(models=None):
 
 def load_population():
     filename = "population.csv"
-    years = [2010, 2015, 2020, 2021, 2022, 2025, 2030, 2035, 2040, 2045]
 
     path = os.path.join(DATA_DIR, filename)
     municipalities = Municipality.objects.all()
     dataframe = pandas.read_csv(path, header=[0, 1], index_col=0)
+    years = dataframe.columns.get_level_values(0)
 
     for municipality in municipalities:
         for year in years:
-            series = dataframe.loc[municipality.id - 1, str(year)]
+            series = dataframe.loc[municipality.id, year]
 
             value = list(series.values)[0]
             if math.isnan(value):
                 continue
 
             entry = Population(
-                year=year, value=int(value), entry_type=list(series.index.values)[0], municipality=municipality
+                year=year, value=value, entry_type=list(series.index.values)[0], municipality=municipality
             )
             entry.save()
 
