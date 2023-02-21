@@ -86,6 +86,9 @@
 {% block js_body %}
   {{ block.super }}
 
+  {{ map_sources|json_script:"map_sources" }}
+  {{ map_layers|json_script:"map_layers" }}
+  {{ layers_at_startup|json_script:"layers_at_startup" }}
   {{ layer_styles|json_script:"styles" }}
   {{ result_styles|json_script:"result_styles" }}
   {{ settings_parameters|json_script:"settings_parameters" }}
@@ -128,147 +131,66 @@
         });
       {% endfor %}
 
-      map.on("load", function () {
-        const layers = map.getStyle().layers;
-        // Find the index of the first symbol layer in the map style
-        let firstSymbolId;
-        for (let i = 0; i < layers.length; i++) {
-          if (layers[i].type === "symbol") {
-            firstSymbolId = layers[i].id;
-            break;
-          }
-        }
-        map.addSource("satellite", {
-          type: "raster",
-          tiles: [
-            "https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key={{tiling_service_token}}"
-          ]
-        });
-        map.addLayer(
-          {
-            id: "satellite",
-            type: "raster",
-            source: "satellite"
-          },
-          firstSymbolId
-        );
-        map.setLayoutProperty("satellite", "visibility", "none");
+      PubSub.subscribe(eventTopics.MAP_SOURCES_LOADED, add_cluster_layers);
 
-        {% for source in all_sources %}
-          map.addSource(
-            "{{source.name}}",
-            {
-              "type": "{{source.type}}",
-              "promoteId": "id",
-              {% if source.tiles %}
-                "tiles": [
-                  {% for tile in source.tiles %}
-                    "{{request.scheme}}://{{request.get_host}}/{{tile|safe}}",
-                  {% endfor %}
+      function add_cluster_layers(msg) {
+        {% if layer.clustered %}
+          // Clustered layer
+          {% for level, zoom in zoom_levels.items %}
+            map.addLayer({
+              id: "{{layer.source_layer}}_{{level}}",
+              type: "circle",
+              source: "clusters",
+              minzoom: {{zoom.min}},
+              maxzoom: {{zoom.max}},
+              filter: ["==", ["get", "zoom_level"], {{zoom.max}}],
+              paint: {
+                // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
+                // with three steps to implement three types of circles:
+                //   * Blue, 20px circles when point count is less than 100
+                //   * Yellow, 30px circles when point count is between 100 and 750
+                //   * Pink, 40px circles when point count is greater than or equal to 750
+                "circle-color": [
+                  "step",
+                  ["get", "{{layer.source_layer}}"],
+                  "#51bbd6",
+                  100,
+                  "#f1f075",
+                  750,
+                  "#f28cb1"
                 ],
-              {% endif %}
-              {% if source.url %}
-                "url": "{{source.url|safe}}",
-              {% endif %}
-            }
-          );
-        {% endfor %}
-
-        // Add source for clustered layers
-        map.addSource(
-          'clusters', {
-            type: 'geojson',
-            data: "{{request.scheme}}://{{request.get_host}}/clusters",
-          }
-        );
-
-        {% for layer in raster_layers %}
-          {
-            const layer_setup = {
-              "id": "{{layer.id}}",
-              "source": "{{layer.source}}",
-              "type": "{{layer.type}}"
-            };
-            map.addLayer(layer_setup);
-            map.setLayoutProperty("{{ layer.id }}", "visibility", "none");
-          }
-        {% endfor %}
-
-        {% for layer in all_layers %}
-          {
-            const layer_style = JSON.parse(document.getElementById("styles").textContent)["{{layer.style}}"];
-            const layer_setup = {
-              "id": "{{layer.id}}",
-              "source": "{{layer.source}}",
-              "source-layer": "{{layer.source_layer}}",
-              "minzoom": {{layer.minzoom}},
-              "maxzoom": {{layer.maxzoom}},
-            };
-            map.addLayer({...layer_setup, ...layer_style});
-            {% if layer.type == "static" %}
-              map.setLayoutProperty("{{ layer.id }}", "visibility", "none");
-            {% endif %}
-          }
-
-          {% if layer.clustered %}
-            // Clustered layer
-            {% for level, zoom in zoom_levels.items %}
-              map.addLayer({
-                id: "{{layer.source_layer}}_{{level}}",
-                type: "circle",
+                "circle-radius": [
+                  "step",
+                  ["get", "{{layer.source_layer}}"],
+                  20,
+                  100,
+                  30,
+                  750,
+                  40
+                ]
+              }
+            });
+            map.addLayer(
+              {
+                id: "{{layer.source_layer}}_counter_{{level}}",
+                type: "symbol",
                 source: "clusters",
                 minzoom: {{zoom.min}},
                 maxzoom: {{zoom.max}},
                 filter: ["==", ["get", "zoom_level"], {{zoom.max}}],
-                paint: {
-                  // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-                  // with three steps to implement three types of circles:
-                  //   * Blue, 20px circles when point count is less than 100
-                  //   * Yellow, 30px circles when point count is between 100 and 750
-                  //   * Pink, 40px circles when point count is greater than or equal to 750
-                  "circle-color": [
-                    "step",
-                    ["get", "{{layer.source_layer}}"],
-                    "#51bbd6",
-                    100,
-                    "#f1f075",
-                    750,
-                    "#f28cb1"
-                  ],
-                  "circle-radius": [
-                    "step",
-                    ["get", "{{layer.source_layer}}"],
-                    20,
-                    100,
-                    30,
-                    750,
-                    40
-                  ]
+                layout: {
+                  "text-field": ["get", "{{layer.source_layer}}"],
+                  "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+                  "text-size": 12,
+                  "text-allow-overlap": true
                 }
-              });
-              map.addLayer(
-                {
-                  id: "{{layer.source_layer}}_counter_{{level}}",
-                  type: "symbol",
-                  source: "clusters",
-                  minzoom: {{zoom.min}},
-                  maxzoom: {{zoom.max}},
-                  filter: ["==", ["get", "zoom_level"], {{zoom.max}}],
-                  layout: {
-                    "text-field": ["get", "{{layer.source_layer}}"],
-                    "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
-                    "text-size": 12,
-                    "text-allow-overlap": true
-                  }
-                }
-              );
-              map.setLayoutProperty("{{layer.source_layer}}_{{level}}", "visibility", "none");
-              map.setLayoutProperty("{{layer.source_layer}}_counter_{{level}}", "visibility", "none");
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
-
-      });
+              }
+            );
+            map.setLayoutProperty("{{layer.source_layer}}_{{level}}", "visibility", "none");
+            map.setLayoutProperty("{{layer.source_layer}}_counter_{{level}}", "visibility", "none");
+          {% endfor %}
+        {% endif %}
+      }
 
       // Zoom to feature on click
       map.on("click", function (element) {
@@ -370,6 +292,7 @@
   {% endcompress %}
 
   {% compress js %}
+    <script src="{% static 'js/init_map.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/map.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/basemaps.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/helper.js' %}" type="text/javascript"></script>

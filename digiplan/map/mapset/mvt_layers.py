@@ -1,5 +1,5 @@
-from . import models
-from .mvt import MVTLayer
+from digiplan.map import models
+from digiplan.map.mvt import MVTLayer
 
 REGION_MVT_LAYERS = {
     "municipality": [
