@@ -45,7 +45,7 @@ def load_regions(regions=None, verbose=True):
             data=data_path,
             mapping=region.mapping,
             layer=region.layer,
-            transform=4326,ja
+            transform=4326,
         )
         instance.region = region_model
         instance.save(strict=True, verbose=verbose)
