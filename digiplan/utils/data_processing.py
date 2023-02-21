@@ -1,17 +1,20 @@
 import json
+import math
 import os
 
+import pandas
 from geojson import Feature, FeatureCollection, Point
 
 from config.settings.base import DATA_DIR
 from digiplan.map.config.config import CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
-from digiplan.map.mapset.layers import VectorLayerData
+from digiplan.map.mapset.layers import StaticLayer
 from digiplan.map.mapset.setup import LAYERS_DEFINITION
 from digiplan.map.models import (
     Biomass,
     Combustion,
     Hydro,
     Municipality,
+    Population,
     PVground,
     PVroof,
     Region,
@@ -69,7 +72,29 @@ def load_data(models=None):
         instance.save(strict=True)
 
 
-def build_cluster_geojson(cluster_layers: list[VectorLayerData] = None):
+def load_population():
+    filename = "population.csv"
+
+    path = os.path.join(DATA_DIR, filename)
+    municipalities = Municipality.objects.all()
+    dataframe = pandas.read_csv(path, header=[0, 1], index_col=0)
+    years = dataframe.columns.get_level_values(0)
+
+    for municipality in municipalities:
+        for year in years:
+            series = dataframe.loc[municipality.id, year]
+
+            value = list(series.values)[0]
+            if math.isnan(value):
+                continue
+
+            entry = Population(
+                year=year, value=value, entry_type=list(series.index.values)[0], municipality=municipality
+            )
+            entry.save()
+
+
+def build_cluster_geojson(cluster_layers: list[StaticLayer] = None):
     cluster_layers = cluster_layers or LAYERS_DEFINITION
     features = []
     for region_model in REGIONS:
