@@ -68,21 +68,23 @@ const detailed_overview_option = {
     }
   },
   legend: {
-     show: true,
-    bottom: '12'
+    show: true,
+    bottom: '15',
+    itemWidth: 14,
+    itemHeight: 14
   },
   grid: {
     top: '10%',
     left: '3%',
-    right: '15%',
-    bottom: '10%',
+    right: '25%',
+    bottom: '18%',
     containLabel: true
   },
   xAxis: {
     type: 'value',
       show: true,
     position: 'bottom',
-    name: 'Mt CO₂-\Emissionen',
+    name: 'Mt CO₂-\nEmissionen',
       nameLocation: 'end',
       nameTextStyle: 'Roboto',
         width: '76',
@@ -92,18 +94,18 @@ const detailed_overview_option = {
   },
   yAxis: {
     type: 'category',
-    data: ['Ziel Szenario - Verbrauch', 
-    'Ziel Szenario - Erzeugung', 
-    'Mein Szenario - Verbrauch', 
-    'Mein Szenario - Erzeugung', 
-    'Status Quo - Verbrauch', 
-    'Status Quo - Erzeugung']
+    data: ['Ziel Szenario\n (Verbrauch)', 
+    'Ziel Szenario\n (Erzeugung)', 
+    'Mein Szenario\n (Verbrauch)', 
+    'Mein Szenario\n (Erzeugung)', 
+    'Status Quo\n (Verbrauch)', 
+    'Status Quo\n (Erzeugung)']
   },
   series: [
     {
       name: 'Wind',
       type: 'bar',
-        barWidth: '35',
+      barWidth: '25',
       stack: 'total',
       color: '#1F82C0',
       label: {
@@ -195,20 +197,22 @@ const ghg_overview_option = {
   },
   legend: {
     show: true,
-    bottom: '12'
+    bottom: '15',
+    itemWidth: 14,
+    itemHeight: 14
   },
   grid: {
     top: '10%',
     left: '3%',
-    right: '15%',
-    bottom: '10%',
+    right: '25%',
+    bottom: '18%',
     containLabel: true
   },
   xAxis:  {
     type: 'value',
     show: true,
     position: 'bottom',
-    name: 'Mt CO₂-\Emissionen',
+    name: 'Mt CO₂-\nEmissionen',
       nameLocation: 'end',
       nameTextStyle: 'Roboto',
         width: '76',
@@ -229,7 +233,7 @@ const ghg_overview_option = {
     {
       name: 'GHG',
       type: 'bar',
-       barWidth: '25',
+      barWidth: '25',
       stack: 'total',
       color: '#C8D8E4',
       label: {
