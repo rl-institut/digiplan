@@ -2,10 +2,8 @@ const chart3Element = document.getElementById("chart3");
 const chart3 = echarts.init(chart3Element);
 const chart4Element = document.getElementById("chart4");
 const chart4 = echarts.init(chart4Element);
-const chart5Element = document.getElementById("chart5");
-const chart5 = echarts.init(chart5Element);
-const chart6Element = document.getElementById("chart6");
-const chart6 = echarts.init(chart6Element);
+const detailed_overview_chart = echarts.init(document.getElementById("detailed_overview_chart"));
+const ghg_overview_chart = echarts.init(document.getElementById("ghg_overview_chart"));
 
 const option = {
   title: {
@@ -61,18 +59,242 @@ const option = {
   ]
 };
 
-const optionResults = {
+const detailed_overview_option = {
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      // Use axis to trigger tooltip
+      type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+    }
+  },
+  legend: {
+     show: true,
+    bottom: '12'
+  },
+  grid: {
+    top: '10%',
+    left: '3%',
+    right: '15%',
+    bottom: '10%',
+    containLabel: true
+  },
   xAxis: {
-    type: 'category',
-    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    type: 'value',
+      show: true,
+    position: 'bottom',
+    name: 'Mt CO₂-\Emissionen',
+      nameLocation: 'end',
+      nameTextStyle: 'Roboto',
+        width: '76',
+        heigth: '32',
+      fontWeight: '300', 
+      fontSize: '14'
   },
   yAxis: {
-    type: 'value'
+    type: 'category',
+    data: ['Ziel Szenario - Verbrauch', 
+    'Ziel Szenario - Erzeugung', 
+    'Mein Szenario - Verbrauch', 
+    'Mein Szenario - Erzeugung', 
+    'Status Quo - Verbrauch', 
+    'Status Quo - Erzeugung']
   },
   series: [
     {
-      data: [120, 200, 150, 80, 70, 110, 130],
-      type: 'bar'
+      name: 'Wind',
+      type: 'bar',
+        barWidth: '35',
+      stack: 'total',
+      color: '#1F82C0',
+      label: {
+        show: false
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [0, 502, 0, 334, 0, 230]
+    },
+    {
+      name: 'Freiflächen - PV',
+      type: 'bar',
+      stack: 'total',
+      color: '#F6B93B',
+      label: {
+        show: false
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [0, 382, 0, 234, 0, 130 ]
+    },
+    {
+      name: 'Aufdach - PV',
+      type: 'bar',
+      stack: 'total',
+      color: '#FFD660',
+      label: {
+        show: false
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [0, 312, 0 , 254, 0 , 130]
+    },
+        {
+      name: 'Bioenergie',
+      type: 'bar',
+      stack: 'total',
+      color: '#98D47E',
+      label: {
+        show: false
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [0, 136, 0, 134, 0, 130]
+    },
+    {
+      name: 'Konventionell',
+      type: 'bar',
+      stack: 'total',
+      color: '#CFCFCF', 
+      label: {
+        show: false
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [0 , 132, 0 , 534,0 , 1130 ]
+    },
+    {
+      name: 'Verbrauch',
+      type: 'bar',
+      stack: 'total',
+      color: '#e9e0c8',
+      label: {
+        show: false
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [1450, 0 , 1440, 0 , 1800 ]
+    },
+  ]
+};
+
+const ghg_overview_option = {
+  backgroundColor: '#FFFFFF',
+  fontStyle: 'Roboto',
+  fontSize: '14',
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      // Use axis to trigger tooltip
+      type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+    }
+  },
+  legend: {
+    show: true,
+    bottom: '12'
+  },
+  grid: {
+    top: '10%',
+    left: '3%',
+    right: '15%',
+    bottom: '10%',
+    containLabel: true
+  },
+  xAxis:  {
+    type: 'value',
+    show: true,
+    position: 'bottom',
+    name: 'Mt CO₂-\Emissionen',
+      nameLocation: 'end',
+      nameTextStyle: 'Roboto',
+        width: '76',
+        heigth: '32',
+      fontWeight: '300', 
+      fontSize: '14',
+    
+  },
+  yAxis: {
+    show: true,
+    type: 'category',
+    data: ['Ziel', 'Szenario', 'Status Quo', '1990'],
+    nameTextStyle: 'Roboto',
+    fontWeight: '400', 
+    fontSize: '14',
+  },
+  series: [
+    {
+      name: 'GHG',
+      type: 'bar',
+       barWidth: '25',
+      stack: 'total',
+      color: '#C8D8E4',
+      label: {
+        show: false
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [20, 20, 20, 20]
+    },
+    {
+      name: 'Haushalte',
+      type: 'bar',
+        barWidth: '25',
+      stack: 'total',
+      color: '#74A9CF',
+      label: {
+        show: false
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [12, 15, 30, 34]
+    },
+    {
+      name: 'Industrie',
+      type: 'bar',
+        barWidth: '25',
+      stack: 'total',
+      color: '#FA9FB5',
+      label: {
+        show: false
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [20, 20, 31, 34]
+    },
+    {
+      name: 'XXX',
+      type: 'bar',
+        barWidth: '25',
+      stack: 'total',
+      color: '#FEC44F',
+      label: {
+        show: false
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [5, 12, 15, 24]
+    },
+    {
+      name: 'XXX',
+      type: 'bar',
+        barWidth: '25',
+      stack: 'total',
+      color: '#8C96C6',
+      label: {
+        show: false
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [15, 20, 30, 34]
     }
   ]
 };
@@ -86,15 +308,15 @@ function resizeChart() {
   setTimeout(function () {
     if (isVisible(chart3Element)) chart3.resize();
     if (isVisible(chart4Element)) chart4.resize();
-    if (isVisible(chart5Element)) chart5.resize();
-    if (isVisible(chart6Element)) chart6.resize();
+    if (isVisible(chart4Element)) detailed_overview_chart.resize();
+    if (isVisible(chart4Element)) ghg_overview_chart.resize();
   }, 200);
 }
 
 chart3.setOption(option);
 chart4.setOption(option);
-chart5.setOption(optionResults);
-chart6.setOption(optionResults);
+detailed_overview_chart.setOption(detailed_overview_option);
+ghg_overview_chart.setOption(ghg_overview_option);
 
 window.addEventListener("resize", resizeChart);
 document.addEventListener("show.bs.tab", resizeChart);

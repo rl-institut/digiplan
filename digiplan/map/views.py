@@ -32,7 +32,7 @@ from digiplan.map.results import core
 
 from . import models
 from .forms import PanelForm, StaticLayerForm
-from .layers import ALL_LAYERS, ALL_SOURCES, LAYERS_CATEGORIES, POPUPS, REGION_LAYERS
+from .mapset import setup
 
 
 class MapGLView(TemplateView):
@@ -44,14 +44,11 @@ class MapGLView(TemplateView):
         "tiling_service_token": TILING_SERVICE_TOKEN,
         "tiling_service_style_id": TILING_SERVICE_STYLE_ID,
         "map_images": MAP_IMAGES,
-        "all_layers": ALL_LAYERS,
-        "all_sources": ALL_SOURCES,
-        "popups": POPUPS,
-        "region_filter": None,  # RegionFilterForm(),
+        "map_layers": [layer.get_layer() for layer in setup.ALL_LAYERS],
+        "layers_at_startup": setup.LAYERS_AT_STARTUP,
+        "popups": setup.POPUPS,
         "area_switches": {
-            category: [StaticLayerForm(layer) for layer in layers]
-            for category, layers in LAYERS_CATEGORIES.items()
-            if category != "Results"
+            category: [StaticLayerForm(layer) for layer in layers] for category, layers in setup.LEGEND.items()
         },
         "energy_settings_panel": PanelForm(ENERGY_SETTINGS_PANEL),
         "heat_settings_panel": PanelForm(HEAT_SETTINGS_PANEL),
@@ -71,16 +68,19 @@ class MapGLView(TemplateView):
         context["settings_dependency_map"] = SETTINGS_DEPENDENCY_MAP
         context["dependency_parameters"] = DEPENDENCY_PARAMETERS
 
+        # Sources need valid URL (containing host and port), thus they have to be defined using request:
+        context["map_sources"] = {map_source.name: map_source.get_source(self.request) for map_source in setup.SOURCES}
+
         # Categorize sources
         categorized_sources = {
-            category: [SOURCES[layer.source] for layer in layers if layer.source in SOURCES]
-            for category, layers in LAYERS_CATEGORIES.items()
+            category: [SOURCES[layer.layer.id] for layer in layers if layer.layer.id in SOURCES]
+            for category, layers in setup.LEGEND.items()
         }
         context["sources"] = categorized_sources
 
         # Add popup-layer IDs to cold store
-        STORE_COLD_INIT["popup_layers"] = [popup.layer_id for popup in POPUPS]
-        STORE_COLD_INIT["region_layers"] = [layer.id for layer in REGION_LAYERS if layer.id.startswith("fill")]
+        STORE_COLD_INIT["popup_layers"] = [popup.layer_id for popup in setup.POPUPS]
+        STORE_COLD_INIT["region_layers"] = [layer.id for layer in setup.REGION_LAYERS if layer.id.startswith("fill")]
         STORE_COLD_INIT["result_views"] = {}  # Placeholder for already downloaded results (used in results.js)
         context["store_cold_init"] = json.dumps(STORE_COLD_INIT)
 
@@ -119,6 +119,15 @@ def get_results(request):
     # pylint: disable=W0511,W0612
     scenario_id = request.GET["scenario_id"]  # noqa: F841
     result_view = request.GET["result_view"]
+
+    if result_view == "EinwohnerInnen":
+        values = {
+            row.municipality_id: row.value
+            for row in models.Population.objects.filter(year=2022)
+        }
+        fill_color = RESULTS_CHOROPLETHS.get_fill_color(result_view, list(values.values()))
+        return JsonResponse({"values": values, "fill_color": fill_color})
+
     # FIXME: Replace dummy data with actual data
     if result_view == "re_power_percentage":
         values = {

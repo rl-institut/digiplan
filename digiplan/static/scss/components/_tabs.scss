@@ -9,6 +9,7 @@
     @extend .border-0;
     @extend .border-bottom;
     @extend .border-1;
+    @extend .bg-light;
   }
 
   &__nav-link {
@@ -22,11 +23,9 @@
 
     &.active {
       @extend .active;
-      @extend .text-info;
+      @extend .text-white;
       @extend .border-0;
-      @extend .border-bottom;
-      @extend .border-4;
-      @extend .border-info;
+      @extend .bg-info;
     }
   }
 

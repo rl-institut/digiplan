@@ -36,6 +36,7 @@ class Region(models.Model):
 class Municipality(models.Model):
     geom = models.MultiPolygonField(srid=4326)
     name = models.CharField(max_length=50, unique=True)
+    area = models.FloatField()
 
     region = models.OneToOneField("Region", on_delete=models.DO_NOTHING, null=True)
 
@@ -43,15 +44,24 @@ class Municipality(models.Model):
     vector_tiles = RegionMVTManager(columns=["id", "name", "bbox"])
     label_tiles = LabelMVTManager(geo_col="geom_label", columns=["id", "name"])
 
-    data_file = "municipality"
-    layer = "municipality"
+    data_file = "bkg_vg250_muns_region"
+    layer = "vg250_gem"
     mapping = {
+        "id": "id",
         "geom": "MULTIPOLYGON",
         "name": "name",
+        "area": "area_km2"
     }
 
     def __str__(self):
         return self.name
+
+
+class Population(models.Model):
+    year = models.IntegerField()
+    value = models.IntegerField()
+    entry_type = models.CharField(max_length=13)
+    municipality = models.ForeignKey(Municipality, on_delete=models.CASCADE)
 
 
 class WindTurbine(models.Model):

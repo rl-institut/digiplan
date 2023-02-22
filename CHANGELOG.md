@@ -18,6 +18,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - results layer with customizable result views
 - add names and lookups for layers
 - add color palettes for map
+- add category bbuttons to results side panel as placeholder
 
 ### Changed
 - make dependent slider values update dynamically on dependency slider changes
@@ -44,6 +45,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - fix clunky sidebar resizing of sidebar chart #68
 - fix Postgis on Mac by improving Docker postgis install
 - remove unneeded option flag in poetry install section in readme
+- fix legend lower part hidden on smaller screens
 
 ## [0.0.0] - 2022-06-30
 ### Added
