@@ -29,6 +29,11 @@
     }
   }
 
+  &__item-title {
+    @extend .fs-7;
+    @extend .fw-semibold;
+  }
+
   &__chart {
     height: 400px;
     width: 100%;
