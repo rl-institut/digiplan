@@ -30,7 +30,10 @@ const option = {
     {
       type: 'category',
       // prettier-ignore
-      data: ['Jahre']
+      data: ['Jahre'],
+      axisTick: {
+        show: false
+      }
     }
   ],
   yAxis: [
@@ -44,6 +47,7 @@ const option = {
       name: '2021',
       type: 'bar',
       color: '#C3D1DC',
+      barWidth: '32',
       data: [
         60
       ],
@@ -52,6 +56,7 @@ const option = {
       name: '2035',
       type: 'bar',
       color: '#06DFA7',
+      barWidth: '32',
       data: [
         80
       ]
@@ -82,7 +87,7 @@ const detailed_overview_option = {
   },
   xAxis: {
     type: 'value',
-      show: true,
+    show: true,
     position: 'bottom',
     name: 'Mt CO₂-\nEmissionen',
       nameLocation: 'end',
@@ -99,13 +104,16 @@ const detailed_overview_option = {
     'Mein Szenario\n (Verbrauch)', 
     'Mein Szenario\n (Erzeugung)', 
     'Status Quo\n (Verbrauch)', 
-    'Status Quo\n (Erzeugung)']
+    'Status Quo\n (Erzeugung)'],
+    axisTick: {
+      show: false
+    }
   },
   series: [
     {
       name: 'Wind',
       type: 'bar',
-      barWidth: '25',
+      barWidth: '16',
       stack: 'total',
       color: '#1F82C0',
       label: {
@@ -228,12 +236,15 @@ const ghg_overview_option = {
     nameTextStyle: 'Roboto',
     fontWeight: '400', 
     fontSize: '14',
+    axisTick: {
+      show: false
+    }
   },
   series: [
     {
       name: 'GHG',
       type: 'bar',
-      barWidth: '25',
+      barWidth: '16',
       stack: 'total',
       color: '#C8D8E4',
       label: {
