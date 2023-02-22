@@ -17,15 +17,17 @@
   &__row {
     @extend .row;
     @extend .mb-4;
-    @extend .bg-white;
   }
 
   &__item {
     @extend .col-xl-6;
+    @extend .bg-white;
     padding: $padding-large;
 
     @include media-breakpoint-up(xl) {
-      border-right: 1px solid $gray-200;
+      &:first-of-type {
+        border-right: 1px solid $gray-200;
+      }
     }
   }
 
@@ -37,5 +39,21 @@
   &__chart {
     height: 400px;
     width: 100%;
+  }
+
+  &__text {
+    @extend .pt-4;
+    @extend .fs-7;
+  }
+
+  &__comparison {
+    @extend .d-flex;
+    @extend .flex-column;
+    @extend .justify-content-evenly;
+    @extend .align-items-center;
+    @extend .bg-light;
+    @extend .py-2;
+    margin: 0 auto;
+    width: 12.5rem;
   }
 }
