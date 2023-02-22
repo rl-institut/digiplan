@@ -323,8 +323,8 @@ function resizeChart() {
   setTimeout(function () {
     if (isVisible(chart3Element)) chart3.resize();
     if (isVisible(chart4Element)) chart4.resize();
-    if (isVisible(chart4Element)) detailed_overview_chart.resize();
-    if (isVisible(chart4Element)) ghg_overview_chart.resize();
+    detailed_overview_chart.resize();
+    ghg_overview_chart.resize();
   }, 200);
 }
 
