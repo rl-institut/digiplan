@@ -5,6 +5,11 @@
   @extend .p-4;
   padding-top: 6rem !important;
 
+  @include media-breakpoint-up(xxl) {
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
+  }
+
   &__header {
     @extend .row;
 
