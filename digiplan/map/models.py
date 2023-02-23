@@ -1,8 +1,12 @@
+import json
+import os
 from dataclasses import dataclass
 from enum import Enum
 
 from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
+
+from config.settings.base import DATA_DIR
 
 from .managers import LabelMVTManager, RegionMVTManager, StaticMVTManager
 
@@ -16,6 +20,31 @@ class LayerFilterType(Enum):
 class LayerFilter:
     name: str
     type: LayerFilterType = LayerFilterType.Range  # noqa: A003
+
+
+class ModelMappingMixin:
+    def get_captions(self, list_of_attributes):
+        filename = "bnetza_mastr_attribute_captions.json"
+
+        mapping_dict = {
+            "WindTurbine": "bnetza_mastr_wind_region",
+            "PVroof": "bnetza_mastr_pv_roof_region",
+            "PVground": "bnetza_mastr_pv_ground_region",
+            "Hydro": "bnetza_mastr_hydro_region",
+            "Biomass": "bnetza_mastr_biomass_region",
+            "Combustion": "bnetza_mastr_combustion_region",
+        }
+
+        checked_classname = mapping_dict[str(self.__class__.__name__)]
+        with open(os.path.join(DATA_DIR, filename), encoding="utf8") as file:
+            jsonfile = json.load(file)
+            caption_dict_name = jsonfile["datasets_caption_map"][checked_classname]
+
+            for attribute in list_of_attributes:
+                caption = jsonfile["captions"][caption_dict_name][attribute]
+                list_of_attributes[list_of_attributes.index(attribute)] = caption
+
+            return list_of_attributes
 
 
 # REGIONS
