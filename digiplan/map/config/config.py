@@ -20,13 +20,13 @@ SETTINGS_DEPENDENCY_MAP_FILE = settings.APPS_DIR.path("static/config/settings_de
 DEPENDENCY_PARAMETERS_FILE = settings.APPS_DIR.path("static/config/dependency_parameters.json")
 
 # REGIONS
-MIN_ZOOM = 6
+MIN_ZOOM = 8
 MAX_ZOOM = 22
 MAX_DISTILLED_ZOOM = 10
 
 Zoom = namedtuple("MinMax", ["min", "max"])
 ZOOM_LEVELS = {
-    "municipality": Zoom(8, MAX_ZOOM),
+    "municipality": Zoom(MIN_ZOOM, MAX_ZOOM),
 }
 REGIONS = ("municipality",)
 REGION_ZOOMS = RangeKeyDict({zoom: layer for layer, zoom in ZOOM_LEVELS.items() if layer in REGIONS})
@@ -106,9 +106,8 @@ MAP_IMAGES = []
 
 
 # DISTILL
-# Tiles of Ghana: At z=5 Ghana has width x=15-16 and height y=15(-16)
-X_AT_MIN_Z = 31
-Y_AT_MIN_Z = 30
+X_AT_MIN_Z = 136
+Y_AT_MIN_Z = 84
 X_OFFSET = 1
 Y_OFFSET = 1
 
