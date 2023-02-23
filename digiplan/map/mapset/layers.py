@@ -59,8 +59,8 @@ class StaticLayer:
                 type=self.type,
                 source=f"{self.source}_distilled",
                 source_layer=self.id,
-                minzoom=self.min_zoom(),
-                maxzoom=self.max_zoom(),
+                minzoom=self.min_zoom(distill=True),
+                maxzoom=self.max_zoom(distill=True),
                 style=config.LAYER_STYLES[self.id],
             )
 

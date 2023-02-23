@@ -26,10 +26,12 @@ MAX_DISTILLED_ZOOM = 10
 
 Zoom = namedtuple("MinMax", ["min", "max"])
 ZOOM_LEVELS = {
-    "municipality": Zoom(MIN_ZOOM, MAX_ZOOM),
+    "municipality": Zoom(MIN_ZOOM, MAX_DISTILLED_ZOOM + 1),
 }
 REGIONS = ("municipality",)
-REGION_ZOOMS = RangeKeyDict({zoom: layer for layer, zoom in ZOOM_LEVELS.items() if layer in REGIONS})
+region_zoom_dict = {zoom: layer for layer, zoom in ZOOM_LEVELS.items() if layer in REGIONS}
+region_zoom_dict[Zoom(MAX_DISTILLED_ZOOM + 1, MAX_ZOOM)] = "municipality"
+REGION_ZOOMS = RangeKeyDict(region_zoom_dict)
 
 # FILTERS
 FILTER_DEFINITION = {}
