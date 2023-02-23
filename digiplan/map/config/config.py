@@ -108,8 +108,8 @@ MAP_IMAGES = []
 # DISTILL
 X_AT_MIN_Z = 136
 Y_AT_MIN_Z = 84
-X_OFFSET = 1
-Y_OFFSET = 1
+X_OFFSET = 1  # Defines how many tiles to the right are added at first level
+Y_OFFSET = 1  # Defines how many tiles to the bottom are added at first level
 
 
 def get_tile_coordinates_for_region(region):
