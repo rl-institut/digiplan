@@ -758,7 +758,7 @@ libsass = ">=0.7.0,<1"
 
 [[package]]
 name = "django-oemof"
-version = "0.1.0"
+version = "0.2.0"
 description = "Django application to run oemof"
 category = "main"
 optional = false
@@ -774,7 +774,7 @@ oemoflex = {git = "https://github.com/rl-institut/oemoflex.git", rev = "feature/
 type = "git"
 url = "https://github.com/rl-institut/django-oemof.git"
 reference = "HEAD"
-resolved_reference = "561d0d8362ed4067da8b3cc07617997100df24bb"
+resolved_reference = "52f5fd5db9e7fe9647eb1c877a53af26ec749597"
 
 [[package]]
 name = "django-raster"
@@ -1132,6 +1132,14 @@ spss = ["savReaderWriter (>=3.0)"]
 sql = ["sqlalchemy (>=1.4)"]
 wkt = ["grako (>=3.99)"]
 zenodo = ["pyzenodo3 (>=1.0)"]
+
+[[package]]
+name = "geojson"
+version = "3.0.1"
+description = "Python bindings and utilities for GeoJSON"
+category = "main"
+optional = false
+python-versions = ">=3.7, <3.12"
 
 [[package]]
 name = "gitdb"
@@ -2947,8 +2955,8 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.9"
-content-hash = "52cea831cf886fb51eafe32d52f5414acb96064121f1a2011ccfce36b9cefe2e"
+python-versions = ">=3.9,<3.12"
+content-hash = "74bef83a7b5ddfc282ff7aa996c0aeafa5feef0b68a0be4f599458e401ee1404"
 
 [metadata.files]
 alabaster = [
@@ -3563,6 +3571,10 @@ fonttools = [
 frictionless = [
     {file = "frictionless-5.6.2-py2.py3-none-any.whl", hash = "sha256:83d395f0ede920a3acc86291fe4bc5d6f9d37912940f29d68ea3ba96c5089ac1"},
     {file = "frictionless-5.6.2.tar.gz", hash = "sha256:89ee4bca3017771238f145a1981b14f5cb2720fbda4d70d84f0d12d02d047e41"},
+]
+geojson = [
+    {file = "geojson-3.0.1-py3-none-any.whl", hash = "sha256:e49df982b204ed481e4c1236c57f587adf71537301cf8faf7120ab27d73c7568"},
+    {file = "geojson-3.0.1.tar.gz", hash = "sha256:ff3d75acab60b1e66504a11f7ea12c104bad32ff3c410a807788663b966dee4a"},
 ]
 gitdb = [
     {file = "gitdb-4.0.10-py3-none-any.whl", hash = "sha256:c286cf298426064079ed96a9e4a9d39e7f3e9bf15ba60701e95f5492f28415c7"},
