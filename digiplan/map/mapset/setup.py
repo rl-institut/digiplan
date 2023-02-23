@@ -72,6 +72,7 @@ if settings.USE_DISTILLED_MVTS:
             name=region,
             type="vector",
             tiles=[f"static/mvts/{{z}}/{{x}}/{{y}}/{region}.mvt"],
+            maxzoom=config.MAX_DISTILLED_ZOOM + 1,
         )
         for region in config.REGIONS
         if config.ZOOM_LEVELS[region].min < config.MAX_DISTILLED_ZOOM
