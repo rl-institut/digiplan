@@ -94,16 +94,16 @@ const detailed_overview_option = {
       nameTextStyle: 'Roboto',
         width: '76',
         heigth: '32',
-      fontWeight: '300', 
+      fontWeight: '300',
       fontSize: '14'
   },
   yAxis: {
     type: 'category',
-    data: ['Ziel Szenario\n (Verbrauch)', 
-    'Ziel Szenario\n (Erzeugung)', 
-    'Mein Szenario\n (Verbrauch)', 
-    'Mein Szenario\n (Erzeugung)', 
-    'Status Quo\n (Verbrauch)', 
+    data: ['Ziel Szenario\n (Verbrauch)',
+    'Ziel Szenario\n (Erzeugung)',
+    'Mein Szenario\n (Verbrauch)',
+    'Mein Szenario\n (Erzeugung)',
+    'Status Quo\n (Verbrauch)',
     'Status Quo\n (Erzeugung)'],
     axisTick: {
       show: false
@@ -167,7 +167,7 @@ const detailed_overview_option = {
       name: 'Konventionell',
       type: 'bar',
       stack: 'total',
-      color: '#CFCFCF', 
+      color: '#CFCFCF',
       label: {
         show: false
       },
@@ -225,16 +225,16 @@ const ghg_overview_option = {
       nameTextStyle: 'Roboto',
         width: '76',
         heigth: '32',
-      fontWeight: '300', 
+      fontWeight: '300',
       fontSize: '14',
-    
+
   },
   yAxis: {
     show: true,
     type: 'category',
     data: ['Ziel', 'Szenario', 'Status Quo', '1990'],
     nameTextStyle: 'Roboto',
-    fontWeight: '400', 
+    fontWeight: '400',
     fontSize: '14',
     axisTick: {
       show: false
