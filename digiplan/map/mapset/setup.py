@@ -44,18 +44,16 @@ LAYERS_DEFINITION = []
 
 DYNAMIC_LAYERS = layers.get_dynamic_layers(LAYERS_DEFINITION)
 REGION_LAYERS = layers.get_region_layers()
-
-ALL_LAYERS = []
-for static_layer in STATIC_LAYERS.values():
-    ALL_LAYERS.extend(static_layer.get_map_layers())
-ALL_LAYERS += DYNAMIC_LAYERS + REGION_LAYERS
-ALL_LAYERS.append(
+RESULT_LAYERS = [
     layers.MapLayer(
         id="results", type="fill", source="results", source_layer="results", style=config.LAYER_STYLES["results"]
     )
-)
-# pylint:disable=W0511
-# FIXME: Build results layer before!
+]
+
+# Order is important! Last items are shown on top!
+ALL_LAYERS = REGION_LAYERS + RESULT_LAYERS + DYNAMIC_LAYERS
+for static_layer in STATIC_LAYERS.values():
+    ALL_LAYERS.extend(static_layer.get_map_layers())
 
 LAYERS_AT_STARTUP = [layer.id for layer in REGION_LAYERS]
 
