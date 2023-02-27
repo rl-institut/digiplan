@@ -102,6 +102,7 @@ def get_clusters(request):
 def get_popup(request):
     lookup = request.GET["lookup"]
     region = request.GET["region"]  # regionID
+    print(region)
 
     # eigentlich so was wie: APPS_DIR.path("schemas").path(lookup + ".json") ?
     with open(APPS_DIR.path("schemas").path("popup.example.json"), "r", encoding="utf-8") as file:
@@ -116,7 +117,7 @@ def get_popup(request):
         "sources": json_data["sources"],
         "title": json_data["title"],
     }
-    # maybe actually APPS_DIR.path("schemas").path("components").path("chart." + lookup + ".example.json")
+    # APPS_DIR.path("schemas").path("components").path("chart." + lookup + ".example.json"), "r", encoding="utf-8"
     with open(
         APPS_DIR.path("schemas").path("components").path("chart.population.example.json"), "r", encoding="utf-8"
     ) as file:

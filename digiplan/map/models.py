@@ -65,7 +65,7 @@ class Population(models.Model):
 
 
 class WindTurbine(models.Model):
-    geom = models.PointField(srid=4326)  # maybe MultiPointField
+    geom = models.PointField(srid=4326)
     name = models.CharField(max_length=255, null=True)
     name_park = models.CharField(max_length=255, null=True)
     geometry_approximated = models.BooleanField()
@@ -74,10 +74,11 @@ class WindTurbine(models.Model):
     hub_height = models.FloatField(null=True)
     zip_code = models.CharField(max_length=50, null=True)
     rotor_diameter = models.FloatField(null=True)
+    mun_id = models.IntegerField(null=True)
 
     objects = models.Manager()
     vector_tiles = StaticMVTManager(
-        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated"]
+        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
     )
 
     data_file = "bnetza_mastr_wind_agg_region"
@@ -92,6 +93,7 @@ class WindTurbine(models.Model):
         "hub_height": "hub_height",
         "rotor_diameter": "rotor_diameter",
         "zip_code": "zip_code",
+        "mun_id": "municipality_id",
     }
 
     def __str__(self):
@@ -106,10 +108,11 @@ class PVroof(models.Model):
     unit_count = models.BigIntegerField(null=True)
     capacity_net = models.FloatField(null=True)
     power_limitation = models.CharField(max_length=50, null=True)
+    mun_id = models.IntegerField(null=True)
 
     objects = models.Manager()
     vector_tiles = StaticMVTManager(
-        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated"]
+        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
     )
 
     data_file = "bnetza_mastr_pv_roof_agg_region"
@@ -123,6 +126,7 @@ class PVroof(models.Model):
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
         "power_limitation": "power_limitation",
+        "mun_id": "municipality_id",
     }
 
     def __str__(self):
@@ -137,10 +141,11 @@ class PVground(models.Model):
     unit_count = models.BigIntegerField(null=True)
     capacity_net = models.FloatField(null=True)
     power_limitation = models.CharField(max_length=50, null=True)
+    mun_id = models.IntegerField(null=True)
 
     objects = models.Manager()
     vector_tiles = StaticMVTManager(
-        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated"]
+        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
     )
 
     data_file = "bnetza_mastr_pv_ground_agg_region"
@@ -154,6 +159,7 @@ class PVground(models.Model):
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
         "power_limitation": "power_limitation",
+        "mun_id": "municipality_id",
     }
 
 
@@ -165,10 +171,11 @@ class Hydro(models.Model):
     unit_count = models.BigIntegerField(null=True)
     capacity_net = models.FloatField(null=True)
     water_origin = models.CharField(max_length=255, null=True)
+    mun_id = models.IntegerField(null=True)
 
     objects = models.Manager()
     vector_tiles = StaticMVTManager(
-        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated"]
+        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
     )
 
     data_file = "bnetza_mastr_hydro_agg_region"
@@ -182,6 +189,7 @@ class Hydro(models.Model):
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
         "water_origin": "water_origin",
+        "mun_id": "municipality_id",
     }
 
 
@@ -193,10 +201,11 @@ class Biomass(models.Model):
     unit_count = models.BigIntegerField(null=True)
     capacity_net = models.FloatField(null=True)
     fuel_type = models.CharField(max_length=50, null=True)
+    mun_id = models.IntegerField(null=True)
 
     objects = models.Manager()
     vector_tiles = StaticMVTManager(
-        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated"]
+        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
     )
 
     data_file = "bnetza_mastr_biomass_agg_region"
@@ -210,6 +219,7 @@ class Biomass(models.Model):
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
         "fuel_type": "fuel_type",
+        "mun_id": "municipality_id",
     }
 
 
@@ -221,10 +231,11 @@ class Combustion(models.Model):
     geometry_approximated = models.BooleanField()
     unit_count = models.BigIntegerField(null=True)
     capacity_net = models.FloatField(null=True)
+    mun_id = models.IntegerField(null=True)
 
     objects = models.Manager()
     vector_tiles = StaticMVTManager(
-        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated"]
+        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
     )
 
     data_file = "bnetza_mastr_combustion_agg_region"
@@ -238,4 +249,5 @@ class Combustion(models.Model):
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
+        "mun_id": "municipality_id",
     }
