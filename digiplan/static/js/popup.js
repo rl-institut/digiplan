@@ -52,7 +52,7 @@ function add_popup(layer_id, fields, template_id = "default") {
     // TODO: construct dynamically via emitted id by event
     const region = event.features[0].properties.id;
     const result_lookup = document.getElementById('result_views').value;
-    const url = "/popup?lookup=population&region=12lang=en";
+    const url = "/popup?lookup=installed_ee&region=" + region + "&lang=en";
     //const url = "/popup?lookup=" + result_lookup + "&region=" + region + "lang=en";
 
 

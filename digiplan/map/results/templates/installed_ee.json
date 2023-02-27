@@ -1,1 +1,15 @@
-{"description": "something about the installed power of the renewable energy in this region and / or municipality", "id": 12, "keyValues": {"unit": "installed power", "year": null, "region_value": 1728365.07, "region_title": "ABW region", "municipality_value": 29988.99}, "municipality": null, "sources": [], "title": "installed power"}
+{
+    "description": "something about the installed power of the renewable energy in this region and / or municipality",
+    "id": "2",
+    "keyValues":
+    {
+        "unit": "installed power",
+        "year": null,
+        "region_value": 1728365.07,
+        "region_title": "ABW region",
+        "municipality_value": 446801.81
+    },
+    "municipality": null,
+    "sources": [],
+    "title": "installed power"
+}

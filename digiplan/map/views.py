@@ -103,13 +103,12 @@ def get_clusters(request):
 def get_popup(request):
     lookup = request.GET["lookup"]
     region = request.GET["region"]  # regionID
-    print(region)
 
-    calculations.write_in_file(12)
+    calculations.create_data(lookup, region)
 
     # eigentlich so was wie: APPS_DIR.path("schemas").path(lookup + ".json") ?
     with open(
-        APPS_DIR.path("map").path("results").path("templates").path("installed_ee.json"), "r", encoding="utf-8"
+        APPS_DIR.path("map").path("results").path("templates").path(lookup + ".json"), "r", encoding="utf-8"
     ) as file:
         json_data = json.load(file)
 
@@ -122,17 +121,19 @@ def get_popup(request):
         "sources": json_data["sources"],
         "title": json_data["title"],
     }
-    print(data["id"])
-    # APPS_DIR.path("schemas").path("components").path("chart." + lookup + ".example.json"), "r", encoding="utf-8"
+
+    calculations.create_chart(lookup)
+    # APPS_DIR.path("schemas").path("components").path("chart." + lookup + "_chart.json"), "r", encoding="utf-8"
     with open(
-        APPS_DIR.path("schemas").path("components").path("chart.population.example.json"), "r", encoding="utf-8"
+        APPS_DIR.path("map").path("results").path("templates").path(lookup + "_chart.json"), "r", encoding="utf-8"
     ) as file:
         json_chart = json.load(file)
     chart = {
-        "lookup": lookup,
+        "lookup": json_chart["lookup"],
         "series": json_chart["series"],
         "title": json_chart["title"],
     }
+    lookup = "population"  # cause the other django templates don't work yet
     try:
         html = render_to_string(f"popups/{lookup}.html", context=data)
     except TemplateDoesNotExist:
