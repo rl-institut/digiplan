@@ -36,6 +36,7 @@ from digiplan.map.results import core
 from . import models
 from .forms import PanelForm, StaticLayerForm
 from .mapset import setup
+from .results import calculations
 
 
 class MapGLView(TemplateView):
@@ -104,8 +105,12 @@ def get_popup(request):
     region = request.GET["region"]  # regionID
     print(region)
 
+    calculations.write_in_file(12)
+
     # eigentlich so was wie: APPS_DIR.path("schemas").path(lookup + ".json") ?
-    with open(APPS_DIR.path("schemas").path("popup.example.json"), "r", encoding="utf-8") as file:
+    with open(
+        APPS_DIR.path("map").path("results").path("templates").path("installed_ee.json"), "r", encoding="utf-8"
+    ) as file:
         json_data = json.load(file)
 
     data = {
@@ -117,6 +122,7 @@ def get_popup(request):
         "sources": json_data["sources"],
         "title": json_data["title"],
     }
+    print(data["id"])
     # APPS_DIR.path("schemas").path("components").path("chart." + lookup + ".example.json"), "r", encoding="utf-8"
     with open(
         APPS_DIR.path("schemas").path("components").path("chart.population.example.json"), "r", encoding="utf-8"
