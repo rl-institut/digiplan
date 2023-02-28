@@ -5,8 +5,13 @@ from collections import namedtuple
 from django.conf import settings
 from range_key_dict import RangeKeyDict
 
+from config.settings.base import APPS_DIR
 from digiplan import __version__
 from digiplan.map import utils
+
+# DIRECTORIES
+MAP_DIR = APPS_DIR.path("map")
+POPUPS_DIR = MAP_DIR.path("results").path("popups")
 
 # FILES
 CLUSTER_GEOJSON_FILE = settings.DATA_DIR.path("cluster.geojson")

@@ -88,6 +88,7 @@
 
   {{ map_sources|json_script:"map_sources" }}
   {{ map_layers|json_script:"map_layers" }}
+  {{ map_popups|json_script:"map_popups" }}
   {{ layers_at_startup|json_script:"layers_at_startup" }}
   {{ layer_styles|json_script:"styles" }}
   {{ result_styles|json_script:"result_styles" }}
@@ -196,16 +197,6 @@
       map.on("click", function (element) {
         flyToElement(element);
       });
-
-      /* Popup start */
-      {% for popup in popups %}
-        {% if popup.template_url %}
-          add_popup("{{popup.layer_id}}", {{popup.fields|safe}}, "{{popup.source}}");
-        {% else %}
-          add_popup("{{popup.layer_id}}", {{popup.fields|safe}});
-        {% endif %}
-      {% endfor %}
-      /* Popup end */
 
       {% for layer in all_layers %}
         {% if layer.style == "region-fill" %}

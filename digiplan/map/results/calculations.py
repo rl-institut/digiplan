@@ -2,7 +2,7 @@ import json
 
 from django.db.models import Sum
 
-from config.settings.base import APPS_DIR
+from digiplan.map.config import config
 
 from .. import models
 
@@ -74,7 +74,6 @@ def installed_ee_region():
     for value in sums_region:
         if value:
             sum_installed_ee = value + sum_installed_ee
-    print(sum_installed_ee)
 
     return round(sum_installed_ee, ndigits=2)
 
@@ -85,30 +84,22 @@ def create_chart(lookup):
         if value:
             series.append({"key": "name", "value": value})
 
-    with open(
-        APPS_DIR.path("map").path("results").path("templates").path(lookup + "_chart.json"), "r", encoding="utf-8"
-    ) as jsonFile:
+    with open(config.POPUPS_DIR.path(lookup + "_chart.json"), "r", encoding="utf-8") as jsonFile:
         data = json.load(jsonFile)
 
     data["series"] = series
 
-    with open(
-        APPS_DIR.path("map").path("results").path("templates").path(lookup + "_chart.json"), "w", encoding="utf-8"
-    ) as jsonFile:
+    with open(config.POPUPS_DIR.path(lookup + "_chart.json"), "w", encoding="utf-8") as jsonFile:
         json.dump(data, jsonFile)
 
 
 def create_data(lookup, mun_id):
-    with open(
-        APPS_DIR.path("map").path("results").path("templates").path(lookup + ".json"), "r", encoding="utf-8"
-    ) as jsonFile:
+    with open(config.POPUPS_DIR.path(lookup + ".json"), "r", encoding="utf-8") as jsonFile:
         data = json.load(jsonFile)
 
     data["id"] = mun_id
     data["keyValues"]["region_value"] = installed_ee_region()
     data["keyValues"]["municipality_value"] = installed_ee(mun_id)
 
-    with open(
-        APPS_DIR.path("map").path("results").path("templates").path(lookup + ".json"), "w", encoding="utf-8"
-    ) as jsonFile:
+    with open(config.POPUPS_DIR.path(lookup + ".json"), "w", encoding="utf-8") as jsonFile:
         json.dump(data, jsonFile)

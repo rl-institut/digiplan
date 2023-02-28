@@ -1,3 +1,7 @@
+
+PubSub.subscribe(eventTopics.MAP_SOURCES_LOADED, add_popups);
+
+
 async function fetchGetJson(url) {
   try {
     // Default options are marked with *
@@ -35,7 +39,14 @@ function createListByName(name, series) {
   return list;
 }
 
-function add_popup(layer_id, fields, template_id = "default") {
+function add_popups() {
+  const popups = JSON.parse(document.getElementById("map_popups").textContent);
+  for (const popup of popups) {
+    add_popup(popup);
+  }
+}
+
+function add_popup(layer_id) {
   map.on("click", layer_id, function (event) {
     /*
       Check if popup already exists
@@ -49,12 +60,9 @@ function add_popup(layer_id, fields, template_id = "default") {
     */
     const coordinates = createCoordinates(event);
 
-    // TODO: construct dynamically via emitted id by event
-    const region = event.features[0].properties.id;
-    const result_lookup = document.getElementById('result_views').value;
-    const url = "/popup?lookup=installed_ee&region=" + region + "&lang=en";
-    //const url = "/popup?lookup=" + result_lookup + "&region=" + region + "lang=en";
-
+    const region_id = event.features[0].properties.id;
+    const lookup = document.getElementById('result_views').value;
+    const url = `/popup?lookup=${lookup}&region=${region_id}&lang=en`;
 
     fetchGetJson(url).then(
       (response) => {
@@ -139,13 +147,14 @@ function add_popup(layer_id, fields, template_id = "default") {
             }]
           };
           chart.setOption(option);
-          requestAnimationFrame(() => {
+        }
+
+        requestAnimationFrame(() => {
             new maplibregl.Popup({
               // https://maplibre.org/maplibre-gl-js-docs/api/markers/#popup-parameters
               maxWidth: "280px",
             }).setLngLat(coordinates).setHTML(popup.innerHTML).addTo(map);
           });
-        }
       });
   });
 }

@@ -5,7 +5,7 @@ from django.conf import settings
 
 from digiplan.map import models
 from digiplan.map.config import config
-from digiplan.map.mapset import layers, popups, sources, utils
+from digiplan.map.mapset import layers, sources, utils
 
 STATIC_LAYERS = {
     "wind": layers.StaticLayer(id="wind", model=models.WindTurbine, type="circle", source="static"),
@@ -51,7 +51,11 @@ for static_layer in STATIC_LAYERS.values():
 ALL_LAYERS += DYNAMIC_LAYERS + REGION_LAYERS
 ALL_LAYERS.append(
     layers.MapLayer(
-        id="results", type="fill", source="results", source_layer="results", style=config.LAYER_STYLES["results"]
+        id="results",
+        type="fill",
+        source="results",
+        source_layer="results",
+        style=config.LAYER_STYLES["results"],
     )
 )
 # pylint:disable=W0511
@@ -59,8 +63,7 @@ ALL_LAYERS.append(
 
 LAYERS_AT_STARTUP = [layer.id for layer in REGION_LAYERS]
 
-POPUP_PRIO = ["hospital", "hospital_simulated"]  # from high to low prio
-POPUPS = popups.get_popups(LAYERS_DEFINITION, POPUP_PRIO)
+POPUPS = ["results"]
 
 if settings.USE_DISTILLED_MVTS:
     SOURCES = [
@@ -88,7 +91,7 @@ SOURCES += [
         "satellite",
         type="raster",
         tiles=[
-            f"https://api.maptiler.com/tiles/satellite-v2/{{z}}/{{x}}/{{y}}.jpg?key={settings.TILING_SERVICE_TOKEN}"
+            f"https://api.maptiler.com/tiles/satellite-v2/{{z}}/{{x}}/{{y}}.jpg?key={settings.TILING_SERVICE_TOKEN}",
         ],
     ),
     sources.MapSource("cluster", type="geojson", url="clusters"),

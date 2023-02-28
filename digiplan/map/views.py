@@ -2,35 +2,13 @@ import json
 import random
 import uuid
 
+from django.conf import settings
 from django.http import JsonResponse
 from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 
-from config.settings.base import (
-    APPS_DIR,
-    DEBUG,
-    PASSWORD,
-    PASSWORD_PROTECTION,
-    TILING_SERVICE_STYLE_ID,
-    TILING_SERVICE_TOKEN,
-    USE_DISTILLED_MVTS,
-)
-from digiplan.map.config.config import (
-    CLUSTER_GEOJSON_FILE,
-    DEPENDENCY_PARAMETERS,
-    ENERGY_SETTINGS_PANEL,
-    HEAT_SETTINGS_PANEL,
-    LAYER_STYLES,
-    MAP_IMAGES,
-    RESULTS_CHOROPLETHS,
-    SETTINGS_DEPENDENCY_MAP,
-    SOURCES,
-    STORE_COLD_INIT,
-    STORE_HOT_INIT,
-    TRAFFIC_SETTINGS_PANEL,
-    ZOOM_LEVELS,
-)
+from digiplan.map.config import config
 from digiplan.map.results import core
 
 from . import models
@@ -42,24 +20,24 @@ from .results import calculations
 class MapGLView(TemplateView):
     template_name = "map.html"
     extra_context = {
-        "debug": DEBUG,
-        "password_protected": PASSWORD_PROTECTION,
-        "password": PASSWORD,
-        "tiling_service_token": TILING_SERVICE_TOKEN,
-        "tiling_service_style_id": TILING_SERVICE_STYLE_ID,
-        "map_images": MAP_IMAGES,
+        "debug": settings.DEBUG,
+        "password_protected": settings.PASSWORD_PROTECTION,
+        "password": settings.PASSWORD,
+        "tiling_service_token": settings.TILING_SERVICE_TOKEN,
+        "tiling_service_style_id": settings.TILING_SERVICE_STYLE_ID,
+        "map_images": config.MAP_IMAGES,
         "map_layers": [layer.get_layer() for layer in setup.ALL_LAYERS],
         "layers_at_startup": setup.LAYERS_AT_STARTUP,
-        "popups": setup.POPUPS,
+        "map_popups": setup.POPUPS,
         "area_switches": {
             category: [StaticLayerForm(layer) for layer in layers] for category, layers in setup.LEGEND.items()
         },
-        "energy_settings_panel": PanelForm(ENERGY_SETTINGS_PANEL),
-        "heat_settings_panel": PanelForm(HEAT_SETTINGS_PANEL),
-        "traffic_settings_panel": PanelForm(TRAFFIC_SETTINGS_PANEL),
-        "use_distilled_mvts": USE_DISTILLED_MVTS,
-        "store_hot_init": STORE_HOT_INIT,
-        "zoom_levels": ZOOM_LEVELS,
+        "energy_settings_panel": PanelForm(config.ENERGY_SETTINGS_PANEL),
+        "heat_settings_panel": PanelForm(config.HEAT_SETTINGS_PANEL),
+        "traffic_settings_panel": PanelForm(config.TRAFFIC_SETTINGS_PANEL),
+        "use_distilled_mvts": settings.USE_DISTILLED_MVTS,
+        "store_hot_init": config.STORE_HOT_INIT,
+        "zoom_levels": config.ZOOM_LEVELS,
     }
 
     def get_context_data(self, **kwargs):
@@ -67,33 +45,35 @@ class MapGLView(TemplateView):
         session_id = str(uuid.uuid4())
         context = super().get_context_data(**kwargs)
         context["session_id"] = session_id
-        context["layer_styles"] = LAYER_STYLES
-        context["settings_parameters"] = ENERGY_SETTINGS_PANEL
-        context["settings_dependency_map"] = SETTINGS_DEPENDENCY_MAP
-        context["dependency_parameters"] = DEPENDENCY_PARAMETERS
+        context["layer_styles"] = config.LAYER_STYLES
+        context["settings_parameters"] = config.ENERGY_SETTINGS_PANEL
+        context["settings_dependency_map"] = config.SETTINGS_DEPENDENCY_MAP
+        context["dependency_parameters"] = config.DEPENDENCY_PARAMETERS
 
         # Sources need valid URL (containing host and port), thus they have to be defined using request:
         context["map_sources"] = {map_source.name: map_source.get_source(self.request) for map_source in setup.SOURCES}
 
         # Categorize sources
         categorized_sources = {
-            category: [SOURCES[layer.layer.id] for layer in layers if layer.layer.id in SOURCES]
+            category: [config.SOURCES[layer.layer.id] for layer in layers if layer.layer.id in config.SOURCES]
             for category, layers in setup.LEGEND.items()
         }
         context["sources"] = categorized_sources
 
         # Add popup-layer IDs to cold store
-        STORE_COLD_INIT["popup_layers"] = [popup.layer_id for popup in setup.POPUPS]
-        STORE_COLD_INIT["region_layers"] = [layer.id for layer in setup.REGION_LAYERS if layer.id.startswith("fill")]
-        STORE_COLD_INIT["result_views"] = {}  # Placeholder for already downloaded results (used in results.js)
-        context["store_cold_init"] = json.dumps(STORE_COLD_INIT)
+        config.STORE_COLD_INIT["popup_layers"] = setup.POPUPS
+        config.STORE_COLD_INIT["region_layers"] = [
+            layer.id for layer in setup.REGION_LAYERS if layer.id.startswith("fill")
+        ]
+        config.STORE_COLD_INIT["result_views"] = {}  # Placeholder for already downloaded results (used in results.js)
+        context["store_cold_init"] = json.dumps(config.STORE_COLD_INIT)
 
         return context
 
 
 def get_clusters(request):
     try:
-        with open(CLUSTER_GEOJSON_FILE, "r", encoding="utf-8") as geojson_file:
+        with open(config.CLUSTER_GEOJSON_FILE, "r", encoding="utf-8") as geojson_file:
             clusters = json.load(geojson_file)
     except FileNotFoundError:
         clusters = {}
@@ -102,14 +82,11 @@ def get_clusters(request):
 
 def get_popup(request):
     lookup = request.GET["lookup"]
-    region = request.GET["region"]  # regionID
+    region = request.GET["region"]
 
     calculations.create_data(lookup, region)
 
-    # eigentlich so was wie: APPS_DIR.path("schemas").path(lookup + ".json") ?
-    with open(
-        APPS_DIR.path("map").path("results").path("templates").path(lookup + ".json"), "r", encoding="utf-8"
-    ) as file:
+    with open(config.POPUPS_DIR.path(lookup + ".json"), "r", encoding="utf-8") as file:
         json_data = json.load(file)
 
     data = {
@@ -123,17 +100,8 @@ def get_popup(request):
     }
 
     calculations.create_chart(lookup)
-    # APPS_DIR.path("schemas").path("components").path("chart." + lookup + "_chart.json"), "r", encoding="utf-8"
-    with open(
-        APPS_DIR.path("map").path("results").path("templates").path(lookup + "_chart.json"), "r", encoding="utf-8"
-    ) as file:
-        json_chart = json.load(file)
-    chart = {
-        "lookup": json_chart["lookup"],
-        "series": json_chart["series"],
-        "title": json_chart["title"],
-    }
-    lookup = "population"  # cause the other django templates don't work yet
+    with open(config.POPUPS_DIR.path(lookup + "_chart.json"), "r", encoding="utf-8") as file:
+        chart = json.load(file)
     try:
         html = render_to_string(f"popups/{lookup}.html", context=data)
     except TemplateDoesNotExist:
@@ -165,12 +133,9 @@ def get_results(request):
     scenario_id = request.GET["scenario_id"]  # noqa: F841
     result_view = request.GET["result_view"]
 
-    if result_view == "EinwohnerInnen":
-        values = {
-            row.municipality_id: row.value
-            for row in models.Population.objects.filter(year=2022)
-        }
-        fill_color = RESULTS_CHOROPLETHS.get_fill_color(result_view, list(values.values()))
+    if result_view == "population":
+        values = {row.municipality_id: row.value for row in models.Population.objects.filter(year=2022)}
+        fill_color = config.RESULTS_CHOROPLETHS.get_fill_color(result_view, list(values.values()))
         return JsonResponse({"values": values, "fill_color": fill_color})
 
     # FIXME: Replace dummy data with actual data
@@ -179,14 +144,14 @@ def get_results(request):
             municipality.id: random.randint(0, 100) / 100  # noqa: S311
             for municipality in models.Municipality.objects.all()
         }
-        fill_color = RESULTS_CHOROPLETHS.get_fill_color(result_view)
+        fill_color = config.RESULTS_CHOROPLETHS.get_fill_color(result_view)
         return JsonResponse({"values": values, "fill_color": fill_color})
     if result_view == "re_power":
         values = {
             municipality.id: random.randint(0, 100) / 100  # noqa: S311
             for municipality in models.Municipality.objects.all()
         }
-        fill_color = RESULTS_CHOROPLETHS.get_fill_color(result_view, list(values.values()))
+        fill_color = config.RESULTS_CHOROPLETHS.get_fill_color(result_view, list(values.values()))
         return JsonResponse({"values": values, "fill_color": fill_color})
     raise ValueError(f"Unknown result view '{result_view}'")
 
