@@ -10,6 +10,7 @@ from digiplan.map import utils
 
 # FILES
 CLUSTER_GEOJSON_FILE = settings.DATA_DIR.path("cluster.geojson")
+CAPTION_MAPPING_FILE = settings.DATA_DIR.path("bnetza_mastr_attribute_captions.json")
 LAYER_STYLES_FILE = settings.APPS_DIR.path("static/config/layer_styles.json")
 RESULT_STYLES_FILE = settings.APPS_DIR.path("static/config/result_styles.json")
 CHOROPLETH_STYLES_FILE = settings.APPS_DIR.path("static/config/choropleth_styles.json")

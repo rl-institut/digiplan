@@ -1,12 +1,11 @@
 import json
-import os
 from dataclasses import dataclass
 from enum import Enum
 
 from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
 
-from config.settings.base import DATA_DIR
+from digiplan.map.config.config import CAPTION_MAPPING_FILE
 
 from .managers import LabelMVTManager, RegionMVTManager, StaticMVTManager
 
@@ -23,8 +22,8 @@ class LayerFilter:
 
 
 class ModelMappingMixin:
-    def get_captions(self, list_of_attributes):
-        filename = "bnetza_mastr_attribute_captions.json"
+    # pylint: disable=too-few-public-methods
+    def get_captions(self, attribute):
 
         mapping_dict = {
             "WindTurbine": "bnetza_mastr_wind_region",
@@ -36,15 +35,10 @@ class ModelMappingMixin:
         }
 
         checked_classname = mapping_dict[str(self.__class__.__name__)]
-        with open(os.path.join(DATA_DIR, filename), encoding="utf8") as file:
-            jsonfile = json.load(file)
-            caption_dict_name = jsonfile["datasets_caption_map"][checked_classname]
-
-            for attribute in list_of_attributes:
-                caption = jsonfile["captions"][caption_dict_name][attribute]
-                list_of_attributes[list_of_attributes.index(attribute)] = caption
-
-            return list_of_attributes
+        with open(CAPTION_MAPPING_FILE, "r", encoding="utf-8") as json_file:
+            captions = json.load(json_file)
+            caption_dict_name = captions["datasets_caption_map"][checked_classname]
+            return captions["captions"][caption_dict_name][attribute]
 
 
 # REGIONS
@@ -83,7 +77,7 @@ class Municipality(models.Model):
         return self.name
 
 
-class WindTurbine(models.Model):
+class WindTurbine(models.Model, ModelMappingMixin):
     geom = models.PointField(srid=4326)  # maybe MultiPointField
     name = models.CharField(max_length=255, null=True)
     name_park = models.CharField(max_length=255, null=True)
@@ -117,7 +111,7 @@ class WindTurbine(models.Model):
         return self.name
 
 
-class PVroof(models.Model):
+class PVroof(models.Model, ModelMappingMixin):
     geom = models.PointField(srid=4326)
     name = models.CharField(max_length=255, null=True)
     zip_code = models.CharField(max_length=50, null=True)
@@ -148,7 +142,7 @@ class PVroof(models.Model):
         return self.name
 
 
-class PVground(models.Model):
+class PVground(models.Model, ModelMappingMixin):
     geom = models.PointField(srid=4326)
     name = models.CharField(max_length=255, null=True)
     zip_code = models.CharField(max_length=50, null=True)
@@ -176,7 +170,7 @@ class PVground(models.Model):
     }
 
 
-class Hydro(models.Model):
+class Hydro(models.Model, ModelMappingMixin):
     geom = models.PointField(srid=4326)
     name = models.CharField(max_length=255, null=True)
     zip_code = models.CharField(max_length=50, null=True)
@@ -204,7 +198,7 @@ class Hydro(models.Model):
     }
 
 
-class Biomass(models.Model):
+class Biomass(models.Model, ModelMappingMixin):
     geom = models.PointField(srid=4326)
     name = models.CharField(max_length=255, null=True)
     zip_code = models.CharField(max_length=50, null=True)
@@ -232,7 +226,7 @@ class Biomass(models.Model):
     }
 
 
-class Combustion(models.Model):
+class Combustion(models.Model, ModelMappingMixin):
     geom = models.PointField(srid=4326)
     name = models.CharField(max_length=255, null=True)
     name_block = models.CharField(max_length=255, null=True)
