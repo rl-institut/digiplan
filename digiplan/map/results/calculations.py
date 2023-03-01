@@ -3,9 +3,8 @@ from typing import Optional
 
 from django.db.models import Sum
 
+from digiplan.map import models
 from digiplan.map.config import config
-
-from .. import models
 
 
 def calc_installed_ee(municipality_id: Optional[int] = None):
