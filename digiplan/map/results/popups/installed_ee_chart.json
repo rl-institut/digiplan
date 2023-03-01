@@ -1,1 +1,10 @@
-{"lookup": "installed power", "series": [{"key": "name", "value": 39510.0}, {"key": "name", "value": 5217.28}, {"key": "name", "value": 17149.399}, {"key": "name", "value": 400.0}, {"key": "name", "value": 770.75}, {"key": "name", "value": 61175.0}, {"key": "name", "value": 2695.6}, {"key": "name", "value": 14046.742}, {"key": "name", "value": 2119.0}, {"key": "name", "value": 54.6}, {"key": "name", "value": 9.3}, {"key": "name", "value": 70350.0}, {"key": "name", "value": 66627.0}, {"key": "name", "value": 30577.325}, {"key": "name", "value": 4846.0}, {"key": "name", "value": 6229.87}, {"key": "name", "value": 70350.0}, {"key": "name", "value": 66627.0}, {"key": "name", "value": 30577.325}, {"key": "name", "value": 4846.0}, {"key": "name", "value": 6229.87}, {"key": "name", "value": 41282.0}, {"key": "name", "value": 3.6}, {"key": "name", "value": 33207.408}, {"key": "name", "value": 10761.0}, {"key": "name", "value": 56.25}, {"key": "name", "value": 21000.0}, {"key": "name", "value": 70857.892}, {"key": "name", "value": 22038.684}, {"key": "name", "value": 3388.0}, {"key": "name", "value": 179963.75}, {"key": "name", "value": 24900.0}, {"key": "name", "value": 732.834}, {"key": "name", "value": 23747.279}, {"key": "name", "value": 18100.0}, {"key": "name", "value": 10439.45}, {"key": "name", "value": 63130.278}, {"key": "name", "value": 16709.787}, {"key": "name", "value": 4618.0}, {"key": "name", "value": 2226.53}], "title": "installed power in diffrent types"}
+{
+  "lookup": "installed_ee",
+  "series": [
+    {
+      "data": [],
+      "name": "Installed EE"
+    }
+  ],
+  "title": "installed power in different types"
+}
