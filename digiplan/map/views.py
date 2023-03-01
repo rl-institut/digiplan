@@ -84,24 +84,9 @@ def get_popup(request):
     lookup = request.GET["lookup"]
     region = request.GET["region"]
 
-    calculations.create_data(lookup, region)
+    data = calculations.create_data(lookup, region)
+    chart = calculations.create_chart(lookup)
 
-    with open(config.POPUPS_DIR.path(lookup + ".json"), "r", encoding="utf-8") as file:
-        json_data = json.load(file)
-
-    data = {
-        # pylint: disable=C0301
-        "description": json_data["description"],  # noqa: E501
-        "id": region,
-        "data": json_data["keyValues"],
-        "municipality": json_data["municipality"],
-        "sources": json_data["sources"],
-        "title": json_data["title"],
-    }
-
-    calculations.create_chart(lookup)
-    with open(config.POPUPS_DIR.path(lookup + "_chart.json"), "r", encoding="utf-8") as file:
-        chart = json.load(file)
     try:
         html = render_to_string(f"popups/{lookup}.html", context=data)
     except TemplateDoesNotExist:

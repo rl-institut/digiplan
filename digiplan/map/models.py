@@ -46,12 +46,7 @@ class Municipality(models.Model):
 
     data_file = "bkg_vg250_muns_region"
     layer = "vg250_gem"
-    mapping = {
-        "id": "id",
-        "geom": "MULTIPOLYGON",
-        "name": "name",
-        "area": "area_km2"
-    }
+    mapping = {"id": "id", "geom": "MULTIPOLYGON", "name": "name", "area": "area_km2"}
 
     def __str__(self):
         return self.name
@@ -251,3 +246,6 @@ class Combustion(models.Model):
         "capacity_net": "capacity_net",
         "mun_id": "municipality_id",
     }
+
+
+RENEWABLES = (WindTurbine, PVroof, PVground, Hydro, Biomass)
