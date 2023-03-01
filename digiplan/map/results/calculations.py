@@ -25,7 +25,6 @@ def calc_installed_ee(municipality_id: Optional[int] = None):
 def create_chart(lookup):
     with open(config.POPUPS_DIR.path(lookup + "_chart.json"), "r", encoding="utf-8") as jsonFile:
         chart = json.load(jsonFile)
-
     return chart
 
 
@@ -34,7 +33,10 @@ def create_data(lookup, mun_id):
         data = json.load(jsonFile)
 
     data["id"] = mun_id
-    data["data"]["region_value"] = calc_installed_ee()
-    data["data"]["municipality_value"] = calc_installed_ee(mun_id)
+    data["data"]["region_value"] = CALCULATIONS[lookup]()
+    data["data"]["municipality_value"] = CALCULATIONS[lookup](mun_id)
 
     return data
+
+
+CALCULATIONS = {"installed_ee": calc_installed_ee}
