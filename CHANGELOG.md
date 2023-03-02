@@ -6,6 +6,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- dynamic choropleths
 - popups from templates
 - e-charts for detailed and ghg overview to charts panel
 - layer switches to map legend
