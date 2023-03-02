@@ -1,6 +1,8 @@
+"""Test for choropleths."""
+
 import pathlib
 
-from digiplan.map.utils import Choropleth
+from digiplan.map.mapset.choropleth import Choropleth
 
 TEST_FOLDER = pathlib.Path(__file__).parent
 TEST_CHOROPLETH_STYLES_FILE = TEST_FOLDER / "test_data" / "choropleth_styles.json"
@@ -8,7 +10,8 @@ TEST_CHOROPLETH_STYLES_FILE = TEST_FOLDER / "test_data" / "choropleth_styles.jso
 CHOROPLETHS = Choropleth(TEST_CHOROPLETH_STYLES_FILE)
 
 
-def test_choropleths_with_values():
+def test_choropleths_with_values() -> None:
+    """Test choropleth with static values."""
     fill_color = CHOROPLETHS.get_fill_color("with_values")
     assert fill_color == [
         "interpolate",
@@ -25,7 +28,8 @@ def test_choropleths_with_values():
     ]
 
 
-def test_choropleths_without_values():
+def test_choropleths_without_values() -> None:
+    """Test dynamic choropleth with values from results."""
     fill_color = CHOROPLETHS.get_fill_color("without_values", [10, 40, 50, 310])
     assert fill_color == [
         "interpolate",

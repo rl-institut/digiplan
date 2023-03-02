@@ -92,3 +92,15 @@ profile = "black"
 
 [tool.ruff]
 line-length = 120
+ignore = [
+  "ANN101",  # Missing type annotation for `self` in method
+  "ANN003",  # Missing type annotation for `**kwargs`
+  "EM102",   # Exception must not use an f-string literal, assign to variable first
+  "TRY003",  # Avoid specifying long messages outside the exception class
+  "S101",    # Use of `assert` detected
+  "UP007",   # Use `X | Y` for type annotations
+  "B905",    # `zip()` without an explicit `strict=` parameter
+]
+fix = true
+show-fixes = true
+unfixable = ["UP007"]

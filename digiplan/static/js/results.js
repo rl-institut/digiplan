@@ -23,9 +23,8 @@ function changeResultView(msg) {
   if (!(view in store.cold.result_views)) {
     $.ajax({
       type: "GET",
-      url: "results",
+      url: `choropleth/${view}/1`,
       dataType: 'json',
-      data: {"scenario_id": 1, "result_view": view},
       success: function(results) {
         updateResultsLayer(view, results);
         map.setPaintProperty("results", "fill-color", results.fill_color);

@@ -1,3 +1,6 @@
+"""URLs for map app, including main view and API points."""
+
+
 from django.conf import settings
 from django.urls import path
 from django_distill import distill_path
@@ -13,7 +16,7 @@ app_name = "map"
 urlpatterns = [
     path("", views.MapGLView.as_view(), name="map"),
     path("clusters", views.get_clusters, name="clusters"),
-    path("results", views.get_results, name="results"),
+    path("choropleth/<str:lookup>/<str:scenario>", views.get_choropleth, name="choropleth"),
     path("visualization", views.get_visualization, name="visualization"),
     path("popup/<str:lookup>/<int:region>", views.get_popup, name="popup"),
 ]
@@ -24,7 +27,19 @@ urlpatterns += [
 ]
 
 
-def get_all_statics_for_state_lod(view_name):
+def get_all_statics_for_state_lod(view_name: str) -> tuple[int, int, int]:
+    """Return distill coordinates for given layer.
+
+    Parameters
+    ----------
+    view_name: str
+        Layer name
+
+    Yields
+    ------
+    tuple[int, int, int]
+        Holding x,y,z
+    """
     for x, y, z in get_tile_coordinates_for_region(view_name):
         yield z, x, y
 
