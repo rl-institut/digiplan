@@ -62,7 +62,7 @@ function add_popup(layer_id) {
 
     const region_id = event.features[0].properties.id;
     const lookup = document.getElementById('result_views').value;
-    const url = `/popup?lookup=${lookup}&region=${region_id}&lang=en`;
+    const url = `/popup/${lookup}/${region_id}?lang=en`;
 
     fetchGetJson(url).then(
       (response) => {

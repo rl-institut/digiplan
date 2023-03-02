@@ -80,10 +80,24 @@ def get_clusters(request):
     return JsonResponse(clusters)
 
 
-def get_popup(request):
-    lookup = request.GET["lookup"]
-    region = request.GET["region"]
+def get_popup(request, lookup: str, region: int):
+    """
+    Returns popup as html and chart options to render chart on popup.
 
+    Parameters
+    ----------
+    request
+        Request from app, can hold option for different language
+    lookup: str
+        Name is used to lookup data and chart functions
+    region: int
+        ID of region selected on map. Data and chart for popup is calculated for related region.
+
+    Returns
+    -------
+    JsonResponse
+        containing HTML to render popup and chart options to be used in E-Chart.
+    """
     data = calculations.create_data(lookup, region)
     chart = calculations.create_chart(lookup, region)
 
