@@ -12,21 +12,21 @@ from digiplan.map.config import config
 LookupFunctions = namedtuple("PopupData", ("data_fct", "chart_fct"))
 
 
-def create_chart(lookup):
+def create_chart(lookup, municipality_id):
     with open(config.POPUPS_DIR.path(f"{lookup}_chart.json"), "r", encoding="utf-8") as chart_json:
         chart = json.load(chart_json)
-    chart = LOOKUPS[lookup].chart_fct(chart)
+    chart = LOOKUPS[lookup].chart_fct(chart, municipality_id)
     jsonschema.validate(chart, schemas.CHART_SCHEMA)
     return chart
 
 
-def create_data(lookup, mun_id):
+def create_data(lookup, municipality_id):
     with open(config.POPUPS_DIR.path(f"{lookup}.json"), "r", encoding="utf-8") as data_json:
         data = json.load(data_json)
 
-    data["id"] = mun_id
+    data["id"] = municipality_id
     data["data"]["region_value"] = LOOKUPS[lookup].data_fct()
-    data["data"]["municipality_value"] = LOOKUPS[lookup].data_fct(mun_id)
+    data["data"]["municipality_value"] = LOOKUPS[lookup].data_fct(municipality_id)
 
     return data
 
@@ -45,7 +45,8 @@ def get_data_for_installed_ee(municipality_id: Optional[int] = None):
     return installed_ee
 
 
-def get_chart_for_installed_ee(chart):
+def get_chart_for_installed_ee(chart, municipality_id):
+    chart["id"] = municipality_id
     chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
     return chart
 

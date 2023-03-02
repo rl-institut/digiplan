@@ -85,7 +85,7 @@ def get_popup(request):
     region = request.GET["region"]
 
     data = calculations.create_data(lookup, region)
-    chart = calculations.create_chart(lookup)
+    chart = calculations.create_chart(lookup, region)
 
     try:
         html = render_to_string(f"popups/{lookup}.html", context=data)
