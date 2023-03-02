@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('map', '0011_biomass_combustion_hydro'),
+        ('map', '0012_add_mun_id'),
     ]
 
     operations = [
