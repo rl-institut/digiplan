@@ -4,7 +4,6 @@ As map app is SPA, this module contains main view and various API points.
 """
 import json
 import pathlib
-import random
 import uuid
 
 from django.conf import settings
@@ -16,7 +15,6 @@ from django.views.generic import TemplateView
 from digiplan.map.config import config
 from digiplan.map.results import core
 
-from . import models
 from .forms import PanelForm, StaticLayerForm
 from .mapset import setup
 from .results import calculations
@@ -155,34 +153,10 @@ def get_choropleth(request: HttpRequest, lookup: str, scenario: str) -> JsonResp
     -------
     JsonResponse
         Containing key-value pairs of municipality_ids and values and related color style
-
-    Raises
-    ------
-    ValueError
-        If result view is unknown
     """
-    if lookup == "population":
-        values = {row.municipality_id: row.value for row in models.Population.objects.filter(year=2022)}
-        fill_color = config.CHOROPLETHS.get_fill_color(lookup, list(values.values()))
-        return JsonResponse({"values": values, "fill_color": fill_color})
-
-    # pylint: disable=W0511
-    # FIXME: Replace dummy data with actual data
-    if lookup == "re_power_percentage":
-        values = {
-            municipality.id: random.randint(0, 100) / 100  # noqa: S311
-            for municipality in models.Municipality.objects.all()
-        }
-        fill_color = config.CHOROPLETHS.get_fill_color(lookup)
-        return JsonResponse({"values": values, "fill_color": fill_color})
-    if lookup == "re_power":
-        values = {
-            municipality.id: random.randint(0, 100) / 100  # noqa: S311
-            for municipality in models.Municipality.objects.all()
-        }
-        fill_color = config.CHOROPLETHS.get_fill_color(lookup, list(values.values()))
-        return JsonResponse({"values": values, "fill_color": fill_color})
-    raise ValueError(f"Unknown {lookup=}")
+    values = calculations.create_choropleth_data(lookup)
+    fill_color = config.CHOROPLETHS.get_fill_color(lookup, list(values.values()))
+    return JsonResponse({"values": values, "fill_color": fill_color})
 
 
 def get_visualization(request: HttpRequest) -> JsonResponse:

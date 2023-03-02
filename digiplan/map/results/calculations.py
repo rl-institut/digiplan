@@ -12,7 +12,31 @@ from config import schemas
 from digiplan.map import models
 from digiplan.map.config import config
 
-LookupFunctions = namedtuple("PopupData", ("data_fct", "chart_fct"))
+LookupFunctions = namedtuple("PopupData", ("data_fct", "chart_fct", "choropleth_fct"))
+
+
+def create_choropleth_data(lookup: str) -> dict:
+    """Create data for every municipality for given lookup.
+
+    Parameters
+    ----------
+    lookup: str
+        Used to get function for choropleth data generation
+
+    Returns
+    -------
+    dict
+        Choropleth values for each municipality
+
+    Raises
+    ------
+    LookupError
+        if lookup can't be found in LOOKUPS
+    """
+    if lookup not in LOOKUPS:
+        error_msg = f"Could not find {lookup=} in LOOKUPS."
+        raise LookupError(error_msg)
+    return LOOKUPS[lookup].choropleth_fct()
 
 
 def create_chart(lookup: str, municipality_id: int) -> dict:
@@ -29,7 +53,16 @@ def create_chart(lookup: str, municipality_id: int) -> dict:
     -------
     dict
         Containing validated chart options for further use in JS
+
+    Raises
+    ------
+    LookupError
+        if lookup can't be found in LOOKUPS
     """
+    if lookup not in LOOKUPS:
+        error_msg = f"Could not find {lookup=} in LOOKUPS."
+        raise LookupError(error_msg)
+
     with pathlib.Path(config.POPUPS_DIR.path(f"{lookup}_chart.json")).open("r", encoding="utf-8") as chart_json:
         chart = json.load(chart_json)
     chart = LOOKUPS[lookup].chart_fct(chart, municipality_id)
@@ -51,7 +84,16 @@ def create_data(lookup: str, municipality_id: int) -> dict:
     -------
     dict
         containing popup data for given lookup
+
+    Raises
+    ------
+    LookupError
+        if lookup can't be found in LOOKUPS
     """
+    if lookup not in LOOKUPS:
+        error_msg = f"Could not find {lookup=} in LOOKUPS."
+        raise LookupError(error_msg)
+
     with pathlib.Path(config.POPUPS_DIR.path(f"{lookup}.json")).open("r", encoding="utf-8") as data_json:
         data = json.load(data_json)
 
@@ -108,6 +150,18 @@ def get_chart_for_installed_ee(chart: dict, municipality_id: int) -> dict:  # no
     return chart
 
 
+def get_population() -> dict[int, int]:
+    """Calculate population per municipality.
+
+    Returns
+    -------
+    dict[int, int]
+        Population per municipality
+    """
+    return {row.municipality_id: row.value for row in models.Population.objects.filter(year=2022)}
+
+
 LOOKUPS: dict[str, LookupFunctions] = {
-    "installed_ee": LookupFunctions(get_data_for_installed_ee, get_chart_for_installed_ee),
+    "installed_ee": LookupFunctions(get_data_for_installed_ee, get_chart_for_installed_ee, None),
+    "population": LookupFunctions(None, None, get_population),
 }

@@ -92,6 +92,7 @@ profile = "black"
 
 [tool.ruff]
 line-length = 120
+# select = ["ALL"]
 ignore = [
   "ANN101",  # Missing type annotation for `self` in method
   "ANN003",  # Missing type annotation for `**kwargs`
