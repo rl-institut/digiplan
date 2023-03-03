@@ -12,6 +12,9 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - layer switches to map legend
 - legend for choropleths
 
+### Fixed
+- choropleth and schema tests
+
 ## [0.1.0] - 2023-02-10
 ### Added
 - integrated django-oemof app

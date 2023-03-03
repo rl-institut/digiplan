@@ -4,15 +4,15 @@
   "additionalProperties": false,
   "description": "Key values for concerning municipality in comparison with ABW region",
   "properties": {
-    "municipalityValue": {
+    "municipality_value": {
       "description": "Value for Municipality",
       "type": "number"
     },
-    "regionTitle": {
+    "region_title": {
       "description": "Title for region, e.g.: AWB region",
       "type": "string"
     },
-    "regionValue": {
+    "region_value": {
       "description": "Value for Municipality",
       "type": "number"
     },
@@ -28,9 +28,9 @@
   "required": [
     "unit",
     "year",
-    "municipalityValue",
-    "regionTitle",
-    "regionValue"
+    "municipality_value",
+    "region_title",
+    "region_value"
   ],
   "type": "object"
 }
