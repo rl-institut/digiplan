@@ -11,6 +11,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - e-charts for detailed and ghg overview to charts panel
 - layer switches to map legend
 - legend for choropleths
+- CONTRIBUTING.md file
 
 ### Fixed
 - choropleth and schema tests
