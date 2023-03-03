@@ -37,6 +37,9 @@ FILTER_DEFINITION = {}
 REGION_FILTER_LAYERS = ["built_up_areas", "settlements", "hospitals"]
 
 # PARAMETERS
+with open(CAPTION_MAPPING_FILE, "r", encoding="utf-8") as param_file:
+    CAPTION_MAPPING = json.load(param_file)
+
 with open(ENERGY_SETTINGS_PANEL_FILE, "r", encoding="utf-8") as param_file:
     ENERGY_SETTINGS_PANEL = json.load(param_file)
 

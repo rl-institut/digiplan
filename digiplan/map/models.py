@@ -1,11 +1,10 @@
-import json
 from dataclasses import dataclass
 from enum import Enum
 
 from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
 
-from digiplan.map.config.config import CAPTION_MAPPING_FILE
+from digiplan.map.config.config import CAPTION_MAPPING
 
 from .managers import LabelMVTManager, RegionMVTManager, StaticMVTManager
 
@@ -35,10 +34,9 @@ class ModelMappingMixin:
         }
 
         checked_classname = mapping_dict[str(self.__class__.__name__)]
-        with open(CAPTION_MAPPING_FILE, "r", encoding="utf-8") as json_file:
-            captions = json.load(json_file)
-            caption_dict_name = captions["datasets_caption_map"][checked_classname]
-            return captions["captions"][caption_dict_name][attribute]
+
+        caption_dict_name = CAPTION_MAPPING["datasets_caption_map"][checked_classname]
+        return CAPTION_MAPPING["captions"][caption_dict_name][attribute]
 
 
 # REGIONS
