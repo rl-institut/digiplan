@@ -55,10 +55,20 @@ git pull
 ```
 
 ##### Permanent branches
-* production - includes the current stable version
+* main - includes the current stable version
 * develop - includes all current developments
 
-#### 2.1. Create a new (local) branch
+#### 2.1. Activate pre-commit
+Activate [pre-commit](https://pre-commit.com/):
+```bash
+pre-commit install
+```
+
+This will activate multiple linters and error checking tools when you are committing your changes.
+If errors are found in your code, pre-commit will prevent you from committing until you fixed those.
+This will lead to a cleaner codebase for all developers.
+
+#### 2.2. Create a new (local) branch
 Create a new feature branch:
 ```bash
 git checkout -b feature-1314-my-feature
@@ -88,7 +98,7 @@ Avoid long and short descriptive names for branches, 2-4 words are optimal.
 
 Examples of branch names: `feature-42-add-new-ontology-class`, `feature-911-branch-naming-convention`, `hotfix-404-update-api`, `release-v0.10.0`
 
-#### 2.2. Start editing the files
+#### 2.3. Start editing the files
 - Divide your feature into small logical units
 - Start to write the documentation or a docstring
 - Don't rush, have the commit messages in mind
@@ -102,7 +112,7 @@ Check branch status:
 git status
 ```
 
-#### 2.3. Commit your changes
+#### 2.4. Commit your changes
 If the file does not exist on the remote server yet, use:
 ```bash
 git add filename.md
@@ -124,7 +134,7 @@ Write a good `commit message`:
 
 Examples of commit message: `Added function with some method #42` or `Update documentation for commit messages #1`
 
-#### 2.4 Fix your latest commit message
+#### 2.5 Fix your latest commit message
 Do you want to improve your latest commit message? <br>
 Is your latest commit not pushed yet? <br>
 Edit the commit message of your latest commit:
