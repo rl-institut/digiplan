@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('map', '0013_alter_population_value'),
+        ('map', '0014_alter_population_value'),
     ]
 
     operations = [

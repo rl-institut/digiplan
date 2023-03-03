@@ -16,6 +16,9 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Fixed
 - choropleth and schema tests
 
+### Fixed
+- migration conflict
+
 ## [0.1.0] - 2023-02-10
 ### Added
 - integrated django-oemof app
