@@ -1,24 +1,25 @@
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Optional
 
 from django.http import HttpRequest
 
 from digiplan.map.mapset import utils
 
 
+# pylint: disable=R0902
 @dataclass
 class MapSource:
     name: str
     type: str  # noqa: A003
     promote_id: str = "id"
-    tiles: Optional[List[str]] = None
+    tiles: Optional[list[str]] = None
     url: Optional[str] = None
     minzoom: Optional[int] = None
     maxzoom: Optional[int] = None
+    cluster: Optional[bool] = False
 
     def get_source(self, request: HttpRequest) -> dict:
-        """
-        Returns source data/tiles using current host and port from request
+        """Returns source data/tiles using current host and port from request.
 
         Parameters
         ----------
@@ -29,6 +30,11 @@ class MapSource:
         -------
         dict
             Containing source data for map
+
+        Raises
+        ------
+        TypeError
+            if type is not supported as map source type.
         """
         source = {"type": self.type, "promoteId": self.promote_id}
         if self.minzoom:
@@ -39,8 +45,12 @@ class MapSource:
             source["tiles"] = [
                 tile if tile.startswith("http") else f"{request.get_raw_uri()}{tile}" for tile in self.tiles
             ]
-        else:
+        elif self.type == "geojson":
             source["data"] = self.url if self.url.startswith("http") else f"{request.get_raw_uri()}{self.url}"
+            if self.cluster:
+                source["cluster"] = self.cluster
+        else:
+            raise TypeError(f"Unsupported source type '{self.type}'.")
         return source
 
 
@@ -57,6 +67,6 @@ def get_dynamic_sources(layers):
                     name=f"{layer.source}-{mvt_str}",
                     type="vector",
                     tiles=[f"{layer.source}_mvt/{{z}}/{{x}}/{{y}}/?{filter_str}"],
-                )
+                ),
             )
     return sources

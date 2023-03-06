@@ -29,6 +29,7 @@ DEPENDENCY_PARAMETERS_FILE = settings.APPS_DIR.path("static/config/dependency_pa
 MIN_ZOOM = 8
 MAX_ZOOM = 22
 MAX_DISTILLED_ZOOM = 10
+DEFAULT_CLUSTER_ZOOM = 11
 
 Zoom = namedtuple("MinMax", ["min", "max"])
 ZOOM_LEVELS = {

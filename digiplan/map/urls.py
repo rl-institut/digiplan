@@ -4,9 +4,10 @@
 from django.conf import settings
 from django.urls import path
 from django_distill import distill_path
+from djgeojson.views import GeoJSONLayerView
 
 from digiplan.map.config.config import get_tile_coordinates_for_region
-from digiplan.map.mapset import mvt_layers
+from digiplan.map.mapset import mvt_layers, setup
 
 from . import views
 from .mvt import mvt_view_factory
@@ -15,10 +16,14 @@ app_name = "map"
 
 urlpatterns = [
     path("", views.MapGLView.as_view(), name="map"),
-    path("clusters", views.get_clusters, name="clusters"),
     path("choropleth/<str:lookup>/<str:scenario>", views.get_choropleth, name="choropleth"),
     path("visualization", views.get_visualization, name="visualization"),
     path("popup/<str:lookup>/<int:region>", views.get_popup, name="popup"),
+]
+
+urlpatterns += [
+    path(f"clusters/{name}.geojson", GeoJSONLayerView.as_view(model=cluster_layer.model))
+    for name, cluster_layer in setup.STATIC_LAYERS.items()
 ]
 
 urlpatterns += [

@@ -7,7 +7,7 @@ from geojson import Feature, FeatureCollection, Point
 
 from config.settings.base import DATA_DIR
 from digiplan.map.config.config import CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
-from digiplan.map.mapset.layers import StaticLayer
+from digiplan.map.mapset.layers import StaticModelLayer
 from digiplan.map.mapset.setup import LAYERS_DEFINITION
 from digiplan.map.models import (
     Biomass,
@@ -89,12 +89,15 @@ def load_population():
                 continue
 
             entry = Population(
-                year=year, value=value, entry_type=list(series.index.values)[0], municipality=municipality
+                year=year,
+                value=value,
+                entry_type=list(series.index.values)[0],
+                municipality=municipality,
             )
             entry.save()
 
 
-def build_cluster_geojson(cluster_layers: list[StaticLayer] = None):
+def build_cluster_geojson(cluster_layers: list[StaticModelLayer] = None):
     cluster_layers = cluster_layers or LAYERS_DEFINITION
     features = []
     for region_model in REGIONS:

@@ -13,10 +13,11 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - legend for choropleths
 - CONTRIBUTING.md file
 
-### Fixed
-- choropleth and schema tests
+### Changed
+- implementation of clustered layers
 
 ### Fixed
+- choropleth and schema tests
 - migration conflict
 
 ## [0.1.0] - 2023-02-10

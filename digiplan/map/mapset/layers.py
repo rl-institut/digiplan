@@ -29,18 +29,20 @@ class MapLayer:
 
 
 @dataclass
-class StaticLayer:
+class ModelLayer:
     id: str  # noqa: A003
     model: Model.__class__
     type: str  # noqa: A003
     source: str
 
+
+class StaticModelLayer(ModelLayer):
     @staticmethod
-    def min_zoom(distill=False):
+    def min_zoom(*, distill=False):
         return config.MAX_DISTILLED_ZOOM + 1 if not distill and settings.USE_DISTILLED_MVTS else config.MIN_ZOOM
 
     @staticmethod
-    def max_zoom(distill=False):
+    def max_zoom(*, distill=False):
         return config.MAX_ZOOM if not distill else config.MAX_DISTILLED_ZOOM + 1
 
     def get_map_layers(self):
@@ -65,9 +67,51 @@ class StaticLayer:
             )
 
 
-# pylint: disable=R0903
-class MapClusterLayer(MapLayer):
-    pass
+@dataclass
+class ClusterModelLayer(ModelLayer):
+    cluster_source: Optional[str] = None
+    cluster_zoom: Optional[int] = config.DEFAULT_CLUSTER_ZOOM
+
+    def min_zoom(self, *, cluster=False):
+        return config.MIN_ZOOM if cluster else self.cluster_zoom
+
+    def max_zoom(self, *, cluster=False):
+        return self.cluster_zoom if cluster else config.MAX_ZOOM
+
+    def get_map_layers(self):
+        yield MapLayer(
+            id=self.id,
+            type=self.type,
+            source=self.source,
+            source_layer=self.id,
+            minzoom=self.min_zoom(),
+            maxzoom=self.max_zoom(),
+            style=config.LAYER_STYLES[self.id],
+        )
+        yield MapLayer(
+            id=f"{self.id}_unclustered",
+            type=self.type,
+            source=self.cluster_source if self.cluster_source else self.id,
+            minzoom=self.min_zoom(cluster=True),
+            maxzoom=self.max_zoom(cluster=True),
+            style=config.LAYER_STYLES[self.id],
+        )
+        yield MapLayer(
+            id=f"{self.id}_cluster",
+            type="circle",
+            source=self.cluster_source if self.cluster_source else self.id,
+            minzoom=self.min_zoom(cluster=True),
+            maxzoom=self.max_zoom(cluster=True),
+            style=config.LAYER_STYLES[f"{self.id}_cluster"],
+        )
+        yield MapLayer(
+            id=f"{self.id}_cluster_count",
+            type="symbol",
+            source=self.cluster_source if self.cluster_source else self.id,
+            minzoom=self.min_zoom(cluster=True),
+            maxzoom=self.max_zoom(cluster=True),
+            style=config.LAYER_STYLES[f"{self.id}_cluster_count"],
+        )
 
 
 def get_region_layers():
