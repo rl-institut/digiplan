@@ -4,9 +4,9 @@
   "data": {
     "unit": "installed power",
     "year": null,
-    "region_value": 1475497.956,
+    "municipality_value": 31971.535,
     "region_title": "ABW region",
-    "municipality_value": 31971.535
+    "region_value": 1475497.956
   },
   "municipality": null,
   "sources": [ ],

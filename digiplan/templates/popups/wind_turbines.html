@@ -1,0 +1,16 @@
+<div id="js-popup" class="popup">
+    <div class="popup__header">
+      <h1 id="js-popup__title" class="popup__title">{{ title }}</h1>
+      <h2 id="js-popup__municipality" class="popup__municipality">{{ municipality }}</h2>
+    </div>
+    <div id="js-popup__key-values" class="popup__key-values">
+      <span class="key-values__municipality">
+        {% for key, value in data.items %}
+          {% if value %}
+            <span class="key-values__{{ key }}">{{ value }}</span>
+          {% endif %}
+        {% endfor %}
+      </span>
+    </div>
+    <div id="js-popup__chart" class="popup__chart" style="width: 416px; height: 200px;"></div>
+</div>

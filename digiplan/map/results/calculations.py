@@ -99,6 +99,7 @@ def create_data(lookup: str, municipality_id: int) -> dict:
     data["id"] = municipality_id
     data["data"]["region_value"] = LOOKUPS[lookup].data_fct()
     data["data"]["municipality_value"] = LOOKUPS[lookup].data_fct(municipality_id)
+    data["municipality"] = models.Municipality.objects.get(pk=municipality_id)
 
     return data
 
@@ -149,6 +150,30 @@ def get_chart_for_installed_ee(chart: dict, municipality_id: int) -> dict:  # no
     return chart
 
 
+def get_data_for_population(municipality_id: Optional[int] = None):
+    """Calculate population in 2022 (either for municipality or for whole region).
+
+    Parameters
+    ----------
+    municipality_id: Optional[int]
+        If given, population for given municipality are calculated. If not, for whole region.
+
+    Returns
+    -------
+    float
+        Value of population
+    """
+    values = get_population()
+    population = 0.0
+
+    if municipality_id:
+        population = values[municipality_id]
+    else:
+        for pop in values:
+            population += pop
+    return population
+
+
 def get_population() -> dict[int, int]:
     """Calculate population per municipality.
 
@@ -160,7 +185,95 @@ def get_population() -> dict[int, int]:
     return {row.municipality_id: row.value for row in models.Population.objects.filter(year=2022)}
 
 
+def get_data_for_windturbines(municipality_id: Optional[int] = None) -> float:
+    """Calculate number of windturbines (either for municipality or for whole region).
+
+    Parameters
+    ----------
+    municipality_id: Optional[int]
+        If given, number of windturbines for given municipality are calculated. If not, for whole region.
+
+    Returns
+    -------
+    float
+        Sum of windturbines
+    """
+    windturbines = 0.0
+    if municipality_id:
+        res_windturbine = models.WindTurbine.objects.filter(mun_id__exact=municipality_id).aggregate(Sum("unit_count"))[
+            "unit_count__sum"
+        ]
+    else:
+        res_windturbine = models.WindTurbine.objects.aggregate(Sum("unit_count"))["unit_count__sum"]
+    if res_windturbine:
+        windturbines += res_windturbine
+    return windturbines
+
+
+def get_chart_for_wind_turbines(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+    """Get chart for wind turbines.
+
+    Parameters
+    ----------
+    chart: dict
+        Default chart options for wind turbines from JSON
+    municipality_id: int
+        Related municipality
+
+    Returns
+    -------
+    dict
+        Chart data to use in JS
+    """
+    chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
+    return chart
+
+
+def get_data_for_windturbines_square(municipality_id: Optional[int] = None) -> float:
+    """Calculate number of windturbines per km² (either for municipality or for whole region).
+
+    Parameters
+    ----------
+    municipality_id: Optional[int]
+        If given, number of windturbines per km² for given municipality are calculated. If not, for whole region.
+
+    Returns
+    -------
+    float
+        Sum of windturbines per km²
+    """
+    windturbines = get_data_for_windturbines(municipality_id)
+
+    if municipality_id:
+        area = models.Municipality.objects.get(pk=municipality_id).area
+        print(area)
+        if area != 0.0:
+            return windturbines / area
+    return windturbines
+
+
+def get_chart_for_wind_turbines_square(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+    """Get chart for wind turbines per km².
+
+    Parameters
+    ----------
+    chart: dict
+        Default chart options for wind turbines from JSON
+    municipality_id: int
+        Related municipality
+
+    Returns
+    -------
+    dict
+        Chart data to use in JS
+    """
+    chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
+    return chart
+
+
 LOOKUPS: dict[str, LookupFunctions] = {
     "installed_ee": LookupFunctions(get_data_for_installed_ee, get_chart_for_installed_ee, None),
-    "population": LookupFunctions(None, None, get_population),
+    "population": LookupFunctions(get_data_for_population, None, get_population),
+    "wind_turbines": LookupFunctions(get_data_for_windturbines, get_chart_for_wind_turbines, None),
+    "wind_turbines_square": LookupFunctions(get_data_for_windturbines_square, get_chart_for_wind_turbines_square, None),
 }
