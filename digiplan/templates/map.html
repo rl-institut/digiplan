@@ -53,11 +53,19 @@
                 role="button" aria-controls="offcanvasContact">
               <a class="nav-link" href="#">Kontakt</a>
             </li>
-            <li class="top-nav__lang">
-              <select aria-label="Sprache auswählen">
-                <option value="de" selected>DE</option>
-                <option value="en">EN</option>
-              </select>
+
+
+           <li class="top-nav__lang">
+              <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}" />
+                {% get_current_language as LANGUAGE_CODE %}
+                      {% if LANGUAGE_CODE == "de" %}
+                        <button class="btn btn-sm btn-outline-secondary" type="submit" name="language" value="en">English</button>
+                      {% else %}
+                        <button class="btn btn-sm btn-outline-secondary"type="submit" name="language" value="de">Deutsch</button>
+                      {% endif %}
+              </form>
             </li>
           </ul>
         </div>

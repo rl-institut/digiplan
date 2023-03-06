@@ -6,6 +6,7 @@ from django.views import defaults as default_views
 
 urlpatterns = [
     i18n_patterns(
+        path("i18n/", include("django.conf.urls.i18n")),
         path("", include("digiplan.map.urls", namespace="map")),
         path("select2/", include("django_select2.urls")),
         prefix_default_language=False,
