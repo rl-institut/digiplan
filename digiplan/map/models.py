@@ -32,6 +32,10 @@ class Region(models.Model):
 
     layer_type = models.CharField(max_length=12, choices=LayerType.choices, null=False)
 
+    class Meta:
+        verbose_name = _("Region")
+        verbose_name_plural = _("Regions")
+
 
 class Municipality(models.Model):
     geom = models.MultiPolygonField(srid=4326)
@@ -48,6 +52,10 @@ class Municipality(models.Model):
     layer = "vg250_gem"
     mapping = {"id": "id", "geom": "MULTIPOLYGON", "name": "name", "area": "area_km2"}
 
+    class Meta:
+        verbose_name = _("Municipality")
+        verbose_name_plural = _("Municipalities")
+
     def __str__(self):
         return self.name
 
@@ -57,6 +65,10 @@ class Population(models.Model):
     value = models.IntegerField()
     entry_type = models.CharField(max_length=13)
     municipality = models.ForeignKey(Municipality, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _("Population")
+        verbose_name_plural = _("Population")
 
 
 class WindTurbine(models.Model):
@@ -91,6 +103,10 @@ class WindTurbine(models.Model):
         "mun_id": "municipality_id",
     }
 
+    class Meta:
+        verbose_name = _("Wind turbine")
+        verbose_name_plural = _("Wind turbines")
+
     def __str__(self):
         return self.name
 
@@ -123,6 +139,10 @@ class PVroof(models.Model):
         "power_limitation": "power_limitation",
         "mun_id": "municipality_id",
     }
+
+    class Meta:
+        verbose_name = _("Roof-mounted PV")
+        verbose_name_plural = _("Roof-mounted PVs")
 
     def __str__(self):
         return self.name
@@ -157,6 +177,10 @@ class PVground(models.Model):
         "mun_id": "municipality_id",
     }
 
+    class Meta:
+        verbose_name = _("Outdoor PV")
+        verbose_name_plural = _("Outdoor PVs")
+
 
 class Hydro(models.Model):
     geom = models.PointField(srid=4326)
@@ -186,6 +210,10 @@ class Hydro(models.Model):
         "water_origin": "water_origin",
         "mun_id": "municipality_id",
     }
+
+    class Meta:
+        verbose_name = _("Hydro")
+        verbose_name_plural = _("Hydro")
 
 
 class Biomass(models.Model):
@@ -217,6 +245,10 @@ class Biomass(models.Model):
         "mun_id": "municipality_id",
     }
 
+    class Meta:
+        verbose_name = _("Biomass")
+        verbose_name_plural = _("Biomass")
+
 
 class Combustion(models.Model):
     geom = models.PointField(srid=4326)
@@ -246,6 +278,10 @@ class Combustion(models.Model):
         "capacity_net": "capacity_net",
         "mun_id": "municipality_id",
     }
+
+    class Meta:
+        verbose_name = _("Combustion")
+        verbose_name_plural = _("Combustion")
 
 
 RENEWABLES = (WindTurbine, PVroof, PVground, Hydro, Biomass)

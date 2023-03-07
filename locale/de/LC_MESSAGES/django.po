@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-07 11:06+0000\n"
+"POT-Creation-Date: 2023-03-07 14:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,6 +26,37 @@ msgstr "Englisch"
 msgid "German"
 msgstr "Deutsch"
 
+#: digiplan/map/mapset/setup.py:35
+msgid "Renewables"
+msgstr "Erneuerbare Energien"
+
+#: digiplan/map/mapset/setup.py:36 digiplan/map/models.py:106
+msgid "Wind turbine"
+msgstr "Windturbine"
+
+#: digiplan/map/mapset/setup.py:37 digiplan/map/models.py:143
+msgid "Roof-mounted PV"
+msgstr "Aufdach-PV"
+
+#: digiplan/map/mapset/setup.py:38 digiplan/map/models.py:180
+msgid "Outdoor PV"
+msgstr "Freiflächen-PV"
+
+#: digiplan/map/mapset/setup.py:39 digiplan/map/models.py:214
+#: digiplan/map/models.py:215
+msgid "Hydro"
+msgstr "Wasserkraft"
+
+#: digiplan/map/mapset/setup.py:40 digiplan/map/models.py:248
+#: digiplan/map/models.py:249
+msgid "Biomass"
+msgstr "Biomasse"
+
+#: digiplan/map/mapset/setup.py:41 digiplan/map/models.py:282
+#: digiplan/map/models.py:283
+msgid "Combustion"
+msgstr "Fossiles Kraftwerk"
+
 #: digiplan/map/models.py:28
 msgid "Country"
 msgstr "Land"
@@ -38,9 +69,39 @@ msgstr "Bundesland"
 msgid "District"
 msgstr "Kreis"
 
-#: digiplan/map/models.py:31 digiplan/templates/popups/default.html:6
+#: digiplan/map/models.py:31 digiplan/map/models.py:56
+#: digiplan/templates/popups/default.html:6
 msgid "Municipality"
 msgstr "Gemeinde"
+
+#: digiplan/map/models.py:36
+msgid "Region"
+msgstr "Region"
+
+#: digiplan/map/models.py:37
+msgid "Regions"
+msgstr "Regionen"
+
+#: digiplan/map/models.py:57
+msgid "Municipalities"
+msgstr "Gemeinden"
+
+#: digiplan/map/models.py:70 digiplan/map/models.py:71
+#: digiplan/templates/components/panel_3_results.html:17
+msgid "Population"
+msgstr "Bevölkerung"
+
+#: digiplan/map/models.py:107
+msgid "Wind turbines"
+msgstr "Windturbine"
+
+#: digiplan/map/models.py:144
+msgid "Roof-mounted PVs"
+msgstr "Aufdach-PVs"
+
+#: digiplan/map/models.py:181
+msgid "Outdoor PVs"
+msgstr "Freiflächen-PVs"
 
 #: digiplan/map/results/visualizations.py:10
 msgid "Total Costs"
@@ -308,6 +369,7 @@ msgid "Region as of today"
 msgstr "Region heute"
 
 #: digiplan/templates/components/map.html:17
+#: digiplan/templates/components/panel_2_settings.html:9
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -353,9 +415,23 @@ msgstr "Situation heute"
 msgid "Planning Region"
 msgstr "Planungsregion"
 
-#: digiplan/templates/components/panel_3_results.html:17
-msgid "Population"
-msgstr "Einwohner:innen"
+#: digiplan/templates/components/panel_2_settings.html:18
+#: digiplan/templates/components/panel_3_results.html:55
+#: digiplan/templates/components/results_view.html:33
+msgid "Electricity"
+msgstr "Strom"
+
+#: digiplan/templates/components/panel_2_settings.html:26
+#: digiplan/templates/components/panel_3_results.html:63
+#: digiplan/templates/components/results_view.html:34
+msgid "Heat"
+msgstr "Wärme"
+
+#: digiplan/templates/components/panel_2_settings.html:34
+#: digiplan/templates/components/panel_3_results.html:71
+#: digiplan/templates/components/results_view.html:35
+msgid "Transportation"
+msgstr "Verkehr"
 
 #: digiplan/templates/components/panel_3_results.html:18
 msgid "Population density"
@@ -369,21 +445,6 @@ msgstr "Ansicht"
 #: digiplan/templates/components/results_view.html:5
 msgid "General"
 msgstr "Allgemein"
-
-#: digiplan/templates/components/panel_3_results.html:55
-#: digiplan/templates/components/results_view.html:33
-msgid "Electricity"
-msgstr "Strom"
-
-#: digiplan/templates/components/panel_3_results.html:63
-#: digiplan/templates/components/results_view.html:34
-msgid "Heat"
-msgstr "Wärme"
-
-#: digiplan/templates/components/panel_3_results.html:71
-#: digiplan/templates/components/results_view.html:35
-msgid "Transportation"
-msgstr "Verkehr"
 
 #: digiplan/templates/components/results_view.html:9
 msgid "Overview"
@@ -403,7 +464,7 @@ msgid "Greenhouse gas"
 msgstr "Treibhausgas"
 
 #: digiplan/templates/components/results_view.html:22
-msgid "Car Trip"
+msgid "Car trip"
 msgstr "Autofahrt"
 
 #: digiplan/templates/components/toggle_view.html:10
