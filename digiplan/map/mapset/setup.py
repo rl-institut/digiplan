@@ -1,3 +1,5 @@
+"""Actual map setup is done here."""
+
 from dataclasses import dataclass
 from typing import Optional
 
@@ -8,7 +10,7 @@ from digiplan.map.config import config
 from digiplan.map.mapset import layers, sources, utils
 
 STATIC_LAYERS = {
-    "wind": layers.ClusterModelLayer(id="wind", model=models.WindTurbine, type="circle", source="static"),
+    "wind": layers.ClusterModelLayer(id="wind", model=models.WindTurbine, type="circle", source="wind"),
     "pvroof": layers.StaticModelLayer(id="pvroof", model=models.PVroof, type="circle", source="static"),
     "pvground": layers.StaticModelLayer(id="pvground", model=models.PVground, type="circle", source="static"),
     "hydro": layers.StaticModelLayer(id="hydro", model=models.Hydro, type="circle", source="static"),
@@ -19,12 +21,22 @@ STATIC_LAYERS = {
 
 @dataclass
 class LegendLayer:
+    """Define a legend item with color which can activate a layer from model in map."""
+
     name: str
     description: str
     layer: layers.ModelLayer
     color: Optional[str] = None
 
-    def get_color(self):
+    def get_color(self) -> str:
+        """
+        Return color to show on legend. If color is not set, color is tried to be read from layer style.
+
+        Returns
+        -------
+        str
+            Color string (name/rgb/hex/etc.) to be used on legend in frontend.
+        """
         if self.color:
             return self.color
         return utils.get_color(self.layer.id)
@@ -40,9 +52,7 @@ LEGEND = {
         LegendLayer("Fossile Kraftwerke", "", STATIC_LAYERS["combustion"]),
     ],
 }
-LAYERS_DEFINITION = []
 
-DYNAMIC_LAYERS = layers.get_dynamic_layers(LAYERS_DEFINITION)
 REGION_LAYERS = layers.get_region_layers()
 RESULT_LAYERS = [
     layers.MapLayer(
@@ -56,7 +66,7 @@ RESULT_LAYERS = [
 
 
 # Order is important! Last items are shown on top!
-ALL_LAYERS = REGION_LAYERS + RESULT_LAYERS + DYNAMIC_LAYERS
+ALL_LAYERS = REGION_LAYERS + RESULT_LAYERS
 for static_layer in STATIC_LAYERS.values():
     ALL_LAYERS.extend(static_layer.get_map_layers())
 
@@ -90,12 +100,11 @@ SOURCES += [
         "satellite",
         type="raster",
         tiles=[
-            f"https://api.maptiler.com/tiles/satellite-v2/{{z}}/{{x}}/{{y}}.jpg?key={settings.TILING_SERVICE_TOKEN}"
+            f"https://api.maptiler.com/tiles/satellite-v2/{{z}}/{{x}}/{{y}}.jpg?key={settings.TILING_SERVICE_TOKEN}",
         ],
     ),
-    sources.MapSource("wind", type="geojson", url="clusters/wind.geojson", cluster=True),
+    sources.ClusterMapSource("wind", type="geojson", url="clusters/wind.geojson"),
     sources.MapSource(name="static", type="vector", tiles=["static_mvt/{z}/{x}/{y}/"]),
     sources.MapSource(name="static_distilled", type="vector", tiles=["static/mvts/{z}/{x}/{y}/static.mvt"]),
     sources.MapSource(name="results", type="vector", tiles=["results_mvt/{z}/{x}/{y}/"]),
-    *sources.get_dynamic_sources(LAYERS_DEFINITION),
 ]

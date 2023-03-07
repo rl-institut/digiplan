@@ -1,14 +1,21 @@
+"""Defines sources in backend to use with maplibre in frontend."""
+
+from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 
-from django.http import HttpRequest
+from digiplan.map.config import config
 
-from digiplan.map.mapset import utils
+if TYPE_CHECKING:
+    from django.http import HttpRequest
 
 
 # pylint: disable=R0902
 @dataclass
 class MapSource:
+    """Default map source to be used in maplibre."""
+
     name: str
     type: str  # noqa: A003
     promote_id: str = "id"
@@ -16,10 +23,10 @@ class MapSource:
     url: Optional[str] = None
     minzoom: Optional[int] = None
     maxzoom: Optional[int] = None
-    cluster: Optional[bool] = False
 
     def get_source(self, request: HttpRequest) -> dict:
-        """Returns source data/tiles using current host and port from request.
+        """
+        Return source data/tiles using current host and port from request.
 
         Parameters
         ----------
@@ -47,26 +54,32 @@ class MapSource:
             ]
         elif self.type == "geojson":
             source["data"] = self.url if self.url.startswith("http") else f"{request.get_raw_uri()}{self.url}"
-            if self.cluster:
-                source["cluster"] = self.cluster
         else:
             raise TypeError(f"Unsupported source type '{self.type}'.")
         return source
 
 
-def get_dynamic_sources(layers):
-    sources = []
-    for layer in layers:
-        if not hasattr(layer.model, "setup"):
-            continue
-        for combination in utils.get_layer_setups(layer):
-            mvt_str = "-".join(combination)
-            filter_str = "&".join(map(lambda x: f"setup__{x}", combination))  # noqa: C417
-            sources.append(
-                MapSource(
-                    name=f"{layer.source}-{mvt_str}",
-                    type="vector",
-                    tiles=[f"{layer.source}_mvt/{{z}}/{{x}}/{{y}}/?{filter_str}"],
-                ),
-            )
-    return sources
+@dataclass
+class ClusterMapSource(MapSource):
+    """Map source for clustered layers."""
+
+    cluster_max_zoom: int = config.DEFAULT_CLUSTER_ZOOM
+
+    def get_source(self, request: HttpRequest) -> dict:
+        """
+        Return source data for clustering.
+
+        Parameters
+        ----------
+        request: HttpRequest
+            Django request holding host and port
+
+        Returns
+        -------
+        dict
+            Containing cluster source data for map
+        """
+        source = super().get_source(request)
+        source["cluster"] = True
+        source["clusterMaxZoom"] = self.cluster_max_zoom
+        return source
