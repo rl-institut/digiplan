@@ -25,10 +25,10 @@ class Region(models.Model):
     """Base class for all regions - works as connector to other models"""
 
     class LayerType(models.TextChoices):
-        COUNTRY = "country", _("Land")
-        STATE = "state", _("Bundesland")
-        DISTRICT = "district", _("Kreis")
-        MUNICIPALITY = "municipality", _("Gemeinde")
+        COUNTRY = "country", _("Country")
+        STATE = "state", _("State")
+        DISTRICT = "district", _("District")
+        MUNICIPALITY = "municipality", _("Municipality")
 
     layer_type = models.CharField(max_length=12, choices=LayerType.choices, null=False)
 
