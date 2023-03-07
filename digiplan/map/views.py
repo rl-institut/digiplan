@@ -5,7 +5,7 @@ As map app is SPA, this module contains main view and various API points.
 import json
 
 from django.conf import settings
-from django.http import HttpRequest, JsonResponse
+from django.http import HttpRequest, HttpResponseRedirect, JsonResponse
 from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import render_to_string
 from django.views.generic import TemplateView
@@ -68,6 +68,10 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         context["store_cold_init"] = config.STORE_COLD_INIT
 
         return context
+
+    def post(self, request):
+        # request.POST is QueryDict of all states of sliders and Textfields (e.g. {'s_w_1' : ['30']})
+        return HttpResponseRedirect("/")
 
 
 def get_popup(request: HttpRequest, lookup: str, region: int) -> JsonResponse:  # noqa: ARG001
