@@ -104,6 +104,13 @@ def create_data(lookup: str, municipality_id: int) -> dict:
     return data
 
 
+def calculate_square_for_value(value: int, municipality_id: int) -> float:
+    area = models.Municipality.objects.get(pk=municipality_id).area
+    if area != 0.0:
+        return round(value / area, 2)
+    return value
+
+
 def get_data_for_installed_ee(municipality_id: Optional[int] = None) -> float:
     """Calculate installed renewables (either for municipality or for whole region).
 
@@ -119,7 +126,7 @@ def get_data_for_installed_ee(municipality_id: Optional[int] = None) -> float:
     """
     installed_ee = 0.0
     for renewable in models.RENEWABLES:
-        if municipality_id:
+        if municipality_id is not None:
             res_installed_ee = renewable.objects.filter(mun_id__exact=municipality_id).aggregate(Sum("capacity_net"))[
                 "capacity_net__sum"
             ]
@@ -150,7 +157,7 @@ def get_chart_for_installed_ee(chart: dict, municipality_id: int) -> dict:  # no
     return chart
 
 
-def get_data_for_population(municipality_id: Optional[int] = None):
+def get_data_for_population(municipality_id: Optional[int] = None) -> int:
     """Calculate population in 2022 (either for municipality or for whole region).
 
     Parameters
@@ -160,14 +167,13 @@ def get_data_for_population(municipality_id: Optional[int] = None):
 
     Returns
     -------
-    float
+    int
         Value of population
     """
     values = get_population()
-    print(values)
     population = 0.0
 
-    if municipality_id:
+    if municipality_id is not None:
         population = values[municipality_id]
     else:
         for index in values:
@@ -205,6 +211,59 @@ def get_population() -> dict[int, int]:
     return {row.municipality_id: row.value for row in models.Population.objects.filter(year=2022)}
 
 
+def get_data_for_population_square(municipality_id: Optional[int] = None) -> float:
+    """Calculate population in 2022 per km² (either for municipality or for whole region).
+
+    Parameters
+    ----------
+    municipality_id: Optional[int]
+        If given, population per km² for given municipality are calculated. If not, for whole region.
+
+    Returns
+    -------
+    float
+        Value of population
+    """
+    population = get_data_for_population(municipality_id)
+
+    if municipality_id is not None:
+        population = calculate_square_for_value(population, municipality_id)
+    return population
+
+
+def get_chart_for_population_square(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+    """Get chart for population density for the given municipality in different years.
+
+    Parameters
+    ----------
+    chart: dict
+        Default chart options for population density from JSON
+    municipality_id: int
+        Related municipality
+
+    Returns
+    -------
+    dict
+        Chart data to use in JS
+    """
+    chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
+    return chart
+
+
+def get_population_square() -> dict[int, int]:
+    """Calculate population per municipality.
+
+    Returns
+    -------
+    dict[int, int]
+        Population per municipality
+    """
+    density = get_population()
+    for index in density:
+        density[index] = calculate_square_for_value(density[index], index)
+    return density
+
+
 def get_data_for_windturbines(municipality_id: Optional[int] = None) -> float:
     """Calculate number of windturbines (either for municipality or for whole region).
 
@@ -219,7 +278,7 @@ def get_data_for_windturbines(municipality_id: Optional[int] = None) -> float:
         Sum of windturbines
     """
     windturbines = 0.0
-    if municipality_id:
+    if municipality_id is not None:
         res_windturbine = models.WindTurbine.objects.filter(mun_id__exact=municipality_id).aggregate(Sum("unit_count"))[
             "unit_count__sum"
         ]
@@ -264,11 +323,8 @@ def get_data_for_windturbines_square(municipality_id: Optional[int] = None) -> f
     """
     windturbines = get_data_for_windturbines(municipality_id)
 
-    if municipality_id:
-        area = models.Municipality.objects.get(pk=municipality_id).area
-        print(area)
-        if area != 0.0:
-            return windturbines / area
+    if municipality_id is not None:
+        windturbines = calculate_square_for_value(windturbines, municipality_id)
     return windturbines
 
 
@@ -294,6 +350,9 @@ def get_chart_for_wind_turbines_square(chart: dict, municipality_id: int) -> dic
 LOOKUPS: dict[str, LookupFunctions] = {
     "installed_ee": LookupFunctions(get_data_for_installed_ee, get_chart_for_installed_ee, None),
     "population": LookupFunctions(get_data_for_population, get_chart_for_population, get_population),
+    "population_density": LookupFunctions(
+        get_data_for_population_square, get_chart_for_population_square, get_population_square
+    ),
     "wind_turbines": LookupFunctions(get_data_for_windturbines, get_chart_for_wind_turbines, None),
     "wind_turbines_square": LookupFunctions(get_data_for_windturbines_square, get_chart_for_wind_turbines_square, None),
 }

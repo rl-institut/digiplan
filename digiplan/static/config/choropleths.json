@@ -3,6 +3,10 @@
     "color_palette": "YlGnBu",
     "num_colors": 6
   },
+  "population_density": {
+    "color_palette": "YlGnBu",
+    "num_colors": 6
+  },
   "re_power": {
     "color_palette": "YlGnBu",
     "num_colors": 6
