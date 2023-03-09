@@ -164,14 +164,34 @@ def get_data_for_population(municipality_id: Optional[int] = None):
         Value of population
     """
     values = get_population()
+    print(values)
     population = 0.0
 
     if municipality_id:
         population = values[municipality_id]
     else:
-        for pop in values:
-            population += pop
+        for index in values:
+            population += values[index]
     return population
+
+
+def get_chart_for_population(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+    """Get chart for population per municipality in different years.
+
+    Parameters
+    ----------
+    chart: dict
+        Default chart options for population from JSON
+    municipality_id: int
+        Related municipality
+
+    Returns
+    -------
+    dict
+        Chart data to use in JS
+    """
+    chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
+    return chart
 
 
 def get_population() -> dict[int, int]:
@@ -273,7 +293,7 @@ def get_chart_for_wind_turbines_square(chart: dict, municipality_id: int) -> dic
 
 LOOKUPS: dict[str, LookupFunctions] = {
     "installed_ee": LookupFunctions(get_data_for_installed_ee, get_chart_for_installed_ee, None),
-    "population": LookupFunctions(get_data_for_population, None, get_population),
+    "population": LookupFunctions(get_data_for_population, get_chart_for_population, get_population),
     "wind_turbines": LookupFunctions(get_data_for_windturbines, get_chart_for_wind_turbines, None),
     "wind_turbines_square": LookupFunctions(get_data_for_windturbines_square, get_chart_for_wind_turbines_square, None),
 }
