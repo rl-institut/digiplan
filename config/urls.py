@@ -9,7 +9,6 @@ urlpatterns = [
         path("i18n/", include("django.conf.urls.i18n")),
         path("", include("digiplan.map.urls", namespace="map")),
         path("select2/", include("django_select2.urls")),
-        prefix_default_language=False,
     ),
     path("oemof/", include("django_oemof.urls")),
     path("map/", include("django_mapengine.urls")),
