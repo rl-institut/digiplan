@@ -7,7 +7,6 @@ from django.conf import settings
 from django_mapengine import layers, mvt, sources, utils
 
 from digiplan.map import models
-from digiplan.map.config import config
 
 STATIC_LAYERS = {
     "wind": layers.ClusterModelLayer(id="wind", model=models.WindTurbine, type="circle", source="wind"),
@@ -60,7 +59,7 @@ RESULT_LAYERS = [
         type="fill",
         source="results",
         source_layer="results",
-        style=config.LAYER_STYLES["results"],
+        style=settings.MAP_ENGINE_LAYER_STYLES["results"],
     ),
 ]
 
@@ -74,25 +73,25 @@ LAYERS_AT_STARTUP = [layer.id for layer in REGION_LAYERS]
 
 POPUPS = ["results"]
 
-if settings.USE_DISTILLED_MVTS:
+if settings.MAP_ENGINE_USE_DISTILLED_MVTS:
     SOURCES = [
         sources.MapSource(name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"])
-        for region in config.REGIONS
-        if config.ZOOM_LEVELS[region].min > config.MAX_DISTILLED_ZOOM
+        for region in settings.MAP_ENGINE_REGIONS
+        if settings.MAP_ENGINE_ZOOM_LEVELS[region].min > settings.MAP_ENGINE_MAX_DISTILLED_ZOOM
     ] + [
         sources.MapSource(
             name=region,
             type="vector",
             tiles=[f"static/mvts/{{z}}/{{x}}/{{y}}/{region}.mvt"],
-            maxzoom=config.MAX_DISTILLED_ZOOM + 1,
+            maxzoom=settings.MAP_ENGINE_MAX_DISTILLED_ZOOM + 1,
         )
-        for region in config.REGIONS
-        if config.ZOOM_LEVELS[region].min < config.MAX_DISTILLED_ZOOM
+        for region in settings.MAP_ENGINE_REGIONS
+        if settings.MAP_ENGINE_ZOOM_LEVELS[region].min < settings.MAP_ENGINE_MAX_DISTILLED_ZOOM
     ]
 else:
     SOURCES = [
         sources.MapSource(name=region, type="vector", tiles=[f"{region}_mvt/{{z}}/{{x}}/{{y}}/"])
-        for region in config.REGIONS
+        for region in settings.MAP_ENGINE_REGIONS
     ]
 
 SOURCES += [
@@ -100,7 +99,8 @@ SOURCES += [
         "satellite",
         type="raster",
         tiles=[
-            f"https://api.maptiler.com/tiles/satellite-v2/{{z}}/{{x}}/{{y}}.jpg?key={settings.TILING_SERVICE_TOKEN}",
+            "https://api.maptiler.com/tiles/satellite-v2/"
+            f"{{z}}/{{x}}/{{y}}.jpg?key={settings.MAP_ENGINE_TILING_SERVICE_TOKEN}",
         ],
     ),
     sources.ClusterMapSource("wind", type="geojson", url="clusters/wind.geojson"),

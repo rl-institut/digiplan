@@ -14,7 +14,7 @@ from django.forms import (
 from django.utils.safestring import mark_safe
 from django_select2.forms import Select2MultipleWidget
 
-from . import models, setup
+from . import map_config, models
 from .widgets import BoxWidget, SwitchWidget, TitleWidget
 
 
@@ -41,7 +41,7 @@ class StaticLayerForm(TemplateForm):
     )
     counter = count()
 
-    def __init__(self, layer: setup.LegendLayer, *args, **kwargs):
+    def __init__(self, layer: map_config.LegendLayer, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.layer = layer
         self.fields["switch"].widget.attrs["id"] = layer.layer.id

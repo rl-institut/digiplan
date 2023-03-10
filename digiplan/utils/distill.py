@@ -1,10 +1,10 @@
 from collections import defaultdict
 
-from digiplan.map.config import config
+from django_mapengine import distill
 
 
 def check_distill_coordinates():
-    tiles = list(config.get_tile_coordinates_for_region("static"))
+    tiles = list(distill.get_coordinates_for_distilling("static"))
     coordinates = defaultdict(lambda: {"x": [None, None], "y": [None, None]})
     for tile in tiles:
         z = tile[2]
