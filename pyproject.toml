@@ -41,6 +41,7 @@ django-select2 = "^7.7.1"
 # Custom apps
 # ------------------------------------------------------------------------------
 django-oemof = {git = "https://github.com/rl-institut/django-oemof.git"}
+django-mapengine = {git = "https://github.com/rl-institut/django-mapengine.git"}
 colorbrewer = {git = "https://github.com/henhuy/colorbrewer-python.git"}
 geojson = "^3.0.1"
 

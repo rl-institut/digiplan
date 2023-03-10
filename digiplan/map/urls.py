@@ -4,13 +4,13 @@
 from django.conf import settings
 from django.urls import path
 from django_distill import distill_path
+from django_mapengine import mvt
 from djgeojson.views import GeoJSONLayerView
 
+from digiplan.map import setup
 from digiplan.map.config.config import get_tile_coordinates_for_region
-from digiplan.map.mapset import mvt_layers, setup
 
 from . import views
-from .mvt import mvt_view_factory
 
 app_name = "map"
 
@@ -27,8 +27,8 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-    path(f"{name}_mvt/<int:z>/<int:x>/<int:y>/", mvt_view_factory(name, layers))
-    for name, layers in mvt_layers.MVT_LAYERS.items()
+    path(f"{name}_mvt/<int:z>/<int:x>/<int:y>/", mvt.mvt_view_factory(name, layers))
+    for name, layers in setup.MVT_LAYERS.items()
 ]
 
 
@@ -54,10 +54,10 @@ if settings.DISTILL:
     urlpatterns += [
         distill_path(
             f"<int:z>/<int:x>/<int:y>/{name}.mvt",
-            mvt_view_factory(name, layers),
+            mvt.mvt_view_factory(name, layers),
             name=name,
             distill_func=get_all_statics_for_state_lod,
             distill_status_codes=(200, 204, 400),
         )
-        for name, layers in mvt_layers.DISTILL_MVT_LAYERS.items()
+        for name, layers in setup.DISTILL_MVT_LAYERS.items()
     ]

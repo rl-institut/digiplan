@@ -4,10 +4,10 @@ from dataclasses import dataclass
 from typing import Optional
 
 from django.conf import settings
+from django_mapengine import layers, mvt, sources, utils
 
 from digiplan.map import models
 from digiplan.map.config import config
-from digiplan.map.mapset import layers, sources, utils
 
 STATIC_LAYERS = {
     "wind": layers.ClusterModelLayer(id="wind", model=models.WindTurbine, type="circle", source="wind"),
@@ -108,3 +108,27 @@ SOURCES += [
     sources.MapSource(name="static_distilled", type="vector", tiles=["static/mvts/{z}/{x}/{y}/static.mvt"]),
     sources.MapSource(name="results", type="vector", tiles=["results_mvt/{z}/{x}/{y}/"]),
 ]
+
+REGION_MVT_LAYERS = {
+    "municipality": [
+        mvt.MVTLayer("municipality", models.Municipality.vector_tiles),
+        mvt.MVTLayer("municipalitylabel", models.Municipality.label_tiles),
+    ],
+}
+
+STATIC_MVT_LAYERS = {
+    "static": [
+        mvt.MVTLayer("wind", models.WindTurbine.vector_tiles),
+        mvt.MVTLayer("pvroof", models.PVroof.vector_tiles),
+        mvt.MVTLayer("pvground", models.PVground.vector_tiles),
+        mvt.MVTLayer("hydro", models.Hydro.vector_tiles),
+        mvt.MVTLayer("biomass", models.Biomass.vector_tiles),
+        mvt.MVTLayer("combustion", models.Combustion.vector_tiles),
+    ],
+    "results": [mvt.MVTLayer("results", models.Municipality.vector_tiles)],
+}
+
+DYNAMIC_MVT_LAYERS = {}
+
+MVT_LAYERS = {**REGION_MVT_LAYERS, **STATIC_MVT_LAYERS, **DYNAMIC_MVT_LAYERS}
+DISTILL_MVT_LAYERS = {**REGION_MVT_LAYERS, **STATIC_MVT_LAYERS}

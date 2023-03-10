@@ -5,11 +5,11 @@ import pathlib
 from collections import namedtuple
 
 from django.conf import settings
+from django_mapengine import choropleth
 from range_key_dict import RangeKeyDict
 
 from config.settings.base import APPS_DIR
 from digiplan import __version__
-from digiplan.map.mapset import choropleth
 
 # DIRECTORIES
 MAP_DIR = APPS_DIR.path("map")

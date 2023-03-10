@@ -15,8 +15,7 @@ from django.views.generic import TemplateView
 from digiplan.map.config import config
 from digiplan.map.results import core
 
-from .forms import PanelForm, StaticLayerForm
-from .mapset import setup
+from . import forms, setup
 from .results import calculations
 
 
@@ -35,11 +34,11 @@ class MapGLView(TemplateView):
         "layers_at_startup": setup.LAYERS_AT_STARTUP,
         "map_popups": setup.POPUPS,
         "area_switches": {
-            category: [StaticLayerForm(layer) for layer in layers] for category, layers in setup.LEGEND.items()
+            category: [forms.StaticLayerForm(layer) for layer in layers] for category, layers in setup.LEGEND.items()
         },
-        "energy_settings_panel": PanelForm(config.ENERGY_SETTINGS_PANEL),
-        "heat_settings_panel": PanelForm(config.HEAT_SETTINGS_PANEL),
-        "traffic_settings_panel": PanelForm(config.TRAFFIC_SETTINGS_PANEL),
+        "energy_settings_panel": forms.PanelForm(config.ENERGY_SETTINGS_PANEL),
+        "heat_settings_panel": forms.PanelForm(config.HEAT_SETTINGS_PANEL),
+        "traffic_settings_panel": forms.PanelForm(config.TRAFFIC_SETTINGS_PANEL),
         "use_distilled_mvts": settings.USE_DISTILLED_MVTS,
         "store_hot_init": config.STORE_HOT_INIT,
         "zoom_levels": config.ZOOM_LEVELS,

@@ -14,8 +14,7 @@ from django.forms import (
 from django.utils.safestring import mark_safe
 from django_select2.forms import Select2MultipleWidget
 
-from . import models
-from .mapset import setup
+from . import models, setup
 from .widgets import BoxWidget, SwitchWidget, TitleWidget
 
 
