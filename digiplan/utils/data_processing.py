@@ -1,14 +1,9 @@
-import json
 import math
 import os
 
 import pandas
-from geojson import Feature, FeatureCollection, Point
 
 from config.settings.base import DATA_DIR
-from digiplan.map.config.config import CLUSTER_GEOJSON_FILE, ZOOM_LEVELS
-from digiplan.map.mapset.layers import StaticModelLayer
-from digiplan.map.mapset.setup import LAYERS_DEFINITION
 from digiplan.map.models import (
     Biomass,
     Combustion,
@@ -95,27 +90,6 @@ def load_population():
                 municipality=municipality,
             )
             entry.save()
-
-
-def build_cluster_geojson(cluster_layers: list[StaticModelLayer] = None):
-    cluster_layers = cluster_layers or LAYERS_DEFINITION
-    features = []
-    for region_model in REGIONS:
-        region_name = region_model.__name__.lower()
-        zoom_level = ZOOM_LEVELS[region_name].max
-        for region in region_model.objects.all():
-            point = Point(region.geom.point_on_surface.coords)
-            properties = {"zoom_level": zoom_level}
-            for cluster_layer in cluster_layers:
-                if not hasattr(cluster_layer, "clustered") or not cluster_layer.clustered:
-                    continue
-                cluster_count = len(cluster_layer.model.objects.filter(geom__within=region.geom))
-                properties[cluster_layer.source] = cluster_count
-            feature = Feature(geometry=point, properties=properties)
-            features.append(feature)
-    fc = FeatureCollection(features)
-    with open(CLUSTER_GEOJSON_FILE, "w", encoding="utf-8") as geojson_file:
-        json.dump(fc, geojson_file)
 
 
 def empty_data(models=None):
