@@ -19,6 +19,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Fixed
 - choropleth and schema tests
 - migration conflict
+- data processing script
 
 ## [0.1.0] - 2023-02-10
 ### Added
