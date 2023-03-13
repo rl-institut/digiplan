@@ -21,7 +21,7 @@ DEPENDENCY_PARAMETERS_FILE = settings.APPS_DIR.path("static/config/dependency_pa
 
 # FILTERS
 FILTER_DEFINITION = {}
-REGION_FILTER_LAYERS = ["built_up_areas", "settlements", "hospitals"]
+REGION_FILTER_LAYERS = []
 
 # PARAMETERS
 with pathlib.Path(ENERGY_SETTINGS_PANEL_FILE).open("r", encoding="utf-8") as param_file:
