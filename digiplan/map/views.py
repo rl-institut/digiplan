@@ -14,6 +14,7 @@ from django_mapengine import views
 from digiplan.map import config
 from digiplan.map.results import core
 
+from .forms import create_formset
 from . import forms, map_config
 from .results import calculations
 
@@ -30,10 +31,10 @@ class MapGLView(TemplateView, views.MapEngineMixin):
             category: [forms.StaticLayerForm(layer) for layer in layers]
             for category, layers in map_config.LEGEND.items()
         },
-        "energy_settings_panel": forms.PanelForm(config.ENERGY_SETTINGS_PANEL),
-        "heat_settings_panel": forms.PanelForm(config.HEAT_SETTINGS_PANEL),
-        "traffic_settings_panel": forms.PanelForm(config.TRAFFIC_SETTINGS_PANEL),
-        "use_distilled_mvts": settings.MAP_ENGINE_USE_DISTILLED_MVTS,
+        "panel_formset": create_formset(
+            [config.ENERGY_SETTINGS_PANEL, config.HEAT_SETTINGS_PANEL, config.TRAFFIC_SETTINGS_PANEL]
+        ),
+        "use_distilled_mvts": settings.USE_DISTILLED_MVTS,
         "store_hot_init": config.STORE_HOT_INIT,
     }
 

@@ -9,6 +9,7 @@ from django.forms import (
     MultipleChoiceField,
     MultiValueField,
     TextInput,
+    formset_factory,
     renderers,
 )
 from django.utils.safestring import mark_safe
@@ -85,9 +86,7 @@ class PanelForm(TemplateForm):
     template_name = "forms/panel.html"
     sidepanels = {}
 
-    def __init__(self, parameters):
-        super().__init__()
-
+    def instantiate_form(self, parameters):
         self.fields = {item["name"]: item["field"] for item in self.generate_fields(parameters)}
 
     def generate_fields(self, parameters):
@@ -133,3 +132,12 @@ class PanelForm(TemplateForm):
                 yield {"name": name, "field": field}
             else:
                 raise ValueError(f"Unknown parameter type '{item['type']}'")
+
+
+# !"initial"
+def create_formset(panels: list):
+    PanelFormSet = formset_factory(PanelForm, extra=len(panels))
+    formset = PanelFormSet()
+    for form, panel in zip(formset, panels):
+        form.instantiate_form(panel)
+    return formset
