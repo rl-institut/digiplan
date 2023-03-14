@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-07 14:08+0000\n"
+"POT-Creation-Date: 2023-03-14 07:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,34 +26,34 @@ msgstr "Englisch"
 msgid "German"
 msgstr "Deutsch"
 
-#: digiplan/map/mapset/setup.py:35
+#: digiplan/map/mapset/setup.py:47
 msgid "Renewables"
 msgstr "Erneuerbare Energien"
 
-#: digiplan/map/mapset/setup.py:36 digiplan/map/models.py:106
+#: digiplan/map/mapset/setup.py:48 digiplan/map/models.py:107
 msgid "Wind turbine"
 msgstr "Windturbine"
 
-#: digiplan/map/mapset/setup.py:37 digiplan/map/models.py:143
+#: digiplan/map/mapset/setup.py:49 digiplan/map/models.py:144
 msgid "Roof-mounted PV"
 msgstr "Aufdach-PV"
 
-#: digiplan/map/mapset/setup.py:38 digiplan/map/models.py:180
+#: digiplan/map/mapset/setup.py:50 digiplan/map/models.py:181
 msgid "Outdoor PV"
 msgstr "Freiflächen-PV"
 
-#: digiplan/map/mapset/setup.py:39 digiplan/map/models.py:214
-#: digiplan/map/models.py:215
+#: digiplan/map/mapset/setup.py:51 digiplan/map/models.py:215
+#: digiplan/map/models.py:216
 msgid "Hydro"
 msgstr "Wasserkraft"
 
-#: digiplan/map/mapset/setup.py:40 digiplan/map/models.py:248
-#: digiplan/map/models.py:249
+#: digiplan/map/mapset/setup.py:52 digiplan/map/models.py:249
+#: digiplan/map/models.py:250
 msgid "Biomass"
 msgstr "Biomasse"
 
-#: digiplan/map/mapset/setup.py:41 digiplan/map/models.py:282
-#: digiplan/map/models.py:283
+#: digiplan/map/mapset/setup.py:53 digiplan/map/models.py:283
+#: digiplan/map/models.py:284
 msgid "Combustion"
 msgstr "Fossiles Kraftwerk"
 
@@ -91,15 +91,15 @@ msgstr "Gemeinden"
 msgid "Population"
 msgstr "Bevölkerung"
 
-#: digiplan/map/models.py:107
+#: digiplan/map/models.py:108
 msgid "Wind turbines"
 msgstr "Windturbine"
 
-#: digiplan/map/models.py:144
+#: digiplan/map/models.py:145
 msgid "Roof-mounted PVs"
 msgstr "Aufdach-PVs"
 
-#: digiplan/map/models.py:181
+#: digiplan/map/models.py:182
 msgid "Outdoor PVs"
 msgstr "Freiflächen-PVs"
 
@@ -110,6 +110,22 @@ msgstr "Gesamtkosten"
 #: digiplan/map/results/visualizations.py:31
 msgid "Electricity Demand"
 msgstr "Strombedarf"
+
+#: digiplan/static/config/energy_settings_panel.json:4
+#: digiplan/static/config/energy_settings_panel.json:5
+msgid "Producer"
+msgstr "Erzeuger"
+
+#: digiplan/static/config/energy_settings_panel.json:12
+#, fuzzy
+#| msgid "Windenergy (MW)"
+msgid "Wind energy (MW)"
+msgstr "WINDENERGIE (MWW)"
+
+#: digiplan/static/config/energy_settings_panel.json:19
+#: digiplan/static/config/energy_settings_panel.json:24
+msgid "Distance from residential areas (m)"
+msgstr "Siedlungsabstand (m)"
 
 #: digiplan/templates/account/account_inactive.html:5
 #: digiplan/templates/account/account_inactive.html:8

@@ -1,9 +1,11 @@
 """Configuration for map app."""
-
+import ast
 import json
 import pathlib
 
 from django.conf import settings
+from django.template import Context, Template
+from range_key_dict import RangeKeyDict
 
 from digiplan import __version__
 
@@ -24,7 +26,15 @@ REGION_FILTER_LAYERS = []
 
 # PARAMETERS
 with pathlib.Path(ENERGY_SETTINGS_PANEL_FILE).open("r", encoding="utf-8") as param_file:
-    ENERGY_SETTINGS_PANEL = json.load(param_file)
+    energy_settings_dict = json.load(param_file)
+    # add {% load i18n %} to file to make django detect translatable strings
+    t = Template("{% load i18n %}" + str(energy_settings_dict))
+    # load context with the current language
+    c = Context({})
+    # translate (=render) dict, it becomes thereby a "django.utils.safestring"
+    safe_string = t.render(c)
+    # reconvert safestring to dict (needed later on)
+    ENERGY_SETTINGS_PANEL = ast.literal_eval(safe_string)
 
 with pathlib.Path(HEAT_SETTINGS_PANEL_FILE).open("r", encoding="utf-8") as param_file:
     HEAT_SETTINGS_PANEL = json.load(param_file)
