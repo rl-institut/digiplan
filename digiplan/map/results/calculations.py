@@ -184,6 +184,58 @@ def get_capacity() -> dict[int, int]:
     return capacity
 
 
+def get_data_for_capacity_square(municipality_id: Optional[int] = None) -> float:
+    """Calculate capacity of renewables per km² (either for municipality or for whole region).
+
+    Parameters
+    ----------
+    municipality_id: Optional[int]
+        If given, capacity of renewables per km² for given municipality are calculated. If not, for whole region.
+
+    Returns
+    -------
+    float
+        Sum of installed renewables
+    """
+    value = get_data_for_capacity(municipality_id)
+    capacity = calculate_square_for_value(value, municipality_id)
+    return capacity
+
+
+# pylint: disable=W0613
+def get_chart_for_capacity_square(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+    """Get chart for capacity of renewables per km².
+
+    Parameters
+    ----------
+    chart: dict
+        Default chart options for capacity of renewables per km² from JSON
+    municipality_id: int
+        Related municipality
+
+    Returns
+    -------
+    dict
+        Chart data to use in JS
+    """
+    chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
+    return chart
+
+
+def get_capacity_square() -> dict[int, int]:
+    """Calculate capacity of renewables per km² per municipality.
+
+    Returns
+    -------
+    dict[int, int]
+        Capacity per km² per municipality
+    """
+    capacity = get_capacity()
+    for key, value in capacity.items():
+        capacity[key] = calculate_square_for_value(value, key)
+    return capacity
+
+
 def get_data_for_population(municipality_id: Optional[int] = None) -> int:
     """Calculate population in 2022 (either for municipality or for whole region).
 
@@ -374,6 +426,9 @@ def get_chart_for_wind_turbines_square(chart: dict, municipality_id: int) -> dic
 
 LOOKUPS: dict[str, LookupFunctions] = {
     "capacity": LookupFunctions(get_data_for_capacity, get_chart_for_capacity, get_capacity),
+    "capacity_square": LookupFunctions(
+        get_data_for_capacity_square, get_chart_for_capacity_square, get_capacity_square
+    ),
     "population": LookupFunctions(get_data_for_population, get_chart_for_population, get_population),
     "population_density": LookupFunctions(
         get_data_for_population_square, get_chart_for_population_square, get_population_square
