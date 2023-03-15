@@ -86,6 +86,7 @@
 {% block js_body %}
   {{ block.super }}
 
+  {{ map_setup|json_script:"map_setup" }}
   {{ map_sources|json_script:"map_sources" }}
   {{ map_layers|json_script:"map_layers" }}
   {{ map_popups|json_script:"map_popups" }}
@@ -96,25 +97,21 @@
   {{ settings_dependency_map|json_script:"settings_dependency_map" }}
   {{ dependency_parameters|json_script:"dependency_parameters" }}
 
-  {% compress js inline %}
-    <script>
-      function setDebugMode(bool) {
-        store.cold.debugMode = bool;
-      }
+  {% compress js %}
+    <script src="{% static 'django_mapengine/js/init_map.js' %}" type="text/javascript"></script>
+    <script src="{% static 'django_mapengine/js/map.js' %}" type="text/javascript"></script>
+    <script src="{% static 'django_mapengine/js/basemaps.js' %}" type="text/javascript"></script>
+    <script src="{% static 'django_mapengine/js/helper.js' %}" type="text/javascript"></script>
+    <script src="{% static 'django_mapengine/js/legend.js' %}" type="text/javascript"></script>
+    <script src="{% static 'django_mapengine/js/popup.js' %}" type="text/javascript"></script>
+    <script src="{% static 'django_mapengine/js/layer.js' %}" type="text/javascript"></script>
+    <script src="{% static 'django_mapengine/js/filter.js' %}" type="text/javascript"></script>
+    <script src="{% static 'django_mapengine/js/results.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/state.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/sliders.js' %}" type="text/javascript"></script>
+  {% endcompress %}
 
-      function setDebugModeVerbose(bool) {
-        store.cold.debugModeVerbose = !(!store.cold.debugMode || !bool);
-      }
-    </script>
-    <script>
-      const map = new maplibregl.Map({
-        container: 'map',
-        style: 'https://api.maptiler.com/maps/{{tiling_service_style_id}}/style.json?key={{tiling_service_token}}',
-        center: [12.537917858911896, 51.80812518969171], // starting position [lng, lat]
-        zoom: 9, // starting zoom
-        maxBounds: [[11.280733017118229, 51.22918643452503], [13.616574868700604, 52.35515806663738]] // [[south-west], [north-east]] restrict area
-      });
-    </script>
+  {% compress js inline %}
     <script>
       if (store.cold.debugMode) {
         map.showTileBoundaries = true;
@@ -218,19 +215,5 @@
         setDebugMode(true);
       {% endif %}
     </script>
-  {% endcompress %}
-
-  {% compress js %}
-    <script src="{% static 'django_mapengine/js/init_map.js' %}" type="text/javascript"></script>
-    <script src="{% static 'django_mapengine/js/map.js' %}" type="text/javascript"></script>
-    <script src="{% static 'django_mapengine/js/basemaps.js' %}" type="text/javascript"></script>
-    <script src="{% static 'django_mapengine/js/helper.js' %}" type="text/javascript"></script>
-    <script src="{% static 'django_mapengine/js/legend.js' %}" type="text/javascript"></script>
-    <script src="{% static 'django_mapengine/js/popup.js' %}" type="text/javascript"></script>
-    <script src="{% static 'django_mapengine/js/layer.js' %}" type="text/javascript"></script>
-    <script src="{% static 'django_mapengine/js/filter.js' %}" type="text/javascript"></script>
-    <script src="{% static 'django_mapengine/js/results.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/state.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/sliders.js' %}" type="text/javascript"></script>
   {% endcompress %}
 {% endblock js_body %}
