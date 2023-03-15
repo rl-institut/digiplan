@@ -105,9 +105,14 @@ def create_data(lookup: str, municipality_id: int) -> dict:
 
 
 def calculate_square_for_value(value: int, municipality_id: int) -> float:
-    area = models.Municipality.objects.get(pk=municipality_id).area
+    area = 0.0
+    if municipality_id is not None:
+        area = models.Municipality.objects.get(pk=municipality_id).area
+    else:
+        for mun in models.Municipality.objects.all():
+            area += models.Municipality.objects.get(pk=mun.id).area
     if area != 0.0:
-        return round(value / area, 2)
+        return value / area
     return value
 
 
@@ -248,9 +253,8 @@ def get_data_for_population_square(municipality_id: Optional[int] = None) -> flo
     """
     population = get_data_for_population(municipality_id)
 
-    if municipality_id is not None:
-        population = calculate_square_for_value(population, municipality_id)
-    return population
+    density = calculate_square_for_value(population, municipality_id)
+    return density
 
 
 def get_chart_for_population_square(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
@@ -345,9 +349,8 @@ def get_data_for_windturbines_square(municipality_id: Optional[int] = None) -> f
     """
     windturbines = get_data_for_windturbines(municipality_id)
 
-    if municipality_id is not None:
-        windturbines = calculate_square_for_value(windturbines, municipality_id)
-    return windturbines
+    windturbines_square = calculate_square_for_value(windturbines, municipality_id)
+    return windturbines_square
 
 
 def get_chart_for_wind_turbines_square(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
