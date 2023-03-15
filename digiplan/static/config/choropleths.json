@@ -27,5 +27,13 @@
       0.8,
       1.0
     ]
+  },
+  "wind_turbines": {
+    "color_palette": "YlGnBu",
+    "num_colors": 6
+  },
+  "wind_turbines_square": {
+    "color_palette": "YlGnBu",
+    "num_colors": 6
   }
 }

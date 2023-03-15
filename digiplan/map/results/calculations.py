@@ -386,6 +386,28 @@ def get_chart_for_wind_turbines(chart: dict, municipality_id: int) -> dict:  # n
     return chart
 
 
+def get_windturbines() -> dict[int, int]:
+    """Calculate number of wind turbines per municipality.
+
+    Returns
+    -------
+    dict[int, int]
+        wind turbines per municipality
+    """
+
+    windturbines = {}
+    municipalities = models.Municipality.objects.all()
+
+    for mun in municipalities:
+        res_windturbine = models.WindTurbine.objects.filter(mun_id__exact=mun.id).aggregate(Sum("unit_count"))[
+            "unit_count__sum"
+        ]
+        if res_windturbine is None:
+            res_windturbine = 0
+        windturbines[mun.id] = res_windturbine
+    return windturbines
+
+
 def get_data_for_windturbines_square(municipality_id: Optional[int] = None) -> float:
     """Calculate number of windturbines per km² (either for municipality or for whole region).
 
@@ -424,6 +446,20 @@ def get_chart_for_wind_turbines_square(chart: dict, municipality_id: int) -> dic
     return chart
 
 
+def get_windturbines_square() -> dict[int, int]:
+    """Calculate windturbines per km² per municipality.
+
+    Returns
+    -------
+    dict[int, int]
+        windturbines per km² per municipality
+    """
+    windtubines = get_windturbines()
+    for index in windtubines:
+        windtubines[index] = calculate_square_for_value(windtubines[index], index)
+    return windtubines
+
+
 LOOKUPS: dict[str, LookupFunctions] = {
     "capacity": LookupFunctions(get_data_for_capacity, get_chart_for_capacity, get_capacity),
     "capacity_square": LookupFunctions(
@@ -433,6 +469,8 @@ LOOKUPS: dict[str, LookupFunctions] = {
     "population_density": LookupFunctions(
         get_data_for_population_square, get_chart_for_population_square, get_population_square
     ),
-    "wind_turbines": LookupFunctions(get_data_for_windturbines, get_chart_for_wind_turbines, None),
-    "wind_turbines_square": LookupFunctions(get_data_for_windturbines_square, get_chart_for_wind_turbines_square, None),
+    "wind_turbines": LookupFunctions(get_data_for_windturbines, get_chart_for_wind_turbines, get_windturbines),
+    "wind_turbines_square": LookupFunctions(
+        get_data_for_windturbines_square, get_chart_for_wind_turbines_square, get_windturbines_square
+    ),
 }
