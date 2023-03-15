@@ -111,40 +111,38 @@ def calculate_square_for_value(value: int, municipality_id: int) -> float:
     return value
 
 
-def get_data_for_installed_ee(municipality_id: Optional[int] = None) -> float:
-    """Calculate installed renewables (either for municipality or for whole region).
+def get_data_for_capacity(municipality_id: Optional[int] = None) -> float:
+    """Calculate capacity of renewables (either for municipality or for whole region).
 
     Parameters
     ----------
     municipality_id: Optional[int]
-        If given, installed renewables for given municipality are calculated. If not, for whole region.
+        If given, capacity of renewables for given municipality are calculated. If not, for whole region.
 
     Returns
     -------
     float
         Sum of installed renewables
     """
-    installed_ee = 0.0
-    for renewable in models.RENEWABLES:
-        if municipality_id is not None:
-            res_installed_ee = renewable.objects.filter(mun_id__exact=municipality_id).aggregate(Sum("capacity_net"))[
-                "capacity_net__sum"
-            ]
-        else:
-            res_installed_ee = renewable.objects.aggregate(Sum("capacity_net"))["capacity_net__sum"]
-        if res_installed_ee:
-            installed_ee += res_installed_ee
-    return installed_ee
+    capacity = 0.0
+    values = get_capacity()
+
+    if municipality_id is not None:
+        capacity = values[municipality_id]
+    else:
+        for _key, value in values.items():
+            capacity += value
+    return capacity
 
 
 # pylint: disable=W0613
-def get_chart_for_installed_ee(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
-    """Get chart for installed renewables.
+def get_chart_for_capacity(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+    """Get chart for capacity of renewables.
 
     Parameters
     ----------
     chart: dict
-        Default chart options for installed renewables from JSON
+        Default chart options for capacity of renewables from JSON
     municipality_id: int
         Related municipality
 
@@ -155,6 +153,30 @@ def get_chart_for_installed_ee(chart: dict, municipality_id: int) -> dict:  # no
     """
     chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
     return chart
+
+
+def get_capacity() -> dict[int, int]:
+    """Calculate capacity of renewables per municipality.
+
+    Returns
+    -------
+    dict[int, int]
+        Capacity per municipality
+    """
+    capacity = {}
+    municipalities = models.Municipality.objects.all()
+
+    for mun in municipalities:
+        res_capacity = 0.0
+        for renewable in models.RENEWABLES:
+            one_capacity = renewable.objects.filter(mun_id__exact=mun.id).aggregate(Sum("capacity_net"))[
+                "capacity_net__sum"
+            ]
+            if one_capacity is None:
+                one_capacity = 0.0
+            res_capacity += one_capacity
+            capacity[mun.id] = res_capacity
+    return capacity
 
 
 def get_data_for_population(municipality_id: Optional[int] = None) -> int:
@@ -348,7 +370,7 @@ def get_chart_for_wind_turbines_square(chart: dict, municipality_id: int) -> dic
 
 
 LOOKUPS: dict[str, LookupFunctions] = {
-    "installed_ee": LookupFunctions(get_data_for_installed_ee, get_chart_for_installed_ee, None),
+    "capacity": LookupFunctions(get_data_for_capacity, get_chart_for_capacity, get_capacity),
     "population": LookupFunctions(get_data_for_population, get_chart_for_population, get_population),
     "population_density": LookupFunctions(
         get_data_for_population_square, get_chart_for_population_square, get_population_square
