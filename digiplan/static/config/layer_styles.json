@@ -65,34 +65,32 @@
     }
   },
   "wind": {
-    "paint": {
-      "circle-color": "#6A89CC",
-      "circle-opacity": 0.5,
-      "circle-radius": [
-        "*",
-        5,
-        [
-          "log10",
-          [
-            "get",
-            "capacity_net"
-          ]
-        ]
-      ],
-      "circle-stroke-width": [
-        "case",
-        [
-          "boolean",
-          [
-            "get",
-            "geometry_approximated"
+    "type": "symbol",
+        "layout": {
+          "icon-image": "wind",
+          "icon-size": [
+            "interpolate",
+            [
+              "linear"
+            ],
+            [
+              "get",
+              "unit_count"
+            ],
+            0,
+            0.5,
+            10,
+            1.0,
+            100,
+            1.25,
+            1000,
+            1.5
           ],
-          false
-        ],
-        0,
-        1
-      ]
-    }
+          "icon-allow-overlap": true
+        },
+        "paint": {
+          "icon-color": "blue"
+        }
   },
   "wind_cluster": {
     "paint": {

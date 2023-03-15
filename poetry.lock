@@ -1277,7 +1277,7 @@ range-key-dict = "^1.1.0"
 type = "git"
 url = "https://github.com/rl-institut/django-mapengine.git"
 reference = "HEAD"
-resolved_reference = "27fd5b6da5bfdff3457932b6401bc386ac67638f"
+resolved_reference = "c6c4ef7bb47943e705edb2579beab684bc2e92ea"
 
 [[package]]
 name = "django-oemof"

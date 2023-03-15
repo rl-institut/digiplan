@@ -75,12 +75,6 @@
   {% include 'offcanvas/sources.html' %}
   {% include 'offcanvas/contact.html' %}
 
-  {% include 'popups/default.html' %}
-  {% for popup in popups %}
-    {% if popup.template_url %}
-      {% include popup.template_url %}
-    {% endif %}
-  {% endfor %}
 {% endblock content %}
 
 {% block js_body %}
@@ -89,6 +83,7 @@
   {{ map_setup|json_script:"map_setup" }}
   {{ map_sources|json_script:"map_sources" }}
   {{ map_layers|json_script:"map_layers" }}
+  {{ map_images|json_script:"map_images" }}
   {{ map_popups|json_script:"map_popups" }}
   {{ layers_at_startup|json_script:"layers_at_startup" }}
   {{ layer_styles|json_script:"styles" }}
@@ -113,21 +108,6 @@
 
   {% compress js inline %}
     <script>
-      if (store.cold.debugMode) {
-        map.showTileBoundaries = true;
-      }
-
-      const nav = new maplibregl.NavigationControl();
-      map.addControl(nav, "bottom-left");
-      map.addControl(new maplibregl.ScaleControl({position: 'bottom-right'}));
-
-      {% for map_image in map_images %}
-        map.loadImage("{% static map_image.path %}", function (error, image) {
-          if (error) throw error;
-          map.addImage("{{map_image.name}}", image);
-        });
-      {% endfor %}
-
       // Zoom to feature on click
       map.on("click", function (element) {
         flyToElement(element);

@@ -27,7 +27,7 @@ class MapGLView(TemplateView):
         "password_protected": settings.PASSWORD_PROTECTION,
         "password": settings.PASSWORD,
         "map_setup": settings.MAP_ENGINE_SETUP,
-        "map_images": settings.MAP_ENGINE_IMAGES,
+        "map_images": [image.as_dict() for image in settings.MAP_ENGINE_IMAGES],
         "map_layers": [layer.get_layer() for layer in map_config.ALL_LAYERS],
         "layers_at_startup": map_config.LAYERS_AT_STARTUP,
         "map_popups": map_config.POPUPS,
