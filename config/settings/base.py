@@ -224,13 +224,13 @@ INSTALLED_APPS += ["compressor"]
 STATICFILES_FINDERS += ["compressor.finders.CompressorFinder"]
 
 # django-libsass
+# ------------------------------------------------------------------------------
 COMPRESS_PRECOMPILERS = [("text/x-scss", "django_libsass.SassCompiler")]
 
 COMPRESS_CACHEABLE_PRECOMPILERS = (("text/x-scss", "django_libsass.SassCompiler"),)
 
 # Your stuff...
 # ------------------------------------------------------------------------------
-
 PASSWORD_PROTECTION = env.bool("PASSWORD_PROTECTION", False)
 PASSWORD = env.str("PASSWORD", default=None)
 if PASSWORD_PROTECTION and PASSWORD is None:
@@ -241,6 +241,8 @@ SELECT2_CACHE_BACKEND = "select2"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+# django-mapengine
+# ------------------------------------------------------------------------------
 MAP_ENGINE_CENTER_AT_STARTUP = [12.537917858911896, 51.80812518969171]
 MAP_ENGINE_ZOOM_AT_STARTUP = 9
 MAP_ENGINE_MAX_BOUNDS = [[11.280733017118229, 51.22918643452503], [13.616574868700604, 52.35515806663738]]
@@ -251,3 +253,5 @@ MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
 MAP_ENGINE_ZOOM_LEVELS = {
     "municipality": core.Zoom(8, 12),
 }
+
+MAP_ENGINE_POPUPS = ["results"]

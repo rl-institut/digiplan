@@ -4,7 +4,6 @@ import json
 import pathlib
 
 from django.conf import settings
-from django_mapengine import settings as map_settings
 
 from digiplan import __version__
 
@@ -43,14 +42,14 @@ with pathlib.Path(DEPENDENCY_PARAMETERS_FILE).open("r", encoding="utf-8") as par
 # STORE
 STORE_COLD_INIT = {
     "version": __version__,
-    "debugMode": settings.DEBUG,
-    "zoom_levels": map_settings.ZOOM_LEVELS,
-    "region_filter_layers": REGION_FILTER_LAYERS,
     "slider_marks": {
         param_name: [("Status Quo", param_data["status_quo"])]
         for param_name, param_data in ENERGY_SETTINGS_PANEL.items()
         if "status_quo" in param_data
     },
+    "allowedSwitches": ["wind_distance"],
+    "detailTab": {"showPotentialLayers": True},
+    "staticState": 0,
 }
 
 

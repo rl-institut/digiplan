@@ -52,7 +52,7 @@ LEGEND = {
     ],
 }
 
-REGION_LAYERS = layers.get_region_layers()
+REGION_LAYERS = list(layers.get_region_layers())
 RESULT_LAYERS = [
     layers.MapLayer(
         id="results",
@@ -63,15 +63,12 @@ RESULT_LAYERS = [
     ),
 ]
 
-
 # Order is important! Last items are shown on top!
 ALL_LAYERS = REGION_LAYERS + RESULT_LAYERS
 for static_layer in STATIC_LAYERS.values():
     ALL_LAYERS.extend(static_layer.get_map_layers())
 
 LAYERS_AT_STARTUP = [layer.id for layer in REGION_LAYERS]
-
-POPUPS = ["results"]
 
 if settings.MAP_ENGINE_USE_DISTILLED_MVTS:
     SOURCES = [

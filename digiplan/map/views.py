@@ -3,13 +3,13 @@
 As map app is SPA, this module contains main view and various API points.
 """
 import json
-import uuid
 
 from django.conf import settings
 from django.http import HttpRequest, JsonResponse
 from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import render_to_string
 from django.views.generic import TemplateView
+from django_mapengine import views
 
 from digiplan.map import config
 from digiplan.map.results import core
@@ -18,7 +18,7 @@ from . import forms, map_config
 from .results import calculations
 
 
-class MapGLView(TemplateView):
+class MapGLView(TemplateView, views.MapEngineMixin):
     """Main view for map app (SPA)."""
 
     template_name = "map.html"
@@ -26,11 +26,6 @@ class MapGLView(TemplateView):
         "debug": settings.DEBUG,
         "password_protected": settings.PASSWORD_PROTECTION,
         "password": settings.PASSWORD,
-        "map_setup": settings.MAP_ENGINE_SETUP,
-        "map_images": [image.as_dict() for image in settings.MAP_ENGINE_IMAGES],
-        "map_layers": [layer.get_layer() for layer in map_config.ALL_LAYERS],
-        "layers_at_startup": map_config.LAYERS_AT_STARTUP,
-        "map_popups": map_config.POPUPS,
         "area_switches": {
             category: [forms.StaticLayerForm(layer) for layer in layers]
             for category, layers in map_config.LEGEND.items()
@@ -40,8 +35,9 @@ class MapGLView(TemplateView):
         "traffic_settings_panel": forms.PanelForm(config.TRAFFIC_SETTINGS_PANEL),
         "use_distilled_mvts": settings.MAP_ENGINE_USE_DISTILLED_MVTS,
         "store_hot_init": config.STORE_HOT_INIT,
-        "zoom_levels": settings.MAP_ENGINE_ZOOM_LEVELS,
     }
+    layers = map_config.ALL_LAYERS
+    sources = map_config.SOURCES
 
     def get_context_data(self, **kwargs) -> dict:
         """Context data for main view.
@@ -57,18 +53,11 @@ class MapGLView(TemplateView):
             context for main view
         """
         # Add unique session ID
-        session_id = str(uuid.uuid4())
         context = super().get_context_data(**kwargs)
-        context["session_id"] = session_id
-        context["layer_styles"] = settings.MAP_ENGINE_LAYER_STYLES
+
         context["settings_parameters"] = config.ENERGY_SETTINGS_PANEL
         context["settings_dependency_map"] = config.SETTINGS_DEPENDENCY_MAP
         context["dependency_parameters"] = config.DEPENDENCY_PARAMETERS
-
-        # Sources need valid URL (containing host and port), thus they have to be defined using request:
-        context["map_sources"] = {
-            map_source.name: map_source.get_source(self.request) for map_source in map_config.SOURCES
-        }
 
         # Categorize sources
         categorized_sources = {
@@ -76,14 +65,9 @@ class MapGLView(TemplateView):
             for category, layers in map_config.LEGEND.items()
         }
         context["sources"] = categorized_sources
+        context["store_cold_init"] = config.STORE_COLD_INIT
 
-        # Add popup-layer IDs to cold store
-        config.STORE_COLD_INIT["popup_layers"] = map_config.POPUPS
-        config.STORE_COLD_INIT["region_layers"] = [
-            layer.id for layer in map_config.REGION_LAYERS if layer.id.startswith("fill")
-        ]
-        config.STORE_COLD_INIT["result_views"] = {}  # Placeholder for already downloaded results (used in results.js)
-        context["store_cold_init"] = json.dumps(config.STORE_COLD_INIT)
+        context.update(**self.get_mapengine_context(map_sources=map_config.SOURCES, map_layers=map_config.ALL_LAYERS))
 
         return context
 
