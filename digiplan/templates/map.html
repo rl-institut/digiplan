@@ -93,9 +93,9 @@
   {{ dependency_parameters|json_script:"dependency_parameters" }}
 
   {% compress js %}
-    <script src="{% static 'django_mapengine/js/init_map.js' %}" type="text/javascript"></script>
     <script src="{% static 'django_mapengine/js/map.js' %}" type="text/javascript"></script>
     <script src="{% static 'django_mapengine/js/basemaps.js' %}" type="text/javascript"></script>
+    <script src="{% static 'django_mapengine/js/regions.js' %}" type="text/javascript"></script>
     <script src="{% static 'django_mapengine/js/helper.js' %}" type="text/javascript"></script>
     <script src="{% static 'django_mapengine/js/legend.js' %}" type="text/javascript"></script>
     <script src="{% static 'django_mapengine/js/popup.js' %}" type="text/javascript"></script>
@@ -106,94 +106,4 @@
     <script src="{% static 'js/sliders.js' %}" type="text/javascript"></script>
   {% endcompress %}
 
-  {% compress js inline %}
-    <script>
-      // Zoom to feature on click
-      map.on("click", function (element) {
-        flyToElement(element);
-      });
-
-      {% for layer in all_layers %}
-        {% if layer.style == "region-fill" %}
-          // Show pointer cursor on fills
-          map.on("mouseenter", "{{layer.id}}", function () {
-            map.getCanvas().style.cursor = "pointer";
-          });
-          map.on("mouseleave", "{{layer.id}}", function () {
-            map.getCanvas().style.cursor = "";
-          });
-        {% endif %}
-      {% endfor %}
-
-      {% for layer in all_layers %}
-        {% if layer.style == "region-fill" %}
-          // When the user moves their mouse over the fill layer, we'll update the
-          // feature state for the feature under the mouse.
-          map.on("mousemove", "{{layer.id}}", function (e) {
-            if (e.features.length > 0) {
-              if (store.cold.hoveredStateId >= 0) {
-                // Fill layer
-                map.setFeatureState({
-                  source: "{{layer.source}}",
-                  sourceLayer: "{{layer.source_layer}}",
-                  id: store.cold.hoveredStateId
-                }, {
-                  hover: false
-                });
-                // Label layer
-                map.setFeatureState({
-                  source: "{{layer.source}}",
-                  sourceLayer: "{{layer.source_layer}}label",
-                  id: store.cold.hoveredStateId
-                }, {
-                  hover: false
-                });
-              }
-              store.cold.hoveredStateId = e.features[0].id;
-              // Fill layer
-              map.setFeatureState({
-                source: "{{layer.source}}",
-                sourceLayer: "{{layer.source_layer}}",
-                id: store.cold.hoveredStateId
-              }, {
-                hover: true
-              });
-              // Label layer
-              map.setFeatureState({
-                source: "{{layer.source}}",
-                sourceLayer: "{{layer.source_layer}}label",
-                id: store.cold.hoveredStateId
-              }, {
-                hover: true
-              });
-            }
-          });
-
-          // When the mouse leaves the fill layer, update the feature state of the
-          // previously hovered feature.
-          map.on("mouseleave", "{{layer.id}}", function () {
-            if (store.cold.hoveredStateId >= 0) {
-              map.setFeatureState({
-                source: "{{layer.source}}",
-                sourceLayer: "{{layer.source_layer}}",
-                id: store.cold.hoveredStateId
-              }, {
-                hover: false
-              });
-            }
-            store.cold.hoveredStateId = null;
-          });
-        {% endif %}
-      {% endfor %}
-
-      {% if debug %}
-        {% for layer in all_layers %}
-          map.on("click", "{{layer.id}}", function (e) {
-            console.log("{{layer.id}}:", e.features[0].properties.name, e.features[0]);
-          });
-        {% endfor %}
-        setDebugMode(true);
-      {% endif %}
-    </script>
-  {% endcompress %}
 {% endblock js_body %}
