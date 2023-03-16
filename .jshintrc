@@ -28,7 +28,7 @@
     "store_cold_init": false,
     "store_hot_init": false,
     "window": false,
-    "subscribeToEventTopicsGroup": false
+    "subscribeToEvents": false
   },
   "strict": "implied"
 }

@@ -58,11 +58,11 @@ panelContainer.addEventListener("scroll", (e) => {
 
 // Subscriptions
 PubSub.subscribe(eventTopics.STATES_INITIALIZED, updateSliderMarks);
-subscribeToEventTopicsGroup(
+subscribeToEvents(
   [eventTopics.STATES_INITIALIZED, eventTopics.POWER_PANEL_SLIDER_CHANGE],
   createPercentagesOfPowerSources
 );
-subscribeToEventTopicsGroup(
+subscribeToEvents(
   [eventTopics.POWER_PANEL_SLIDER_CHANGE, eventTopics.PANEL_SLIDER_CHANGE],
   showActivePanelSliderOnPanelSliderChange
 );
