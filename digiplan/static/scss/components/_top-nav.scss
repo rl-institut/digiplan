@@ -24,6 +24,7 @@
   @extend .flex-row;
   @extend .justify-content-center;
   @extend .align-items-center;
+  @extend .px-2;
   height: $steps-height;
 
   &__list {
@@ -41,41 +42,24 @@
     }
   }
 
-  .nav-item--separator {
+  &__item--separator {
+    @extend .mx-2;
     flex: 1;
     height: 1px;
     background-color: $gray-300;
   }
 
-  &__item {
-    @extend .list-group-item;
-    @extend .list-group-item-action;
-    @extend .text-primary;
-    @extend .border-0;
-    @extend .bg-white;
-    @extend .text-center;
-    @extend .fw-bold;
-
-    &.active {
-      @extend .text-info;
-    }
-
-    &.disabled {
-      @extend .text-muted;
-    }
-  }
-
   &__number {
     @extend .d-inline-block;
-    @extend .bg-primary;
     @extend .text-white;
     @extend .fw-bold;
     @extend .rounded-circle;
     @extend .me-1;
     @extend .fs-7;
+    background-color: $gray-300 !important;
     width: $steps-numbers-size;
     height: $steps-numbers-size;
-    padding: 0.125rem;
+    padding: 0.125rem 0.125rem 0.125rem 0.5rem;
   }
 
   &__text {
@@ -84,14 +68,15 @@
     @extend .d-sm-inline;
     @extend .d-md-none;
     @extend .d-lg-inline;
+    color: $gray-300 !important;
     letter-spacing: $letter-spacing-small;
   }
 
   &__item.active .steps__number {
-    @extend .bg-info;
+    @extend .bg-primary;
   }
 
-  &__item.disabled .steps__number {
-    background-color: $c-color-gray !important;
+  &__item.active .steps__text {
+    @extend .text-primary;
   }
 }
