@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-14 07:37+0000\n"
+"POT-Creation-Date: 2023-03-17 08:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,22 +110,6 @@ msgstr "Gesamtkosten"
 #: digiplan/map/results/visualizations.py:31
 msgid "Electricity Demand"
 msgstr "Strombedarf"
-
-#: digiplan/static/config/energy_settings_panel.json:4
-#: digiplan/static/config/energy_settings_panel.json:5
-msgid "Producer"
-msgstr "Erzeuger"
-
-#: digiplan/static/config/energy_settings_panel.json:12
-#, fuzzy
-#| msgid "Windenergy (MW)"
-msgid "Wind energy (MW)"
-msgstr "WINDENERGIE (MWW)"
-
-#: digiplan/static/config/energy_settings_panel.json:19
-#: digiplan/static/config/energy_settings_panel.json:24
-msgid "Distance from residential areas (m)"
-msgstr "Siedlungsabstand (m)"
 
 #: digiplan/templates/account/account_inactive.html:5
 #: digiplan/templates/account/account_inactive.html:8
@@ -531,3 +515,12 @@ msgstr "Popup Titel"
 #: digiplan/templates/popups/default.html:7
 msgid "Description"
 msgstr "Beschreibung"
+
+#~ msgid "Producer"
+#~ msgstr "Erzeuger"
+
+#~ msgid "Wind energy (MW)"
+#~ msgstr "WINDENERGIE (MWW)"
+
+#~ msgid "Distance from residential areas (m)"
+#~ msgstr "Siedlungsabstand (m)"

@@ -26,6 +26,8 @@ REGION_FILTER_LAYERS = []
 
 # PARAMETERS
 with pathlib.Path(ENERGY_SETTINGS_PANEL_FILE).open("r", encoding="utf-8") as param_file:
+    ENERGY_SETTINGS_PANEL = json.load(param_file)
+
     energy_settings_dict = json.load(param_file)
     # add {% load i18n %} to file to make django detect translatable strings
     t = Template("{% load i18n %}" + str(energy_settings_dict))
