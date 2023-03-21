@@ -5,7 +5,7 @@ import os
 
 import environ
 from django.core.exceptions import ValidationError
-from django_mapengine import core
+from django_mapengine import setup
 
 ROOT_DIR = environ.Path(__file__) - 3  # (digiplan/config/settings/base.py - 3 = digiplan/)
 APPS_DIR = ROOT_DIR.path("digiplan")
@@ -247,11 +247,28 @@ MAP_ENGINE_CENTER_AT_STARTUP = [12.537917858911896, 51.80812518969171]
 MAP_ENGINE_ZOOM_AT_STARTUP = 9
 MAP_ENGINE_MAX_BOUNDS = [[11.280733017118229, 51.22918643452503], [13.616574868700604, 52.35515806663738]]
 
-MAP_ENGINE_IMAGES = [core.MapImage("wind", "images/icons/i_wind.png")]
+MAP_ENGINE_IMAGES = [setup.MapImage("wind", "images/icons/i_wind.png")]
+
+MAP_ENGINE_API_MVTS = {
+    "municipality": [
+        setup.MVTAPI("municipality", "map", "Municipality"),
+        setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
+    ],
+    "results": [setup.MVTAPI("results", "map", "Municipality")],
+}
+
+MAP_ENGINE_API_CLUSTERS = [
+    setup.ClusterAPI("wind", "map", "WindTurbine"),
+    setup.ClusterAPI("pvroof", "map", "PVroof"),
+    setup.ClusterAPI("pvground", "map", "PVground"),
+    setup.ClusterAPI("hydro", "map", "Hydro"),
+    setup.ClusterAPI("biomass", "map", "Biomass"),
+    setup.ClusterAPI("combustion", "map", "Combustion"),
+]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
 MAP_ENGINE_ZOOM_LEVELS = {
-    "municipality": core.Zoom(8, 12),
+    "municipality": setup.Zoom(8, 12),
 }
 
 MAP_ENGINE_POPUPS = ["results"]
