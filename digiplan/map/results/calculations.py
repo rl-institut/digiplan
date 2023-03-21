@@ -275,7 +275,12 @@ def get_chart_for_population(chart: dict, municipality_id: int) -> dict:  # noqa
     dict
         Chart data to use in JS
     """
-    chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
+    values = models.Population.objects.filter(municipality_id=municipality_id).values_list("year", "value")
+    data_list = []
+    for _mun, value in enumerate(values):
+        data_list.append({"key": value[0], "value": value[1]})
+
+    chart["series"][0]["data"] = data_list
     return chart
 
 
