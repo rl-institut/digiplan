@@ -6,6 +6,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- (static) charts for electricity and mobility
 - dynamic choropleths
 - popups from templates
 - e-charts for detailed and ghg overview to charts panel
