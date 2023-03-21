@@ -116,7 +116,7 @@ def calculate_square_for_value(value: int, municipality_id: int) -> float:
     return value
 
 
-def get_data_for_capacity(municipality_id: Optional[int] = None) -> float:
+def capacity_popup(municipality_id: Optional[int] = None) -> float:
     """Calculate capacity of renewables (either for municipality or for whole region).
 
     Parameters
@@ -130,7 +130,7 @@ def get_data_for_capacity(municipality_id: Optional[int] = None) -> float:
         Sum of installed renewables
     """
     capacity = 0.0
-    values = get_capacity()
+    values = capacity_choropleth()
 
     if municipality_id is not None:
         capacity = values[municipality_id]
@@ -141,7 +141,7 @@ def get_data_for_capacity(municipality_id: Optional[int] = None) -> float:
 
 
 # pylint: disable=W0613
-def get_chart_for_capacity(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+def capacity_chart(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
     """Get chart for capacity of renewables.
 
     Parameters
@@ -160,7 +160,7 @@ def get_chart_for_capacity(chart: dict, municipality_id: int) -> dict:  # noqa: 
     return chart
 
 
-def get_capacity() -> dict[int, int]:
+def capacity_choropleth() -> dict[int, int]:
     """Calculate capacity of renewables per municipality.
 
     Returns
@@ -184,7 +184,7 @@ def get_capacity() -> dict[int, int]:
     return capacity
 
 
-def get_data_for_capacity_square(municipality_id: Optional[int] = None) -> float:
+def capacity_square_popup(municipality_id: Optional[int] = None) -> float:
     """Calculate capacity of renewables per km² (either for municipality or for whole region).
 
     Parameters
@@ -197,13 +197,13 @@ def get_data_for_capacity_square(municipality_id: Optional[int] = None) -> float
     float
         Sum of installed renewables
     """
-    value = get_data_for_capacity(municipality_id)
+    value = capacity_popup(municipality_id)
     capacity = calculate_square_for_value(value, municipality_id)
     return capacity
 
 
 # pylint: disable=W0613
-def get_chart_for_capacity_square(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+def capacity_square_chart(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
     """Get chart for capacity of renewables per km².
 
     Parameters
@@ -222,7 +222,7 @@ def get_chart_for_capacity_square(chart: dict, municipality_id: int) -> dict:  #
     return chart
 
 
-def get_capacity_square() -> dict[int, int]:
+def capacity_square_choropleth() -> dict[int, int]:
     """Calculate capacity of renewables per km² per municipality.
 
     Returns
@@ -230,13 +230,13 @@ def get_capacity_square() -> dict[int, int]:
     dict[int, int]
         Capacity per km² per municipality
     """
-    capacity = get_capacity()
+    capacity = capacity_choropleth()
     for key, value in capacity.items():
         capacity[key] = calculate_square_for_value(value, key)
     return capacity
 
 
-def get_data_for_population(municipality_id: Optional[int] = None) -> int:
+def population_popup(municipality_id: Optional[int] = None) -> int:
     """Calculate population in 2022 (either for municipality or for whole region).
 
     Parameters
@@ -249,7 +249,7 @@ def get_data_for_population(municipality_id: Optional[int] = None) -> int:
     int
         Value of population
     """
-    values = get_population()
+    values = population_choropleth()
     population = 0.0
 
     if municipality_id is not None:
@@ -260,7 +260,7 @@ def get_data_for_population(municipality_id: Optional[int] = None) -> int:
     return population
 
 
-def get_chart_for_population(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+def population_chart(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
     """Get chart for population per municipality in different years.
 
     Parameters
@@ -284,7 +284,7 @@ def get_chart_for_population(chart: dict, municipality_id: int) -> dict:  # noqa
     return chart
 
 
-def get_population() -> dict[int, int]:
+def population_choropleth() -> dict[int, int]:
     """Calculate population per municipality.
 
     Returns
@@ -295,7 +295,7 @@ def get_population() -> dict[int, int]:
     return {row.municipality_id: row.value for row in models.Population.objects.filter(year=2022)}
 
 
-def get_data_for_population_square(municipality_id: Optional[int] = None) -> float:
+def population_square_popup(municipality_id: Optional[int] = None) -> float:
     """Calculate population in 2022 per km² (either for municipality or for whole region).
 
     Parameters
@@ -308,13 +308,13 @@ def get_data_for_population_square(municipality_id: Optional[int] = None) -> flo
     float
         Value of population
     """
-    population = get_data_for_population(municipality_id)
+    population = population_popup(municipality_id)
 
     density = calculate_square_for_value(population, municipality_id)
     return density
 
 
-def get_chart_for_population_square(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+def population_square_chart(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
     """Get chart for population density for the given municipality in different years.
 
     Parameters
@@ -333,7 +333,7 @@ def get_chart_for_population_square(chart: dict, municipality_id: int) -> dict: 
     return chart
 
 
-def get_population_square() -> dict[int, int]:
+def population_square_choropleth() -> dict[int, int]:
     """Calculate population per municipality.
 
     Returns
@@ -341,13 +341,13 @@ def get_population_square() -> dict[int, int]:
     dict[int, int]
         Population per municipality
     """
-    density = get_population()
+    density = population_choropleth()
     for index in density:
         density[index] = calculate_square_for_value(density[index], index)
     return density
 
 
-def get_data_for_windturbines(municipality_id: Optional[int] = None) -> float:
+def windturbines_popup(municipality_id: Optional[int] = None) -> float:
     """Calculate number of windturbines (either for municipality or for whole region).
 
     Parameters
@@ -372,7 +372,7 @@ def get_data_for_windturbines(municipality_id: Optional[int] = None) -> float:
     return windturbines
 
 
-def get_chart_for_wind_turbines(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+def windturbines_chart(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
     """Get chart for wind turbines.
 
     Parameters
@@ -391,7 +391,7 @@ def get_chart_for_wind_turbines(chart: dict, municipality_id: int) -> dict:  # n
     return chart
 
 
-def get_windturbines() -> dict[int, int]:
+def windturbines_choropleth() -> dict[int, int]:
     """Calculate number of wind turbines per municipality.
 
     Returns
@@ -413,7 +413,7 @@ def get_windturbines() -> dict[int, int]:
     return windturbines
 
 
-def get_data_for_windturbines_square(municipality_id: Optional[int] = None) -> float:
+def windturbines_square_popup(municipality_id: Optional[int] = None) -> float:
     """Calculate number of windturbines per km² (either for municipality or for whole region).
 
     Parameters
@@ -426,13 +426,13 @@ def get_data_for_windturbines_square(municipality_id: Optional[int] = None) -> f
     float
         Sum of windturbines per km²
     """
-    windturbines = get_data_for_windturbines(municipality_id)
+    windturbines = windturbines_popup(municipality_id)
 
     windturbines_square = calculate_square_for_value(windturbines, municipality_id)
     return windturbines_square
 
 
-def get_chart_for_wind_turbines_square(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+def windturbines_square_chart(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
     """Get chart for wind turbines per km².
 
     Parameters
@@ -451,7 +451,7 @@ def get_chart_for_wind_turbines_square(chart: dict, municipality_id: int) -> dic
     return chart
 
 
-def get_windturbines_square() -> dict[int, int]:
+def windturbines_square_choropleth() -> dict[int, int]:
     """Calculate windturbines per km² per municipality.
 
     Returns
@@ -459,23 +459,21 @@ def get_windturbines_square() -> dict[int, int]:
     dict[int, int]
         windturbines per km² per municipality
     """
-    windtubines = get_windturbines()
+    windtubines = windturbines_choropleth()
     for index in windtubines:
         windtubines[index] = calculate_square_for_value(windtubines[index], index)
     return windtubines
 
 
 LOOKUPS: dict[str, LookupFunctions] = {
-    "capacity": LookupFunctions(get_data_for_capacity, get_chart_for_capacity, get_capacity),
-    "capacity_square": LookupFunctions(
-        get_data_for_capacity_square, get_chart_for_capacity_square, get_capacity_square
-    ),
-    "population": LookupFunctions(get_data_for_population, get_chart_for_population, get_population),
+    "capacity": LookupFunctions(capacity_popup, capacity_chart, capacity_choropleth),
+    "capacity_square": LookupFunctions(capacity_square_popup, capacity_square_chart, capacity_square_choropleth),
+    "population": LookupFunctions(population_popup, population_chart, population_choropleth),
     "population_density": LookupFunctions(
-        get_data_for_population_square, get_chart_for_population_square, get_population_square
+        population_square_popup, population_square_chart, population_square_choropleth
     ),
-    "wind_turbines": LookupFunctions(get_data_for_windturbines, get_chart_for_wind_turbines, get_windturbines),
+    "wind_turbines": LookupFunctions(windturbines_popup, windturbines_chart, windturbines_choropleth),
     "wind_turbines_square": LookupFunctions(
-        get_data_for_windturbines_square, get_chart_for_wind_turbines_square, get_windturbines_square
+        windturbines_square_popup, windturbines_square_chart, windturbines_square_choropleth
     ),
 }
