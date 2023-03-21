@@ -9,12 +9,12 @@ from django_mapengine import layers, sources, utils
 from digiplan.map import models
 
 STATIC_LAYERS = {
-    "wind": layers.ClusterModelLayer(id="wind", model=models.WindTurbine, type="circle", source="wind"),
-    "pvroof": layers.StaticModelLayer(id="pvroof", model=models.PVroof, type="circle", source="static"),
-    "pvground": layers.StaticModelLayer(id="pvground", model=models.PVground, type="circle", source="static"),
-    "hydro": layers.StaticModelLayer(id="hydro", model=models.Hydro, type="circle", source="static"),
-    "biomass": layers.StaticModelLayer(id="biomass", model=models.Biomass, type="circle", source="static"),
-    "combustion": layers.StaticModelLayer(id="combustion", model=models.Combustion, type="circle", source="static"),
+    "wind": layers.ClusterModelLayer(id="wind", model=models.WindTurbine, source="wind"),
+    "pvroof": layers.StaticModelLayer(id="pvroof", model=models.PVroof, source="static"),
+    "pvground": layers.StaticModelLayer(id="pvground", model=models.PVground, source="static"),
+    "hydro": layers.StaticModelLayer(id="hydro", model=models.Hydro, source="static"),
+    "biomass": layers.StaticModelLayer(id="biomass", model=models.Biomass, source="static"),
+    "combustion": layers.StaticModelLayer(id="combustion", model=models.Combustion, source="static"),
 }
 
 
@@ -56,7 +56,6 @@ REGION_LAYERS = list(layers.get_region_layers())
 RESULT_LAYERS = [
     layers.MapLayer(
         id="results",
-        type="fill",
         source="results",
         source_layer="results",
         style=settings.MAP_ENGINE_LAYER_STYLES["results"],

@@ -36,8 +36,6 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         "use_distilled_mvts": settings.MAP_ENGINE_USE_DISTILLED_MVTS,
         "store_hot_init": config.STORE_HOT_INIT,
     }
-    layers = map_config.ALL_LAYERS
-    sources = map_config.SOURCES
 
     def get_context_data(self, **kwargs) -> dict:
         """Context data for main view.
