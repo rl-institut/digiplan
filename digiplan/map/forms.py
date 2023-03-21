@@ -110,7 +110,8 @@ class PanelForm(TemplateForm):
                 yield {"name": name, "field": field}
 
                 if "sidepanel" in item:
-                    self.sidepanels[name] = PanelForm(item["sidepanel"])
+                    self.sidepanels[name] = PanelForm()
+                    self.sidepanels[name].instantiate_form(item["sidepanel"])
             elif item["type"] == "switch":
                 attrs = {
                     "class": item["class"],

@@ -37,7 +37,6 @@
       </ul>
       <div class="c-tabs__content">
         {{ panel_formset.management_form}}
-        {% csrf_token %}
         <div class="c-tabs__pane fade show active" id="wind" role="tabpanel" aria-labelledby="wind-tab">
           <div id="js-power-mix" class="power-mix"></div>
           {{panel_formset.forms.0}}
