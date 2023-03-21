@@ -111,9 +111,10 @@ function createPercentagesOfPowerSources(msg) {
   return logMessage(msg);
 }
 
+/* when the other forms get Status Quo marks, there needs to be an iteration over the forms! (line 117)*/
 function updateSliderMarks(msg) {
   for (let [slider_name, slider_marks] of Object.entries(store.cold.slider_marks)) {
-    let slider = $(`#id_${slider_name}`).data("ionRangeSlider");
+    let slider = $(`#id_form-0-${slider_name}`).data("ionRangeSlider");
     slider.update({
       onUpdate: function (data) {  // jshint ignore:line
         addMarks(data, slider_marks);
@@ -129,7 +130,7 @@ function updateSliderMarks(msg) {
 function getColorsByIds(ids) {
   let colors = [];
   for (let id of ids) {
-    const cleanedId = id.replace(/^id_/, "");
+    const cleanedId = id.replace(/^id_form-0-/, "");
     colors.push(SETTINGS_PARAMETERS[cleanedId].color);
   }
   return colors;
