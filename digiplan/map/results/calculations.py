@@ -347,7 +347,7 @@ def population_square_choropleth() -> dict[int, int]:
     return density
 
 
-def windturbines_popup(municipality_id: Optional[int] = None) -> float:
+def windturbines_popup(municipality_id: Optional[int] = None) -> int:
     """Calculate number of windturbines (either for municipality or for whole region).
 
     Parameters
@@ -357,10 +357,10 @@ def windturbines_popup(municipality_id: Optional[int] = None) -> float:
 
     Returns
     -------
-    float
+    int
         Sum of windturbines
     """
-    windturbines = 0.0
+    windturbines = 0
     if municipality_id is not None:
         res_windturbine = models.WindTurbine.objects.filter(mun_id__exact=municipality_id).aggregate(Sum("unit_count"))[
             "unit_count__sum"

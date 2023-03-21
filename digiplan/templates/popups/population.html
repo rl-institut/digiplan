@@ -1,9 +1,5 @@
-<div id="js-popup" class="popup">
-  <div class="popup__header">
-    <h1 id="js-popup__title" class="popup__title">{{ title }}</h1>
-    <h2 id="js-popup__municipality" class="popup__municipality">{{ municipality }}</h2>
-  </div>
-  <div id="js-popup__key-values" class="popup__key-values">
+{% extends "popups/base.html" %}
+
     <!-- <span class="key-values__municipality">
         <span class="key-values__unit">{{ data.unit }}</span>
         <span class="key-values__year">{{ data.year }}</span>
@@ -13,35 +9,17 @@
         <span class="key-values__municipality-title">{{ data.region_title }}</span>
         <span class="key-values__municipality-value">{{ data.region_value }}</span>
     </span> -->
-    <span class="key-values__municipality"></span>
-      {% for key, value in data.items %}
-        {% if "region" not in key %}
-          {% if value %}
-          <span class="key-values__{{ key }}">{{ value }}</span>
-          {% endif %}
-        {% endif %}
-      {% endfor %}
-    </span>
-    <span class="key-values__region">
-      {% for key, value in data.items%}
-        {% if "region" in key %}
-          {% if value %}
-          <span class="key-values__{{ key }}">{{ value }}</span>
-          {% endif %}
-        {% endif %}
-      {% endfor %}
-    </span>
-  </div>
+
+{% block chart %}
   <div id="js-popup__chart" class="popup__chart" style="width: 416px; height: 200px;"></div>
-  <div id="js-popup__description" class="popup__description">{{ description }}</div>
-  <div id="js-popup__sources" class="popup__sources">
-    Quellen:
-    {% for source in sources %}
-      {% if forloop.first %}
-        <a href="{{ source.url }}">{{ source.name }}</a>
-      {% else %}
-        , <a href="{{ source.url }}">{{ source.name }}</a>
-      {% endif %}
-    {% endfor %}
-  </div>
+{% endblock %}
+<div id="js-popup__sources" class="popup__sources">
+  Quellen:
+  {% for source in sources %}
+    {% if forloop.first %}
+      <a href="{{ source.url }}">{{ source.name }}</a>
+    {% else %}
+      , <a href="{{ source.url }}">{{ source.name }}</a>
+    {% endif %}
+  {% endfor %}
 </div>
