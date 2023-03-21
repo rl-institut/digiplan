@@ -260,10 +260,6 @@ MAP_ENGINE_API_MVTS = {
 MAP_ENGINE_API_CLUSTERS = [
     setup.ClusterAPI("wind", "map", "WindTurbine"),
     setup.ClusterAPI("pvroof", "map", "PVroof"),
-    setup.ClusterAPI("pvground", "map", "PVground"),
-    setup.ClusterAPI("hydro", "map", "Hydro"),
-    setup.ClusterAPI("biomass", "map", "Biomass"),
-    setup.ClusterAPI("combustion", "map", "Combustion"),
 ]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"

@@ -44,9 +44,8 @@ class StaticLayerForm(TemplateForm):
     def __init__(self, layer: map_config.LegendLayer, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.layer = layer
-        self.fields["switch"].widget.attrs["id"] = layer.layer.id
 
-        if hasattr(layer.layer.model, "filters"):
+        if hasattr(layer.model, "filters"):
             self.has_filters = True
             for filter_ in layer.layer.model.filters:
                 if filter_.type == models.LayerFilterType.Range:
