@@ -67,26 +67,7 @@ for static_layer in layers.get_static_layers():
     ALL_LAYERS.extend(static_layer.get_map_layers())
 
 
-if settings.MAP_ENGINE_USE_DISTILLED_MVTS:
-    SOURCES = [
-        sources.MapSource(name=region, type="vector", tiles=[f"map/{region}_mvt/{{z}}/{{x}}/{{y}}/"])
-        for region in settings.MAP_ENGINE_REGIONS
-        if settings.MAP_ENGINE_ZOOM_LEVELS[region].min > settings.MAP_ENGINE_MAX_DISTILLED_ZOOM
-    ] + [
-        sources.MapSource(
-            name=region,
-            type="vector",
-            tiles=[f"static/mvts/{{z}}/{{x}}/{{y}}/{region}.mvt"],
-            maxzoom=settings.MAP_ENGINE_MAX_DISTILLED_ZOOM + 1,
-        )
-        for region in settings.MAP_ENGINE_REGIONS
-        if settings.MAP_ENGINE_ZOOM_LEVELS[region].min < settings.MAP_ENGINE_MAX_DISTILLED_ZOOM
-    ]
-else:
-    SOURCES = [
-        sources.MapSource(name=region, type="vector", tiles=[f"map/{region}_mvt/{{z}}/{{x}}/{{y}}/"])
-        for region in settings.MAP_ENGINE_REGIONS
-    ]
+SOURCES = list(sources.get_region_sources())
 
 SOURCES += [
     sources.MapSource(
