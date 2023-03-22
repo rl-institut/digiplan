@@ -3,7 +3,6 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from django.conf import settings
 from django_mapengine import layers, sources, utils
 
 
@@ -68,19 +67,6 @@ for static_layer in layers.get_static_layers():
 
 
 SOURCES = list(sources.get_region_sources())
-
-SOURCES += [
-    sources.MapSource(
-        "satellite",
-        type="raster",
-        tiles=[
-            "https://api.maptiler.com/tiles/satellite-v2/"
-            f"{{z}}/{{x}}/{{y}}.jpg?key={settings.MAP_ENGINE_TILING_SERVICE_TOKEN}",
-        ],
-    ),
-    sources.ClusterMapSource("wind", type="geojson", url="map/clusters/wind.geojson"),
-    sources.ClusterMapSource("pvroof", type="geojson", url="map/clusters/pvroof.geojson"),
-    sources.MapSource(name="static", type="vector", tiles=["map/static_mvt/{z}/{x}/{y}/"]),
-    sources.MapSource(name="static_distilled", type="vector", tiles=["map/static/mvts/{z}/{x}/{y}/static.mvt"]),
-    sources.MapSource(name="results", type="vector", tiles=["map/results_mvt/{z}/{x}/{y}/"]),
-]
+SOURCES.append(sources.get_satellite_source())
+SOURCES.extend(sources.get_static_sources())
+SOURCES.extend(sources.get_cluster_sources())
