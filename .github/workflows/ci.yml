@@ -11,7 +11,7 @@ on:
     paths-ignore: [ "docs/**" ]
 
   push:
-    branches: [ "main", "dev" ]
+    branches: [ "main", "dev", "feature-31-add-basic-tests-and-github-action-ci" ]
     paths-ignore: [ "docs/**" ]
 
 concurrency:
