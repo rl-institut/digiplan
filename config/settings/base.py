@@ -254,6 +254,12 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("municipality", "map", "Municipality"),
         setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
     ],
+    "static": [
+        setup.MVTAPI("pvground", "map", "PVground"),
+        setup.MVTAPI("hydro", "map", "Hydro"),
+        setup.MVTAPI("biomass", "map", "Biomass"),
+        setup.MVTAPI("combustion", "map", "Combustion"),
+    ],
     "results": [setup.MVTAPI("results", "map", "Municipality")],
 }
 

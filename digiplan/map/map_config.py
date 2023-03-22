@@ -6,15 +6,6 @@ from typing import Optional
 from django.conf import settings
 from django_mapengine import layers, sources, utils
 
-from digiplan.map import models
-
-STATIC_LAYERS = {
-    "pvground": layers.StaticModelLayer(id="pvground", model=models.PVground, source="static"),
-    "hydro": layers.StaticModelLayer(id="hydro", model=models.Hydro, source="static"),
-    "biomass": layers.StaticModelLayer(id="biomass", model=models.Biomass, source="static"),
-    "combustion": layers.StaticModelLayer(id="combustion", model=models.Combustion, source="static"),
-}
-
 
 @dataclass
 class LegendLayer:
@@ -59,28 +50,20 @@ LEGEND = {
     "Renewables": [
         LegendLayer("Windturbinen", "", layer_id="wind", color="blue"),
         LegendLayer("Aufdach-PV", "", layer_id="pvroof", color="yellow"),
-        LegendLayer("Boden-PV", "", STATIC_LAYERS["pvground"]),
-        LegendLayer("Hydro", "", STATIC_LAYERS["hydro"]),
-        LegendLayer("Biomasse", "", STATIC_LAYERS["biomass"]),
-        LegendLayer("Fossile Kraftwerke", "", STATIC_LAYERS["combustion"]),
+        LegendLayer("Boden-PV", "", layer_id="pvground"),
+        LegendLayer("Hydro", "", layer_id="hydro"),
+        LegendLayer("Biomasse", "", layer_id="biomass"),
+        LegendLayer("Fossile Kraftwerke", "", layer_id="combustion"),
     ],
 }
 
 REGION_LAYERS = list(layers.get_region_layers())
-RESULT_LAYERS = [
-    layers.MapLayer(
-        id="results",
-        source="results",
-        source_layer="results",
-        style=settings.MAP_ENGINE_LAYER_STYLES["results"],
-    ),
-]
 
 # Order is important! Last items are shown on top!
-ALL_LAYERS = REGION_LAYERS + RESULT_LAYERS
+ALL_LAYERS = REGION_LAYERS
 for cluster_layer in layers.get_cluster_layers():
     ALL_LAYERS.extend(cluster_layer.get_map_layers())
-for static_layer in STATIC_LAYERS.values():
+for static_layer in layers.get_static_layers():
     ALL_LAYERS.extend(static_layer.get_map_layers())
 
 

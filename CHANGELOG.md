@@ -17,6 +17,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - CONTRIBUTING.md file
 
 ### Changed
+- integrated mapengine
 - implementation of clustered layers
 - move navigation buttons below top navbar
 
