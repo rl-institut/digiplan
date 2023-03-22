@@ -12,9 +12,10 @@ from django.forms import (
     renderers,
 )
 from django.utils.safestring import mark_safe
+from django_mapengine import legend
 from django_select2.forms import Select2MultipleWidget
 
-from . import map_config, models
+from . import models
 from .widgets import BoxWidget, SwitchWidget, TitleWidget
 
 
@@ -41,7 +42,7 @@ class StaticLayerForm(TemplateForm):
     )
     counter = count()
 
-    def __init__(self, layer: map_config.LegendLayer, *args, **kwargs):
+    def __init__(self, layer: legend.LegendLayer, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.layer = layer
 
