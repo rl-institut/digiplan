@@ -3,7 +3,7 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from django_mapengine import layers, sources, utils
+from django_mapengine import layers, utils
 
 
 @dataclass
@@ -55,18 +55,3 @@ LEGEND = {
         LegendLayer("Fossile Kraftwerke", "", layer_id="combustion"),
     ],
 }
-
-REGION_LAYERS = list(layers.get_region_layers())
-
-# Order is important! Last items are shown on top!
-ALL_LAYERS = REGION_LAYERS
-for cluster_layer in layers.get_cluster_layers():
-    ALL_LAYERS.extend(cluster_layer.get_map_layers())
-for static_layer in layers.get_static_layers():
-    ALL_LAYERS.extend(static_layer.get_map_layers())
-
-
-SOURCES = list(sources.get_region_sources())
-SOURCES.append(sources.get_satellite_source())
-SOURCES.extend(sources.get_static_sources())
-SOURCES.extend(sources.get_cluster_sources())

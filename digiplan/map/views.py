@@ -67,8 +67,6 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         context["sources"] = categorized_sources
         context["store_cold_init"] = config.STORE_COLD_INIT
 
-        context.update(**self.get_mapengine_context(map_sources=map_config.SOURCES, map_layers=map_config.ALL_LAYERS))
-
         return context
 
 
