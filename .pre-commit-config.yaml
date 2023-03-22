@@ -34,9 +34,10 @@ repos:
         args: [ "--config=setup.cfg" ]
         additional_dependencies: [ flake8-isort ]
 
-  - repo: local
+  - repo: https://github.com/pycqa/pylint
+    rev: v2.16.2
     hooks:
-      - id: pylint
+    -   id: pylint
         name: pylint
         entry: env DATABASE_URL=null env PROJ_LIB=null USE_DOCKER=null pylint
         language: system
@@ -46,8 +47,3 @@ repos:
             "-rn", # Only display messages
             "-sn", # Don't display the score
           ]
-# sets up .pre-commit-ci.yaml to ensure pre-commit dependencies stay up to date
-ci:
-  autoupdate_schedule: weekly
-  skip: []
-  submodules: false
