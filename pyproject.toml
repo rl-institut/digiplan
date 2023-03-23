@@ -44,12 +44,14 @@ django-oemof = {git = "https://github.com/rl-institut/django-oemof.git"}
 colorbrewer = {git = "https://github.com/henhuy/colorbrewer-python.git"}
 geojson = "^3.0.1"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 Werkzeug = "^2.0.1" # https://github.com/pallets/werkzeug
 ipdb = "^0.13.7"  # https://github.com/gotcha/ipdb
 sphinx = "^5.3.0"  # https://github.com/sphinx-doc/sphinx
 sphinx-material = "^0.0.35"
 m2r2 = "^0.3.3"
+coverage = "^7.2.2"
+django-coverage-plugin = "^3.0.0"
 
 
 # Testing
