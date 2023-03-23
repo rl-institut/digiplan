@@ -42,8 +42,9 @@ repos:
         entry: env DATABASE_URL=null env PROJ_LIB=null USE_DOCKER=null pylint
         language: system
         types: [python]
-        args:
-          [
-            "-rn", # Only display messages
-            "-sn", # Don't display the score
+        args: [
+          "--output-format=parseable",
+          "--rcfile=.pylintrc",
+          "-rn", # Only display messages
+          "-sn", # Don't display the score
           ]
