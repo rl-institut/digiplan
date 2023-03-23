@@ -6,6 +6,8 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- test coverage to dev setup
+- CI with github actions (pre-commit and pytest)
 - (static) charts for electricity and mobility
 - dynamic choropleths
 - popups from templates
