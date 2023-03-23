@@ -35,7 +35,8 @@
     @extend .justify-content-around;
     @extend .align-items-center;
     @extend .border-0;
-    max-width: 42rem;
+    @extend .px-2;
+    max-width: 24rem;
 
     &:hover {
       @extend .bg-white;
@@ -49,27 +50,15 @@
     background-color: $gray-300;
   }
 
-  &__number {
-    @extend .d-inline-block;
-    @extend .text-white;
-    @extend .fw-bold;
-    @extend .rounded-circle;
-    @extend .me-1;
-    @extend .fs-7;
-    background-color: $gray-300 !important;
-    width: $steps-numbers-size;
-    height: $steps-numbers-size;
-    padding: 0.125rem 0.125rem 0.125rem 0.5rem;
-  }
-
   &__text {
     @extend .fs-7;
+    @extend .fw-semibold;
     @extend .d-none;
     @extend .d-sm-inline;
     @extend .d-md-none;
     @extend .d-lg-inline;
     color: $gray-300 !important;
-    letter-spacing: $letter-spacing-small;
+    letter-spacing: $letter-spacing-normal;
   }
 
   &__item.active .steps__number {
