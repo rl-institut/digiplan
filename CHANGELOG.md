@@ -16,7 +16,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ### Changed
 - implementation of clustered layers
-- remove nav elements from wizard
+- move navigation buttons below top navbar
 
 ### Fixed
 - choropleth and schema tests
