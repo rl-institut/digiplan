@@ -2,6 +2,7 @@ from itertools import count
 
 from django.db.models import Max, Min
 from django.forms import (
+    BaseFormSet,
     BooleanField,
     CharField,
     Form,
@@ -86,7 +87,8 @@ class PanelForm(TemplateForm):
     template_name = "forms/panel.html"
     sidepanels = {}
 
-    def instantiate_form(self, parameters):
+    def __init__(self, parameters, **kwargs):
+        super().__init__(**kwargs)
         self.fields = {item["name"]: item["field"] for item in self.generate_fields(parameters)}
 
     def generate_fields(self, parameters):
@@ -110,8 +112,7 @@ class PanelForm(TemplateForm):
                 yield {"name": name, "field": field}
 
                 if "sidepanel" in item:
-                    self.sidepanels[name] = PanelForm()
-                    self.sidepanels[name].instantiate_form(item["sidepanel"])
+                    self.sidepanels[name] = PanelForm(item["sidepanel"])
             elif item["type"] == "switch":
                 attrs = {
                     "class": item["class"],
@@ -135,10 +136,15 @@ class PanelForm(TemplateForm):
                 raise ValueError(f"Unknown parameter type '{item['type']}'")
 
 
+class PanelFormSet(BaseFormSet):
+    def get_form_kwargs(self, index):
+        if "panels" not in self.form_kwargs:
+            raise KeyError("You must set panels in form_kwargs.")
+        parameters = self.form_kwargs["panels"][index]
+        return {"parameters": parameters}
+
+
 # !"initial"
 def create_formset(panels: list):
-    PanelFormSet = formset_factory(PanelForm, extra=len(panels))
-    formset = PanelFormSet()
-    for form, panel in zip(formset, panels):
-        form.instantiate_form(panel)
-    return formset
+    panel_formset = formset_factory(PanelForm, extra=len(panels), formset=PanelFormSet)
+    return panel_formset(form_kwargs={"panels": panels})
