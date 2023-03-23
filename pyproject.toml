@@ -109,4 +109,3 @@ ignore = [
 fix = true
 show-fixes = true
 unfixable = ["UP007"]
-
