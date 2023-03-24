@@ -3,6 +3,10 @@ const renewable_share_goal_div = document.getElementById("renewable_share_goal_c
 const renewable_share_goal_chart = echarts.init(renewable_share_goal_div);
 const co2_emissions_goal_div = document.getElementById("co2_emissions_goal_chart");
 const co2_emissions_goal_chart = echarts.init(co2_emissions_goal_div);
+const renewable_share_scenario_div = document.getElementById("renewable_share_scenario_chart");
+const renewable_share_scenario_chart = echarts.init(renewable_share_scenario_div);
+const co2_emissions_scenario_div = document.getElementById("co2_emissions_scenario_chart");
+const co2_emissions_scenario_chart = echarts.init(co2_emissions_scenario_div);
 
 // Sidebar
 const chart3Element = document.getElementById("chart3");
@@ -54,6 +58,10 @@ const chart_legend = {
     itemHeight: 14
 };
 
+// Goal variables
+const renewable_share_goal_value = 90;
+const co2_emissions_goal_value = 30;
+
 // CHARTS
 const renewable_share_goal = {
   grid: chart_grid_goal,
@@ -97,7 +105,7 @@ const renewable_share_goal = {
         },
         symbol: 'none',
         data: [{
-          yAxis: 90,
+          yAxis: renewable_share_goal_value,
           label: {
             show: false
           }
@@ -149,7 +157,111 @@ const co2_emissions_goal = {
         },
         symbol: 'none',
         data: [{
-          yAxis: 30,
+          yAxis: co2_emissions_goal_value,
+          label: {
+            show: false
+          }
+        }]
+      }
+    },
+  ],
+}
+
+const renewable_share_scenario = {
+  grid: chart_grid_goal,
+  tooltip: chart_tooltip,
+  textStyle: chart_text_style,
+  xAxis: {
+    type: 'category',
+    data: ['2021', '2045'],
+    axisTick: {
+      show: false
+    }
+  },
+  yAxis: {
+    show: true,
+    type: 'value',
+    maxValueSpan: '100'
+  },
+  series: [
+    { 
+      type: 'bar',
+      barWidth: chart_bar_width_sm,
+      data: [
+        {
+          value: 30, 
+          itemStyle: {
+            color: '#C3D1DC'
+          }
+        },
+        {
+          value: 90, 
+          itemStyle: {
+            color: '#06DFA7'
+          }
+        },
+      ],
+      markLine: {
+        silent: true,
+        lineStyle: {
+          color: '#00BC8C',
+          type: 'solid'
+        },
+        symbol: 'none',
+        data: [{
+          yAxis: renewable_share_goal_value,
+          label: {
+            show: false
+          }
+        }]
+      }
+    },
+  ],
+}
+
+const co2_emissions_scenario = {
+  grid: chart_grid_goal,
+  tooltip: chart_tooltip,
+  textStyle: chart_text_style,
+  xAxis: {
+    type: 'category',
+    data: ['2021', '2045'],
+    axisTick: {
+      show: false
+    }
+  },
+  yAxis: {
+    show: true,
+    type: 'value',
+    maxValueSpan: '100'
+  },
+  series: [
+    { 
+      type: 'bar',
+      barWidth: chart_bar_width_sm,
+      data: [
+        {
+          value: 90, 
+          itemStyle: {
+            color: '#C3D1DC'
+          }
+        },
+        {
+          value: 30, 
+          itemStyle: {
+            color: '#E6A100'
+          }
+        },
+      ],
+      markLine: {
+        silent: true,
+        lineStyle: {
+          color: '#BE880B',
+          type: 'solid'
+        },
+        symbol: 'none',
+        data: [{
+          yAxis: co2_emissions_goal_value,
           label: {
             show: false
           }
@@ -803,6 +915,8 @@ function resizeCharts() {
   setTimeout(function () {
     if (isVisible(renewable_share_goal_div)) renewable_share_goal_chart.resize();
     if (isVisible(co2_emissions_goal_div)) co2_emissions_goal_chart.resize();
+    if (isVisible(renewable_share_scenario_div)) renewable_share_scenario_chart.resize();
+    if (isVisible(co2_emissions_scenario_div)) co2_emissions_scenario_chart.resize();
     if (isVisible(chart3Element)) chart3.resize();
     if (isVisible(chart4Element)) chart4.resize();
     detailed_overview_chart.resize();
@@ -817,6 +931,8 @@ function resizeCharts() {
 // Goals & scenarios
 renewable_share_goal_chart.setOption(renewable_share_goal);
 co2_emissions_goal_chart.setOption(co2_emissions_goal);
+renewable_share_scenario_chart.setOption(renewable_share_scenario);
+co2_emissions_scenario_chart.setOption(co2_emissions_scenario);
 
 // Sidebar
 chart3.setOption(option);
