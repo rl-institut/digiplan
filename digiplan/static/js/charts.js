@@ -1,6 +1,6 @@
 // Sidebar
-const anteil_ee_chart = echarts.init(document.getElementById("anteil_ee_chart"));
-const co2_emissionen_chart = echarts.init(document.getElementById("co2_emissionen_chart"));
+const renewable_share_goal_chart = echarts.init(document.getElementById("renewable_share_goal_chart"));
+const co2_emissions_goal_chart = echarts.init(document.getElementById("co2_emissions_goal_chart"));
 const chart3Element = document.getElementById("chart3");
 const chart3 = echarts.init(chart3Element);
 const chart4Element = document.getElementById("chart4");
@@ -14,7 +14,7 @@ const electricity_THG_chart = echarts.init(document.getElementById("electricity_
 const mobility_overview_chart = echarts.init(document.getElementById("mobility_overview_chart"));
 const mobility_THG_chart = echarts.init(document.getElementById("mobility_THG_chart"));
 
-const anteil_ee = {
+const renewable_share_goal = {
   tooltip: {
     trigger: 'axis',
     axisPointer: {
@@ -83,7 +83,7 @@ const anteil_ee = {
   ],
 }
 
-const co2_emissionen = {
+const co2_emissions_goal = {
   tooltip: {
     trigger: 'axis',
     axisPointer: {
@@ -918,8 +918,8 @@ function isVisible(element) {
 
 function resizeCharts() {
   setTimeout(function () {
-    anteil_ee_chart.resize();
-    co2_emissionen_chart.resize();
+    renewable_share_goal_chart.resize();
+    co2_emissions_goal_chart.resize();
     chart3.resize();
     chart4.resize();
     detailed_overview_chart.resize();
@@ -932,8 +932,8 @@ function resizeCharts() {
 }
 
 // Sidebar
-anteil_ee_chart.setOption(anteil_ee);
-co2_emissionen_chart.setOption(co2_emissionen);
+renewable_share_goal_chart.setOption(renewable_share_goal);
+co2_emissions_goal_chart.setOption(co2_emissions_goal);
 chart3.setOption(option);
 chart4.setOption(option);
 detailed_overview_chart.setOption(detailed_overview_option);
