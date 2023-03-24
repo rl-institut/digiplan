@@ -15,6 +15,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - layer switches to map legend
 - legend for choropleths
 - CONTRIBUTING.md file
+- goal charts in sidebar as placeholders
 
 ### Changed
 - implementation of clustered layers
