@@ -1,0 +1,10 @@
+{
+  "lookup": "capacity",
+  "series": [
+    {
+      "data": [],
+      "name": "Installed Capacity"
+    }
+  ],
+  "title": "installed capacity in different types"
+}

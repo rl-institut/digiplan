@@ -1332,7 +1332,7 @@ libsass = ">=0.7.0,<1"
 
 [[package]]
 name = "django-mapengine"
-version = "0.3.0"
+version = "0.4.0"
 description = "Map engine for maplibre in django"
 category = "main"
 optional = false
@@ -1352,7 +1352,7 @@ range-key-dict = "^1.1.0"
 type = "git"
 url = "https://github.com/rl-institut/django-mapengine.git"
 reference = "HEAD"
-resolved_reference = "e0a7e81f32bb642bf25c770010674146700e0850"
+resolved_reference = "ba531dfab1f1676388460e35bc7fedfb34094fd1"
 
 [[package]]
 name = "django-oemof"

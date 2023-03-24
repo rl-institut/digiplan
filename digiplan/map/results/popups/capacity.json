@@ -1,0 +1,14 @@
+{
+  "description": "something about the installed capacity of the renewable energy in this region and / or municipality",
+  "id": "14",
+  "data": {
+    "unit": "installed capacity",
+    "year": null,
+    "municipality_value": null,
+    "region_title": "ABW region",
+    "region_value": null
+  },
+  "municipality": null,
+  "sources": [ ],
+  "title": "installed capacity"
+}
