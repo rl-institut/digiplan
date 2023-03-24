@@ -1,6 +1,8 @@
 // Goals & scenarios
-const renewable_share_goal_chart = echarts.init(document.getElementById("renewable_share_goal_chart"));
-const co2_emissions_goal_chart = echarts.init(document.getElementById("co2_emissions_goal_chart"));
+const renewable_share_goal_div = document.getElementById("renewable_share_goal_chart");
+const renewable_share_goal_chart = echarts.init(renewable_share_goal_div);
+const co2_emissions_goal_div = document.getElementById("co2_emissions_goal_chart");
+const co2_emissions_goal_chart = echarts.init(co2_emissions_goal_div);
 
 // Sidebar
 const chart3Element = document.getElementById("chart3");
@@ -799,10 +801,10 @@ function isVisible(element) {
 
 function resizeCharts() {
   setTimeout(function () {
-    renewable_share_goal_chart.resize();
-    co2_emissions_goal_chart.resize();
-    chart3.resize();
-    chart4.resize();
+    if (isVisible(renewable_share_goal_div)) renewable_share_goal_chart.resize();
+    if (isVisible(co2_emissions_goal_div)) co2_emissions_goal_chart.resize();
+    if (isVisible(chart3Element)) chart3.resize();
+    if (isVisible(chart4Element)) chart4.resize();
     detailed_overview_chart.resize();
     ghg_overview_chart.resize();
     electricity_overview_chart.resize();
