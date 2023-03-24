@@ -1,13 +1,124 @@
+// Sidebar
+const anteil_ee_chart = echarts.init(document.getElementById("anteil_ee_chart"));
+const co2_emissionen_chart = echarts.init(document.getElementById("co2_emissionen_chart"));
 const chart3Element = document.getElementById("chart3");
 const chart3 = echarts.init(chart3Element);
 const chart4Element = document.getElementById("chart4");
 const chart4 = echarts.init(chart4Element);
+
+// Results view
 const detailed_overview_chart = echarts.init(document.getElementById("detailed_overview_chart"));
 const ghg_overview_chart = echarts.init(document.getElementById("ghg_overview_chart"));
 const electricity_overview_chart = echarts.init(document.getElementById("electricity_overview_chart"));
 const electricity_THG_chart = echarts.init(document.getElementById("electricity_THG_chart"));
 const mobility_overview_chart = echarts.init(document.getElementById("mobility_overview_chart"));
 const mobility_THG_chart = echarts.init(document.getElementById("mobility_THG_chart"));
+
+const anteil_ee = {
+  xAxis: {
+    type: 'category',
+    data: ['0','2021', '2045', '0'],
+    boundaryGap: false
+  },
+  yAxis: {
+    show: true,
+    type: 'value',
+      maxValueSpan: '100',
+      name: 'Anteil Erneuerbare\n Energien (%)',
+        nameLocation: 'end',
+        nameTextStyle: 'Roboto',
+          width: '76',
+          heigth: '32',
+        fontWeight: '300',
+        fontSize: '14',
+  },
+  series: [
+        {
+      type: 'line',
+        boundaryGap: false,
+      smooth: 0.6,
+      lineStyle: {
+        color: '#06DFA7',
+         width: 5
+      },
+      data: [90,90,90,90]
+    },
+    { 
+      type: 'bar',
+        barWidth:'40',
+      data: [
+        {value: 0, 
+        itemStyle: {
+          color: '#F4F6F7'
+          }
+        },
+        {value: 30, 
+        itemStyle: {
+          color: '#C3D1DC'
+          }
+        },
+        {value: 90, 
+        itemStyle: {
+          color: '#06DFA7'
+          }
+        },
+      ],
+    },
+  ],
+}
+
+const co2_emissionen = {
+  xAxis: {
+    type: 'category',
+    data: ['0','2021', '2045', '0'],
+    boundaryGap: false
+  },
+  yAxis: {
+    show: true,
+    type: 'value',
+      maxValueSpan: '100',
+      name: 'CO2-Emissionen (Mt)',
+        nameLocation: 'end',
+        nameTextStyle: 'Roboto',
+          width: '76',
+          heigth: '32',
+        fontWeight: '300',
+        fontSize: '14',
+  },
+  series: [
+        {
+      type: 'line',
+        boundaryGap: false,
+      smooth: 0.6,
+      lineStyle: {
+        color: '#E6A100',
+         width: 5
+      },
+      data: [30,30,30,30]
+    },
+    { 
+      type: 'bar',
+        barWidth:'40',
+      data: [
+        {value: 0, 
+        itemStyle: {
+          color: '#F4F6F7'
+          }
+        },
+        {value: 90, 
+        itemStyle: {
+          color: '#C3D1DC'
+          }
+        },
+        {value: 30, 
+        itemStyle: {
+          color: '#E6A100'
+          }
+        },
+      ],
+    },
+  ],
+}
 
 const option = {
   title: {
@@ -776,8 +887,10 @@ function isVisible(element) {
 
 function resizeCharts() {
   setTimeout(function () {
-    if (isVisible(chart3Element)) chart3.resize();
-    if (isVisible(chart4Element)) chart4.resize();
+    anteil_ee_chart.resize();
+    co2_emissionen_chart.resize();
+    chart3.resize();
+    chart4.resize();
     detailed_overview_chart.resize();
     ghg_overview_chart.resize();
     electricity_overview_chart.resize();
@@ -787,6 +900,9 @@ function resizeCharts() {
   }, 200);
 }
 
+// Sidebar
+anteil_ee_chart.setOption(anteil_ee);
+co2_emissionen_chart.setOption(co2_emissionen);
 chart3.setOption(option);
 chart4.setOption(option);
 detailed_overview_chart.setOption(detailed_overview_option);

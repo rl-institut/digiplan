@@ -1,7 +1,8 @@
 {% load static i18n %}
 
 <div class="panel__chart">
-  <img src="{% static 'images/Ziele-charts.svg' %}" alt="Ziele zu erreichen: Zunahme Anteil Erneuerbare Energien auf 95% und Reduzierung der CO2-Emissionen auf 50 Mt" data-bs-toggle="tooltip" title="Einwohner im Jahr 2021" >
+  <div id="anteil_ee_chart" class="results__chart"></div>
+  <div id="co2_emissionen_chart" class="results__chart"></div>
 </div>
 <div class="panel__settings panel__settings--padding">
   <div class="panel-item">
