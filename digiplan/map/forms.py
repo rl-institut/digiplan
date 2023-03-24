@@ -12,10 +12,10 @@ from django.forms import (
     renderers,
 )
 from django.utils.safestring import mark_safe
+from django_mapengine import legend
 from django_select2.forms import Select2MultipleWidget
 
 from . import models
-from .mapset import setup
 from .widgets import BoxWidget, SwitchWidget, TitleWidget
 
 
@@ -42,12 +42,11 @@ class StaticLayerForm(TemplateForm):
     )
     counter = count()
 
-    def __init__(self, layer: setup.LegendLayer, *args, **kwargs):
+    def __init__(self, layer: legend.LegendLayer, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.layer = layer
-        self.fields["switch"].widget.attrs["id"] = layer.layer.id
 
-        if hasattr(layer.layer.model, "filters"):
+        if hasattr(layer.model, "filters"):
             self.has_filters = True
             for filter_ in layer.layer.model.filters:
                 if filter_.type == models.LayerFilterType.Range:

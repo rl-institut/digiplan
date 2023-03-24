@@ -1,14 +1,15 @@
-// Events
-
-map.on("load", function () {
-  PubSub.publish(eventTopics.MAP_LOADED);
-});
-
-
 // Subscriptions
 
 PubSub.subscribe(eventTopics.MAP_LOADED, init_map_location);
 PubSub.subscribe(eventTopics.MAP_LAYERS_LOADED, init_states);
+
+
+const store = initStore();
+
+function initStore() {
+  const store_cold_init = JSON.parse(document.getElementById("store_cold_init").textContent);
+  return new Store(store_cold_init);
+}
 
 
 // Subscriber Functions

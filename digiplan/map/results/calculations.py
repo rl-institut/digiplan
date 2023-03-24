@@ -9,8 +9,7 @@ import jsonschema
 from django.db.models import Sum
 
 from config import schemas
-from digiplan.map import models
-from digiplan.map.config import config
+from digiplan.map import config, models
 
 LookupFunctions = namedtuple("PopupData", ("data_fct", "chart_fct", "choropleth_fct"))
 

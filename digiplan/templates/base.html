@@ -69,27 +69,7 @@
         <script src="{% static 'django_select2/django_select2.js' %}"></script>
       {% endcompress %}
 
-      {% compress js inline %}
-        <script>
-          let store_cold_init = {
-            session_id: "{{session_id}}",
-            allowedSwitches: ["wind_distance"],
-            debugModeVerbose: false,
-            detailTab: {
-              showPotentialLayers: true
-            },
-            hoveredStateId: null,
-            staticState: 0,
-            useDistilledMVTs: "{{ use_distilled_mvts }}" === "True",
-            basemapFocusElement: "basemaps__default",
-          }
-          store_cold_init = { ...store_cold_init, ...{{store_cold_init|safe}} };
-          var store_hot_init = {{store_hot_init|safe}};
-        </script>
-      {% endcompress %}
-
       {% compress js %}
-        <script src="{% static 'js/store.js' %}"></script>
         <script src="{% static 'js/event-topics.js' %}"></script>
         <script src="{% static 'js/charts.js' %}"></script>
         <script src="{% static 'js/layers-box.js' %}"></script>

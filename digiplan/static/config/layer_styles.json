@@ -1,5 +1,6 @@
 {
   "region-fill": {
+    "type": "fill",
     "paint": {
       "fill-color": "rgb(250,174,29)",
       "fill-opacity": [
@@ -18,6 +19,7 @@
     }
   },
   "region-label": {
+    "type": "symbol",
     "layout": {
       "text-field": "{name}",
       "text-letter-spacing": 0.04,
@@ -47,6 +49,7 @@
     }
   },
   "region-line": {
+    "type": "line",
     "paint": {
       "line-color": "rgb(250, 174,29)",
       "line-width": [
@@ -65,36 +68,35 @@
     }
   },
   "wind": {
-    "paint": {
-      "circle-color": "#6A89CC",
-      "circle-opacity": 0.5,
-      "circle-radius": [
-        "*",
-        5,
+    "type": "symbol",
+    "layout": {
+      "icon-image": "wind",
+      "icon-size": [
+        "interpolate",
         [
-          "log10",
-          [
-            "get",
-            "capacity_net"
-          ]
-        ]
-      ],
-      "circle-stroke-width": [
-        "case",
+          "linear"
+        ],
         [
-          "boolean",
-          [
-            "get",
-            "geometry_approximated"
-          ],
-          false
+          "get",
+          "unit_count"
         ],
         0,
-        1
-      ]
+        0.5,
+        10,
+        1.0,
+        100,
+        1.25,
+        1000,
+        1.5
+      ],
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "blue"
     }
   },
   "wind_cluster": {
+    "type": "circle",
     "paint": {
       "circle-color": [
         "step",
@@ -117,6 +119,7 @@
     }
   },
   "wind_cluster_count": {
+    "type": "symbol",
     "filter": ["has", "point_count"],
     "layout": {
       "text-field": "{point_count_abbreviated}",
@@ -125,36 +128,67 @@
     }
   },
   "pvroof": {
-    "paint": {
-      "circle-color": "#FFD660",
-      "circle-opacity": 0.5,
-      "circle-radius": [
-        "*",
-        5,
+    "type": "symbol",
+    "layout": {
+      "icon-image": "pv",
+      "icon-size": [
+        "interpolate",
         [
-          "log10",
-          [
-            "get",
-            "capacity_net"
-          ]
-        ]
-      ],
-      "circle-stroke-width": [
-        "case",
+          "linear"
+        ],
         [
-          "boolean",
-          [
-            "get",
-            "geometry_approximated"
-          ],
-          false
+          "get",
+          "unit_count"
         ],
         0,
-        1
+        0.5,
+        10,
+        1.0,
+        100,
+        1.25,
+        1000,
+        1.5
+      ],
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "yellow"
+    }
+  },
+  "pvroof_cluster": {
+    "type": "circle",
+    "paint": {
+      "circle-color": [
+        "step",
+        ["get", "point_count"],
+        "#51bbd6",
+        100,
+        "#f1f075",
+        750,
+        "#f28cb1"
+      ],
+      "circle-radius": [
+        "step",
+        ["get", "point_count"],
+        20,
+        100,
+        30,
+        750,
+        40
       ]
     }
   },
+  "pvroof_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    }
+  },
   "pvground": {
+    "type": "circle",
     "paint": {
       "circle-color": "#F6B93B",
       "circle-opacity": 0.5,
@@ -185,6 +219,7 @@
     }
   },
   "hydro": {
+    "type": "circle",
     "paint": {
       "circle-color": "#9CC4D9",
       "circle-opacity": 0.5,
@@ -215,6 +250,7 @@
     }
   },
   "biomass": {
+    "type": "circle",
     "paint": {
       "circle-color": "#52C41A",
       "circle-opacity": 0.5,
@@ -245,6 +281,7 @@
     }
   },
   "combustion": {
+    "type": "circle",
     "paint": {
       "circle-color": "#1A1A1A",
       "circle-opacity": 0.5,
@@ -275,6 +312,7 @@
     }
   },
   "results": {
+    "type": "fill",
     "paint": {
       "fill-color": [
         "interpolate",

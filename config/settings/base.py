@@ -5,6 +5,7 @@ import os
 
 import environ
 from django.core.exceptions import ValidationError
+from django_mapengine import setup
 
 ROOT_DIR = environ.Path(__file__) - 3  # (digiplan/config/settings/base.py - 3 = digiplan/)
 APPS_DIR = ROOT_DIR.path("digiplan")
@@ -88,7 +89,7 @@ THIRD_PARTY_APPS = [
     # "raster",
 ]
 
-LOCAL_APPS = ["digiplan.map.apps.MapConfig", "django_oemof"]
+LOCAL_APPS = ["digiplan.map.apps.MapConfig", "django_oemof", "django_mapengine"]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -223,29 +224,54 @@ INSTALLED_APPS += ["compressor"]
 STATICFILES_FINDERS += ["compressor.finders.CompressorFinder"]
 
 # django-libsass
+# ------------------------------------------------------------------------------
 COMPRESS_PRECOMPILERS = [("text/x-scss", "django_libsass.SassCompiler")]
 
 COMPRESS_CACHEABLE_PRECOMPILERS = (("text/x-scss", "django_libsass.SassCompiler"),)
 
 # Your stuff...
 # ------------------------------------------------------------------------------
-
-# If given, use local PROJ_LIB environment variable
-if env("PROJ_LIB", default=False):
-    PROJ_LIB = env("PROJ_LIB")
-
-DISTILL = env.bool("DISTILL", False)
-USE_DISTILLED_MVTS = env.bool("USE_DISTILLED_MVTS", True)
-
 PASSWORD_PROTECTION = env.bool("PASSWORD_PROTECTION", False)
 PASSWORD = env.str("PASSWORD", default=None)
 if PASSWORD_PROTECTION and PASSWORD is None:
     raise ValidationError("Password protection is on, but no password is given")
 
-TILING_SERVICE_TOKEN = env.str("TILING_SERVICE_TOKEN", default=None)
-TILING_SERVICE_STYLE_ID = env.str("TILING_SERVICE_STYLE_ID", default=None)
-
 SELECT2_CACHE_BACKEND = "select2"
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# django-mapengine
+# ------------------------------------------------------------------------------
+MAP_ENGINE_CENTER_AT_STARTUP = [12.537917858911896, 51.80812518969171]
+MAP_ENGINE_ZOOM_AT_STARTUP = 9
+MAP_ENGINE_MAX_BOUNDS = [[11.280733017118229, 51.22918643452503], [13.616574868700604, 52.35515806663738]]
+
+MAP_ENGINE_IMAGES = [setup.MapImage("wind", "images/icons/i_wind.png")]
+
+MAP_ENGINE_API_MVTS = {
+    "municipality": [
+        setup.MVTAPI("municipality", "map", "Municipality"),
+        setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
+    ],
+    "static": [
+        setup.MVTAPI("pvground", "map", "PVground"),
+        setup.MVTAPI("hydro", "map", "Hydro"),
+        setup.MVTAPI("biomass", "map", "Biomass"),
+        setup.MVTAPI("combustion", "map", "Combustion"),
+    ],
+    "results": [setup.MVTAPI("results", "map", "Municipality")],
+}
+
+MAP_ENGINE_API_CLUSTERS = [
+    setup.ClusterAPI("wind", "map", "WindTurbine"),
+    setup.ClusterAPI("pvroof", "map", "PVroof"),
+]
+
+MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
+MAP_ENGINE_ZOOM_LEVELS = {
+    "municipality": setup.Zoom(8, 12),
+}
+
+MAP_ENGINE_CHOROPLETHS = [setup.Choropleth("population", layers=["municipality"])]
+MAP_ENGINE_POPUPS = ["results"]

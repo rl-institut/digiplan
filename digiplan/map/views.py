@@ -3,24 +3,22 @@
 As map app is SPA, this module contains main view and various API points.
 """
 import json
-import pathlib
-import uuid
 
 from django.conf import settings
 from django.http import HttpRequest, JsonResponse
 from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import render_to_string
 from django.views.generic import TemplateView
+from django_mapengine import views
 
-from digiplan.map.config import config
+from digiplan.map import config
 from digiplan.map.results import core
 
-from .forms import PanelForm, StaticLayerForm
-from .mapset import setup
+from . import forms, map_config
 from .results import calculations
 
 
-class MapGLView(TemplateView):
+class MapGLView(TemplateView, views.MapEngineMixin):
     """Main view for map app (SPA)."""
 
     template_name = "map.html"
@@ -28,21 +26,15 @@ class MapGLView(TemplateView):
         "debug": settings.DEBUG,
         "password_protected": settings.PASSWORD_PROTECTION,
         "password": settings.PASSWORD,
-        "tiling_service_token": settings.TILING_SERVICE_TOKEN,
-        "tiling_service_style_id": settings.TILING_SERVICE_STYLE_ID,
-        "map_images": config.MAP_IMAGES,
-        "map_layers": [layer.get_layer() for layer in setup.ALL_LAYERS],
-        "layers_at_startup": setup.LAYERS_AT_STARTUP,
-        "map_popups": setup.POPUPS,
         "area_switches": {
-            category: [StaticLayerForm(layer) for layer in layers] for category, layers in setup.LEGEND.items()
+            category: [forms.StaticLayerForm(layer) for layer in layers]
+            for category, layers in map_config.LEGEND.items()
         },
-        "energy_settings_panel": PanelForm(config.ENERGY_SETTINGS_PANEL),
-        "heat_settings_panel": PanelForm(config.HEAT_SETTINGS_PANEL),
-        "traffic_settings_panel": PanelForm(config.TRAFFIC_SETTINGS_PANEL),
-        "use_distilled_mvts": settings.USE_DISTILLED_MVTS,
+        "energy_settings_panel": forms.PanelForm(config.ENERGY_SETTINGS_PANEL),
+        "heat_settings_panel": forms.PanelForm(config.HEAT_SETTINGS_PANEL),
+        "traffic_settings_panel": forms.PanelForm(config.TRAFFIC_SETTINGS_PANEL),
+        "use_distilled_mvts": settings.MAP_ENGINE_USE_DISTILLED_MVTS,
         "store_hot_init": config.STORE_HOT_INIT,
-        "zoom_levels": config.ZOOM_LEVELS,
     }
 
     def get_context_data(self, **kwargs) -> dict:
@@ -59,54 +51,23 @@ class MapGLView(TemplateView):
             context for main view
         """
         # Add unique session ID
-        session_id = str(uuid.uuid4())
         context = super().get_context_data(**kwargs)
-        context["session_id"] = session_id
-        context["layer_styles"] = config.LAYER_STYLES
+
         context["settings_parameters"] = config.ENERGY_SETTINGS_PANEL
         context["settings_dependency_map"] = config.SETTINGS_DEPENDENCY_MAP
         context["dependency_parameters"] = config.DEPENDENCY_PARAMETERS
 
-        # Sources need valid URL (containing host and port), thus they have to be defined using request:
-        context["map_sources"] = {map_source.name: map_source.get_source(self.request) for map_source in setup.SOURCES}
-
         # Categorize sources
         categorized_sources = {
-            category: [config.SOURCES[layer.layer.id] for layer in layers if layer.layer.id in config.SOURCES]
-            for category, layers in setup.LEGEND.items()
+            category: [
+                config.SOURCES[layer.get_layer_id()] for layer in layers if layer.get_layer_id() in config.SOURCES
+            ]
+            for category, layers in map_config.LEGEND.items()
         }
         context["sources"] = categorized_sources
-
-        # Add popup-layer IDs to cold store
-        config.STORE_COLD_INIT["popup_layers"] = setup.POPUPS
-        config.STORE_COLD_INIT["region_layers"] = [
-            layer.id for layer in setup.REGION_LAYERS if layer.id.startswith("fill")
-        ]
-        config.STORE_COLD_INIT["result_views"] = {}  # Placeholder for already downloaded results (used in results.js)
-        context["store_cold_init"] = json.dumps(config.STORE_COLD_INIT)
+        context["store_cold_init"] = config.STORE_COLD_INIT
 
         return context
-
-
-def get_clusters(request: HttpRequest) -> JsonResponse:  # noqa: ARG001
-    """Return cluster geojson.
-
-    Parameters
-    ----------
-    request : HttpRequest
-        Request from map to visualize clusters
-
-    Returns
-    -------
-    JsonResponse
-        Clusters as Geojson
-    """
-    try:
-        with pathlib.Path(config.CLUSTER_GEOJSON_FILE).open("r", encoding="utf-8") as geojson_file:
-            clusters = json.load(geojson_file)
-    except FileNotFoundError:
-        clusters = {}
-    return JsonResponse(clusters)
 
 
 def get_popup(request: HttpRequest, lookup: str, region: int) -> JsonResponse:  # noqa: ARG001
@@ -155,8 +116,8 @@ def get_choropleth(request: HttpRequest, lookup: str, scenario: str) -> JsonResp
         Containing key-value pairs of municipality_ids and values and related color style
     """
     values = calculations.create_choropleth_data(lookup)
-    fill_color = config.CHOROPLETHS.get_fill_color(lookup, list(values.values()))
-    return JsonResponse({"values": values, "fill_color": fill_color})
+    fill_color = settings.MAP_ENGINE_CHOROPLETH_STYLES.get_fill_color(lookup, list(values.values()))
+    return JsonResponse({"values": values, "paintProperties": {"fill-color": fill_color, "fill-opacity": 1}})
 
 
 def get_visualization(request: HttpRequest) -> JsonResponse:
