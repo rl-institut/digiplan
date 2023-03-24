@@ -1,25 +1,5 @@
 {% extends "popups/base.html" %}
 
-    <!-- <span class="key-values__municipality">
-        <span class="key-values__unit">{{ data.unit }}</span>
-        <span class="key-values__year">{{ data.year }}</span>
-        <span class="key-values__region-value">{{ data.municipality_value }}</span>
-    </span>
-    <span class="key-values__region">
-        <span class="key-values__municipality-title">{{ data.region_title }}</span>
-        <span class="key-values__municipality-value">{{ data.region_value }}</span>
-    </span> -->
-
 {% block chart %}
   <div id="js-popup__chart" class="popup__chart" style="width: 416px; height: 200px;"></div>
 {% endblock %}
-<div id="js-popup__sources" class="popup__sources">
-  Quellen:
-  {% for source in sources %}
-    {% if forloop.first %}
-      <a href="{{ source.url }}">{{ source.name }}</a>
-    {% else %}
-      , <a href="{{ source.url }}">{{ source.name }}</a>
-    {% endif %}
-  {% endfor %}
-</div>
