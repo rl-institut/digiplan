@@ -15,6 +15,20 @@ const mobility_overview_chart = echarts.init(document.getElementById("mobility_o
 const mobility_THG_chart = echarts.init(document.getElementById("mobility_THG_chart"));
 
 const anteil_ee = {
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  grid: {
+    top: '10%',
+    left: '15%',
+    right: '15%',
+    bottom: '18%',
+    height: '120',
+    containLabel: true
+  },
   xAxis: {
     type: 'category',
     data: ['0','2021', '2045', '0'],
@@ -23,43 +37,45 @@ const anteil_ee = {
   yAxis: {
     show: true,
     type: 'value',
-      maxValueSpan: '100',
-      name: 'Anteil Erneuerbare\n Energien (%)',
-        nameLocation: 'end',
-        nameTextStyle: 'Roboto',
-          width: '76',
-          heigth: '32',
-        fontWeight: '300',
-        fontSize: '14',
+    maxValueSpan: '100',
+    nameLocation: 'end',
+    nameTextStyle: 'Roboto',
+    width: '76',
+    heigth: '32',
+    fontWeight: '300',
+    fontSize: '14',
   },
   series: [
-        {
+    {
       type: 'line',
-        boundaryGap: false,
+      boundaryGap: false,
       smooth: 0.6,
       lineStyle: {
         color: '#06DFA7',
-         width: 5
+        width: 1
       },
       data: [90,90,90,90]
     },
     { 
       type: 'bar',
-        barWidth:'40',
+      barWidth:'16',
       data: [
-        {value: 0, 
-        itemStyle: {
-          color: '#F4F6F7'
+        {
+          value: 0, 
+          itemStyle: {
+            color: '#F4F6F7'
           }
         },
-        {value: 30, 
-        itemStyle: {
-          color: '#C3D1DC'
+        {
+          value: 30, 
+          itemStyle: {
+            color: '#C3D1DC'
           }
         },
-        {value: 90, 
-        itemStyle: {
-          color: '#06DFA7'
+        {
+          value: 90, 
+          itemStyle: {
+            color: '#06DFA7'
           }
         },
       ],
@@ -68,6 +84,20 @@ const anteil_ee = {
 }
 
 const co2_emissionen = {
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'shadow'
+    }
+  },
+  grid: {
+    top: '10%',
+    left: '15%',
+    right: '15%',
+    bottom: '18%',
+    height: '120',
+    containLabel: true
+  },
   xAxis: {
     type: 'category',
     data: ['0','2021', '2045', '0'],
@@ -76,43 +106,45 @@ const co2_emissionen = {
   yAxis: {
     show: true,
     type: 'value',
-      maxValueSpan: '100',
-      name: 'CO2-Emissionen (Mt)',
-        nameLocation: 'end',
-        nameTextStyle: 'Roboto',
-          width: '76',
-          heigth: '32',
-        fontWeight: '300',
-        fontSize: '14',
+    maxValueSpan: '100',
+    nameLocation: 'end',
+    nameTextStyle: 'Roboto',
+    width: '76',
+    heigth: '32',
+    fontWeight: '300',
+    fontSize: '14',
   },
   series: [
-        {
+    {
       type: 'line',
-        boundaryGap: false,
+      boundaryGap: false,
       smooth: 0.6,
       lineStyle: {
         color: '#E6A100',
-         width: 5
+        width: 1
       },
       data: [30,30,30,30]
     },
     { 
       type: 'bar',
-        barWidth:'40',
+      barWidth:'16',
       data: [
-        {value: 0, 
-        itemStyle: {
-          color: '#F4F6F7'
+        {
+          value: 0, 
+          itemStyle: {
+            color: '#F4F6F7'
           }
         },
-        {value: 90, 
-        itemStyle: {
-          color: '#C3D1DC'
+        {
+          value: 90, 
+          itemStyle: {
+            color: '#C3D1DC'
           }
         },
-        {value: 30, 
-        itemStyle: {
-          color: '#E6A100'
+        {
+          value: 30, 
+          itemStyle: {
+            color: '#E6A100'
           }
         },
       ],

@@ -1,8 +1,27 @@
 {% load static i18n %}
 
-<div class="panel__chart">
-  <div id="anteil_ee_chart" class="results__chart"></div>
-  <div id="co2_emissionen_chart" class="results__chart"></div>
+<div class="panel__goal">
+  <div class="panel__goal-header">
+    <span>Ziele 2045</span>
+  </div>
+  <div class="panel__charts">
+    <div class="panel__chart">
+      <div class="panel__chart-title">
+        Anteil Erneuerbare Energien (%)
+      </div>
+      <div class="panel__chart-content">
+        <div id="anteil_ee_chart" class="goal-chart"></div>
+      </div>
+    </div>
+    <div class="panel__chart">
+      <div class="panel__chart-title">
+        CO2-Emissionen (Mt)
+      </div>
+      <div class="panel__chart-content">
+        <div id="co2_emissionen_chart" class="goal-chart"></div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="panel__settings panel__settings--padding">
   <div class="panel-item">
