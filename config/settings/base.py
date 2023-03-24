@@ -273,4 +273,5 @@ MAP_ENGINE_ZOOM_LEVELS = {
     "municipality": setup.Zoom(8, 12),
 }
 
+MAP_ENGINE_CHOROPLETHS = [setup.Choropleth("population", layers=["municipality"])]
 MAP_ENGINE_POPUPS = ["results"]

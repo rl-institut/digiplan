@@ -116,8 +116,8 @@ def get_choropleth(request: HttpRequest, lookup: str, scenario: str) -> JsonResp
         Containing key-value pairs of municipality_ids and values and related color style
     """
     values = calculations.create_choropleth_data(lookup)
-    fill_color = settings.MAP_ENGINE_CHOROPLETHS.get_fill_color(lookup, list(values.values()))
-    return JsonResponse({"values": values, "fill_color": fill_color})
+    fill_color = settings.MAP_ENGINE_CHOROPLETH_STYLES.get_fill_color(lookup, list(values.values()))
+    return JsonResponse({"values": values, "paintProperties": {"fill-color": fill_color, "fill-opacity": 1}})
 
 
 def get_visualization(request: HttpRequest) -> JsonResponse:
