@@ -31,8 +31,10 @@ const anteil_ee = {
   },
   xAxis: {
     type: 'category',
-    data: ['0','2021', '2045', '0'],
-    boundaryGap: false
+    data: ['2021', '2045'],
+    axisTick: {
+      show: false
+    }
   },
   yAxis: {
     show: true,
@@ -46,26 +48,10 @@ const anteil_ee = {
     fontSize: '14',
   },
   series: [
-    {
-      type: 'line',
-      boundaryGap: false,
-      smooth: 0.6,
-      lineStyle: {
-        color: '#06DFA7',
-        width: 1
-      },
-      data: [90,90,90,90]
-    },
     { 
       type: 'bar',
       barWidth:'16',
       data: [
-        {
-          value: 0, 
-          itemStyle: {
-            color: '#F4F6F7'
-          }
-        },
         {
           value: 30, 
           itemStyle: {
@@ -79,6 +65,20 @@ const anteil_ee = {
           }
         },
       ],
+      markLine: {
+        silent: true,
+        lineStyle: {
+          color: '#00BC8C',
+          type: 'solid'
+        },
+        symbol: 'none',
+        data: [{
+          yAxis: 90,
+          label: {
+            show: false
+          }
+        }]
+      }
     },
   ],
 }
@@ -100,8 +100,10 @@ const co2_emissionen = {
   },
   xAxis: {
     type: 'category',
-    data: ['0','2021', '2045', '0'],
-    boundaryGap: false
+    data: ['2021', '2045'],
+    axisTick: {
+      show: false
+    }
   },
   yAxis: {
     show: true,
@@ -115,26 +117,10 @@ const co2_emissionen = {
     fontSize: '14',
   },
   series: [
-    {
-      type: 'line',
-      boundaryGap: false,
-      smooth: 0.6,
-      lineStyle: {
-        color: '#E6A100',
-        width: 1
-      },
-      data: [30,30,30,30]
-    },
     { 
       type: 'bar',
       barWidth:'16',
       data: [
-        {
-          value: 0, 
-          itemStyle: {
-            color: '#F4F6F7'
-          }
-        },
         {
           value: 90, 
           itemStyle: {
@@ -148,6 +134,20 @@ const co2_emissionen = {
           }
         },
       ],
+      markLine: {
+        silent: true,
+        lineStyle: {
+          color: '#BE880B',
+          type: 'solid'
+        },
+        symbol: 'none',
+        data: [{
+          yAxis: 30,
+          label: {
+            show: false
+          }
+        }]
+      }
     },
   ],
 }
@@ -176,7 +176,6 @@ const option = {
   xAxis: [
     {
       type: 'category',
-      // prettier-ignore
       data: ['Jahre'],
       axisTick: {
         show: false
