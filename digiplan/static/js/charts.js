@@ -1,6 +1,8 @@
-// Sidebar
+// Goals & scenarios
 const renewable_share_goal_chart = echarts.init(document.getElementById("renewable_share_goal_chart"));
 const co2_emissions_goal_chart = echarts.init(document.getElementById("co2_emissions_goal_chart"));
+
+// Sidebar
 const chart3Element = document.getElementById("chart3");
 const chart3 = echarts.init(chart3Element);
 const chart4Element = document.getElementById("chart4");
@@ -14,21 +16,47 @@ const electricity_THG_chart = echarts.init(document.getElementById("electricity_
 const mobility_overview_chart = echarts.init(document.getElementById("mobility_overview_chart"));
 const mobility_THG_chart = echarts.init(document.getElementById("mobility_THG_chart"));
 
+// Styling variables
+const chart_tooltip = {
+  trigger: 'axis',
+  axisPointer: {
+    type: 'shadow'
+  }
+};
+const chart_bar_width_sm = 16;
+const chart_grid_goal = {
+  top: '10%',
+  left: '15%',
+  right: '15%',
+  bottom: '18%',
+  height: '120',
+  containLabel: true
+};
+const chart_grid_results = {
+  top: '10%',
+  left: '3%',
+  right: '25%',
+  bottom: '18%',
+  containLabel: true
+};
+const chart_text_style = {
+  fontFamily: "Roboto",
+  fontSize: 14,
+  fontWeight: 300,
+  color: '#002C50'
+};
+const chart_legend = {
+  show: true,
+    bottom: '15',
+    itemWidth: 14,
+    itemHeight: 14
+};
+
+// CHARTS
 const renewable_share_goal = {
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
-    }
-  },
-  grid: {
-    top: '10%',
-    left: '15%',
-    right: '15%',
-    bottom: '18%',
-    height: '120',
-    containLabel: true
-  },
+  grid: chart_grid_goal,
+  tooltip: chart_tooltip,
+  textStyle: chart_text_style,
   xAxis: {
     type: 'category',
     data: ['2021', '2045'],
@@ -39,18 +67,12 @@ const renewable_share_goal = {
   yAxis: {
     show: true,
     type: 'value',
-    maxValueSpan: '100',
-    nameLocation: 'end',
-    nameTextStyle: 'Roboto',
-    width: '76',
-    heigth: '32',
-    fontWeight: '300',
-    fontSize: '14',
+    maxValueSpan: '100'
   },
   series: [
     { 
       type: 'bar',
-      barWidth:'16',
+      barWidth: chart_bar_width_sm,
       data: [
         {
           value: 30, 
@@ -84,20 +106,9 @@ const renewable_share_goal = {
 }
 
 const co2_emissions_goal = {
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
-    }
-  },
-  grid: {
-    top: '10%',
-    left: '15%',
-    right: '15%',
-    bottom: '18%',
-    height: '120',
-    containLabel: true
-  },
+  grid: chart_grid_goal,
+  tooltip: chart_tooltip,
+  textStyle: chart_text_style,
   xAxis: {
     type: 'category',
     data: ['2021', '2045'],
@@ -108,18 +119,12 @@ const co2_emissions_goal = {
   yAxis: {
     show: true,
     type: 'value',
-    maxValueSpan: '100',
-    nameLocation: 'end',
-    nameTextStyle: 'Roboto',
-    width: '76',
-    heigth: '32',
-    fontWeight: '300',
-    fontSize: '14',
+    maxValueSpan: '100'
   },
   series: [
     { 
       type: 'bar',
-      barWidth:'16',
+      barWidth: chart_bar_width_sm,
       data: [
         {
           value: 90, 
@@ -153,14 +158,9 @@ const co2_emissions_goal = {
 }
 
 const option = {
+  textStyle: chart_text_style,
   title: {
     text: 'Anteil Erneuerbare \nEnergien (%)',
-    textStyle: {
-      color: '#002C50',
-      fontWeight: 300,
-      fontFamily: 'Roboto',
-      fontSize: 14
-    }
   },
   tooltip: {
     trigger: 'axis'
@@ -211,37 +211,18 @@ const option = {
 };
 
 const detailed_overview_option = {
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      // Use axis to trigger tooltip
-      type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-    }
-  },
-  legend: {
-    show: true,
-    bottom: '15',
-    itemWidth: 14,
-    itemHeight: 14
-  },
-  grid: {
-    top: '10%',
-    left: '3%',
-    right: '25%',
-    bottom: '18%',
-    containLabel: true
-  },
+  tooltip: chart_tooltip,
+  legend: chart_legend,
+  grid: chart_grid_results,
+  textStyle: chart_text_style,
   xAxis: {
     type: 'value',
     show: true,
     position: 'bottom',
     name: 'Mt CO₂-\nEmissionen',
-      nameLocation: 'end',
-      nameTextStyle: 'Roboto',
-        width: '76',
-        heigth: '32',
-      fontWeight: '300',
-      fontSize: '14'
+    nameLocation: 'end',
+    width: '76',
+    heigth: '32',
   },
   yAxis: {
     type: 'category',
@@ -259,7 +240,7 @@ const detailed_overview_option = {
     {
       name: 'Wind',
       type: 'bar',
-      barWidth: '16',
+      barWidth: chart_bar_width_sm,
       stack: 'total',
       color: '#1F82C0',
       label: {
@@ -340,48 +321,24 @@ const detailed_overview_option = {
 
 const ghg_overview_option = {
   backgroundColor: '#FFFFFF',
-  fontStyle: 'Roboto',
-  fontSize: '14',
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      // Use axis to trigger tooltip
-      type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-    }
-  },
-  legend: {
-    show: true,
-    bottom: '15',
-    itemWidth: 14,
-    itemHeight: 14
-  },
-  grid: {
-    top: '10%',
-    left: '3%',
-    right: '25%',
-    bottom: '18%',
-    containLabel: true
-  },
+  textStyle: chart_text_style,
+  tooltip: chart_tooltip,
+  legend: chart_legend,
+  grid: chart_grid_results,
   xAxis:  {
     type: 'value',
     show: true,
     position: 'bottom',
     name: 'Mt CO₂-\nEmissionen',
-      nameLocation: 'end',
-      nameTextStyle: 'Roboto',
-        width: '76',
-        heigth: '32',
-      fontWeight: '300',
-      fontSize: '14',
-
+    nameLocation: 'end',
+    width: '76',
+    heigth: '32',
   },
   yAxis: {
     show: true,
     type: 'category',
     data: ['Ziel', 'Szenario', 'Status Quo', '1990'],
-    nameTextStyle: 'Roboto',
     fontWeight: '400',
-    fontSize: '14',
     axisTick: {
       show: false
     }
@@ -390,7 +347,7 @@ const ghg_overview_option = {
     {
       name: 'GHG',
       type: 'bar',
-      barWidth: '16',
+      barWidth: chart_bar_width_sm,
       stack: 'total',
       color: '#C8D8E4',
       label: {
@@ -404,7 +361,7 @@ const ghg_overview_option = {
     {
       name: 'Haushalte',
       type: 'bar',
-        barWidth: '25',
+      barWidth: '25',
       stack: 'total',
       color: '#74A9CF',
       label: {
@@ -461,37 +418,18 @@ const ghg_overview_option = {
 };
 
 const electricity_overview = {
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      // Use axis to trigger tooltip
-      type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-    }
-  },
-  legend: {
-    show: true,
-    bottom: '15',
-    itemWidth: 14,
-    itemHeight: 14
-  },
-  grid: {
-    top: '10%',
-    left: '3%',
-    right: '25%',
-    bottom: '18%',
-    containLabel: true
-  },
+  textStyle: chart_text_style,
+  tooltip: chart_tooltip,
+  legend: chart_legend,
+  grid: chart_grid_results,
   xAxis: {
     type: 'value',
     show: true,
     position: 'bottom',
     name: 'TWh',
-      nameLocation: 'end',
-      nameTextStyle: 'Roboto',
-        width: '76',
-        heigth: '32',
-      fontWeight: '300',
-      fontSize: '14'
+    nameLocation: 'end',
+    width: '76',
+    heigth: '32',
   },
   yAxis: {
     type: 'category',
@@ -507,7 +445,7 @@ const electricity_overview = {
     {
       name: 'Wind',
       type: 'bar',
-      barWidth: '16',
+      barWidth: chart_bar_width_sm,
       stack: 'total',
       color: '#1F82C0',
       label: {
@@ -625,37 +563,18 @@ const electricity_overview = {
 };
 
 const electricity_THG = {
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      // Use axis to trigger tooltip
-      type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-    }
-  },
-  legend: {
-    show: true,
-    bottom: '15',
-    itemWidth: 14,
-    itemHeight: 14
-  },
-  grid: {
-    top: '10%',
-    left: '3%',
-    right: '25%',
-    bottom: '18%',
-    containLabel: true
-  },
+  textStyle: chart_text_style,
+  tooltip: chart_tooltip,
+  legend: chart_legend,
+  grid: chart_grid_results,
   xAxis: {
     type: 'value',
     show: true,
     position: 'bottom',
     name: 'Mt CO₂-\nEmissionen',
-      nameLocation: 'end',
-      nameTextStyle: 'Roboto',
-        width: '76',
-        heigth: '32',
-      fontWeight: '300',
-      fontSize: '14'
+    nameLocation: 'end',
+    width: '76',
+    heigth: '32',
   },
   yAxis: {
     type: 'category',
@@ -671,7 +590,7 @@ const electricity_THG = {
     {
       name: 'GHG',
       type: 'bar',
-      barWidth: '16',
+      barWidth: chart_bar_width_sm,
       stack: 'total',
       color: '#F5F5DC',
       label: {
@@ -725,37 +644,18 @@ const electricity_THG = {
 };
 
 const mobility_overview = {
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      // Use axis to trigger tooltip
-      type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-    }
-  },
-  legend: {
-    show: true,
-    bottom: '15',
-    itemWidth: 14,
-    itemHeight: 14
-  },
-  grid: {
-    top: '10%',
-    left: '3%',
-    right: '25%',
-    bottom: '18%',
-    containLabel: true
-  },
+  textStyle: chart_text_style,
+  tooltip: chart_tooltip,
+  legend: chart_legend,
+  grid: chart_grid_results,
   xAxis: {
     type: 'value',
     show: true,
     position: 'bottom',
     name: 'Anzahl Autos',
-      nameLocation: 'end',
-      nameTextStyle: 'Roboto',
-        width: '76',
-        heigth: '32',
-      fontWeight: '300',
-      fontSize: '14'
+    nameLocation: 'end',
+    width: '76',
+    heigth: '32',
   },
   yAxis: {
     type: 'category',
@@ -771,7 +671,7 @@ const mobility_overview = {
     {
       name: 'Diesel',
       type: 'bar',
-      barWidth: '16',
+      barWidth: chart_bar_width_sm,
       stack: 'total',
       color: '#647078',
       label: {
@@ -825,37 +725,18 @@ const mobility_overview = {
 };
 
 const mobility_THG = {
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      // Use axis to trigger tooltip
-      type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-    }
-  },
-  legend: {
-    show: true,
-    bottom: '15',
-    itemWidth: 14,
-    itemHeight: 14
-  },
-  grid: {
-    top: '10%',
-    left: '3%',
-    right: '25%',
-    bottom: '18%',
-    containLabel: true
-  },
+  textStyle: chart_text_style,
+  tooltip: chart_tooltip,
+  legend: chart_legend,
+  grid: chart_grid_results,
   xAxis: {
     type: 'value',
     show: true,
     position: 'bottom',
     name: 'Mt CO₂-\nEmissionen',
-      nameLocation: 'end',
-      nameTextStyle: 'Roboto',
-        width: '76',
-        heigth: '32',
-      fontWeight: '300',
-      fontSize: '14'
+    nameLocation: 'end',
+    width: '76',
+    heigth: '32'
   },
   yAxis: {
     type: 'category',
@@ -871,7 +752,7 @@ const mobility_THG = {
     {
       name: 'Sockel',
       type: 'bar',
-      barWidth: '16',
+      barWidth: chart_bar_width_sm,
       stack: 'total',
       color: '#C8D8E4',
       label: {
@@ -931,11 +812,15 @@ function resizeCharts() {
   }, 200);
 }
 
-// Sidebar
+// Goals & scenarios
 renewable_share_goal_chart.setOption(renewable_share_goal);
 co2_emissions_goal_chart.setOption(co2_emissions_goal);
+
+// Sidebar
 chart3.setOption(option);
 chart4.setOption(option);
+
+// Results
 detailed_overview_chart.setOption(detailed_overview_option);
 ghg_overview_chart.setOption(ghg_overview_option);
 electricity_overview_chart.setOption(electricity_overview);
