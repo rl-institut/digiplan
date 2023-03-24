@@ -273,5 +273,12 @@ MAP_ENGINE_ZOOM_LEVELS = {
     "municipality": setup.Zoom(8, 12),
 }
 
-MAP_ENGINE_CHOROPLETHS = [setup.Choropleth("population", layers=["municipality"])]
+MAP_ENGINE_CHOROPLETHS = [
+    setup.Choropleth("population", layers=["municipality"]),
+    setup.Choropleth("population_density", layers=["municipality"]),
+    setup.Choropleth("capacity", layers=["municipality"]),
+    setup.Choropleth("capacity_square", layers=["municipality"]),
+    setup.Choropleth("wind_turbines", layers=["municipality"]),
+    setup.Choropleth("wind_turbines_square", layers=["municipality"]),
+]
 MAP_ENGINE_POPUPS = ["results"]
