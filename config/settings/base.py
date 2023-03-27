@@ -1,12 +1,14 @@
 """
 Base settings to build other settings files upon.
 """
+import os
 
 import environ
 from django.core.exceptions import ValidationError
+from django_mapengine import setup
 
-ROOT_DIR = environ.Path(__file__) - 3  # (enershelf/config/settings/base.py - 3 = enershelf/)
-APPS_DIR = ROOT_DIR.path("enershelf")
+ROOT_DIR = environ.Path(__file__) - 3  # (digiplan/config/settings/base.py - 3 = digiplan/)
+APPS_DIR = ROOT_DIR.path("digiplan")
 DATA_DIR = APPS_DIR.path("data")
 METADATA_DIR = APPS_DIR.path("metadata")
 
@@ -42,7 +44,17 @@ LOCALE_PATHS = [ROOT_DIR.path("locale")]
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {"default": env.db("DATABASE_URL")}
+if os.environ.get("DATABASE_URL"):
+    DATABASES = {"default": env.db("DATABASE_URL")}
+else:
+    POSTGRES_USER = env.str("POSTGRES_USER")
+    POSTGRES_PASSWORD = env.str("POSTGRES_PASSWORD")
+    POSTGRES_HOST = env.str("POSTGRES_HOST")
+    POSTGRES_PORT = env.str("POSTGRES_PORT")
+    POSTGRES_DB = env.str("POSTGRES_DB")
+    DATABASE_URL = f"postgis://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+    os.environ["DATABASE_URL"] = DATABASE_URL
+    DATABASES = {"default": env.db("DATABASE_URL")}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
@@ -64,7 +76,6 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
-    "django.contrib.admin",
     "django.forms",
 ]
 
@@ -72,52 +83,26 @@ THIRD_PARTY_APPS = [
     "foundation_formtags",  # Form layouts
     "rest_framework",
     "crispy_forms",
+    "crispy_bootstrap5",
     "django_distill",
     "django_select2",
-    "raster",
+    # "raster",
 ]
 
-LOCAL_APPS = [
-    "enershelf.users.apps.UsersConfig",
-    "enershelf.map.apps.MapConfig",
-]
+LOCAL_APPS = ["digiplan.map.apps.MapConfig", "django_oemof", "django_mapengine"]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "enershelf.contrib.sites.migrations"}
+MIGRATION_MODULES = {"sites": "digiplan.contrib.sites.migrations"}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
-]
-# https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
-AUTH_USER_MODEL = "users.User"
-# https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "users:redirect"
-# https://docs.djangoproject.com/en/dev/ref/settings/#login-url
-LOGIN_URL = "account_login"
-
-# PASSWORDS
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#password-hashers
-PASSWORD_HASHERS = [
-    # https://docs.djangoproject.com/en/dev/topics/auth/passwords/#using-argon2-with-django
-    "django.contrib.auth.hashers.Argon2PasswordHasher",
-    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
-    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
-    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
-]
-# https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
-AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 # MIDDLEWARE
@@ -130,7 +115,6 @@ MIDDLEWARE = [
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -179,7 +163,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "enershelf.utils.context_processors.settings_context",
+                "digiplan.utils.context_processors.settings_context",
             ],
         },
     }
@@ -240,26 +224,67 @@ INSTALLED_APPS += ["compressor"]
 STATICFILES_FINDERS += ["compressor.finders.CompressorFinder"]
 
 # django-libsass
+# ------------------------------------------------------------------------------
 COMPRESS_PRECOMPILERS = [("text/x-scss", "django_libsass.SassCompiler")]
 
 COMPRESS_CACHEABLE_PRECOMPILERS = (("text/x-scss", "django_libsass.SassCompiler"),)
 
 # Your stuff...
 # ------------------------------------------------------------------------------
-
-# If given, use local PROJ_LIB environment variable
-if env("PROJ_LIB"):
-    PROJ_LIB = env("PROJ_LIB")
-
-DISTILL = env.bool("DISTILL", False)
-USE_DISTILLED_MVTS = env.bool("USE_DISTILLED_MVTS", True)
-
 PASSWORD_PROTECTION = env.bool("PASSWORD_PROTECTION", False)
 PASSWORD = env.str("PASSWORD", default=None)
 if PASSWORD_PROTECTION and PASSWORD is None:
     raise ValidationError("Password protection is on, but no password is given")
 
-MAPBOX_TOKEN = env.str("MAPBOX_TOKEN", default=None)
-MAPBOX_STYLE_LOCATION = env.str("MAPBOX_STYLE_LOCATION", default=None)
-
 SELECT2_CACHE_BACKEND = "select2"
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# django-mapengine
+# ------------------------------------------------------------------------------
+MAP_ENGINE_CENTER_AT_STARTUP = [12.537917858911896, 51.80812518969171]
+MAP_ENGINE_ZOOM_AT_STARTUP = 9
+MAP_ENGINE_MAX_BOUNDS = [[11.280733017118229, 51.22918643452503], [13.616574868700604, 52.35515806663738]]
+
+MAP_ENGINE_IMAGES = [setup.MapImage("wind", "images/icons/i_wind.png")]
+
+MAP_ENGINE_API_MVTS = {
+    "municipality": [
+        setup.MVTAPI("municipality", "map", "Municipality"),
+        setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
+    ],
+    "static": [
+        setup.MVTAPI("pvground", "map", "PVground"),
+        setup.MVTAPI("hydro", "map", "Hydro"),
+        setup.MVTAPI("biomass", "map", "Biomass"),
+        setup.MVTAPI("combustion", "map", "Combustion"),
+    ],
+    "results": [setup.MVTAPI("results", "map", "Municipality")],
+}
+
+MAP_ENGINE_API_CLUSTERS = [
+    setup.ClusterAPI("wind", "map", "WindTurbine"),
+    setup.ClusterAPI("pvroof", "map", "PVroof"),
+]
+
+MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
+MAP_ENGINE_ZOOM_LEVELS = {
+    "municipality": setup.Zoom(8, 12),
+}
+
+MAP_ENGINE_CHOROPLETHS = [
+    setup.Choropleth("population", layers=["municipality"]),
+    setup.Choropleth("population_density", layers=["municipality"]),
+    setup.Choropleth("capacity", layers=["municipality"]),
+    setup.Choropleth("capacity_square", layers=["municipality"]),
+    setup.Choropleth("wind_turbines", layers=["municipality"]),
+    setup.Choropleth("wind_turbines_square", layers=["municipality"]),
+]
+MAP_ENGINE_POPUPS = [
+    setup.Popup(
+        "municipality",
+        False,
+        ["population", "population_density", "capacity", "capacity_square", "wind_turbines", "wind_turbines_square"],
+    )
+]

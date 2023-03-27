@@ -1,0 +1,109 @@
+.c-tabs {
+  @extend .nav;
+  @extend .nav-tabs;
+  @extend .nav-fill;
+  @extend .border-0;
+
+  &__nav-item {
+    @extend .nav-item;
+    @extend .border-0;
+    @extend .border-bottom;
+    @extend .border-1;
+    @extend .bg-light;
+  }
+
+  &__nav-link {
+    @extend .nav-link;
+    @extend .text-primary;
+    @extend .border-0;
+
+    &:hover {
+      @extend .text-info;
+    }
+
+    &.active {
+      @extend .active;
+      @extend .text-white;
+      @extend .border-0;
+      @extend .bg-info;
+    }
+  }
+
+  &__content {
+    @extend .tab-content;
+  }
+
+  &__pane {
+    @extend .tab-pane;
+    @extend .fade;
+
+    &.show {
+      @extend .show;
+    }
+
+    &.active {
+      @extend .active;
+    }
+  }
+}
+
+.view-toggle {
+  @extend .position-absolute;
+  @extend .start-50;
+  @extend .translate-middle;
+  @extend .bg-white;
+  @extend .rounded;
+  @extend .fs-7;
+  top: 5rem;
+  z-index: 100;
+
+  @include media-breakpoint-down(sm) {
+    font-size: $font-size-xsmall;
+  }
+
+  &__nav-tabs {
+    @extend .nav;
+    @extend .nav-tabs;
+  }
+
+  &__nav-item {
+    @extend .nav-item;
+
+    &:first-of-type button {
+      @extend .rounded-0;
+      @extend .rounded-start;
+    }
+
+    &:last-of-type button {
+      @extend .rounded-0;
+      @extend .rounded-end;
+    }
+  }
+
+  &__nav-link {
+    @extend .nav-link;
+    @extend .text-primary;
+    @extend .border-0;
+
+    @include media-breakpoint-down(sm) {
+      padding: 0.5rem;
+    }
+
+    &:hover {
+      @extend .text-info;
+    }
+
+    &.active {
+      @extend .active;
+      @extend .text-info;
+      @extend .border-0;
+      @extend .bg-info;
+      @extend .text-white;
+    }
+
+    svg {
+      @extend .me-1;
+      @include translateY(-2px);
+    }
+  }
+}

@@ -1,0 +1,40 @@
+import json
+import os
+
+from config.settings.base import APPS_DIR
+
+SCHEMAS_DIR = APPS_DIR.path("schemas")
+COMPONENTS_DIR = SCHEMAS_DIR.path("components")
+
+with open(os.path.join(SCHEMAS_DIR, "legend.schema.json"), "rb") as f:
+    LEGEND_SCHEMA = json.loads(f.read())
+
+with open(os.path.join(SCHEMAS_DIR, "legend.example.json"), "rb") as f:
+    LEGEND_EXAMPLE = json.loads(f.read())
+
+with open(os.path.join(SCHEMAS_DIR, "popup.schema.json"), "rb") as f:
+    POPUP_SCHEMA = json.loads(f.read())
+
+with open(os.path.join(SCHEMAS_DIR, "popup.example.json"), "rb") as f:
+    POPUP_EXAMPLE = json.loads(f.read())
+
+with open(os.path.join(COMPONENTS_DIR, "chart.schema.json"), "rb") as f:
+    CHART_SCHEMA = json.loads(f.read())
+
+with open(os.path.join(COMPONENTS_DIR, "chart.energy_consumption.example.json"), "rb") as f:
+    CHART_ENERGY_CONSUMPTION_EXAMPLE = json.loads(f.read())
+
+with open(os.path.join(COMPONENTS_DIR, "chart.population.example.json"), "rb") as f:
+    CHART_POPULATION_EXAMPLE = json.loads(f.read())
+
+with open(os.path.join(COMPONENTS_DIR, "key-values.schema.json"), "rb") as f:
+    KEY_VALUES_SCHEMA = json.loads(f.read())
+
+with open(os.path.join(COMPONENTS_DIR, "key-values.example.json"), "rb") as f:
+    KEY_VALUES_EXAMPLE = json.loads(f.read())
+
+with open(os.path.join(COMPONENTS_DIR, "sources.schema.json"), "rb") as f:
+    SOURCES_SCHEMA = json.loads(f.read())
+
+with open(os.path.join(COMPONENTS_DIR, "sources.example.json"), "rb") as f:
+    SOURCES_EXAMPLE = json.loads(f.read())

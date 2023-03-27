@@ -1,0 +1,29 @@
+<div class="view-toggle">
+  <ul class="view-toggle__nav-tabs nav nav-tabs" id="myTab" role="tablist">
+    <li class="view-toggle__nav-item" role="presentation">
+      <button class="view-toggle__nav-link active" id="map-view-tab" data-bs-toggle="tab" data-bs-target="#map-view" type="button" role="tab" aria-controls="map-view" aria-selected="true">
+        <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
+          <path d="m16.933 0-5.8208 3.175-5.2917-3.1497-5.8208 3.1497v13.758l5.8208-3.175 5.2917 3.175 5.8208-3.175v-13.758zm-11.642 1.617v11.112l-4.2333 2.3518v-11.112l4.2333-2.3518zm1.0583 0.023254 4.2333 2.5404v11.112l-4.2333-2.5404v-11.112zm9.525 0.47646v11.113l-4.2333 2.1167v-11.112l4.2333-2.1167z"/>
+         </svg>
+        Karte
+      </button>
+    </li>
+    <li class="view-toggle__nav-item" role="presentation">
+      <button class="view-toggle__nav-link" id="chart-view-tab" data-bs-toggle="tab" data-bs-target="#chart-view" type="button" role="tab" aria-controls="chart-view" aria-selected="false">
+        <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
+          <path d="m12.7 0.025321v13.733h1.0583v-13.733h-1.0583zm-5.2917 4.208v9.525h1.0583v-9.525h-1.0583zm-5.2917 2.1167v7.4083h1.0583v-7.4083h-1.0583zm-2.1167 9.4821v1.1012h16.933v-1.1012h-16.933z"/>
+        </svg>
+        Charts
+      </button>
+    </li>
+  </ul>
+</div>
+<div class="tab-content" id="mainTabContent">
+  <div class="map tab-pane fade show active" id="map-view" role="tabpanel" aria-labelledby="map-view-tab">
+    {% include './layer_box.html' %}
+    {% include 'django_mapengine/map.html' %}
+  </div>
+  <div class="results tab-pane fade" id="chart-view" role="tabpanel" aria-labelledby="chart-view-tab">
+    {% include 'components/results_view.html' %}
+  </div>
+</div>

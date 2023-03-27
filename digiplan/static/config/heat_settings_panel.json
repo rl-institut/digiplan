@@ -1,0 +1,50 @@
+{
+    "energy_category_1": {
+        "label": "",
+        "text": "Erzeuger",
+        "tooltip": "Erzeuger",
+        "type": "title"
+    },
+    "w_d_wp_1": {
+        "class": "js-slider js-slider-panel",
+        "grid": false,
+        "label": "Dezentral, Anteil Haushalte mit Wärmepumpe (%)",
+        "max": 100,
+        "min": 0,
+        "start": 30,
+        "status_quo": 50,
+        "step": 5,
+        "tooltip": "Dezentral, Anteil Haushalte mit Wärmepumpe (%)",
+        "type": "slider"
+    },
+    "w_d_st_1": {
+        "class": "js-slider js-slider-panel",
+        "grid": false,
+        "label": "Dezentral, Anteil Haushalte mit Solartherme (%)",
+        "max": 100,
+        "min": 0,
+        "start": 25,
+        "status_quo": 45,
+        "step": 5,
+        "tooltip": "Dezentral, Anteil Haushalte mit Solartherme (%)",
+        "type": "slider"
+    },
+    "w_z_wp_1": {
+        "class": "js-slider js-slider-panel",
+        "grid": false,
+        "label": "Zentral, Anteil Großwärmepumpen (%)",
+        "max": 100,
+        "min": 0,
+        "start": 10,
+        "status_quo": 40,
+        "step": 5,
+        "tooltip": "Zentral, Anteil Großwärmepumpen (%)",
+        "type": "slider"
+    },
+    "energy_category_2": {
+        "label": "",
+        "text": "Verbraucher",
+        "tooltip": "Verbraucher",
+        "type": "title"
+    }
+}

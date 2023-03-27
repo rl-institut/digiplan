@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static i18n compress %}
+
+{% block js_head %}
+  {% compress js %}
+    <script src="{% static 'vendors/maplibre/js/maplibre-gl.js' %}"></script>
+
+  {% endcompress %}
+{% endblock %}
+
+{% block css %}
+  {% compress css %}
+    <link href="{% static 'vendors/maplibre/css/maplibre-gl.css' %}" rel='stylesheet'/>
+  {% endcompress %}
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+  {% include 'modals/imprint.html' %}
+  {% include 'modals/privacy.html' %}
+  <div class="main-container">
+
+    <nav class="top-nav navbar navbar-expand-sm navbar-light bg-body"
+         aria-label="Navbar mit Links zu den anderen Seiten">
+      <div class="container-fluid">
+        <a class="top-nav__brand navbar-brand" href="#">
+          <img src="{% static 'images/logos/digiplan-anhalt-logo-horizontal.svg' %}"
+               alt="Digiplan">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarsExample03" aria-controls="navbarsExample03"
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample03">
+          <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
+            <li class="nav-item">
+              <a class="nav-link active" id="mapView" aria-current="page"
+                 href="#">Karte</a>
+            </li>
+            <li class="nav-item" data-bs-toggle="offcanvas"
+                href="#offcanvasDocumentation" role="button"
+                aria-controls="offcanvasDocumentation">
+              <a class="nav-link" href="#">Dokumentation</a>
+            </li>
+            <li class="nav-item" data-bs-toggle="offcanvas" href="#offcanvasSources"
+                role="button" aria-controls="offcanvasSources">
+              <a class="nav-link" href="#">Quellen</a>
+            </li>
+            <li class="nav-item" data-bs-toggle="offcanvas" href="#offcanvasContact"
+                role="button" aria-controls="offcanvasContact">
+              <a class="nav-link" href="#">Kontakt</a>
+            </li>
+            <li class="top-nav__lang">
+              <select aria-label="Sprache auswählen">
+                <option value="de" selected>DE</option>
+                <option value="en">EN</option>
+              </select>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="map-content">
+      {% include 'components/panel.html' %}
+      <pre id="info"></pre>
+      {% include 'components/map.html' %}
+    </section>
+  </div>
+
+  {% include 'offcanvas/documentation.html' %}
+  {% include 'offcanvas/sources.html' %}
+  {% include 'offcanvas/contact.html' %}
+
+{% endblock content %}
+
+{% block js_body %}
+  {{ block.super }}
+
+  {% include 'django_mapengine/map_json.html' %}
+
+  {{ store_cold_init|json_script:"store_cold_init" }}
+  {{ settings_parameters|json_script:"settings_parameters" }}
+  {{ settings_dependency_map|json_script:"settings_dependency_map" }}
+  {{ dependency_parameters|json_script:"dependency_parameters" }}
+
+  {% compress js %}
+    {% include 'django_mapengine/map_js.html' %}
+    <script src="{% static 'js/state.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/sliders.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/results.js' %}" type="text/javascript"></script>
+  {% endcompress %}
+
+{% endblock js_body %}

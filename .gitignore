@@ -161,7 +161,7 @@ typings/
 # Provided default Pycharm Run/Debug Configurations should be tracked by git
 # In case of local modifications made by Pycharm, use update-index command
 # for each changed file, like this:
-# git update-index --assume-unchanged .idea/enershelf.iml
+# git update-index --assume-unchanged .idea/digiplan.iml
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
@@ -321,7 +321,7 @@ tags
 
 ### Project template
 
-enershelf/media/
+digiplan/media/
 
 .pytest_cache/
 
@@ -332,7 +332,7 @@ enershelf/media/
 !.envs/.local/
 
 .idea/*
-/enershelf/data/
-/enershelf/static/mvts/
+/digiplan/data/
+/digiplan/static/mvts/
 
 distill/

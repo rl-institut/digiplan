@@ -1,0 +1,64 @@
+.results {
+  @extend .h-100;
+  @extend .w-100;
+  @extend .bg-light;
+  @extend .p-4;
+  padding-top: 6rem !important;
+
+  @include media-breakpoint-up(xxl) {
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
+  }
+
+  &__header {
+    @extend .row;
+
+    h2 {
+      @extend .fs-6;
+      @extend .ps-0;
+    }
+  }
+
+  &__row {
+    @extend .row;
+    @extend .mb-4;
+  }
+
+  &__item {
+    @extend .col-xl-6;
+    @extend .bg-white;
+    padding: $padding-large;
+
+    @include media-breakpoint-up(xl) {
+      &:first-of-type {
+        border-right: 1px solid $gray-200;
+      }
+    }
+  }
+
+  &__item-title {
+    @extend .fs-7;
+    @extend .fw-semibold;
+  }
+
+  &__chart {
+    height: 400px;
+    width: 100%;
+  }
+
+  &__text {
+    @extend .pt-4;
+    @extend .fs-7;
+  }
+
+  &__comparison {
+    @extend .d-flex;
+    @extend .flex-column;
+    @extend .justify-content-evenly;
+    @extend .align-items-center;
+    @extend .bg-light;
+    @extend .py-2;
+    margin: 0 auto;
+    width: 12.5rem;
+  }
+}

@@ -15,7 +15,7 @@ RUN conda install --freeze-installed -c conda-forge conda-pack
 
 # Use conda-pack to create a standalone environment
 # in /venv:
-RUN conda-pack -n enershelf -o /tmp/env.tar && \
+RUN conda-pack -n digiplan -o /tmp/env.tar && \
   mkdir /venv && cd /venv && tar xf /tmp/env.tar && \
   rm /tmp/env.tar
 
@@ -47,7 +47,6 @@ RUN apt-get update \
   # Only for django-distill (remove later)
   && apt-get install -y ca-certificates \
   && update-ca-certificates \
-
   # Remove unnecessary apt files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
@@ -60,7 +59,6 @@ WORKDIR /tmp
 SHELL ["/bin/bash", "-c"]
 COPY ./pyproject.toml ./poetry.lock ./
 RUN source /venv/bin/activate && python -m pip install --upgrade pip && pip install --no-cache-dir poetry && poetry install --no-root
-RUN source /venv/bin/activate && pip install --trusted-host github.com git+https://github.com/henhuy/django-raster.git@djagora
 
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r$//g' /entrypoint

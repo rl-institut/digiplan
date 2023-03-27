@@ -1,0 +1,87 @@
+section.offcanvas {
+  &.offcanvas-view {
+    @extend .offcanvas-start;
+    @extend .w-100;
+    @extend .overflow-auto;
+    z-index: 1100;
+    top: calc(#{$top-nav-height} + 4px) !important;
+  }
+
+  .offcanvas-view__wrap {
+    @extend .container;
+    @extend .py-5;
+    max-width: 44rem;
+  }
+
+  .offcanvas-view__title {
+    @extend .fs-1;
+    @extend .fw-bold;
+  }
+
+  .offcanvas-view__subtitle {
+    @extend .fw-bold;
+    @extend .pt-2;
+
+    img {
+      @extend .ms-1;
+      @include translateY(-4px);
+    }
+  }
+
+  .offcanvas-view__body {
+    @extend .py-3;
+  }
+
+  .offcanvas-view__logos {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .justify-content-between;
+    @extend .pt-4;
+  }
+
+  .offcanvas-view__logo {
+    @extend .pe-2;
+
+    &--rli img {
+      width: 8.5rem;
+    }
+
+    &--eaa img {
+      width: 9rem;
+    }
+
+    &--rg img {
+      width: 12rem;
+    }
+
+    &--bbsr img {
+      width: 11.5rem;
+    }
+
+    &--bmwsb img {
+      width: 12.5rem;
+    }
+
+    &--bmi img {
+      width: 10rem;
+    }
+  }
+
+  .offcanvas-view__list {
+    .source-item {
+      &__title {
+        @extend .fw-bold;
+      }
+
+      &__open {
+        cursor: pointer;
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  }
+
+  .offcanvas-view__contact {
+    @extend .pb-2;
+  }
+}

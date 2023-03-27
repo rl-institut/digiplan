@@ -1,0 +1,52 @@
+{% load static i18n crispy_forms_tags %}
+
+<div class="panel__settings">
+  <div class="panel-item">
+    <h2 class="panel-item__heading">
+      <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
+        <path d="m8.4667 0-8.4667 4.2333 8.4667 4.2333 8.4667-4.2333-8.4667-4.2333zm0 1.0583 6.6146 3.175-6.6146 3.175-6.6146-3.175 6.6146-3.175zm-8.4667 7.4083 8.4667 4.2333 8.4667-4.2333h-1.8521l-6.6146 3.175-6.6146-3.175h-1.8521zm0 4.2333 8.4667 4.2333 8.4667-4.2333h-1.8521l-6.6146 3.175-6.6146-3.175h-1.8521z"/>
+       </svg>
+      Einstellungen
+    </h2>
+    <div class="panel-item__tabs">
+      <ul class="c-tabs nav nav-tabs" id="settings_area_tab" role="tablist">
+        <li class="c-tabs__nav-item" role="presentation">
+          <button class="c-tabs__nav-link active" id="wind-tab" data-bs-toggle="tab" data-bs-target="#wind" type="button" role="tab" aria-controls="wind" aria-selected="true">
+            <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
+              <path d="m8.2021 0.025372-5.4677 8.4414h9.5898l-4.9159 8.4665h1.3229l5.4035-9.5251h-9.4609l4.8512-7.3828z"/>
+            </svg>
+            Strom
+          </button>
+        </li>
+        <li class="c-tabs__nav-item" role="presentation">
+          <button class="c-tabs__nav-link" id="heat-tab" data-bs-toggle="tab" data-bs-target="#heat" type="button" role="tab" aria-controls="heat" aria-selected="false">
+            <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
+              <path d="m4.3692 1.0589-3.4923 11.64h0.71107 2.6443v3.176h1.0589v-3.176h6.3516v3.176h1.0563v-3.176h3.3574l-3.4918-11.64h-8.1954zm0.78703 1.0583h2.7812v2.1151h-3.4163l0.6351-2.1151zm3.8401 0h2.7812l0.6351 2.1151h-3.4163v-2.1151zm-4.793 3.174h3.7341v2.1172h-4.3692l0.6351-2.1172zm4.793 0h3.7341l0.6351 2.1172h-4.3692v-2.1172zm-5.7459 3.1755h4.6871v3.176h-5.6405l0.95343-3.176zm5.7459 0h4.6871l0.95343 3.176h-5.6405v-3.176z"/>
+            </svg>
+            Wärme
+          </button>
+        </li>
+        <li class="c-tabs__nav-item" role="presentation">
+          <button class="c-tabs__nav-link" id="traffic-tab" data-bs-toggle="tab" data-bs-target="#traffic" type="button" role="tab" aria-controls="traffic" aria-selected="false">
+            <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
+              <path d="m4.3692 1.0589-3.4923 11.64h0.71107 2.6443v3.176h1.0589v-3.176h6.3516v3.176h1.0563v-3.176h3.3574l-3.4918-11.64h-8.1954zm0.78703 1.0583h2.7812v2.1151h-3.4163l0.6351-2.1151zm3.8401 0h2.7812l0.6351 2.1151h-3.4163v-2.1151zm-4.793 3.174h3.7341v2.1172h-4.3692l0.6351-2.1172zm4.793 0h3.7341l0.6351 2.1172h-4.3692v-2.1172zm-5.7459 3.1755h4.6871v3.176h-5.6405l0.95343-3.176zm5.7459 0h4.6871l0.95343 3.176h-5.6405v-3.176z"/>
+            </svg>
+            Verkehr
+          </button>
+        </li>
+      </ul>
+      <div class="c-tabs__content">
+        <div class="c-tabs__pane fade show active" id="wind" role="tabpanel" aria-labelledby="wind-tab">
+          <div id="js-power-mix" class="power-mix"></div>
+          {{energy_settings_panel}}
+        </div>
+        <div class="c-tabs__pane fade" id="heat" role="tabpanel" aria-labelledby="heat-tab">
+          {{heat_settings_panel}}
+        </div>
+        <div class="c-tabs__pane fade" id="traffic" role="tabpanel" aria-labelledby="traffic-tab">
+          {{traffic_settings_panel}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

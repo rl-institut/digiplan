@@ -1,0 +1,355 @@
+.panel {
+  @extend .d-flex;
+  @extend .flex-column;
+  @extend .h-auto;
+  @extend .shadow;
+  @extend .w-100;
+
+  @include media-breakpoint-down(md) {
+    order: 2;
+  }
+
+  @include media-breakpoint-up(md) {
+    width: $panel-width-sm !important;
+    overflow-y: scroll;
+  }
+
+  @include media-breakpoint-up(lg) {
+    height: 100vh;
+    width: $panel-width !important;
+  }
+
+  &__content {
+    @extend .flex-grow-1;
+    @extend .flex-shrink-0;
+  }
+
+  &__chart {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .justify-content-around;
+    @extend .bg-light;
+    @extend .pt-2;
+  }
+
+  &__settings {
+    @extend .bg-white;
+    @extend .pb-3;
+
+    &--padding {
+      @extend .px-3;
+    }
+  }
+
+  &-item {
+    @extend .py-4;
+
+    &__padding {
+      @extend .px-3;
+    }
+
+    &__heading {
+      @extend .px-3;
+      @extend .fs-7;
+      @extend .fw-light;
+      @extend .text-uppercase;
+
+      svg {
+        @include translateY(-2px);
+        margin-right: $icon-margin-right;
+      }
+    }
+
+    &__heading.panel-item__heading--nopadding {
+      @extend .px-0;
+    }
+
+    &__tabs {
+      .nav-tabs,
+      .c-slider {
+        @extend .pt-2;
+        @extend .pb-4;
+        @extend .px-3;
+      }
+
+      .c-slider {
+        @extend .position-relative;
+        @extend .border-start;
+        @extend .border-7;
+        @include user-select-none;
+        border-color: rgba(0, 0, 0, 0) !important;
+      }
+
+      .c-slider.energy_category_1,
+      .c-slider.energy_category_2,
+      .c-slider.energy_category_3 {
+        @extend .pb-1;
+        @extend .border-0;
+      }
+
+      .c-slider.energy_category_2,
+      .c-slider.energy_category_3 {
+        @extend .pt-3;
+        @extend .border-1;
+        @extend .border-top;
+      }
+
+      .c-slider .title-widget {
+        @extend .fs-6;
+      }
+
+      .c-slider.active {
+        @extend .px-3;
+        @extend .bg-light;
+      }
+
+      .c-slider button svg {
+        transform: translateX(2px) translateY(-1px);
+      }
+
+      .c-slider.active-sidepanel button svg {
+        transform: rotate(180deg) translateX(-2px) translateY(1px);
+      }
+
+      .c-slider + .sidepanel {
+        display: none;
+      }
+
+      .c-slider.active-sidepanel + .sidepanel {
+        display: block;
+        z-index: 999;
+      }
+
+      .c-slider__label {
+        @extend .d-flex;
+        @extend .flex-row;
+        @extend .justify-content-between;
+        @extend .pb-1;
+        @extend .fs-7;
+        @include user-select-none;
+
+        &--more button {
+          @extend .text-info;
+          @extend .fs-7;
+          @extend .fw-bold;
+        }
+      }
+
+      // replace with a more general class for checkboxes
+      .c-slider.lsg_usage {
+        @extend .d-flex;
+        @extend .flex-row;
+        @extend .align-items-center;
+        @extend .h-auto;
+
+        .c-slider__label {
+          @extend .p-0;
+          @extend .pe-1;
+        }
+      }
+    }
+
+    &__form {
+      @extend .d-flex;
+      @extend .flex-row;
+      @extend .align-items-center;
+
+      select,
+      img {
+        @extend .d-block;
+      }
+
+      img {
+        @extend .ms-1;
+      }
+    }
+
+    &__nav {
+      @extend .py-3;
+
+      &-header {
+        @extend .fs-7;
+        @extend .mb-1;
+      }
+
+      .nav-item {
+        width: 50%;
+        padding-bottom: $panel-results-nav-button-padding;
+      }
+
+      .nav-item:nth-of-type(odd) {
+        padding-right: calc(#{$panel-results-nav-button-padding} / 2);
+      }
+
+      .nav-item:nth-of-type(even) {
+        padding-left: calc(#{$panel-results-nav-button-padding} / 2);
+      }
+
+      .nav-link {
+        @extend .w-100;
+        @extend .bg-light;
+        @extend .text-primary;
+        @extend .text-center;
+        @include user-select-none;
+        height: 4.25rem;
+        border-radius: $button-border-radius;
+      }
+
+      .nav-link.active {
+        @extend .border;
+        @extend .border-primary;
+        @extend .border-2;
+      }
+    }
+
+    &__chart {
+      @extend .pb-2;
+    }
+
+    button svg {
+      @include translateY(-2px);
+      margin-right: $icon-margin-right;
+    }
+  }
+
+  .js-sidepanel {
+    top: 0;
+  }
+
+  .sidepanel {
+    @extend .position-absolute;
+    @extend .bg-light;
+    @extend .p-3;
+    @extend .overflow-auto;
+    width: 18rem;
+    left: $panel-width-sm;
+    padding-top: $padding-large !important;
+
+    @include media-breakpoint-up(md) {
+      height: calc(100% - #{$top-nav-height} - #{$steps-height});
+      top: calc(#{$top-nav-height} + #{$steps-height});
+      left: $panel-width-sm;
+    }
+
+    @include media-breakpoint-up(lg) {
+      left: $panel-width;
+    }
+
+    &__heading {
+      @extend .d-flex;
+      @extend .flex-row;
+      @extend .justify-content-between;
+      @extend .fs-7;
+      @extend .fw-bold;
+    }
+
+    &__close {
+      @extend .btn-close;
+    }
+
+    .c-slider {
+      @extend .p-0;
+      @extend .pb-3;
+      @extend .border-0;
+
+      &__label {
+        @extend .fs-7;
+      }
+    }
+  }
+}
+
+.footer {
+  @extend .flex-shrink-0;
+  @extend .border-top;
+  @extend .bg-white;
+  @extend .position-sticky;
+  @extend .bottom-0;
+  @extend .w-auto;
+  z-index: 9;
+
+  &__btns {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .px-4;
+    @extend .py-2;
+    @extend .border-bottom;
+
+    button {
+      @extend .w-50;
+    }
+  }
+
+  &__logos {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .text-center;
+    @extend .pt-2;
+
+    .logo--bmbf {
+      @extend .text-end;
+
+      img {
+        width: 8rem;
+      }
+    }
+  }
+
+  &__logo {
+    @extend .flex-fill;
+
+    &--rli {
+      @extend .text-center;
+      @extend .ps-2;
+
+      img {
+        width: 4.5rem;
+      }
+    }
+
+    &--eaa {
+      @extend .text-start;
+      @extend .ps-4;
+
+      img {
+        @include translateX(1rem);
+        width: 5rem;
+      }
+    }
+
+    &--rg {
+      @extend .text-end;
+
+      img {
+        @include translateY(-0.5rem);
+        width: 9rem;
+      }
+    }
+  }
+
+  &__links {
+    height: 1.5rem;
+
+    ul {
+      @include ul-horizontal;
+      @extend .d-flex;
+      @extend .flex-row;
+      @extend .justify-content-center;
+    }
+
+    li {
+      @extend .d-inline-block;
+      @extend .fs-7;
+
+      button {
+        @extend .bg-white;
+        @extend .border-0;
+        @extend .link-primary;
+      }
+    }
+
+    li:not(:last-of-type) {
+      @extend .pe-2;
+    }
+  }
+}

@@ -1,0 +1,80 @@
+#basemaps-control {
+  @extend .text-primary;
+  @include map-control-legend;
+  border: 1px solid $c-color-gray;
+  top: $map-control-position-top;
+  left: $map-control-position-left;
+  height: 3.5rem;
+  width: 3rem;
+
+  @include media-breakpoint-up(sm) {
+    height: $map-control-total-height;
+    width: $map-control-total-height;
+
+    svg {
+      @include translateY(0.4rem);
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+  }
+
+  & > div {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  .layers-text {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    font-size: 12px;
+  }
+}
+
+.basemaps {
+  @include map-control-legend;
+  @include flex-row;
+  top: $map-control-position-top;
+  left: 4.5rem;
+  width: auto;
+  height: auto;
+  z-index: 101;
+
+  @include media-breakpoint-up(sm) {
+    height: $map-control-total-height;
+    left: calc(#{$map-control-position-left} + #{$map-control-total-height} + 0.5rem);
+  }
+
+  &__btn:not(:last-of-type) {
+    padding-right: 0.5rem;
+  }
+
+  button.btn {
+    @include flex-column-align-center;
+    padding: 0;
+
+    &:focus {
+      box-shadow: 0 0 0 0.25rem $c-color-yellow;
+    }
+
+    img {
+      display: inline-block;
+      width: $map-control-img-size;
+      height: $map-control-img-size;
+    }
+
+    span {
+      display: inline-block;
+      height: $map-control-text-height;
+      text-align: center;
+      font-size: 12px;
+      color: $gray-3;
+    }
+
+    &:focus {
+      border-radius: 0;
+    }
+  }
+}

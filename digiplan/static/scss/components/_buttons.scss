@@ -1,0 +1,65 @@
+.bs-btn {
+  @extend .btn;
+}
+
+.bs-btn-primary {
+  @extend .btn-primary;
+}
+
+.button {
+  @extend .btn;
+  letter-spacing: $c-letter-spacing;
+
+  &--primary {
+    @extend .btn-primary;
+  }
+
+  &--secondary {
+    @extend .btn-info;
+  }
+
+  &--ghost {
+    @extend .btn-outline-primary;
+  }
+
+  &--link {
+    @extend .btn-link;
+  }
+
+  &--pagination {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .justify-content-center;
+    @extend .align-items-center;
+    @extend .btn-info;
+    @extend .rounded-circle;
+    @extend .p-0;
+    height: 2rem;
+    width: 2rem;
+
+    &:disabled {
+      background-color: $gray-200;
+      border-color: $gray-200;
+    }
+  }
+
+  &--transparent {
+    @extend .btn-link;
+    @extend .p-0;
+    @extend .d-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  &--danger {
+    @extend .btn-danger;
+  }
+
+  &--sm {
+    @extend .btn-sm;
+  }
+
+  &--lg {
+    @extend .btn-lg;
+  }
+}

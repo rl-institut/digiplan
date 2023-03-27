@@ -1,0 +1,82 @@
+{% load static i18n compress %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}Digiplan{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% include "partials/_favicon_set.html" %}
+
+    {# Only for JS that MUST be in the head #}
+    {% block js_head %}{% endblock%}
+
+    {% block css %}
+      {% compress css %}
+        <link rel="stylesheet" type="text/x-scss" href="{% static 'scss/app.scss' %}">
+        <link href="{% static 'css/project.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'vendors/ionrangeslider/css/ion.rangeSlider.min.css' %}"/>
+        <link href="{%  static 'vendors/select2/css/select2.min.css' %}" type="text/css" media="screen" rel="stylesheet">
+        <link href="{% static 'django_select2/django_select2.css' %}" type="text/css" media="screen" rel="stylesheet">
+      {% endcompress %}
+    {% endblock %}
+
+    {% if password_protected %}
+      <script type="text/javascript">
+        var s = "";
+        const pw = "{{password}}";
+        while (s != pw) {
+          s = prompt("Bitte Passwort eingeben");
+          if (s != pw) {
+            alert("Falsches Passwort - bitte versuch es erneut!");
+          }
+        }
+      </script>
+    {% endif %}
+
+  </head>
+
+  <body>
+
+    <div>
+      {% if messages %}
+        {% for message in messages %}
+          <div class="callout {% if message.tags %}{{ message.tags }}{% endif %}" data-closable>
+          <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    {% block content %}{% endblock content %}
+    {% block modal %}{% endblock modal %}
+
+    {% block js_body %}
+
+      {% compress js %}
+        <script src="{% static 'vendors/echarts/js/echarts.min.js' %}"></script>
+        <script src="{% static 'vendors/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'vendors/jquery/js/jquery.min.js' %}"></script>
+        <script src="{% static 'vendors/pubsub/js/pubsub.js' %}"></script>
+        <script src="{% static 'vendors/ionrangeslider/js/ion.rangeSlider.min.js' %}"></script>
+        <script src="{% static 'vendors/select2/js/select2.min.js' %}"></script>
+        <script src="{% static 'vendors/select2/js/i18n/de.js' %}"></script>
+        <script src="{% static 'django_select2/django_select2.js' %}"></script>
+      {% endcompress %}
+
+      {% compress js %}
+        <script src="{% static 'js/event-topics.js' %}"></script>
+        <script src="{% static 'js/charts.js' %}"></script>
+        <script src="{% static 'js/layers-box.js' %}"></script>
+        <script src="{% static 'js/offcanvas.js' %}"></script>
+        <script src="{% static 'js/menu.js' %}"></script>
+      {% endcompress %}
+
+    {% endblock js_body %}
+  </body>
+</html>

@@ -1,6 +1,7 @@
-name: enershelf
+name: digiplan
 channels:
   - conda-forge
 dependencies:
   - python=3.9
-  - gdal=3.2.1
+  - gdal
+  - coincbc

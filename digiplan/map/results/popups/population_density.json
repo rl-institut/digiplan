@@ -1,0 +1,14 @@
+{
+    "description": "something about the population density in this region and / or municipality",
+    "id": "14",
+    "data": {
+      "unit": "population per km²",
+      "year": null,
+      "municipality_value": null,
+      "region_title": "ABW region",
+      "region_value": null
+    },
+    "municipality": null,
+    "sources": [ ],
+    "title": "Population Density"
+  }
