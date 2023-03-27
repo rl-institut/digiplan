@@ -1,12 +1,13 @@
 [tool.poetry]
 name = "digiplan"
-version = "0.1.0"
+version = "0.2.0"
 description = "Digiplan"
 authors = [
   "Hendrik Huyskens <hendrik.huyskens@rl-institut.de>",
   "Marie-Claire Gering <marie-claire.gering@rl-institut.de>",
   "Josephine Stolle <josephine.stolle@rl-institut.de>",
   "Josefine Hoppe <josefine.hoppe@rl-institut.de>",
+  "Finn Hees <finn.hees@rl-institut.de>",
 ]
 
 [tool.poetry.dependencies]
