@@ -76,8 +76,8 @@ class WindTurbine(models.Model):
         geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
     )
 
-    data_file = "bnetza_mastr_wind_agg_abw"
-    layer = "bnetza_mastr_wind_abw"
+    data_file = "bnetza_mastr_wind_agg_region"
+    layer = "bnetza_mastr_wind"
     mapping = {
         "geom": "POINT",
         "name": "name",
@@ -110,8 +110,8 @@ class PVroof(models.Model):
         geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
     )
 
-    data_file = "bnetza_mastr_pv_roof_agg_abw"
-    layer = "bnetza_mastr_pv_roof_abw"
+    data_file = "bnetza_mastr_pv_roof_agg_region"
+    layer = "bnetza_mastr_pv_roof"
 
     mapping = {
         "geom": "POINT",
@@ -143,8 +143,8 @@ class PVground(models.Model):
         geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
     )
 
-    data_file = "bnetza_mastr_pv_ground_agg_abw"
-    layer = "bnetza_mastr_pv_ground_abw"
+    data_file = "bnetza_mastr_pv_ground_agg_region"
+    layer = "bnetza_mastr_pv_ground"
 
     mapping = {
         "geom": "POINT",
@@ -173,8 +173,8 @@ class Hydro(models.Model):
         geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
     )
 
-    data_file = "bnetza_mastr_hydro_agg_abw"
-    layer = "bnetza_mastr_hydro_abw"
+    data_file = "bnetza_mastr_hydro_agg_region"
+    layer = "bnetza_mastr_hydro"
 
     mapping = {
         "geom": "POINT",
@@ -203,8 +203,8 @@ class Biomass(models.Model):
         geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
     )
 
-    data_file = "bnetza_mastr_biomass_agg_abw"
-    layer = "bnetza_mastr_biomass_abw"
+    data_file = "bnetza_mastr_biomass_agg_region"
+    layer = "bnetza_mastr_biomass"
 
     mapping = {
         "geom": "POINT",
@@ -233,8 +233,8 @@ class Combustion(models.Model):
         geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
     )
 
-    data_file = "bnetza_mastr_combustion_agg_abw"
-    layer = "bnetza_mastr_combustion_abw"
+    data_file = "bnetza_mastr_combustion_agg_region"
+    layer = "bnetza_mastr_combustion"
 
     mapping = {
         "geom": "POINT",
