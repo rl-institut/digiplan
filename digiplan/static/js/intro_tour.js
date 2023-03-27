@@ -20,10 +20,18 @@ tour.addStep({
     buttons: [
         {
             action() {
+                return this.cancel();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Tour beenden'
+        },
+        {
+            action() {
                 return this.next();
             },
             text: 'Weiter'
         }
+
     ],
     id: 'creating'
 });
