@@ -1,149 +1,138 @@
+"""Views for map app.
+
+As map app is SPA, this module contains main view and various API points.
+"""
 import json
-import random
-import uuid
 
-from django.http import JsonResponse
+from django.conf import settings
+from django.http import HttpRequest, JsonResponse
+from django.template.exceptions import TemplateDoesNotExist
+from django.template.loader import render_to_string
 from django.views.generic import TemplateView
+from django_mapengine import views
 
-from config.settings.base import (
-    DEBUG,
-    PASSWORD,
-    PASSWORD_PROTECTION,
-    TILING_SERVICE_STYLE_ID,
-    TILING_SERVICE_TOKEN,
-    USE_DISTILLED_MVTS,
-)
-from digiplan.map.config.config import (
-    CLUSTER_GEOJSON_FILE,
-    DEPENDENCY_PARAMETERS,
-    ENERGY_SETTINGS_PANEL,
-    HEAT_SETTINGS_PANEL,
-    LAYER_STYLES,
-    MAP_IMAGES,
-    RESULTS_CHOROPLETHS,
-    SETTINGS_DEPENDENCY_MAP,
-    SOURCES,
-    STORE_COLD_INIT,
-    STORE_HOT_INIT,
-    TRAFFIC_SETTINGS_PANEL,
-    ZOOM_LEVELS,
-)
+from digiplan.map import config
 from digiplan.map.results import core
 
-from . import models
-from .forms import PanelForm, StaticLayerForm
-from .layers import (
-    ALL_LAYERS,
-    ALL_SOURCES,
-    LAYERS_CATEGORIES,
-    POPUPS,
-    RASTER_LAYERS,
-    REGION_LAYERS,
-)
+from . import forms, map_config
+from .results import calculations
 
 
-class MapGLView(TemplateView):
+class MapGLView(TemplateView, views.MapEngineMixin):
+    """Main view for map app (SPA)."""
+
     template_name = "map.html"
     extra_context = {
-        "debug": DEBUG,
-        "password_protected": PASSWORD_PROTECTION,
-        "password": PASSWORD,
-        "tiling_service_token": TILING_SERVICE_TOKEN,
-        "tiling_service_style_id": TILING_SERVICE_STYLE_ID,
-        "map_images": MAP_IMAGES,
-        "all_layers": ALL_LAYERS,
-        "raster_layers": RASTER_LAYERS,
-        "all_sources": ALL_SOURCES,
-        "popups": POPUPS,
-        "region_filter": None,  # RegionFilterForm(),
+        "debug": settings.DEBUG,
+        "password_protected": settings.PASSWORD_PROTECTION,
+        "password": settings.PASSWORD,
         "area_switches": {
-            category: [StaticLayerForm(layer) for layer in layers] for category, layers in LAYERS_CATEGORIES.items()
+            category: [forms.StaticLayerForm(layer) for layer in layers]
+            for category, layers in map_config.LEGEND.items()
         },
-        "energy_settings_panel": PanelForm(ENERGY_SETTINGS_PANEL),
-        "heat_settings_panel": PanelForm(HEAT_SETTINGS_PANEL),
-        "traffic_settings_panel": PanelForm(TRAFFIC_SETTINGS_PANEL),
-        "use_distilled_mvts": USE_DISTILLED_MVTS,
-        "store_hot_init": STORE_HOT_INIT,
-        "zoom_levels": ZOOM_LEVELS,
+        "energy_settings_panel": forms.PanelForm(config.ENERGY_SETTINGS_PANEL),
+        "heat_settings_panel": forms.PanelForm(config.HEAT_SETTINGS_PANEL),
+        "traffic_settings_panel": forms.PanelForm(config.TRAFFIC_SETTINGS_PANEL),
+        "use_distilled_mvts": settings.MAP_ENGINE_USE_DISTILLED_MVTS,
+        "store_hot_init": config.STORE_HOT_INIT,
     }
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
+        """Context data for main view.
+
+        Parameters
+        ----------
+        kwargs
+            Optional kwargs
+
+        Returns
+        -------
+        dict
+            context for main view
+        """
         # Add unique session ID
-        session_id = str(uuid.uuid4())
         context = super().get_context_data(**kwargs)
-        context["session_id"] = session_id
-        context["layer_styles"] = LAYER_STYLES
-        context["settings_parameters"] = ENERGY_SETTINGS_PANEL
-        context["settings_dependency_map"] = SETTINGS_DEPENDENCY_MAP
-        context["dependency_parameters"] = DEPENDENCY_PARAMETERS
+
+        context["settings_parameters"] = config.ENERGY_SETTINGS_PANEL
+        context["settings_dependency_map"] = config.SETTINGS_DEPENDENCY_MAP
+        context["dependency_parameters"] = config.DEPENDENCY_PARAMETERS
 
         # Categorize sources
         categorized_sources = {
-            category: [SOURCES[layer.source] for layer in layers if layer.source in SOURCES]
-            for category, layers in LAYERS_CATEGORIES.items()
+            category: [
+                config.SOURCES[layer.get_layer_id()] for layer in layers if layer.get_layer_id() in config.SOURCES
+            ]
+            for category, layers in map_config.LEGEND.items()
         }
         context["sources"] = categorized_sources
-
-        # Add popup-layer IDs to cold store
-        STORE_COLD_INIT["popup_layers"] = [popup.layer_id for popup in POPUPS]
-        STORE_COLD_INIT["region_layers"] = [layer.id for layer in REGION_LAYERS if layer.id.startswith("fill")]
-        STORE_COLD_INIT["result_views"] = {}  # Placeholder for already downloaded results (used in results.js)
-        context["store_cold_init"] = json.dumps(STORE_COLD_INIT)
+        context["store_cold_init"] = config.STORE_COLD_INIT
 
         return context
 
 
-def get_clusters(request):
-    try:
-        with open(CLUSTER_GEOJSON_FILE, "r", encoding="utf-8") as geojson_file:
-            clusters = json.load(geojson_file)
-    except FileNotFoundError:
-        clusters = {}
-    return JsonResponse(clusters)
-
-
-def get_results(request):
-    """
-    Reads scenario results from database, aggregates data according to results view and sends back data
-    related to municipality.
+def get_popup(request: HttpRequest, lookup: str, region: int) -> JsonResponse:  # noqa: ARG001
+    """Return popup as html and chart options to render chart on popup.
 
     Parameters
     ----------
     request : HttpRequest
-        Request must contain GET variables "scenario_id" and "result_view"
+        Request from app, can hold option for different language
+    lookup: str
+        Name is used to lookup data and chart functions
+    region: int
+        ID of region selected on map. Data and chart for popup is calculated for related region.
 
     Returns
     -------
-    dict
-        Containing key-value pairs of municipality_ids and values
-
-    Raises
-    ------
-    ValueError
-        If result view is unknown
+    JsonResponse
+        containing HTML to render popup and chart options to be used in E-Chart.
     """
-    # pylint: disable=W0511,W0612
-    scenario_id = request.GET["scenario_id"]  # noqa: F841
-    result_view = request.GET["result_view"]
-    # FIXME: Replace dummy data with actual data
-    if result_view == "re_power_percentage":
-        values = {
-            municipality.id: random.randint(0, 100) / 100  # noqa: S311
-            for municipality in models.Municipality.objects.all()
-        }
-        fill_color = RESULTS_CHOROPLETHS.get_fill_color(result_view)
-        return JsonResponse({"values": values, "fill_color": fill_color})
-    if result_view == "re_power":
-        values = {
-            municipality.id: random.randint(0, 100) / 100  # noqa: S311
-            for municipality in models.Municipality.objects.all()
-        }
-        fill_color = RESULTS_CHOROPLETHS.get_fill_color(result_view, list(values.values()))
-        return JsonResponse({"values": values, "fill_color": fill_color})
-    raise ValueError(f"Unknown result view '{result_view}'")
+    data = calculations.create_data(lookup, region)
+    chart = calculations.create_chart(lookup, region)
+
+    try:
+        html = render_to_string(f"popups/{lookup}.html", context=data)
+    except TemplateDoesNotExist:
+        html = render_to_string("popups/default.html", context=data)
+    return JsonResponse({"html": html, "chart": chart})
 
 
-def get_visualization(request):
+# pylint: disable=W0613
+def get_choropleth(request: HttpRequest, lookup: str, scenario: str) -> JsonResponse:  # noqa: ARG001
+    """Read scenario results from database, aggregate data and send back data.
+
+    Parameters
+    ----------
+    request : HttpRequest
+        Request can contain optional values (i.e. language)
+    lookup : str
+        which result/calculation shall be shown in choropleth?
+    scenario : str
+        defines the scenario to look up values for (i.e. status quo or user scenario)
+
+    Returns
+    -------
+    JsonResponse
+        Containing key-value pairs of municipality_ids and values and related color style
+    """
+    values = calculations.create_choropleth_data(lookup)
+    fill_color = settings.MAP_ENGINE_CHOROPLETH_STYLES.get_fill_color(lookup, list(values.values()))
+    return JsonResponse({"values": values, "paintProperties": {"fill-color": fill_color, "fill-opacity": 1}})
+
+
+def get_visualization(request: HttpRequest) -> JsonResponse:
+    """Return visualization from oemof simulation result.
+
+    Parameters
+    ----------
+    request : HttpRequest
+        Request for visualization
+
+    Returns
+    -------
+    JsonResponse
+        Visualization of simulation result
+    """
     scenario_name = request.GET["scenario"]
     parameters_raw = request.GET.get("parameters")
     parameters = json.loads(parameters_raw) if parameters_raw else {}

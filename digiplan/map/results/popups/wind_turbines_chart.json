@@ -1,0 +1,10 @@
+{
+    "lookup": "wind_turbines",
+    "series": [
+      {
+        "data": [],
+        "name": "wind turbines"
+      }
+    ],
+    "title": "number of wind turbines"
+}

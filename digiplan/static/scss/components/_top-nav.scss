@@ -24,6 +24,7 @@
   @extend .flex-row;
   @extend .justify-content-center;
   @extend .align-items-center;
+  @extend .px-2;
   height: $steps-height;
 
   &__list {
@@ -34,64 +35,37 @@
     @extend .justify-content-around;
     @extend .align-items-center;
     @extend .border-0;
-    max-width: 42rem;
+    @extend .px-2;
+    max-width: 24rem;
 
     &:hover {
       @extend .bg-white;
     }
   }
 
-  .nav-item--separator {
+  &__item--separator {
+    @extend .mx-2;
     flex: 1;
     height: 1px;
     background-color: $gray-300;
   }
 
-  &__item {
-    @extend .list-group-item;
-    @extend .list-group-item-action;
-    @extend .text-primary;
-    @extend .border-0;
-    @extend .bg-white;
-    @extend .text-center;
-    @extend .fw-bold;
-
-    &.active {
-      @extend .text-info;
-    }
-
-    &.disabled {
-      @extend .text-muted;
-    }
-  }
-
-  &__number {
-    @extend .d-inline-block;
-    @extend .bg-primary;
-    @extend .text-white;
-    @extend .fw-bold;
-    @extend .rounded-circle;
-    @extend .me-1;
-    @extend .fs-7;
-    width: $steps-numbers-size;
-    height: $steps-numbers-size;
-    padding: 0.125rem;
-  }
-
   &__text {
     @extend .fs-7;
+    @extend .fw-semibold;
     @extend .d-none;
     @extend .d-sm-inline;
     @extend .d-md-none;
     @extend .d-lg-inline;
-    letter-spacing: $letter-spacing-small;
+    color: $gray-300 !important;
+    letter-spacing: $letter-spacing-normal;
   }
 
   &__item.active .steps__number {
-    @extend .bg-info;
+    @extend .bg-primary;
   }
 
-  &__item.disabled .steps__number {
-    background-color: $c-color-gray !important;
+  &__item.active .steps__text {
+    @extend .text-primary;
   }
 }

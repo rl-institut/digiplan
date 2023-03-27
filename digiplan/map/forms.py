@@ -12,6 +12,7 @@ from django.forms import (
     renderers,
 )
 from django.utils.safestring import mark_safe
+from django_mapengine import legend
 from django_select2.forms import Select2MultipleWidget
 
 from . import models
@@ -29,7 +30,7 @@ class TemplateForm(Form):
 
 
 class StaticLayerForm(TemplateForm):
-    template_name = "forms.layer.html"
+    template_name = "forms/layer.html"
     switch = BooleanField(
         label=False,
         widget=SwitchWidget(
@@ -41,19 +42,18 @@ class StaticLayerForm(TemplateForm):
     )
     counter = count()
 
-    def __init__(self, layer, *args, **kwargs):
+    def __init__(self, layer: legend.LegendLayer, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.layer = layer
-        self.fields["switch"].widget.attrs["id"] = layer.source
 
         if hasattr(layer.model, "filters"):
             self.has_filters = True
-            for filter_ in layer.model.filters:
+            for filter_ in layer.layer.model.filters:
                 if filter_.type == models.LayerFilterType.Range:
-                    filter_min = layer.model.vector_tiles.aggregate(Min(filter_.name))[f"{filter_.name}__min"]
-                    filter_max = layer.model.vector_tiles.aggregate(Max(filter_.name))[f"{filter_.name}__max"]
+                    filter_min = layer.layer.model.vector_tiles.aggregate(Min(filter_.name))[f"{filter_.name}__min"]
+                    filter_max = layer.layer.model.vector_tiles.aggregate(Max(filter_.name))[f"{filter_.name}__max"]
                     self.fields[filter_.name] = MultiValueField(
-                        label=getattr(layer.model, filter_.name).field.verbose_name,
+                        label=getattr(layer.layer.model, filter_.name).field.verbose_name,
                         fields=[IntegerField(), IntegerField()],
                         widget=TextInput(
                             attrs={
@@ -69,7 +69,9 @@ class StaticLayerForm(TemplateForm):
                     )
                 elif filter_.type == models.LayerFilterType.Dropdown:
                     filter_values = (
-                        layer.model.vector_tiles.values_list(filter_.name, flat=True).order_by(filter_.name).distinct()
+                        layer.layer.model.vector_tiles.values_list(filter_.name, flat=True)
+                        .order_by(filter_.name)
+                        .distinct()
                     )
                     self.fields[filter_.name] = MultipleChoiceField(
                         choices=[(value, value) for value in filter_values],

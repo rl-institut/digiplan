@@ -1,0 +1,10 @@
+{
+    "lookup": "population",
+    "series": [
+      {
+        "data": [],
+        "name": "Population"
+      }
+    ],
+    "title": "population in different years"
+  }

@@ -4,6 +4,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2023-03-27
+### Added
+- test coverage to dev setup
+- CI with github actions (pre-commit and pytest)
+- (static) charts for electricity and mobility
+- dynamic choropleths
+- popups from templates
+- e-charts for detailed and ghg overview to charts panel
+- layer switches to map legend
+- legend for choropleths
+- CONTRIBUTING.md file
+
+### Changed
+- integrated mapengine
+- implementation of clustered layers
+- move navigation buttons below top navbar
+
+### Fixed
+- choropleth and schema tests
+- migration conflict
+- data processing script
+
 ## [0.1.0] - 2023-02-10
 ### Added
 - integrated django-oemof app
@@ -13,6 +35,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - results layer with customizable result views
 - add names and lookups for layers
 - add color palettes for map
+- add category bbuttons to results side panel as placeholder
 
 ### Changed
 - make dependent slider values update dynamically on dependency slider changes
@@ -33,11 +56,13 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - make top nav responsive
 - update horizontal padding on left panel for better use of bg-colors individual items
 - colors for choropleth are rendered by colorbrewer
+- make layers box visible on start
 
 ### Fixed
 - fix clunky sidebar resizing of sidebar chart #68
 - fix Postgis on Mac by improving Docker postgis install
 - remove unneeded option flag in poetry install section in readme
+- fix legend lower part hidden on smaller screens
 
 ## [0.0.0] - 2022-06-30
 ### Added

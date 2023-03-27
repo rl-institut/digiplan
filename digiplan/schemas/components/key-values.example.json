@@ -1,7 +1,7 @@
 {
-  "municipalityValue": 9311,
-  "regionTitle": "ABW region",
-  "regionValue": 370190,
+  "municipality_value": 9311,
+  "region_title": "ABW region",
+  "region_value": 370190,
   "unit": "Population",
   "year": 2022
 }

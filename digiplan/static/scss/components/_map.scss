@@ -26,7 +26,9 @@
 }
 
 #mainTabContent {
+  @extend .bg-light;
   height: $map-height;
+  overflow-y: auto;
 }
 
 #map {
@@ -65,7 +67,6 @@
     top: calc(#{$steps-height} + #{$map-items-padding});
     right: $map-items-padding;
     z-index: $map-layers-box-z-index;
-    display: none;
   }
 
   &__layers-close {
@@ -78,6 +79,7 @@
     @extend .fs-7;
     @extend .text-uppercase;
     @extend .fw-bold;
+    @extend .mb-1;
   }
 }
 
@@ -142,7 +144,12 @@
 
   &__title {
     @extend .text-uppercase;
-    @extend .pb-2;
+    @extend .pb-1;
+  }
+
+  &__unit {
+    @extend .fw-light;
+    @extend .ps-1;
   }
 
   &__wrap {
@@ -152,6 +159,7 @@
 
   &__column {
     @extend .col-6;
+    @extend .fs-8;
   }
 
   &__item {
@@ -166,6 +174,16 @@
       left: 0;
       right: 0;
     }
+  }
+}
+
+@media only screen and (max-height: 700px) {
+  .map__layers-box {
+    height: 55vh;
+  }
+
+  .legend {
+    height: calc(100vh - #{$top-nav-height} - #{$steps-height} - 55vh - (2 * #{#{$map-items-padding}}) - #{$map-legend-box-padding-bottom});
   }
 }
 

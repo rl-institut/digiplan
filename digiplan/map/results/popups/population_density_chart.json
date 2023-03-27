@@ -1,0 +1,10 @@
+{
+    "lookup": "population_density",
+    "series": [
+      {
+        "data": [],
+        "name": "Population Density"
+      }
+    ],
+    "title": "population density in different years"
+  }

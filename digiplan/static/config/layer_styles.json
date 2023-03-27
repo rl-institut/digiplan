@@ -1,5 +1,6 @@
 {
   "region-fill": {
+    "type": "fill",
     "paint": {
       "fill-color": "rgb(250,174,29)",
       "fill-opacity": [
@@ -15,10 +16,10 @@
         0,
         0.1
       ]
-    },
-    "type": "fill"
+    }
   },
   "region-label": {
+    "type": "symbol",
     "layout": {
       "text-field": "{name}",
       "text-letter-spacing": 0.04,
@@ -45,10 +46,10 @@
       "text-halo-blur": 1.5,
       "text-halo-color": "hsl(0, 0%, 100%)",
       "text-halo-width": 0.85
-    },
-    "type": "symbol"
+    }
   },
   "region-line": {
+    "type": "line",
     "paint": {
       "line-color": "rgb(250, 174,29)",
       "line-width": [
@@ -64,10 +65,254 @@
         3,
         0.25
       ]
+    }
+  },
+  "wind": {
+    "type": "symbol",
+    "layout": {
+      "icon-image": "wind",
+      "icon-size": [
+        "interpolate",
+        [
+          "linear"
+        ],
+        [
+          "get",
+          "unit_count"
+        ],
+        0,
+        0.5,
+        10,
+        1.0,
+        100,
+        1.25,
+        1000,
+        1.5
+      ],
+      "icon-allow-overlap": true
     },
-    "type": "line"
+    "paint": {
+      "icon-color": "blue"
+    }
+  },
+  "wind_cluster": {
+    "type": "circle",
+    "paint": {
+      "circle-color": [
+        "step",
+        ["get", "point_count"],
+        "#51bbd6",
+        100,
+        "#f1f075",
+        750,
+        "#f28cb1"
+      ],
+      "circle-radius": [
+        "step",
+        ["get", "point_count"],
+        20,
+        100,
+        30,
+        750,
+        40
+      ]
+    }
+  },
+  "wind_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    }
+  },
+  "pvroof": {
+    "type": "symbol",
+    "layout": {
+      "icon-image": "pv",
+      "icon-size": [
+        "interpolate",
+        [
+          "linear"
+        ],
+        [
+          "get",
+          "unit_count"
+        ],
+        0,
+        0.5,
+        10,
+        1.0,
+        100,
+        1.25,
+        1000,
+        1.5
+      ],
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "yellow"
+    }
+  },
+  "pvroof_cluster": {
+    "type": "circle",
+    "paint": {
+      "circle-color": [
+        "step",
+        ["get", "point_count"],
+        "#51bbd6",
+        100,
+        "#f1f075",
+        750,
+        "#f28cb1"
+      ],
+      "circle-radius": [
+        "step",
+        ["get", "point_count"],
+        20,
+        100,
+        30,
+        750,
+        40
+      ]
+    }
+  },
+  "pvroof_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    }
+  },
+  "pvground": {
+    "type": "circle",
+    "paint": {
+      "circle-color": "#F6B93B",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "*",
+        5,
+        [
+          "log10",
+          [
+            "get",
+            "capacity_net"
+          ]
+        ]
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0,
+        1
+      ]
+    }
+  },
+  "hydro": {
+    "type": "circle",
+    "paint": {
+      "circle-color": "#9CC4D9",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "*",
+        5,
+        [
+          "log10",
+          [
+            "get",
+            "capacity_net"
+          ]
+        ]
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0,
+        1
+      ]
+    }
+  },
+  "biomass": {
+    "type": "circle",
+    "paint": {
+      "circle-color": "#52C41A",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "*",
+        5,
+        [
+          "log10",
+          [
+            "get",
+            "capacity_net"
+          ]
+        ]
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0,
+        1
+      ]
+    }
+  },
+  "combustion": {
+    "type": "circle",
+    "paint": {
+      "circle-color": "#1A1A1A",
+      "circle-opacity": 0.5,
+      "circle-radius": [
+        "*",
+        5,
+        [
+          "log10",
+          [
+            "get",
+            "capacity_net"
+          ]
+        ]
+      ],
+      "circle-stroke-width": [
+        "case",
+        [
+          "boolean",
+          [
+            "get",
+            "geometry_approximated"
+          ],
+          false
+        ],
+        0,
+        1
+      ]
+    }
   },
   "results": {
+    "type": "fill",
     "paint": {
       "fill-color": [
         "interpolate",
@@ -90,7 +335,6 @@
         "#b30000"
       ],
       "fill-opacity": 0.8
-    },
-    "type": "fill"
+    }
   }
 }

@@ -13,6 +13,7 @@
         "production",
         "production_capita",
         "production_square_km",
+        "installed_ee",
         "capacity",
         "capacity_square_km",
         "wind_turbines",
