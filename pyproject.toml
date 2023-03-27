@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "digiplan"
-version = "0.2.0"
+version = "0.2.1"
 description = "Digiplan"
 authors = [
   "Hendrik Huyskens <hendrik.huyskens@rl-institut.de>",
