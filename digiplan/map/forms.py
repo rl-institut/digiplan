@@ -109,7 +109,9 @@ class PanelForm(TemplateForm):
                 attrs = {
                     "class": item["class"],
                 }
-                field = BooleanField(label=item["label"], widget=SwitchWidget(attrs=attrs), help_text=item["tooltip"])
+                field = BooleanField(
+                    label=item["label"], widget=SwitchWidget(attrs=attrs), help_text=item["tooltip"], required=False
+                )
                 yield {"name": name, "field": field}
             else:
                 raise ValueError(f"Unknown parameter type '{item['type']}'")
