@@ -4,12 +4,13 @@ from django.conf.urls.static import static
 from django.urls import include, path
 from django.views import defaults as default_views
 
-urlpatterns = [
-    i18n_patterns(
-        path("i18n/", include("django.conf.urls.i18n")),
-        path("", include("digiplan.map.urls", namespace="map")),
-        path("select2/", include("django_select2.urls")),
-    ),
+urlpatterns = i18n_patterns(
+    path("i18n/", include("django.conf.urls.i18n")),
+    path("", include("digiplan.map.urls", namespace="map")),
+    path("select2/", include("django_select2.urls")),
+)
+
+urlpatterns += [
     path("oemof/", include("django_oemof.urls")),
     path("map/", include("django_mapengine.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
