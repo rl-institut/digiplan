@@ -1,0 +1,53 @@
+<h2 class="title">Erzeuger</h2>
+
+<div id="js-power-mix" class="power-mix"></div>
+
+{% include "widgets/slider.html" with field=form.s_w_1 %}
+<div class="sidepanel">
+  <p class="sidepanel__heading">
+    Detaileinstellungen
+    {% include "widgets/sidepanel_close_btn.html" %}
+    {% include "widgets/slider.html" with field=form.s_w_2 %}
+    {% include "widgets/slider.html" with field=form.s_w_3 %}
+    {% include "widgets/slider.html" with field=form.s_w_4 %}
+  </p>
+</div>
+
+{% include "widgets/slider.html" with field=form.s_pv_ff_1 %}
+<div class="sidepanel">
+  <p class="sidepanel__heading">
+    Detaileinstellungen
+    {% include "widgets/sidepanel_close_btn.html" %}
+    {% include "widgets/slider.html" with field=form.s_pv_ff_2 %}
+    {% include "widgets/slider.html" with field=form.s_pv_ff_3 %}
+    {% include "widgets/slider.html" with field=form.s_pv_ff_4 %}
+  </p>
+</div>
+
+{% include "widgets/slider.html" with field=form.s_pv_d_1 %}
+<div class="sidepanel">
+  <p class="sidepanel__heading">
+    Detaileinstellungen
+    {% include "widgets/sidepanel_close_btn.html" %}
+    {% include "widgets/slider.html" with field=form.s_pv_d_2 %}
+  </p>
+</div>
+
+{% include "widgets/slider.html" with field=form.s_b_1 %}
+{% include "widgets/slider.html" with field=form.s_k_1 %}
+
+<h2 class="title">Verbraucher</h2>
+{% include "widgets/slider.html" with field=form.s_v_1 %}
+<div class="sidepanel">
+  <p class="sidepanel__heading">
+    Detaileinstellungen
+    {% include "widgets/sidepanel_close_btn.html" %}
+    {% include "widgets/slider.html" with field=form.s_v_2 %}
+    {% include "widgets/slider.html" with field=form.s_v_3 %}
+    {% include "widgets/slider.html" with field=form.s_v_4 %}
+  </p>
+</div>
+
+<h2 class="title">Speicher</h2>
+{% include "widgets/slider.html" with field=form.s_s_k_1 %}
+{% include "widgets/slider.html" with field=form.s_s_g_1 %}

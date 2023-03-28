@@ -35,18 +35,18 @@
           </button>
         </li>
       </ul>
-      <div class="c-tabs__content">
+      <form id="settings" class="c-tabs__content" method="POST">
+        {% csrf_token %}
         <div class="c-tabs__pane fade show active" id="wind" role="tabpanel" aria-labelledby="wind-tab">
-          <div id="js-power-mix" class="power-mix"></div>
-          {{energy_settings_panel}}
+          {{panels.0}}
         </div>
         <div class="c-tabs__pane fade" id="heat" role="tabpanel" aria-labelledby="heat-tab">
-          {{heat_settings_panel}}
+          {{panels.1}}
         </div>
         <div class="c-tabs__pane fade" id="traffic" role="tabpanel" aria-labelledby="traffic-tab">
-          {{traffic_settings_panel}}
+          {{panels.2}}
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
