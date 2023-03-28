@@ -5,8 +5,8 @@ import os
 
 import environ
 from django.core.exceptions import ValidationError
-from django_mapengine import setup
 from django.utils.translation import gettext_lazy as _
+from django_mapengine import setup
 
 ROOT_DIR = environ.Path(__file__) - 3  # (digiplan/config/settings/base.py - 3 = digiplan/)
 APPS_DIR = ROOT_DIR.path("digiplan")
