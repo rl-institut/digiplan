@@ -4,13 +4,13 @@
 {% block js_head %}
   {% compress js %}
     <script src="{% static 'vendors/maplibre/js/maplibre-gl.js' %}"></script>
-
   {% endcompress %}
 {% endblock %}
 
 {% block css %}
   {% compress css %}
     <link href="{% static 'vendors/maplibre/css/maplibre-gl.css' %}" rel='stylesheet'/>
+    <link href="{% static 'vendors/shepherd/shepherd.css' %}" rel='stylesheet'/>
   {% endcompress %}
   {{ block.super }}
 {% endblock %}
@@ -89,6 +89,10 @@
 
   {% compress js %}
     {% include 'django_mapengine/map_js.html' %}
+    {% if not debug %}
+      <script src="{% static 'vendors/shepherd/shepherd.min.js' %}" type="text/javascript"></script>
+      <script src="{% static 'js/intro_tour.js' %}" type="text/javascript"></script>
+    {% endif %}
     <script src="{% static 'js/state.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/sliders.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/results.js' %}" type="text/javascript"></script>
