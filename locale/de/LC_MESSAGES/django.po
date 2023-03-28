@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-17 08:42+0000\n"
+"POT-Creation-Date: 2023-03-28 14:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,509 +18,194 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: config/settings/base.py:33
-msgid "English"
-msgstr "Englisch"
+#: digiplan/static/config/energy_settings_panel.json:6
+#: digiplan/static/config/energy_settings_panel.json:12
+#, fuzzy
+#| msgid "Wind energy (MW)"
+msgid "Wind energy"
+msgstr "Windenergie"
 
-#: config/settings/base.py:34
-msgid "German"
-msgstr "Deutsch"
+#: digiplan/static/config/energy_settings_panel.json:19
+#: digiplan/static/config/energy_settings_panel.json:24
+#, fuzzy
+#| msgid "Distance from residential areas (m)"
+msgid "Distance from residential areas"
+msgstr "Siedlungsabstand"
 
-#: digiplan/map/mapset/setup.py:47
+#: digiplan/static/config/energy_settings_panel.json:29
+#: digiplan/static/config/energy_settings_panel.json:34
+msgid "Forest usage"
+msgstr "Windnutzungsfläche"
+
+#: digiplan/static/config/energy_settings_panel.json:39
+#: digiplan/static/config/energy_settings_panel.json:44
+msgid "LSG usage"
+msgstr "LSG-Nutzung"
+
+#~ msgid "English"
+#~ msgstr "Englisch"
+
+#~ msgid "German"
+#~ msgstr "Deutsch"
+
 msgid "Renewables"
 msgstr "Erneuerbare Energien"
 
-#: digiplan/map/mapset/setup.py:48 digiplan/map/models.py:107
 msgid "Wind turbine"
 msgstr "Windturbine"
 
-#: digiplan/map/mapset/setup.py:49 digiplan/map/models.py:144
-msgid "Roof-mounted PV"
-msgstr "Aufdach-PV"
-
-#: digiplan/map/mapset/setup.py:50 digiplan/map/models.py:181
-msgid "Outdoor PV"
-msgstr "Freiflächen-PV"
-
-#: digiplan/map/mapset/setup.py:51 digiplan/map/models.py:215
-#: digiplan/map/models.py:216
-msgid "Hydro"
-msgstr "Wasserkraft"
-
-#: digiplan/map/mapset/setup.py:52 digiplan/map/models.py:249
-#: digiplan/map/models.py:250
-msgid "Biomass"
-msgstr "Biomasse"
-
-#: digiplan/map/mapset/setup.py:53 digiplan/map/models.py:283
-#: digiplan/map/models.py:284
-msgid "Combustion"
-msgstr "Fossiles Kraftwerk"
-
-#: digiplan/map/models.py:28
-msgid "Country"
-msgstr "Land"
-
-#: digiplan/map/models.py:29
-msgid "State"
-msgstr "Bundesland"
-
-#: digiplan/map/models.py:30
-msgid "District"
-msgstr "Kreis"
-
-#: digiplan/map/models.py:31 digiplan/map/models.py:56
-#: digiplan/templates/popups/default.html:6
-msgid "Municipality"
-msgstr "Gemeinde"
-
-#: digiplan/map/models.py:36
-msgid "Region"
-msgstr "Region"
-
-#: digiplan/map/models.py:37
-msgid "Regions"
-msgstr "Regionen"
-
-#: digiplan/map/models.py:57
-msgid "Municipalities"
-msgstr "Gemeinden"
-
-#: digiplan/map/models.py:70 digiplan/map/models.py:71
-#: digiplan/templates/components/panel_3_results.html:17
-msgid "Population"
-msgstr "Bevölkerung"
-
-#: digiplan/map/models.py:108
-msgid "Wind turbines"
-msgstr "Windturbine"
-
-#: digiplan/map/models.py:145
-msgid "Roof-mounted PVs"
-msgstr "Aufdach-PVs"
-
-#: digiplan/map/models.py:182
-msgid "Outdoor PVs"
-msgstr "Freiflächen-PVs"
-
-#: digiplan/map/results/visualizations.py:10
-msgid "Total Costs"
-msgstr "Gesamtkosten"
-
-#: digiplan/map/results/visualizations.py:31
-msgid "Electricity Demand"
-msgstr "Strombedarf"
-
-#: digiplan/templates/account/account_inactive.html:5
-#: digiplan/templates/account/account_inactive.html:8
-msgid "Account Inactive"
-msgstr ""
-
-#: digiplan/templates/account/account_inactive.html:10
-msgid "This account is inactive."
-msgstr ""
-
-#: digiplan/templates/account/email.html:7
-msgid "Account"
-msgstr ""
-
-#: digiplan/templates/account/email.html:10
-msgid "E-mail Addresses"
-msgstr ""
-
-#: digiplan/templates/account/email.html:13
-msgid "The following e-mail addresses are associated with your account:"
-msgstr ""
-
-#: digiplan/templates/account/email.html:27
-msgid "Verified"
-msgstr ""
-
-#: digiplan/templates/account/email.html:29
-msgid "Unverified"
-msgstr ""
-
-#: digiplan/templates/account/email.html:31
-msgid "Primary"
-msgstr ""
-
-#: digiplan/templates/account/email.html:37
-msgid "Make Primary"
-msgstr ""
-
-#: digiplan/templates/account/email.html:38
-msgid "Re-send Verification"
-msgstr ""
-
-#: digiplan/templates/account/email.html:39
-msgid "Remove"
-msgstr ""
-
-#: digiplan/templates/account/email.html:46
-msgid "Warning:"
-msgstr ""
-
-#: digiplan/templates/account/email.html:46
-msgid ""
-"You currently do not have any e-mail address set up. You should really add "
-"an e-mail address so you can receive notifications, reset your password, etc."
-msgstr ""
-
-#: digiplan/templates/account/email.html:51
-msgid "Add E-mail Address"
-msgstr ""
-
-#: digiplan/templates/account/email.html:56
-msgid "Add E-mail"
-msgstr ""
-
-#: digiplan/templates/account/email.html:66
-msgid "Do you really want to remove the selected e-mail address?"
-msgstr ""
-
-#: digiplan/templates/account/email_confirm.html:6
-#: digiplan/templates/account/email_confirm.html:10
-msgid "Confirm E-mail Address"
-msgstr ""
-
-#: digiplan/templates/account/email_confirm.html:16
-#, python-format
-msgid ""
-"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
-"address for user %(user_display)s."
-msgstr ""
-
-#: digiplan/templates/account/email_confirm.html:20
-msgid "Confirm"
-msgstr ""
-
-#: digiplan/templates/account/email_confirm.html:27
-#, python-format
-msgid ""
-"This e-mail confirmation link expired or is invalid. Please <a "
-"href=\"%(email_url)s\">issue a new e-mail confirmation request</a>."
-msgstr ""
-
-#: digiplan/templates/account/login.html:7
-#: digiplan/templates/account/login.html:11
-#: digiplan/templates/account/login.html:45
-msgid "Sign In"
-msgstr ""
-
-#: digiplan/templates/account/login.html:16
-#, python-format
-msgid ""
-"Please sign in with one\n"
-"of your existing third party accounts. Or, <a href=\"%(signup_url)s\">sign "
-"up</a>\n"
-"for a %(site_name)s account and sign in below:"
-msgstr ""
-
-#: digiplan/templates/account/login.html:26
-msgid "or"
-msgstr ""
-
-#: digiplan/templates/account/login.html:33
-#, python-format
-msgid ""
-"If you have not created an account yet, then please\n"
-"<a href=\"%(signup_url)s\">sign up</a> first."
-msgstr ""
-
-#: digiplan/templates/account/login.html:44
-msgid "Forgot Password?"
-msgstr ""
-
-#: digiplan/templates/account/logout.html:5
-#: digiplan/templates/account/logout.html:8
-#: digiplan/templates/account/logout.html:17
-msgid "Sign Out"
-msgstr ""
-
-#: digiplan/templates/account/logout.html:10
-msgid "Are you sure you want to sign out?"
-msgstr ""
-
-#: digiplan/templates/account/password_change.html:6
-#: digiplan/templates/account/password_change.html:9
-#: digiplan/templates/account/password_change.html:14
-#: digiplan/templates/account/password_reset_from_key.html:5
-#: digiplan/templates/account/password_reset_from_key.html:8
-#: digiplan/templates/account/password_reset_from_key_done.html:4
-#: digiplan/templates/account/password_reset_from_key_done.html:7
-msgid "Change Password"
-msgstr ""
-
-#: digiplan/templates/account/password_reset.html:7
-#: digiplan/templates/account/password_reset.html:11
-#: digiplan/templates/account/password_reset_done.html:6
-#: digiplan/templates/account/password_reset_done.html:9
-msgid "Password Reset"
-msgstr ""
-
-#: digiplan/templates/account/password_reset.html:16
-msgid ""
-"Forgotten your password? Enter your e-mail address below, and we'll send you "
-"an e-mail allowing you to reset it."
-msgstr ""
-
-#: digiplan/templates/account/password_reset.html:21
-msgid "Reset My Password"
-msgstr ""
-
-#: digiplan/templates/account/password_reset.html:24
-msgid "Please contact us if you have any trouble resetting your password."
-msgstr ""
-
-#: digiplan/templates/account/password_reset_done.html:15
-msgid ""
-"We have sent you an e-mail. Please contact us if you do not receive it "
-"within a few minutes."
-msgstr ""
-
-#: digiplan/templates/account/password_reset_from_key.html:8
-msgid "Bad Token"
-msgstr ""
-
-#: digiplan/templates/account/password_reset_from_key.html:12
-#, python-format
-msgid ""
-"The password reset link was invalid, possibly because it has already been "
-"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
-"a>."
-msgstr ""
-
-#: digiplan/templates/account/password_reset_from_key.html:18
-msgid "change password"
-msgstr ""
-
-#: digiplan/templates/account/password_reset_from_key.html:21
-#: digiplan/templates/account/password_reset_from_key_done.html:8
-msgid "Your password is now changed."
-msgstr ""
-
-#: digiplan/templates/account/password_set.html:6
-#: digiplan/templates/account/password_set.html:9
-#: digiplan/templates/account/password_set.html:14
-msgid "Set Password"
-msgstr ""
-
-#: digiplan/templates/account/signup.html:6
-msgid "Signup"
-msgstr ""
-
-#: digiplan/templates/account/signup.html:9
-#: digiplan/templates/account/signup.html:19
-msgid "Sign Up"
-msgstr ""
-
-#: digiplan/templates/account/signup.html:11
-#, python-format
-msgid ""
-"Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
-msgstr ""
-
-#: digiplan/templates/account/signup_closed.html:5
-#: digiplan/templates/account/signup_closed.html:8
-msgid "Sign Up Closed"
-msgstr ""
-
-#: digiplan/templates/account/signup_closed.html:10
-msgid "We are sorry, but the sign up is currently closed."
-msgstr ""
-
-#: digiplan/templates/account/verification_sent.html:5
-#: digiplan/templates/account/verification_sent.html:8
-#: digiplan/templates/account/verified_email_required.html:5
-#: digiplan/templates/account/verified_email_required.html:8
-msgid "Verify Your E-mail Address"
-msgstr ""
-
-#: digiplan/templates/account/verification_sent.html:10
-msgid ""
-"We have sent an e-mail to you for verification. Follow the link provided to "
-"finalize the signup process. Please contact us if you do not receive it "
-"within a few minutes."
-msgstr ""
-
-#: digiplan/templates/account/verified_email_required.html:12
-msgid ""
-"This part of the site requires us to verify that\n"
-"you are who you claim to be. For this purpose, we require that you\n"
-"verify ownership of your e-mail address. "
-msgstr ""
-
-#: digiplan/templates/account/verified_email_required.html:16
-msgid ""
-"We have sent an e-mail to you for\n"
-"verification. Please click on the link inside this e-mail. Please\n"
-"contact us if you do not receive it within a few minutes."
-msgstr ""
-
-#: digiplan/templates/account/verified_email_required.html:20
-#, python-format
-msgid ""
-"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
-"mail address</a>."
-msgstr ""
-
-#: digiplan/templates/components/map.html:9
-msgid "Region as of today"
-msgstr "Region heute"
-
-#: digiplan/templates/components/map.html:17
-#: digiplan/templates/components/panel_2_settings.html:9
-msgid "Settings"
-msgstr "Einstellungen"
-
-#: digiplan/templates/components/map.html:25
-#: digiplan/templates/components/panel_3_results.html:12
-msgid "Results"
-msgstr "Ergebnisse"
-
-#: digiplan/templates/components/map_basemaps_control.html:7
-msgid "maps"
-msgstr "Karten"
-
-#: digiplan/templates/components/map_basemaps_control.html:14
-msgid "default"
-msgstr "Standard"
-
-#: digiplan/templates/components/map_basemaps_control.html:20
-msgid "satellite"
-msgstr "Satellit"
-
-#: digiplan/templates/components/panel.html:24
-msgid "Previous"
-msgstr "Zurück"
-
-#: digiplan/templates/components/panel.html:30
-msgid "Next"
-msgstr "Weiter"
-
-#: digiplan/templates/components/panel.html:54
-msgid "Imprint"
-msgstr "Impressum"
-
-#: digiplan/templates/components/panel.html:59
-msgid "Data privacy"
-msgstr "Datenschutz"
-
-#: digiplan/templates/components/panel_1_today.html:12
-msgid "Situation today"
-msgstr "Situation heute"
-
-#: digiplan/templates/components/panel_1_today.html:16
-#: digiplan/templates/components/panel_3_results.html:16
-msgid "Planning Region"
-msgstr "Planungsregion"
-
-#: digiplan/templates/components/panel_2_settings.html:18
-#: digiplan/templates/components/panel_3_results.html:55
-#: digiplan/templates/components/results_view.html:33
-msgid "Electricity"
-msgstr "Strom"
-
-#: digiplan/templates/components/panel_2_settings.html:26
-#: digiplan/templates/components/panel_3_results.html:63
-#: digiplan/templates/components/results_view.html:34
-msgid "Heat"
-msgstr "Wärme"
-
-#: digiplan/templates/components/panel_2_settings.html:34
-#: digiplan/templates/components/panel_3_results.html:71
-#: digiplan/templates/components/results_view.html:35
-msgid "Transportation"
-msgstr "Verkehr"
-
-#: digiplan/templates/components/panel_3_results.html:18
-msgid "Population density"
-msgstr "Bevölkerungsdichte"
-
-#: digiplan/templates/components/panel_3_results.html:39
-msgid "View"
-msgstr "Ansicht"
-
-#: digiplan/templates/components/panel_3_results.html:47
-#: digiplan/templates/components/results_view.html:5
-msgid "General"
-msgstr "Allgemein"
-
-#: digiplan/templates/components/results_view.html:9
-msgid "Overview"
-msgstr "Überblick"
-
-#: digiplan/templates/components/results_view.html:12
-msgid ""
-"In dieser Darstellung sind die Ergebnisse der beiden Szenarien für die "
-"Stromerzeugung gegeneinander aufgetragen. Auf der linken Seite findet sich "
-"die Zusammensetzung des von Ihnen erstellten Szenarios, auf der rechten die "
-"des Referenzszenarios. Auf diese Art lässt sich sowohl die Gesamterzeugung "
-"als auch die Erzeugung der unterschiedlichen Technologien vergleichen."
-msgstr ""
-
-#: digiplan/templates/components/results_view.html:16
-msgid "Greenhouse gas"
-msgstr "Treibhausgas"
-
-#: digiplan/templates/components/results_view.html:22
-msgid "Car trip"
-msgstr "Autofahrt"
-
-#: digiplan/templates/components/toggle_view.html:10
-#: digiplan/templates/map.html:41
-msgid "Map"
-msgstr "Karte"
-
-#: digiplan/templates/components/toggle_view.html:18
-msgid "Charts"
-msgstr "Diagramme"
-
-#: digiplan/templates/forms/panel.html:8
-msgid "Detail Settings"
-msgstr "Detaileinstellungen"
-
-#: digiplan/templates/map.html:46
-msgid "Documentation"
-msgstr "Dokumentation"
-
-#: digiplan/templates/map.html:50
-msgid "Sources"
-msgstr "Quellen"
-
-#: digiplan/templates/map.html:54 digiplan/templates/offcanvas/contact.html:4
-msgid "Contact"
-msgstr "Kontakt"
-
-#: digiplan/templates/offcanvas/contact.html:7
-msgid "Project Lead"
-msgstr "Projektleiterin"
-
-#: digiplan/templates/offcanvas/contact.html:12
-msgid "Research Associate"
-msgstr "Wissenschaflticher Mitarbeiter"
-
-#: digiplan/templates/offcanvas/contact.html:24
-msgid "Phone"
-msgstr "Telefon"
-
-#: digiplan/templates/offcanvas/contact.html:25
-msgid "Telefax"
-msgstr "Telefax"
-
-#: digiplan/templates/popups/default.html:5
-msgid "Popup Title"
-msgstr "Popup Titel"
-
-#: digiplan/templates/popups/default.html:7
-msgid "Description"
-msgstr "Beschreibung"
+#~ msgid "Roof-mounted PV"
+#~ msgstr "Aufdach-PV"
+
+#~ msgid "Outdoor PV"
+#~ msgstr "Freiflächen-PV"
+
+#~ msgid "Hydro"
+#~ msgstr "Wasserkraft"
+
+#~ msgid "Biomass"
+#~ msgstr "Biomasse"
+
+#~ msgid "Combustion"
+#~ msgstr "Fossiles Kraftwerk"
+
+#~ msgid "Country"
+#~ msgstr "Land"
+
+#~ msgid "State"
+#~ msgstr "Bundesland"
+
+#~ msgid "District"
+#~ msgstr "Kreis"
+
+#~ msgid "Municipality"
+#~ msgstr "Gemeinde"
+
+#~ msgid "Region"
+#~ msgstr "Region"
+
+#~ msgid "Regions"
+#~ msgstr "Regionen"
+
+#~ msgid "Municipalities"
+#~ msgstr "Gemeinden"
+
+#~ msgid "Population"
+#~ msgstr "Bevölkerung"
+
+#~ msgid "Wind turbines"
+#~ msgstr "Windturbine"
+
+#~ msgid "Roof-mounted PVs"
+#~ msgstr "Aufdach-PVs"
+
+#~ msgid "Outdoor PVs"
+#~ msgstr "Freiflächen-PVs"
+
+#~ msgid "Total Costs"
+#~ msgstr "Gesamtkosten"
+
+#~ msgid "Electricity Demand"
+#~ msgstr "Strombedarf"
+
+#~ msgid "Region as of today"
+#~ msgstr "Region heute"
+
+#~ msgid "Settings"
+#~ msgstr "Einstellungen"
+
+#~ msgid "Results"
+#~ msgstr "Ergebnisse"
+
+#~ msgid "maps"
+#~ msgstr "Karten"
+
+#~ msgid "default"
+#~ msgstr "Standard"
+
+#~ msgid "satellite"
+#~ msgstr "Satellit"
+
+#~ msgid "Previous"
+#~ msgstr "Zurück"
+
+#~ msgid "Next"
+#~ msgstr "Weiter"
+
+#~ msgid "Imprint"
+#~ msgstr "Impressum"
+
+#~ msgid "Data privacy"
+#~ msgstr "Datenschutz"
+
+#~ msgid "Situation today"
+#~ msgstr "Situation heute"
+
+#~ msgid "Planning Region"
+#~ msgstr "Planungsregion"
+
+#~ msgid "Electricity"
+#~ msgstr "Strom"
+
+#~ msgid "Heat"
+#~ msgstr "Wärme"
+
+#~ msgid "Transportation"
+#~ msgstr "Verkehr"
+
+#~ msgid "Population density"
+#~ msgstr "Bevölkerungsdichte"
+
+#~ msgid "View"
+#~ msgstr "Ansicht"
+
+#~ msgid "General"
+#~ msgstr "Allgemein"
+
+#~ msgid "Overview"
+#~ msgstr "Überblick"
+
+#~ msgid "Greenhouse gas"
+#~ msgstr "Treibhausgas"
+
+#~ msgid "Car trip"
+#~ msgstr "Autofahrt"
+
+#~ msgid "Map"
+#~ msgstr "Karte"
+
+#~ msgid "Charts"
+#~ msgstr "Diagramme"
+
+#~ msgid "Detail Settings"
+#~ msgstr "Detaileinstellungen"
+
+#~ msgid "Documentation"
+#~ msgstr "Dokumentation"
+
+#~ msgid "Sources"
+#~ msgstr "Quellen"
+
+#~ msgid "Contact"
+#~ msgstr "Kontakt"
+
+#~ msgid "Project Lead"
+#~ msgstr "Projektleiterin"
+
+#~ msgid "Research Associate"
+#~ msgstr "Wissenschaflticher Mitarbeiter"
+
+#~ msgid "Phone"
+#~ msgstr "Telefon"
+
+#~ msgid "Telefax"
+#~ msgstr "Telefax"
+
+#~ msgid "Popup Title"
+#~ msgstr "Popup Titel"
+
+#~ msgid "Description"
+#~ msgstr "Beschreibung"
 
 #~ msgid "Producer"
 #~ msgstr "Erzeuger"
-
-#~ msgid "Wind energy (MW)"
-#~ msgstr "WINDENERGIE (MWW)"
-
-#~ msgid "Distance from residential areas (m)"
-#~ msgstr "Siedlungsabstand (m)"
