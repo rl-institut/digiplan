@@ -14,7 +14,6 @@ from django_mapengine import views
 from digiplan.map import config
 from digiplan.map.results import core
 
-from .forms import create_formset
 from . import forms, map_config
 from .results import calculations
 
@@ -31,10 +30,11 @@ class MapGLView(TemplateView, views.MapEngineMixin):
             category: [forms.StaticLayerForm(layer) for layer in layers]
             for category, layers in map_config.LEGEND.items()
         },
-        "panel_formset": create_formset(
-            [config.ENERGY_SETTINGS_PANEL, config.HEAT_SETTINGS_PANEL, config.TRAFFIC_SETTINGS_PANEL]
-        ),
-        "use_distilled_mvts": settings.USE_DISTILLED_MVTS,
+        "panels": [
+            forms.EnergyPanelForm(config.ENERGY_SETTINGS_PANEL),
+            forms.HeatPanelForm(config.HEAT_SETTINGS_PANEL),
+            forms.TrafficPanelForm(config.TRAFFIC_SETTINGS_PANEL),
+        ],
         "store_hot_init": config.STORE_HOT_INIT,
     }
 
@@ -71,9 +71,8 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         return context
 
     def post(self, request):
-        # request.POST is QueryDict of all states of sliders and Textfields (e.g. {'s_w_1' : ['30']})
-        if request.method == "POST":
-            print(request.POST)
+        energy_panel = forms.EnergyPanelForm(config.ENERGY_SETTINGS_PANEL, data=request.POST)
+        energy_panel.is_valid()
         return JsonResponse({"nothing to see": "no success data yet"})
 
 

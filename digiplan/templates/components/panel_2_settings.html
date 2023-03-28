@@ -38,16 +38,14 @@
       <div class="c-tabs__content">
         <form id="settings" method="POST">
           {% csrf_token %}
-          {{ panel_formset.management_form}}
           <div class="c-tabs__pane fade show active" id="wind" role="tabpanel" aria-labelledby="wind-tab">
-            <div id="js-power-mix" class="power-mix"></div>
-            {{panel_formset.forms.0}}
+            {{panels.0}}
           </div>
           <div class="c-tabs__pane fade" id="heat" role="tabpanel" aria-labelledby="heat-tab">
-              {{panel_formset.forms.1}}
+            {{panels.1}}
           </div>
           <div class="c-tabs__pane fade" id="traffic" role="tabpanel" aria-labelledby="traffic-tab">
-            {{panel_formset.forms.2}}
+            {{panels.2}}
           </div>
         </form>
       </div>
