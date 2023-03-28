@@ -1,12 +1,12 @@
 """Configuration for map app."""
-import ast
 import json
 import pathlib
 
 from django.conf import settings
-from django.template import Context, Template
 
 from digiplan import __version__
+
+from . import utils
 
 # DIRECTORIES
 MAP_DIR = settings.APPS_DIR.path("map")
@@ -24,28 +24,11 @@ FILTER_DEFINITION = {}
 REGION_FILTER_LAYERS = []
 
 # PARAMETERS
-with pathlib.Path(ENERGY_SETTINGS_PANEL_FILE).open("r", encoding="utf-8") as param_file:
-    energy_settings_dict = json.load(param_file)
-    # add {% load i18n %} to file to make django detect translatable strings
-    t = Template("{% load i18n %}" + str(energy_settings_dict))
-    # load context with the current language
-    c = Context({})
-    # translate (=render) dict, it becomes thereby a "django.utils.safestring"
-    safe_string = t.render(c)
-    # reconvert safestring to dict (needed later on)
-    ENERGY_SETTINGS_PANEL = ast.literal_eval(safe_string)
-
-with pathlib.Path(HEAT_SETTINGS_PANEL_FILE).open("r", encoding="utf-8") as param_file:
-    HEAT_SETTINGS_PANEL = json.load(param_file)
-
-with pathlib.Path(TRAFFIC_SETTINGS_PANEL_FILE).open("r", encoding="utf-8") as param_file:
-    TRAFFIC_SETTINGS_PANEL = json.load(param_file)
-
-with pathlib.Path(SETTINGS_DEPENDENCY_MAP_FILE).open("r", encoding="utf-8") as param_file:
-    SETTINGS_DEPENDENCY_MAP = json.load(param_file)
-
-with pathlib.Path(DEPENDENCY_PARAMETERS_FILE).open("r", encoding="utf-8") as param_file:
-    DEPENDENCY_PARAMETERS = json.load(param_file)
+ENERGY_SETTINGS_PANEL = utils.get_translated_json_from_file(ENERGY_SETTINGS_PANEL_FILE)
+HEAT_SETTINGS_PANEL = utils.get_translated_json_from_file(HEAT_SETTINGS_PANEL_FILE)
+TRAFFIC_SETTINGS_PANEL = utils.get_translated_json_from_file(TRAFFIC_SETTINGS_PANEL_FILE)
+SETTINGS_DEPENDENCY_MAP = utils.get_translated_json_from_file(SETTINGS_DEPENDENCY_MAP_FILE)
+DEPENDENCY_PARAMETERS = utils.get_translated_json_from_file(DEPENDENCY_PARAMETERS_FILE)
 
 
 # STORE
