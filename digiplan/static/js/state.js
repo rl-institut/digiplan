@@ -1,7 +1,7 @@
 // Subscriptions
 
-PubSub.subscribe(eventTopics.MAP_LOADED, init_map_location);
-PubSub.subscribe(eventTopics.MAP_LAYERS_LOADED, init_states);
+PubSub.subscribe(mapEvent.MAP_LOADED, init_map_location);
+PubSub.subscribe(mapEvent.MAP_LAYERS_LOADED, init_states);
 
 
 const store = initStore();
