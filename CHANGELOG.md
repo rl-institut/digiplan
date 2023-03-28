@@ -7,6 +7,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ## [Unreleased]
 ### Added
 - sentry in production
+- intro tour using shepard.js
 
 ## [0.2.1] - 2023-03-27
 ### Fixed
