@@ -9,6 +9,9 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - sentry in production
 - intro tour using shepard.js
 
+### Changed
+- move logos to top navbar
+
 ## [0.2.1] - 2023-03-27
 ### Fixed
 - geopackage names and layer names
