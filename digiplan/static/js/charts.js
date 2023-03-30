@@ -22,6 +22,9 @@ const electricity_THG_chart = echarts.init(document.getElementById("electricity_
 const mobility_overview_chart = echarts.init(document.getElementById("mobility_overview_chart"));
 const mobility_THG_chart = echarts.init(document.getElementById("mobility_THG_chart"));
 
+
+PubSub.subscribe(eventTopics.MENU_CHANGED, resizeCharts);
+
 // Styling variables
 const chart_tooltip = {
   trigger: 'axis',
@@ -80,18 +83,18 @@ const renewable_share_goal = {
     maxValueSpan: '100'
   },
   series: [
-    { 
+    {
       type: 'bar',
       barWidth: chart_bar_width_sm,
       data: [
         {
-          value: 30, 
+          value: 30,
           itemStyle: {
             color: '#C3D1DC'
           }
         },
         {
-          value: 90, 
+          value: 90,
           itemStyle: {
             color: '#06DFA7'
           }
@@ -113,7 +116,7 @@ const renewable_share_goal = {
       }
     },
   ],
-}
+};
 
 const co2_emissions_goal = {
   grid: chart_grid_goal,
@@ -132,18 +135,18 @@ const co2_emissions_goal = {
     maxValueSpan: '100'
   },
   series: [
-    { 
+    {
       type: 'bar',
       barWidth: chart_bar_width_sm,
       data: [
         {
-          value: 90, 
+          value: 90,
           itemStyle: {
             color: '#C3D1DC'
           }
         },
         {
-          value: 30, 
+          value: 30,
           itemStyle: {
             color: '#E6A100'
           }
@@ -165,7 +168,7 @@ const co2_emissions_goal = {
       }
     },
   ],
-}
+};
 
 const renewable_share_scenario = {
   grid: chart_grid_goal,
@@ -184,18 +187,18 @@ const renewable_share_scenario = {
     maxValueSpan: '100'
   },
   series: [
-    { 
+    {
       type: 'bar',
       barWidth: chart_bar_width_sm,
       data: [
         {
-          value: 30, 
+          value: 30,
           itemStyle: {
             color: '#C3D1DC'
           }
         },
         {
-          value: 90, 
+          value: 90,
           itemStyle: {
             color: '#06DFA7'
           }
@@ -217,7 +220,7 @@ const renewable_share_scenario = {
       }
     },
   ],
-}
+};
 
 const co2_emissions_scenario = {
   grid: chart_grid_goal,
@@ -236,18 +239,18 @@ const co2_emissions_scenario = {
     maxValueSpan: '100'
   },
   series: [
-    { 
+    {
       type: 'bar',
       barWidth: chart_bar_width_sm,
       data: [
         {
-          value: 90, 
+          value: 90,
           itemStyle: {
             color: '#C3D1DC'
           }
         },
         {
-          value: 30, 
+          value: 30,
           itemStyle: {
             color: '#E6A100'
           }
@@ -269,7 +272,7 @@ const co2_emissions_scenario = {
       }
     },
   ],
-}
+};
 
 const option = {
   textStyle: chart_text_style,
@@ -906,19 +909,14 @@ const mobility_THG = {
   ]
 };
 
-function isVisible(element) {
-  if (element.offsetParent) return true;
-  return false;
-}
-
 function resizeCharts() {
   setTimeout(function () {
-    if (isVisible(renewable_share_goal_div)) renewable_share_goal_chart.resize();
-    if (isVisible(co2_emissions_goal_div)) co2_emissions_goal_chart.resize();
-    if (isVisible(renewable_share_scenario_div)) renewable_share_scenario_chart.resize();
-    if (isVisible(co2_emissions_scenario_div)) co2_emissions_scenario_chart.resize();
-    if (isVisible(chart3Element)) chart3.resize();
-    if (isVisible(chart4Element)) chart4.resize();
+    renewable_share_goal_chart.resize();
+    co2_emissions_goal_chart.resize();
+    renewable_share_scenario_chart.resize();
+    co2_emissions_scenario_chart.resize();
+    chart3.resize();
+    chart4.resize();
     detailed_overview_chart.resize();
     ghg_overview_chart.resize();
     electricity_overview_chart.resize();
@@ -945,6 +943,8 @@ electricity_overview_chart.setOption(electricity_overview);
 electricity_THG_chart.setOption(electricity_THG);
 mobility_overview_chart.setOption(mobility_overview);
 mobility_THG_chart.setOption(mobility_THG);
+
+resizeCharts();
 
 window.addEventListener("resize", resizeCharts);
 document.addEventListener("show.bs.tab", resizeCharts);
