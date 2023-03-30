@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-28 14:33+0000\n"
+"POT-Creation-Date: 2023-03-30 12:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,6 +86,7 @@ msgid "Municipalities"
 msgstr "Gemeinden"
 
 #: digiplan/map/models.py:70 digiplan/map/models.py:71
+#: digiplan/templates/components/panel_3_results.html:34
 msgid "Population"
 msgstr "Bevölkerung"
 
@@ -129,14 +130,132 @@ msgstr "Windnutzungsfläche"
 msgid "LSG usage"
 msgstr "LSG-Nutzung"
 
-#~ msgid "Region as of today"
-#~ msgstr "Region heute"
+#: digiplan/templates/components/map.html:12
+msgid "Region as of today"
+msgstr "Region heute"
 
-#~ msgid "Settings"
-#~ msgstr "Einstellungen"
+#: digiplan/templates/components/map.html:17
+#: digiplan/templates/components/panel_2_settings.html:9
+msgid "Settings"
+msgstr "Einstellungen"
 
-#~ msgid "Results"
-#~ msgstr "Ergebnisse"
+#: digiplan/templates/components/map.html:22
+#: digiplan/templates/components/panel_3_results.html:29
+msgid "Results"
+msgstr "Ergebnisse"
+
+#: digiplan/templates/components/panel.html:23
+msgid "Imprint"
+msgstr "Impressum"
+
+#: digiplan/templates/components/panel.html:28
+msgid "Data privacy"
+msgstr "Datenschutz"
+
+#: digiplan/templates/components/panel_1_today.html:32
+msgid "Situation today"
+msgstr "Situation heute"
+
+#: digiplan/templates/components/panel_1_today.html:36
+#: digiplan/templates/components/panel_3_results.html:33
+msgid "Planning Region"
+msgstr "Planungsregion"
+
+#: digiplan/templates/components/panel_2_settings.html:18
+#: digiplan/templates/components/panel_3_results.html:73
+msgid "Electricity"
+msgstr "Strom"
+
+#: digiplan/templates/components/panel_2_settings.html:26
+#: digiplan/templates/components/panel_3_results.html:81
+#: digiplan/templates/components/results_view.html:52
+msgid "Heat"
+msgstr "Wärme"
+
+#: digiplan/templates/components/panel_2_settings.html:34
+#: digiplan/templates/components/panel_3_results.html:89
+msgid "Transportation"
+msgstr "Verkehr"
+
+#: digiplan/templates/components/panel_3_results.html:35
+msgid "Population density"
+msgstr "Bevölkerungsdichte"
+
+#: digiplan/templates/components/panel_3_results.html:57
+msgid "View"
+msgstr "Ansicht"
+
+#: digiplan/templates/components/panel_3_results.html:65
+#: digiplan/templates/components/results_view.html:5
+#: digiplan/templates/components/results_view.html:35
+#: digiplan/templates/components/results_view.html:55
+msgid "General"
+msgstr "Allgemein"
+
+#: digiplan/templates/components/results_view.html:9
+#: digiplan/templates/components/results_view.html:39
+#: digiplan/templates/components/results_view.html:59
+msgid "Overview"
+msgstr "Überblick"
+
+#: digiplan/templates/components/results_view.html:12
+msgid ""
+"In dieser Darstellung sind die Ergebnisse der beiden Szenarien für die "
+"Stromerzeugung gegeneinander aufgetragen. Auf der linken Seite findet sich "
+"die Zusammensetzung des von Ihnen erstellten Szenarios, auf der rechten die "
+"des Referenzszenarios. Auf diese Art lässt sich sowohl die Gesamterzeugung "
+"als auch die Erzeugung der unterschiedlichen Technologien vergleichen."
+msgstr ""
+
+#: digiplan/templates/components/results_view.html:16
+msgid "Greenhouse gas"
+msgstr "Treibhausgas"
+
+#: digiplan/templates/components/results_view.html:22
+msgid "Car trip"
+msgstr "Autofahrt"
+
+#: digiplan/templates/components/results_view.html:44
+#: digiplan/templates/components/results_view.html:64
+msgid "CO2 Emissions"
+msgstr ""
+
+#: digiplan/templates/components/toggle_view.html:10
+#: digiplan/templates/map.html:49
+msgid "Map"
+msgstr "Karte"
+
+#: digiplan/templates/components/toggle_view.html:18
+msgid "Charts"
+msgstr "Diagramme"
+
+#: digiplan/templates/map.html:54
+msgid "Documentation"
+msgstr "Dokumentation"
+
+#: digiplan/templates/map.html:58
+msgid "Sources"
+msgstr "Quellen"
+
+#: digiplan/templates/map.html:62 digiplan/templates/offcanvas/contact.html:4
+msgid "Contact"
+msgstr "Kontakt"
+
+#: digiplan/templates/offcanvas/contact.html:7
+msgid "Project Lead"
+msgstr "Projektleiterin"
+
+#: digiplan/templates/offcanvas/contact.html:12
+msgid "Research Associate"
+msgstr "Wissenschaflticher Mitarbeiter"
+
+#: digiplan/templates/offcanvas/contact.html:24
+msgid "Phone"
+msgstr "Telefon"
+
+#: digiplan/templates/offcanvas/contact.html:25
+msgid "Telefax"
+msgstr "Telefax"
 
 #~ msgid "maps"
 #~ msgstr "Karten"
@@ -153,74 +272,8 @@ msgstr "LSG-Nutzung"
 #~ msgid "Next"
 #~ msgstr "Weiter"
 
-#~ msgid "Imprint"
-#~ msgstr "Impressum"
-
-#~ msgid "Data privacy"
-#~ msgstr "Datenschutz"
-
-#~ msgid "Situation today"
-#~ msgstr "Situation heute"
-
-#~ msgid "Planning Region"
-#~ msgstr "Planungsregion"
-
-#~ msgid "Electricity"
-#~ msgstr "Strom"
-
-#~ msgid "Heat"
-#~ msgstr "Wärme"
-
-#~ msgid "Transportation"
-#~ msgstr "Verkehr"
-
-#~ msgid "Population density"
-#~ msgstr "Bevölkerungsdichte"
-
-#~ msgid "View"
-#~ msgstr "Ansicht"
-
-#~ msgid "General"
-#~ msgstr "Allgemein"
-
-#~ msgid "Overview"
-#~ msgstr "Überblick"
-
-#~ msgid "Greenhouse gas"
-#~ msgstr "Treibhausgas"
-
-#~ msgid "Car trip"
-#~ msgstr "Autofahrt"
-
-#~ msgid "Map"
-#~ msgstr "Karte"
-
-#~ msgid "Charts"
-#~ msgstr "Diagramme"
-
 #~ msgid "Detail Settings"
 #~ msgstr "Detaileinstellungen"
-
-#~ msgid "Documentation"
-#~ msgstr "Dokumentation"
-
-#~ msgid "Sources"
-#~ msgstr "Quellen"
-
-#~ msgid "Contact"
-#~ msgstr "Kontakt"
-
-#~ msgid "Project Lead"
-#~ msgstr "Projektleiterin"
-
-#~ msgid "Research Associate"
-#~ msgstr "Wissenschaflticher Mitarbeiter"
-
-#~ msgid "Phone"
-#~ msgstr "Telefon"
-
-#~ msgid "Telefax"
-#~ msgstr "Telefax"
 
 #~ msgid "Popup Title"
 #~ msgstr "Popup Titel"
