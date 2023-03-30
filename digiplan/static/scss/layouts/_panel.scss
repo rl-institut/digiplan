@@ -280,61 +280,16 @@
     }
   }
 
-  &__logos {
-    @extend .d-flex;
-    @extend .flex-row;
-    @extend .text-center;
-    @extend .pt-2;
-
-    .logo--bmbf {
-      @extend .text-end;
-
-      img {
-        width: 8rem;
-      }
-    }
-  }
-
-  &__logo {
-    @extend .flex-fill;
-
-    &--rli {
-      @extend .text-center;
-      @extend .ps-2;
-
-      img {
-        width: 4.5rem;
-      }
-    }
-
-    &--eaa {
-      @extend .text-start;
-      @extend .ps-4;
-
-      img {
-        @include translateX(1rem);
-        width: 5rem;
-      }
-    }
-
-    &--rg {
-      @extend .text-end;
-
-      img {
-        @include translateY(-0.5rem);
-        width: 9rem;
-      }
-    }
-  }
-
   &__links {
-    height: 1.5rem;
+    height: 2.5rem;
 
     ul {
       @include ul-horizontal;
+      @extend .h-100;
       @extend .d-flex;
       @extend .flex-row;
       @extend .justify-content-center;
+      @extend .align-items-center;
     }
 
     li {
