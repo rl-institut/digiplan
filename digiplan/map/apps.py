@@ -22,6 +22,11 @@ class MapConfig(AppConfig):
         from digiplan.map.results import hooks as digiplan_hooks
 
         hooks.register_hook(
+            hooks.HookType.SETUP,
+            hooks.Hook(scenario="dispatch", function=digiplan_hooks.read_parameters),
+        )
+
+        hooks.register_hook(
             hooks.HookType.PARAMETER,
-            hooks.Hook(scenario="dispatch", function=digiplan_hooks.parameter_setup),
+            hooks.Hook(scenario="dispatch", function=digiplan_hooks.adapt_demand),
         )

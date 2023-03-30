@@ -190,7 +190,7 @@ function sendSettings() {
   var form = document.getElementById("settings");
   var formData = new FormData(form); // jshint ignore:line
   $.ajax({
-      url : "",
+      url : "/oemof/simulate",
       type : "POST",
       processData: false,
       contentType: false,

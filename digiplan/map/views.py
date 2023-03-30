@@ -73,16 +73,6 @@ class MapGLView(TemplateView, views.MapEngineMixin):
 
         return context
 
-    def post(self, request):
-        panel_forms = [
-            forms.EnergyPanelForm(config.ENERGY_SETTINGS_PANEL, data=request.POST),
-            forms.HeatPanelForm(config.HEAT_SETTINGS_PANEL, data=request.POST),
-            forms.TrafficPanelForm(config.TRAFFIC_SETTINGS_PANEL, data=request.POST),
-        ]
-        if all(form.is_valid() for form in panel_forms):
-            return response.JsonResponse({"status": "okay"})
-        return response.HttpResponseBadRequest("Invalid data")
-
 
 def get_popup(request: HttpRequest, lookup: str, region: int) -> response.JsonResponse:  # noqa: ARG001
     """Return popup as html and chart options to render chart on popup.

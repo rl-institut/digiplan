@@ -22,6 +22,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [0.3.0] - 2023-03-30
 ### Added
+- first draft for demand preprocessing for oemof simulation
 - preprocessing oemof build from user settings (#111) using hooks
 - sentry in production
 - intro tour using shepard.js
