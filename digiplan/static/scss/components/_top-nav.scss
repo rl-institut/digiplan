@@ -3,9 +3,30 @@
   box-shadow: $box-shadow-sm;
   z-index: 1000;
 
+  .container-fluid {
+    @extend .bg-white;
+  }
+
   &__brand {
     img {
       height: calc(#{$top-nav-height} - 1.5rem);
+    }
+  }
+
+  &__logo {
+    &--rli img {
+      max-height: 3.25rem;
+      padding-left: 1.5rem;
+    }
+
+    &--eaa img {
+      max-height: 3.75rem;
+      padding-left: 2.5rem;
+    }
+
+    &--gestalten img {
+      max-height: 4rem;
+      padding-left: 0.5rem;
     }
   }
 
@@ -15,6 +36,14 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+    }
+  }
+
+  .navbar-collapse {
+    @include media-breakpoint-down(lg) {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid $gray-200;
     }
   }
 }
