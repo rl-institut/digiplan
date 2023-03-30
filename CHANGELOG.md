@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2023-03-30
+### Added
+- sentry in production
+- intro tour using shepard.js
+- language support
+- goal charts to side panel
+- user settings preprocessing for oemof simulation
+
+### Changed
+- move logos to top navbar
+
 ## [0.2.1] - 2023-03-27
 ### Fixed
 - geopackage names and layer names
@@ -19,6 +30,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - layer switches to map legend
 - legend for choropleths
 - CONTRIBUTING.md file
+- goal charts in sidebar as placeholders
 
 ### Changed
 - integrated mapengine

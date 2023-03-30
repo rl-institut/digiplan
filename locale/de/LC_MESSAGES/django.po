@@ -1,0 +1,232 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-28 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: config/settings/base.py:34
+msgid "English"
+msgstr "Englisch"
+
+#: config/settings/base.py:35
+msgid "German"
+msgstr "Deutsch"
+
+#: digiplan/map/map_config.py:7
+msgid "Renewables"
+msgstr "Erneuerbare Energien"
+
+#: digiplan/map/map_config.py:8 digiplan/map/models.py:107
+msgid "Wind turbine"
+msgstr "Windturbine"
+
+#: digiplan/map/map_config.py:9 digiplan/map/models.py:144
+msgid "Roof-mounted PV"
+msgstr "Aufdach-PV"
+
+#: digiplan/map/map_config.py:10 digiplan/map/models.py:181
+msgid "Outdoor PV"
+msgstr "Freiflächen-PV"
+
+#: digiplan/map/map_config.py:11 digiplan/map/models.py:215
+#: digiplan/map/models.py:216
+msgid "Hydro"
+msgstr "Wasserkraft"
+
+#: digiplan/map/map_config.py:12 digiplan/map/models.py:249
+#: digiplan/map/models.py:250
+msgid "Biomass"
+msgstr "Biomasse"
+
+#: digiplan/map/map_config.py:13 digiplan/map/models.py:283
+#: digiplan/map/models.py:284
+msgid "Combustion"
+msgstr "Fossiles Kraftwerk"
+
+#: digiplan/map/models.py:28
+msgid "Country"
+msgstr "Land"
+
+#: digiplan/map/models.py:29
+msgid "State"
+msgstr "Bundesland"
+
+#: digiplan/map/models.py:30
+msgid "District"
+msgstr "Kreis"
+
+#: digiplan/map/models.py:31 digiplan/map/models.py:56
+msgid "Municipality"
+msgstr "Gemeinde"
+
+#: digiplan/map/models.py:36
+msgid "Region"
+msgstr "Region"
+
+#: digiplan/map/models.py:37
+msgid "Regions"
+msgstr "Regionen"
+
+#: digiplan/map/models.py:57
+msgid "Municipalities"
+msgstr "Gemeinden"
+
+#: digiplan/map/models.py:70 digiplan/map/models.py:71
+msgid "Population"
+msgstr "Bevölkerung"
+
+#: digiplan/map/models.py:108
+msgid "Wind turbines"
+msgstr "Windturbine"
+
+#: digiplan/map/models.py:145
+msgid "Roof-mounted PVs"
+msgstr "Aufdach-PVs"
+
+#: digiplan/map/models.py:182
+msgid "Outdoor PVs"
+msgstr "Freiflächen-PVs"
+
+#: digiplan/map/results/visualizations.py:10
+msgid "Total Costs"
+msgstr "Gesamtkosten"
+
+#: digiplan/map/results/visualizations.py:31
+msgid "Electricity Demand"
+msgstr "Strombedarf"
+
+#: digiplan/static/config/energy_settings_panel.json:6
+#: digiplan/static/config/energy_settings_panel.json:12
+msgid "Wind energy"
+msgstr "Windenergie"
+
+#: digiplan/static/config/energy_settings_panel.json:19
+#: digiplan/static/config/energy_settings_panel.json:24
+msgid "Distance from residential areas"
+msgstr "Siedlungsabstand"
+
+#: digiplan/static/config/energy_settings_panel.json:29
+#: digiplan/static/config/energy_settings_panel.json:34
+msgid "Forest usage"
+msgstr "Windnutzungsfläche"
+
+#: digiplan/static/config/energy_settings_panel.json:39
+#: digiplan/static/config/energy_settings_panel.json:44
+msgid "LSG usage"
+msgstr "LSG-Nutzung"
+
+#~ msgid "Region as of today"
+#~ msgstr "Region heute"
+
+#~ msgid "Settings"
+#~ msgstr "Einstellungen"
+
+#~ msgid "Results"
+#~ msgstr "Ergebnisse"
+
+#~ msgid "maps"
+#~ msgstr "Karten"
+
+#~ msgid "default"
+#~ msgstr "Standard"
+
+#~ msgid "satellite"
+#~ msgstr "Satellit"
+
+#~ msgid "Previous"
+#~ msgstr "Zurück"
+
+#~ msgid "Next"
+#~ msgstr "Weiter"
+
+#~ msgid "Imprint"
+#~ msgstr "Impressum"
+
+#~ msgid "Data privacy"
+#~ msgstr "Datenschutz"
+
+#~ msgid "Situation today"
+#~ msgstr "Situation heute"
+
+#~ msgid "Planning Region"
+#~ msgstr "Planungsregion"
+
+#~ msgid "Electricity"
+#~ msgstr "Strom"
+
+#~ msgid "Heat"
+#~ msgstr "Wärme"
+
+#~ msgid "Transportation"
+#~ msgstr "Verkehr"
+
+#~ msgid "Population density"
+#~ msgstr "Bevölkerungsdichte"
+
+#~ msgid "View"
+#~ msgstr "Ansicht"
+
+#~ msgid "General"
+#~ msgstr "Allgemein"
+
+#~ msgid "Overview"
+#~ msgstr "Überblick"
+
+#~ msgid "Greenhouse gas"
+#~ msgstr "Treibhausgas"
+
+#~ msgid "Car trip"
+#~ msgstr "Autofahrt"
+
+#~ msgid "Map"
+#~ msgstr "Karte"
+
+#~ msgid "Charts"
+#~ msgstr "Diagramme"
+
+#~ msgid "Detail Settings"
+#~ msgstr "Detaileinstellungen"
+
+#~ msgid "Documentation"
+#~ msgstr "Dokumentation"
+
+#~ msgid "Sources"
+#~ msgstr "Quellen"
+
+#~ msgid "Contact"
+#~ msgstr "Kontakt"
+
+#~ msgid "Project Lead"
+#~ msgstr "Projektleiterin"
+
+#~ msgid "Research Associate"
+#~ msgstr "Wissenschaflticher Mitarbeiter"
+
+#~ msgid "Phone"
+#~ msgstr "Telefon"
+
+#~ msgid "Telefax"
+#~ msgstr "Telefax"
+
+#~ msgid "Popup Title"
+#~ msgstr "Popup Titel"
+
+#~ msgid "Description"
+#~ msgstr "Beschreibung"
+
+#~ msgid "Producer"
+#~ msgstr "Erzeuger"

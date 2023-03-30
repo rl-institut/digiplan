@@ -5,6 +5,7 @@ import os
 
 import environ
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 from django_mapengine import setup
 
 ROOT_DIR = environ.Path(__file__) - 3  # (digiplan/config/settings/base.py - 3 = digiplan/)
@@ -28,8 +29,14 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 # though not all of them may be available with every OS.
 # In Windows, this must be set to your system time zone.
 TIME_ZONE = "UTC"
+# https://docs.djangoproject.com/en/dev/ref/settings/#languages
+LANGUAGES = (
+    ("en", _("English")),
+    ("de", _("German")),
+)
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = "en-us"
+# 'de' is the standard language
+LANGUAGE_CODE = "de"
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n

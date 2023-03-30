@@ -1,14 +1,15 @@
+{% load i18n %}
 <section class="offcanvas-view offcanvas" tabindex="-1" id="offcanvasContact" data-bs-backdrop="false" aria-labelledby="offcanvasContactLabel">
   <div class="offcanvas-view__wrap">
-    <h2 class="offcanvas-view__title" id="offcanvasContactLabel">Kontakt</h2>
+    <h2 class="offcanvas-view__title" id="offcanvasContactLabel">{% translate "Contact" %}</h2>
     <div class="offcanvas-view__body">
       <div class="offcanvas-view__contact">
-        <h3>Mascha Richter (Projektleiterin)</h3>
+        <h3>Mascha Richter ({% translate "Project Lead" %})</h3>
         <a href="mailto:Mascha.Richter@rl-institut.de">mascha.richter@rl-institut.de</a>
         <p>+49 (0)30 1208 434 27</p>
       </div>
       <div class="offcanvas-view__contact">
-        <h3>Jonathan Amme (Wissenschaftlicher Mitarbeiter)</h3>
+        <h3>Jonathan Amme ({% translate "Research Associate" %})</h3>
         <a href="mailto:jonathan.amme@rl-institut.de">jonathan.amme@rl-institut.de</a>
         <p>+49 (0)30 1208 434 26</p>
       </div>
@@ -20,8 +21,8 @@
           12489 Berlin
         </p>
         <p>
-          Telefon: +49 (0)30 1208 434 0<br/>
-          Telefax: +49 (0)30 1208 434 99
+          {% translate "Phone" %}: +49 (0)30 1208 434 0<br/>
+          {% translate "Telefax" %}: +49 (0)30 1208 434 99
         </p>
       </div>
     </div>

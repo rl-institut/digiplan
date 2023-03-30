@@ -1,3 +1,5 @@
+{%  load i18n %}
+
 <div class="view-toggle">
   <ul class="view-toggle__nav-tabs nav nav-tabs" id="myTab" role="tablist">
     <li class="view-toggle__nav-item" role="presentation">
@@ -5,7 +7,7 @@
         <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
           <path d="m16.933 0-5.8208 3.175-5.2917-3.1497-5.8208 3.1497v13.758l5.8208-3.175 5.2917 3.175 5.8208-3.175v-13.758zm-11.642 1.617v11.112l-4.2333 2.3518v-11.112l4.2333-2.3518zm1.0583 0.023254 4.2333 2.5404v11.112l-4.2333-2.5404v-11.112zm9.525 0.47646v11.113l-4.2333 2.1167v-11.112l4.2333-2.1167z"/>
          </svg>
-        Karte
+        {% translate "Map" %}
       </button>
     </li>
     <li class="view-toggle__nav-item" role="presentation">
@@ -13,7 +15,7 @@
         <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
           <path d="m12.7 0.025321v13.733h1.0583v-13.733h-1.0583zm-5.2917 4.208v9.525h1.0583v-9.525h-1.0583zm-5.2917 2.1167v7.4083h1.0583v-7.4083h-1.0583zm-2.1167 9.4821v1.1012h16.933v-1.1012h-16.933z"/>
         </svg>
-        Charts
+        {% translate "Charts" %}
       </button>
     </li>
   </ul>

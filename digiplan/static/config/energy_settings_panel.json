@@ -1,272 +1,193 @@
 {
-    "energy_category_1": {
-        "label": "",
-        "text": "Erzeuger",
-        "tooltip": "Erzeuger",
-        "type": "title"
-    },
-    "s_w_1": {
-        "class": "js-slider js-slider-panel js-power-mix",
-        "color": "#99D8C9",
-        "grid": false,
-        "label": "Windenergie (MW)",
-        "max": 1512,
-        "min": 0,
-        "sidepanel": {
-            "s_w_2": {
-                "class": "js-slider",
-                "grid": false,
-                "label": "Siedlungsabstand (m)",
-                "max": 1000,
-                "min": 400,
-                "start": 1000,
-                "step": 200,
-                "tooltip": "Siedlungsabstand (m)",
-                "type": "slider"
-            },
-            "s_w_3": {
-                "class": "js-slider",
-                "label": "Waldfl\u00e4chennutzung (%)",
-                "max": 10,
-                "min": 0,
-                "start": 0,
-                "step": 2,
-                "tooltip": "Waldfl\u00e4chennutzung (%)",
-                "type": "slider"
-            },
-            "s_w_4": {
-                "class": "js-slider",
-                "label": "LSG-Nutzung (%)",
-                "max": 10,
-                "min": 0,
-                "start": 0,
-                "step": 2,
-                "tooltip": "LSG-Nutzung (%)",
-                "type": "slider"
-            },
-            "s_w_5": {
-                "class": "js-box box-widget",
-                "label": "Detailinfos",
-                "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                "tooltip": "Detailinfos",
-                "type": "box"
-            }
-        },
-        "start": 30,
-        "status_quo": 50,
-        "step": 5,
-        "tooltip": "Windenergie (MW)",
-        "type": "slider"
-    },
-    "s_pv_ff_1": {
-        "class": "js-slider js-slider-panel js-power-mix",
-        "color": "#A6BDDB",
-        "grid": false,
-        "label": "Freifl\u00e4chen-PV (MW)",
-        "max": 1200,
-        "min": 0,
-        "sidepanel": {
-            "s_pv_ff_2": {
-                "class": "js-sidepanel-switch",
-                "label": "Fl\u00e4chen entlang BAB und Schienenwegen",
-                "tooltip": "Fl\u00e4chen entlang BAB und Schienenwegen",
-                "type": "switch"
-            },
-            "s_pv_ff_3": {
-                "class": "js-sidepanel-switch",
-                "label": "Nutzung von Agrar- und Gr\u00fcnlandfl\u00e4chen",
-                "tooltip": "Nutzung von Agrar- und Gr\u00fcnlandfl\u00e4chen",
-                "type": "switch"
-            },
-            "s_pv_ff_4": {
-                "class": "js-sidepanel-switch",
-                "label": "Begrenzung auf benachteiligte Gebiete aufheben",
-                "tooltip": "Begrenzung auf benachteiligte Gebiete aufheben",
-                "type": "switch"
-            },
-            "s_pv_ff_5": {
-                "class": "js-box box-widget",
-                "label": "Detailinfos",
-                "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                "tooltip": "Detailinfos",
-                "type": "box"
-            }
-        },
-        "start": 30,
-        "status_quo": 50,
-        "step": 5,
-        "tooltip": "Freifl\u00e4chen-PV (MW)",
-        "type": "slider"
-    },
-    "s_pv_d_1": {
-        "class": "js-slider js-slider-panel js-power-mix",
-        "color": "#FEC44F",
-        "grid": false,
-        "label": "Aufdach-PV (MW)",
-        "max": 400,
-        "min": 0,
-        "sidepanel": {
-            "s_pv_d_2": {
-                "class": "js-slider",
-                "label": "Anteil genutzter Dächer (%)",
-                "max": 100,
-                "min": 0,
-                "start": 0,
-                "step": 5,
-                "tooltip": "Anteil genutzter Dächer (%)",
-                "type": "slider"
-            },
-            "s_pv_d_3": {
-                "class": "js-box box-widget",
-                "label": "Detailinfos",
-                "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                "tooltip": "Detailinfos",
-                "type": "box"
-            }
-        },
-        "start": 30,
-        "status_quo": 50,
-        "step": 5,
-        "tooltip": "Aufdach-PV",
-        "type": "slider"
-    },
-    "s_b_1": {
-        "class": "js-slider js-slider-panel js-power-mix",
-        "color": "#FA9FB5",
-        "label": "Bioenergie (MW)",
-        "max": 30,
-        "min": 0,
-        "sidepanel": {
-            "s_b_2": {
-                "class": "js-box box-widget",
-                "label": "Detailinfos",
-                "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                "tooltip": "Detailinfos",
-                "type": "box"
-            }
-        },
-        "start": 5,
-        "status_quo": 15,
-        "step": 5,
-        "tooltip": "Bioenergie (MW)",
-        "type": "slider"
-    },
-    "s_k_1": {
-        "class": "js-slider js-slider-panel js-power-mix",
-        "color": "#964b00",
-        "label": "Konventionell (MW)",
-        "max": 300,
-        "min": 0,
-        "sidepanel": {
-            "s_k_2": {
-                "class": "js-box box-widget",
-                "label": "Detailinfos",
-                "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                "tooltip": "Detailinfos",
-                "type": "box"
-            }
-        },
-        "start": 5,
-        "status_quo": 15,
-        "step": 5,
-        "tooltip": "Konventionell (MW)",
-        "type": "slider"
-    },
-    "energy_category_2": {
-        "label": "",
-        "text": "Verbraucher",
-        "tooltip": "Verbraucher",
-        "type": "title"
-    },
-    "s_v_1": {
-        "class": "js-slider js-slider-panel",
-        "grid": false,
-        "label": "Stromverbrauch, ohne Wärmeerzeugung (%)",
-        "max": 210,
-        "min": 25,
-        "sidepanel": {
-            "s_v_2": {
-                "class": "js-slider",
-                "grid": false,
-                "label": "Haushalte (%)",
-                "max": 200,
-                "min": 25,
-                "start": 30,
-                "step": 5,
-                "tooltip": "Haushalte (%)",
-                "type": "slider"
-            },
-            "s_v_3": {
-                "class": "js-slider",
-                "label": "Gewerbe, Handel, Dienstleistungen (%)",
-                "max": 200,
-                "min": 25,
-                "start": 30,
-                "step": 5,
-                "tooltip": "Gewerbe, Handel, Dienstleistungen (%)",
-                "type": "slider"
-            },
-            "s_v_4": {
-                "class": "js-slider",
-                "label": "Industrie (%)",
-                "max": 200,
-                "min": 25,
-                "start": 30,
-                "step": 5,
-                "tooltip": "Industrie (%)",
-                "type": "slider"
-            }
-        },
-        "start": 30,
-        "status_quo": 50,
-        "step": 5,
-        "tooltip": "Stromverbrauch, ohne Wärmeerzeugung (%)",
-        "type": "slider"
-    },
-    "energy_category_3": {
-        "label": "",
-        "text": "Speicher",
-        "tooltip": "Speicher",
-        "type": "title"
-    },
-    "s_s_k_1": {
-        "class": "js-slider js-slider-panel js-power-mix",
-        "label": "Heimspeicher (%)",
-        "max": 100,
-        "min": 0,
-        "sidepanel": {
-            "s_s_k_2": {
-                "class": "js-box box-widget",
-                "label": "Detailinfos",
-                "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                "tooltip": "Detailinfos",
-                "type": "box"
-            }
-        },
-        "start": 5,
-        "status_quo": 15,
-        "step": 5,
-        "tooltip": "Heimspeicher (%)",
-        "type": "slider"
-    },
-    "s_s_g_1": {
-        "class": "js-slider js-slider-panel js-power-mix",
-        "label": "Großspeicher (GWh)",
-        "max": 10,
-        "min": 0,
-        "sidepanel": {
-            "s_s_g_2": {
-                "class": "js-box box-widget",
-                "label": "Detailinfos",
-                "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                "tooltip": "Detailinfos",
-                "type": "box"
-            }
-        },
-        "start": 2,
-        "status_quo": 3,
-        "step": 0.1,
-        "tooltip": "Großspeicher (GWh)",
-        "type": "slider"
-    }
+  "s_w_1": {
+    "class": "js-slider js-slider-panel js-power-mix",
+    "color": "#99D8C9",
+    "grid": false,
+    "label": "{% trans 'Wind energy' %} (MW)",
+    "max": 1512,
+    "min": 0,
+    "start": 30,
+    "status_quo": 50,
+    "step": 5,
+    "tooltip": "{% trans 'Wind energy' %} (MW)",
+    "type": "slider",
+    "sidepanel": true
+  },
+  "s_w_2": {
+    "class": "js-slider",
+    "grid": false,
+    "label": "{% trans 'Distance from residential areas' %} (m)",
+    "max": 1000,
+    "min": 400,
+    "start": 1000,
+    "step": 200,
+    "tooltip": "{% trans 'Distance from residential areas' %} (m)",
+    "type": "slider"
+  },
+  "s_w_3": {
+    "class": "js-slider",
+    "label": "{% trans 'Forest usage' %} (%)",
+    "max": 10,
+    "min": 0,
+    "start": 0,
+    "step": 2,
+    "tooltip": "{% trans 'Forest usage' %} (%)",
+    "type": "slider"
+  },
+  "s_w_4": {
+    "class": "js-slider",
+    "label": "{% trans 'LSG usage' %} (%)",
+    "max": 10,
+    "min": 0,
+    "start": 0,
+    "step": 2,
+    "tooltip": "{% trans 'LSG usage' %} (%)",
+    "type": "slider"
+  },
+  "s_pv_ff_1": {
+    "class": "js-slider js-slider-panel js-power-mix",
+    "color": "#A6BDDB",
+    "grid": false,
+    "label": "Freifl\u00e4chen-PV (MW)",
+    "max": 1200,
+    "min": 0,
+    "start": 30,
+    "status_quo": 50,
+    "step": 5,
+    "tooltip": "Freifl\u00e4chen-PV (MW)",
+    "type": "slider",
+    "sidepanel": true
+  },
+  "s_pv_ff_2": {
+    "class": "js-sidepanel-switch",
+    "label": "Fl\u00e4chen entlang BAB und Schienenwegen",
+    "tooltip": "Fl\u00e4chen entlang BAB und Schienenwegen",
+    "type": "switch"
+  },
+  "s_pv_ff_3": {
+    "class": "js-sidepanel-switch",
+    "label": "Nutzung von Agrar- und Gr\u00fcnlandfl\u00e4chen",
+    "tooltip": "Nutzung von Agrar- und Gr\u00fcnlandfl\u00e4chen",
+    "type": "switch"
+  },
+  "s_pv_ff_4": {
+    "class": "js-sidepanel-switch",
+    "label": "Begrenzung auf benachteiligte Gebiete aufheben",
+    "tooltip": "Begrenzung auf benachteiligte Gebiete aufheben",
+    "type": "switch"
+  },
+  "s_pv_d_1": {
+    "class": "js-slider js-slider-panel js-power-mix",
+    "color": "#FEC44F",
+    "grid": false,
+    "label": "Aufdach-PV (MW)",
+    "max": 400,
+    "min": 0,
+    "start": 30,
+    "status_quo": 50,
+    "step": 5,
+    "tooltip": "Aufdach-PV",
+    "type": "slider",
+    "sidepanel": true
+  },
+  "s_pv_d_2": {
+    "class": "js-slider",
+    "label": "Anteil genutzter Dächer (%)",
+    "max": 100,
+    "min": 0,
+    "start": 0,
+    "step": 5,
+    "tooltip": "Anteil genutzter Dächer (%)",
+    "type": "slider"
+  },
+  "s_b_1": {
+    "class": "js-slider js-slider-panel js-power-mix",
+    "color": "#FA9FB5",
+    "label": "Bioenergie (MW)",
+    "max": 30,
+    "min": 0,
+    "start": 5,
+    "status_quo": 15,
+    "step": 5,
+    "tooltip": "Bioenergie (MW)",
+    "type": "slider"
+  },
+  "s_k_1": {
+    "class": "js-slider js-slider-panel js-power-mix",
+    "color": "#964b00",
+    "label": "Konventionell (MW)",
+    "max": 300,
+    "min": 0,
+    "start": 5,
+    "status_quo": 15,
+    "step": 5,
+    "tooltip": "Konventionell (MW)",
+    "type": "slider"
+  },
+  "s_v_1": {
+    "class": "js-slider js-slider-panel",
+    "grid": false,
+    "label": "Stromverbrauch, ohne Wärmeerzeugung (%)",
+    "max": 210,
+    "min": 25,
+    "start": 30,
+    "status_quo": 50,
+    "step": 5,
+    "tooltip": "Stromverbrauch, ohne Wärmeerzeugung (%)",
+    "type": "slider",
+    "sidepanel": true
+  },
+  "s_v_2": {
+    "class": "js-slider",
+    "grid": false,
+    "label": "Haushalte (%)",
+    "max": 200,
+    "min": 25,
+    "start": 30,
+    "step": 5,
+    "tooltip": "Haushalte (%)",
+    "type": "slider"
+  },
+  "s_v_3": {
+    "class": "js-slider",
+    "label": "Gewerbe, Handel, Dienstleistungen (%)",
+    "max": 200,
+    "min": 25,
+    "start": 30,
+    "step": 5,
+    "tooltip": "Gewerbe, Handel, Dienstleistungen (%)",
+    "type": "slider"
+  },
+  "s_v_4": {
+    "class": "js-slider",
+    "label": "Industrie (%)",
+    "max": 200,
+    "min": 25,
+    "start": 30,
+    "step": 5,
+    "tooltip": "Industrie (%)",
+    "type": "slider"
+  },
+  "s_s_k_1": {
+    "class": "js-slider js-slider-panel js-power-mix",
+    "label": "Heimspeicher (%)",
+    "max": 100,
+    "min": 0,
+    "start": 5,
+    "status_quo": 15,
+    "step": 5,
+    "tooltip": "Heimspeicher (%)",
+    "type": "slider"
+  },
+  "s_s_g_1": {
+    "class": "js-slider js-slider-panel js-power-mix",
+    "label": "Großspeicher (GWh)",
+    "max": 10,
+    "min": 0,
+    "start": 2,
+    "status_quo": 3,
+    "step": 0.1,
+    "tooltip": "Großspeicher (GWh)",
+    "type": "slider"
+  }
 }

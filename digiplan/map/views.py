@@ -5,7 +5,7 @@ As map app is SPA, this module contains main view and various API points.
 import json
 
 from django.conf import settings
-from django.http import HttpRequest, JsonResponse
+from django.http import HttpRequest, response
 from django.template.exceptions import TemplateDoesNotExist
 from django.template.loader import render_to_string
 from django.views.generic import TemplateView
@@ -30,10 +30,11 @@ class MapGLView(TemplateView, views.MapEngineMixin):
             category: [forms.StaticLayerForm(layer) for layer in layers]
             for category, layers in map_config.LEGEND.items()
         },
-        "energy_settings_panel": forms.PanelForm(config.ENERGY_SETTINGS_PANEL),
-        "heat_settings_panel": forms.PanelForm(config.HEAT_SETTINGS_PANEL),
-        "traffic_settings_panel": forms.PanelForm(config.TRAFFIC_SETTINGS_PANEL),
-        "use_distilled_mvts": settings.MAP_ENGINE_USE_DISTILLED_MVTS,
+        "panels": [
+            forms.EnergyPanelForm(config.ENERGY_SETTINGS_PANEL),
+            forms.HeatPanelForm(config.HEAT_SETTINGS_PANEL),
+            forms.TrafficPanelForm(config.TRAFFIC_SETTINGS_PANEL),
+        ],
         "store_hot_init": config.STORE_HOT_INIT,
     }
 
@@ -69,8 +70,18 @@ class MapGLView(TemplateView, views.MapEngineMixin):
 
         return context
 
+    def post(self, request):
+        panel_forms = [
+            forms.EnergyPanelForm(config.ENERGY_SETTINGS_PANEL, data=request.POST),
+            forms.HeatPanelForm(config.HEAT_SETTINGS_PANEL, data=request.POST),
+            forms.TrafficPanelForm(config.TRAFFIC_SETTINGS_PANEL, data=request.POST),
+        ]
+        if all(form.is_valid() for form in panel_forms):
+            return response.JsonResponse({"status": "okay"})
+        return response.HttpResponseBadRequest("Invalid data")
 
-def get_popup(request: HttpRequest, lookup: str, region: int) -> JsonResponse:  # noqa: ARG001
+
+def get_popup(request: HttpRequest, lookup: str, region: int) -> response.JsonResponse:  # noqa: ARG001
     """Return popup as html and chart options to render chart on popup.
 
     Parameters
@@ -94,11 +105,11 @@ def get_popup(request: HttpRequest, lookup: str, region: int) -> JsonResponse:  
         html = render_to_string(f"popups/{lookup}.html", context=data)
     except TemplateDoesNotExist:
         html = render_to_string("popups/default.html", context=data)
-    return JsonResponse({"html": html, "chart": chart})
+    return response.JsonResponse({"html": html, "chart": chart})
 
 
 # pylint: disable=W0613
-def get_choropleth(request: HttpRequest, lookup: str, scenario: str) -> JsonResponse:  # noqa: ARG001
+def get_choropleth(request: HttpRequest, lookup: str, scenario: str) -> response.JsonResponse:  # noqa: ARG001
     """Read scenario results from database, aggregate data and send back data.
 
     Parameters
@@ -117,10 +128,10 @@ def get_choropleth(request: HttpRequest, lookup: str, scenario: str) -> JsonResp
     """
     values = calculations.create_choropleth_data(lookup)
     fill_color = settings.MAP_ENGINE_CHOROPLETH_STYLES.get_fill_color(lookup, list(values.values()))
-    return JsonResponse({"values": values, "paintProperties": {"fill-color": fill_color, "fill-opacity": 1}})
+    return response.JsonResponse({"values": values, "paintProperties": {"fill-color": fill_color, "fill-opacity": 1}})
 
 
-def get_visualization(request: HttpRequest) -> JsonResponse:
+def get_visualization(request: HttpRequest) -> response.JsonResponse:
     """Return visualization from oemof simulation result.
 
     Parameters
@@ -141,4 +152,4 @@ def get_visualization(request: HttpRequest) -> JsonResponse:
     vh = core.VisualizationHandler([scenario])
     vh.add(visualization)
     vh.run()
-    return JsonResponse(vh[visualization])
+    return response.JsonResponse(vh[visualization])
