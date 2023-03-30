@@ -3,6 +3,10 @@
   box-shadow: $box-shadow-sm;
   z-index: 1000;
 
+  .container-fluid {
+    @extend .bg-white;
+  }
+
   &__brand {
     img {
       height: calc(#{$top-nav-height} - 1.5rem);
@@ -32,6 +36,14 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+    }
+  }
+
+  .navbar-collapse {
+    @include media-breakpoint-down(lg) {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid $gray-200;
     }
   }
 }
