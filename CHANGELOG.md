@@ -8,6 +8,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Added
 - sentry in production
 - intro tour using shepard.js
+- language support
 
 ### Changed
 - move logos to top navbar
