@@ -1,7 +1,24 @@
 {% load static i18n %}
 
-<div class="panel__chart">
-  <img src="{% static 'images/charts_placeholder.png' %}" alt="Ziele 2035 erreicht" data-bs-toggle="tooltip" title="Szenarienziele 2035" >
+<div class="panel__goal">
+  <div class="panel__charts">
+    <div class="panel__chart">
+      <div class="panel__chart-title">
+        Anteil Erneuerbare Energien (%)
+      </div>
+      <div class="panel__chart-content">
+        <div id="renewable_share_scenario_chart" class="goal-chart"></div>
+      </div>
+    </div>
+    <div class="panel__chart">
+      <div class="panel__chart-title">
+        CO2-Emissionen (Mt)
+      </div>
+      <div class="panel__chart-content">
+        <div id="co2_emissions_scenario_chart" class="goal-chart"></div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="panel__settings panel__settings--padding">
   <div class="panel-item">

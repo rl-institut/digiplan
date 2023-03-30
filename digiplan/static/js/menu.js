@@ -2,12 +2,14 @@
 const menuNextBtn = document.getElementById("menu_next_btn");
 const menuPreviousBtn = document.getElementById("menu_previous_btn");
 
-menuNextBtn.addEventListener("click", nextMenuTab);
-menuPreviousBtn.addEventListener("click", previousMenuTab);
-
-PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, test);
-PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, test);
-PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, test);
+menuNextBtn.addEventListener("click", function () {
+    nextMenuTab();
+    PubSub.publish(eventTopics.MENU_CHANGED);
+});
+menuPreviousBtn.addEventListener("click", function() {
+    previousMenuTab();
+    PubSub.publish(eventTopics.MENU_CHANGED);
+});
 
 
 function nextMenuTab() {
@@ -51,8 +53,4 @@ function previousMenuTab() {
 
 function getCurrentMenuTab() {
     return document.querySelector("#js-panel-container > .panel__content > .tab-content > .active");
-}
-
-function test(msg) {
-    logMessage(msg);
 }
