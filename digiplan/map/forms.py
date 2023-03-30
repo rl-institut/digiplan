@@ -3,7 +3,6 @@ from itertools import count
 from django.db.models import Max, Min
 from django.forms import (
     BooleanField,
-    CharField,
     Form,
     IntegerField,
     MultipleChoiceField,
@@ -12,11 +11,11 @@ from django.forms import (
     renderers,
 )
 from django.utils.safestring import mark_safe
+from django_mapengine import legend
 from django_select2.forms import Select2MultipleWidget
 
 from . import models
-from .mapset import setup
-from .widgets import BoxWidget, SwitchWidget, TitleWidget
+from .widgets import SwitchWidget
 
 
 class TemplateForm(Form):
@@ -42,12 +41,11 @@ class StaticLayerForm(TemplateForm):
     )
     counter = count()
 
-    def __init__(self, layer: setup.LegendLayer, *args, **kwargs):
+    def __init__(self, layer: legend.LegendLayer, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.layer = layer
-        self.fields["switch"].widget.attrs["id"] = layer.layer.id
 
-        if hasattr(layer.layer.model, "filters"):
+        if hasattr(layer.model, "filters"):
             self.has_filters = True
             for filter_ in layer.layer.model.filters:
                 if filter_.type == models.LayerFilterType.Range:
@@ -83,15 +81,12 @@ class StaticLayerForm(TemplateForm):
 
 
 class PanelForm(TemplateForm):
-    template_name = "forms/panel.html"
-    sidepanels = {}
-
-    def __init__(self, parameters):
-        super().__init__()
-
+    def __init__(self, parameters, **kwargs):
+        super().__init__(**kwargs)
         self.fields = {item["name"]: item["field"] for item in self.generate_fields(parameters)}
 
-    def generate_fields(self, parameters):
+    @staticmethod
+    def generate_fields(parameters):
         for name, item in parameters.items():
             if item["type"] == "slider":
                 attrs = {
@@ -110,27 +105,25 @@ class PanelForm(TemplateForm):
 
                 field = IntegerField(label=item["label"], widget=TextInput(attrs=attrs), help_text=item["tooltip"])
                 yield {"name": name, "field": field}
-
-                if "sidepanel" in item:
-                    self.sidepanels[name] = PanelForm(item["sidepanel"])
             elif item["type"] == "switch":
                 attrs = {
                     "class": item["class"],
                 }
-                field = BooleanField(label=item["label"], widget=SwitchWidget(attrs=attrs), help_text=item["tooltip"])
-                yield {"name": name, "field": field}
-            elif item["type"] == "box":
-                attrs = {
-                    "class": item["class"],
-                }
-                field = CharField(
-                    label=item["label"], widget=BoxWidget(attrs=attrs), help_text=item["tooltip"], initial=item["text"]
-                )
-                yield {"name": name, "field": field}
-            elif item["type"] == "title":
-                field = CharField(
-                    label=item["label"], widget=TitleWidget(), help_text=item["tooltip"], initial=item["text"]
+                field = BooleanField(
+                    label=item["label"], widget=SwitchWidget(attrs=attrs), help_text=item["tooltip"], required=False
                 )
                 yield {"name": name, "field": field}
             else:
                 raise ValueError(f"Unknown parameter type '{item['type']}'")
+
+
+class EnergyPanelForm(PanelForm):
+    template_name = "forms/panel_energy.html"
+
+
+class HeatPanelForm(PanelForm):
+    template_name = "forms/panel_heat.html"
+
+
+class TrafficPanelForm(PanelForm):
+    template_name = "forms/panel_traffic.html"

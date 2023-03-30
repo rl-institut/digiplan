@@ -96,7 +96,6 @@ Please follow tutorials for this or ask your local IT-expert.
 5. In your database create following extensions:
     ```postgresql
       CREATE EXTENSION postgis;
-      CREATE EXTENSION postgis_raster;
     ```
 
 ### Load data into application
@@ -112,13 +111,13 @@ added, which can be used by command `make`.
 You can load all data by running (or you can run them one-by-one):
 
 ```
-make load_regions load_data load_raster build_clusters
+make load_regions load_data
 ```
 
 And you can empty all data by running:
 
 ```
-make empty_raster empty_data empty_regions
+make empty_data empty_regions
 ```
 
 ## Using Docker
@@ -153,9 +152,8 @@ Following steps are necessary to refresh/load data on production server:
 
 ```
 docker-compose -f production.yml run --rm django python manage.py migrate
-docker-compose -f production.yml run --rm django make empty_raster empty_data empty_regions
-docker-compose -f production.yml run --rm django make load_regions load_data load_raster
-docker-compose -f production.yml run --rm django make build_cluster
+docker-compose -f production.yml run --rm django make empty_data empty_regions
+docker-compose -f production.yml run --rm django make load_regions load_data
 ```
 
 In order to increase loading speed of vector tiles, the tiles can be prerenderd. This is
@@ -172,6 +170,8 @@ docker rm -f digiplan_distill
 ```
 
 # Adding new (static) layers
+
+> **Outdated!** - `django-mapengine` is used to set up map sources and layers instead!
 
 In order to add new layers to the application following steps must be made:
 

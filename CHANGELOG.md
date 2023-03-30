@@ -6,6 +6,15 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- sentry in production
+- intro tour using shepard.js
+
+## [0.2.1] - 2023-03-27
+### Fixed
+- geopackage names and layer names
+
+## [0.2.0] - 2023-03-27
+### Added
 - test coverage to dev setup
 - CI with github actions (pre-commit and pytest)
 - (static) charts for electricity and mobility
@@ -18,6 +27,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - goal charts in sidebar as placeholders
 
 ### Changed
+- integrated mapengine
 - implementation of clustered layers
 - move navigation buttons below top navbar
 

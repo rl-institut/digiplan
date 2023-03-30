@@ -1,0 +1,14 @@
+{
+    "description": "Wind Turbines per km² in this municipality in comparision to the whole region.",
+    "id": "14",
+    "data": {
+      "unit": "wind turbines",
+      "year": null,
+      "municipality_value": null,
+      "region_title": "ABW region",
+      "region_value": null
+    },
+    "municipality": null,
+    "sources": [ ],
+    "title": "wind turbines"
+}

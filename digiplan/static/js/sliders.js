@@ -58,11 +58,11 @@ panelContainer.addEventListener("scroll", (e) => {
 
 // Subscriptions
 PubSub.subscribe(eventTopics.STATES_INITIALIZED, updateSliderMarks);
-subscribeToEventTopicsGroup(
+subscribeToEvents(
   [eventTopics.STATES_INITIALIZED, eventTopics.POWER_PANEL_SLIDER_CHANGE],
   createPercentagesOfPowerSources
 );
-subscribeToEventTopicsGroup(
+subscribeToEvents(
   [eventTopics.POWER_PANEL_SLIDER_CHANGE, eventTopics.PANEL_SLIDER_CHANGE],
   showActivePanelSliderOnPanelSliderChange
 );
@@ -111,6 +111,7 @@ function createPercentagesOfPowerSources(msg) {
   return logMessage(msg);
 }
 
+/* when the other forms get Status Quo marks, there needs to be an iteration over the forms! (line 117)*/
 function updateSliderMarks(msg) {
   for (let [slider_name, slider_marks] of Object.entries(store.cold.slider_marks)) {
     let slider = $(`#id_${slider_name}`).data("ionRangeSlider");
@@ -181,4 +182,24 @@ function addMarks(data, marks) {
   }
 
   data.slider.append(html);
+}
+
+$('form button').on("click",function(e){
+  e.preventDefault();
+});
+
+function sendSettings() {
+  var form = document.getElementById("settings");
+  var formData = new FormData(form); // jshint ignore:line
+  $.ajax({
+      url : "",
+      type : "POST",
+      processData: false,
+      contentType: false,
+      data : formData,
+      success : function(json) {
+        $('#post-text').val('');
+        console.log(json);
+      },
+  });
 }
