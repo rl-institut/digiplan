@@ -28,12 +28,45 @@
     @extend .flex-shrink-0;
   }
 
-  &__chart {
+  &__goal {
+    @extend .d-flex;
+    @extend .flex-column;
+    @extend .bg-light;
+    @extend .pt-2;
+    @extend .px-1;
+
+    &-header {
+      @extend .fs-6;
+      @extend .px-1;
+    }
+  }
+
+  &__charts {
     @extend .d-flex;
     @extend .flex-row;
     @extend .justify-content-around;
     @extend .bg-light;
-    @extend .pt-2;
+    @extend .pt-1;
+  }
+
+  &__chart {
+    @extend .px-1;
+    width: calc(#{$panel-width-sm} / 2);
+
+    @include media-breakpoint-up(lg) {
+      width: calc(#{$panel-width} / 2);
+    }
+
+    &-title {
+      @extend .fs-7;
+      @extend .fw-light;
+      @extend .lh-1;
+      height: 2rem;
+    }
+
+    .goal-chart {
+      height: 10rem;
+    }
   }
 
   &__settings {
