@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
+from typing import Optional
 
 from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
@@ -69,6 +70,121 @@ class Population(models.Model):
     class Meta:
         verbose_name = _("Population")
         verbose_name_plural = _("Population")
+
+    @classmethod
+    def quantity_in_2022(cls, mun_id: Optional[int] = None) -> int:
+        """Calculate population in 2022 (either for municipality or for whole region).
+
+        Parameters
+        ----------
+        municipality_id: Optional[int]
+            If given, population for given municipality are calculated. If not, for whole region.
+
+        Returns
+        -------
+        int
+            Value of population
+        """
+        values = cls.choropleth()
+        population = 0
+
+        if mun_id is not None:
+            population = values[mun_id]
+        else:
+            for index in values:
+                population += values[index]
+        return population
+
+    @classmethod
+    def population_history(cls, chart: dict, mun_id: int) -> dict:  # noqa: ARG001
+        """Get chart for population per municipality in different years.
+
+        Parameters
+        ----------
+        chart: dict
+            Default chart options for population from JSON
+        municipality_id: int
+            Related municipality
+
+        Returns
+        -------
+        dict
+            Chart data to use in JS
+        """
+        values = cls.objects.filter(municipality_id=mun_id).values_list("year", "value")
+        data_list = []
+        for _mun, value in enumerate(values):
+            data_list.append({"key": value[0], "value": value[1]})
+
+        chart["series"][0]["data"] = data_list
+        return chart
+
+    @classmethod
+    def choropleth(cls) -> dict[int, int]:
+        """Calculate population per municipality.
+
+        Returns
+        -------
+        dict[int, int]
+            Population per municipality
+        """
+        return {row.municipality_id: row.value for row in cls.objects.filter(year=2022)}
+
+    @classmethod
+    def density_in_2022(cls, mun_id: Optional[int] = None) -> float:
+        """Calculate population in 2022 per km² (either for municipality or for whole region).
+
+        Parameters
+        ----------
+        municipality_id: Optional[int]
+            If given, population per km² for given municipality are calculated. If not, for whole region.
+
+        Returns
+        -------
+        float
+            Value of population
+        """
+        population = cls.quantity_in_2022(mun_id)
+        density = 0.0
+
+        if mun_id is not None:
+            density = population / Municipality.objects.get(pk=mun_id).area
+        else:
+            density = population / Municipality.area_whole_region()
+        return density
+
+    @classmethod
+    def density_history(cls, chart: dict, mun_id: int) -> dict:  # noqa: ARG001
+        """Get chart for population density for the given municipality in different years.
+
+        Parameters
+        ----------
+        chart: dict
+            Default chart options for population density from JSON
+        municipality_id: int
+            Related municipality
+
+        Returns
+        -------
+        dict
+            Chart data to use in JS
+        """
+        chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
+        return chart
+
+    @classmethod
+    def denisty_choropleth(cls) -> dict[int, int]:
+        """Calculate population per municipality.
+
+        Returns
+        -------
+        dict[int, int]
+            Population per municipality
+        """
+        density = cls.choropleth()
+        for mun_id in density:
+            density[mun_id] = density[mun_id] / Municipality.objects.get(pk=mun_id).area
+        return density
 
 
 class WindTurbine(models.Model):

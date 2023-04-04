@@ -236,117 +236,6 @@ def capacity_square_choropleth() -> dict[int, int]:
     return capacity
 
 
-def population_popup(municipality_id: Optional[int] = None) -> int:
-    """Calculate population in 2022 (either for municipality or for whole region).
-
-    Parameters
-    ----------
-    municipality_id: Optional[int]
-        If given, population for given municipality are calculated. If not, for whole region.
-
-    Returns
-    -------
-    int
-        Value of population
-    """
-    values = population_choropleth()
-    population = 0.0
-
-    if municipality_id is not None:
-        population = values[municipality_id]
-    else:
-        for index in values:
-            population += values[index]
-    return population
-
-
-def population_chart(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
-    """Get chart for population per municipality in different years.
-
-    Parameters
-    ----------
-    chart: dict
-        Default chart options for population from JSON
-    municipality_id: int
-        Related municipality
-
-    Returns
-    -------
-    dict
-        Chart data to use in JS
-    """
-    values = models.Population.objects.filter(municipality_id=municipality_id).values_list("year", "value")
-    data_list = []
-    for _mun, value in enumerate(values):
-        data_list.append({"key": value[0], "value": value[1]})
-
-    chart["series"][0]["data"] = data_list
-    return chart
-
-
-def population_choropleth() -> dict[int, int]:
-    """Calculate population per municipality.
-
-    Returns
-    -------
-    dict[int, int]
-        Population per municipality
-    """
-    return {row.municipality_id: row.value for row in models.Population.objects.filter(year=2022)}
-
-
-def population_square_popup(municipality_id: Optional[int] = None) -> float:
-    """Calculate population in 2022 per km² (either for municipality or for whole region).
-
-    Parameters
-    ----------
-    municipality_id: Optional[int]
-        If given, population per km² for given municipality are calculated. If not, for whole region.
-
-    Returns
-    -------
-    float
-        Value of population
-    """
-    population = population_popup(municipality_id)
-
-    density = calculate_square_for_value(population, municipality_id)
-    return density
-
-
-def population_square_chart(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
-    """Get chart for population density for the given municipality in different years.
-
-    Parameters
-    ----------
-    chart: dict
-        Default chart options for population density from JSON
-    municipality_id: int
-        Related municipality
-
-    Returns
-    -------
-    dict
-        Chart data to use in JS
-    """
-    chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
-    return chart
-
-
-def population_square_choropleth() -> dict[int, int]:
-    """Calculate population per municipality.
-
-    Returns
-    -------
-    dict[int, int]
-        Population per municipality
-    """
-    density = population_choropleth()
-    for index in density:
-        density[index] = calculate_square_for_value(density[index], index)
-    return density
-
-
 def windturbines_popup(municipality_id: Optional[int] = None) -> int:
     """Calculate number of windturbines (either for municipality or for whole region).
 
@@ -468,9 +357,11 @@ def windturbines_square_choropleth() -> dict[int, int]:
 LOOKUPS: dict[str, LookupFunctions] = {
     "capacity": LookupFunctions(capacity_popup, capacity_chart, capacity_choropleth),
     "capacity_square": LookupFunctions(capacity_square_popup, capacity_square_chart, capacity_square_choropleth),
-    "population": LookupFunctions(population_popup, population_chart, population_choropleth),
+    "population": LookupFunctions(
+        models.Population.quantity_in_2022, models.Population.population_history, models.Population.choropleth
+    ),
     "population_density": LookupFunctions(
-        population_square_popup, population_square_chart, population_square_choropleth
+        models.Population.density_in_2022, models.Population.density_history, models.Population.denisty_choropleth
     ),
     "wind_turbines": LookupFunctions(windturbines_popup, windturbines_chart, windturbines_choropleth),
     "wind_turbines_square": LookupFunctions(
