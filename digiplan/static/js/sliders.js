@@ -184,6 +184,10 @@ function addMarks(data, marks) {
   data.slider.append(html);
 }
 
+$('form button').on("click",function(e){
+  e.preventDefault();
+});
+
 function sendSettings() {
   var form = document.getElementById("settings");
   var formData = new FormData(form); // jshint ignore:line
