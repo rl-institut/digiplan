@@ -10,12 +10,17 @@
     @extend .border-bottom;
     @extend .border-1;
     @extend .bg-light;
+    @extend .fs-7;
+    margin-left: 1px;
+    margin-right: 1px;
   }
 
   &__nav-link {
     @extend .nav-link;
     @extend .text-primary;
     @extend .border-0;
+    @extend .rounded-0;
+    @extend .px-1;
 
     &:hover {
       @extend .text-info;
