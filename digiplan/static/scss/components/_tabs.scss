@@ -54,13 +54,11 @@
 
 .view-toggle {
   @extend .position-absolute;
-  @extend .start-50;
-  @extend .translate-middle;
   @extend .bg-white;
   @extend .rounded;
   @extend .fs-7;
-  top: 5rem;
-  z-index: 100;
+  top: 6px;
+  right: $padding-large;
 
   @include media-breakpoint-down(sm) {
     font-size: $font-size-xsmall;
@@ -107,8 +105,19 @@
     }
 
     svg {
-      @extend .me-1;
       @include translateY(-2px);
+      margin-right: 0.5rem;
+
+      @include media-breakpoint-down(xl) {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__text {
+    @include media-breakpoint-down(xl) {
+      display: none;
+      visibility: hidden;
     }
   }
 }

@@ -51,10 +51,14 @@
 .steps {
   @extend .d-flex;
   @extend .flex-row;
-  @extend .justify-content-center;
   @extend .align-items-center;
   @extend .px-2;
+  justify-content: center;
   height: $steps-height;
+
+  @include media-breakpoint-down(xxl) {
+    justify-content: flex-start;
+  }
 
   &__list {
     @extend .list-group;
@@ -70,6 +74,10 @@
     &:hover {
       @extend .bg-white;
     }
+
+    @include media-breakpoint-down(lg) {
+      width: 3rem;
+    }
   }
 
   &__item--separator {
@@ -77,14 +85,16 @@
     flex: 1;
     height: 1px;
     background-color: $gray-300;
+
+    @include media-breakpoint-down(lg) {
+      display: none;
+    }
   }
 
   &__text {
     @extend .fs-7;
     @extend .fw-semibold;
     @extend .d-none;
-    @extend .d-sm-inline;
-    @extend .d-md-none;
     @extend .d-lg-inline;
     color: $gray-300 !important;
     letter-spacing: $letter-spacing-normal;
