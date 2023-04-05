@@ -10,6 +10,10 @@
   &__brand {
     img {
       height: calc(#{$top-nav-height} - 1.5rem);
+
+      @include media-breakpoint-down(md) {
+        height: 2.5rem;
+      }
     }
   }
 
@@ -27,6 +31,12 @@
     &--gestalten img {
       max-height: 4rem;
       padding-left: 0.5rem;
+    }
+
+    img {
+      @include media-breakpoint-down(sm) {
+        height: 2.5rem;
+      }
     }
   }
 
