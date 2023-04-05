@@ -10,6 +10,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ### Changed
 - removed unnecessary account and user stuff
+- moved view toggle tabs to top right
 
 ## [0.3.0] - 2023-03-30
 ### Added
