@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 08:12+0000\n"
+"POT-Creation-Date: 2023-04-11 12:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -158,10 +158,12 @@ msgid "Goals 2045"
 msgstr ""
 
 #: digiplan/templates/components/panel_1_today.html:10
+#: digiplan/templates/components/panel_3_results.html:7
 msgid "Share of renewable energies"
 msgstr ""
 
 #: digiplan/templates/components/panel_1_today.html:18
+#: digiplan/templates/components/panel_3_results.html:15
 msgid "CO2-Emissions (Mt)"
 msgstr ""
 
@@ -175,24 +177,29 @@ msgid "Planning Region"
 msgstr "Planungsregion"
 
 #: digiplan/templates/components/panel_1_today.html:39
+#: digiplan/templates/components/panel_1_today.html:97
 msgid "Inhabitants 2021"
 msgstr ""
 
 #: digiplan/templates/components/panel_1_today.html:41
+#: digiplan/templates/components/panel_3_results.html:36
 msgid ""
 "In 2021 the population density in Germany was 238 per km² and 106 per km² in "
 "Saxony-Anhalt."
 msgstr ""
 
 #: digiplan/templates/components/panel_1_today.html:42
+#: digiplan/templates/components/panel_3_results.html:37
 msgid "Population Density"
 msgstr "Bevölkerungsdichte"
 
 #: digiplan/templates/components/panel_1_today.html:45
+#: digiplan/templates/components/panel_3_results.html:40
 msgid "Renewable Energies (RE)"
 msgstr "Erneuerbare Energien"
 
 #: digiplan/templates/components/panel_1_today.html:47
+#: digiplan/templates/components/panel_3_results.html:42
 #, python-format
 msgid ""
 "Annual balance sheet share of renewable energy (wind energy, photovoltaic, "
@@ -211,10 +218,12 @@ msgstr ""
 "von 49,7%% von Erneuerbaren Energien gedeckt."
 
 #: digiplan/templates/components/panel_1_today.html:48
+#: digiplan/templates/components/panel_3_results.html:43
 msgid "Renewable Energy Share of Demand"
 msgstr "Anteil Energie aus EE an Strombedarf"
 
 #: digiplan/templates/components/panel_1_today.html:51
+#: digiplan/templates/components/panel_3_results.html:46
 msgid ""
 "Annual amount of energy fed into the grid from renewable plants in gigawatt "
 "hours (wind energy, photovoltaic, hydro power)."
@@ -223,10 +232,12 @@ msgstr ""
 "Gigawattstunden (Windenergie, Photovoltaik, Wasserkraft)."
 
 #: digiplan/templates/components/panel_1_today.html:52
+#: digiplan/templates/components/panel_3_results.html:47
 msgid "Renewable Electricity Production (GWh)"
 msgstr "Gewonnene Energie aus EE (GWh)"
 
 #: digiplan/templates/components/panel_1_today.html:54
+#: digiplan/templates/components/panel_3_results.html:49
 msgid ""
 "Annual amount of energy fed in from renewable plants (wind energy, "
 "photovoltaic, hydro power) in relation to the number of inhabitants in "
@@ -237,10 +248,12 @@ msgstr ""
 "pro EinwohnerIn."
 
 #: digiplan/templates/components/panel_1_today.html:55
+#: digiplan/templates/components/panel_3_results.html:50
 msgid "Renewable Electricity Production per Capita (MWh)"
 msgstr "Gewonnene Energie aus EE je EinwohnerIn (MWh)"
 
 #: digiplan/templates/components/panel_1_today.html:58
+#: digiplan/templates/components/panel_3_results.html:53
 msgid ""
 "Annual amount of energy fed in from renewable plants (wind energy, "
 "photovoltaic, hydro power) related to the area in megawatt hours per km²."
@@ -249,10 +262,12 @@ msgstr ""
 "Photovoltaik, Wasserkraft) bezogen auf die Fläche in Megawattstunden pro km²."
 
 #: digiplan/templates/components/panel_1_today.html:59
+#: digiplan/templates/components/panel_3_results.html:54
 msgid "Renewable Electricity Production per km² (MWh)"
 msgstr "Gewonnene Energie aus EE je km² (MWh)"
 
 #: digiplan/templates/components/panel_1_today.html:62
+#: digiplan/templates/components/panel_3_results.html:57
 msgid ""
 "Installed capacity from renewable energy plants (wind energy, photovoltaic, "
 "hydro power, biomass and biogas) in megawatts."
@@ -261,10 +276,12 @@ msgstr ""
 "Photovoltaik, Wasserkraft, Biomasse und Biogas) in Megawatt ."
 
 #: digiplan/templates/components/panel_1_today.html:63
+#: digiplan/templates/components/panel_3_results.html:58
 msgid "Installed Renewable Capacity (MW)"
 msgstr "Installierte Leistung EE (MW)"
 
 #: digiplan/templates/components/panel_1_today.html:66
+#: digiplan/templates/components/panel_3_results.html:61
 msgid ""
 "Installed capacity from renewable energy plants (wind energy, photovoltaic, "
 "hydro power, biomass and biogas) in megawatts per km²."
@@ -273,19 +290,33 @@ msgstr ""
 "Photovoltaik, Wasserkraft, Biomasse und Biogas) in Megawatt pro km² ."
 
 #: digiplan/templates/components/panel_1_today.html:67
+#: digiplan/templates/components/panel_3_results.html:62
 msgid "Installed Renewable Capacity per km² (MW)"
 msgstr "Installierte Leistung EE je km² (MW)"
 
 #: digiplan/templates/components/panel_1_today.html:70
 #: digiplan/templates/components/panel_1_today.html:71
-msgid "Number of Wind Turbines per km²"
+#: digiplan/templates/components/panel_3_results.html:65
+#: digiplan/templates/components/panel_3_results.html:66
+#, fuzzy
+#| msgid "Number of Wind Turbines per km²"
+msgid "Number of Wind Turbines"
 msgstr "Anzahl Windenergieanlagen je km²"
 
 #: digiplan/templates/components/panel_1_today.html:74
+#: digiplan/templates/components/panel_1_today.html:75
+#: digiplan/templates/components/panel_3_results.html:69
+#: digiplan/templates/components/panel_3_results.html:70
+msgid "Number of Wind Turbines per km²"
+msgstr "Anzahl Windenergieanlagen je km²"
+
+#: digiplan/templates/components/panel_1_today.html:78
+#: digiplan/templates/components/panel_3_results.html:73
 msgid "Energy Demand"
 msgstr "Strombedarf"
 
-#: digiplan/templates/components/panel_1_today.html:76
+#: digiplan/templates/components/panel_1_today.html:80
+#: digiplan/templates/components/panel_3_results.html:75
 msgid ""
 "Annual electricity demand in gigawatt hours of the sectors, households, "
 "tertiary sector (trade, commerce, services), agriculture and industry. This "
@@ -295,11 +326,13 @@ msgstr ""
 "(Gewerbe, Handel Dienstleistungen), Landwirtschaft und Industrie. Es handelt "
 "sich dabei um den Nettostromverbrauch."
 
-#: digiplan/templates/components/panel_1_today.html:77
+#: digiplan/templates/components/panel_1_today.html:81
+#: digiplan/templates/components/panel_3_results.html:76
 msgid "Electricity Demand (GWh)"
 msgstr "Strombedarf (GWh)"
 
-#: digiplan/templates/components/panel_1_today.html:80
+#: digiplan/templates/components/panel_1_today.html:84
+#: digiplan/templates/components/panel_3_results.html:79
 msgid ""
 "Annual electricity demand in gigawatt hours of the sectors, households, "
 "tertiary sector (trade, commerce, services), agriculture and industry per "
@@ -309,13 +342,15 @@ msgstr ""
 "(Gewerbe, Handel Dienstleistungen), Landwirtschaft und Industrie je "
 "EinwohnerIn. Es handelt sich dabei um den Nettostromverbrauch."
 
-#: digiplan/templates/components/panel_1_today.html:81
+#: digiplan/templates/components/panel_1_today.html:85
+#: digiplan/templates/components/panel_3_results.html:80
 #, fuzzy
 #| msgid "Electricity Demand"
 msgid "Electricity Demand per Capita (kWh)"
 msgstr "Strombedarf je EinwohnerIn (kWh)"
 
-#: digiplan/templates/components/panel_1_today.html:84
+#: digiplan/templates/components/panel_1_today.html:88
+#: digiplan/templates/components/panel_3_results.html:83
 msgid ""
 "Annual heat consumption for space heating and domestic hot water in gigawatt "
 "hours in the household, commercial, trade and services, and agriculture "
@@ -325,11 +360,13 @@ msgstr ""
 "Gigawattstunden der Sektoren Haushalte, GHD (Gewerbe, Handel, "
 "Dienstleistungen), Landwirtschaft (ohne Industrie)."
 
-#: digiplan/templates/components/panel_1_today.html:85
+#: digiplan/templates/components/panel_1_today.html:89
+#: digiplan/templates/components/panel_3_results.html:84
 msgid "Heat Demand (GWh)"
 msgstr "Wärmebedarf (GWh)"
 
-#: digiplan/templates/components/panel_1_today.html:88
+#: digiplan/templates/components/panel_1_today.html:92
+#: digiplan/templates/components/panel_3_results.html:87
 msgid ""
 "Annual heat consumption per inhabitant for space heating and domestic hot "
 "water in gigawatt hours in the household, commercial, trade and services, "
@@ -339,35 +376,37 @@ msgstr ""
 "Trinkwassererwärmung in Gigawattstunden der Sektoren Haushalte, GHD "
 "(Gewerbe, Handel, Dienstleistungen), Landwirtschaft (ohne Industrie)."
 
-#: digiplan/templates/components/panel_1_today.html:89
+#: digiplan/templates/components/panel_1_today.html:93
+#: digiplan/templates/components/panel_3_results.html:88
 msgid "Heat Demand per Capita (kWh)"
 msgstr "Wärmebedarf je EinwohnerIn (kWh)"
 
 #: digiplan/templates/components/panel_2_settings.html:18
-#: digiplan/templates/components/panel_3_results.html:73
+#: digiplan/templates/components/panel_3_results.html:111
 msgid "Electricity"
 msgstr "Strom"
 
 #: digiplan/templates/components/panel_2_settings.html:26
-#: digiplan/templates/components/panel_3_results.html:81
+#: digiplan/templates/components/panel_3_results.html:119
 #: digiplan/templates/components/results_view.html:52
 msgid "Heat"
 msgstr "Wärme"
 
 #: digiplan/templates/components/panel_2_settings.html:34
-#: digiplan/templates/components/panel_3_results.html:89
+#: digiplan/templates/components/panel_3_results.html:127
 msgid "Transportation"
 msgstr "Verkehr"
 
-#: digiplan/templates/components/panel_3_results.html:35
-msgid "Population density"
-msgstr "Bevölkerungsdichte"
+#: digiplan/templates/components/panel_3_results.html:34
+#: digiplan/templates/components/panel_3_results.html:92
+msgid "Inhabitants"
+msgstr ""
 
-#: digiplan/templates/components/panel_3_results.html:57
+#: digiplan/templates/components/panel_3_results.html:95
 msgid "View"
 msgstr "Ansicht"
 
-#: digiplan/templates/components/panel_3_results.html:65
+#: digiplan/templates/components/panel_3_results.html:103
 #: digiplan/templates/components/results_view.html:5
 #: digiplan/templates/components/results_view.html:35
 #: digiplan/templates/components/results_view.html:55
@@ -438,6 +477,9 @@ msgstr "Telefon"
 #: digiplan/templates/offcanvas/contact.html:25
 msgid "Telefax"
 msgstr "Telefax"
+
+#~ msgid "Population density"
+#~ msgstr "Bevölkerungsdichte"
 
 #, fuzzy
 #~| msgid "Number of Wind Turbines per km²"
