@@ -4,12 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Changed
+- moved map/chart view toggle to nav bar
+- hide map/chart view toggle in status quo and settings menu
+
 ## [0.3.1] - 2023-03-30
 ### Added
 - missing translations
 
 ### Changed
 - removed unnecessary account and user stuff
+- moved view toggle tabs to top right
 
 ## [0.3.0] - 2023-03-30
 ### Added

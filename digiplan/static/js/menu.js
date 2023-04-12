@@ -11,6 +11,10 @@ menuPreviousBtn.addEventListener("click", function() {
     PubSub.publish(eventTopics.MENU_CHANGED);
 });
 
+PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, setMapChartViewVisibility);
+PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, setMapChartViewVisibility);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, setMapChartViewVisibility);
+
 
 function nextMenuTab() {
     const currentTab = getCurrentMenuTab();
@@ -53,4 +57,11 @@ function previousMenuTab() {
 
 function getCurrentMenuTab() {
     return document.querySelector("#js-panel-container > .panel__content > .tab-content > .active");
+}
+
+
+function setMapChartViewVisibility(msg) {
+    const view_toggle = document.getElementsByClassName("view-toggle")[0];
+    view_toggle.hidden = msg !== eventTopics.MENU_RESULTS_SELECTED;
+    return logMessage(msg);
 }

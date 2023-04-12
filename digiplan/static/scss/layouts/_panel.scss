@@ -41,6 +41,20 @@
     }
   }
 
+  &__title {
+    @extend .px-3;
+    @extend .pt-3;
+    @extend .fw-semibold;
+  }
+
+  &__separator {
+    @extend .d-block;
+    @extend .mt-3;
+    @extend .mb-2;
+    @extend .mx-3;
+    @extend .border-top;
+  }
+
   &__charts {
     @extend .d-flex;
     @extend .flex-row;
@@ -102,11 +116,16 @@
     }
 
     &__tabs {
-      .nav-tabs,
+      .nav-tabs {
+        @extend .pt-2;
+        @extend .px-3;
+      }
+
       .c-slider {
         @extend .pt-2;
         @extend .pb-4;
-        @extend .px-3;
+        @extend .ps-2;
+        @extend .pe-3;
       }
 
       .c-slider {
