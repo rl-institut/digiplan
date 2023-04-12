@@ -2,12 +2,12 @@
 
 <div class="panel__goal">
   <div class="panel__goal-header">
-    <span>Ziele 2045</span>
+    <span>{% translate "Goals 2045" %}</span>
   </div>
   <div class="panel__charts">
     <div class="panel__chart">
       <div class="panel__chart-title">
-        Anteil Erneuerbare Energien (%)
+        {% translate "Share of renewable energies" %} (%)
       </div>
       <div class="panel__chart-content">
         <div id="renewable_share_goal_chart" class="goal-chart"></div>
@@ -15,7 +15,7 @@
     </div>
     <div class="panel__chart">
       <div class="panel__chart-title">
-        CO2-Emissionen (Mt)
+        {% translate "CO2-Emissions (Mt)" %}
       </div>
       <div class="panel__chart-content">
         <div id="co2_emissions_goal_chart" class="goal-chart"></div>
@@ -26,34 +26,75 @@
 <div class="panel__settings panel__settings--padding">
   <div class="panel-item">
     <h2 class="panel-item__heading panel-item__heading--nopadding">
-      <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
-        <path d="m6.2265 0.10542c-3.4031 0-6.1738 2.7707-6.1738 6.1738 1e-8 3.4031 2.7707 6.1738 6.1738 6.1738 1.5629 0 2.9918-0.58449 4.0804-1.5462l5.3868 5.3883 0.74776-0.74828-5.4038-5.4059c0.85078-1.0584 1.3606-2.4017 1.3606-3.8618 0-3.4031-2.7687-6.1738-6.1717-6.1738zm0 1.0589c2.8311 0 5.1154 2.2838 5.1154 5.1149s-2.2843 5.1154-5.1154 5.1154c-2.8311 0-5.1149-2.2843-5.1149-5.1154s2.2838-5.1149 5.1149-5.1149z">
-       </svg>
+      <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933"
+           xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="m6.2265 0.10542c-3.4031 0-6.1738 2.7707-6.1738 6.1738 1e-8 3.4031 2.7707 6.1738 6.1738 6.1738 1.5629 0 2.9918-0.58449 4.0804-1.5462l5.3868 5.3883 0.74776-0.74828-5.4038-5.4059c0.85078-1.0584 1.3606-2.4017 1.3606-3.8618 0-3.4031-2.7687-6.1738-6.1717-6.1738zm0 1.0589c2.8311 0 5.1154 2.2838 5.1154 5.1149s-2.2843 5.1154-5.1154 5.1154c-2.8311 0-5.1149-2.2843-5.1149-5.1154s2.2838-5.1149 5.1149-5.1149z">
+      </svg>
       {% translate "Situation today" %}
     </h2>
     <div class="panel-item__form">
-      <select class="form-select" aria-label="Default select example">
+      <select class="form-select" aria-label="Default select example" id="situation_today">
         <optgroup label="{% translate "Planning Region" %}">
-          <option value="EinwohnerInnen" selected>EinwohnerInnen</option>
-          <option value="Bevölkerungsdichte">Bevölkerungsdichte</option>
+          <option value="population" title="{% translate "Inhabitants 2021" %}" selected>{% translate "Population" %}</option>
+          <option value="population_density"
+                  title="{% translate "In 2021 the population density in Germany was 238 per km² and 106 per km² in Saxony-Anhalt." %}">
+            {% translate "Population Density" %}
+          </option>
         </optgroup>
-        <optgroup label="Renewable Energies (RE)">
-          <option value="Anteil Energie aus EE an Strombedarf">Anteil Energie aus EE an Strombedarf</option>
-          <option value="Gewonnene Energie aus EE">Gewonnene Energie aus EE</option>
-          <option value="Gewonnene Energie aus EE je EinwohnerIn">Gewonnene Energie aus EE je EinwohnerIn</option>
-          <option value="Gewonnene Energie aus EE je km²">Gewonnene Energie aus EE je km²</option>
-          <option value="Installierte Leistung EE">Installierte Leistung EE</option>
-          <option value="Installierte Leistung EE je km²">Installierte Leistung EE je km²</option>
-          <option value="Anzahl Windenergieanlagen je km²">Anzahl Windenergieanlagen je km²</option>
+        <optgroup label="{% translate "Renewable Energies (RE)" %}">
+          <option value="re_power_percentage"
+                  title="{% translate "Annual balance sheet share of renewable energy (wind energy, photovoltaic, hydroelectric power) in the electricity demand of the sectors agriculture, GHG (trade, commerce, services), households and industry in percent. The demand is the net electricity consumption, i.e. transmission losses and power plant consumption are not taken into account. 49.7% of the electricity demand in Germany was covered by renewable energies in 2022." %}">
+                  {% translate "Renewable Energy Share of Demand" %} (%)
+          </option>
+          <option value="re_power"
+                  title="{% translate "Annual amount of energy fed into the grid from renewable plants in gigawatt hours (wind energy, photovoltaic, hydro power)." %}">
+            {% translate "Renewable Electricity Production (GWh)" %}</option>
+          <option value="production_capita"
+                  title="{% translate "Annual amount of energy fed in from renewable plants (wind energy, photovoltaic, hydro power) in relation to the number of inhabitants in megawatt hours per inhabitant." %}">
+            {% translate "Renewable Electricity Production per Capita (MWh)" %}
+          </option>
+          <option value="Gewonnene Energie aus EE je km²"
+                  title="{% translate "Annual amount of energy fed in from renewable plants (wind energy, photovoltaic, hydro power) related to the area in megawatt hours per km²." %}">
+            {% translate "Renewable Electricity Production per km² (MWh)" %}
+          </option>
+          <option value="capacity"
+                  title="{% translate "Installed capacity from renewable energy plants (wind energy, photovoltaic, hydro power, biomass and biogas) in megawatts." %}">
+            {% translate "Installed Renewable Capacity (MW)" %}
+          </option>
+          <option value="capacity_square"
+                  title="{% translate "Installed capacity from renewable energy plants (wind energy, photovoltaic, hydro power, biomass and biogas) in megawatts per km²." %}">
+            {% translate "Installed Renewable Capacity per km² (MW)" %}
+          </option>
+          <option value="wind_turbines"
+                  title="{% translate "Number of Wind Turbines" %}">
+            {% translate "Number of Wind Turbines" %}
+          </option>
+          <option value="wind_turbines_square"
+                  title="{% translate "Number of Wind Turbines per km²" %}">
+            {% translate "Number of Wind Turbines per km²" %}
+          </option>
         </optgroup>
-        <optgroup label="Energy Demand">
-          <option value="Strombedarf">Strombedarf</option>
-          <option value="Strombedarf je EinwohnerIn">Strombedarf je EinwohnerIn</option>
-          <option value="Wärmebedarf">Wärmebedarf</option>
-          <option value="Wärmebedarf je EinwohnerIn">Wärmebedarf je EinwohnerIn</option>
+        <optgroup label="{% translate "Energy Demand" %}">
+          <option value="electricity_demand"
+                  title="{% translate "Annual electricity demand in gigawatt hours of the sectors, households, tertiary sector (trade, commerce, services), agriculture and industry. This is the net electricity consumption." %}">
+            {% translate "Electricity Demand (GWh)" %}
+          </option>
+          <option value="electricity_demand_capita"
+                  title="{% translate "Annual electricity demand in gigawatt hours of the sectors, households, tertiary sector (trade, commerce, services), agriculture and industry per inhabitant This is the net electricity consumption." %}">
+            {% translate "Electricity Demand per Capita (kWh)" %}
+          </option>
+          <option value="heat_demand"
+                  title="{% translate "Annual heat consumption for space heating and domestic hot water in gigawatt hours in the household, commercial, trade and services, and agriculture (excluding industry) sectors." %}">
+            {% translate "Heat Demand (GWh)" %}
+          </option>
+          <option value="heat_demand_capita"
+                  title="{% translate "Annual heat consumption per inhabitant for space heating and domestic hot water in gigawatt hours in the household, commercial, trade and services, and agriculture (excluding industry) sectors." %}">
+            {% translate "Heat Demand per Capita (kWh)" %}
+          </option>
         </optgroup>
       </select>
-      <img src="{% static 'images/icons/i_info.svg' %}" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="Einwohner im Jahr 2021" >
+      <img src="{% static 'images/icons/i_info.svg' %}" id="info_tooltip" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="{% translate "Inhabitants 2021" %}">
     </div>
   </div>
   <div class="panel-item">
@@ -63,3 +104,13 @@
     </div>
   </div>
 </div>
+
+<!-- JavaScript code -->
+<script>
+  const select = document.getElementById("situation_today");
+  const image = document.getElementById("info_tooltip");
+
+  select.addEventListener("change", function() {
+    image.title = select.options[select.selectedIndex].title;
+  });
+</script>
