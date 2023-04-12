@@ -236,124 +236,6 @@ def capacity_square_choropleth() -> dict[int, int]:
     return capacity
 
 
-def windturbines_popup(municipality_id: Optional[int] = None) -> int:
-    """Calculate number of windturbines (either for municipality or for whole region).
-
-    Parameters
-    ----------
-    municipality_id: Optional[int]
-        If given, number of windturbines for given municipality are calculated. If not, for whole region.
-
-    Returns
-    -------
-    int
-        Sum of windturbines
-    """
-    windturbines = 0
-    if municipality_id is not None:
-        res_windturbine = models.WindTurbine.objects.filter(mun_id__exact=municipality_id).aggregate(Sum("unit_count"))[
-            "unit_count__sum"
-        ]
-    else:
-        res_windturbine = models.WindTurbine.objects.aggregate(Sum("unit_count"))["unit_count__sum"]
-    if res_windturbine:
-        windturbines += res_windturbine
-    return windturbines
-
-
-def windturbines_chart(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
-    """Get chart for wind turbines.
-
-    Parameters
-    ----------
-    chart: dict
-        Default chart options for wind turbines from JSON
-    municipality_id: int
-        Related municipality
-
-    Returns
-    -------
-    dict
-        Chart data to use in JS
-    """
-    chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
-    return chart
-
-
-def windturbines_choropleth() -> dict[int, int]:
-    """Calculate number of wind turbines per municipality.
-
-    Returns
-    -------
-    dict[int, int]
-        wind turbines per municipality
-    """
-
-    windturbines = {}
-    municipalities = models.Municipality.objects.all()
-
-    for mun in municipalities:
-        res_windturbine = models.WindTurbine.objects.filter(mun_id__exact=mun.id).aggregate(Sum("unit_count"))[
-            "unit_count__sum"
-        ]
-        if res_windturbine is None:
-            res_windturbine = 0
-        windturbines[mun.id] = res_windturbine
-    return windturbines
-
-
-def windturbines_square_popup(municipality_id: Optional[int] = None) -> float:
-    """Calculate number of windturbines per km² (either for municipality or for whole region).
-
-    Parameters
-    ----------
-    municipality_id: Optional[int]
-        If given, number of windturbines per km² for given municipality are calculated. If not, for whole region.
-
-    Returns
-    -------
-    float
-        Sum of windturbines per km²
-    """
-    windturbines = windturbines_popup(municipality_id)
-
-    windturbines_square = calculate_square_for_value(windturbines, municipality_id)
-    return windturbines_square
-
-
-def windturbines_square_chart(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
-    """Get chart for wind turbines per km².
-
-    Parameters
-    ----------
-    chart: dict
-        Default chart options for wind turbines from JSON
-    municipality_id: int
-        Related municipality
-
-    Returns
-    -------
-    dict
-        Chart data to use in JS
-    """
-    chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
-    return chart
-
-
-def windturbines_square_choropleth() -> dict[int, int]:
-    """Calculate windturbines per km² per municipality.
-
-    Returns
-    -------
-    dict[int, int]
-        windturbines per km² per municipality
-    """
-    windtubines = windturbines_choropleth()
-    for index in windtubines:
-        windtubines[index] = calculate_square_for_value(windtubines[index], index)
-    return windtubines
-
-
 LOOKUPS: dict[str, LookupFunctions] = {
     "capacity": LookupFunctions(capacity_popup, capacity_chart, capacity_choropleth),
     "capacity_square": LookupFunctions(capacity_square_popup, capacity_square_chart, capacity_square_choropleth),
@@ -363,8 +245,10 @@ LOOKUPS: dict[str, LookupFunctions] = {
     "population_density": LookupFunctions(
         models.Population.density_in_2022, models.Population.density_history, models.Population.denisty_choropleth
     ),
-    "wind_turbines": LookupFunctions(windturbines_popup, windturbines_chart, windturbines_choropleth),
+    "wind_turbines": LookupFunctions(
+        models.WindTurbine.number_per_mun, models.WindTurbine.chart, models.WindTurbine.choropleth
+    ),
     "wind_turbines_square": LookupFunctions(
-        windturbines_square_popup, windturbines_square_chart, windturbines_square_choropleth
+        models.WindTurbine.number_per_square, models.WindTurbine.square_chart, models.WindTurbine.square_choropleth
     ),
 }

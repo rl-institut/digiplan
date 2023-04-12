@@ -3,6 +3,7 @@ from enum import Enum
 from typing import Optional
 
 from django.contrib.gis.db import models
+from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 
 from .managers import LabelMVTManager, RegionMVTManager, StaticMVTManager
@@ -59,6 +60,14 @@ class Municipality(models.Model):
 
     def __str__(self):
         return self.name
+
+    @classmethod
+    def area_whole_region(cls) -> float:
+        area = 0.0
+        area = cls.objects.all().aggregate(Sum("area"))["area__sum"]
+        # for mun in cls.objects.all():
+        #   area += cls.objects.filter(pk=mun.id).area
+        return area
 
 
 class Population(models.Model):
@@ -169,7 +178,12 @@ class Population(models.Model):
         dict
             Chart data to use in JS
         """
-        chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
+        values = cls.objects.filter(municipality_id=mun_id).values_list("year", "value")
+        data_list = []
+        for _mun, value in enumerate(values):
+            data_list.append({"key": value[0], "value": value[1] / Municipality.objects.get(pk=mun_id).area})
+
+        chart["series"][0]["data"] = data_list
         return chart
 
     @classmethod
@@ -225,6 +239,125 @@ class WindTurbine(models.Model):
 
     def __str__(self):
         return self.name
+
+    @classmethod
+    def number_per_mun(cls, mun_id: Optional[int] = None) -> int:
+        """Calculate number of windturbines (either for municipality or for whole region).
+
+        Parameters
+        ----------
+        municipality_id: Optional[int]
+            If given, number of windturbines for given municipality are calculated. If not, for whole region.
+
+        Returns
+        -------
+        int
+            Sum of windturbines
+        """
+        values = cls.choropleth()
+        windturbines = 0
+
+        if mun_id is not None:
+            windturbines = values[mun_id]
+        else:
+            for index in values:
+                windturbines += values[index]
+        return windturbines
+
+    @classmethod
+    def choropleth(cls) -> dict[int, int]:
+        """Calculate number of wind turbines per municipality.
+
+        Returns
+        -------
+        dict[int, int]
+            wind turbines per municipality
+        """
+
+        windturbines = {}
+        municipalities = Municipality.objects.all()
+
+        for mun in municipalities:
+            res_windturbine = cls.objects.filter(mun_id=mun.id).aggregate(Sum("unit_count"))["unit_count__sum"]
+            if res_windturbine is None:
+                res_windturbine = 0
+            windturbines[mun.id] = res_windturbine
+        return windturbines
+
+    @classmethod
+    def chart(cls, chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+        """Get chart for wind turbines.
+
+        Parameters
+        ----------
+        chart: dict
+            Default chart options for wind turbines from JSON
+        municipality_id: int
+            Related municipality
+
+        Returns
+        -------
+        dict
+            Chart data to use in JS
+        """
+        chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
+        return chart
+
+    @classmethod
+    def number_per_square(cls, mun_id: Optional[int] = None) -> float:
+        """Calculate number of windturbines per km² (either for municipality or for whole region).
+
+        Parameters
+        ----------
+        municipality_id: Optional[int]
+            If given, number of windturbines per km² for given municipality are calculated. If not, for whole region.
+
+        Returns
+        -------
+        float
+            Sum of windturbines per km²
+        """
+        windturbines = cls.number_per_mun(mun_id)
+        square_value = 0.0
+
+        if mun_id is not None:
+            square_value = windturbines / Municipality.objects.get(pk=mun_id).area
+        else:
+            square_value = windturbines / Municipality.area_whole_region()
+        return square_value
+
+    @classmethod
+    def square_chart(cls, chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+        """Get chart for wind turbines per km².
+
+        Parameters
+        ----------
+        chart: dict
+            Default chart options for wind turbines from JSON
+        municipality_id: int
+            Related municipality
+
+        Returns
+        -------
+        dict
+            Chart data to use in JS
+        """
+        chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
+        return chart
+
+    @classmethod
+    def square_choropleth(cls) -> dict[int, int]:
+        """Calculate windturbines per km² per municipality.
+
+        Returns
+        -------
+        dict[int, int]
+            windturbines per km² per municipality
+        """
+        windtubines = cls.choropleth()
+        for index in windtubines:
+            windtubines[index] = windtubines[index] / Municipality.objects.get(pk=index).area
+        return windtubines
 
 
 class PVroof(models.Model):
