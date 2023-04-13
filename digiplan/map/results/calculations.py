@@ -3,6 +3,7 @@
 import json
 import pathlib
 from collections import namedtuple
+from functools import partial
 from typing import Optional
 
 import jsonschema
@@ -64,7 +65,8 @@ def create_chart(lookup: str, municipality_id: int) -> dict:
 
     with pathlib.Path(config.POPUPS_DIR.path(f"{lookup}_chart.json")).open("r", encoding="utf-8") as chart_json:
         chart = json.load(chart_json)
-    chart = LOOKUPS[lookup].chart_fct(chart, municipality_id)
+    chart_data = LOOKUPS[lookup].chart_fct(municipality_id)
+    chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
     jsonschema.validate(chart, schemas.CHART_SCHEMA)
     return chart
 
@@ -98,7 +100,7 @@ def create_data(lookup: str, municipality_id: int) -> dict:
 
     data["id"] = municipality_id
     data["data"]["region_value"] = LOOKUPS[lookup].data_fct()
-    data["data"]["municipality_value"] = LOOKUPS[lookup].data_fct(municipality_id)
+    data["data"]["municipality_value"] = LOOKUPS[lookup].data_fct(municipality_id=municipality_id)
     data["municipality"] = models.Municipality.objects.get(pk=municipality_id)
 
     return data
@@ -240,7 +242,9 @@ LOOKUPS: dict[str, LookupFunctions] = {
     "capacity": LookupFunctions(capacity_popup, capacity_chart, capacity_choropleth),
     "capacity_square": LookupFunctions(capacity_square_popup, capacity_square_chart, capacity_square_choropleth),
     "population": LookupFunctions(
-        models.Population.quantity_in_2022, models.Population.population_history, models.Population.choropleth
+        partial(models.Population.quantity, year=2022),
+        models.Population.population_history,
+        models.Population.choropleth,
     ),
     "population_density": LookupFunctions(
         models.Population.density_in_2022, models.Population.density_history, models.Population.denisty_choropleth

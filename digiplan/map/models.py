@@ -81,11 +81,13 @@ class Population(models.Model):
         verbose_name_plural = _("Population")
 
     @classmethod
-    def quantity_in_2022(cls, mun_id: Optional[int] = None) -> int:
+    def quantity(cls, year: int, municipality_id: Optional[int] = None) -> int:
         """Calculate population in 2022 (either for municipality or for whole region).
 
         Parameters
         ----------
+        year: int
+            Year to filter population for
         municipality_id: Optional[int]
             If given, population for given municipality are calculated. If not, for whole region.
 
@@ -94,39 +96,27 @@ class Population(models.Model):
         int
             Value of population
         """
-        values = cls.choropleth()
-        population = 0
 
-        if mun_id is not None:
-            population = values[mun_id]
+        if municipality_id is not None:
+            return cls.objects.filter(year=year, municipality__id=municipality_id).aggregate(sum=Sum("value"))["sum"]
         else:
-            for index in values:
-                population += values[index]
-        return population
+            return cls.objects.filter(year=year).aggregate(sum=Sum("value"))["sum"]
 
     @classmethod
-    def population_history(cls, chart: dict, mun_id: int) -> dict:  # noqa: ARG001
+    def population_history(cls, mun_id: int) -> models.QuerySet:  # noqa: ARG001
         """Get chart for population per municipality in different years.
 
         Parameters
         ----------
-        chart: dict
-            Default chart options for population from JSON
-        municipality_id: int
+        mun_id: int
             Related municipality
 
         Returns
         -------
-        dict
-            Chart data to use in JS
+        models.QuerySet
+            containing list of year/value pairs
         """
-        values = cls.objects.filter(municipality_id=mun_id).values_list("year", "value")
-        data_list = []
-        for _mun, value in enumerate(values):
-            data_list.append({"key": value[0], "value": value[1]})
-
-        chart["series"][0]["data"] = data_list
-        return chart
+        return cls.objects.filter(municipality__id=mun_id).values_list("year", "value")
 
     @classmethod
     def choropleth(cls) -> dict[int, int]:
@@ -140,7 +130,7 @@ class Population(models.Model):
         return {row.municipality_id: row.value for row in cls.objects.filter(year=2022)}
 
     @classmethod
-    def density_in_2022(cls, mun_id: Optional[int] = None) -> float:
+    def density_in_2022(cls, municipality_id: Optional[int] = None) -> float:
         """Calculate population in 2022 per km² (either for municipality or for whole region).
 
         Parameters
@@ -153,17 +143,17 @@ class Population(models.Model):
         float
             Value of population
         """
-        population = cls.quantity_in_2022(mun_id)
+        population = cls.quantity(year=2022, municipality_id=municipality_id)
         density = 0.0
 
-        if mun_id is not None:
-            density = population / Municipality.objects.get(pk=mun_id).area
+        if municipality_id is not None:
+            density = population / Municipality.objects.get(pk=municipality_id).area
         else:
             density = population / Municipality.area_whole_region()
         return density
 
     @classmethod
-    def density_history(cls, chart: dict, mun_id: int) -> dict:  # noqa: ARG001
+    def density_history(cls, mun_id: int) -> dict:  # noqa: ARG001
         """Get chart for population density for the given municipality in different years.
 
         Parameters
@@ -178,13 +168,7 @@ class Population(models.Model):
         dict
             Chart data to use in JS
         """
-        values = cls.objects.filter(municipality_id=mun_id).values_list("year", "value")
-        data_list = []
-        for _mun, value in enumerate(values):
-            data_list.append({"key": value[0], "value": value[1] / Municipality.objects.get(pk=mun_id).area})
-
-        chart["series"][0]["data"] = data_list
-        return chart
+        return cls.objects.filter(municipality_id=mun_id).values_list("year", "value")
 
     @classmethod
     def denisty_choropleth(cls) -> dict[int, int]:
