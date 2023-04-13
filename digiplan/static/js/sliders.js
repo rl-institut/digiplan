@@ -184,9 +184,7 @@ function addMarks(data, marks) {
   data.slider.append(html);
 }
 
-$('form button').on("click",function(e){
-  e.preventDefault();
-});
+$('#settings').submit(false);
 
 function sendSettings() {
   var form = document.getElementById("settings");
