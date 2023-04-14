@@ -2,7 +2,6 @@
 
 As map app is SPA, this module contains main view and various API points.
 """
-import json
 
 from django.conf import settings
 from django.http import HttpRequest, response
@@ -137,12 +136,9 @@ def get_visualization(request: HttpRequest) -> response.JsonResponse:
     JsonResponse
         Visualization of simulation result
     """
-    scenario_name = request.GET["scenario"]
-    parameters_raw = request.GET.get("parameters")
-    parameters = json.loads(parameters_raw) if parameters_raw else {}
+    simulation_ids = [int(sim_id) for sim_id in request.GET.getlist("simulation_ids")]
     visualization = request.GET["visualization"]
-    scenario = core.Scenario(scenario_name, parameters)
-    vh = core.VisualizationHandler([scenario])
+    vh = core.VisualizationHandler(simulation_ids)
     vh.add(visualization)
     vh.run()
     return response.JsonResponse(vh[visualization])

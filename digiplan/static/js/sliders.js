@@ -183,21 +183,3 @@ function addMarks(data, marks) {
 
   data.slider.append(html);
 }
-
-$('#settings').submit(false);
-
-function sendSettings() {
-  var form = document.getElementById("settings");
-  var formData = new FormData(form); // jshint ignore:line
-  $.ajax({
-      url : "/oemof/simulate",
-      type : "POST",
-      processData: false,
-      contentType: false,
-      data : formData,
-      success : function(json) {
-        $('#post-text').val('');
-        console.log(json);
-      },
-  });
-}

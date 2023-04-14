@@ -17,7 +17,7 @@ class TotalCosts(core.Visualization):
                 {
                     "name": None,
                     "data": [
-                        {"key": self.handler.scenarios[scenario_index].name, "value": result.sum().sum()}
+                        {"key": self.get_scenario_name(scenario_index), "value": result.sum().sum()}
                         for scenario_index, result in enumerate(self._result)
                     ],
                 }
@@ -50,7 +50,7 @@ class ElectricityDemand(core.Visualization):
                 {
                     "name": None,
                     "data": [
-                        {"key": self.handler.scenarios[scenario_index].name, "value": result.sum()}
+                        {"key": self.get_scenario_name(scenario_index), "value": result.sum()}
                         for scenario_index, result in enumerate(self._result)
                     ],
                 }

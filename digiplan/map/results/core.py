@@ -1,15 +1,12 @@
 import abc
-from collections import namedtuple
 from typing import List, Type, Union
 
 import jsonschema
 from django.conf import settings
-from django_oemof.results import CALCULATIONS, get_results
+from django_oemof import models, results
 from oemoflex.postprocessing import core
 
 from config.schemas import CHART_SCHEMA
-
-Scenario = namedtuple("Scenario", ["name", "parameters"])
 
 VISUALIZATIONS = {}
 
@@ -23,16 +20,16 @@ class VisualizationError(Exception):
 
 
 class VisualizationHandler:
-    def __init__(self, scenarios: List[Scenario]):
-        self.scenarios: List[Scenario] = scenarios
+    def __init__(self, simulations: List[int]):
+        self.simulations: List[int] = simulations
         self.visualizations = {}
         self.results = []
 
     def add(self, visualization):
         if visualization not in VISUALIZATIONS:
-            if settings.DEBUG and visualization in CALCULATIONS:
+            if settings.DEBUG and visualization in results.CALCULATIONS:
                 self.visualizations[visualization] = DefaultVisualization(
-                    self, visualization, CALCULATIONS[visualization]
+                    self, visualization, results.CALCULATIONS[visualization]
                 )
             else:
                 raise VisualizationError(f"Could not find {visualization=}.")
@@ -43,10 +40,8 @@ class VisualizationHandler:
         calculations = [
             core.get_dependency_name(visualization.calculation) for visualization in self.visualizations.values()
         ]
-        for scenario in self.scenarios:
-            self.results.append(
-                get_results(scenario=scenario.name, parameters=scenario.parameters, calculations=calculations)
-            )
+        for simulation in self.simulations:
+            self.results.append(results.get_results(simulation_id=simulation, calculations=calculations))
 
     def __getitem__(self, visualization_name):
         return self.visualizations[visualization_name].render()
@@ -76,6 +71,9 @@ class Visualization(abc.ABC):
     def validate(rendered):
         jsonschema.validate(rendered, CHART_SCHEMA)
 
+    def get_scenario_name(self, simulation_index):
+        return models.Simulation.objects.get(pk=self.handler.simulations[simulation_index]).scenario
+
 
 class DefaultVisualization(Visualization):
     def __init__(
@@ -97,7 +95,7 @@ class DefaultVisualization(Visualization):
                 {
                     "name": None,
                     "data": [
-                        {"key": self.handler.scenarios[scenario_index].name, "value": result.to_json()}
+                        {"key": self.get_scenario_name(scenario_index), "value": result.to_json()}
                         for scenario_index, result in enumerate(self._result)
                     ],
                 }
