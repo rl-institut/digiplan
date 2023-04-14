@@ -63,10 +63,7 @@ class Municipality(models.Model):
 
     @classmethod
     def area_whole_region(cls) -> float:
-        area = 0.0
         area = cls.objects.all().aggregate(Sum("area"))["area__sum"]
-        # for mun in cls.objects.all():
-        #   area += cls.objects.filter(pk=mun.id).area
         return area
 
 
@@ -144,7 +141,6 @@ class Population(models.Model):
             Value of population
         """
         population = cls.quantity(year=2022, municipality_id=municipality_id)
-        density = 0.0
 
         if municipality_id is not None:
             density = population / Municipality.objects.get(pk=municipality_id).area
