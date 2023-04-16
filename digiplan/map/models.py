@@ -78,7 +78,7 @@ class Population(models.Model):
         verbose_name_plural = _("Population")
 
     @classmethod
-    def quantity(cls, year: int, municipality_id: Optional[int] = None) -> int:
+    def quantity(cls, year: int, mun_id: Optional[int] = None) -> int:
         """Calculate population in 2022 (either for municipality or for whole region).
 
         Parameters
@@ -94,8 +94,8 @@ class Population(models.Model):
             Value of population
         """
 
-        if municipality_id is not None:
-            return cls.objects.filter(year=year, municipality__id=municipality_id).aggregate(sum=Sum("value"))["sum"]
+        if mun_id is not None:
+            return cls.objects.filter(year=year, municipality__id=mun_id).aggregate(sum=Sum("value"))["sum"]
         else:
             return cls.objects.filter(year=year).aggregate(sum=Sum("value"))["sum"]
 
@@ -116,7 +116,7 @@ class Population(models.Model):
         return cls.objects.filter(municipality__id=mun_id).values_list("year", "value")
 
     @classmethod
-    def choropleth(cls) -> dict[int, int]:
+    def population_per_municipality(cls) -> dict[int, int]:
         """Calculate population per municipality.
 
         Returns
@@ -127,7 +127,7 @@ class Population(models.Model):
         return {row.municipality_id: row.value for row in cls.objects.filter(year=2022)}
 
     @classmethod
-    def density_in_2022(cls, municipality_id: Optional[int] = None) -> float:
+    def density_in_2022(cls, mun_id: Optional[int] = None) -> float:
         """Calculate population in 2022 per km² (either for municipality or for whole region).
 
         Parameters
@@ -140,10 +140,10 @@ class Population(models.Model):
         float
             Value of population
         """
-        population = cls.quantity(year=2022, municipality_id=municipality_id)
+        population = cls.quantity(year=2022, mun_id=mun_id)
 
-        if municipality_id is not None:
-            density = population / Municipality.objects.get(pk=municipality_id).area
+        if mun_id is not None:
+            density = population / Municipality.objects.get(pk=mun_id).area
         else:
             density = population / Municipality.area_whole_region()
         return density
@@ -167,7 +167,7 @@ class Population(models.Model):
         return cls.objects.filter(municipality_id=mun_id).values_list("year", "value")
 
     @classmethod
-    def denisty_choropleth(cls) -> dict[int, int]:
+    def denisty_per_municipality(cls) -> dict[int, int]:
         """Calculate population per municipality.
 
         Returns
@@ -175,7 +175,7 @@ class Population(models.Model):
         dict[int, int]
             Population per municipality
         """
-        density = cls.choropleth()
+        density = cls.population_per_municipality()
         for mun_id in density:
             density[mun_id] = density[mun_id] / Municipality.objects.get(pk=mun_id).area
         return density
