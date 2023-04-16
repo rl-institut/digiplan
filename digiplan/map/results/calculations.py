@@ -252,9 +252,11 @@ LOOKUPS: dict[str, LookupFunctions] = {
         models.Population.denisty_per_municipality,
     ),
     "wind_turbines": LookupFunctions(
-        models.WindTurbine.number_per_mun, models.WindTurbine.chart, models.WindTurbine.choropleth
+        models.WindTurbine.quantity, models.WindTurbine.chart, models.WindTurbine.quantity_per_municipality
     ),
     "wind_turbines_square": LookupFunctions(
-        models.WindTurbine.number_per_square, models.WindTurbine.square_chart, models.WindTurbine.square_choropleth
+        models.WindTurbine.quantity_per_square,
+        models.WindTurbine.wind_turbines_per_area_history,
+        models.WindTurbine.quantity_per_mun_and_area,
     ),
 }

@@ -223,7 +223,7 @@ class WindTurbine(models.Model):
         return self.name
 
     @classmethod
-    def number_per_mun(cls, mun_id: Optional[int] = None) -> int:
+    def quantity(cls, mun_id: Optional[int] = None) -> int:
         """Calculate number of windturbines (either for municipality or for whole region).
 
         Parameters
@@ -236,7 +236,7 @@ class WindTurbine(models.Model):
         int
             Sum of windturbines
         """
-        values = cls.choropleth()
+        values = cls.quantity_per_municipality()
         windturbines = 0
 
         if mun_id is not None:
@@ -247,7 +247,7 @@ class WindTurbine(models.Model):
         return windturbines
 
     @classmethod
-    def choropleth(cls) -> dict[int, int]:
+    def quantity_per_municipality(cls) -> dict[int, int]:
         """Calculate number of wind turbines per municipality.
 
         Returns
@@ -267,7 +267,7 @@ class WindTurbine(models.Model):
         return windturbines
 
     @classmethod
-    def chart(cls, chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+    def wind_turbines_history(cls, chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
         """Get chart for wind turbines.
 
         Parameters
@@ -286,7 +286,7 @@ class WindTurbine(models.Model):
         return chart
 
     @classmethod
-    def number_per_square(cls, mun_id: Optional[int] = None) -> float:
+    def quantity_per_square(cls, mun_id: Optional[int] = None) -> float:
         """Calculate number of windturbines per km² (either for municipality or for whole region).
 
         Parameters
@@ -299,7 +299,7 @@ class WindTurbine(models.Model):
         float
             Sum of windturbines per km²
         """
-        windturbines = cls.number_per_mun(mun_id)
+        windturbines = cls.quantity(mun_id)
         square_value = 0.0
 
         if mun_id is not None:
@@ -309,7 +309,7 @@ class WindTurbine(models.Model):
         return square_value
 
     @classmethod
-    def square_chart(cls, chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+    def wind_turbines_per_area_history(cls, chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
         """Get chart for wind turbines per km².
 
         Parameters
@@ -328,7 +328,7 @@ class WindTurbine(models.Model):
         return chart
 
     @classmethod
-    def square_choropleth(cls) -> dict[int, int]:
+    def quantity_per_mun_and_area(cls) -> dict[int, int]:
         """Calculate windturbines per km² per municipality.
 
         Returns
@@ -336,7 +336,7 @@ class WindTurbine(models.Model):
         dict[int, int]
             windturbines per km² per municipality
         """
-        windtubines = cls.choropleth()
+        windtubines = cls.quantity_per_municipality()
         for index in windtubines:
             windtubines[index] = windtubines[index] / Municipality.objects.get(pk=index).area
         return windtubines
