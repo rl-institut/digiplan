@@ -85,7 +85,7 @@ class Population(models.Model):
         ----------
         year: int
             Year to filter population for
-        municipality_id: Optional[int]
+        mun_id: Optional[int]
             If given, population for given municipality are calculated. If not, for whole region.
 
         Returns
@@ -127,20 +127,22 @@ class Population(models.Model):
         return {row.municipality_id: row.value for row in cls.objects.filter(year=2022)}
 
     @classmethod
-    def density_in_2022(cls, mun_id: Optional[int] = None) -> float:
-        """Calculate population in 2022 per km² (either for municipality or for whole region).
+    def density(cls, year: int, mun_id: Optional[int] = None) -> float:
+        """Calculate population denisty in given year per km² (either for municipality or for whole region).
 
         Parameters
         ----------
-        municipality_id: Optional[int]
+        year: int
+            Year to filter population for
+        mun_id: Optional[int]
             If given, population per km² for given municipality are calculated. If not, for whole region.
 
         Returns
         -------
         float
-            Value of population
+            Value of population density
         """
-        population = cls.quantity(year=2022, mun_id=mun_id)
+        population = cls.quantity(year, mun_id=mun_id)
 
         if mun_id is not None:
             density = population / Municipality.objects.get(pk=mun_id).area

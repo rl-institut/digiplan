@@ -247,7 +247,9 @@ LOOKUPS: dict[str, LookupFunctions] = {
         models.Population.population_per_municipality,
     ),
     "population_density": LookupFunctions(
-        models.Population.density_in_2022, models.Population.density_history, models.Population.denisty_per_municipality
+        partial(models.Population.density, year=2022),
+        models.Population.density_history,
+        models.Population.denisty_per_municipality,
     ),
     "wind_turbines": LookupFunctions(
         models.WindTurbine.number_per_mun, models.WindTurbine.chart, models.WindTurbine.choropleth
