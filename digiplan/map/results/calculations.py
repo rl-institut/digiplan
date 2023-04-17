@@ -100,7 +100,7 @@ def create_data(lookup: str, municipality_id: int) -> dict:
 
     data["id"] = municipality_id
     data["data"]["region_value"] = LOOKUPS[lookup].data_fct()
-    data["data"]["municipality_value"] = LOOKUPS[lookup].data_fct(municipality_id=municipality_id)
+    data["data"]["municipality_value"] = LOOKUPS[lookup].data_fct(mun_id=municipality_id)
     data["municipality"] = models.Municipality.objects.get(pk=municipality_id)
 
     return data
@@ -118,12 +118,12 @@ def calculate_square_for_value(value: int, municipality_id: int) -> float:
     return value
 
 
-def capacity_popup(municipality_id: Optional[int] = None) -> float:
+def capacity_popup(mun_id: Optional[int] = None) -> float:
     """Calculate capacity of renewables (either for municipality or for whole region).
 
     Parameters
     ----------
-    municipality_id: Optional[int]
+    mun_id: Optional[int]
         If given, capacity of renewables for given municipality are calculated. If not, for whole region.
 
     Returns
@@ -134,8 +134,8 @@ def capacity_popup(municipality_id: Optional[int] = None) -> float:
     capacity = 0.0
     values = capacity_choropleth()
 
-    if municipality_id is not None:
-        capacity = values[municipality_id]
+    if mun_id is not None:
+        capacity = values[mun_id]
     else:
         for _key, value in values.items():
             capacity += value
@@ -143,13 +143,11 @@ def capacity_popup(municipality_id: Optional[int] = None) -> float:
 
 
 # pylint: disable=W0613
-def capacity_chart(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+def capacity_chart(municipality_id: int) -> dict:  # noqa: ARG001
     """Get chart for capacity of renewables.
 
     Parameters
     ----------
-    chart: dict
-        Default chart options for capacity of renewables from JSON
     municipality_id: int
         Related municipality
 
@@ -158,8 +156,7 @@ def capacity_chart(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
     dict
         Chart data to use in JS
     """
-    chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
-    return chart
+    return [(2023, 2), (2046, 3), (2050, 4)]
 
 
 def capacity_choropleth() -> dict[int, int]:
@@ -186,12 +183,12 @@ def capacity_choropleth() -> dict[int, int]:
     return capacity
 
 
-def capacity_square_popup(municipality_id: Optional[int] = None) -> float:
+def capacity_square_popup(mun_id: Optional[int] = None) -> float:
     """Calculate capacity of renewables per km² (either for municipality or for whole region).
 
     Parameters
     ----------
-    municipality_id: Optional[int]
+    mun_id: Optional[int]
         If given, capacity of renewables per km² for given municipality are calculated. If not, for whole region.
 
     Returns
@@ -199,19 +196,17 @@ def capacity_square_popup(municipality_id: Optional[int] = None) -> float:
     float
         Sum of installed renewables
     """
-    value = capacity_popup(municipality_id)
-    capacity = calculate_square_for_value(value, municipality_id)
+    value = capacity_popup(mun_id)
+    capacity = calculate_square_for_value(value, mun_id)
     return capacity
 
 
 # pylint: disable=W0613
-def capacity_square_chart(chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+def capacity_square_chart(municipality_id: int) -> dict:  # noqa: ARG001
     """Get chart for capacity of renewables per km².
 
     Parameters
     ----------
-    chart: dict
-        Default chart options for capacity of renewables per km² from JSON
     municipality_id: int
         Related municipality
 
@@ -220,8 +215,7 @@ def capacity_square_chart(chart: dict, municipality_id: int) -> dict:  # noqa: A
     dict
         Chart data to use in JS
     """
-    chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
-    return chart
+    return [(2023, 2), (2046, 3), (2050, 4)]
 
 
 def capacity_square_choropleth() -> dict[int, int]:
@@ -252,7 +246,9 @@ LOOKUPS: dict[str, LookupFunctions] = {
         models.Population.denisty_per_municipality,
     ),
     "wind_turbines": LookupFunctions(
-        models.WindTurbine.quantity, models.WindTurbine.chart, models.WindTurbine.quantity_per_municipality
+        models.WindTurbine.quantity,
+        models.WindTurbine.wind_turbines_history,
+        models.WindTurbine.quantity_per_municipality,
     ),
     "wind_turbines_square": LookupFunctions(
         models.WindTurbine.quantity_per_square,

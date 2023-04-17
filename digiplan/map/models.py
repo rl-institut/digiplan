@@ -267,13 +267,11 @@ class WindTurbine(models.Model):
         return windturbines
 
     @classmethod
-    def wind_turbines_history(cls, chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+    def wind_turbines_history(cls, municipality_id: int) -> dict:  # noqa: ARG001
         """Get chart for wind turbines.
 
         Parameters
         ----------
-        chart: dict
-            Default chart options for wind turbines from JSON
         municipality_id: int
             Related municipality
 
@@ -282,8 +280,7 @@ class WindTurbine(models.Model):
         dict
             Chart data to use in JS
         """
-        chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
-        return chart
+        return [(2023, 2), (2046, 3), (2050, 4)]
 
     @classmethod
     def quantity_per_square(cls, mun_id: Optional[int] = None) -> float:
@@ -309,13 +306,11 @@ class WindTurbine(models.Model):
         return square_value
 
     @classmethod
-    def wind_turbines_per_area_history(cls, chart: dict, municipality_id: int) -> dict:  # noqa: ARG001
+    def wind_turbines_per_area_history(cls, municipality_id: int) -> dict:  # noqa: ARG001
         """Get chart for wind turbines per km².
 
         Parameters
         ----------
-        chart: dict
-            Default chart options for wind turbines from JSON
         municipality_id: int
             Related municipality
 
@@ -324,8 +319,7 @@ class WindTurbine(models.Model):
         dict
             Chart data to use in JS
         """
-        chart["series"][0]["data"] = [{"key": 2023, "value": 2}, {"key": 2045, "value": 3}, {"key": 2050, "value": 4}]
-        return chart
+        return [(2023, 2), (2046, 3), (2050, 4)]
 
     @classmethod
     def quantity_per_mun_and_area(cls) -> dict[int, int]:
