@@ -69,26 +69,10 @@
   },
   "wind": {
     "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
     "layout": {
       "icon-image": "wind",
-      "icon-size": [
-        "interpolate",
-        [
-          "linear"
-        ],
-        [
-          "get",
-          "unit_count"
-        ],
-        0,
-        0.5,
-        10,
-        1.0,
-        100,
-        1.25,
-        1000,
-        1.5
-      ],
+      "icon-size": 0.8,
       "icon-allow-overlap": true
     },
     "paint": {
@@ -97,23 +81,16 @@
   },
   "wind_cluster": {
     "type": "circle",
+    "filter": ["has", "point_count"],
     "paint": {
-      "circle-color": [
-        "step",
-        ["get", "point_count"],
-        "#51bbd6",
-        100,
-        "#f1f075",
-        750,
-        "#f28cb1"
-      ],
+      "circle-color": "#6A89CC",
       "circle-radius": [
         "step",
         ["get", "point_count"],
         20,
-        100,
+        50,
         30,
-        750,
+        100,
         40
       ]
     }
@@ -129,26 +106,10 @@
   },
   "pvroof": {
     "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
     "layout": {
       "icon-image": "pv",
-      "icon-size": [
-        "interpolate",
-        [
-          "linear"
-        ],
-        [
-          "get",
-          "unit_count"
-        ],
-        0,
-        0.5,
-        10,
-        1.0,
-        100,
-        1.25,
-        1000,
-        1.5
-      ],
+      "icon-size": 0.8,
       "icon-allow-overlap": true
     },
     "paint": {
@@ -157,23 +118,16 @@
   },
   "pvroof_cluster": {
     "type": "circle",
+    "filter": ["has", "point_count"],
     "paint": {
-      "circle-color": [
-        "step",
-        ["get", "point_count"],
-        "#51bbd6",
-        100,
-        "#f1f075",
-        750,
-        "#f28cb1"
-      ],
+      "circle-color": "#FFD660",
       "circle-radius": [
         "step",
         ["get", "point_count"],
         20,
-        100,
+        50,
         30,
-        750,
+        100,
         40
       ]
     }
@@ -187,35 +141,36 @@
       "text-size": 12
     }
   },
+  "pvground_cluster": {
+    "type": "circle",
+    "paint": {
+      "circle-color": "#F6B93B",
+      "circle-radius": [
+        "step",
+        ["get", "point_count"],
+        20,
+        50,
+        30,
+        100,
+        40
+      ]
+    }
+  },
+  "pvground_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    }
+  },
   "pvground": {
     "type": "circle",
     "paint": {
       "circle-color": "#F6B93B",
       "circle-opacity": 0.5,
-      "circle-radius": [
-        "*",
-        5,
-        [
-          "log10",
-          [
-            "get",
-            "capacity_net"
-          ]
-        ]
-      ],
-      "circle-stroke-width": [
-        "case",
-        [
-          "boolean",
-          [
-            "get",
-            "geometry_approximated"
-          ],
-          false
-        ],
-        0,
-        1
-      ]
+      "circle-radius": 5
     }
   },
   "hydro": {
@@ -223,17 +178,7 @@
     "paint": {
       "circle-color": "#9CC4D9",
       "circle-opacity": 0.5,
-      "circle-radius": [
-        "*",
-        5,
-        [
-          "log10",
-          [
-            "get",
-            "capacity_net"
-          ]
-        ]
-      ],
+      "circle-radius": 5,
       "circle-stroke-width": [
         "case",
         [
