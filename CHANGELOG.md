@@ -9,6 +9,9 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - moved map/chart view toggle to nav bar
 - hide map/chart view toggle in status quo and settings menu
 
+### Fixed
+- settings are translated
+
 ## [0.3.1] - 2023-03-30
 ### Added
 - missing translations
