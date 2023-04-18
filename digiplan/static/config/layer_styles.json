@@ -187,7 +187,7 @@
       "icon-allow-overlap": true
     },
     "paint": {
-      "icon-color": "#9CC4D9"
+      "icon-color": "blue"
     }
   },
   "hydro_cluster": {
@@ -216,65 +216,80 @@
     }
   },
   "biomass": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "biomass",
+      "icon-size": 0.5,
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "green"
+    }
+  },
+  "biomass_cluster": {
     "type": "circle",
+    "filter": ["has", "point_count"],
     "paint": {
       "circle-color": "#52C41A",
-      "circle-opacity": 0.5,
       "circle-radius": [
-        "*",
-        5,
-        [
-          "log10",
-          [
-            "get",
-            "capacity_net"
-          ]
-        ]
-      ],
-      "circle-stroke-width": [
-        "case",
-        [
-          "boolean",
-          [
-            "get",
-            "geometry_approximated"
-          ],
-          false
-        ],
-        0,
-        1
+        "step",
+        ["get", "point_count"],
+        20,
+        50,
+        30,
+        100,
+        40
       ]
     }
   },
+  "biomass_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    }
+  },
   "combustion": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "combustion",
+      "icon-size": 0.8,
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "black"
+    }
+  },
+  "combustion_cluster": {
     "type": "circle",
+    "filter": ["has", "point_count"],
     "paint": {
       "circle-color": "#1A1A1A",
-      "circle-opacity": 0.5,
       "circle-radius": [
-        "*",
-        5,
-        [
-          "log10",
-          [
-            "get",
-            "capacity_net"
-          ]
-        ]
-      ],
-      "circle-stroke-width": [
-        "case",
-        [
-          "boolean",
-          [
-            "get",
-            "geometry_approximated"
-          ],
-          false
-        ],
-        0,
-        1
+        "step",
+        ["get", "point_count"],
+        20,
+        50,
+        30,
+        100,
+        40
       ]
+    }
+  },
+  "combustion_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    },
+    "paint": {
+      "text-color": "white"
     }
   },
   "results": {

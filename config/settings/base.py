@@ -249,6 +249,8 @@ MAP_ENGINE_IMAGES = [
     setup.MapImage("wind", "images/icons/i_wind.png"),
     setup.MapImage("pv", "images/icons/i_pv.png"),
     setup.MapImage("hydro", "images/icons/i_hydro.png"),
+    setup.MapImage("biomass", "images/icons/i_biomass.png"),
+    setup.MapImage("combustion", "images/icons/i_combustion.png"),
 ]
 
 MAP_ENGINE_API_MVTS = {
@@ -256,10 +258,7 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("municipality", "map", "Municipality"),
         setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
     ],
-    "static": [
-        setup.MVTAPI("biomass", "map", "Biomass"),
-        setup.MVTAPI("combustion", "map", "Combustion"),
-    ],
+    "static": [],
     "results": [setup.MVTAPI("results", "map", "Municipality")],
 }
 
@@ -268,6 +267,8 @@ MAP_ENGINE_API_CLUSTERS = [
     setup.ClusterAPI("pvroof", "map", "PVroof"),
     setup.ClusterAPI("pvground", "map", "PVground"),
     setup.ClusterAPI("hydro", "map", "Hydro"),
+    setup.ClusterAPI("biomass", "map", "Biomass"),
+    setup.ClusterAPI("combustion", "map", "Combustion"),
 ]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
