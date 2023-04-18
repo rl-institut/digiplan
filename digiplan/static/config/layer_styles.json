@@ -88,9 +88,9 @@
         "step",
         ["get", "point_count"],
         20,
-        50,
+        15,
         30,
-        100,
+        50,
         40
       ]
     }
@@ -113,7 +113,8 @@
       "icon-allow-overlap": true
     },
     "paint": {
-      "icon-color": "yellow"
+      "icon-color": "yellow",
+      "icon-halo-color": "red"
     }
   },
   "pvroof_cluster": {
@@ -125,9 +126,9 @@
         "step",
         ["get", "point_count"],
         20,
-        50,
+        15,
         30,
-        100,
+        50,
         40
       ]
     }
@@ -162,9 +163,9 @@
         "step",
         ["get", "point_count"],
         20,
-        50,
+        15,
         30,
-        100,
+        50,
         40
       ]
     }
@@ -199,9 +200,9 @@
         "step",
         ["get", "point_count"],
         20,
-        50,
+        15,
         30,
-        100,
+        50,
         40
       ]
     }
@@ -236,9 +237,9 @@
         "step",
         ["get", "point_count"],
         20,
-        50,
+        15,
         30,
-        100,
+        50,
         40
       ]
     }
@@ -273,9 +274,9 @@
         "step",
         ["get", "point_count"],
         20,
-        50,
+        15,
         30,
-        100,
+        50,
         40
       ]
     }
