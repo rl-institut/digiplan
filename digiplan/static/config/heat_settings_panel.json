@@ -2,37 +2,37 @@
   "w_d_wp_1": {
     "class": "js-slider js-slider-panel",
     "grid": false,
-    "label": "Dezentral, Anteil Haushalte mit Wärmepumpe (%)",
+    "label": "{% trans 'Decentralized: share of households with heat pumps (%)' %}",
     "max": 100,
     "min": 0,
     "start": 30,
     "status_quo": 50,
     "step": 5,
-    "tooltip": "Dezentral, Anteil Haushalte mit Wärmepumpe (%)",
+    "tooltip": "{% trans 'Decentralized: share of households with heat pumps (%)' %}",
     "type": "slider"
   },
   "w_d_st_1": {
     "class": "js-slider js-slider-panel",
     "grid": false,
-    "label": "Dezentral, Anteil Haushalte mit Solartherme (%)",
+    "label": "{% trans 'Decentralized: share of households with solar thermal energy (%)' %}",
     "max": 100,
     "min": 0,
     "start": 25,
     "status_quo": 45,
     "step": 5,
-    "tooltip": "Dezentral, Anteil Haushalte mit Solartherme (%)",
+    "tooltip": "{% trans 'Decentralized: share of households with solar thermal energy (%)' %}",
     "type": "slider"
   },
   "w_z_wp_1": {
     "class": "js-slider js-slider-panel",
     "grid": false,
-    "label": "Zentral, Anteil Großwärmepumpen (%)",
+    "label": "{% trans 'Centralized: Share of large scale heat pumps (%)' %}",
     "max": 100,
     "min": 0,
     "start": 10,
     "status_quo": 40,
     "step": 5,
-    "tooltip": "Zentral, Anteil Großwärmepumpen (%)",
+    "tooltip": "{% trans 'Centralized: Share of large scale heat pumps (%)' %}",
     "type": "slider"
   }
 }

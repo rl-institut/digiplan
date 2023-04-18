@@ -1,4 +1,4 @@
-{% load helper_tags %}
+{% load helper_tags i18n %}
 
 {% if field.field.widget.attrs|dict_lookup_filter:"data-color" %}
   <style>
@@ -15,7 +15,7 @@
       {% if field.field.widget.attrs|dict_lookup_filter:"data-has-sidepanel" == "true" %}
         <span class="c-slider__label--more">
       <button class="button button--transparent">
-        <span>mehr</span>
+        <span>{%  trans "more" %}</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
              fill="currentColor" class="bi bi-arrow-right-circle-fill"
              viewBox="0 0 6.35 6.35">

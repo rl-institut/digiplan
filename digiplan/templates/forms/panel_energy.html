@@ -1,11 +1,12 @@
-<h2 class="panel__title title">Erzeuger</h2>
+{% load i18n %}
+<h2 class="panel__title title">{%  trans "Generation" %}</h2>
 
 <div id="js-power-mix" class="power-mix"></div>
 
 {% include "widgets/slider.html" with field=form.s_w_1 %}
 <div class="sidepanel">
   <p class="sidepanel__heading">
-    Detaileinstellungen
+    {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
     {% include "widgets/slider.html" with field=form.s_w_2 %}
     {% include "widgets/slider.html" with field=form.s_w_3 %}
@@ -16,7 +17,7 @@
 {% include "widgets/slider.html" with field=form.s_pv_ff_1 %}
 <div class="sidepanel">
   <p class="sidepanel__heading">
-    Detaileinstellungen
+    {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
     {% include "widgets/slider.html" with field=form.s_pv_ff_2 %}
     {% include "widgets/slider.html" with field=form.s_pv_ff_3 %}
@@ -27,7 +28,7 @@
 {% include "widgets/slider.html" with field=form.s_pv_d_1 %}
 <div class="sidepanel">
   <p class="sidepanel__heading">
-    Detaileinstellungen
+    {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
     {% include "widgets/slider.html" with field=form.s_pv_d_2 %}
   </p>
@@ -38,11 +39,11 @@
 
 <span class="panel__separator" aria-hidden="true"></span>
 
-<h2 class="panel__title title">Verbraucher</h2>
+<h2 class="panel__title title">{%  trans "Consumption" %}</h2>
 {% include "widgets/slider.html" with field=form.s_v_1 %}
 <div class="sidepanel">
   <p class="sidepanel__heading">
-    Detaileinstellungen
+    {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
     {% include "widgets/slider.html" with field=form.s_v_2 %}
     {% include "widgets/slider.html" with field=form.s_v_3 %}
@@ -52,6 +53,6 @@
 
 <span class="panel__separator" aria-hidden="true"></span>
 
-<h2 class="panel__title title">Speicher</h2>
+<h2 class="panel__title title">{%  trans "Batteries" %}</h2>
 {% include "widgets/slider.html" with field=form.s_s_k_1 %}
 {% include "widgets/slider.html" with field=form.s_s_g_1 %}
