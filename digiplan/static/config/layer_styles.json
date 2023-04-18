@@ -141,8 +141,21 @@
       "text-size": 12
     }
   },
+  "pvground": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "pv",
+      "icon-size": 0.8,
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "yellow"
+    }
+  },
   "pvground_cluster": {
     "type": "circle",
+    "filter": ["has", "point_count"],
     "paint": {
       "circle-color": "#F6B93B",
       "circle-radius": [
@@ -165,33 +178,41 @@
       "text-size": 12
     }
   },
-  "pvground": {
-    "type": "circle",
+  "hydro": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "hydro",
+      "icon-size": 0.8,
+      "icon-allow-overlap": true
+    },
     "paint": {
-      "circle-color": "#F6B93B",
-      "circle-opacity": 0.5,
-      "circle-radius": 5
+      "icon-color": "#9CC4D9"
     }
   },
-  "hydro": {
+  "hydro_cluster": {
     "type": "circle",
+    "filter": ["has", "point_count"],
     "paint": {
       "circle-color": "#9CC4D9",
-      "circle-opacity": 0.5,
-      "circle-radius": 5,
-      "circle-stroke-width": [
-        "case",
-        [
-          "boolean",
-          [
-            "get",
-            "geometry_approximated"
-          ],
-          false
-        ],
-        0,
-        1
+      "circle-radius": [
+        "step",
+        ["get", "point_count"],
+        20,
+        50,
+        30,
+        100,
+        40
       ]
+    }
+  },
+  "hydro_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
     }
   },
   "biomass": {
