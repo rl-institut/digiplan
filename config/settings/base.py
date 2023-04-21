@@ -258,7 +258,6 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("municipality", "map", "Municipality"),
         setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
     ],
-    "static": [],
     "results": [setup.MVTAPI("results", "map", "Municipality")],
 }
 
