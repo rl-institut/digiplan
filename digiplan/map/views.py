@@ -14,7 +14,7 @@ from django_mapengine import views
 from digiplan.map import config
 from digiplan.map.results import core
 
-from . import forms, map_config
+from . import forms, map_config, utils
 from .results import calculations
 
 
@@ -30,11 +30,6 @@ class MapGLView(TemplateView, views.MapEngineMixin):
             category: [forms.StaticLayerForm(layer) for layer in layers]
             for category, layers in map_config.LEGEND.items()
         },
-        "panels": [
-            forms.EnergyPanelForm(config.ENERGY_SETTINGS_PANEL),
-            forms.HeatPanelForm(config.HEAT_SETTINGS_PANEL),
-            forms.TrafficPanelForm(config.TRAFFIC_SETTINGS_PANEL),
-        ],
         "store_hot_init": config.STORE_HOT_INIT,
     }
 
@@ -53,6 +48,14 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         """
         # Add unique session ID
         context = super().get_context_data(**kwargs)
+
+        context["panels"] = [
+            forms.EnergyPanelForm(utils.get_translated_json_from_file(config.ENERGY_SETTINGS_PANEL_FILE, self.request)),
+            forms.HeatPanelForm(utils.get_translated_json_from_file(config.HEAT_SETTINGS_PANEL_FILE, self.request)),
+            forms.TrafficPanelForm(
+                utils.get_translated_json_from_file(config.TRAFFIC_SETTINGS_PANEL_FILE, self.request)
+            ),
+        ]
 
         context["settings_parameters"] = config.ENERGY_SETTINGS_PANEL
         context["settings_dependency_map"] = config.SETTINGS_DEPENDENCY_MAP
