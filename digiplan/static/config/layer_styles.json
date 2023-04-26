@@ -69,26 +69,10 @@
   },
   "wind": {
     "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
     "layout": {
       "icon-image": "wind",
-      "icon-size": [
-        "interpolate",
-        [
-          "linear"
-        ],
-        [
-          "get",
-          "unit_count"
-        ],
-        0,
-        0.5,
-        10,
-        1.0,
-        100,
-        1.25,
-        1000,
-        1.5
-      ],
+      "icon-size": 0.8,
       "icon-allow-overlap": true
     },
     "paint": {
@@ -97,23 +81,16 @@
   },
   "wind_cluster": {
     "type": "circle",
+    "filter": ["has", "point_count"],
     "paint": {
-      "circle-color": [
-        "step",
-        ["get", "point_count"],
-        "#51bbd6",
-        100,
-        "#f1f075",
-        750,
-        "#f28cb1"
-      ],
+      "circle-color": "#6A89CC",
       "circle-radius": [
         "step",
         ["get", "point_count"],
         20,
-        100,
+        15,
         30,
-        750,
+        50,
         40
       ]
     }
@@ -129,51 +106,29 @@
   },
   "pvroof": {
     "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
     "layout": {
       "icon-image": "pv",
-      "icon-size": [
-        "interpolate",
-        [
-          "linear"
-        ],
-        [
-          "get",
-          "unit_count"
-        ],
-        0,
-        0.5,
-        10,
-        1.0,
-        100,
-        1.25,
-        1000,
-        1.5
-      ],
+      "icon-size": 0.8,
       "icon-allow-overlap": true
     },
     "paint": {
-      "icon-color": "yellow"
+      "icon-color": "yellow",
+      "icon-halo-color": "red"
     }
   },
   "pvroof_cluster": {
     "type": "circle",
+    "filter": ["has", "point_count"],
     "paint": {
-      "circle-color": [
-        "step",
-        ["get", "point_count"],
-        "#51bbd6",
-        100,
-        "#f1f075",
-        750,
-        "#f28cb1"
-      ],
+      "circle-color": "#FFD660",
       "circle-radius": [
         "step",
         ["get", "point_count"],
         20,
-        100,
+        15,
         30,
-        750,
+        50,
         40
       ]
     }
@@ -188,127 +143,154 @@
     }
   },
   "pvground": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "pv",
+      "icon-size": 0.8,
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "yellow"
+    }
+  },
+  "pvground_cluster": {
     "type": "circle",
+    "filter": ["has", "point_count"],
     "paint": {
       "circle-color": "#F6B93B",
-      "circle-opacity": 0.5,
       "circle-radius": [
-        "*",
-        5,
-        [
-          "log10",
-          [
-            "get",
-            "capacity_net"
-          ]
-        ]
-      ],
-      "circle-stroke-width": [
-        "case",
-        [
-          "boolean",
-          [
-            "get",
-            "geometry_approximated"
-          ],
-          false
-        ],
-        0,
-        1
+        "step",
+        ["get", "point_count"],
+        20,
+        15,
+        30,
+        50,
+        40
       ]
+    }
+  },
+  "pvground_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
     }
   },
   "hydro": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "hydro",
+      "icon-size": 0.8,
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "blue"
+    }
+  },
+  "hydro_cluster": {
     "type": "circle",
+    "filter": ["has", "point_count"],
     "paint": {
       "circle-color": "#9CC4D9",
-      "circle-opacity": 0.5,
       "circle-radius": [
-        "*",
-        5,
-        [
-          "log10",
-          [
-            "get",
-            "capacity_net"
-          ]
-        ]
-      ],
-      "circle-stroke-width": [
-        "case",
-        [
-          "boolean",
-          [
-            "get",
-            "geometry_approximated"
-          ],
-          false
-        ],
-        0,
-        1
+        "step",
+        ["get", "point_count"],
+        20,
+        15,
+        30,
+        50,
+        40
       ]
+    }
+  },
+  "hydro_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
     }
   },
   "biomass": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "biomass",
+      "icon-size": 0.5,
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "green"
+    }
+  },
+  "biomass_cluster": {
     "type": "circle",
+    "filter": ["has", "point_count"],
     "paint": {
       "circle-color": "#52C41A",
-      "circle-opacity": 0.5,
       "circle-radius": [
-        "*",
-        5,
-        [
-          "log10",
-          [
-            "get",
-            "capacity_net"
-          ]
-        ]
-      ],
-      "circle-stroke-width": [
-        "case",
-        [
-          "boolean",
-          [
-            "get",
-            "geometry_approximated"
-          ],
-          false
-        ],
-        0,
-        1
+        "step",
+        ["get", "point_count"],
+        20,
+        15,
+        30,
+        50,
+        40
       ]
     }
   },
+  "biomass_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    }
+  },
   "combustion": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "combustion",
+      "icon-size": 0.8,
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "black"
+    }
+  },
+  "combustion_cluster": {
     "type": "circle",
+    "filter": ["has", "point_count"],
     "paint": {
       "circle-color": "#1A1A1A",
-      "circle-opacity": 0.5,
       "circle-radius": [
-        "*",
-        5,
-        [
-          "log10",
-          [
-            "get",
-            "capacity_net"
-          ]
-        ]
-      ],
-      "circle-stroke-width": [
-        "case",
-        [
-          "boolean",
-          [
-            "get",
-            "geometry_approximated"
-          ],
-          false
-        ],
-        0,
-        1
+        "step",
+        ["get", "point_count"],
+        20,
+        15,
+        30,
+        50,
+        40
       ]
+    }
+  },
+  "combustion_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    },
+    "paint": {
+      "text-color": "white"
     }
   },
   "results": {

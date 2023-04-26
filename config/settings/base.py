@@ -245,18 +245,18 @@ MAP_ENGINE_CENTER_AT_STARTUP = [12.537917858911896, 51.80812518969171]
 MAP_ENGINE_ZOOM_AT_STARTUP = 9
 MAP_ENGINE_MAX_BOUNDS = [[11.280733017118229, 51.22918643452503], [13.616574868700604, 52.35515806663738]]
 
-MAP_ENGINE_IMAGES = [setup.MapImage("wind", "images/icons/i_wind.png")]
+MAP_ENGINE_IMAGES = [
+    setup.MapImage("wind", "images/icons/i_wind.png"),
+    setup.MapImage("pv", "images/icons/i_pv.png"),
+    setup.MapImage("hydro", "images/icons/i_hydro.png"),
+    setup.MapImage("biomass", "images/icons/i_biomass.png"),
+    setup.MapImage("combustion", "images/icons/i_combustion.png"),
+]
 
 MAP_ENGINE_API_MVTS = {
     "municipality": [
         setup.MVTAPI("municipality", "map", "Municipality"),
         setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
-    ],
-    "static": [
-        setup.MVTAPI("pvground", "map", "PVground"),
-        setup.MVTAPI("hydro", "map", "Hydro"),
-        setup.MVTAPI("biomass", "map", "Biomass"),
-        setup.MVTAPI("combustion", "map", "Combustion"),
     ],
     "results": [setup.MVTAPI("results", "map", "Municipality")],
 }
@@ -264,6 +264,10 @@ MAP_ENGINE_API_MVTS = {
 MAP_ENGINE_API_CLUSTERS = [
     setup.ClusterAPI("wind", "map", "WindTurbine"),
     setup.ClusterAPI("pvroof", "map", "PVroof"),
+    setup.ClusterAPI("pvground", "map", "PVground"),
+    setup.ClusterAPI("hydro", "map", "Hydro"),
+    setup.ClusterAPI("biomass", "map", "Biomass"),
+    setup.ClusterAPI("combustion", "map", "Combustion"),
 ]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
