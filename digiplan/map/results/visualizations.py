@@ -57,3 +57,31 @@ class ElectricityDemand(core.Visualization):
             ],
             "title": self.title,
         }
+
+
+class RenewableElectricityProduction(core.Visualization):
+    name = "renewable_electricity_production"
+    title = _("Renewable Electricity Production")
+    calculation = results_core.ParametrizedCalculation(
+        postprocessing.AggregatedFlows,
+        {
+            "from_nodes": [
+                "ABW-solar-pv_ground",
+            ]
+        },
+    )
+
+    def _render(self):
+        return {
+            "lookup": self.name,
+            "series": [
+                {
+                    "name": None,
+                    "data": [
+                        {"key": self.get_scenario_name(scenario_index), "value": result.sum()}
+                        for scenario_index, result in enumerate(self._result)
+                    ],
+                }
+            ],
+            "title": self.title,
+        }
