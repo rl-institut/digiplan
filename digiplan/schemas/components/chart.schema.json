@@ -6,24 +6,6 @@
   "properties": {
     "lookup": {
       "description": "Lookup names (see also static/json/names.json). If no chart shall be used, set value to (JSON type) null.",
-      "enum": [
-        "population",
-        "population_density",
-        "demand_share",
-        "production",
-        "production_capita",
-        "production_square_km",
-        "installed_ee",
-        "capacity",
-        "capacity_square_km",
-        "wind_turbines",
-        "electricity_demand",
-        "electricity_demand_capita",
-        "heat_demand",
-        "heat_demand_capita",
-        "energy_consumption",
-        "total_system_costs"
-      ],
       "type": "string"
     },
     "series": {
