@@ -1,10 +1,11 @@
 import abc
 import json
 import pathlib
-from typing import Iterable
+from typing import Iterable, Optional
 
 import jsonschema
 from django_mapengine import popups
+from django_oemof import results
 
 from config import schemas
 
@@ -45,6 +46,15 @@ class RegionPopup(popups.ChartPopup):
     @abc.abstractmethod
     def get_chart_data(self) -> Iterable:
         """Must be overwritten"""
+
+
+class SimulationPopup(RegionPopup, abc.ABC):
+    calculation = None
+
+    def __init__(self, lookup: str, selected_id: int, map_state: Optional[dict] = None, template: Optional[str] = None):
+        super().__init__(lookup, selected_id, map_state, template)
+        self.simulation_id = map_state["simulation_id"]
+        self.result = results.get_results(self.simulation_id, [self.calculation])
 
 
 class CapacityPopup(RegionPopup):
