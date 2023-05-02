@@ -48,6 +48,7 @@ function simulate(msg) {
         contentType: false,
         data : formData,
         success : function(json) {
+            map_store.cold.state.simulation_id = json.simulation_id;
             PubSub.publish(eventTopics.SIMULATION_FINISHED, json.simulation_id);
         },
     });
