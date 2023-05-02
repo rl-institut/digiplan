@@ -259,4 +259,9 @@ LOOKUPS: dict[str, LookupFunctions] = {
         models.WindTurbine.wind_turbines_per_area_history,
         models.WindTurbine.quantity_per_mun_and_area,
     ),
+    "renewable_electricity_production": LookupFunctions(
+        models.WindTurbine.quantity_per_square,
+        models.WindTurbine.wind_turbines_per_area_history,
+        models.WindTurbine.quantity_per_mun_and_area,
+    ),
 }

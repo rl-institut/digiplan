@@ -6,6 +6,7 @@ from typing import Iterable, Optional
 import jsonschema
 from django_mapengine import popups
 from django_oemof import results
+from oemoflex.postprocessing import core, postprocessing
 
 from config import schemas
 
@@ -68,4 +69,27 @@ class CapacityPopup(RegionPopup):
         return calculations.capacity_chart(self.selected_id)
 
 
-POPUPS: dict[str, type(popups.Popup)] = {"capacity": CapacityPopup}
+class RenewableElectricityProductionPopup(SimulationPopup):
+    calculation = core.ParametrizedCalculation(
+        postprocessing.AggregatedFlows,
+        {
+            "from_nodes": [
+                "ABW-solar-pv_ground",
+            ]
+        },
+    )
+
+    def get_region_value(self) -> float:
+        return self.result
+
+    def get_municipality_value(self) -> float:
+        return calculations.capacity_popup(self.selected_id)
+
+    def get_chart_data(self) -> Iterable:
+        return calculations.capacity_chart(self.selected_id)
+
+
+POPUPS: dict[str, type(popups.Popup)] = {
+    "capacity": CapacityPopup,
+    "renewable_electricity_production": RenewableElectricityProductionPopup,
+}
