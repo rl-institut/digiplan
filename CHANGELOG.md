@@ -9,6 +9,8 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - start oemof simulation
 
 ### Changed
+- removed legacy config
+- moved schema examples to test folder
 - moved map/chart view toggle to nav bar
 - hide map/chart view toggle in status quo and settings menu
 
