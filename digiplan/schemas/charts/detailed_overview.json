@@ -1,8 +1,8 @@
 {
-    "tooltip": "chart_tooltip",
-    "legend": "chart_legend",
-    "grid": "chart_grid_results",
-    "textStyle": "chart_text_style",
+    "tooltip": "",
+    "legend": "",
+    "grid": "",
+    "textStyle": "",
     "xAxis": {
         "type": "value",
         "show": true,
@@ -30,7 +30,7 @@
         {
             "name": "Wind",
             "type": "bar",
-            "barWidth": "chart_bar_width_sm",
+            "barWidth": 0,
             "stack": "total",
             "color": "#1F82C0",
             "label": {

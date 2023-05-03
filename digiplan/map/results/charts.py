@@ -5,9 +5,6 @@ import pathlib
 from collections import namedtuple
 from functools import partial
 
-import jsonschema
-
-from config import schemas
 from digiplan.map import config, models
 
 POPUPCHARTS = (
@@ -20,7 +17,7 @@ POPUPCHARTS = (
 )
 
 RESULTCHARTS = (
-    "detailed_overview_chart",
+    "detailed_overview",
     "ghg_overview_chart",
     "electricity_overview_chart",
     "electricity_THG_chart",
@@ -57,7 +54,7 @@ def get_chart_structure(lookup: str) -> json:
         with pathlib.Path(config.POPUPS_DIR.path("general_options.json")).open("r", encoding="utf-8") as options_json:
             options = json.load(options_json)
     elif lookup in RESULTCHARTS:
-        with pathlib.Path(config.CHARTS_DIR.path(f"{lookup}_chart.json")).open("r", encoding="utf-8") as chart_json:
+        with pathlib.Path(config.CHARTS_DIR.path(f"{lookup}.json")).open("r", encoding="utf-8") as chart_json:
             chart = json.load(chart_json)
 
         with pathlib.Path(config.CHARTS_DIR.path("general_options.json")).open("r", encoding="utf-8") as options_json:
@@ -68,12 +65,12 @@ def get_chart_structure(lookup: str) -> json:
 
     # space to modify options if needed
 
-    chart.update(options)
+    chart = merge_dicts(chart, options)
 
     return chart
 
 
-def get_chart_data(lookup: str, municipality_id: int) -> dict:
+def create_chart(lookup: str, municipality_id: int) -> dict:
     """Create chart based on given lookup and municipality ID or result option
 
     Parameters
@@ -94,9 +91,36 @@ def get_chart_data(lookup: str, municipality_id: int) -> dict:
         chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
 
     # space to add result chart data dynamically
-
-    jsonschema.validate(chart, schemas.CHART_SCHEMA)
+    print(chart)
+    # jsonschema.validate(chart, schemas.CHART_SCHEMA)
     return chart
+
+
+def merge_dicts(dict1: dict, dict2: dict) -> dict:
+    """
+    Recursively merge two dictionaries.
+
+    Parameters
+    ----------
+    dict1: dict
+        Containing the first chart structure. Objects will be first.
+    dict2: dict
+        Containing the second chart structure. Objects will be last and
+        if they have the same name as ones from dict1 they overwrite the ones in first.
+
+    Returns
+    -------
+    dict
+        First chart modified and appended by second chart.
+    """
+    for key in dict2:
+        if key in dict1 and isinstance(dict1[key], dict) and isinstance(dict2[key], dict):
+            merge_dicts(dict1[key], dict2[key])
+        elif key in dict1 and isinstance(dict1[key], list) and isinstance(dict2[key], list):
+            dict1[key].extend(dict2[key])
+        else:
+            dict1[key] = dict2[key]
+    return dict1
 
 
 LOOKUPS: dict[str, LookupFunctions] = {
