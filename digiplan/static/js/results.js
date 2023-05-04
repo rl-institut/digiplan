@@ -1,6 +1,7 @@
 
 const resultsDropdown = document.getElementById("result_views");
 const imageResults = document.getElementById("info_tooltip_results");
+const simulation_spinner = document.getElementById("simulation_spinner");
 
 // Setup
 
@@ -15,7 +16,9 @@ resultsDropdown.addEventListener("change", function() {
 
 // Subscriptions
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
+PubSub.subscribe(eventTopics.SIMULATION_FINISHED, hideSimulationSpinner);
 
 
 // Subscriber Functions
@@ -49,5 +52,15 @@ function showResults(msg, simulation_id) {
             console.log(json);
         },
     });
+    return logMessage(msg);
+}
+
+function showSimulationSpinner(msg) {
+    simulation_spinner.hidden = false;
+    return logMessage(msg);
+}
+
+function hideSimulationSpinner(msg) {
+    simulation_spinner.hidden = true;
     return logMessage(msg);
 }
