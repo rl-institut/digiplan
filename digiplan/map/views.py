@@ -13,7 +13,7 @@ from django_mapengine import views
 from digiplan.map import config
 from digiplan.map.results import core
 
-from . import forms, map_config, utils
+from . import forms, map_config, popups, utils
 from .results import calculations
 
 
@@ -90,8 +90,14 @@ def get_popup(request: HttpRequest, lookup: str, region: int) -> response.JsonRe
     JsonResponse
         containing HTML to render popup and chart options to be used in E-Chart.
     """
-    data = calculations.create_data(lookup, region)
-    chart = calculations.create_chart(lookup, region)
+    map_state = request.GET.dict()
+
+    if lookup in popups.POPUPS:
+        popup = popups.POPUPS[lookup](lookup, region, map_state)
+        return popup.render()
+
+    data = calculations.create_data(lookup, region, map_state)
+    chart = calculations.create_chart(lookup, region, map_state)
 
     try:
         html = render_to_string(f"popups/{lookup}.html", context=data)

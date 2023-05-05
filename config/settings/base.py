@@ -282,11 +282,20 @@ MAP_ENGINE_CHOROPLETHS = [
     setup.Choropleth("capacity_square", layers=["municipality"]),
     setup.Choropleth("wind_turbines", layers=["municipality"]),
     setup.Choropleth("wind_turbines_square", layers=["municipality"]),
+    setup.Choropleth("renewable_electricity_production", layers=["municipality"]),
 ]
 MAP_ENGINE_POPUPS = [
     setup.Popup(
         "municipality",
         False,
-        ["population", "population_density", "capacity", "capacity_square", "wind_turbines", "wind_turbines_square"],
+        [
+            "population",
+            "population_density",
+            "capacity",
+            "capacity_square",
+            "wind_turbines",
+            "wind_turbines_square",
+            "renewable_electricity_production",
+        ],
     )
 ]

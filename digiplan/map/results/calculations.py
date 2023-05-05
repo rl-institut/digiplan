@@ -39,7 +39,7 @@ def create_choropleth_data(lookup: str) -> dict:
     return LOOKUPS[lookup].choropleth_fct()
 
 
-def create_chart(lookup: str, municipality_id: int) -> dict:
+def create_chart(lookup: str, municipality_id: int, map_state: dict) -> dict:
     """Create chart based on given lookup and municipality ID.
 
     Parameters
@@ -48,6 +48,8 @@ def create_chart(lookup: str, municipality_id: int) -> dict:
         Looks up related chart function in LOOKUPS.
     municipality_id: int
         Used to calculate chart data related to given municipality.
+    map_state: dict
+        Additional information on current map state
 
     Returns
     -------
@@ -71,7 +73,7 @@ def create_chart(lookup: str, municipality_id: int) -> dict:
     return chart
 
 
-def create_data(lookup: str, municipality_id: int) -> dict:
+def create_data(lookup: str, municipality_id: int, map_state: dict) -> dict:
     """Create data for given lookup.
 
     Parameters
@@ -80,6 +82,8 @@ def create_data(lookup: str, municipality_id: int) -> dict:
         Looks up related data function in LOOKUPS.
     municipality_id: int
         Used to calculate data related to given municipality.
+    map_state: dict
+        Additional information on current map state
 
     Returns
     -------
@@ -251,6 +255,11 @@ LOOKUPS: dict[str, LookupFunctions] = {
         models.WindTurbine.quantity_per_municipality,
     ),
     "wind_turbines_square": LookupFunctions(
+        models.WindTurbine.quantity_per_square,
+        models.WindTurbine.wind_turbines_per_area_history,
+        models.WindTurbine.quantity_per_mun_and_area,
+    ),
+    "renewable_electricity_production": LookupFunctions(
         models.WindTurbine.quantity_per_square,
         models.WindTurbine.wind_turbines_per_area_history,
         models.WindTurbine.quantity_per_mun_and_area,

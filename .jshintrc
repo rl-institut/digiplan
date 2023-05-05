@@ -28,6 +28,7 @@
     "store": true,
     "store_cold_init": false,
     "store_hot_init": false,
+    "map_store": false,
     "window": false,
     "subscribeToEvents": false
   },
