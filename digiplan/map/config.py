@@ -10,9 +10,9 @@ from . import utils
 
 # DIRECTORIES
 MAP_DIR = settings.APPS_DIR.path("map")
-POPUPS_DIR = MAP_DIR.path("results").path("popups")
+POPUPS_DIR = MAP_DIR.path("popups")
+CHARTS_DIR = MAP_DIR.path("charts")
 SCENARIOS_DIR = settings.DATA_DIR.path("scenarios")
-CHARTS_DIR = MAP_DIR.path("results").path("charts")
 
 # FILES
 ENERGY_SETTINGS_PANEL_FILE = settings.APPS_DIR.path("static/config/energy_settings_panel.json")

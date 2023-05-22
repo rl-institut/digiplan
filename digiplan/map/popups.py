@@ -7,8 +7,7 @@ from django_mapengine import popups
 from django_oemof import results
 from oemoflex.postprocessing import core, postprocessing
 
-from . import config, models
-from .results import calculations
+from . import calculations, config, models
 
 
 class RegionPopup(popups.ChartPopup):

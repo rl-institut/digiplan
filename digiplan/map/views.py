@@ -10,11 +10,10 @@ from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 from django_mapengine import views
 
-from digiplan.map import config
+from digiplan.map import calculations, config
 from digiplan.map.results import core
 
-from . import forms, map_config, popups, utils
-from .results import calculations, charts
+from . import charts, forms, map_config, popups, utils
 
 
 class MapGLView(TemplateView, views.MapEngineMixin):
