@@ -48,17 +48,16 @@ def get_chart_options(lookup: str) -> dict:
     return chart
 
 
-def create_chart(lookup: str, feature_id: int, map_state: Optional[dict] = None) -> dict:
+def create_chart(lookup: str, chart_data: Optional[list[tuple[str, float]]] = None) -> dict:
     """Create chart based on given lookup and municipality ID or result option
 
     Parameters
     ----------
     lookup: str
         Looks up related chart function in charts folder.
-    feature_id: int
-        ID of currently selected feature
-    map_state: dict
-        Optional kwargs sent from django-mapengine
+    chart_data: list[tuple[str, float]]
+        Chart data separated into tuples holding key and value
+        If no data is given, data is expected to be set via lookup JSON
 
     Returns
     -------
@@ -67,10 +66,8 @@ def create_chart(lookup: str, feature_id: int, map_state: Optional[dict] = None)
 
     """
     chart = get_chart_options(lookup)
-    if lookup in CHARTS:
-        chart_data = CHARTS[lookup](feature_id)
+    if chart_data:
         chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
-
     return chart
 
 

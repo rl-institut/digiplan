@@ -69,7 +69,7 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         }
         context["sources"] = categorized_sources
         context["store_cold_init"] = config.STORE_COLD_INIT
-        context["detailed_overview"] = charts.create_chart("detailed_overview", 0)
+        context["detailed_overview"] = charts.create_chart("detailed_overview")
 
         return context
 
@@ -98,7 +98,8 @@ def get_popup(request: HttpRequest, lookup: str, region: int) -> response.JsonRe
         return popup.render()
 
     data = calculations.create_data(lookup, region, map_state)
-    chart = charts.create_chart(lookup, region, map_state)
+    chart_data = charts.CHARTS[lookup](region)
+    chart = charts.create_chart(lookup, chart_data)
 
     try:
         html = render_to_string(f"popups/{lookup}.html", context=data)
