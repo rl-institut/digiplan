@@ -5,7 +5,8 @@ from typing import Iterable, Optional
 
 from django_mapengine import popups
 from django_oemof import results
-from oemoflex.postprocessing import core, postprocessing
+from oemof.tabular.postprocessing import calculations as tabular_calculations
+from oemof.tabular.postprocessing import core
 
 from . import calculations, charts, config, models
 
@@ -62,7 +63,7 @@ class CapacityPopup(RegionPopup):
 
 class RenewableElectricityProductionPopup(SimulationPopup):
     calculation = core.ParametrizedCalculation(
-        postprocessing.AggregatedFlows,
+        tabular_calculations.AggregatedFlows,
         {
             "from_nodes": [
                 "ABW-solar-pv_ground",

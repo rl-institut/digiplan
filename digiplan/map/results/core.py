@@ -3,7 +3,7 @@ from typing import List, Type, Union
 
 from django.conf import settings
 from django_oemof import models, results
-from oemoflex.postprocessing import core
+from oemof.tabular.postprocessing import core
 
 VISUALIZATIONS = {}
 

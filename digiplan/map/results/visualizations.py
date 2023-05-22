@@ -1,6 +1,6 @@
 from django.utils.translation import gettext as _
-from oemoflex.postprocessing import core as results_core
-from oemoflex.postprocessing import postprocessing
+from oemof.tabular.postprocessing import calculations
+from oemof.tabular.postprocessing import core as results_core
 
 from digiplan.map.results import core
 
@@ -8,7 +8,7 @@ from digiplan.map.results import core
 class TotalCosts(core.Visualization):
     name = "total_system_costs"
     title = _("Total Costs")
-    calculation = postprocessing.TotalSystemCosts
+    calculation = calculations.TotalSystemCosts
 
     def _render(self):
         return {
@@ -30,7 +30,7 @@ class ElectricityDemand(core.Visualization):
     name = "electricity_demand"
     title = _("Electricity Demand")
     calculation = results_core.ParametrizedCalculation(
-        postprocessing.AggregatedFlows,
+        calculations.AggregatedFlows,
         {
             "to_nodes": [
                 "ABW-ch4-demand",
@@ -63,7 +63,7 @@ class RenewableElectricityProduction(core.Visualization):
     name = "renewable_electricity_production"
     title = _("Renewable Electricity Production")
     calculation = results_core.ParametrizedCalculation(
-        postprocessing.AggregatedFlows,
+        calculations.AggregatedFlows,
         {
             "from_nodes": [
                 "ABW-solar-pv_ground",
