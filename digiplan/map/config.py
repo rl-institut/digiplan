@@ -10,7 +10,8 @@ from . import utils
 
 # DIRECTORIES
 MAP_DIR = settings.APPS_DIR.path("map")
-POPUPS_DIR = MAP_DIR.path("results").path("popups")
+POPUPS_DIR = MAP_DIR.path("popups")
+CHARTS_DIR = MAP_DIR.path("charts")
 SCENARIOS_DIR = settings.DATA_DIR.path("scenarios")
 
 # FILES

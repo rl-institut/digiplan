@@ -10,11 +10,10 @@ from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 from django_mapengine import views
 
-from digiplan.map import config
+from digiplan.map import calculations, config
 from digiplan.map.results import core
 
-from . import forms, map_config, popups, utils
-from .results import calculations
+from . import charts, forms, map_config, popups, utils
 
 
 class MapGLView(TemplateView, views.MapEngineMixin):
@@ -70,6 +69,7 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         }
         context["sources"] = categorized_sources
         context["store_cold_init"] = config.STORE_COLD_INIT
+        context["detailed_overview"] = charts.create_chart("detailed_overview")
 
         return context
 
@@ -98,7 +98,8 @@ def get_popup(request: HttpRequest, lookup: str, region: int) -> response.JsonRe
         return popup.render()
 
     data = calculations.create_data(lookup, region, map_state)
-    chart = calculations.create_chart(lookup, region, map_state)
+    chart_data = charts.CHARTS[lookup](region)
+    chart = charts.create_chart(lookup, chart_data)
 
     try:
         html = render_to_string(f"popups/{lookup}.html", context=data)

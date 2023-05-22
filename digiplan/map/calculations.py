@@ -6,10 +6,8 @@ from collections import namedtuple
 from functools import partial
 from typing import Optional
 
-import jsonschema
 from django.db.models import Sum
 
-from config import schemas
 from digiplan.map import config, models
 
 LookupFunctions = namedtuple("PopupData", ("data_fct", "chart_fct", "choropleth_fct"))
@@ -37,40 +35,6 @@ def create_choropleth_data(lookup: str) -> dict:
         error_msg = f"Could not find {lookup=} in LOOKUPS."
         raise LookupError(error_msg)
     return LOOKUPS[lookup].choropleth_fct()
-
-
-def create_chart(lookup: str, municipality_id: int, map_state: dict) -> dict:
-    """Create chart based on given lookup and municipality ID.
-
-    Parameters
-    ----------
-    lookup: str
-        Looks up related chart function in LOOKUPS.
-    municipality_id: int
-        Used to calculate chart data related to given municipality.
-    map_state: dict
-        Additional information on current map state
-
-    Returns
-    -------
-    dict
-        Containing validated chart options for further use in JS
-
-    Raises
-    ------
-    LookupError
-        if lookup can't be found in LOOKUPS
-    """
-    if lookup not in LOOKUPS:
-        error_msg = f"Could not find {lookup=} in LOOKUPS."
-        raise LookupError(error_msg)
-
-    with pathlib.Path(config.POPUPS_DIR.path(f"{lookup}_chart.json")).open("r", encoding="utf-8") as chart_json:
-        chart = json.load(chart_json)
-    chart_data = LOOKUPS[lookup].chart_fct(municipality_id)
-    chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
-    jsonschema.validate(chart, schemas.CHART_SCHEMA)
-    return chart
 
 
 def create_data(lookup: str, municipality_id: int, map_state: dict) -> dict:
