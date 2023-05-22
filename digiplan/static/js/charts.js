@@ -1,4 +1,4 @@
-// Goals & scenarios
+// Goals & scenarios, initioalize charts
 const renewable_share_goal_div = document.getElementById("renewable_share_goal_chart");
 const renewable_share_goal_chart = echarts.init(renewable_share_goal_div);
 const co2_emissions_goal_div = document.getElementById("co2_emissions_goal_chart");
@@ -8,19 +8,21 @@ const renewable_share_scenario_chart = echarts.init(renewable_share_scenario_div
 const co2_emissions_scenario_div = document.getElementById("co2_emissions_scenario_chart");
 const co2_emissions_scenario_chart = echarts.init(co2_emissions_scenario_div);
 
-// Sidebar
+// Sidebar, initialize charts
 const chart3Element = document.getElementById("chart3");
 const chart3 = echarts.init(chart3Element);
 const chart4Element = document.getElementById("chart4");
 const chart4 = echarts.init(chart4Element);
 
-// Results view
+// Results view, initiliaze charts
 const detailed_overview_chart = echarts.init(document.getElementById("detailed_overview_chart"));
 const ghg_overview_chart = echarts.init(document.getElementById("ghg_overview_chart"));
 const electricity_overview_chart = echarts.init(document.getElementById("electricity_overview_chart"));
 const electricity_THG_chart = echarts.init(document.getElementById("electricity_THG_chart"));
 const mobility_overview_chart = echarts.init(document.getElementById("mobility_overview_chart"));
 const mobility_THG_chart = echarts.init(document.getElementById("mobility_THG_chart"));
+const overview_heat_chart = echarts.init(document.getElementById("overview_heat_chart"));
+const decentralized_centralized_heat_chart = echarts.init(document.getElementById("decentralized_centralized_heat_chart"));
 
 
 PubSub.subscribe(eventTopics.MENU_CHANGED, resizeCharts);
@@ -327,480 +329,15 @@ const option = {
   ]
 };
 
+// get options for result view charts
 const detailed_overview_option = JSON.parse(document.getElementById("detailed_overview").textContent);
-
-const ghg_overview_option = {
-  backgroundColor: '#FFFFFF',
-  textStyle: chart_text_style,
-  tooltip: chart_tooltip,
-  legend: chart_legend,
-  grid: chart_grid_results,
-  xAxis:  {
-    type: 'value',
-    show: true,
-    position: 'bottom',
-    name: 'Mt CO₂-\nEmissionen',
-    nameLocation: 'end',
-    width: '76',
-    heigth: '32',
-  },
-  yAxis: {
-    show: true,
-    type: 'category',
-    data: ['Ziel', 'Szenario', 'Status Quo', '1990'],
-    fontWeight: '400',
-    axisTick: {
-      show: false
-    }
-  },
-  series: [
-    {
-      name: 'GHG',
-      type: 'bar',
-      barWidth: chart_bar_width_sm,
-      stack: 'total',
-      color: '#C8D8E4',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [20, 20, 20, 20]
-    },
-    {
-      name: 'Haushalte',
-      type: 'bar',
-      barWidth: '25',
-      stack: 'total',
-      color: '#74A9CF',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [12, 15, 30, 34]
-    },
-    {
-      name: 'Industrie',
-      type: 'bar',
-        barWidth: '25',
-      stack: 'total',
-      color: '#FA9FB5',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [20, 20, 31, 34]
-    },
-    {
-      name: 'XXX',
-      type: 'bar',
-        barWidth: '25',
-      stack: 'total',
-      color: '#FEC44F',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [5, 12, 15, 24]
-    },
-    {
-      name: 'XXX',
-      type: 'bar',
-        barWidth: '25',
-      stack: 'total',
-      color: '#8C96C6',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [15, 20, 30, 34]
-    }
-  ]
-};
-
-const electricity_overview = {
-  textStyle: chart_text_style,
-  tooltip: chart_tooltip,
-  legend: chart_legend,
-  grid: chart_grid_results,
-  xAxis: {
-    type: 'value',
-    show: true,
-    position: 'bottom',
-    name: 'TWh',
-    nameLocation: 'end',
-    width: '76',
-    heigth: '32',
-  },
-  yAxis: {
-    type: 'category',
-    data: ['Bedarf',
-    'Ziel',
-    'Mein Szeanrio',
-    'Status Quo' ],
-    axisTick: {
-      show: false
-    }
-  },
-  series: [
-    {
-      name: 'Wind',
-      type: 'bar',
-      barWidth: chart_bar_width_sm,
-      stack: 'total',
-      color: '#1F82C0',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [0, 502, 400, 334]
-    },
-    {
-      name: 'Freiflächen - PV',
-      type: 'bar',
-      stack: 'total',
-      color: '#F6B93B',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [0, 382, 300, 234 ]
-    },
-    {
-      name: 'Aufdach - PV',
-      type: 'bar',
-      stack: 'total',
-      color: '#FFD660',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [0, 312, 280 , 254]
-    },
-        {
-      name: 'Bioenergie',
-      type: 'bar',
-      stack: 'total',
-      color: '#98D47E',
-      label: {
-        show: false
-      },
-      emphasis: {
-      },
-      data: [0, 136, 135, 134]
-    },
-    {
-      name: 'Konventionell',
-      type: 'bar',
-      stack: 'total',
-      color: '#1A1A1A',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [0 , 132, 200, 534 ]
-    },
-    {
-      name: 'GHG',
-      type: 'bar',
-      stack: 'total',
-      color: '#F5F5DC',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [400, 0 , 0, 0]
-    },
-    {
-      name: 'Haushalte',
-      type: 'bar',
-      stack: 'total',
-      color: '#A8DADC',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [360, 0 , 0, 0]
-    },
-     {
-      name: 'Industrie',
-      type: 'bar',
-      stack: 'total',
-      color: '#C27BA0',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [300, 0 , 0, 0]
-    },
-    {
-      name: 'Sonstiges',
-      type: 'bar',
-      stack: 'total',
-      color: '#B0BEC5',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [350, 0 , 0, 0]
-    },
-  ]
-};
-
-const electricity_THG = {
-  textStyle: chart_text_style,
-  tooltip: chart_tooltip,
-  legend: chart_legend,
-  grid: chart_grid_results,
-  xAxis: {
-    type: 'value',
-    show: true,
-    position: 'bottom',
-    name: 'Mt CO₂-\nEmissionen',
-    nameLocation: 'end',
-    width: '76',
-    heigth: '32',
-  },
-  yAxis: {
-    type: 'category',
-    data: ['Ziel',
-    'Mein Szenario',
-    'Status Quo',
-    '1990' ],
-    axisTick: {
-      show: false
-    }
-  },
-  series: [
-    {
-      name: 'GHG',
-      type: 'bar',
-      barWidth: chart_bar_width_sm,
-      stack: 'total',
-      color: '#F5F5DC',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [10, 30, 34, 37]
-    },
-    {
-      name: 'Haushalte',
-      type: 'bar',
-      stack: 'total',
-      color: '#A8DADC',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [20, 25 , 27, 30]
-    },
-     {
-      name: 'Industrie',
-      type: 'bar',
-      stack: 'total',
-      color: '#C27BA0',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [30, 40, 50, 60]
-    },
-    {
-      name: 'Sonstiges',
-      type: 'bar',
-      stack: 'total',
-      color: '#B0BEC5',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [30, 40 , 45, 50]
-    },
-  ]
-};
-
-const mobility_overview = {
-  textStyle: chart_text_style,
-  tooltip: chart_tooltip,
-  legend: chart_legend,
-  grid: chart_grid_results,
-  xAxis: {
-    type: 'value',
-    show: true,
-    position: 'bottom',
-    name: 'Anzahl Autos',
-    nameLocation: 'end',
-    width: '76',
-    heigth: '32',
-  },
-  yAxis: {
-    type: 'category',
-    data: ['Ziel\nSzenario',
-    'Mein \nSzenario',
-    'Status Quo'
-    ],
-    axisTick: {
-      show: false
-    }
-  },
-  series: [
-    {
-      name: 'Diesel',
-      type: 'bar',
-      barWidth: chart_bar_width_sm,
-      stack: 'total',
-      color: '#647078',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [50, 222, 400]
-    },
-    {
-      name: 'Benzin',
-      type: 'bar',
-      stack: 'total',
-      color: '#866E18',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [20, 182, 350]
-    },
-    {
-      name: 'Hybrid',
-      type: 'bar',
-      stack: 'total',
-      color: '#8FDCE1',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [100, 100, 140]
-    },
-        {
-      name: 'E-Auto',
-      type: 'bar',
-      stack: 'total',
-      color: '#98D47E',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [500, 300, 100]
-    },
-  ]
-};
-
-const mobility_THG = {
-  textStyle: chart_text_style,
-  tooltip: chart_tooltip,
-  legend: chart_legend,
-  grid: chart_grid_results,
-  xAxis: {
-    type: 'value',
-    show: true,
-    position: 'bottom',
-    name: 'Mt CO₂-\nEmissionen',
-    nameLocation: 'end',
-    width: '76',
-    heigth: '32'
-  },
-  yAxis: {
-    type: 'category',
-    data: ['Ziel',
-    'Mein Szenario',
-    'Status Quo',
-    '1990' ],
-    axisTick: {
-      show: false
-    }
-  },
-  series: [
-    {
-      name: 'Sockel',
-      type: 'bar',
-      barWidth: chart_bar_width_sm,
-      stack: 'total',
-      color: '#C8D8E4',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [30, 30, 30, 30]
-    },
-    {
-      name: 'Konventionell',
-      type: 'bar',
-      stack: 'total',
-      color: '#647078',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [15, 25 , 65, 100]
-    },
-     {
-      name: 'Erneuerbare Energien',
-      type: 'bar',
-      stack: 'total',
-      color: '#A8E7BA',
-      label: {
-        show: false
-      },
-      emphasis: {
-        focus: 'series'
-      },
-      data: [65, 65, 38, 10]
-    },
-  ]
-};
+const ghg_overview_option = JSON.parse(document.getElementById("ghg_overview").textContent);
+const electricity_overview_option = JSON.parse(document.getElementById("electricity_overview").textContent);
+const electricity_ghg_option = JSON.parse(document.getElementById("electricity_ghg").textContent);
+const mobility_overview_option = JSON.parse(document.getElementById("mobility_overview").textContent);
+const mobility_ghg_option = JSON.parse(document.getElementById("mobility_ghg").textContent);
+const overview_heat_option = JSON.parse(document.getElementById("overview_heat").textContent);
+const decentralized_centralized_heat_option = JSON.parse(document.getElementById("decentralized_centralized_heat").textContent);
 
 function resizeCharts() {
   setTimeout(function () {
@@ -816,26 +353,30 @@ function resizeCharts() {
     electricity_THG_chart.resize();
     mobility_overview_chart.resize();
     mobility_THG_chart.resize();
+    overview_heat_chart.resize();
+    decentralized_centralized_heat_chart.resize();
   }, 200);
 }
 
-// Goals & scenarios
+// Goals & scenarios, setOptions
 renewable_share_goal_chart.setOption(renewable_share_goal);
 co2_emissions_goal_chart.setOption(co2_emissions_goal);
 renewable_share_scenario_chart.setOption(renewable_share_scenario);
 co2_emissions_scenario_chart.setOption(co2_emissions_scenario);
 
-// Sidebar
+// Sidebar, setOptions
 chart3.setOption(option);
 chart4.setOption(option);
 
-// Results
+// Results, setOptions
 detailed_overview_chart.setOption(detailed_overview_option);
 ghg_overview_chart.setOption(ghg_overview_option);
-electricity_overview_chart.setOption(electricity_overview);
-electricity_THG_chart.setOption(electricity_THG);
-mobility_overview_chart.setOption(mobility_overview);
-mobility_THG_chart.setOption(mobility_THG);
+electricity_overview_chart.setOption(electricity_overview_option);
+electricity_THG_chart.setOption(electricity_ghg_option);
+mobility_overview_chart.setOption(mobility_overview_option);
+mobility_THG_chart.setOption(mobility_ghg_option);
+overview_heat_chart.setOption(overview_heat_option);
+decentralized_centralized_heat_chart.setOption(decentralized_centralized_heat_option);
 
 resizeCharts();
 

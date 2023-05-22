@@ -70,6 +70,13 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         context["sources"] = categorized_sources
         context["store_cold_init"] = config.STORE_COLD_INIT
         context["detailed_overview"] = charts.create_chart("detailed_overview")
+        context["ghg_overview"] = charts.create_chart("ghg_overview")
+        context["electricity_overview"] = charts.create_chart("electricity_overview")
+        context["electricity_ghg"] = charts.create_chart("electricity_ghg")
+        context["mobility_overview"] = charts.create_chart("mobility_overview")
+        context["mobility_ghg"] = charts.create_chart("mobility_ghg")
+        context["overview_heat"] = charts.create_chart("overview_heat")
+        context["decentralized_centralized_heat"] = charts.create_chart("decentralized_centralized_heat")
 
         return context
 

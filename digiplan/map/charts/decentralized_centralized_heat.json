@@ -1,0 +1,181 @@
+{
+  "legend": {
+    "data": [
+      "Kohleofen",
+      "Holzofen",
+      "Gasheizkessel",
+      "Solarthermiekollektor",
+      "Wärmepumpe",
+      "Thermische Energiespeicher",
+      "Große Gasheizkessel",
+      "Große Wärmepumpen",
+      "Power to Heat",
+      "Große Solarthermiekollektoren"
+    ],
+    "bottom": "12"
+  },
+  "brush": {
+    "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],
+    "xAxisIndex": 0
+  },
+  "toolbox": {
+    "feature": {
+      "magicType": {
+        "type": ["stack"]
+      },
+      "dataView": {}
+    }
+  },
+  "yAxis": {
+    "data": ["Status Quo", "Mein Szenario", "Ziel Szenario"],
+    "axisLine": { "onZero": true },
+    "splitLine": { "show": false },
+    "splitArea": { "show": false }
+  },
+  "xAxis": {
+    "type": "value",
+    "show": true,
+    "position": "bottom",
+    "name": "TWh",
+    "nameLocation": "end",
+    "nameTextStyle": "Roboto",
+    "width": "76",
+    "heigth": "32",
+    "fontWeight": "300",
+    "fontSize": "14"
+  },
+  "series": [
+    {
+      "name": "Kohleofen",
+      "type": "bar",
+      "barWidth": "35",
+      "stack": "five",
+      "color": "#604F4F",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [132, 334, 700]
+    },
+    {
+      "name": "Holzofen",
+      "type": "bar",
+      "stack": "five",
+      "color": "#610B0B",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [102, 234, 280]
+    },
+    {
+      "name": "Gasheizkessel",
+      "type": "bar",
+      "stack": "five",
+      "color": "#B1BEC6",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [282, 234, 100]
+    },
+    {
+      "name": "Wärmepumpe",
+      "type": "bar",
+      "stack": "five",
+      "color": "#E6772E",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [136, 134, 130]
+    },
+    {
+      "name": "Thermische Energiespeicher",
+      "type": "bar",
+      "stack": "five",
+      "color": "#DF3A01",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [280, 150, 100]
+    },
+    {
+      "name": "Solarthermiekollektor",
+      "type": "bar",
+      "stack": "five",
+      "color": "#FFD660",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [412, 254, 100]
+    },
+    {
+      "name": "Große Gasheizkessel",
+      "type": "bar",
+      "stack": "four",
+      "color": "#B1BEC6",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [300, 344, 380]
+    },
+    {
+      "name": "Große Wärmepumpen",
+      "type": "bar",
+      "stack": "four",
+      "color": "#E6772E",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [254, 244, 380]
+    },
+    {
+      "name": "Power-to-Heat",
+      "type": "bar",
+      "barWidth": "35",
+      "stack": "four",
+      "color": "#D7DF01",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [280, 300, 350]
+    },
+    {
+      "name": "Große Solarthermiekollektoren",
+      "type": "bar",
+      "stack": "four",
+      "color": "#FFD660",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [145, 144, 180]
+    }
+  ]
+}
