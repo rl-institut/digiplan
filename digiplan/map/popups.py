@@ -7,7 +7,7 @@ from django_mapengine import popups
 from django_oemof import results
 from oemoflex.postprocessing import core, postprocessing
 
-from . import calculations, config, models
+from . import calculations, charts, config, models
 
 
 class RegionPopup(popups.ChartPopup):
@@ -23,12 +23,8 @@ class RegionPopup(popups.ChartPopup):
         return data
 
     def get_chart_options(self) -> dict:
-        with pathlib.Path(config.POPUPS_DIR.path(f"{self.lookup}_chart.json")).open(
-            "r", encoding="utf-8"
-        ) as chart_json:
-            chart = json.load(chart_json)
         chart_data = self.get_chart_data()
-        chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
+        chart = charts.create_chart(self.lookup, chart_data)
         return chart
 
     @abc.abstractmethod

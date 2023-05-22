@@ -2,7 +2,7 @@
 
 import json
 import pathlib
-from typing import Callable, Optional
+from typing import Callable, Iterable, Optional
 
 from digiplan.map import config, models
 
@@ -48,7 +48,7 @@ def get_chart_options(lookup: str) -> dict:
     return chart
 
 
-def create_chart(lookup: str, chart_data: Optional[list[tuple[str, float]]] = None) -> dict:
+def create_chart(lookup: str, chart_data: Optional[Iterable[tuple[str, float]]] = None) -> dict:
     """Create chart based on given lookup and municipality ID or result option
 
     Parameters
