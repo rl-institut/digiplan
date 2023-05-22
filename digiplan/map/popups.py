@@ -3,12 +3,9 @@ import json
 import pathlib
 from typing import Iterable, Optional
 
-import jsonschema
 from django_mapengine import popups
 from django_oemof import results
 from oemoflex.postprocessing import core, postprocessing
-
-from config import schemas
 
 from . import config, models
 from .results import calculations
@@ -33,7 +30,6 @@ class RegionPopup(popups.ChartPopup):
             chart = json.load(chart_json)
         chart_data = self.get_chart_data()
         chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
-        jsonschema.validate(chart, schemas.CHART_SCHEMA)
         return chart
 
     @abc.abstractmethod

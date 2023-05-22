@@ -4,41 +4,24 @@ import json
 import pathlib
 from collections import namedtuple
 from functools import partial
+from typing import Optional
 
 from digiplan.map import config, models
-
-POPUPCHARTS = (
-    "capacity",
-    "capacity_square",
-    "population",
-    "population_density",
-    "wind_turbines",
-    "wind_turbines_square",
-)
-
-RESULTCHARTS = (
-    "detailed_overview",
-    "ghg_overview_chart",
-    "electricity_overview_chart",
-    "electricity_THG_chart",
-    "mobility_overview_chart",
-    "mobility_THG_chart",
-)
 
 LookupFunctions = namedtuple("PopupData", ("data_fct", "chart_fct", "choropleth_fct"))
 
 
-def get_chart_structure(lookup: str) -> json:
+def get_chart_structure(lookup: str) -> dict:
     """Get the structure and options for a chart from the coresponding json file.
 
     Parameters
     ----------
     lookup: str
-        Looks up related chart function in POPUPCHARTS or RESULTCHARTS.
+        Looks up related chart function in CHARTS
 
     Returns
     -------
-    json
+    dict
         Containing the json that can be filled with data
 
     Raises
@@ -46,37 +29,33 @@ def get_chart_structure(lookup: str) -> json:
     LookupError
         if lookup can't be found in LOOKUPS
     """
-
-    if lookup in POPUPCHARTS:
-        with pathlib.Path(config.POPUPS_DIR.path(f"{lookup}_chart.json")).open("r", encoding="utf-8") as chart_json:
-            chart = json.load(chart_json)
-
-        with pathlib.Path(config.POPUPS_DIR.path("general_options.json")).open("r", encoding="utf-8") as options_json:
-            options = json.load(options_json)
-    elif lookup in RESULTCHARTS:
-        with pathlib.Path(config.CHARTS_DIR.path(f"{lookup}.json")).open("r", encoding="utf-8") as chart_json:
-            chart = json.load(chart_json)
-
-        with pathlib.Path(config.CHARTS_DIR.path("general_options.json")).open("r", encoding="utf-8") as options_json:
-            options = json.load(options_json)
-    else:
-        error_msg = f"Could not find {lookup=} in POPUPCHARTS or RESULTCHARTS."
+    lookup_path = pathlib.Path(config.CHARTS_DIR.path(f"{lookup}.json"))
+    if not lookup_path.exists():
+        error_msg = f"Could not find {lookup=} in charts folder."
         raise LookupError(error_msg)
 
-    # space to modify options if needed
+    with lookup_path.open("r", encoding="utf-8") as lookup_json:
+        lookup_options = json.load(lookup_json)
 
-    chart = merge_dicts(chart, options)
+    with pathlib.Path(config.CHARTS_DIR.path("general_options.json")).open("r", encoding="utf-8") as general_chart_json:
+        general_chart_options = json.load(general_chart_json)
+
+    chart = merge_dicts(lookup_options, general_chart_options)
 
     return chart
 
 
-def create_chart(lookup: str, municipality_id: int) -> dict:
+def create_chart(lookup: str, feature_id: int, map_state: Optional[dict] = None) -> dict:
     """Create chart based on given lookup and municipality ID or result option
 
     Parameters
     ----------
     lookup: str
         Looks up related chart function in POPUPCHARTS or RESULTCHARTS.
+    feature_id: int
+        ID of currently selected feature
+    map_state: dict
+        Optional kwargs sent from mapengine
 
     Returns
     -------
@@ -85,13 +64,11 @@ def create_chart(lookup: str, municipality_id: int) -> dict:
 
     """
     chart = get_chart_structure(lookup)
-    if lookup in POPUPCHARTS:
+    if lookup in LOOKUPS:
         # maybe get popupchart data through calculations.py?
-        chart_data = LOOKUPS[lookup].chart_fct(municipality_id)
+        chart_data = LOOKUPS[lookup].chart_fct(feature_id)
         chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
 
-    # space to add result chart data dynamically
-    print(chart)
     # jsonschema.validate(chart, schemas.CHART_SCHEMA)
     return chart
 

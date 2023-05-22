@@ -1,12 +1,9 @@
 import abc
 from typing import List, Type, Union
 
-import jsonschema
 from django.conf import settings
 from django_oemof import models, results
 from oemoflex.postprocessing import core
-
-from config.schemas import CHART_SCHEMA
 
 VISUALIZATIONS = {}
 
@@ -60,16 +57,11 @@ class Visualization(abc.ABC):
         if not self._result:
             self._result = [result[core.get_dependency_name(self.calculation)] for result in self.handler.results]
         rendered = self._render()
-        self.validate(rendered)
         return rendered
 
     @abc.abstractmethod
     def _render(self):
         """Render method should be overwritten in child class and shall return a valid chart dict/JSON"""
-
-    @staticmethod
-    def validate(rendered):
-        jsonschema.validate(rendered, CHART_SCHEMA)
 
     def get_scenario_name(self, simulation_index):
         return models.Simulation.objects.get(pk=self.handler.simulations[simulation_index]).scenario

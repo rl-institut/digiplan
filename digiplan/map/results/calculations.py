@@ -6,10 +6,8 @@ from collections import namedtuple
 from functools import partial
 from typing import Optional
 
-import jsonschema
 from django.db.models import Sum
 
-from config import schemas
 from digiplan.map import config, models
 
 LookupFunctions = namedtuple("PopupData", ("data_fct", "chart_fct", "choropleth_fct"))
@@ -69,7 +67,6 @@ def create_chart(lookup: str, municipality_id: int, map_state: dict) -> dict:
         chart = json.load(chart_json)
     chart_data = LOOKUPS[lookup].chart_fct(municipality_id)
     chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
-    jsonschema.validate(chart, schemas.CHART_SCHEMA)
     return chart
 
 
