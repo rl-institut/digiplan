@@ -2,13 +2,16 @@
 
 import json
 import pathlib
-from collections import namedtuple
-from functools import partial
-from typing import Optional
+from typing import Callable, Optional
 
 from digiplan.map import config, models
 
-LookupFunctions = namedtuple("PopupData", ("data_fct", "chart_fct", "choropleth_fct"))
+CHARTS: dict[str, Callable] = {
+    "population": models.Population.population_history,
+    "population_density": models.Population.density_history,
+    "wind_turbines": models.WindTurbine.wind_turbines_history,
+    "wind_turbines_square": models.WindTurbine.wind_turbines_per_area_history,
+}
 
 
 def get_chart_options(lookup: str) -> dict:
@@ -64,8 +67,8 @@ def create_chart(lookup: str, feature_id: int, map_state: Optional[dict] = None)
 
     """
     chart = get_chart_options(lookup)
-    if lookup in LOOKUPS:
-        chart_data = LOOKUPS[lookup].chart_fct(feature_id)
+    if lookup in CHARTS:
+        chart_data = CHARTS[lookup](feature_id)
         chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
 
     return chart
@@ -96,27 +99,3 @@ def merge_dicts(dict1: dict, dict2: dict) -> dict:
         else:
             dict1[key] = dict2[key]
     return dict1
-
-
-LOOKUPS: dict[str, LookupFunctions] = {
-    "population": LookupFunctions(
-        partial(models.Population.quantity, year=2022),
-        models.Population.population_history,
-        models.Population.population_per_municipality,
-    ),
-    "population_density": LookupFunctions(
-        partial(models.Population.density, year=2022),
-        models.Population.density_history,
-        models.Population.denisty_per_municipality,
-    ),
-    "wind_turbines": LookupFunctions(
-        models.WindTurbine.quantity,
-        models.WindTurbine.wind_turbines_history,
-        models.WindTurbine.quantity_per_municipality,
-    ),
-    "wind_turbines_square": LookupFunctions(
-        models.WindTurbine.quantity_per_square,
-        models.WindTurbine.wind_turbines_per_area_history,
-        models.WindTurbine.quantity_per_mun_and_area,
-    ),
-}
