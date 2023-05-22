@@ -239,6 +239,8 @@ SELECT2_CACHE_BACKEND = "select2"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+OEMOF_SCENARIO = env.str("OEMOF_SCENARIO", "scenario_2045")
+
 # django-mapengine
 # ------------------------------------------------------------------------------
 MAP_ENGINE_CENTER_AT_STARTUP = [12.537917858911896, 51.80812518969171]

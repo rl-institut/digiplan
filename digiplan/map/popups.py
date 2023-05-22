@@ -55,7 +55,7 @@ class SimulationPopup(RegionPopup, abc.ABC):
     def __init__(self, lookup: str, selected_id: int, map_state: Optional[dict] = None, template: Optional[str] = None):
         super().__init__(lookup, selected_id, map_state, template)
         self.simulation_id = map_state["simulation_id"]
-        self.result = results.get_results(self.simulation_id, [self.calculation])
+        self.result = list(results.get_results(self.simulation_id, [self.calculation]).values())[0]
 
 
 class CapacityPopup(RegionPopup):

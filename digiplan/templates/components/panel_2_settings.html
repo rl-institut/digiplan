@@ -37,7 +37,7 @@
       </ul>
       <form id="settings" class="c-tabs__content" method="POST">
         {% csrf_token %}
-        <input hidden name="scenario" value="scenario_2045">
+        <input hidden name="scenario" value="{{oemof_scenario}}">
         <div class="c-tabs__pane fade show active" id="wind" role="tabpanel" aria-labelledby="wind-tab">
           {{panels.0}}
         </div>

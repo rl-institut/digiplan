@@ -30,6 +30,7 @@ class MapGLView(TemplateView, views.MapEngineMixin):
             for category, layers in map_config.LEGEND.items()
         },
         "store_hot_init": config.STORE_HOT_INIT,
+        "oemof_scenario": settings.OEMOF_SCENARIO,
     }
 
     def get_context_data(self, **kwargs) -> dict:
