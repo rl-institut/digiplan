@@ -11,8 +11,8 @@ from digiplan.map import config, models
 LookupFunctions = namedtuple("PopupData", ("data_fct", "chart_fct", "choropleth_fct"))
 
 
-def get_chart_structure(lookup: str) -> dict:
-    """Get the structure and options for a chart from the coresponding json file.
+def get_chart_options(lookup: str) -> dict:
+    """Get the options for a chart from the corresponding json file.
 
     Parameters
     ----------
@@ -51,11 +51,11 @@ def create_chart(lookup: str, feature_id: int, map_state: Optional[dict] = None)
     Parameters
     ----------
     lookup: str
-        Looks up related chart function in POPUPCHARTS or RESULTCHARTS.
+        Looks up related chart function in charts folder.
     feature_id: int
         ID of currently selected feature
     map_state: dict
-        Optional kwargs sent from mapengine
+        Optional kwargs sent from django-mapengine
 
     Returns
     -------
@@ -63,13 +63,11 @@ def create_chart(lookup: str, feature_id: int, map_state: Optional[dict] = None)
         Containing chart filled with data
 
     """
-    chart = get_chart_structure(lookup)
+    chart = get_chart_options(lookup)
     if lookup in LOOKUPS:
-        # maybe get popupchart data through calculations.py?
         chart_data = LOOKUPS[lookup].chart_fct(feature_id)
         chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
 
-    # jsonschema.validate(chart, schemas.CHART_SCHEMA)
     return chart
 
 
