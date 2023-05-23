@@ -3,6 +3,7 @@
 import json
 
 from django.http import HttpRequest
+from django_oemof.settings import OEMOF_DIR
 
 from .. import config, forms
 
@@ -62,7 +63,7 @@ def adapt_demand(scenario: str, data: dict, request: HttpRequest) -> dict:
     """
     # since we only have 1 scenario, do we need the scenario argument here?
     filename = "absolute_values.json"
-    absolute_filename = config.SCENARIOS_DIR.path(scenario).path(filename)
+    absolute_filename = OEMOF_DIR / scenario / filename
     # also why is the request as argument needed?
 
     with open(absolute_filename, "r") as read_file:
@@ -78,10 +79,9 @@ def adapt_demand(scenario: str, data: dict, request: HttpRequest) -> dict:
         "i": sum(jsondata["electricity_demand"]["i"]),
     }
 
-    electricity_demand = [
-        region_values_per_sector["hh"] * data["s_v_2"] / 100
-        + region_values_per_sector["ghd"] * data["s_v_3"] / 100
-        + region_values_per_sector["i"] * data["s_v_4"] / 100
-    ]
-    parameters = {"demand0": {"profile": electricity_demand}}
+    parameters = {
+        "ABW-electricity-demand_hh": {"amount": region_values_per_sector["hh"] * data["s_v_2"] / 100},
+        "ABW-electricity-demand_ghd": {"amount": region_values_per_sector["ghh"] * data["s_v_3"] / 100},
+        "ABW-electricity-demand_i": {"amount": region_values_per_sector["i"] * data["s_v_4"] / 100},
+    }
     return parameters
