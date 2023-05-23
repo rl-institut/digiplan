@@ -23,10 +23,10 @@ class MapConfig(AppConfig):
 
         hooks.register_hook(
             hooks.HookType.SETUP,
-            hooks.Hook(scenario="dispatch", function=digiplan_hooks.read_parameters),
+            hooks.Hook(scenario=hooks.ALL_SCENARIOS, function=digiplan_hooks.read_parameters),
         )
 
         hooks.register_hook(
             hooks.HookType.PARAMETER,
-            hooks.Hook(scenario="dispatch", function=digiplan_hooks.adapt_demand),
+            hooks.Hook(scenario=hooks.ALL_SCENARIOS, function=digiplan_hooks.adapt_demand),
         )
