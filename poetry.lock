@@ -2407,14 +2407,14 @@ signedtoken = ["cryptography (>=3.0.0)", "pyjwt (>=2.0.0,<3)"]
 
 [[package]]
 name = "oemof-network"
-version = "0.4.0"
+version = "0.5.0a1"
 description = "The network/graph submodules of oemof."
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "oemof.network-0.4.0-py2.py3-none-any.whl", hash = "sha256:afdfd4e1056746aa470bc5b72053c9819b48d56c4d2ec4176b5bce85e228548a"},
-    {file = "oemof.network-0.4.0.tar.gz", hash = "sha256:5eee3b8f5e8b0a45f5f573b36f3b8c5b6d7460290e05ef72324bca7e9643a58b"},
+    {file = "oemof.network-0.5.0a1-py2.py3-none-any.whl", hash = "sha256:43fad16fdf82634e037d22d9bf66c4bae7f75b1069ef059f0b457b6992045e61"},
+    {file = "oemof.network-0.5.0a1.tar.gz", hash = "sha256:ea701d901bc1a87a5bfe31f2f117dbd841a04ad5f2a2af122212f90a92170715"},
 ]
 
 [package.dependencies]
@@ -4153,4 +4153,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "04bf93966eb3ee3efe6821b76c35f8387117667254ec85cffc2c38b1ce8dd5aa"
+content-hash = "4c5824d553dde43f1ab731d58b626e77f07b155e8f076e9299e3deca03030c21"

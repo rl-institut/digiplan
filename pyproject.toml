@@ -42,6 +42,7 @@ django-select2 = "^7.7.1"
 django-oemof = {git = "https://github.com/rl-institut/django-oemof.git"}
 django-mapengine = {git = "https://github.com/rl-institut/django-mapengine.git"}
 geojson = "^3.0.1"
+oemof-network = "0.5.0a1"
 
 [tool.poetry.group.dev.dependencies]
 Werkzeug = "^2.0.1" # https://github.com/pallets/werkzeug
