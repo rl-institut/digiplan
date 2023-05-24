@@ -9,6 +9,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - start oemof simulation
 
 ### Changed
+- switched to oemof.tabular postprocessing (instead of using oemoflex)
 - removed legacy config
 - moved schema examples to test folder
 - moved map/chart view toggle to nav bar
