@@ -81,6 +81,10 @@ RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
 RUN chown django /start
 
+COPY ./compose/production/celery/worker/start /start-celeryworker
+RUN sed -i 's/\r$//g' /start-celeryworker
+RUN chmod +x /start-celeryworker
+
 ENV BASH_ENV "/home/django/.bashrc"
 RUN echo "source /venv/bin/activate" > /home/django/.bashrc
 
