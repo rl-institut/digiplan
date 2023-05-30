@@ -1,6 +1,6 @@
 """Module to implement hooks for django-oemof."""
-
 import json
+import os
 
 from django.http import HttpRequest
 from django_oemof.settings import OEMOF_DIR
@@ -61,18 +61,12 @@ def adapt_demand(scenario: str, data: dict, request: HttpRequest) -> dict:
     dict
         Parameters for oemof with adapted demands
     """
-    # since we only have 1 scenario, do we need the scenario argument here?
     filename = "absolute_values.json"
-    absolute_filename = OEMOF_DIR / scenario / filename
-    # also why is the request as argument needed?
+    absolute_filename = os.path.join(OEMOF_DIR, "scenario_2045", filename)
 
     with open(absolute_filename, "r") as read_file:
         jsondata = json.load(read_file)
 
-    # since this will be one hook for all profiles(?), thats what I intent for later
-    # like this, "electricity_demand" will be replaced by "profile"
-
-    # for profile in jsondata.keys():
     region_values_per_sector = {
         "hh": sum(jsondata["electricity_demand"]["hh"]),
         "ghd": sum(jsondata["electricity_demand"]["ghd"]),
@@ -81,7 +75,7 @@ def adapt_demand(scenario: str, data: dict, request: HttpRequest) -> dict:
 
     parameters = {
         "ABW-electricity-demand_hh": {"amount": region_values_per_sector["hh"] * data["s_v_2"] / 100},
-        "ABW-electricity-demand_ghd": {"amount": region_values_per_sector["ghh"] * data["s_v_3"] / 100},
+        "ABW-electricity-demand_ghd": {"amount": region_values_per_sector["ghd"] * data["s_v_3"] / 100},
         "ABW-electricity-demand_i": {"amount": region_values_per_sector["i"] * data["s_v_4"] / 100},
     }
     return parameters
