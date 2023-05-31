@@ -2,6 +2,8 @@
 
 As map app is SPA, this module contains main view and various API points.
 """
+import json
+import os
 
 from django.conf import settings
 from django.http import HttpRequest, response
@@ -10,6 +12,7 @@ from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 from django_mapengine import views
 
+from config.settings.base import STATICFILES_DIRS
 from digiplan.map import config
 from digiplan.map.results import core
 
@@ -47,6 +50,8 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         """
         # Add unique session ID
         context = super().get_context_data(**kwargs)
+
+        add_legend_labels(context)
 
         context["panels"] = [
             forms.EnergyPanelForm(utils.get_translated_json_from_file(config.ENERGY_SETTINGS_PANEL_FILE, self.request)),
@@ -148,3 +153,18 @@ def get_visualization(request: HttpRequest) -> response.JsonResponse:
     vh.add(visualization)
     vh.run()
     return response.JsonResponse(vh[visualization])
+
+
+def add_legend_labels(context):
+    with open(os.path.join(STATICFILES_DIRS[0], "config", "choropleths.json"), "rb") as f:
+        labels = json.loads(f.read())
+
+    for item in context["mapengine_store_cold_init"]["choropleths"]:
+        context["mapengine_store_cold_init"]["choropleths"][item]["name"] = labels[item]["name"]
+        if "unit" in labels[item]:
+            unit = labels[item]["unit"]
+        else:
+            unit = "-"
+        context["mapengine_store_cold_init"]["choropleths"][item]["unit"] = unit
+
+    return context
