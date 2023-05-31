@@ -15,6 +15,9 @@ Chart = namedtuple("Chart", ("lookup", "div_id"))
 RESULT_CHARTS = (Chart("detailed_overview", "detailed_overview_chart"),)
 
 CHARTS: dict[str, Callable] = {
+    "capacity": calculations.capacity_chart,
+    "population": models.Population.population_history,
+    "population_density": models.Population.density_history,
     "wind_turbines": models.WindTurbine.wind_turbines_history,
     "wind_turbines_square": models.WindTurbine.wind_turbines_per_area_history,
     "detailed_overview": calculations.detailed_overview,
