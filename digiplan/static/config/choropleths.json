@@ -1,23 +1,31 @@
 {
   "population": {
     "color_palette": "YlGnBu",
-    "num_colors": 6
+    "num_colors": 6,
+    "name": "Einwohner"
   },
   "population_density": {
     "color_palette": "YlGnBu",
-    "num_colors": 6
+    "num_colors": 6,
+    "name": "Einwohnerdichte"
   },
   "capacity": {
     "color_palette": "YlGnBu",
-    "num_colors": 6
+    "num_colors": 6,
+    "name": "Installed renewable capacity",
+    "unit": "MW"
   },
   "capacity_square": {
     "color_palette": "YlGnBu",
-    "num_colors": 6
+    "num_colors": 6,
+    "name": "Installed renewable capacity per km2",
+    "unit": "MW"
   },
-  "re_power": {
+  "renewable_electricity_production": {
     "color_palette": "YlGnBu",
-    "num_colors": 6
+    "num_colors": 6,
+    "name": "renewable energy production",
+    "unit": "GWh"
   },
   "re_power_percentage": {
     "color_palette": "GnBu",
@@ -26,14 +34,18 @@
       0.6,
       0.8,
       1.0
-    ]
+    ],
+    "name": "renewable energy share of demand",
+    "unit": "%"
   },
   "wind_turbines": {
     "color_palette": "YlGnBu",
-    "num_colors": 6
+    "num_colors": 6,
+    "name": "Number of wind turbines"
   },
   "wind_turbines_square": {
     "color_palette": "YlGnBu",
-    "num_colors": 6
+    "num_colors": 6,
+    "name": "Number of wind turbines per km2"
   }
 }
