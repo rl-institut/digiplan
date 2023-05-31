@@ -16,6 +16,7 @@ RESULT_CHARTS = (Chart("detailed_overview", "detailed_overview_chart"),)
 
 CHARTS: dict[str, Callable] = {
     "capacity": calculations.capacity_chart,
+    "capacity_square": calculations.capacity_square_chart,
     "population": models.Population.population_history,
     "population_density": models.Population.density_history,
     "wind_turbines": models.WindTurbine.wind_turbines_history,
