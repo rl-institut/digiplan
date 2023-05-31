@@ -1,8 +1,20 @@
 {
-  "lookup": "capacity",
+  "xAxis": {
+    "type": "category",
+    "data": ["Wind", "Freiflächen-PV", "Aufdach-PV", "Bioenergie", "Konventionell"]
+  },
+  "yAxis": {
+    "type": "value",
+    "show": true,
+    "name": "MW",
+    "nameLocation": "end",
+    "nameTextStyle": "Roboto"
+  },
   "series": [
     {
-      "data": [],
+      "type": "bar",
+      "barWidth": "16",
+      "data": [5, 20, 36, 10, 10],
       "name": "Installed Capacity"
     }
   ],

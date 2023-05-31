@@ -1,5 +1,17 @@
 {% extends "popups/base.html" %}
+{% load static i18n compress %}
 
 {% block chart %}
   <div id="js-popup__chart" class="popup__chart" style="width: 416px; height: 200px;"></div>
+  {{ chart|json_script:"chart-options" }}
+
+  {% compress js %}
+    <script src="{% static 'vendors/echarts/js/echarts.min.js' %}" type="text/javascript"></script>
+    <script>
+      var chart = echarts.init(document.getElementById('js-popup__chart'));
+      chart.resize();
+      chart.setOption(JSON.parse(document.getElementById('chart-options').textContent));
+    </script>
+  {% endcompress %}
+
 {% endblock %}
