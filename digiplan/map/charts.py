@@ -7,9 +7,11 @@ from typing import Optional
 
 import pandas as pd
 
-from digiplan.map import config, models
+from digiplan.map import calculations, config, models
 
 CHARTS: dict[str, Callable] = {
+    "capacity": calculations.capacity_chart,
+    "population": models.Population.population_history,
     "population_density": models.Population.density_history,
     "wind_turbines": models.WindTurbine.wind_turbines_history,
     "wind_turbines_square": models.WindTurbine.wind_turbines_per_area_history,
