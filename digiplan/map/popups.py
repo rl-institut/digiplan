@@ -107,6 +107,17 @@ class CapacityPopup(RegionPopup):
         return calculations.capacity_chart(self.selected_id)
 
 
+class CapacitySquarePopup(RegionPopup):
+    def get_region_value(self) -> float:
+        return calculations.capacity_square_popup
+
+    def get_municipality_value(self) -> float:
+        return calculations.capacity_square_popup(self.selected_id)
+
+    def get_chart_data(self) -> Iterable:
+        return charts.create_chart(self.lookup)
+
+
 class RenewableElectricityProductionPopup(SimulationPopup):
     """Popup to show renewable electricity production values."""
 
@@ -126,5 +137,6 @@ class RenewableElectricityProductionPopup(SimulationPopup):
 
 POPUPS: dict[str, type(popups.Popup)] = {
     "capacity": CapacityPopup,
+    "capacity_square": CapacitySquarePopup,
     "renewable_electricity_production": RenewableElectricityProductionPopup,
 }

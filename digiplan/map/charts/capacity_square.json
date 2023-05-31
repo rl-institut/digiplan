@@ -1,10 +1,22 @@
 {
-    "lookup": "capacity_square_km",
-    "series": [
-      {
-        "data": [],
-        "name": "Installed Capacity per km²"
-      }
-    ],
+  "xAxis": {
+    "type": "category",
+    "data": ["Wind", "Freiflächen-PV", "Aufdach-PV", "Bioenergie", "Konventionell"]
+  },
+  "yAxis": {
+    "type": "value",
+    "show": true,
+    "name": "MW",
+    "nameLocation": "end",
+    "nameTextStyle": "Roboto"
+  },
+  "series": [
+    {
+      "type": "bar",
+      "barWidth": "16",
+      "data": [5, 20, 36, 10, 10],
+      "name": "Installed Capacity per km²"
+    }
+  ],
     "title": "installed capacity per km² in different types"
   }

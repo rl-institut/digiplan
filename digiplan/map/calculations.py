@@ -78,7 +78,7 @@ def capacity_chart(municipality_id: int) -> dict:  # noqa: ARG001
     dict
         Chart data to use in JS
     """
-    return [(2023, 2), (2046, 3), (2050, 4), (2060, 6), (2070, 2)]
+    return [5, 20, 36, 10, 10]
 
 
 def capacity_choropleth() -> dict[int, int]:
@@ -139,7 +139,7 @@ def capacity_square_chart(municipality_id: int) -> dict:  # noqa: ARG001
     dict
         Chart data to use in JS
     """
-    return [(2023, 2), (2046, 3), (2050, 4)]
+    return [5, 20, 36, 10, 10]
 
 
 def capacity_square_choropleth() -> dict[int, int]:
