@@ -6,6 +6,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- integration of celery for oemof simulations
 - start oemof simulation
 
 ### Changed
