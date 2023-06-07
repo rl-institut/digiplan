@@ -8,6 +8,7 @@ const store = initStore();
 
 function initStore() {
   const store_cold_init = JSON.parse(document.getElementById("store_cold_init").textContent);
+  store_cold_init.task_id = null;
   return new Store(store_cold_init);
 }
 

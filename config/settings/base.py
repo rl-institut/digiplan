@@ -227,6 +227,13 @@ COMPRESS_PRECOMPILERS = [("text/x-scss", "django_libsass.SassCompiler")]
 
 COMPRESS_CACHEABLE_PRECOMPILERS = (("text/x-scss", "django_libsass.SassCompiler"),)
 
+# celery
+# ------------------------------------------------------------------------------
+# https://docs.celeryq.dev/en/stable/userguide/configuration.html#std:setting-broker_url
+CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+# https://docs.celeryq.dev/en/stable/userguide/configuration.html#std:setting-result_backend
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+
 # Your stuff...
 # ------------------------------------------------------------------------------
 PASSWORD_PROTECTION = env.bool("PASSWORD_PROTECTION", False)
