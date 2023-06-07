@@ -33,8 +33,6 @@ function simulate(msg) {
         $.ajax({
             url : "/oemof/terminate",
             type : "POST",
-            processData: false,
-            contentType: false,
             data : {task_id: store.cold.task_id},
         });
     }
