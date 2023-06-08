@@ -6,20 +6,19 @@
   </div>
 
   <div id="js-popup__key-values" class="popup__key-values">
-    {% block key_values %}
+    {% block data %}
       <span class="key-values__municipality">
-        {% for key, value in data.items %}
-          {% if "value" in key %}
-            <span class="key-values__{{ key }}">{{ value|default_if_none:""|floatformat }}</span>
-          {% else %}
-            <span class="key-values__{{ key }}">{{ value|default_if_none:"" }}</span>
-          {% endif %}
-        {% endfor %}
+        {% if data.region_value %}
+          <span class="key-values__region_value">ABW Region {{ data.region_value|floatformat:0 }} {{ data.unit }}</span>
+        {% endif %}
+        {% if data.municipality_value %}
+          <span class="key-values__municipality_value">{{ municipality }}{{ data.municipality_value|floatformat:0 }} {{ data.unit }}</span>
+        {% endif %}
       </span>
-    {% endblock %}
+    {% endblock data%}
   </div>
 
-  {% block chart %}{% endblock %}
+  {% block chart %}{% endblock chart %}
 
   <div id="js-popup__description" class="popup__description">{{ description }}</div>
 
