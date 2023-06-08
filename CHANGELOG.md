@@ -8,6 +8,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Added
 - integration of celery for oemof simulations
 - start oemof simulation
+- oemof hooks for adapting RE capacities and electric demand
 
 ### Changed
 - switched to oemof.tabular postprocessing (instead of using oemoflex)
