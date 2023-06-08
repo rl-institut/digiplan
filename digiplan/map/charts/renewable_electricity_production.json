@@ -1,10 +1,10 @@
 {
-    "lookup": "population_density",
+    "lookup": "renewable_electricity_production",
     "series": [
       {
         "data": [],
-        "name": "Population Density"
+        "name": "Renewable Electricity Production"
       }
     ],
-    "title": "population density in different years"
+    "title": "Renewable Electricity Production"
   }

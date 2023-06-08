@@ -243,6 +243,8 @@ renewable_electricity_production = core.ParametrizedCalculation(
     {
         "from_nodes": [
             "ABW-solar-pv_ground",
+            "ABW-solar-pv_rooftop",
+            "ABW-wind-onshore",
         ],
     },
 )
