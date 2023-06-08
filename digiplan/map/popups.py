@@ -55,7 +55,7 @@ class RegionPopup(popups.ChartPopup):
         """Must be overwritten."""
 
     @abc.abstractmethod
-    def get_municipality_value(self) -> float:
+    def get_municipality_value(self) -> Optional[float]:
         """Must be overwritten."""
 
     @abc.abstractmethod
@@ -114,13 +114,14 @@ class RenewableElectricityProductionPopup(SimulationPopup):
     calculation = calculations.renewable_electricity_production
 
     def get_region_value(self) -> float:  # noqa: D102
-        return self.result
+        return self.result.sum() / 1000
 
-    def get_municipality_value(self) -> float:  # noqa: D102
-        return calculations.capacity_popup(self.selected_id)
+    def get_municipality_value(self) -> Optional[float]:  # noqa: D102
+        return None
 
     def get_chart_data(self) -> Iterable:  # noqa: D102
-        return calculations.capacity_chart(self.selected_id)
+        self.result.index = self.result.index.map(lambda x: config.SIMULATION_NAMES[x[0]])
+        return self.result
 
 
 POPUPS: dict[str, type(popups.Popup)] = {
