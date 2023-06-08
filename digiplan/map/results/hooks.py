@@ -1,9 +1,8 @@
 """Module to implement hooks for django-oemof."""
-import json
-import os
 
+import pandas
+from django.conf import settings
 from django.http import HttpRequest
-from django_oemof.settings import OEMOF_DIR
 
 from .. import config, forms
 
@@ -43,7 +42,7 @@ def read_parameters(scenario: str, parameters: dict, request: HttpRequest) -> di
     return parameters
 
 
-def adapt_demand(scenario: str, data: dict, request: HttpRequest) -> dict:
+def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) -> dict:
     """
     Reads demand settings and scales and aggregates related demands
 
@@ -61,21 +60,17 @@ def adapt_demand(scenario: str, data: dict, request: HttpRequest) -> dict:
     dict
         Parameters for oemof with adapted demands
     """
-    filename = "absolute_values.json"
-    absolute_filename = os.path.join(OEMOF_DIR, "scenario_2045", filename)
+    year = "2045" if scenario == "scenario_2045" else "2022"
+    for sector, slider in (("hh", "s_v_2"), ("ghd", "s_v_3"), ("i", "s_v_4")):
+        demand_filename = settings.DATA_DIR.path("scenarios").path(f"demand_{sector}_power_demand.csv")
+        demand = pandas.read_csv(demand_filename)
+        data[f"ABW-electricity-demand_{sector}"] = {"amount": float(demand[year].sum()) * data.pop(slider) / 100}
+    return data
 
-    with open(absolute_filename, "r") as read_file:
-        jsondata = json.load(read_file)
 
-    region_values_per_sector = {
-        "hh": sum(jsondata["electricity_demand"]["hh"]),
-        "ghd": sum(jsondata["electricity_demand"]["ghd"]),
-        "i": sum(jsondata["electricity_demand"]["i"]),
-    }
-
-    parameters = {
-        "ABW-electricity-demand_hh": {"amount": region_values_per_sector["hh"] * data["s_v_2"] / 100},
-        "ABW-electricity-demand_ghd": {"amount": region_values_per_sector["ghd"] * data["s_v_3"] / 100},
-        "ABW-electricity-demand_i": {"amount": region_values_per_sector["i"] * data["s_v_4"] / 100},
-    }
-    return parameters
+def adapt_capacities(scenario: str, data: dict, request) -> dict:
+    data["ABW-wind-onshore"] = {"capacity": data.pop("s_w_1")}
+    data["ABW-solar-pv_ground"] = {"capacity": data.pop("s_pv_ff_1")}
+    data["ABW-solar-pv_rooftop"] = {"capacity": data.pop("s_pv_d_1")}
+    data["ABW-biomass-fermenter"] = {"capacity": data.pop("s_b_1")}
+    return data
