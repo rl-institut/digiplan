@@ -2,7 +2,10 @@
 
 import json
 import pathlib
-from typing import Callable, Iterable, Optional
+from collections.abc import Callable, Iterable
+from typing import Optional
+
+import pandas as pd
 
 from digiplan.map import config, models
 
@@ -15,7 +18,8 @@ CHARTS: dict[str, Callable] = {
 
 
 def get_chart_options(lookup: str) -> dict:
-    """Get the options for a chart from the corresponding json file.
+    """
+    Get the options for a chart from the corresponding json file.
 
     Parameters
     ----------
@@ -43,13 +47,12 @@ def get_chart_options(lookup: str) -> dict:
     with pathlib.Path(config.CHARTS_DIR.path("general_options.json")).open("r", encoding="utf-8") as general_chart_json:
         general_chart_options = json.load(general_chart_json)
 
-    chart = merge_dicts(lookup_options, general_chart_options)
-
-    return chart
+    return merge_dicts(lookup_options, general_chart_options)
 
 
 def create_chart(lookup: str, chart_data: Optional[Iterable[tuple[str, float]]] = None) -> dict:
-    """Create chart based on given lookup and municipality ID or result option
+    """
+    Create chart based on given lookup and municipality ID or result option.
 
     Parameters
     ----------
@@ -66,8 +69,11 @@ def create_chart(lookup: str, chart_data: Optional[Iterable[tuple[str, float]]] 
 
     """
     chart = get_chart_options(lookup)
-    if chart_data:
-        chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
+    if chart_data is not None:
+        if isinstance(chart_data, pd.Series):
+            chart["series"][0]["data"] = [{"key": index, "value": value} for index, value in chart_data.items()]
+        else:
+            chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
     return chart
 
 
