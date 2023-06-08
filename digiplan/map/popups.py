@@ -16,6 +16,8 @@ from . import calculations, charts, config, models
 class RegionPopup(popups.ChartPopup):
     """Popup containing values for municipality and region in header."""
 
+    unit: str = None
+
     def get_context_data(self) -> dict:
         """
         Set up context data including municipality and region values.
@@ -31,6 +33,7 @@ class RegionPopup(popups.ChartPopup):
         data["id"] = self.selected_id
         data["data"]["region_value"] = self.get_region_value()
         data["data"]["municipality_value"] = self.get_municipality_value()
+        data["data"]["unit"] = self.unit
         data["municipality"] = models.Municipality.objects.get(pk=self.selected_id)
 
         return data
@@ -107,6 +110,7 @@ class CapacityPopup(RegionPopup):
 class RenewableElectricityProductionPopup(SimulationPopup):
     """Popup to show renewable electricity production values."""
 
+    unit = "MWh"
     calculation = calculations.renewable_electricity_production
 
     def get_region_value(self) -> float:  # noqa: D102
