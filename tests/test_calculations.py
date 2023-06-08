@@ -1,16 +1,18 @@
-from django.test import TestCase
+from django.test import SimpleTestCase
 from django_oemof import results as oemof_results
 from django_oemof import simulation
 from oemof.tabular.postprocessing import calculations as tabular_calculations
 from oemof.tabular.postprocessing import core
 
 
-class RenewableElectricityProductionTest(TestCase):
-    def tearDown(self) -> None:
+class RenewableElectricityProductionTest(SimpleTestCase):
+    databases = ("default",)  # Needed, as otherwise django complains about tests using "default" DB
+
+    def tearDown(self) -> None:  # Needed to keep results in test DB
         pass
 
     @classmethod
-    def tearDownClass(cls):
+    def tearDownClass(cls):  # Needed to keep results in test DB
         pass
 
     def test_renewable_electricity_production(self):
