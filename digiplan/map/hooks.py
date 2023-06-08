@@ -1,15 +1,15 @@
 """Module to implement hooks for django-oemof."""
 
-import pandas
+import pandas as pd
 from django.conf import settings
 from django.http import HttpRequest
 
-from .. import config, forms
+from digiplan.map import config, forms
 
 
-def read_parameters(scenario: str, parameters: dict, request: HttpRequest) -> dict:
+def read_parameters(scenario: str, parameters: dict, request: HttpRequest) -> dict:  # noqa: ARG001
     """
-    Read parameters from settings panel
+    Read parameters from settings panel.
 
     Parameters
     ----------
@@ -42,9 +42,9 @@ def read_parameters(scenario: str, parameters: dict, request: HttpRequest) -> di
     return parameters
 
 
-def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) -> dict:
+def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) -> dict:  # noqa: ARG001
     """
-    Reads demand settings and scales and aggregates related demands
+    Read demand settings and scales and aggregates related demands.
 
     Parameters
     ----------
@@ -63,12 +63,29 @@ def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) ->
     year = "2045" if scenario == "scenario_2045" else "2022"
     for sector, slider in (("hh", "s_v_2"), ("ghd", "s_v_3"), ("i", "s_v_4")):
         demand_filename = settings.DATA_DIR.path("scenarios").path(f"demand_{sector}_power_demand.csv")
-        demand = pandas.read_csv(demand_filename)
+        demand = pd.read_csv(demand_filename)
         data[f"ABW-electricity-demand_{sector}"] = {"amount": float(demand[year].sum()) * data.pop(slider) / 100}
     return data
 
 
-def adapt_capacities(scenario: str, data: dict, request) -> dict:
+def adapt_capacities(scenario: str, data: dict, request: HttpRequest) -> dict:  # noqa: ARG001
+    """
+    Read renewable capacities from user input and adapt ES parameters accordingly.
+
+    Parameters
+    ----------
+    scenario: str
+        Name of oemof datapackage
+    data: dict
+        User-given input parameters
+    request:
+        HttpRequest from django
+
+    Returns
+    -------
+    dict
+        Adapted parameters dict with set up capacities
+    """
     data["ABW-wind-onshore"] = {"capacity": data.pop("s_w_1")}
     data["ABW-solar-pv_ground"] = {"capacity": data.pop("s_pv_ff_1")}
     data["ABW-solar-pv_rooftop"] = {"capacity": data.pop("s_pv_d_1")}

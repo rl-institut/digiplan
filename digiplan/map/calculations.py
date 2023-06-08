@@ -7,6 +7,7 @@ from functools import partial
 from typing import Optional
 
 from django.db.models import Sum
+from oemof.tabular.postprocessing import calculations, core
 
 from digiplan.map import config, models
 
@@ -14,7 +15,8 @@ LookupFunctions = namedtuple("PopupData", ("data_fct", "chart_fct", "choropleth_
 
 
 def create_choropleth_data(lookup: str) -> dict:
-    """Create data for every municipality for given lookup.
+    """
+    Create data for every municipality for given lookup.
 
     Parameters
     ----------
@@ -37,8 +39,9 @@ def create_choropleth_data(lookup: str) -> dict:
     return LOOKUPS[lookup].choropleth_fct()
 
 
-def create_data(lookup: str, municipality_id: int, map_state: dict) -> dict:
-    """Create data for given lookup.
+def create_data(lookup: str, municipality_id: int, map_state: dict) -> dict:  # noqa: ARG001
+    """
+    Create data for given lookup.
 
     Parameters
     ----------
@@ -74,20 +77,37 @@ def create_data(lookup: str, municipality_id: int, map_state: dict) -> dict:
     return data
 
 
-def calculate_square_for_value(value: int, municipality_id: int) -> float:
+def calculate_square_for_value(value: int, municipality_id: Optional[int]) -> float:
+    """
+    Calculate value related to municipality area.
+
+    Parameters
+    ----------
+    value: int
+        Value to calculate
+    municipality_id: Optional[int]
+        ID of municipality to get area from
+        If not given, value in relation to area of whole region is calculated.
+
+    Returns
+    -------
+    float
+        Value per square meter
+    """
     area = 0.0
     if municipality_id is not None:
         area = models.Municipality.objects.get(pk=municipality_id).area
     else:
         for mun in models.Municipality.objects.all():
             area += models.Municipality.objects.get(pk=mun.id).area
-    if area != 0.0:
+    if area != 0.0:  # noqa: PLR2004
         return value / area
     return value
 
 
 def capacity_popup(mun_id: Optional[int] = None) -> float:
-    """Calculate capacity of renewables (either for municipality or for whole region).
+    """
+    Calculate capacity of renewables (either for municipality or for whole region).
 
     Parameters
     ----------
@@ -112,7 +132,8 @@ def capacity_popup(mun_id: Optional[int] = None) -> float:
 
 # pylint: disable=W0613
 def capacity_chart(municipality_id: int) -> dict:  # noqa: ARG001
-    """Get chart for capacity of renewables.
+    """
+    Get chart for capacity of renewables.
 
     Parameters
     ----------
@@ -128,7 +149,8 @@ def capacity_chart(municipality_id: int) -> dict:  # noqa: ARG001
 
 
 def capacity_choropleth() -> dict[int, int]:
-    """Calculate capacity of renewables per municipality.
+    """
+    Calculate capacity of renewables per municipality.
 
     Returns
     -------
@@ -152,7 +174,8 @@ def capacity_choropleth() -> dict[int, int]:
 
 
 def capacity_square_popup(mun_id: Optional[int] = None) -> float:
-    """Calculate capacity of renewables per km² (either for municipality or for whole region).
+    """
+    Calculate capacity of renewables per km² (either for municipality or for whole region).
 
     Parameters
     ----------
@@ -165,13 +188,13 @@ def capacity_square_popup(mun_id: Optional[int] = None) -> float:
         Sum of installed renewables
     """
     value = capacity_popup(mun_id)
-    capacity = calculate_square_for_value(value, mun_id)
-    return capacity
+    return calculate_square_for_value(value, mun_id)
 
 
 # pylint: disable=W0613
 def capacity_square_chart(municipality_id: int) -> dict:  # noqa: ARG001
-    """Get chart for capacity of renewables per km².
+    """
+    Get chart for capacity of renewables per km².
 
     Parameters
     ----------
@@ -187,7 +210,8 @@ def capacity_square_chart(municipality_id: int) -> dict:  # noqa: ARG001
 
 
 def capacity_square_choropleth() -> dict[int, int]:
-    """Calculate capacity of renewables per km² per municipality.
+    """
+    Calculate capacity of renewables per km² per municipality.
 
     Returns
     -------
@@ -198,6 +222,30 @@ def capacity_square_choropleth() -> dict[int, int]:
     for key, value in capacity.items():
         capacity[key] = calculate_square_for_value(value, key)
     return capacity
+
+
+electric_demand = core.ParametrizedCalculation(
+    calculations.AggregatedFlows,
+    {
+        "to_nodes": [
+            "ABW-ch4-demand",
+            "ABW-electricity-demand",
+            "ABW-heat_central-demand",
+            "ABW-heat_decentral-demand",
+            "ABW-lignite-demand",
+            "ABW-wood-demand",
+        ],
+    },
+)
+
+renewable_electricity_production = core.ParametrizedCalculation(
+    calculations.AggregatedFlows,
+    {
+        "from_nodes": [
+            "ABW-solar-pv_ground",
+        ],
+    },
+)
 
 
 LOOKUPS: dict[str, LookupFunctions] = {

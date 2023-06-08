@@ -1,4 +1,5 @@
-"""Views for map app.
+"""
+Views for map app.
 
 As map app is SPA, this module contains main view and various API points.
 """
@@ -11,7 +12,6 @@ from django.views.generic import TemplateView
 from django_mapengine import views
 
 from digiplan.map import calculations, config
-from digiplan.map.results import core
 
 from . import charts, forms, map_config, popups, utils
 
@@ -33,7 +33,8 @@ class MapGLView(TemplateView, views.MapEngineMixin):
     }
 
     def get_context_data(self, **kwargs) -> dict:
-        """Context data for main view.
+        """
+        Context data for main view.
 
         Parameters
         ----------
@@ -52,7 +53,7 @@ class MapGLView(TemplateView, views.MapEngineMixin):
             forms.EnergyPanelForm(utils.get_translated_json_from_file(config.ENERGY_SETTINGS_PANEL_FILE, self.request)),
             forms.HeatPanelForm(utils.get_translated_json_from_file(config.HEAT_SETTINGS_PANEL_FILE, self.request)),
             forms.TrafficPanelForm(
-                utils.get_translated_json_from_file(config.TRAFFIC_SETTINGS_PANEL_FILE, self.request)
+                utils.get_translated_json_from_file(config.TRAFFIC_SETTINGS_PANEL_FILE, self.request),
             ),
         ]
 
@@ -81,8 +82,9 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         return context
 
 
-def get_popup(request: HttpRequest, lookup: str, region: int) -> response.JsonResponse:  # noqa: ARG001
-    """Return popup as html and chart options to render chart on popup.
+def get_popup(request: HttpRequest, lookup: str, region: int) -> response.JsonResponse:
+    """
+    Return popup as html and chart options to render chart on popup.
 
     Parameters
     ----------
@@ -117,7 +119,8 @@ def get_popup(request: HttpRequest, lookup: str, region: int) -> response.JsonRe
 
 # pylint: disable=W0613
 def get_choropleth(request: HttpRequest, lookup: str, scenario: str) -> response.JsonResponse:  # noqa: ARG001
-    """Read scenario results from database, aggregate data and send back data.
+    """
+    Read scenario results from database, aggregate data and send back data.
 
     Parameters
     ----------
@@ -136,24 +139,3 @@ def get_choropleth(request: HttpRequest, lookup: str, scenario: str) -> response
     values = calculations.create_choropleth_data(lookup)
     fill_color = settings.MAP_ENGINE_CHOROPLETH_STYLES.get_fill_color(lookup, list(values.values()))
     return response.JsonResponse({"values": values, "paintProperties": {"fill-color": fill_color, "fill-opacity": 1}})
-
-
-def get_visualization(request: HttpRequest) -> response.JsonResponse:
-    """Return visualization from oemof simulation result.
-
-    Parameters
-    ----------
-    request : HttpRequest
-        Request for visualization
-
-    Returns
-    -------
-    JsonResponse
-        Visualization of simulation result
-    """
-    simulation_ids = [int(sim_id) for sim_id in request.GET.getlist("simulation_ids")]
-    visualization = request.GET["visualization"]
-    vh = core.VisualizationHandler(simulation_ids)
-    vh.add(visualization)
-    vh.run()
-    return response.JsonResponse(vh[visualization])

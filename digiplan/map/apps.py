@@ -14,12 +14,11 @@ class MapConfig(AppConfig):
 
     def ready(self) -> None:
         """Content in here is run when app is ready."""
-
         # pylint: disable=C0415
         from django_oemof import hooks
 
         # pylint: disable=C0415
-        from digiplan.map.results import hooks as digiplan_hooks
+        from digiplan.map import hooks as digiplan_hooks
 
         hooks.register_hook(
             hooks.HookType.SETUP,
