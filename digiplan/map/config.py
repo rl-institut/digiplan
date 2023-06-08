@@ -3,6 +3,7 @@ import json
 import pathlib
 
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 from digiplan import __version__
 
@@ -48,7 +49,8 @@ STORE_COLD_INIT = {
 
 
 def init_hot_store() -> str:
-    """Initialize hot store for use in JS store.
+    """
+    Initialize hot store for use in JS store.
 
     Returns
     -------
@@ -65,7 +67,8 @@ STORE_HOT_INIT = init_hot_store()
 
 # SOURCES
 def init_sources() -> dict[str, dict]:
-    """Initialize sources to be shown in sources section in app.
+    """
+    Initialize sources to be shown in sources section in app.
 
     Returns
     -------
@@ -84,3 +87,12 @@ def init_sources() -> dict[str, dict]:
 
 
 SOURCES = init_sources()
+
+
+# SIMULATION
+
+SIMULATION_NAMES = {
+    "ABW-solar-pv_ground": _("Freiflächen-PV"),
+    "ABW-solar-pv_rooftop": _("Aufdach-PV"),
+    "ABW-wind-onshore": _("Wind"),
+}
