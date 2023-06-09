@@ -1,5 +1,5 @@
-from dataclasses import dataclass
-from enum import Enum
+"""Digiplan models."""
+
 from typing import Optional
 
 from django.contrib.gis.db import models
@@ -8,25 +8,15 @@ from django.utils.translation import gettext_lazy as _
 
 from .managers import LabelMVTManager, RegionMVTManager, StaticMVTManager
 
-
-class LayerFilterType(Enum):
-    Range = 0
-    Dropdown = 1
-
-
-@dataclass
-class LayerFilter:
-    name: str
-    type: LayerFilterType = LayerFilterType.Range  # noqa: A003
-
-
 # REGIONS
 
 
 class Region(models.Model):
-    """Base class for all regions - works as connector to other models"""
+    """Base class for all regions - works as connector to other models."""
 
     class LayerType(models.TextChoices):
+        """Region layer types."""
+
         COUNTRY = "country", _("Country")
         STATE = "state", _("State")
         DISTRICT = "district", _("District")
@@ -34,12 +24,14 @@ class Region(models.Model):
 
     layer_type = models.CharField(max_length=12, choices=LayerType.choices, null=False)
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = _("Region")
         verbose_name_plural = _("Regions")
 
 
 class Municipality(models.Model):
+    """Model for region level municipality."""
+
     geom = models.MultiPolygonField(srid=4326)
     name = models.CharField(max_length=50, unique=True)
     area = models.FloatField()
@@ -54,32 +46,43 @@ class Municipality(models.Model):
     layer = "vg250_gem"
     mapping = {"id": "id", "geom": "MULTIPOLYGON", "name": "name", "area": "area_km2"}
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = _("Municipality")
         verbose_name_plural = _("Municipalities")
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """Return string representation of model."""
         return self.name
 
     @classmethod
     def area_whole_region(cls) -> float:
-        area = cls.objects.all().aggregate(Sum("area"))["area__sum"]
-        return area
+        """
+        Return summed area of all municipalities.
+
+        Returns
+        -------
+        float
+            total area of all municipalities
+        """
+        return cls.objects.all().aggregate(Sum("area"))["area__sum"]
 
 
 class Population(models.Model):
+    """Population model."""
+
     year = models.IntegerField()
     value = models.IntegerField()
     entry_type = models.CharField(max_length=13)
     municipality = models.ForeignKey(Municipality, on_delete=models.CASCADE)
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = _("Population")
         verbose_name_plural = _("Population")
 
     @classmethod
     def quantity(cls, year: int, mun_id: Optional[int] = None) -> int:
-        """Calculate population in 2022 (either for municipality or for whole region).
+        """
+        Calculate population in 2022 (either for municipality or for whole region).
 
         Parameters
         ----------
@@ -93,15 +96,14 @@ class Population(models.Model):
         int
             Value of population
         """
-
         if mun_id is not None:
             return cls.objects.filter(year=year, municipality__id=mun_id).aggregate(sum=Sum("value"))["sum"]
-        else:
-            return cls.objects.filter(year=year).aggregate(sum=Sum("value"))["sum"]
+        return cls.objects.filter(year=year).aggregate(sum=Sum("value"))["sum"]
 
     @classmethod
-    def population_history(cls, mun_id: int) -> models.QuerySet:  # noqa: ARG001
-        """Get chart for population per municipality in different years.
+    def population_history(cls, mun_id: int) -> models.QuerySet:
+        """
+        Get chart for population per municipality in different years.
 
         Parameters
         ----------
@@ -117,7 +119,8 @@ class Population(models.Model):
 
     @classmethod
     def population_per_municipality(cls) -> dict[int, int]:
-        """Calculate population per municipality.
+        """
+        Calculate population per municipality.
 
         Returns
         -------
@@ -128,7 +131,8 @@ class Population(models.Model):
 
     @classmethod
     def density(cls, year: int, mun_id: Optional[int] = None) -> float:
-        """Calculate population denisty in given year per km² (either for municipality or for whole region).
+        """
+        Calculate population denisty in given year per km² (either for municipality or for whole region).
 
         Parameters
         ----------
@@ -151,14 +155,13 @@ class Population(models.Model):
         return density
 
     @classmethod
-    def density_history(cls, mun_id: int) -> dict:  # noqa: ARG001
-        """Get chart for population density for the given municipality in different years.
+    def density_history(cls, mun_id: int) -> dict:
+        """
+        Get chart for population density for the given municipality in different years.
 
         Parameters
         ----------
-        chart: dict
-            Default chart options for population density from JSON
-        municipality_id: int
+        mun_id: int
             Related municipality
 
         Returns
@@ -169,8 +172,9 @@ class Population(models.Model):
         return cls.objects.filter(municipality_id=mun_id).values_list("year", "value")
 
     @classmethod
-    def denisty_per_municipality(cls) -> dict[int, int]:
-        """Calculate population per municipality.
+    def density_per_municipality(cls) -> dict[int, int]:
+        """
+        Calculate population per municipality.
 
         Returns
         -------
@@ -184,6 +188,8 @@ class Population(models.Model):
 
 
 class WindTurbine(models.Model):
+    """Model holding wind turbines."""
+
     geom = models.PointField(srid=4326)
     name = models.CharField(max_length=255, null=True)
     name_park = models.CharField(max_length=255, null=True)
@@ -197,7 +203,8 @@ class WindTurbine(models.Model):
 
     objects = models.Manager()
     vector_tiles = StaticMVTManager(
-        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
+        geo_col="geom",
+        columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"],
     )
 
     data_file = "bnetza_mastr_wind_agg_region"
@@ -215,16 +222,18 @@ class WindTurbine(models.Model):
         "mun_id": "municipality_id",
     }
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = _("Wind turbine")
         verbose_name_plural = _("Wind turbines")
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """Return string representation of model."""
         return self.name
 
     @classmethod
-    def quantity(cls, mun_id: Optional[int] = None) -> int:
-        """Calculate number of windturbines (either for municipality or for whole region).
+    def quantity(cls, municipality_id: Optional[int] = None) -> int:
+        """
+        Calculate number of windturbines (either for municipality or for whole region).
 
         Parameters
         ----------
@@ -239,8 +248,8 @@ class WindTurbine(models.Model):
         values = cls.quantity_per_municipality()
         windturbines = 0
 
-        if mun_id is not None:
-            windturbines = values[mun_id]
+        if municipality_id is not None:
+            windturbines = values[municipality_id]
         else:
             for index in values:
                 windturbines += values[index]
@@ -248,14 +257,14 @@ class WindTurbine(models.Model):
 
     @classmethod
     def quantity_per_municipality(cls) -> dict[int, int]:
-        """Calculate number of wind turbines per municipality.
+        """
+        Calculate number of wind turbines per municipality.
 
         Returns
         -------
         dict[int, int]
             wind turbines per municipality
         """
-
         windturbines = {}
         municipalities = Municipality.objects.all()
 
@@ -267,8 +276,9 @@ class WindTurbine(models.Model):
         return windturbines
 
     @classmethod
-    def wind_turbines_history(cls, municipality_id: int) -> dict:  # noqa: ARG001
-        """Get chart for wind turbines.
+    def wind_turbines_history(cls, municipality_id: int) -> dict:  # noqa: ARG003
+        """
+        Get chart for wind turbines.
 
         Parameters
         ----------
@@ -283,8 +293,9 @@ class WindTurbine(models.Model):
         return [(2023, 2), (2046, 3), (2050, 4)]
 
     @classmethod
-    def quantity_per_square(cls, mun_id: Optional[int] = None) -> float:
-        """Calculate number of windturbines per km² (either for municipality or for whole region).
+    def quantity_per_square(cls, municipality_id: Optional[int] = None) -> float:
+        """
+        Calculate number of windturbines per km² (either for municipality or for whole region).
 
         Parameters
         ----------
@@ -296,18 +307,16 @@ class WindTurbine(models.Model):
         float
             Sum of windturbines per km²
         """
-        windturbines = cls.quantity(mun_id)
-        square_value = 0.0
+        windturbines = cls.quantity(municipality_id)
 
-        if mun_id is not None:
-            square_value = windturbines / Municipality.objects.get(pk=mun_id).area
-        else:
-            square_value = windturbines / Municipality.area_whole_region()
-        return square_value
+        if municipality_id is not None:
+            return windturbines / Municipality.objects.get(pk=municipality_id).area
+        return windturbines / Municipality.area_whole_region()
 
     @classmethod
-    def wind_turbines_per_area_history(cls, municipality_id: int) -> dict:  # noqa: ARG001
-        """Get chart for wind turbines per km².
+    def wind_turbines_per_area_history(cls, municipality_id: int) -> dict:  # noqa: ARG003
+        """
+        Get chart for wind turbines per km².
 
         Parameters
         ----------
@@ -323,7 +332,8 @@ class WindTurbine(models.Model):
 
     @classmethod
     def quantity_per_mun_and_area(cls) -> dict[int, int]:
-        """Calculate windturbines per km² per municipality.
+        """
+        Calculate windturbines per km² per municipality.
 
         Returns
         -------
@@ -337,6 +347,8 @@ class WindTurbine(models.Model):
 
 
 class PVroof(models.Model):
+    """Model holding PV roof."""
+
     geom = models.PointField(srid=4326)
     name = models.CharField(max_length=255, null=True)
     zip_code = models.CharField(max_length=50, null=True)
@@ -348,7 +360,8 @@ class PVroof(models.Model):
 
     objects = models.Manager()
     vector_tiles = StaticMVTManager(
-        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
+        geo_col="geom",
+        columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"],
     )
 
     data_file = "bnetza_mastr_pv_roof_agg_region"
@@ -365,15 +378,18 @@ class PVroof(models.Model):
         "mun_id": "municipality_id",
     }
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = _("Roof-mounted PV")
         verbose_name_plural = _("Roof-mounted PVs")
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """Return string representation of model."""
         return self.name
 
 
 class PVground(models.Model):
+    """Model holding PV on ground."""
+
     geom = models.PointField(srid=4326)
     name = models.CharField(max_length=255, null=True)
     zip_code = models.CharField(max_length=50, null=True)
@@ -385,7 +401,8 @@ class PVground(models.Model):
 
     objects = models.Manager()
     vector_tiles = StaticMVTManager(
-        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
+        geo_col="geom",
+        columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"],
     )
 
     data_file = "bnetza_mastr_pv_ground_agg_region"
@@ -402,12 +419,14 @@ class PVground(models.Model):
         "mun_id": "municipality_id",
     }
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = _("Outdoor PV")
         verbose_name_plural = _("Outdoor PVs")
 
 
 class Hydro(models.Model):
+    """Hydro model."""
+
     geom = models.PointField(srid=4326)
     name = models.CharField(max_length=255, null=True)
     zip_code = models.CharField(max_length=50, null=True)
@@ -419,7 +438,8 @@ class Hydro(models.Model):
 
     objects = models.Manager()
     vector_tiles = StaticMVTManager(
-        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
+        geo_col="geom",
+        columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"],
     )
 
     data_file = "bnetza_mastr_hydro_agg_region"
@@ -436,12 +456,14 @@ class Hydro(models.Model):
         "mun_id": "municipality_id",
     }
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = _("Hydro")
         verbose_name_plural = _("Hydro")
 
 
 class Biomass(models.Model):
+    """Biomass model."""
+
     geom = models.PointField(srid=4326)
     name = models.CharField(max_length=255, null=True)
     zip_code = models.CharField(max_length=50, null=True)
@@ -453,7 +475,8 @@ class Biomass(models.Model):
 
     objects = models.Manager()
     vector_tiles = StaticMVTManager(
-        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
+        geo_col="geom",
+        columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"],
     )
 
     data_file = "bnetza_mastr_biomass_agg_region"
@@ -470,12 +493,14 @@ class Biomass(models.Model):
         "mun_id": "municipality_id",
     }
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = _("Biomass")
         verbose_name_plural = _("Biomass")
 
 
 class Combustion(models.Model):
+    """Combustion model."""
+
     geom = models.PointField(srid=4326)
     name = models.CharField(max_length=255, null=True)
     name_block = models.CharField(max_length=255, null=True)
@@ -487,7 +512,8 @@ class Combustion(models.Model):
 
     objects = models.Manager()
     vector_tiles = StaticMVTManager(
-        geo_col="geom", columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"]
+        geo_col="geom",
+        columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"],
     )
 
     data_file = "bnetza_mastr_combustion_agg_region"
@@ -504,7 +530,7 @@ class Combustion(models.Model):
         "mun_id": "municipality_id",
     }
 
-    class Meta:
+    class Meta:  # noqa: D106
         verbose_name = _("Combustion")
         verbose_name_plural = _("Combustion")
 
