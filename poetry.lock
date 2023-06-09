@@ -345,14 +345,14 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.29.149"
+version = "1.29.150"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
 python-versions = ">= 3.7"
 files = [
-    {file = "botocore-1.29.149-py3-none-any.whl", hash = "sha256:b8ffb9ae92d2232dbf0c5e661328f3c174fd55dfd9505626a3606ffdc89268b2"},
-    {file = "botocore-1.29.149.tar.gz", hash = "sha256:2996117aac40e8c30a41e01b16f75f14f1a51fc2fa27ce9090eeece045f0ac35"},
+    {file = "botocore-1.29.150-py3-none-any.whl", hash = "sha256:9af58faa67c99d860eabba4cd030b5ee5f4e7e1c301edd6a9174419f75b39334"},
+    {file = "botocore-1.29.150.tar.gz", hash = "sha256:0e8c8f0dab008418e4e136ecf2a450fa01bae5b725b7b43ff7cc13beebbf33aa"},
 ]
 
 [package.dependencies]
@@ -1243,7 +1243,7 @@ libsass = ">=0.7.0,<1"
 
 [[package]]
 name = "django-mapengine"
-version = "0.8.0"
+version = "0.9.0"
 description = "Map engine for maplibre in django"
 category = "main"
 optional = false
@@ -1263,7 +1263,7 @@ range-key-dict = "^1.1.0"
 type = "git"
 url = "https://github.com/rl-institut/django-mapengine.git"
 reference = "HEAD"
-resolved_reference = "a0857fb6cc9db583215b4a9815b83ea71f413b43"
+resolved_reference = "7cc59a42d0f89f8fa04cd7d190df04b08e050580"
 
 [[package]]
 name = "django-oemof"
@@ -1391,14 +1391,14 @@ files = [
 
 [[package]]
 name = "eradicate"
-version = "2.2.0"
+version = "2.3.0"
 description = "Removes commented-out code."
 category = "dev"
 optional = false
 python-versions = "*"
 files = [
-    {file = "eradicate-2.2.0-py3-none-any.whl", hash = "sha256:751813c315a48ce7e3d0483410991015342d380a956e86e0265c61bfb875bcbc"},
-    {file = "eradicate-2.2.0.tar.gz", hash = "sha256:c329a05def6a4b558dab58bb1b694f5209706b7c99ba174d226dfdb69a5ba0da"},
+    {file = "eradicate-2.3.0-py3-none-any.whl", hash = "sha256:2b29b3dd27171f209e4ddd8204b70c02f0682ae95eecb353f10e8d72b149c63e"},
+    {file = "eradicate-2.3.0.tar.gz", hash = "sha256:06df115be3b87d0fc1c483db22a2ebb12bcf40585722810d809cc770f5031c37"},
 ]
 
 [[package]]
@@ -4193,14 +4193,14 @@ files = [
 
 [[package]]
 name = "werkzeug"
-version = "2.3.5"
+version = "2.3.6"
 description = "The comprehensive WSGI web application library."
 category = "dev"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "Werkzeug-2.3.5-py3-none-any.whl", hash = "sha256:26c6a6a63a8a8d10a8d4e13e7f10821772ff5f138909262e89e946717c72b857"},
-    {file = "Werkzeug-2.3.5.tar.gz", hash = "sha256:f6426f626540009131f06482c73f10c536efd47125afc63c850cc950db9ae585"},
+    {file = "Werkzeug-2.3.6-py3-none-any.whl", hash = "sha256:935539fa1413afbb9195b24880778422ed620c0fc09670945185cce4d91a8890"},
+    {file = "Werkzeug-2.3.6.tar.gz", hash = "sha256:98c774df2f91b05550078891dee5f0eb0cb797a522c757a2452b9cee5b202330"},
 ]
 
 [package.dependencies]
