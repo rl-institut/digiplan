@@ -1,6 +1,4 @@
-"""
-Base settings to build other settings files upon.
-"""
+"""Base settings to build other settings files upon."""
 import os
 
 import environ
@@ -164,7 +162,7 @@ TEMPLATES = [
                 "digiplan.utils.context_processors.settings_context",
             ],
         },
-    }
+    },
 ]
 
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
@@ -209,7 +207,11 @@ MANAGERS = ADMINS
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "formatters": {"verbose": {"format": "%(levelname)s %(asctime)s %(module)s " "%(process)d %(thread)d %(message)s"}},
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s " "%(process)d %(thread)d %(message)s",  # noqa: ISC001
+        },
+    },
     "handlers": {"console": {"level": "DEBUG", "class": "logging.StreamHandler", "formatter": "verbose"}},
     "root": {"level": "INFO", "handlers": ["console"]},
 }
@@ -239,7 +241,8 @@ CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 PASSWORD_PROTECTION = env.bool("PASSWORD_PROTECTION", False)
 PASSWORD = env.str("PASSWORD", default=None)
 if PASSWORD_PROTECTION and PASSWORD is None:
-    raise ValidationError("Password protection is on, but no password is given")
+    msg = "Password protection is on, but no password is given"
+    raise ValidationError(msg)
 
 SELECT2_CACHE_BACKEND = "select2"
 
@@ -285,19 +288,34 @@ MAP_ENGINE_ZOOM_LEVELS = {
 }
 
 MAP_ENGINE_CHOROPLETHS = [
-    setup.Choropleth("population", layers=["municipality"]),
-    setup.Choropleth("population_density", layers=["municipality"]),
-    setup.Choropleth("capacity", layers=["municipality"]),
-    setup.Choropleth("capacity_square", layers=["municipality"]),
-    setup.Choropleth("wind_turbines", layers=["municipality"]),
-    setup.Choropleth("wind_turbines_square", layers=["municipality"]),
-    setup.Choropleth("renewable_electricity_production", layers=["municipality"]),
+    setup.Choropleth("population", layers=["municipality"], title=_("Einwohner_innenzahl"), unit=_("EW")),
+    setup.Choropleth("population_density", layers=["municipality"], title=_("Einwohner_innenzahl"), unit=_("EW/qm")),
+    setup.Choropleth("capacity", layers=["municipality"], title=_("Installierte Leistung"), unit=_("MW")),
+    setup.Choropleth(
+        "capacity_square",
+        layers=["municipality"],
+        title=_("Installierte Leistung pro qm"),
+        unit=_("MW/qm"),
+    ),
+    setup.Choropleth("wind_turbines", layers=["municipality"], title=_("Anzahl Windturbinen"), unit=_("")),
+    setup.Choropleth(
+        "wind_turbines_square",
+        layers=["municipality"],
+        title=_("Anzahl Windturbinen pro qm"),
+        unit=_(""),
+    ),
+    setup.Choropleth(
+        "renewable_electricity_production",
+        layers=["municipality"],
+        title=_("Energie Erneuerbare"),
+        unit=_("GWh"),
+    ),
 ]
 MAP_ENGINE_POPUPS = [
     setup.Popup(
         "municipality",
-        False,
-        [
+        popup_at_default_layer=False,
+        choropleths=[
             "population",
             "population_density",
             "capacity",
@@ -306,5 +324,5 @@ MAP_ENGINE_POPUPS = [
             "wind_turbines_square",
             "renewable_electricity_production",
         ],
-    )
+    ),
 ]
