@@ -1,5 +1,6 @@
 
-const resultsDropdown = document.getElementById("result_views");
+import {resultsDropdown} from "./elements.js";
+
 const imageResults = document.getElementById("info_tooltip_results");
 const simulation_spinner = document.getElementById("simulation_spinner");
 

@@ -18,6 +18,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - hide map/chart view toggle in status quo and settings menu
 
 ### Fixed
+- chart tiles and results dropdown visible at same time
 - chart view is closed when navigating to status quo or settings tab
 - settings are translated
 
