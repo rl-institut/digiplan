@@ -1,12 +1,13 @@
 """Module to support choropleths in digiplan."""
 
 import abc
-from typing import Optional
+from collections.abc import Callable
+from typing import Optional, Union
 
 from django.conf import settings
 from django.http.response import JsonResponse
 
-from . import calculations
+from . import calculations, models
 
 
 class Choropleth:
@@ -75,13 +76,47 @@ class Choropleth:
         return JsonResponse({"values": self.get_values_per_feature(), "paintProperties": paint_properties})
 
 
-class RenewableElectricityProductionChoropleth(Choropleth):
-    """Choropleth for renewable electricity production."""
-
+class RenewableElectricityProductionChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         return calculations.capacity_choropleth()
 
 
-CHOROPLETHS: dict[str, type(Choropleth)] = {
+class CapacityChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return calculations.capacity_choropleth()
+
+
+class CapacitySquareChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return calculations.capacity_square_choropleth()
+
+
+class PopulationChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return models.Population.population_per_municipality()
+
+
+class PopulationDensityChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return models.Population.density_per_municipality()
+
+
+class WindTurbinesChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return models.WindTurbine.quantity_per_municipality()
+
+
+class WindTurbinesSquareChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return models.WindTurbine.quantity_per_square()
+
+
+CHOROPLETHS: dict[str, Union[Callable, type(Choropleth)]] = {
+    "capacity": CapacityChoropleth,
+    "capacity_square": CapacitySquareChoropleth,
+    "population": PopulationChoropleth,
+    "population_density": PopulationDensityChoropleth,
+    "wind_turbines": WindTurbinesChoropleth,
+    "wind_turbines_square": WindTurbinesSquareChoropleth,
     "renewable_electricity_production": RenewableElectricityProductionChoropleth,
 }
