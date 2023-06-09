@@ -1,6 +1,7 @@
 
 const menuNextBtn = document.getElementById("menu_next_btn");
 const menuPreviousBtn = document.getElementById("menu_previous_btn");
+const mapTab = document.getElementById("map-view-tab");
 
 menuNextBtn.addEventListener("click", function () {
     nextMenuTab();
@@ -12,7 +13,9 @@ menuPreviousBtn.addEventListener("click", function() {
 });
 
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, setMapChartViewVisibility);
+PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, showMapView);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, setMapChartViewVisibility);
+PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, showMapView);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, setMapChartViewVisibility);
 
 
@@ -59,6 +62,11 @@ function getCurrentMenuTab() {
     return document.querySelector("#js-panel-container > .panel__content > .tab-content > .active");
 }
 
+
+function showMapView(msg) {
+    bootstrap.Tab.getInstance(mapTab).show();
+    return logMessage(msg);
+}
 
 function setMapChartViewVisibility(msg) {
     const view_toggle = document.getElementsByClassName("view-toggle")[0];
