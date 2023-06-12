@@ -115,7 +115,7 @@ class CapacitySquarePopup(RegionPopup):
         return calculations.capacity_square_popup(self.selected_id)
 
     def get_chart_data(self) -> Iterable:
-        return charts.create_chart(self.lookup)
+        return calculations.capacity_square_chart(self.selected_id)
 
 
 class PopulationPopup(RegionPopup):

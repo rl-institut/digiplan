@@ -65,7 +65,8 @@ def capacity_popup(mun_id: Optional[int] = None) -> float:
 
 # pylint: disable=W0613
 def capacity_chart(municipality_id: int) -> list:  # noqa: ARG001
-    """Get chart for capacity of renewables.
+    """
+    Get chart for capacity of renewables.
 
     Parameters
     ----------

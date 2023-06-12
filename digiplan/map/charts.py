@@ -75,11 +75,12 @@ def create_chart(lookup: str, chart_data: Optional[Iterable[tuple[str, float]]] 
     chart = get_chart_options(lookup)
     if chart_data:
         # chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
-        if isinstance(chart_data, list):
-            chart["series"][0]["data"] = chart_data
-        elif isinstance(chart_data, dict):
-            for part in chart_data:
-                chart["series"][part]["data"] = chart_data[part]
+        # if isinstance(chart_data, list):
+        chart["series"][0]["data"] = chart_data
+    # elif isinstance(chart_data, dict):
+    # for part, index in chart_data:
+    # chart["series"][index]["data"] = chart_data[index]
+    print(chart)
     return chart
 
 
