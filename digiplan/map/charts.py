@@ -7,11 +7,9 @@ from typing import Optional
 
 import pandas as pd
 
-from digiplan.map import calculations, config, models
+from digiplan.map import config, models
 
 CHARTS: dict[str, Callable] = {
-    "capacity": calculations.capacity_chart,
-    "capacity_square": calculations.capacity_square_chart,
     "population": models.Population.population_history,
     "population_density": models.Population.density_history,
     "wind_turbines": models.WindTurbine.wind_turbines_history,
@@ -74,12 +72,13 @@ def create_chart(lookup: str, chart_data: Optional[Iterable[tuple[str, float]]] 
     """
     chart = get_chart_options(lookup)
     if chart_data:
-        # chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
-        # if isinstance(chart_data, list):
-        chart["series"][0]["data"] = chart_data
-    # elif isinstance(chart_data, dict):
-    # for part, index in chart_data:
-    # chart["series"][index]["data"] = chart_data[index]
+        series_length = len(chart["series"])
+        if series_length > 1:
+            for i in range(0, series_length):
+                chart["series"][i]["data"] = chart_data[i]
+        else:
+            chart["series"][0]["data"] = chart_data
+
     print(chart)
     return chart
 
