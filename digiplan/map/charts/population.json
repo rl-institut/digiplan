@@ -1,10 +1,22 @@
 {
-    "lookup": "population",
-    "series": [
-      {
-        "data": [],
-        "name": "Population"
-      }
-    ],
-    "title": "population in different years"
-  }
+  "xAxis": {
+    "type": "category",
+    "data": []
+  },
+  "yAxis": {
+    "type": "value",
+    "show": true,
+    "name": "MW",
+    "nameLocation": "end",
+    "nameTextStyle": "Roboto"
+  },
+  "series": [
+    {
+      "type": "bar",
+      "barWidth": "16",
+      "data": [5, 20, 36, 10, 10],
+      "name": "Population"
+    }
+  ],
+  "title": {"text": "population in different years"}
+}
