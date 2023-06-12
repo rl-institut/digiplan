@@ -10,5 +10,6 @@
   },
   "municipality": null,
   "sources": [ ],
-  "title": "installed capacity"
+  "title": "installed capacity",
+  "chart": []
 }

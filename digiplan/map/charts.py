@@ -49,7 +49,9 @@ def get_chart_options(lookup: str) -> dict:
     with pathlib.Path(config.CHARTS_DIR.path("general_options.json")).open("r", encoding="utf-8") as general_chart_json:
         general_chart_options = json.load(general_chart_json)
 
-    return merge_dicts(lookup_options, general_chart_options)
+    chart = merge_dicts(general_chart_options, lookup_options)
+
+    return chart
 
 
 def create_chart(lookup: str, chart_data: Optional[Iterable[tuple[str, float]]] = None) -> dict:
@@ -73,11 +75,12 @@ def create_chart(lookup: str, chart_data: Optional[Iterable[tuple[str, float]]] 
     chart = get_chart_options(lookup)
     if chart_data:
         # chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
-        if isinstance(chart_data, list):
-            chart["series"][0]["data"] = chart_data
-        elif isinstance(chart_data, dict):
-            for part in chart_data:
-                chart["series"][part]["data"] = chart_data[part]
+        # if isinstance(chart_data, list):
+        chart["series"][0]["data"] = chart_data
+    # elif isinstance(chart_data, dict):
+    # for part, index in chart_data:
+    # chart["series"][index]["data"] = chart_data[index]
+    print(chart)
     return chart
 
 
