@@ -18,5 +18,5 @@
       "name": "Installed Capacity"
     }
   ],
-  "title": "installed capacity of different types"
+  "title": {"text": "installed capacity of different types"}
 }

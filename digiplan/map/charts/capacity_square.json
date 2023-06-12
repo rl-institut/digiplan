@@ -62,5 +62,5 @@
       "name": "Konventionell"
     }
   ],
-  "title": "installed capacity per km² in different types"
+  "title": {"text": "installed capacity per km² in different types"}
 }
