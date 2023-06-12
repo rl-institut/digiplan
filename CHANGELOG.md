@@ -11,6 +11,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - oemof hooks for adapting RE capacities and electric demand
 
 ### Changed
+- deactivate choropleths when switching to settings tab
 - switched to oemof.tabular postprocessing (instead of using oemoflex)
 - removed legacy config
 - moved schema examples to test folder
