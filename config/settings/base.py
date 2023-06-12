@@ -311,6 +311,7 @@ MAP_ENGINE_CHOROPLETHS = [
         unit=_("GWh"),
     ),
 ]
+
 MAP_ENGINE_POPUPS = [
     setup.Popup(
         "municipality",
