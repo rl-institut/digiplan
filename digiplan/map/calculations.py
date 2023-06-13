@@ -159,6 +159,28 @@ def capacity_square_per_municipality() -> dict[int, int]:
     return capacity
 
 
+def detailed_overview(simulation_id: int) -> pd.DataFrame:  # noqa: ARG001
+    """
+    Calculate data for detailed overview chart from simulation ID.
+
+    Parameters
+    ----------
+    simulation_id: int
+        Simulation ID to calculate results from
+
+    Returns
+    -------
+    pandas.DataFrame
+        holding data for detailed overview chart
+    """
+    # TODO(Hendrik): Calculate real data
+    # https://github.com/rl-institut-private/digiplan/issues/164
+    return pd.DataFrame(
+        data={"production": [300, 200, 200, 150, 520, 0], "consumption": [0, 0, 0, 0, 0, 1300]},
+        index=["wind", "pv_roof", "pv_ground", "biomass", "fossil", "consumption"],
+    )
+
+
 def electricity_from_from_biomass(simulation_id: int) -> pd.Series:
     """
     Calculate electricity from biomass.
