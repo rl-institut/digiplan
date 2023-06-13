@@ -10,8 +10,8 @@
 <div class="c-slider {{ field.name }}">
   {% if field.label %}
     <div class="c-slider__label">
-    <span>{{ field.label }}{% if tooltip %}
-      {% include 'widgets/info_button.html' with description=tooltip %}{% endif %}</span>
+    <span>{{ field.label }}{% if field.help_text %}
+      {% include 'widgets/info_button.html' with description=field.help_text %}{% endif %}</span>
       {% if field.field.widget.attrs|dict_lookup_filter:"data-has-sidepanel" == "true" %}
         <span class="c-slider__label--more">
       <button class="button button--transparent">
