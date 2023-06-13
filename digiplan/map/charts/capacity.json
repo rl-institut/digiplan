@@ -1,7 +1,10 @@
 {
+  "color": ["#1F82C0","#F6B93B","#FFD660","#98D47E","#CFCFCF"],
   "xAxis": {
     "type": "category",
-    "data": ["Wind", "Freiflächen-PV", "Aufdach-PV", "Bioenergie", "Konventionell"]
+    "boundaryGap": true,
+    "data": ["Wind", "Freiflächen-PV", "Aufdach-PV", "Bioenergie", "Konventionell"],
+    "axisTick": "alignWithLabel"
   },
   "yAxis": {
     "type": "value",
@@ -13,7 +16,7 @@
   "series": [
     {
       "type": "bar",
-      "barWidth": "16",
+      "colorBy": "data",
       "data": [5, 20, 36, 10, 10],
       "name": "Installed Capacity"
     }

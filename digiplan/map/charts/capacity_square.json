@@ -11,7 +11,9 @@
   },
   "xAxis": {
     "type": "category",
-    "data": ["Status Quo", "Mein Szenario", "Ziel Szenario"]
+    "boundaryGap": true,
+    "data": ["Status Quo", "Mein Szenario", "Ziel Szenario"],
+    "axisTick": "alignWithLabel"
   },
   "yAxis": {
     "type": "value",
@@ -23,7 +25,6 @@
   "series": [
     {
       "type": "bar",
-      "barWidth": "16",
       "stack": "five",
       "color": "#1F82C0",
       "data": [36, 10, 10],
@@ -31,7 +32,6 @@
     },
     {
       "type": "bar",
-      "barWidth": "16",
       "stack": "five",
       "color": "#F6B93B",
       "data": [36, 10, 10],
@@ -39,7 +39,6 @@
     },
     {
       "type": "bar",
-      "barWidth": "16",
       "stack": "five",
       "color": "#FFD660",
       "data": [36, 10, 10],
@@ -47,7 +46,6 @@
     },
     {
       "type": "bar",
-      "barWidth": "16",
       "stack": "five",
       "color": "#98D47E",
       "data": [36, 10, 10],
@@ -55,7 +53,6 @@
     },
     {
       "type": "bar",
-      "barWidth": "16",
       "stack": "five",
       "color": "#CFCFCF",
       "data": [36, 10, 10],
