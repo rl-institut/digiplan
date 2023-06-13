@@ -244,8 +244,6 @@ if PASSWORD_PROTECTION and PASSWORD is None:
     msg = "Password protection is on, but no password is given"
     raise ValidationError(msg)
 
-SELECT2_CACHE_BACKEND = "select2"
-
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
