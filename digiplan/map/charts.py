@@ -2,14 +2,22 @@
 
 import json
 import pathlib
+from collections import namedtuple
 from collections.abc import Callable, Iterable
 from typing import Optional
 
-from digiplan.map import config, models
+import pandas as pd
+
+from digiplan.map import calculations, config, models
+
+Chart = namedtuple("Chart", ("lookup", "div_id"))
+
+RESULT_CHARTS = (Chart("detailed_overview", "detailed_overview_chart"),)
 
 CHARTS: dict[str, Callable] = {
     "wind_turbines": models.WindTurbine.wind_turbines_history,
     "wind_turbines_square": models.WindTurbine.wind_turbines_per_area_history,
+    "detailed_overview": calculations.detailed_overview,
 }
 
 
