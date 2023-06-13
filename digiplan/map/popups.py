@@ -98,24 +98,26 @@ class CapacityPopup(RegionPopup):
     """Popup to show capacities."""
 
     def get_region_value(self) -> float:  # noqa: D102
-        return calculations.capacity_popup()
+        return calculations.capacity()
 
     def get_municipality_value(self) -> float:  # noqa: D102
-        return calculations.capacity_popup(self.selected_id)
+        return calculations.capacity(self.selected_id)
 
     def get_chart_data(self) -> Iterable:  # noqa: D102
-        return calculations.capacity_chart(self.selected_id)
+        return calculations.capacity_comparison(self.selected_id)
 
 
 class CapacitySquarePopup(RegionPopup):
-    def get_region_value(self) -> float:
-        return calculations.capacity_square_popup
+    """Popup to show capacities per km²."""
 
-    def get_municipality_value(self) -> float:
-        return calculations.capacity_square_popup(self.selected_id)
+    def get_region_value(self) -> float:  # noqa: D102
+        return calculations.capacity_square
 
-    def get_chart_data(self) -> Iterable:
-        return calculations.capacity_square_chart(self.selected_id)
+    def get_municipality_value(self) -> float:  # noqa: D102
+        return calculations.capacity_square(self.selected_id)
+
+    def get_chart_data(self) -> Iterable:  # noqa: D102
+        return calculations.capacity_square_comparison(self.selected_id)
 
 
 class PopulationPopup(RegionPopup):

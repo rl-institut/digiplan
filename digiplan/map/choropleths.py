@@ -78,17 +78,17 @@ class Choropleth:
 
 class RenewableElectricityProductionChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.capacity_choropleth()
+        return calculations.capacity_per_municipality()
 
 
 class CapacityChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.capacity_choropleth()
+        return calculations.capacity_per_municipality()
 
 
 class CapacitySquareChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.capacity_square_choropleth()
+        return calculations.capacity_square_per_municipality()
 
 
 class PopulationChoropleth(Choropleth):  # noqa: D101

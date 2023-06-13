@@ -38,7 +38,7 @@ def calculate_square_for_value(value: int, municipality_id: Optional[int]) -> fl
     return value
 
 
-def capacity_popup(mun_id: Optional[int] = None) -> float:
+def capacity(mun_id: Optional[int] = None) -> float:
     """
     Calculate capacity of renewables (either for municipality or for whole region).
 
@@ -53,7 +53,7 @@ def capacity_popup(mun_id: Optional[int] = None) -> float:
         Sum of installed renewables
     """
     capacity = 0.0
-    values = capacity_choropleth()
+    values = capacity_per_municipality()
 
     if mun_id is not None:
         capacity = values[mun_id]
@@ -64,7 +64,7 @@ def capacity_popup(mun_id: Optional[int] = None) -> float:
 
 
 # pylint: disable=W0613
-def capacity_chart(municipality_id: int) -> list:  # noqa: ARG001
+def capacity_comparison(municipality_id: int) -> dict:  # noqa: ARG001
     """
     Get chart for capacity of renewables.
 
@@ -81,7 +81,7 @@ def capacity_chart(municipality_id: int) -> list:  # noqa: ARG001
     return [4, 11, 36, 9, 10]
 
 
-def capacity_choropleth() -> dict[int, int]:
+def capacity_per_municipality() -> dict[int, int]:
     """
     Calculate capacity of renewables per municipality.
 
@@ -106,7 +106,7 @@ def capacity_choropleth() -> dict[int, int]:
     return capacity
 
 
-def capacity_square_popup(mun_id: Optional[int] = None) -> float:
+def capacity_square(mun_id: Optional[int] = None) -> float:
     """
     Calculate capacity of renewables per km² (either for municipality or for whole region).
 
@@ -120,12 +120,12 @@ def capacity_square_popup(mun_id: Optional[int] = None) -> float:
     float
         Sum of installed renewables
     """
-    value = capacity_popup(mun_id)
+    value = capacity(mun_id)
     return calculate_square_for_value(value, mun_id)
 
 
 # pylint: disable=W0613
-def capacity_square_chart(municipality_id: int) -> dict:  # noqa: ARG001
+def capacity_square_comparison(municipality_id: int) -> dict:  # noqa: ARG001
     """
     Get chart for capacity of renewables per km².
 
@@ -142,7 +142,7 @@ def capacity_square_chart(municipality_id: int) -> dict:  # noqa: ARG001
     return ([36, 9, 10], [36, 2, 1], [1, 5, 10], [3, 9, 10], [17, 10, 10])
 
 
-def capacity_square_choropleth() -> dict[int, int]:
+def capacity_square_per_municipality() -> dict[int, int]:
     """
     Calculate capacity of renewables per km² per municipality.
 
@@ -151,7 +151,7 @@ def capacity_square_choropleth() -> dict[int, int]:
     dict[int, int]
         Capacity per km² per municipality
     """
-    capacity = capacity_choropleth()
+    capacity = capacity_per_municipality()
     for key, value in capacity.items():
         capacity[key] = calculate_square_for_value(value, key)
     return capacity
