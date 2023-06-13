@@ -6,14 +6,12 @@ As map app is SPA, this module contains main view and various API points.
 
 from django.conf import settings
 from django.http import HttpRequest, response
-from django.template.exceptions import TemplateDoesNotExist
-from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 from django_mapengine import views
 
-from digiplan.map import calculations, config
+from digiplan.map import config
 
-from . import charts, forms, map_config, popups, utils
+from . import charts, choropleths, forms, map_config, popups, utils
 
 
 class MapGLView(TemplateView, views.MapEngineMixin):
@@ -101,24 +99,12 @@ def get_popup(request: HttpRequest, lookup: str, region: int) -> response.JsonRe
         containing HTML to render popup and chart options to be used in E-Chart.
     """
     map_state = request.GET.dict()
-
-    if lookup in popups.POPUPS:
-        popup = popups.POPUPS[lookup](lookup, region, map_state)
-        return popup.render()
-
-    data = calculations.create_data(lookup, region, map_state)
-    chart_data = charts.CHARTS[lookup](region)
-    chart = charts.create_chart(lookup, chart_data)
-
-    try:
-        html = render_to_string(f"popups/{lookup}.html", context=data)
-    except TemplateDoesNotExist:
-        html = render_to_string("popups/default.html", context=data)
-    return response.JsonResponse({"html": html, "chart": chart})
+    popup = popups.POPUPS[lookup](lookup, region, map_state)
+    return popup.render()
 
 
 # pylint: disable=W0613
-def get_choropleth(request: HttpRequest, lookup: str, scenario: str) -> response.JsonResponse:  # noqa: ARG001
+def get_choropleth(request: HttpRequest, lookup: str, layer_id: str) -> response.JsonResponse:  # noqa: ARG001
     """
     Read scenario results from database, aggregate data and send back data.
 
@@ -128,14 +114,13 @@ def get_choropleth(request: HttpRequest, lookup: str, scenario: str) -> response
         Request can contain optional values (i.e. language)
     lookup : str
         which result/calculation shall be shown in choropleth?
-    scenario : str
-        defines the scenario to look up values for (i.e. status quo or user scenario)
+    layer_id : str
+        layer ID of given choropleth
 
     Returns
     -------
     JsonResponse
         Containing key-value pairs of municipality_ids and values and related color style
     """
-    values = calculations.create_choropleth_data(lookup)
-    fill_color = settings.MAP_ENGINE_CHOROPLETH_STYLES.get_fill_color(lookup, list(values.values()))
-    return response.JsonResponse({"values": values, "paintProperties": {"fill-color": fill_color, "fill-opacity": 1}})
+    map_state = request.GET.dict()
+    return choropleths.CHOROPLETHS[lookup](lookup, map_state)
