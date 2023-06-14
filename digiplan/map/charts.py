@@ -128,8 +128,8 @@ def create_result_chart(lookup: str, chart_data: Optional[pd.DataFrame] = None) 
     if not chart_data.empty:
         for item in chart["series"]:
             profile = MAPPING[item["name"]]
-            item["data"][2] = chart_data.loc[profile, "consumption"]
-            item["data"][3] = chart_data.loc[profile, "production"]
+            item["data"][2] = int(chart_data.loc[profile, "consumption"])
+            item["data"][3] = int(chart_data.loc[profile, "production"])
         return chart
     return chart
 

@@ -23,6 +23,9 @@ PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, hideSimulationSpinner);
+PubSub.subscribe(eventTopics.SIMULATION_FINISHED, checkResultCharts);
+// for testing:
+PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, checkResultCharts);
 
 
 // Subscriber Functions
@@ -95,5 +98,20 @@ function showSimulationSpinner(msg) {
 
 function hideSimulationSpinner(msg) {
     simulation_spinner.hidden = true;
+    return logMessage(msg);
+}
+
+function checkResultCharts(msg) {
+    $.ajax({
+        url : "/charts",
+        type : "GET",
+        data : {
+            //needs correct simulation_id
+            simulation_id: 3,
+        },
+        success : function(json) {
+            detailed_overview_chart.setOption(json.detailed_overview_chart); // jshint ignore:line
+        },
+    });
     return logMessage(msg);
 }
