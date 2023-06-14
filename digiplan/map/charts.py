@@ -24,6 +24,15 @@ CHARTS: dict[str, Callable] = {
     "detailed_overview": calculations.detailed_overview,
 }
 
+MAPPING = {
+    "Wind": "wind",
+    "Aufdach - PV": "pv_roof",
+    "Freiflächen - PV": "pv_ground",
+    "Bioenergie": "biomass",
+    "Konventionell": "fossil",
+    "Verbrauch": "consumption",
+}
+
 
 def get_chart_options(lookup: str) -> dict:
     """
@@ -94,6 +103,34 @@ def create_chart(lookup: str, chart_data: Optional[Iterable[tuple[str, float]]] 
         else:
             chart["series"][0]["data"] = chart_data
 
+    return chart
+
+
+def create_result_chart(lookup: str, chart_data: Optional[pd.DataFrame] = None) -> dict:
+    """
+    Create result chart based on given lookup and simulation results.
+
+    Parameters
+    ----------
+    lookup: str
+        Looks up related chart function in charts folder.
+    chart_data: pandas.DataFrame
+        DataFrame separated into production and consumption columns for each profile
+        If no data is given, data is expected to be set via lookup JSON
+
+    Returns
+    -------
+    dict
+        Containing chart filled with data
+
+    """
+    chart = get_chart_options(lookup)
+    if not chart_data.empty:
+        for item in chart["series"]:
+            profile = MAPPING[item["name"]]
+            item["data"][2] = chart_data.loc[profile, "consumption"]
+            item["data"][3] = chart_data.loc[profile, "production"]
+        return chart
     return chart
 
 
