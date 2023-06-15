@@ -8,6 +8,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Added
 - calculation for electricity overview chart
 - calculation for heat overview chart
+- function to create echart from options
 - integration of celery for oemof simulations
 - start oemof simulation
 - oemof hooks for adapting RE capacities and electric demand
