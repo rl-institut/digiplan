@@ -6,7 +6,7 @@
   "yAxis": {
     "type": "value",
     "show": true,
-    "name": "MW",
+    "name": "Population",
     "nameLocation": "end",
     "nameTextStyle": "Roboto"
   },

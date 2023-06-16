@@ -121,14 +121,29 @@ class CapacitySquarePopup(RegionPopup):
 
 
 class PopulationPopup(RegionPopup):
-    def get_region_value(self) -> float:
-        return models.Population.quantity
+    """Popup to show Population."""
 
-    def get_municipality_value(self) -> float:
-        return models.Population.quantity(self.selected_id)
+    def get_region_value(self) -> float:  # noqa: D102
+        return models.Population.quantity(2022)
+
+    def get_municipality_value(self) -> float:  # noqa: D102
+        return models.Population.quantity(2022, self.selected_id)
 
     def get_chart_data(self) -> Iterable:
         return models.Population.population_history(self.selected_id)
+
+
+class PopulationDensityPopup(RegionPopup):
+    """Popup to show Population Density."""
+
+    def get_region_value(self) -> float:  # noqa: D102
+        return models.Population.density(2022)
+
+    def get_municipality_value(self) -> float:  # noqa: D102
+        return models.Population.density(2022, self.selected_id)
+
+    def get_chart_data(self) -> Iterable:  # noqa: D102
+        return models.Population.density_history(self.selected_id)
 
 
 class RenewableElectricityProductionPopup(SimulationPopup):
@@ -152,5 +167,6 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "capacity": CapacityPopup,
     "capacity_square": CapacitySquarePopup,
     "population": PopulationPopup,
+    "population_density": PopulationDensityPopup,
     "renewable_electricity_production": RenewableElectricityProductionPopup,
 }
