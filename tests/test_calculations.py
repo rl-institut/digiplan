@@ -81,3 +81,11 @@ class HeatDemandTest(SimulationTest):
             calculations=[calculations.heat_demand],
         )
         assert list(results.values())[0].iloc[0] > 0
+
+
+class ElectricityOverviewTest(SimulationTest):
+    """Test electricity overview calculation."""
+
+    def test_electricity_overview(self):  # noqa: D102,ANN201
+        result = calculations.electricity_overview(self.simulation_id)
+        assert len(result) == 3
