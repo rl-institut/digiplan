@@ -61,7 +61,7 @@ def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) ->
         Parameters for oemof with adapted demands
     """
     year = "2045" if scenario == "scenario_2045" else "2022"
-    for sector, slider in (("hh", "s_v_2"), ("ghd", "s_v_3"), ("i", "s_v_4")):
+    for sector, slider in (("hh", "s_v_2"), ("cts", "s_v_3"), ("ind", "s_v_4")):
         demand_filename = settings.DATA_DIR.path("scenarios").path(f"demand_{sector}_power_demand.csv")
         demand = pd.read_csv(demand_filename)
         data[f"ABW-electricity-demand_{sector}"] = {"amount": float(demand[year].sum()) * data.pop(slider) / 100}
