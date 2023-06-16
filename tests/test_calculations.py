@@ -40,9 +40,9 @@ class SimulationTest(SimpleTestCase):
 
 
 class ElectricityProductionTest(SimulationTest):
-    """Test renewable electricity production calculation."""
+    """Test electricity production calculation."""
 
-    def test_renewable_electricity_production(self):  # noqa: D102,ANN201
+    def test_electricity_production(self):  # noqa: D102,ANN201
         results = oemof_results.get_results(
             self.simulation_id,
             calculations=[calculations.electricity_production],
@@ -51,9 +51,9 @@ class ElectricityProductionTest(SimulationTest):
 
 
 class HeatProductionTest(SimulationTest):
-    """Test renewable electricity production calculation."""
+    """Test heat production calculation."""
 
-    def test_renewable_electricity_production(self):  # noqa: D102,ANN201
+    def test_heat_production(self):  # noqa: D102,ANN201
         results = oemof_results.get_results(
             self.simulation_id,
             calculations=[calculations.heat_production],
@@ -62,9 +62,9 @@ class HeatProductionTest(SimulationTest):
 
 
 class ElectricityDemandTest(SimulationTest):
-    """Test renewable electricity production calculation."""
+    """Test electricity demand calculation."""
 
-    def test_renewable_electricity_production(self):  # noqa: D102,ANN201
+    def test_electricity_demand(self):  # noqa: D102,ANN201
         results = oemof_results.get_results(
             self.simulation_id,
             calculations=[calculations.electricity_demand],
@@ -73,9 +73,9 @@ class ElectricityDemandTest(SimulationTest):
 
 
 class HeatDemandTest(SimulationTest):
-    """Test renewable electricity production calculation."""
+    """Test heat demand calculation."""
 
-    def test_renewable_electricity_production(self):  # noqa: D102,ANN201
+    def test_heat_demand(self):  # noqa: D102,ANN201
         results = oemof_results.get_results(
             self.simulation_id,
             calculations=[calculations.heat_demand],
