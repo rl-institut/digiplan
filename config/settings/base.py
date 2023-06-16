@@ -258,11 +258,11 @@ MAP_ENGINE_ZOOM_AT_STARTUP = 9
 MAP_ENGINE_MAX_BOUNDS = [[11.280733017118229, 51.22918643452503], [13.616574868700604, 52.35515806663738]]
 
 MAP_ENGINE_IMAGES = [
-    setup.MapImage("wind", "images/icons/i_wind.png"),
-    setup.MapImage("pv", "images/icons/i_pv.png"),
-    setup.MapImage("hydro", "images/icons/i_hydro.png"),
-    setup.MapImage("biomass", "images/icons/i_biomass.png"),
-    setup.MapImage("combustion", "images/icons/i_combustion.png"),
+    setup.MapImage("wind", "images/icons/map_wind.png"),
+    setup.MapImage("pv", "images/icons/map_pv.png"),
+    setup.MapImage("hydro", "images/icons/map_hydro.png"),
+    setup.MapImage("biomass", "images/icons/map_biomass.png"),
+    setup.MapImage("combustion", "images/icons/map_combustion.png"),
 ]
 
 MAP_ENGINE_API_MVTS = {
