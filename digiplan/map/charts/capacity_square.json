@@ -1,4 +1,9 @@
 {
+  "grid": {
+    "top": "24%",
+    "right": "30%",
+    "bottom": "5%"
+  },
   "legend": {
     "data": [
       "Wind",
@@ -7,12 +12,15 @@
       "Bioenergie",
       "Konventionell"
     ],
-    "bottom": "12"
+    "orient": "vertical",
+    "right": "1%",
+    "bottom": "5%"
   },
+  "color": ["#1F82C0","#F6B93B","#FFD660","#98D47E","#CFCFCF"],
   "xAxis": {
     "type": "category",
     "boundaryGap": true,
-    "data": ["Status Quo", "Mein Szenario", "Ziel Szenario"],
+    "data": ["Status Quo", "2045"],
     "axisTick": "alignWithLabel"
   },
   "yAxis": {
@@ -26,36 +34,31 @@
     {
       "type": "bar",
       "stack": "five",
-      "color": "#1F82C0",
-      "data": [36, 10, 10],
+      "data": [36, 10],
       "name": "Wind"
     },
     {
       "type": "bar",
       "stack": "five",
-      "color": "#F6B93B",
-      "data": [36, 10, 10],
+      "data": [36, 10],
       "name": "Freiflächen-PV"
     },
     {
       "type": "bar",
       "stack": "five",
-      "color": "#FFD660",
-      "data": [36, 10, 10],
+      "data": [10, 10],
       "name": "Aufdach-PV"
     },
     {
       "type": "bar",
       "stack": "five",
-      "color": "#98D47E",
-      "data": [36, 10, 10],
+      "data": [10, 10],
       "name": "Bioenergie"
     },
     {
       "type": "bar",
       "stack": "five",
-      "color": "#CFCFCF",
-      "data": [36, 10, 10],
+      "data": [10, 10],
       "name": "Konventionell"
     }
   ],

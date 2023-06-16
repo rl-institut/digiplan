@@ -1,4 +1,7 @@
 {
+  "grid": {
+    "top": "24%"
+  },
   "xAxis": {
     "type": "category",
     "data": []
@@ -6,7 +9,7 @@
   "yAxis": {
     "type": "value",
     "show": true,
-    "name": "Population density per km²",
+    "name": "Density per km²",
     "nameLocation": "end",
     "nameTextStyle": "Roboto"
   },

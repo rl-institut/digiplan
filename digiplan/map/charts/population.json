@@ -1,4 +1,7 @@
 {
+  "grid": {
+    "top": "24%"
+  },
   "xAxis": {
     "type": "category",
     "data": []
