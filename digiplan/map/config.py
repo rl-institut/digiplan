@@ -91,8 +91,18 @@ SOURCES = init_sources()
 
 # SIMULATION
 
-SIMULATION_NAMES = {
+SIMULATION_RENEWABLES = {
     "ABW-solar-pv_ground": _("Freiflächen-PV"),
     "ABW-solar-pv_rooftop": _("Aufdach-PV"),
     "ABW-wind-onshore": _("Wind"),
+    "ABW-hydro-ror": _("Hydro"),
 }
+
+SIMULATION_DEMANDS = {
+    "ABW-electricity-bev_charging": _("BEV"),
+    "ABW-electricity-demand_hh": _("Electricity Household Demand"),
+    "ABW-electricity-demand_cts": _("Electricity CTS Demand"),
+    "ABW-electricity-demand_ind": _("Electricity Industry Demand"),
+}
+
+SIMULATION_NAME_MAPPING = {} | SIMULATION_RENEWABLES | SIMULATION_DEMANDS

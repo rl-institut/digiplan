@@ -120,7 +120,7 @@ class RenewableElectricityProductionPopup(SimulationPopup):
         return None
 
     def get_chart_data(self) -> Iterable:  # noqa: D102
-        self.result.index = self.result.index.map(lambda x: config.SIMULATION_NAMES[x[0]])
+        self.result.index = self.result.index.map(lambda x: config.SIMULATION_NAME_MAPPING[x[0]])
         return self.result
 
 
