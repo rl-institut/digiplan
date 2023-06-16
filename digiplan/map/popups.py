@@ -111,7 +111,7 @@ class RenewableElectricityProductionPopup(SimulationPopup):
     """Popup to show renewable electricity production values."""
 
     unit = "MWh"
-    calculation = calculations.renewable_electricity_production
+    calculation = calculations.electricity_production
 
     def get_region_value(self) -> float:  # noqa: D102
         return self.result.sum() / 1000

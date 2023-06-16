@@ -155,27 +155,42 @@ def capacity_square_choropleth() -> dict[int, int]:
     return capacity
 
 
-electric_demand = core.ParametrizedCalculation(
+electricity_demand = core.ParametrizedCalculation(
+    calculations.AggregatedFlows,
+    {
+        "from_nodes": ["ABW-electricity"],
+    },
+)
+
+heat_demand = core.ParametrizedCalculation(
     calculations.AggregatedFlows,
     {
         "to_nodes": [
-            "ABW-ch4-demand",
-            "ABW-electricity-demand",
-            "ABW-heat_central-demand",
-            "ABW-heat_decentral-demand",
-            "ABW-lignite-demand",
-            "ABW-wood-demand",
+            "ABW-heat_decentral-demand_hh",
+            "ABW-heat_decentral-demand_cts",
+            "ABW-heat_decentral-demand_ind",
+            "ABW-heat_central-demand_hh",
+            "ABW-heat_central-demand_cts",
+            "ABW-heat_central-demand_ind",
         ],
     },
 )
 
-renewable_electricity_production = core.ParametrizedCalculation(
+electricity_production = core.ParametrizedCalculation(
     calculations.AggregatedFlows,
     {
-        "from_nodes": [
-            "ABW-solar-pv_ground",
-            "ABW-solar-pv_rooftop",
-            "ABW-wind-onshore",
+        "to_nodes": [
+            "ABW-electricity",
+        ],
+    },
+)
+
+heat_production = core.ParametrizedCalculation(
+    calculations.AggregatedFlows,
+    {
+        "to_nodes": [
+            "ABW-heat_decentral",
+            "ABW-heat_central",
         ],
     },
 )
