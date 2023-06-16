@@ -68,6 +68,36 @@ def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) ->
     return data
 
 
+def adapt_heat_demand(scenario: str, data: dict, request: HttpRequest) -> dict:  # noqa: ARG001
+    """
+    Read settings and adapt related heat demands.
+
+    Parameters
+    ----------
+    scenario: str
+        Used oemof scenario
+    data : dict
+        Raw parameters from user settings
+    request : HttpRequest
+        Original request from settings
+
+    Returns
+    -------
+    dict
+        Parameters for oemof with adapted heat demands
+    """
+    year = "2045" if scenario == "scenario_2045" else "2022"
+    for sector, slider in (("hh", "w_v_3"), ("cts", "w_v_4"), ("ind", "w_v_5")):
+        percentage = data.pop(slider)
+        for location in ("central", "decentral"):
+            demand_filename = settings.DATA_DIR.path("scenarios").path(f"demand_{sector}_heat_demand_{location}.csv")
+            demand = pd.read_csv(demand_filename)
+            data[f"ABW-heat_{location}-demand_{sector}"] = {
+                "amount": float(demand[year].sum()) * percentage / 100,
+            }
+    return data
+
+
 def adapt_capacities(scenario: str, data: dict, request: HttpRequest) -> dict:  # noqa: ARG001
     """
     Read renewable capacities from user input and adapt ES parameters accordingly.
@@ -89,5 +119,10 @@ def adapt_capacities(scenario: str, data: dict, request: HttpRequest) -> dict:  
     data["ABW-wind-onshore"] = {"capacity": data.pop("s_w_1")}
     data["ABW-solar-pv_ground"] = {"capacity": data.pop("s_pv_ff_1")}
     data["ABW-solar-pv_rooftop"] = {"capacity": data.pop("s_pv_d_1")}
+    # TODO(Hendrik): Slider not yet implemented
+    # https://github.com/rl-institut-private/digiplan/issues/229
+    data["ABW-hydro-ror"] = {"capacity": data.pop("ror")}
     data["ABW-biomass-fermenter"] = {"capacity": data.pop("s_b_1")}
+    data["ABW-electricity-heatpump_decentral"] = {"capacity": data.pop("w_d_wp_1")}
+    data["ABW-electricity-heatpump_central"] = {"capacity": data.pop("w_z_wp_1")}
     return data

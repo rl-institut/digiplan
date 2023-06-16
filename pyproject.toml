@@ -105,6 +105,7 @@ ignore = [
   "S101",    # Use of `assert` detected
   "UP007",   # Use `X | Y` for type annotations
   "B905",    # `zip()` without an explicit `strict=` parameter
+  "FIX001",  # Line contains FIXME
   "FIX002",  # Line contains TODO
 ]
 fix = true
