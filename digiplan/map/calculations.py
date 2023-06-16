@@ -139,8 +139,14 @@ def capacity_square_comparison(municipality_id: int) -> dict:
     dict
         Chart data to use in JS
     """
-    capacity_comparison(municipality_id)
-    return ([36, 10], [2, 1], [5, 10], [3, 10], [17, 10])
+    capacity_square = []
+    capacity = capacity_comparison(municipality_id)
+    for quo, future in capacity:
+        quo_new = calculate_square_for_value(quo, municipality_id)
+        future_new = calculate_square_for_value(future, municipality_id)
+        capacity_square.append([quo_new, future_new])
+
+    return capacity_square
 
 
 def capacity_square_per_municipality() -> dict[int, int]:
