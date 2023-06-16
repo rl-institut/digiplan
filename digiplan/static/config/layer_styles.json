@@ -72,7 +72,7 @@
     "filter": ["!", ["has", "point_count"]],
     "layout": {
       "icon-image": "wind",
-      "icon-size": 0.8,
+      "icon-size": 0.4,
       "icon-allow-overlap": true
     },
     "paint": {
@@ -109,7 +109,7 @@
     "filter": ["!", ["has", "point_count"]],
     "layout": {
       "icon-image": "pv",
-      "icon-size": 0.8,
+      "icon-size": 0.4,
       "icon-allow-overlap": true
     },
     "paint": {
@@ -147,7 +147,7 @@
     "filter": ["!", ["has", "point_count"]],
     "layout": {
       "icon-image": "pv",
-      "icon-size": 0.8,
+      "icon-size": 0.4,
       "icon-allow-overlap": true
     },
     "paint": {
@@ -184,7 +184,7 @@
     "filter": ["!", ["has", "point_count"]],
     "layout": {
       "icon-image": "hydro",
-      "icon-size": 0.8,
+      "icon-size": 0.4,
       "icon-allow-overlap": true
     },
     "paint": {
@@ -221,7 +221,7 @@
     "filter": ["!", ["has", "point_count"]],
     "layout": {
       "icon-image": "biomass",
-      "icon-size": 0.5,
+      "icon-size": 0.4,
       "icon-allow-overlap": true
     },
     "paint": {
@@ -258,7 +258,7 @@
     "filter": ["!", ["has", "point_count"]],
     "layout": {
       "icon-image": "combustion",
-      "icon-size": 0.8,
+      "icon-size": 0.4,
       "icon-allow-overlap": true
     },
     "paint": {
