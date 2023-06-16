@@ -5,7 +5,7 @@ import pathlib
 from collections.abc import Callable, Iterable
 from typing import Optional
 
-import pandas as pd
+from django.db.models.query import QuerySet
 
 from digiplan.map import config, models
 
@@ -71,14 +71,22 @@ def create_chart(lookup: str, chart_data: Optional[Iterable[tuple[str, float]]] 
     """
     chart = get_chart_options(lookup)
     if chart_data:
-        series_length = len(chart["series"])
-        if series_length > 1:
-            for i in range(0, series_length):
-                chart["series"][i]["data"] = chart_data[i]
+        if isinstance(chart_data, QuerySet):
+            keys = []
+            values = []
+            for key, value in chart_data:
+                keys.append(key)
+                values.append(value)
+            chart["series"][0]["data"] = values
+            chart["xAxis"]["data"] = keys
         else:
-            chart["series"][0]["data"] = chart_data
+            series_length = len(chart["series"])
+            if series_length > 1:
+                for i in range(0, series_length):
+                    chart["series"][i]["data"] = chart_data[i]
+            else:
+                chart["series"][0]["data"] = chart_data
 
-    print(chart)
     return chart
 
 
