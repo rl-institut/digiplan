@@ -1,10 +1,18 @@
 {
+  "tooltip": {
+    "trigger": "item",
+    "axisPointer": {
+      "type": "cross"
+    }
+  },
   "grid": {
     "top": "24%"
   },
   "xAxis": {
-    "type": "category",
-    "data": []
+    "type": "time",
+    "xAxisLabel":{
+      "formatter": "{yyyy}"
+    }
   },
   "yAxis": {
     "type": "value",

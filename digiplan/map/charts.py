@@ -71,13 +71,11 @@ def create_chart(lookup: str, chart_data: Optional[Iterable[tuple[str, float]]] 
         series_type = chart["series"][0]["type"]
         series_length = len(chart["series"])
         if series_type == "line":
-            keys = []
-            values = []
+            data = []
             for key, value in chart_data:
-                keys.append(key)
-                values.append(value)
-            chart["series"][0]["data"] = values
-            chart["xAxis"]["data"] = keys
+                year_as_string = f"{key}"
+                data.append([year_as_string, value])
+            chart["series"][0]["data"] = data
         elif series_length > 1:
             for i in range(0, series_length):
                 chart["series"][i]["data"] = chart_data[i]
