@@ -98,13 +98,52 @@ class CapacityPopup(RegionPopup):
     """Popup to show capacities."""
 
     def get_region_value(self) -> float:  # noqa: D102
-        return calculations.capacity_popup()
+        return calculations.capacity()
 
     def get_municipality_value(self) -> float:  # noqa: D102
-        return calculations.capacity_popup(self.selected_id)
+        return calculations.capacity(self.selected_id)
 
     def get_chart_data(self) -> Iterable:  # noqa: D102
-        return calculations.capacity_chart(self.selected_id)
+        return calculations.capacity_comparison(self.selected_id)
+
+
+class CapacitySquarePopup(RegionPopup):
+    """Popup to show capacities per km²."""
+
+    def get_region_value(self) -> float:  # noqa: D102
+        return calculations.capacity_square
+
+    def get_municipality_value(self) -> float:  # noqa: D102
+        return calculations.capacity_square(self.selected_id)
+
+    def get_chart_data(self) -> Iterable:  # noqa: D102
+        return calculations.capacity_square_comparison(self.selected_id)
+
+
+class PopulationPopup(RegionPopup):
+    """Popup to show Population."""
+
+    def get_region_value(self) -> float:  # noqa: D102
+        return models.Population.quantity(2022)
+
+    def get_municipality_value(self) -> float:  # noqa: D102
+        return models.Population.quantity(2022, self.selected_id)
+
+    def get_chart_data(self) -> Iterable:
+        return models.Population.population_history(self.selected_id)
+
+
+class PopulationDensityPopup(RegionPopup):
+    """Popup to show Population Density."""
+
+    def get_region_value(self) -> float:  # noqa: D102
+        return models.Population.density(2022)
+
+    def get_municipality_value(self) -> float:  # noqa: D102
+        return models.Population.density(2022, self.selected_id)
+
+    def get_chart_data(self) -> Iterable:  # noqa: D102
+        return models.Population.density_history(self.selected_id)
 
 
 class RenewableElectricityProductionPopup(SimulationPopup):
@@ -124,7 +163,38 @@ class RenewableElectricityProductionPopup(SimulationPopup):
         return self.result
 
 
+class NumberWindturbinesPopup(RegionPopup):
+    """Popup to show the number of wind turbines."""
+
+    def get_region_value(self) -> float:  # noqa: D102
+        return models.WindTurbine.quantity()
+
+    def get_municipality_value(self) -> float:  # noqa: D102
+        return models.WindTurbine.quantity(self.selected_id)
+
+    def get_chart_data(self) -> Iterable:  # noqa: D102
+        return models.WindTurbine.wind_turbines_history(self.selected_id)
+
+
+class NumberWindturbinesSquarePopup(RegionPopup):
+    """Popup to show the number of wind turbines per km²."""
+
+    def get_region_value(self) -> float:  # noqa: D102
+        return models.WindTurbine.quantity_per_square()
+
+    def get_municipality_value(self) -> float:  # noqa: D102
+        return models.WindTurbine.quantity_per_square(self.selected_id)
+
+    def get_chart_data(self) -> Iterable:  # noqa: D102
+        return models.WindTurbine.wind_turbines_per_area_history(self.selected_id)
+
+
 POPUPS: dict[str, type(popups.Popup)] = {
     "capacity": CapacityPopup,
+    "capacity_square": CapacitySquarePopup,
+    "population": PopulationPopup,
+    "population_density": PopulationDensityPopup,
     "renewable_electricity_production": RenewableElectricityProductionPopup,
+    "wind_turbines": NumberWindturbinesPopup,
+    "wind_turbines_square": NumberWindturbinesSquarePopup,
 }

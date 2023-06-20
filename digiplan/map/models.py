@@ -169,7 +169,14 @@ class Population(models.Model):
         dict
             Chart data to use in JS
         """
-        return cls.objects.filter(municipality_id=mun_id).values_list("year", "value")
+        density_history = []
+        population_history = cls.objects.filter(municipality_id=mun_id).values_list("year", "value")
+
+        for year, value in population_history:
+            density = value / Municipality.objects.get(pk=mun_id).area
+            density_history.append((year, density))
+
+        return density_history
 
     @classmethod
     def density_per_municipality(cls) -> dict[int, int]:

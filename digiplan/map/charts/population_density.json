@@ -1,10 +1,33 @@
 {
-    "lookup": "population_density",
-    "series": [
-      {
-        "data": [],
-        "name": "Population Density"
-      }
-    ],
-    "title": "population density in different years"
-  }
+  "tooltip": {
+    "trigger": "item",
+    "axisPointer": {
+      "type": "cross"
+    }
+  },
+  "grid": {
+    "top": "24%"
+  },
+  "xAxis": {
+    "type": "time",
+    "xAxisLabel":{
+      "formatter": "{yyyy}"
+    }
+  },
+  "yAxis": {
+    "type": "value",
+    "show": true,
+    "name": "Density per km²",
+    "nameLocation": "end",
+    "nameTextStyle": "Roboto"
+  },
+  "series": [
+    {
+      "type": "line",
+      "barWidth": "16",
+      "data": [5, 20, 36, 10, 10],
+      "name": "Population per km²"
+    }
+  ],
+  "title": {"text": "population density in different years"}
+}

@@ -5,13 +5,9 @@ import pathlib
 from collections.abc import Callable, Iterable
 from typing import Optional
 
-import pandas as pd
-
 from digiplan.map import config, models
 
 CHARTS: dict[str, Callable] = {
-    "population": models.Population.population_history,
-    "population_density": models.Population.density_history,
     "wind_turbines": models.WindTurbine.wind_turbines_history,
     "wind_turbines_square": models.WindTurbine.wind_turbines_per_area_history,
 }
@@ -47,7 +43,9 @@ def get_chart_options(lookup: str) -> dict:
     with pathlib.Path(config.CHARTS_DIR.path("general_options.json")).open("r", encoding="utf-8") as general_chart_json:
         general_chart_options = json.load(general_chart_json)
 
-    return merge_dicts(lookup_options, general_chart_options)
+    chart = merge_dicts(general_chart_options, lookup_options)
+
+    return chart
 
 
 def create_chart(lookup: str, chart_data: Optional[Iterable[tuple[str, float]]] = None) -> dict:
@@ -69,11 +67,21 @@ def create_chart(lookup: str, chart_data: Optional[Iterable[tuple[str, float]]] 
 
     """
     chart = get_chart_options(lookup)
-    if chart_data is not None:
-        if isinstance(chart_data, pd.Series):
-            chart["series"][0]["data"] = [{"key": index, "value": value} for index, value in chart_data.items()]
+    if chart_data:
+        series_type = chart["series"][0]["type"]
+        series_length = len(chart["series"])
+        if series_type == "line":
+            data = []
+            for key, value in chart_data:
+                year_as_string = f"{key}"
+                data.append([year_as_string, value])
+            chart["series"][0]["data"] = data
+        elif series_length > 1:
+            for i in range(0, series_length):
+                chart["series"][i]["data"] = chart_data[i]
         else:
-            chart["series"][0]["data"] = [{"key": key, "value": value} for key, value in chart_data]
+            chart["series"][0]["data"] = chart_data
+
     return chart
 
 

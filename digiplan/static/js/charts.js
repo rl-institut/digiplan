@@ -382,3 +382,10 @@ resizeCharts();
 
 window.addEventListener("resize", resizeCharts);
 document.addEventListener("show.bs.tab", resizeCharts);
+
+
+function createChart(div_id, options) {
+  const chartElement = document.getElementById(div_id);
+  const chart = echarts.init(chartElement, null, {renderer: 'svg'});
+  chart.setOption(options);
+}

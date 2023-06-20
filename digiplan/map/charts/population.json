@@ -1,10 +1,33 @@
 {
-    "lookup": "population",
-    "series": [
-      {
-        "data": [],
-        "name": "Population"
-      }
-    ],
-    "title": "population in different years"
-  }
+  "tooltip": {
+    "trigger": "item",
+    "axisPointer": {
+      "type": "cross"
+    }
+  },
+  "grid": {
+    "top": "24%"
+  },
+  "xAxis": {
+    "type": "time",
+    "xAxisLabel":{
+      "formatter": "{yyyy}"
+    }
+  },
+  "yAxis": {
+    "type": "value",
+    "show": true,
+    "name": "Population",
+    "nameLocation": "end",
+    "nameTextStyle": "Roboto"
+  },
+  "series": [
+    {
+      "type": "line",
+      "barWidth": "16",
+      "data": [5, 20, 36, 10, 10],
+      "name": "Population"
+    }
+  ],
+  "title": {"text": "population in different years"}
+}
