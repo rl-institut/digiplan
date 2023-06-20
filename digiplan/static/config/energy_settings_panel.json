@@ -9,40 +9,51 @@
     "start": 30,
     "status_quo": 50,
     "step": 5,
-    "tooltip": "{% trans 'Wind energy (MW)' %} ",
+    "tooltip": "{% trans 'The use of wind potential areas can be set here.\nNote: Since the setting always refers to future, more profitable systems, maintaining the current system capacity also leads to increases in yield.' %} ",
     "type": "slider",
     "sidepanel": true
   },
-  "s_w_2": {
-    "class": "js-slider",
-    "grid": false,
-    "label": "{% trans 'Distance from residential areas (m)' %} ",
-    "max": 1000,
-    "min": 400,
-    "start": 1000,
-    "step": 200,
-    "tooltip": "{% trans 'Distance from residential areas (m)' %} ",
-    "type": "slider"
-  },
   "s_w_3": {
-    "class": "js-slider",
-    "label": "{% trans 'Forest usage (%)' %}",
-    "max": 10,
-    "min": 0,
-    "start": 0,
-    "step": 2,
-    "tooltip": "{% trans 'Forest usage (%)' %}",
-    "type": "slider"
+    "class": "js-sidepanel-switch",
+    "label": "{% trans 'Only previous priority areas/suitable areas.' %}",
+    "tooltip": "{% trans 'Only previous priority areas/suitable areas.' %}",
+    "type": "switch"
   },
   "s_w_4": {
-    "class": "js-slider",
-    "label": "{% trans 'LSG usage (%)' %} ",
-    "max": 10,
-    "min": 0,
-    "start": 0,
-    "step": 2,
-    "tooltip": "{% trans 'LSG usage (%)' %} ",
-    "type": "slider"
+    "class": "js-sidepanel-switch",
+    "label": "{% trans 'Priority areas according to STP Wind 2027.' %}",
+    "tooltip": "{% trans 'Priority areas according to STP Wind 2027.' %}",
+    "type": "switch"
+  },
+    "s_w_4_1": {
+    "class": "js-sidepanel-switch",
+    "label": "{% trans 'Priority areas.' %}",
+    "tooltip": "{% trans 'Priority areas.' %}",
+    "type": "switch"
+  },
+    "s_w_4_2": {
+    "class": "js-sidepanel-switch",
+    "label": "{% trans 'Priority areas repowering.' %}",
+    "tooltip": "{% trans 'Priority areas repowering.' %}",
+    "type": "switch"
+  },
+    "s_w_5": {
+    "class": "js-sidepanel-switch",
+    "label": "{% trans 'Free extension in the search area.' %}",
+    "tooltip": "{% trans 'Free extension in the search area.' %}",
+    "type": "switch"
+  },
+    "s_w_5_1": {
+    "class": "js-sidepanel-switch",
+    "label": "{% trans 'Use of open country search area.' %}",
+    "tooltip": "{% trans 'Use of open country search area.' %}",
+    "type": "switch"
+  },
+    "s_w_5_2": {
+    "class": "js-sidepanel-switch",
+    "label": "{% trans 'Use of forest search space.' %}",
+    "tooltip": "{% trans 'Use of forest search space.' %}",
+    "type": "switch"
   },
   "s_pv_ff_1": {
     "class": "js-slider js-slider-panel js-power-mix",
@@ -58,23 +69,25 @@
     "type": "slider",
     "sidepanel": true
   },
-  "s_pv_ff_2": {
-    "class": "js-sidepanel-switch",
-    "label": "{% trans 'Areas alongside highways and railways' %}",
-    "tooltip": "{% trans 'Areas alongside highways and railways' %}",
-    "type": "switch"
-  },
   "s_pv_ff_3": {
-    "class": "js-sidepanel-switch",
-    "label": "{% trans 'Use of agricultural ad grassland areas' %}",
-    "tooltip": "{% trans 'Use of agricultural ad grassland areas' %}",
-    "type": "switch"
+    "class": "js-slider",
+    "label": "{% trans 'Areas along the federal motorway and rail routes (%)' %} ",
+    "max": 100,
+    "min": 0,
+    "start": 0,
+    "step": 5,
+    "tooltip": "{% trans 'Areas along the federal motorway and rail routes (%)' %} ",
+    "type": "slider"
   },
   "s_pv_ff_4": {
-    "class": "js-sidepanel-switch",
-    "label": "{% trans 'Remove restrictions on disadvantaged areas.' %}",
-    "tooltip": "{% trans 'Remove restrictions on disadvantaged areas.' %}",
-    "type": "switch"
+    "class": "js-slider",
+    "label": "{% trans 'Use of agricultural and grassland areas (%)' %} ",
+    "max": 100,
+    "min": 0,
+    "start": 0,
+    "step": 5,
+    "tooltip": "{% trans 'Use of agricultural and grassland areas (%)' %} ",
+    "type": "slider"
   },
   "s_pv_d_1": {
     "class": "js-slider js-slider-panel js-power-mix",
@@ -90,14 +103,36 @@
     "type": "slider",
     "sidepanel": true
   },
-  "s_pv_d_2": {
+  "s_pv_d_3": {
     "class": "js-slider",
     "label": "{% trans 'Share of used roofs (%)' %}",
     "max": 100,
     "min": 0,
     "start": 0,
     "step": 5,
-    "tooltip": "{% trans 'Anteil genutzter Dächer (%)' %}",
+    "tooltip": "{% trans 'Share of used roofs (%)' %}",
+    "type": "slider"
+  },
+    "s_pv_d_4": {
+    "class": "js-slider",
+    "label": "{% trans 'Proportion of photovoltaic systems with electricity storage (%)' %}",
+    "max": 100,
+    "min": 0,
+    "start": 0,
+    "step": 5,
+    "tooltip": "{% trans 'Proportion of photovoltaic systems with electricity storage (%)' %}",
+    "type": "slider"
+  },
+  "s_h_1": {
+    "class": "js-slider js-slider-panel js-power-mix",
+    "color": "#FA9FB5",
+    "label": "{% trans 'Hydropower (MW)' %}",
+    "max": 30,
+    "min": 0,
+    "start": 5,
+    "status_quo": 15,
+    "step": 1,
+    "tooltip": "{% trans 'Run-of-river power plants' %}",
     "type": "slider"
   },
   "s_b_1": {
@@ -109,19 +144,7 @@
     "start": 5,
     "status_quo": 15,
     "step": 5,
-    "tooltip": "{% trans 'Bioenergy (MW)' %}",
-    "type": "slider"
-  },
-  "s_k_1": {
-    "class": "js-slider js-slider-panel js-power-mix",
-    "color": "#964b00",
-    "label": "{% trans 'Conventional Energy (MW)' %}",
-    "max": 300,
-    "min": 0,
-    "start": 5,
-    "status_quo": 15,
-    "step": 5,
-    "tooltip": "{% trans 'Conventional Energy (MW)' %}",
+    "tooltip": "{% trans 'Biomass and biogas plants' %}",
     "type": "slider"
   },
   "s_v_1": {
@@ -129,65 +152,65 @@
     "grid": false,
     "label": "{% trans 'Power consumption without heat generation (%)' %}",
     "max": 210,
-    "min": 25,
-    "start": 30,
+    "min": 50,
+    "start": 50,
     "status_quo": 50,
-    "step": 5,
-    "tooltip": "{% trans 'Power consumption without heat generation (%)' %}",
+    "step": 10,
+    "tooltip": "{% trans 'Power consumption without providing heat using power-to-heat (e.g. heat pumps)' %}",
     "type": "slider",
     "sidepanel": true
   },
-  "s_v_2": {
-    "class": "js-slider",
-    "grid": false,
-    "label": "Households (%)' %}",
-    "max": 200,
-    "min": 25,
-    "start": 30,
-    "step": 5,
-    "tooltip": "{% trans 'Haushalte (%)' %}",
-    "type": "slider"
-  },
   "s_v_3": {
     "class": "js-slider",
-    "label": "{% trans 'Commercial, Trade, Services (%)' %}",
+    "grid": false,
+    "label": "{% trans 'Households (%)' %}",
     "max": 200,
-    "min": 25,
-    "start": 30,
-    "step": 5,
-    "tooltip": "Commercial, Trade, Services (%)' %}",
+    "min": 50,
+    "start": 100,
+    "step": 10,
+    "tooltip": "{% trans 'Haushalte (%)' %}",
     "type": "slider"
   },
   "s_v_4": {
     "class": "js-slider",
-    "label": "{% trans 'Industry (%)' %}",
+    "label": "{% trans 'Commercial, Trade, Services (%)' %}",
     "max": 200,
-    "min": 25,
-    "start": 30,
-    "step": 5,
-    "tooltip": "{% trans 'Industry (%)' %}",
+    "min": 50,
+    "start": 100,
+    "step": 10,
+    "tooltip": "{% trans 'Commercial, Trade, Services (%)' %}",
     "type": "slider"
   },
-  "s_s_k_1": {
-    "class": "js-slider js-slider-panel js-power-mix",
-    "label": "{% trans 'Home batteries (%)' %}",
-    "max": 100,
-    "min": 0,
-    "start": 5,
-    "status_quo": 15,
-    "step": 5,
-    "tooltip": "{% trans 'Home batteries (%)' %}",
+  "s_v_5": {
+    "class": "js-slider",
+    "label": "{% trans 'Industry (%)' %}",
+    "max": 200,
+    "min": 50,
+    "start": 100,
+    "step": 10,
+    "tooltip": "{% trans 'Industry (%)' %}",
     "type": "slider"
   },
   "s_s_g_1": {
     "class": "js-slider js-slider-panel js-power-mix",
     "label": "{% trans 'Large scale batteries (GWh)' %}",
-    "max": 10,
+    "max": 20,
     "min": 0,
     "start": 2,
     "status_quo": 3,
     "step": 0.1,
     "tooltip": "{% trans 'Large scale batteries (GWh)' %}",
+    "type": "slider",
+    "sidepanel": true
+  },
+    "s_s_g_3": {
+    "class": "js-slider",
+    "label": "{% trans 'Storage of wind and PV energy (%)' %}",
+    "max": 200,
+    "min": 0,
+    "start": 5,
+    "step": 10,
+    "tooltip": "{% trans 'Storage of wind and PV energy (%)' %}",
     "type": "slider"
   }
 }

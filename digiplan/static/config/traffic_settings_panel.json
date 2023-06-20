@@ -9,30 +9,19 @@
     "status_quo": 50,
     "step": 5,
     "tooltip": "{% trans 'Share of battery-electric vehicles (%)' %}",
-    "type": "slider"
+    "type": "slider",
+    "sidepanel": true
   },
-  "v_iv_2": {
+  "v_iv_3": {
     "class": "js-slider js-slider-panel",
     "grid": false,
-    "label": "{% trans 'Share of plugin-hybrid vehicles (%)' %}",
+    "label": "{% trans 'Share of battery electric and plugin-hybrid vehicles (%)' %}",
     "max": 100,
     "min": 0,
     "start": 25,
     "status_quo": 45,
     "step": 5,
-    "tooltip": "{% trans 'Share of plugin-hybrid vehicles (%)' %}",
-    "type": "slider"
-  },
-  "v_sl_1": {
-    "class": "js-slider js-slider-panel",
-    "grid": false,
-    "label": "{% trans 'Share of heavy-duty trucks with fuel cell (%)' %}",
-    "max": 100,
-    "min": 0,
-    "start": 10,
-    "status_quo": 40,
-    "step": 5,
-    "tooltip": "{% trans 'Share of heavy-duty trucks with fuel cell (%)' %}",
+    "tooltip": "{% trans 'Personal battery electric and plug-in hybrid vehicles' %}",
     "type": "slider"
   }
 }
