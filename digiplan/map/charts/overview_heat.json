@@ -22,7 +22,7 @@
     {
       "name": "GHD",
       "type": "bar",
-      "barWidth": "35",
+      "barWidth": "16",
       "stack": "total",
       "color": "#F5F5DC",
       "label": {

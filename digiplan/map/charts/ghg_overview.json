@@ -24,7 +24,7 @@
     {
       "name": "Sockel",
       "type": "bar",
-      "barWidth": "25",
+      "barWidth": "16",
       "stack": "total",
       "color": "#F2F2F2",
       "label": {

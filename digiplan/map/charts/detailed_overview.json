@@ -55,7 +55,7 @@
     {
       "name": "Konventionell",
       "type": "bar",
-      "barWidth": "35",
+      "barWidth": "16",
       "stack": "five",
       "color": "#CFCFCF",
       "emphasis": {

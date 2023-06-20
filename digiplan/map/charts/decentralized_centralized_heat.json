@@ -48,7 +48,7 @@
     {
       "name": "Kohleofen",
       "type": "bar",
-      "barWidth": "35",
+      "barWidth": "16",
       "stack": "five",
       "color": "#604F4F",
       "emphasis": {
