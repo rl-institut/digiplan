@@ -1,151 +1,175 @@
 {
-    "tooltip": "",
-    "legend": "",
-    "grid": "",
-    "textStyle": "",
-    "xAxis": {
-        "type": "value",
-        "show": true,
-        "position": "bottom",
-        "name": "Mt CO₂-\nEmissionen",
-        "nameLocation": "end",
-        "width": "76",
-        "heigth": "32"
-    },
-    "yAxis": {
-        "type": "category",
-        "data": [
-            "Ziel Szenario\n (Verbrauch)",
-            "Ziel Szenario\n (Erzeugung)",
-            "Mein Szenario\n (Verbrauch)",
-            "Mein Szenario\n (Erzeugung)",
-            "Status Quo\n (Verbrauch)",
-            "Status Quo\n (Erzeugung)"
-        ],
-        "axisTick": {
-            "show": false
+  "legend": {
+    "data": [
+      "Konventionell",
+      "Wind",
+      "Freiflächen-PV",
+      "Aufdach-PV",
+      "Bioenergie",
+      "GHD",
+      "Haushalt",
+      "Industrie",
+      "Sonstiges"
+    ],
+    "bottom": "12"
+  },
+  "brush": {
+    "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],
+    "xAxisIndex": 0
+  },
+  "toolbox": {
+    "feature": {
+      "magicType": {
+        "type": ["stack"]
+      },
+      "dataView": {}
+    }
+  },
+  "tooltip": {},
+  "grid": {
+    "top": "10%",
+    "left": "3%",
+    "right": "15%",
+    "bottom": "10%",
+    "containLabel": true
+  },
+  "yAxis": {
+    "data": ["Status Quo", "Mein Szenario", "Ziel Szenario"],
+    "axisLine": { "onZero": true },
+    "splitLine": { "show": false },
+    "splitArea": { "show": false }
+  },
+  "xAxis": {
+    "type": "value",
+    "show": true,
+    "position": "bottom",
+    "name": "TWh",
+    "nameLocation": "end",
+    "nameTextStyle": "Roboto",
+    "width": "76",
+    "heigth": "32",
+    "fontWeight": "300",
+    "fontSize": "14"
+  },
+  "series": [
+    {
+      "name": "Konventionell",
+      "type": "bar",
+      "barWidth": "35",
+      "stack": "five",
+      "color": "#CFCFCF",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
         }
+      },
+      "data": [132, 334, 700]
     },
-    "series": [
-        {
-            "name": "Wind",
-            "type": "bar",
-            "barWidth": 0,
-            "stack": "total",
-            "color": "#1F82C0",
-            "label": {
-                "show": false
-            },
-            "emphasis": {
-                "focus": "series"
-            },
-            "data": [
-                0,
-                502,
-                0,
-                334,
-                0,
-                230
-            ]
-        },
-        {
-            "name": "Freiflächen - PV",
-            "type": "bar",
-            "stack": "total",
-            "color": "#F6B93B",
-            "label": {
-                "show": false
-            },
-            "emphasis": {
-                "focus": "series"
-            },
-            "data": [
-                0,
-                382,
-                0,
-                234,
-                0,
-                130
-            ]
-        },
-        {
-            "name": "Aufdach - PV",
-            "type": "bar",
-            "stack": "total",
-            "color": "#FFD660",
-            "label": {
-                "show": false
-            },
-            "emphasis": {
-                "focus": "series"
-            },
-            "data": [
-                0,
-                312,
-                0,
-                254,
-                0,
-                130
-            ]
-        },
-        {
-            "name": "Bioenergie",
-            "type": "bar",
-            "stack": "total",
-            "color": "#98D47E",
-            "label": {
-                "show": false
-            },
-            "emphasis": {
-                "focus": "series"
-            },
-            "data": [
-                0,
-                136,
-                0,
-                134,
-                0,
-                130
-            ]
-        },
-        {
-            "name": "Konventionell",
-            "type": "bar",
-            "stack": "total",
-            "color": "#CFCFCF",
-            "label": {
-                "show": false
-            },
-            "emphasis": {
-                "focus": "series"
-            },
-            "data": [
-                0,
-                132,
-                0,
-                534,
-                0,
-                1130
-            ]
-        },
-        {
-            "name": "Verbrauch",
-            "type": "bar",
-            "stack": "total",
-            "color": "#e9e0c8",
-            "label": {
-                "show": false
-            },
-            "emphasis": {
-                "focus": "series"
-            },
-            "data": [
-                1450,
-                0,
-                1440,
-                0,
-                1800
-            ]
+    {
+      "name": "Wind",
+      "type": "bar",
+      "stack": "five",
+      "color": "#1F82C0",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
         }
-    ]
+      },
+      "data": [302, 234, 230]
+    },
+    {
+      "name": "Freiflächen-PV",
+      "type": "bar",
+      "stack": "five",
+      "color": "#F6B93B",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [282, 234, 100]
+    },
+    {
+      "name": "Aufdach-PV",
+      "type": "bar",
+      "stack": "five",
+      "color": "#FFD660",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [312, 254, 100]
+    },
+    {
+      "name": "Bioenergie",
+      "type": "bar",
+      "stack": "five",
+      "color": "#98D47E",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [136, 134, 130]
+    },
+    {
+      "name": "GHD",
+      "type": "bar",
+      "stack": "four",
+      "color": "#F5F5DC",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [300, 344, 380]
+    },
+    {
+      "name": "Haushalte",
+      "type": "bar",
+      "stack": "four",
+      "color": "#A8DADC",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [254, 244, 380]
+    },
+    {
+      "name": "Industrie",
+      "type": "bar",
+      "barWidth": "35",
+      "stack": "four",
+      "color": "#C27BA0",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [280, 300, 350]
+    },
+    {
+      "name": "Sonstiges",
+      "type": "bar",
+      "stack": "four",
+      "color": "#B0BEC5",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [145, 144, 180]
+    }
+  ]
 }
