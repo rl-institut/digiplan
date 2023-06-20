@@ -96,6 +96,7 @@ SIMULATION_RENEWABLES = {
     "ABW-solar-pv_rooftop": _("Aufdach-PV"),
     "ABW-wind-onshore": _("Wind"),
     "ABW-hydro-ror": _("Hydro"),
+    "ABW-biomass": _("Biomass"),
 }
 
 SIMULATION_DEMANDS = {

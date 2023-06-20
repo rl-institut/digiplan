@@ -157,6 +157,70 @@ def capacity_square_choropleth() -> dict[int, int]:
     return capacity
 
 
+def electricity_from_from_biomass(simulation_id: int) -> pd.Series:
+    """
+    Calculate electricity from biomass.
+
+    Biomass share to electricity comes from following parts:
+    - biomass is turned into biogas
+    - biogas powers central and decentral BPCHP which outputs to electricity bus
+    - wood powers central and decentral EXTCHP which outputs to electricity bus
+
+    - biogas is further upgraded into methane
+    - methane powers following components which all output to electricity bus:
+      - BPCHP (central/decentral)
+      - EXTCHP (central/decentral)
+      - gas turbine
+
+    Regarding the power delivered by methane, we have to distinguish between methane from import and methane from
+    upgraded biomass. This is done, by calculating the share of both and multiplying output respectively.
+
+    Returns
+    -------
+    pd.Series
+        containing one entry for electric energy powered by biomass
+    """
+    results = get_results(
+        simulation_id,
+        {
+            "electricity_production": electricity_production,
+            "methane_production": methane_production,
+        },
+    )
+    biomass = results["electricity_production"][
+        results["electricity_production"]
+        .index.get_level_values(0)
+        .isin(
+            [
+                "ABW-wood-extchp_central",
+                "ABW-wood-extchp_decentral",
+                "ABW-biogas-bpchp_central",
+                "ABW-biogas-bpchp_decentral",
+            ],
+        )
+    ]
+    methane_total = results["methane_production"].sum()
+    methane_biomass_share = results["methane_production"].loc[["ABW-biogas-biogas_upgrading_plant"]] / methane_total
+    electricity_from_methane = (
+        results["electricity_production"][
+            results["electricity_production"]
+            .index.get_level_values(0)
+            .isin(
+                [
+                    "ABW-ch4-gt",
+                    "ABW-ch4-extchp_central",
+                    "ABW-ch4-extchp_decentral",
+                    "ABW-ch4-bpchp_central",
+                    "ABW-ch4-bpchp_decentral",
+                ],
+            )
+        ]
+        * methane_biomass_share.sum()
+    )
+    biomass = pd.concat([biomass, electricity_from_methane])
+    return biomass.sum()
+
+
 def electricity_heat_demand(simulation_id: int) -> pd.Series:
     """
     Return electricity demand for heat demand supply.
@@ -228,11 +292,11 @@ def electricity_overview(simulation_id: int) -> pd.Series:
             "electricity_production": electricity_production,
         },
     )
-    # TODO(Hendrik): How to determine biomass electricity production?  # noqa: TD003
     renewables = results["electricity_production"][
         results["electricity_production"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
     ]
     renewables.index = renewables.index.get_level_values(0)
+    renewables = pd.concat([renewables, pd.Series(electricity_from_from_biomass(simulation_id), index=["ABW-biomass"])])
 
     electricity_import = results["electricity_production"].loc[["ABW-electricity-import"]]
     electricity_import.index = electricity_import.index.get_level_values(0)
@@ -285,6 +349,15 @@ heat_production = core.ParametrizedCalculation(
         "to_nodes": [
             "ABW-heat_decentral",
             "ABW-heat_central",
+        ],
+    },
+)
+
+methane_production = core.ParametrizedCalculation(
+    calculations.AggregatedFlows,
+    {
+        "to_nodes": [
+            "ABW-ch4",
         ],
     },
 )

@@ -83,9 +83,17 @@ class HeatDemandTest(SimulationTest):
         assert list(results.values())[0].iloc[0] > 0
 
 
+class ElectricityProductionFromBiomassTest(SimulationTest):
+    """Test electricity production from biomass calculation."""
+
+    def test_electricity_production_from_biomass(self):  # noqa: D102,ANN201
+        results = calculations.electricity_from_from_biomass(self.simulation_id)
+        assert isinstance(results, float) is True
+
+
 class ElectricityOverviewTest(SimulationTest):
     """Test electricity overview calculation."""
 
     def test_electricity_overview(self):  # noqa: D102,ANN201
         result = calculations.electricity_overview(self.simulation_id)
-        assert len(result) == 3
+        assert len(result) == 12
