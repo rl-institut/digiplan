@@ -97,3 +97,11 @@ class ElectricityOverviewTest(SimulationTest):
     def test_electricity_overview(self):  # noqa: D102,ANN201
         result = calculations.electricity_overview(self.simulation_id)
         assert len(result) == 12
+
+
+class HeatOverviewTest(SimulationTest):
+    """Test heat overview calculation."""
+
+    def test_heat_overview(self):  # noqa: D102,ANN201
+        result = calculations.heat_overview(self.simulation_id)
+        assert len(result) == 3
