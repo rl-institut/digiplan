@@ -1,10 +1,25 @@
 {
-    "lookup": "wind_turbines",
-    "series": [
-      {
-        "data": [],
-        "name": "wind turbines"
-      }
-    ],
-    "title": "number of wind turbines"
+  "grid": {
+    "top": "24%"
+  },
+  "xAxis": {
+    "type": "category",
+    "data": []
+  },
+  "yAxis": {
+    "type": "value",
+    "show": true,
+    "name": "Wind Turbines",
+    "nameLocation": "end",
+    "nameTextStyle": "Roboto"
+  },
+  "series": [
+    {
+      "type": "line",
+      "barWidth": "16",
+      "data": [5, 20, 36, 10, 10],
+      "name": "Wind Turbines"
+    }
+  ],
+  "title": { "text": "number of wind turbines" }
 }
