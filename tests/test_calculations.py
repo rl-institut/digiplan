@@ -16,9 +16,15 @@ class SimulationTest(SimpleTestCase):
         "s_v_3": 100,
         "s_v_4": 100,
         "s_w_1": 1000,
-        "s_pv_ff_1": 300,
-        "s_pv_d_1": 200,
-        "s_b_1": 1000,
+        "w_v_3": 100,
+        "w_v_4": 100,
+        "w_v_5": 100,
+        "s_pv_ff_1": 100,
+        "s_pv_d_1": 100,
+        "s_b_1": 100,
+        "ror": 100,
+        "w_z_wp_1": 100,
+        "w_d_wp_1": 100,
     }
 
     def setUp(self) -> None:
@@ -29,16 +35,65 @@ class SimulationTest(SimpleTestCase):
         pass
 
     @classmethod
-    def tearDownClass(cls):  # noqa: D102,ANN102,ANN206 Needed to keep results in test DB
+    def tearDownClass(cls):  # noqa: D102, ANN206 Needed to keep results in test DB
         pass
 
 
-class RenewableElectricityProductionTest(SimulationTest):
-    """Test renewable electricity production calculation."""
+class ElectricityProductionTest(SimulationTest):
+    """Test electricity production calculation."""
 
-    def test_renewable_electricity_production(self):  # noqa: D102,ANN201
+    def test_electricity_production(self):  # noqa: D102,ANN201
         results = oemof_results.get_results(
             self.simulation_id,
-            calculations=[calculations.renewable_electricity_production],
+            calculations=[calculations.electricity_production],
         )
         assert list(results.values())[0].iloc[0] > 0
+
+
+class HeatProductionTest(SimulationTest):
+    """Test heat production calculation."""
+
+    def test_heat_production(self):  # noqa: D102,ANN201
+        results = oemof_results.get_results(
+            self.simulation_id,
+            calculations=[calculations.heat_production],
+        )
+        assert list(results.values())[0].iloc[0] > 0
+
+
+class ElectricityDemandTest(SimulationTest):
+    """Test electricity demand calculation."""
+
+    def test_electricity_demand(self):  # noqa: D102,ANN201
+        results = oemof_results.get_results(
+            self.simulation_id,
+            calculations=[calculations.electricity_demand],
+        )
+        assert list(results.values())[0].iloc[0] > 0
+
+
+class HeatDemandTest(SimulationTest):
+    """Test heat demand calculation."""
+
+    def test_heat_demand(self):  # noqa: D102,ANN201
+        results = oemof_results.get_results(
+            self.simulation_id,
+            calculations=[calculations.heat_demand],
+        )
+        assert list(results.values())[0].iloc[0] > 0
+
+
+class ElectricityProductionFromBiomassTest(SimulationTest):
+    """Test electricity production from biomass calculation."""
+
+    def test_electricity_production_from_biomass(self):  # noqa: D102,ANN201
+        results = calculations.electricity_from_from_biomass(self.simulation_id)
+        assert isinstance(results, float) is True
+
+
+class ElectricityOverviewTest(SimulationTest):
+    """Test electricity overview calculation."""
+
+    def test_electricity_overview(self):  # noqa: D102,ANN201
+        result = calculations.electricity_overview(self.simulation_id)
+        assert len(result) == 12

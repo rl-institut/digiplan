@@ -61,10 +61,40 @@ def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) ->
         Parameters for oemof with adapted demands
     """
     year = "2045" if scenario == "scenario_2045" else "2022"
-    for sector, slider in (("hh", "s_v_2"), ("ghd", "s_v_3"), ("i", "s_v_4")):
+    for sector, slider in (("hh", "s_v_2"), ("cts", "s_v_3"), ("ind", "s_v_4")):
         demand_filename = settings.DATA_DIR.path("scenarios").path(f"demand_{sector}_power_demand.csv")
         demand = pd.read_csv(demand_filename)
         data[f"ABW-electricity-demand_{sector}"] = {"amount": float(demand[year].sum()) * data.pop(slider) / 100}
+    return data
+
+
+def adapt_heat_demand(scenario: str, data: dict, request: HttpRequest) -> dict:  # noqa: ARG001
+    """
+    Read settings and adapt related heat demands.
+
+    Parameters
+    ----------
+    scenario: str
+        Used oemof scenario
+    data : dict
+        Raw parameters from user settings
+    request : HttpRequest
+        Original request from settings
+
+    Returns
+    -------
+    dict
+        Parameters for oemof with adapted heat demands
+    """
+    year = "2045" if scenario == "scenario_2045" else "2022"
+    for sector, slider in (("hh", "w_v_3"), ("cts", "w_v_4"), ("ind", "w_v_5")):
+        percentage = data.pop(slider)
+        for location in ("central", "decentral"):
+            demand_filename = settings.DATA_DIR.path("scenarios").path(f"demand_{sector}_heat_demand_{location}.csv")
+            demand = pd.read_csv(demand_filename)
+            data[f"ABW-heat_{location}-demand_{sector}"] = {
+                "amount": float(demand[year].sum()) * percentage / 100,
+            }
     return data
 
 
@@ -89,5 +119,23 @@ def adapt_capacities(scenario: str, data: dict, request: HttpRequest) -> dict:  
     data["ABW-wind-onshore"] = {"capacity": data.pop("s_w_1")}
     data["ABW-solar-pv_ground"] = {"capacity": data.pop("s_pv_ff_1")}
     data["ABW-solar-pv_rooftop"] = {"capacity": data.pop("s_pv_d_1")}
-    data["ABW-biomass-fermenter"] = {"capacity": data.pop("s_b_1")}
+    # TODO(Hendrik): Slider not yet implemented
+    # https://github.com/rl-institut-private/digiplan/issues/229
+    data["ABW-hydro-ror"] = {"capacity": data.pop("ror")}
+    data["ABW-electricity-heatpump_decentral"] = {"capacity": data.pop("w_d_wp_1")}
+    data["ABW-electricity-heatpump_central"] = {"capacity": data.pop("w_z_wp_1")}
+
+    # TODO(Hendrik): Get values either from static file or from sliders
+    # https://github.com/rl-institut-private/digipipe/issues/119
+    data["ABW-biogas-bpchp_central"] = {"capacity": 100}
+    data["ABW-biogas-bpchp_decentral"] = {"capacity": 100}
+    data["ABW-wood-extchp_central"] = {"capacity": 100}
+    data["ABW-wood-extchp_decentral"] = {"capacity": 100}
+    data["ABW-ch4-bpchp_central"] = {"capacity": 100}
+    data["ABW-ch4-bpchp_decentral"] = {"capacity": 100}
+    data["ABW-ch4-extchp_central"] = {"capacity": 100}
+    data["ABW-ch4-extchp_decentral"] = {"capacity": 100}
+    data["ABW-ch4-gt"] = {"capacity": 100}
+    data["ABW-biogas-biogas_upgrading_plant"] = {"capacity": 100}
+    data["ABW-biomass-biogas_plant"] = {"capacity": 100}
     return data

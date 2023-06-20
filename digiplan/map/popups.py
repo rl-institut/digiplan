@@ -111,7 +111,7 @@ class RenewableElectricityProductionPopup(SimulationPopup):
     """Popup to show renewable electricity production values."""
 
     unit = "MWh"
-    calculation = calculations.renewable_electricity_production
+    calculation = calculations.electricity_production
 
     def get_region_value(self) -> float:  # noqa: D102
         return self.result.sum() / 1000
@@ -120,7 +120,7 @@ class RenewableElectricityProductionPopup(SimulationPopup):
         return None
 
     def get_chart_data(self) -> Iterable:  # noqa: D102
-        self.result.index = self.result.index.map(lambda x: config.SIMULATION_NAMES[x[0]])
+        self.result.index = self.result.index.map(lambda x: config.SIMULATION_NAME_MAPPING[x[0]])
         return self.result
 
 
