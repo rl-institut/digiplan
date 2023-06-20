@@ -313,6 +313,31 @@ def electricity_overview(simulation_id: int) -> pd.Series:
     return pd.concat([renewables, demand, electricity_heat_production_result])
 
 
+def heat_overview(simulation_id: int) -> pd.Series:
+    """
+    Return data for heat overview chart.
+
+    Parameters
+    ----------
+    simulation_id: int
+        Simulation ID to get results from
+
+    Returns
+    -------
+    pd.Series
+        containing heat demand for all sectors (hh, cts, ind)
+    """
+    results = get_results(
+        simulation_id,
+        {
+            "heat_demand": heat_demand,
+        },
+    )
+    demand = results["heat_demand"]
+    demand.index = demand.index.map(lambda ind: f"heat-demand-{ind[1].split('_')[2]}")
+    return demand.groupby(level=0).sum()
+
+
 electricity_demand = core.ParametrizedCalculation(
     calculations.AggregatedFlows,
     {
