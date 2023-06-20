@@ -122,7 +122,20 @@ def adapt_capacities(scenario: str, data: dict, request: HttpRequest) -> dict:  
     # TODO(Hendrik): Slider not yet implemented
     # https://github.com/rl-institut-private/digiplan/issues/229
     data["ABW-hydro-ror"] = {"capacity": data.pop("ror")}
-    data["ABW-biomass-fermenter"] = {"capacity": data.pop("s_b_1")}
     data["ABW-electricity-heatpump_decentral"] = {"capacity": data.pop("w_d_wp_1")}
     data["ABW-electricity-heatpump_central"] = {"capacity": data.pop("w_z_wp_1")}
+
+    # TODO(Hendrik): Get values either from static file or from sliders
+    # https://github.com/rl-institut-private/digipipe/issues/119
+    data["ABW-biogas-bpchp_central"] = {"capacity": 100}
+    data["ABW-biogas-bpchp_decentral"] = {"capacity": 100}
+    data["ABW-wood-extchp_central"] = {"capacity": 100}
+    data["ABW-wood-extchp_decentral"] = {"capacity": 100}
+    data["ABW-ch4-bpchp_central"] = {"capacity": 100}
+    data["ABW-ch4-bpchp_decentral"] = {"capacity": 100}
+    data["ABW-ch4-extchp_central"] = {"capacity": 100}
+    data["ABW-ch4-extchp_decentral"] = {"capacity": 100}
+    data["ABW-ch4-gt"] = {"capacity": 100}
+    data["ABW-biogas-biogas_upgrading_plant"] = {"capacity": 100}
+    data["ABW-biomass-biogas_plant"] = {"capacity": 100}
     return data
