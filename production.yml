@@ -5,7 +5,7 @@ volumes:
   production_postgres_data_backups: {}
 
 services:
-  django:
+  django: &django
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
@@ -40,6 +40,16 @@ services:
       - production_postgres_data_backups:/backups
     env_file:
       - ./.envs/.production/.postgres
+
+  redis:
+    image: redis
+    networks:
+      digiplan_network:
+
+  celeryworker:
+    <<: *django
+    image: digiplan_production_celeryworker
+    command: /start-celeryworker
 
 networks:
   digiplan_network:

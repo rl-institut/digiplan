@@ -1,0 +1,27 @@
+{
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow"
+    }
+  },
+  "grid": {
+    "top": "10%",
+    "left": "3%",
+    "right": "15%",
+    "bottom": "18%",
+    "containLabel": true
+  },
+  "textStyle": {
+    "fontFamily": "Roboto",
+    "fontSize": 14,
+    "fontWeight": 300,
+    "color": "#002C50"
+  },
+  "legend": {
+    "show": true,
+    "bottom": "12",
+    "itemWidth": 14,
+    "itemHeight": 14
+  }
+}

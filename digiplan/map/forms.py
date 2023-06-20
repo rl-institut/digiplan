@@ -1,4 +1,4 @@
-from itertools import count
+from itertools import count  # noqa: D100
 
 from django.db.models import Max, Min
 from django.forms import (
@@ -12,23 +12,22 @@ from django.forms import (
 )
 from django.utils.safestring import mark_safe
 from django_mapengine import legend
-from django_select2.forms import Select2MultipleWidget
 
 from . import models
 from .widgets import SwitchWidget
 
 
-class TemplateForm(Form):
+class TemplateForm(Form):  # noqa: D101
     template_name = None
 
-    def __str__(self):
+    def __str__(self) -> str:  # noqa: D105
         if self.template_name:
             renderer = renderers.get_default_renderer()
-            return mark_safe(renderer.render(self.template_name, {"form": self}))  # noqa: S703, S308
+            return mark_safe(renderer.render(self.template_name, {"form": self}))  # noqa: S308
         return super().__str__()
 
 
-class StaticLayerForm(TemplateForm):
+class StaticLayerForm(TemplateForm):  # noqa: D101
     template_name = "forms/layer.html"
     switch = BooleanField(
         label=False,
@@ -36,12 +35,12 @@ class StaticLayerForm(TemplateForm):
             attrs={
                 "switch_class": "form-check form-switch",
                 "switch_input_class": "form-check-input",
-            }
+            },
         ),
     )
     counter = count()
 
-    def __init__(self, layer: legend.LegendLayer, *args, **kwargs):
+    def __init__(self, layer: legend.LegendLayer, *args, **kwargs) -> None:  # noqa: ANN002, D107
         super().__init__(*args, **kwargs)
         self.layer = layer
 
@@ -63,7 +62,7 @@ class StaticLayerForm(TemplateForm):
                                 "data-from": filter_min,
                                 "data-to": filter_max,
                                 "data-grid": True,
-                            }
+                            },
                         ),
                     )
                 elif filter_.type == models.LayerFilterType.Dropdown:
@@ -74,19 +73,18 @@ class StaticLayerForm(TemplateForm):
                     )
                     self.fields[filter_.name] = MultipleChoiceField(
                         choices=[(value, value) for value in filter_values],
-                        widget=Select2MultipleWidget(attrs={"id": f"{filter_.name}_{next(self.counter)}"}),
                     )
                 else:
                     raise ValueError(f"Unknown filter type '{filter_.type}'")
 
 
-class PanelForm(TemplateForm):
-    def __init__(self, parameters, **kwargs):
+class PanelForm(TemplateForm):  # noqa: D101
+    def __init__(self, parameters, **kwargs) -> None:  # noqa: D107, ANN001
         super().__init__(**kwargs)
         self.fields = {item["name"]: item["field"] for item in self.generate_fields(parameters)}
 
     @staticmethod
-    def generate_fields(parameters):
+    def generate_fields(parameters):  # noqa: ANN001, ANN205, D102
         for name, item in parameters.items():
             if item["type"] == "slider":
                 attrs = {
@@ -110,20 +108,23 @@ class PanelForm(TemplateForm):
                     "class": item["class"],
                 }
                 field = BooleanField(
-                    label=item["label"], widget=SwitchWidget(attrs=attrs), help_text=item["tooltip"], required=False
+                    label=item["label"],
+                    widget=SwitchWidget(attrs=attrs),
+                    help_text=item["tooltip"],
+                    required=False,
                 )
                 yield {"name": name, "field": field}
             else:
                 raise ValueError(f"Unknown parameter type '{item['type']}'")
 
 
-class EnergyPanelForm(PanelForm):
+class EnergyPanelForm(PanelForm):  # noqa: D101
     template_name = "forms/panel_energy.html"
 
 
-class HeatPanelForm(PanelForm):
+class HeatPanelForm(PanelForm):  # noqa: D101
     template_name = "forms/panel_heat.html"
 
 
-class TrafficPanelForm(PanelForm):
+class TrafficPanelForm(PanelForm):  # noqa: D101
     template_name = "forms/panel_traffic.html"

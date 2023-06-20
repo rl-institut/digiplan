@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-30 12:31+0000\n"
+"POT-Creation-Date: 2023-04-18 17:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,75 +30,77 @@ msgstr "Deutsch"
 msgid "Renewables"
 msgstr "Erneuerbare Energien"
 
-#: digiplan/map/map_config.py:8 digiplan/map/models.py:107
+#: digiplan/map/map_config.py:8 digiplan/map/models.py:219
 msgid "Wind turbine"
 msgstr "Windturbine"
 
-#: digiplan/map/map_config.py:9 digiplan/map/models.py:144
+#: digiplan/map/map_config.py:9 digiplan/map/models.py:369
+#: digiplan/static/config/energy_settings_panel.json:89
 msgid "Roof-mounted PV"
 msgstr "Aufdach-PV"
 
-#: digiplan/map/map_config.py:10 digiplan/map/models.py:181
+#: digiplan/map/map_config.py:10 digiplan/map/models.py:406
 msgid "Outdoor PV"
 msgstr "Freiflächen-PV"
 
-#: digiplan/map/map_config.py:11 digiplan/map/models.py:215
-#: digiplan/map/models.py:216
+#: digiplan/map/map_config.py:11 digiplan/map/models.py:440
+#: digiplan/map/models.py:441
 msgid "Hydro"
 msgstr "Wasserkraft"
 
-#: digiplan/map/map_config.py:12 digiplan/map/models.py:249
-#: digiplan/map/models.py:250
+#: digiplan/map/map_config.py:12 digiplan/map/models.py:474
+#: digiplan/map/models.py:475
 msgid "Biomass"
 msgstr "Biomasse"
 
-#: digiplan/map/map_config.py:13 digiplan/map/models.py:283
-#: digiplan/map/models.py:284
+#: digiplan/map/map_config.py:13 digiplan/map/models.py:508
+#: digiplan/map/models.py:509
 msgid "Combustion"
 msgstr "Fossiles Kraftwerk"
 
-#: digiplan/map/models.py:28
+#: digiplan/map/models.py:30
 msgid "Country"
 msgstr "Land"
 
-#: digiplan/map/models.py:29
+#: digiplan/map/models.py:31
 msgid "State"
 msgstr "Bundesland"
 
-#: digiplan/map/models.py:30
+#: digiplan/map/models.py:32
 msgid "District"
 msgstr "Kreis"
 
-#: digiplan/map/models.py:31 digiplan/map/models.py:56
+#: digiplan/map/models.py:33 digiplan/map/models.py:58
 msgid "Municipality"
 msgstr "Gemeinde"
 
-#: digiplan/map/models.py:36
+#: digiplan/map/models.py:38
 msgid "Region"
 msgstr "Region"
 
-#: digiplan/map/models.py:37
+#: digiplan/map/models.py:39
 msgid "Regions"
 msgstr "Regionen"
 
-#: digiplan/map/models.py:57
+#: digiplan/map/models.py:59
 msgid "Municipalities"
 msgstr "Gemeinden"
 
-#: digiplan/map/models.py:70 digiplan/map/models.py:71
+#: digiplan/map/models.py:77 digiplan/map/models.py:78
+#: digiplan/templates/components/panel_1_today.html:39
 #: digiplan/templates/components/panel_3_results.html:34
 msgid "Population"
 msgstr "Bevölkerung"
 
-#: digiplan/map/models.py:108
+#: digiplan/map/models.py:220
 msgid "Wind turbines"
 msgstr "Windturbine"
 
-#: digiplan/map/models.py:145
+#: digiplan/map/models.py:370
 msgid "Roof-mounted PVs"
 msgstr "Aufdach-PVs"
 
-#: digiplan/map/models.py:182
+#: digiplan/map/models.py:407
 msgid "Outdoor PVs"
 msgstr "Freiflächen-PVs"
 
@@ -112,23 +114,146 @@ msgstr "Strombedarf"
 
 #: digiplan/static/config/energy_settings_panel.json:6
 #: digiplan/static/config/energy_settings_panel.json:12
-msgid "Wind energy"
+#, fuzzy
+#| msgid "Wind energy"
+msgid "Wind energy (MW)"
 msgstr "Windenergie"
 
 #: digiplan/static/config/energy_settings_panel.json:19
 #: digiplan/static/config/energy_settings_panel.json:24
-msgid "Distance from residential areas"
+#, fuzzy
+#| msgid "Distance from residential areas"
+msgid "Distance from residential areas (m)"
 msgstr "Siedlungsabstand"
 
 #: digiplan/static/config/energy_settings_panel.json:29
 #: digiplan/static/config/energy_settings_panel.json:34
-msgid "Forest usage"
-msgstr "Windnutzungsfläche"
+#, python-format
+msgid "Forest usage (%%)"
+msgstr "Waldnutzungsfläche (%%)"
 
 #: digiplan/static/config/energy_settings_panel.json:39
 #: digiplan/static/config/energy_settings_panel.json:44
-msgid "LSG usage"
+#, fuzzy, python-format
+#| msgid "LSG usage"
+msgid "LSG usage (%%)"
 msgstr "LSG-Nutzung"
+
+#: digiplan/static/config/energy_settings_panel.json:51
+#: digiplan/static/config/energy_settings_panel.json:57
+msgid "Outdoor PV (MW)"
+msgstr "Freiflächen-PV (MW)"
+
+#: digiplan/static/config/energy_settings_panel.json:63
+#: digiplan/static/config/energy_settings_panel.json:64
+msgid "Areas alongside highways and railways"
+msgstr "Flächen entlang Autobahnen und Schienenwegen"
+
+#: digiplan/static/config/energy_settings_panel.json:69
+#: digiplan/static/config/energy_settings_panel.json:70
+msgid "Use of agricultural ad grassland areas"
+msgstr "Nutzung von Agrar- und Grünlandflächen"
+
+#: digiplan/static/config/energy_settings_panel.json:75
+#: digiplan/static/config/energy_settings_panel.json:76
+msgid "Remove restrictions on disadvantaged areas."
+msgstr "Begrenzung auf benachteiligte Gebiete aufheben"
+
+#: digiplan/static/config/energy_settings_panel.json:83
+msgid "Roof-mounted PV (MW)"
+msgstr "Aufdach-PV"
+
+#: digiplan/static/config/energy_settings_panel.json:95
+#, fuzzy, python-format
+#| msgid "Share of used roofs (%)"
+msgid "Share of used roofs (%%)"
+msgstr "Anteil genutzter Dächer (%%)"
+
+#: digiplan/static/config/energy_settings_panel.json:100
+#, python-format
+msgid "Anteil genutzter Dächer (%%)"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:106
+#: digiplan/static/config/energy_settings_panel.json:112
+msgid "Bioenergy (MW)"
+msgstr "Bioenergie (MW)"
+
+#: digiplan/static/config/energy_settings_panel.json:118
+#: digiplan/static/config/energy_settings_panel.json:124
+msgid "Conventional Energy (MW)"
+msgstr "Konventionell (MW)"
+
+#: digiplan/static/config/energy_settings_panel.json:130
+#: digiplan/static/config/energy_settings_panel.json:136
+#, fuzzy, python-format
+#| msgid "Power consumption without heat generation (%%)"
+msgid "Power consumption without heat generation (%%)"
+msgstr "Stromverbrauch, ohne Wärmeerzeugung (%%)"
+
+#: digiplan/static/config/energy_settings_panel.json:148
+#, fuzzy, python-format
+#| msgid "Households (%%)"
+msgid "Haushalte (%%)"
+msgstr "Haushalte (%%)"
+
+#: digiplan/static/config/energy_settings_panel.json:153
+#, python-format
+msgid "Commercial, Trade, Services (%%)"
+msgstr "Gewerbe, Handel, Dienstleistungen (%%)"
+
+#: digiplan/static/config/energy_settings_panel.json:163
+#: digiplan/static/config/energy_settings_panel.json:168
+#, python-format
+msgid "Industry (%%)"
+msgstr "Industrie (%%)"
+
+#: digiplan/static/config/energy_settings_panel.json:173
+#: digiplan/static/config/energy_settings_panel.json:179
+#, python-format
+msgid "Home batteries (%%)"
+msgstr "Heimspeicher (%%)"
+
+#: digiplan/static/config/energy_settings_panel.json:184
+#: digiplan/static/config/energy_settings_panel.json:190
+msgid "Large scale batteries (GWh)"
+msgstr "Großspeicher (GWh)"
+
+#: digiplan/static/config/heat_settings_panel.json:5
+#: digiplan/static/config/heat_settings_panel.json:11
+#, python-format
+msgid "Decentralized: share of households with heat pumps (%%)"
+msgstr "Dezentral: Anteil Haushalte mit Wärmepumpe (%%)"
+
+#: digiplan/static/config/heat_settings_panel.json:17
+#: digiplan/static/config/heat_settings_panel.json:23
+#, python-format
+msgid "Decentralized: share of households with solar thermal energy (%%)"
+msgstr "Dezentral, Anteil Haushalte mit Solartherme (%%)"
+
+#: digiplan/static/config/heat_settings_panel.json:29
+#: digiplan/static/config/heat_settings_panel.json:35
+#, python-format
+msgid "Centralized: Share of large scale heat pumps (%%)"
+msgstr "Zentral: Anteil Großwärmepumpen (%%)"
+
+#: digiplan/static/config/traffic_settings_panel.json:5
+#: digiplan/static/config/traffic_settings_panel.json:11
+#, python-format
+msgid "Share of battery-electric vehicles (%%)"
+msgstr "Anteil privater batterieelektrischer Fahrzeuge (%%)"
+
+#: digiplan/static/config/traffic_settings_panel.json:17
+#: digiplan/static/config/traffic_settings_panel.json:23
+#, python-format
+msgid "Share of plugin-hybrid vehicles (%%)"
+msgstr "Anteil privater Plugin-Hybrid-Fahrzeuge (%%)"
+
+#: digiplan/static/config/traffic_settings_panel.json:29
+#: digiplan/static/config/traffic_settings_panel.json:35
+#, python-format
+msgid "Share of heavy-duty trucks with fuel cell (%%)"
+msgstr "Anteil schwerer LKW mit Brennstoffzelle (%%)"
 
 #: digiplan/templates/components/map.html:12
 msgid "Region as of today"
@@ -144,6 +269,14 @@ msgstr "Einstellungen"
 msgid "Results"
 msgstr "Ergebnisse"
 
+#: digiplan/templates/components/map.html:38 digiplan/templates/map.html:49
+msgid "Map"
+msgstr "Karte"
+
+#: digiplan/templates/components/map.html:48
+msgid "Charts"
+msgstr "Diagramme"
+
 #: digiplan/templates/components/panel.html:23
 msgid "Imprint"
 msgstr "Impressum"
@@ -152,40 +285,260 @@ msgstr "Impressum"
 msgid "Data privacy"
 msgstr "Datenschutz"
 
-#: digiplan/templates/components/panel_1_today.html:32
+#: digiplan/templates/components/panel_1_today.html:5
+msgid "Goals 2045"
+msgstr "Ziele 2045"
+
+#: digiplan/templates/components/panel_1_today.html:10
+#: digiplan/templates/components/panel_3_results.html:7
+msgid "Share of renewable energies"
+msgstr "Anteil erneuerbarer Energien"
+
+#: digiplan/templates/components/panel_1_today.html:18
+#: digiplan/templates/components/panel_3_results.html:15
+msgid "CO2-Emissions (Mt)"
+msgstr "CO2-Emissionen (Mt)"
+
+#: digiplan/templates/components/panel_1_today.html:34
 msgid "Situation today"
 msgstr "Situation heute"
 
-#: digiplan/templates/components/panel_1_today.html:36
+#: digiplan/templates/components/panel_1_today.html:38
 #: digiplan/templates/components/panel_3_results.html:33
 msgid "Planning Region"
 msgstr "Planungsregion"
 
-#: digiplan/templates/components/panel_2_settings.html:18
+#: digiplan/templates/components/panel_1_today.html:39
+#: digiplan/templates/components/panel_1_today.html:97
+msgid "Inhabitants 2021"
+msgstr "Einwohner:innen 2021"
+
+#: digiplan/templates/components/panel_1_today.html:41
+#: digiplan/templates/components/panel_3_results.html:36
+msgid ""
+"In 2021 the population density in Germany was 238 per km² and 106 per km² in "
+"Saxony-Anhalt."
+msgstr ""
+
+#: digiplan/templates/components/panel_1_today.html:42
+#: digiplan/templates/components/panel_3_results.html:37
+msgid "Population Density"
+msgstr "Bevölkerungsdichte"
+
+#: digiplan/templates/components/panel_1_today.html:45
+#: digiplan/templates/components/panel_3_results.html:40
+msgid "Renewable Energies (RE)"
+msgstr "Erneuerbare Energien"
+
+#: digiplan/templates/components/panel_1_today.html:47
+#: digiplan/templates/components/panel_3_results.html:42
+#, python-format
+msgid ""
+"Annual balance sheet share of renewable energy (wind energy, photovoltaic, "
+"hydroelectric power) in the electricity demand of the sectors agriculture, "
+"GHG (trade, commerce, services), households and industry in percent. The "
+"demand is the net electricity consumption, i.e. transmission losses and "
+"power plant consumption are not taken into account. 49.7%% of the "
+"electricity demand in Germany was covered by renewable energies in 2022."
+msgstr ""
+"Jährlicher bilanzieller Anteil erneuerbar produzierter Energiemenge "
+"(Windenergie, Photovoltaik, Wasserkraft) am Strombedarf der Sektoren "
+"Landwirtschaft, GHG (Gewerbe, Handel, Dienstleistungen), Haushalte und "
+"Industrie in Prozent. Beim Bedarf handelt es sich um den "
+"Nettostromverbrauch, d.h. Übertragungsverluste und Kraftwerkeigenverbauch "
+"werden darin nicht berücksichtigt.In Deutschland wurde 2022 ein Strombedarf "
+"von 49,7%% von Erneuerbaren Energien gedeckt."
+
+#: digiplan/templates/components/panel_1_today.html:48
+#: digiplan/templates/components/panel_3_results.html:43
+msgid "Renewable Energy Share of Demand"
+msgstr "Anteil Energie aus EE an Strombedarf"
+
+#: digiplan/templates/components/panel_1_today.html:51
+#: digiplan/templates/components/panel_3_results.html:46
+msgid ""
+"Annual amount of energy fed into the grid from renewable plants in gigawatt "
+"hours (wind energy, photovoltaic, hydro power)."
+msgstr ""
+"Jährlich eingespeiste Energiemenge aus erneuerbaren Anlagen in "
+"Gigawattstunden (Windenergie, Photovoltaik, Wasserkraft)."
+
+#: digiplan/templates/components/panel_1_today.html:52
+#: digiplan/templates/components/panel_3_results.html:47
+msgid "Renewable Electricity Production (GWh)"
+msgstr "Gewonnene Energie aus EE (GWh)"
+
+#: digiplan/templates/components/panel_1_today.html:54
+#: digiplan/templates/components/panel_3_results.html:49
+msgid ""
+"Annual amount of energy fed in from renewable plants (wind energy, "
+"photovoltaic, hydro power) in relation to the number of inhabitants in "
+"megawatt hours per inhabitant."
+msgstr ""
+"Jährliche eingespeiste Energiemenge aus erneuerbaren Anlagen (Windenergie, "
+"Photovoltaik, Wasserkraft) bezogen auf die Einwohnerzahl in Megawattstunden "
+"pro EinwohnerIn."
+
+#: digiplan/templates/components/panel_1_today.html:55
+#: digiplan/templates/components/panel_3_results.html:50
+msgid "Renewable Electricity Production per Capita (MWh)"
+msgstr "Gewonnene Energie aus EE je EinwohnerIn (MWh)"
+
+#: digiplan/templates/components/panel_1_today.html:58
+#: digiplan/templates/components/panel_3_results.html:53
+msgid ""
+"Annual amount of energy fed in from renewable plants (wind energy, "
+"photovoltaic, hydro power) related to the area in megawatt hours per km²."
+msgstr ""
+"Jährlich eingespeiste Energiemenge aus erneuerbaren Anlagen (Windenergie, "
+"Photovoltaik, Wasserkraft) bezogen auf die Fläche in Megawattstunden pro km²."
+
+#: digiplan/templates/components/panel_1_today.html:59
+#: digiplan/templates/components/panel_3_results.html:54
+msgid "Renewable Electricity Production per km² (MWh)"
+msgstr "Gewonnene Energie aus EE je km² (MWh)"
+
+#: digiplan/templates/components/panel_1_today.html:62
+#: digiplan/templates/components/panel_3_results.html:57
+msgid ""
+"Installed capacity from renewable energy plants (wind energy, photovoltaic, "
+"hydro power, biomass and biogas) in megawatts."
+msgstr ""
+"Installierte Leistung aus erneuerbaren Energieanlagen (Windenergie, "
+"Photovoltaik, Wasserkraft, Biomasse und Biogas) in Megawatt ."
+
+#: digiplan/templates/components/panel_1_today.html:63
+#: digiplan/templates/components/panel_3_results.html:58
+msgid "Installed Renewable Capacity (MW)"
+msgstr "Installierte Leistung EE (MW)"
+
+#: digiplan/templates/components/panel_1_today.html:66
+#: digiplan/templates/components/panel_3_results.html:61
+msgid ""
+"Installed capacity from renewable energy plants (wind energy, photovoltaic, "
+"hydro power, biomass and biogas) in megawatts per km²."
+msgstr ""
+"Installierte Leistung aus erneuerbaren Energieanlagen (Windenergie, "
+"Photovoltaik, Wasserkraft, Biomasse und Biogas) in Megawatt pro km² ."
+
+#: digiplan/templates/components/panel_1_today.html:67
+#: digiplan/templates/components/panel_3_results.html:62
+msgid "Installed Renewable Capacity per km² (MW)"
+msgstr "Installierte Leistung EE je km² (MW)"
+
+#: digiplan/templates/components/panel_1_today.html:70
+#: digiplan/templates/components/panel_1_today.html:71
+#: digiplan/templates/components/panel_3_results.html:65
+#: digiplan/templates/components/panel_3_results.html:66
+#, fuzzy
+#| msgid "Number of Wind Turbines per km²"
+msgid "Number of Wind Turbines"
+msgstr "Anzahl Windenergieanlagen je km²"
+
+#: digiplan/templates/components/panel_1_today.html:74
+#: digiplan/templates/components/panel_1_today.html:75
+#: digiplan/templates/components/panel_3_results.html:69
+#: digiplan/templates/components/panel_3_results.html:70
+msgid "Number of Wind Turbines per km²"
+msgstr "Anzahl Windenergieanlagen je km²"
+
+#: digiplan/templates/components/panel_1_today.html:78
 #: digiplan/templates/components/panel_3_results.html:73
+msgid "Energy Demand"
+msgstr "Strombedarf"
+
+#: digiplan/templates/components/panel_1_today.html:80
+#: digiplan/templates/components/panel_3_results.html:75
+msgid ""
+"Annual electricity demand in gigawatt hours of the sectors, households, "
+"tertiary sector (trade, commerce, services), agriculture and industry. This "
+"is the net electricity consumption."
+msgstr ""
+"Jährlicher Strombedarf in Gigawattstunden der Sektoren, Haushalte, GHD "
+"(Gewerbe, Handel Dienstleistungen), Landwirtschaft und Industrie. Es handelt "
+"sich dabei um den Nettostromverbrauch."
+
+#: digiplan/templates/components/panel_1_today.html:81
+#: digiplan/templates/components/panel_3_results.html:76
+msgid "Electricity Demand (GWh)"
+msgstr "Strombedarf (GWh)"
+
+#: digiplan/templates/components/panel_1_today.html:84
+#: digiplan/templates/components/panel_3_results.html:79
+msgid ""
+"Annual electricity demand in gigawatt hours of the sectors, households, "
+"tertiary sector (trade, commerce, services), agriculture and industry per "
+"inhabitant This is the net electricity consumption."
+msgstr ""
+"Jährlicher Strombedarf in Gigawattstunden der Sektoren, Haushalte, GHD "
+"(Gewerbe, Handel Dienstleistungen), Landwirtschaft und Industrie je "
+"EinwohnerIn. Es handelt sich dabei um den Nettostromverbrauch."
+
+#: digiplan/templates/components/panel_1_today.html:85
+#: digiplan/templates/components/panel_3_results.html:80
+#, fuzzy
+#| msgid "Electricity Demand"
+msgid "Electricity Demand per Capita (kWh)"
+msgstr "Strombedarf je EinwohnerIn (kWh)"
+
+#: digiplan/templates/components/panel_1_today.html:88
+#: digiplan/templates/components/panel_3_results.html:83
+msgid ""
+"Annual heat consumption for space heating and domestic hot water in gigawatt "
+"hours in the household, commercial, trade and services, and agriculture "
+"(excluding industry) sectors."
+msgstr ""
+"Jährlich verbrauchte Wärmemenge für Raumwärme und Trinkwassererwärmung in "
+"Gigawattstunden der Sektoren Haushalte, GHD (Gewerbe, Handel, "
+"Dienstleistungen), Landwirtschaft (ohne Industrie)."
+
+#: digiplan/templates/components/panel_1_today.html:89
+#: digiplan/templates/components/panel_3_results.html:84
+msgid "Heat Demand (GWh)"
+msgstr "Wärmebedarf (GWh)"
+
+#: digiplan/templates/components/panel_1_today.html:92
+#: digiplan/templates/components/panel_3_results.html:87
+msgid ""
+"Annual heat consumption per inhabitant for space heating and domestic hot "
+"water in gigawatt hours in the household, commercial, trade and services, "
+"and agriculture (excluding industry) sectors."
+msgstr ""
+"Jährlich verbrauchte Wärmemenge je EinwohnerIn für Raumwärme und "
+"Trinkwassererwärmung in Gigawattstunden der Sektoren Haushalte, GHD "
+"(Gewerbe, Handel, Dienstleistungen), Landwirtschaft (ohne Industrie)."
+
+#: digiplan/templates/components/panel_1_today.html:93
+#: digiplan/templates/components/panel_3_results.html:88
+msgid "Heat Demand per Capita (kWh)"
+msgstr "Wärmebedarf je EinwohnerIn (kWh)"
+
+#: digiplan/templates/components/panel_2_settings.html:18
+#: digiplan/templates/components/panel_3_results.html:111
 msgid "Electricity"
 msgstr "Strom"
 
 #: digiplan/templates/components/panel_2_settings.html:26
-#: digiplan/templates/components/panel_3_results.html:81
+#: digiplan/templates/components/panel_3_results.html:119
 #: digiplan/templates/components/results_view.html:52
 msgid "Heat"
 msgstr "Wärme"
 
 #: digiplan/templates/components/panel_2_settings.html:34
-#: digiplan/templates/components/panel_3_results.html:89
+#: digiplan/templates/components/panel_3_results.html:127
 msgid "Transportation"
 msgstr "Verkehr"
 
-#: digiplan/templates/components/panel_3_results.html:35
-msgid "Population density"
-msgstr "Bevölkerungsdichte"
+#: digiplan/templates/components/panel_3_results.html:34
+#: digiplan/templates/components/panel_3_results.html:92
+msgid "Inhabitants"
+msgstr ""
 
-#: digiplan/templates/components/panel_3_results.html:57
+#: digiplan/templates/components/panel_3_results.html:95
 msgid "View"
 msgstr "Ansicht"
 
-#: digiplan/templates/components/panel_3_results.html:65
+#: digiplan/templates/components/panel_3_results.html:103
 #: digiplan/templates/components/results_view.html:5
 #: digiplan/templates/components/results_view.html:35
 #: digiplan/templates/components/results_view.html:55
@@ -218,16 +571,32 @@ msgstr "Autofahrt"
 #: digiplan/templates/components/results_view.html:44
 #: digiplan/templates/components/results_view.html:64
 msgid "CO2 Emissions"
-msgstr ""
+msgstr "CO2 Emissionen"
 
-#: digiplan/templates/components/toggle_view.html:10
-#: digiplan/templates/map.html:49
-msgid "Map"
-msgstr "Karte"
+#: digiplan/templates/forms/panel_energy.html:2
+#: digiplan/templates/forms/panel_heat.html:1
+#: digiplan/templates/forms/panel_traffic.html:1
+#, fuzzy
+#| msgid "General"
+msgid "Generation"
+msgstr "Allgemein"
 
-#: digiplan/templates/components/toggle_view.html:18
-msgid "Charts"
-msgstr "Diagramme"
+#: digiplan/templates/forms/panel_energy.html:9
+#: digiplan/templates/forms/panel_energy.html:20
+#: digiplan/templates/forms/panel_energy.html:31
+#: digiplan/templates/forms/panel_energy.html:46
+msgid "Detail settings"
+msgstr "Detaileinstellungen"
+
+#: digiplan/templates/forms/panel_energy.html:42
+#: digiplan/templates/forms/panel_heat.html:8
+#: digiplan/templates/forms/panel_traffic.html:8
+msgid "Consumption"
+msgstr "Verbraucher"
+
+#: digiplan/templates/forms/panel_energy.html:56
+msgid "Batteries"
+msgstr "Batterien"
 
 #: digiplan/templates/map.html:54
 msgid "Documentation"
@@ -257,29 +626,6 @@ msgstr "Telefon"
 msgid "Telefax"
 msgstr "Telefax"
 
-#~ msgid "maps"
-#~ msgstr "Karten"
-
-#~ msgid "default"
-#~ msgstr "Standard"
-
-#~ msgid "satellite"
-#~ msgstr "Satellit"
-
-#~ msgid "Previous"
-#~ msgstr "Zurück"
-
-#~ msgid "Next"
-#~ msgstr "Weiter"
-
-#~ msgid "Detail Settings"
-#~ msgstr "Detaileinstellungen"
-
-#~ msgid "Popup Title"
-#~ msgstr "Popup Titel"
-
-#~ msgid "Description"
-#~ msgstr "Beschreibung"
-
-#~ msgid "Producer"
-#~ msgstr "Erzeuger"
+#: digiplan/templates/widgets/slider.html:18
+msgid "more"
+msgstr "mehr"

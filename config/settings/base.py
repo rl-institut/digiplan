@@ -1,6 +1,4 @@
-"""
-Base settings to build other settings files upon.
-"""
+"""Base settings to build other settings files upon."""
 import os
 
 import environ
@@ -92,7 +90,6 @@ THIRD_PARTY_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "django_distill",
-    "django_select2",
 ]
 
 LOCAL_APPS = ["digiplan.map.apps.MapConfig", "django_oemof", "django_mapengine"]
@@ -164,7 +161,7 @@ TEMPLATES = [
                 "digiplan.utils.context_processors.settings_context",
             ],
         },
-    }
+    },
 ]
 
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
@@ -209,7 +206,11 @@ MANAGERS = ADMINS
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "formatters": {"verbose": {"format": "%(levelname)s %(asctime)s %(module)s " "%(process)d %(thread)d %(message)s"}},
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s " "%(process)d %(thread)d %(message)s",  # noqa: ISC001
+        },
+    },
     "handlers": {"console": {"level": "DEBUG", "class": "logging.StreamHandler", "formatter": "verbose"}},
     "root": {"level": "INFO", "handlers": ["console"]},
 }
@@ -227,17 +228,25 @@ COMPRESS_PRECOMPILERS = [("text/x-scss", "django_libsass.SassCompiler")]
 
 COMPRESS_CACHEABLE_PRECOMPILERS = (("text/x-scss", "django_libsass.SassCompiler"),)
 
+# celery
+# ------------------------------------------------------------------------------
+# https://docs.celeryq.dev/en/stable/userguide/configuration.html#std:setting-broker_url
+CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+# https://docs.celeryq.dev/en/stable/userguide/configuration.html#std:setting-result_backend
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+
 # Your stuff...
 # ------------------------------------------------------------------------------
 PASSWORD_PROTECTION = env.bool("PASSWORD_PROTECTION", False)
 PASSWORD = env.str("PASSWORD", default=None)
 if PASSWORD_PROTECTION and PASSWORD is None:
-    raise ValidationError("Password protection is on, but no password is given")
-
-SELECT2_CACHE_BACKEND = "select2"
+    msg = "Password protection is on, but no password is given"
+    raise ValidationError(msg)
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+OEMOF_SCENARIO = env.str("OEMOF_SCENARIO", "scenario_2045")
 
 # django-mapengine
 # ------------------------------------------------------------------------------
@@ -245,18 +254,18 @@ MAP_ENGINE_CENTER_AT_STARTUP = [12.537917858911896, 51.80812518969171]
 MAP_ENGINE_ZOOM_AT_STARTUP = 9
 MAP_ENGINE_MAX_BOUNDS = [[11.280733017118229, 51.22918643452503], [13.616574868700604, 52.35515806663738]]
 
-MAP_ENGINE_IMAGES = [setup.MapImage("wind", "images/icons/i_wind.png")]
+MAP_ENGINE_IMAGES = [
+    setup.MapImage("wind", "images/icons/map_wind.png"),
+    setup.MapImage("pv", "images/icons/map_pv.png"),
+    setup.MapImage("hydro", "images/icons/map_hydro.png"),
+    setup.MapImage("biomass", "images/icons/map_biomass.png"),
+    setup.MapImage("combustion", "images/icons/map_combustion.png"),
+]
 
 MAP_ENGINE_API_MVTS = {
     "municipality": [
         setup.MVTAPI("municipality", "map", "Municipality"),
         setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
-    ],
-    "static": [
-        setup.MVTAPI("pvground", "map", "PVground"),
-        setup.MVTAPI("hydro", "map", "Hydro"),
-        setup.MVTAPI("biomass", "map", "Biomass"),
-        setup.MVTAPI("combustion", "map", "Combustion"),
     ],
     "results": [setup.MVTAPI("results", "map", "Municipality")],
 }
@@ -264,6 +273,10 @@ MAP_ENGINE_API_MVTS = {
 MAP_ENGINE_API_CLUSTERS = [
     setup.ClusterAPI("wind", "map", "WindTurbine"),
     setup.ClusterAPI("pvroof", "map", "PVroof"),
+    setup.ClusterAPI("pvground", "map", "PVground"),
+    setup.ClusterAPI("hydro", "map", "Hydro"),
+    setup.ClusterAPI("biomass", "map", "Biomass"),
+    setup.ClusterAPI("combustion", "map", "Combustion"),
 ]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
@@ -272,17 +285,42 @@ MAP_ENGINE_ZOOM_LEVELS = {
 }
 
 MAP_ENGINE_CHOROPLETHS = [
-    setup.Choropleth("population", layers=["municipality"]),
-    setup.Choropleth("population_density", layers=["municipality"]),
-    setup.Choropleth("capacity", layers=["municipality"]),
-    setup.Choropleth("capacity_square", layers=["municipality"]),
-    setup.Choropleth("wind_turbines", layers=["municipality"]),
-    setup.Choropleth("wind_turbines_square", layers=["municipality"]),
+    setup.Choropleth("population", layers=["municipality"], title=_("Einwohner_innenzahl"), unit=_("EW")),
+    setup.Choropleth("population_density", layers=["municipality"], title=_("Einwohner_innenzahl"), unit=_("EW/qm")),
+    setup.Choropleth("capacity", layers=["municipality"], title=_("Installierte Leistung"), unit=_("MW")),
+    setup.Choropleth(
+        "capacity_square",
+        layers=["municipality"],
+        title=_("Installierte Leistung pro qm"),
+        unit=_("MW/qm"),
+    ),
+    setup.Choropleth("wind_turbines", layers=["municipality"], title=_("Anzahl Windturbinen"), unit=_("")),
+    setup.Choropleth(
+        "wind_turbines_square",
+        layers=["municipality"],
+        title=_("Anzahl Windturbinen pro qm"),
+        unit=_(""),
+    ),
+    setup.Choropleth(
+        "renewable_electricity_production",
+        layers=["municipality"],
+        title=_("Energie Erneuerbare"),
+        unit=_("GWh"),
+    ),
 ]
+
 MAP_ENGINE_POPUPS = [
     setup.Popup(
         "municipality",
-        False,
-        ["population", "population_density", "capacity", "capacity_square", "wind_turbines", "wind_turbines_square"],
-    )
+        popup_at_default_layer=False,
+        choropleths=[
+            "population",
+            "population_density",
+            "capacity",
+            "capacity_square",
+            "wind_turbines",
+            "wind_turbines_square",
+            "renewable_electricity_production",
+        ],
+    ),
 ]

@@ -61,19 +61,13 @@
                 role="button" aria-controls="offcanvasContact">
               <a class="nav-link" href="#">{% translate "Contact" %}</a>
             </li>
-
-
-           <li class="top-nav__lang">
-              <form action="{% url 'set_language' %}" method="post">
-                {% csrf_token %}
-                <input name="next" type="hidden" value="{{ redirect_to }}" />
-                {% get_current_language as LANGUAGE_CODE %}
-                      {% if LANGUAGE_CODE == "de" %}
-                        <button class="btn btn-sm btn-outline-secondary" type="submit" name="language" value="en">English</button>
-                      {% else %}
-                        <button class="btn btn-sm btn-outline-secondary" type="submit" name="language" value="de">Deutsch</button>
-                      {% endif %}
-              </form>
+            <li class="top-nav__lang">
+              {% get_current_language as LANGUAGE_CODE %}
+              {% if LANGUAGE_CODE == "de" %}
+                <a href="/en/" class="btn btn-sm btn-outline-secondary">English</a>
+              {% else %}
+                <a href="/de/" class="btn btn-sm btn-outline-secondary">Deutsch</a>
+              {% endif %}
             </li>
           </ul>
         </div>
@@ -99,6 +93,14 @@
   {% include 'django_mapengine/map_json.html' %}
 
   {{ store_cold_init|json_script:"store_cold_init" }}
+  {{ detailed_overview|json_script:"detailed_overview" }}
+  {{ ghg_overview|json_script:"ghg_overview" }}
+  {{ electricity_overview|json_script:"electricity_overview" }}
+  {{ electricity_ghg|json_script:"electricity_ghg" }}
+  {{ mobility_overview|json_script:"mobility_overview" }}
+  {{ mobility_ghg|json_script:"mobility_ghg" }}
+  {{ overview_heat|json_script:"overview_heat" }}
+  {{ decentralized_centralized_heat|json_script:"decentralized_centralized_heat" }}
   {{ settings_parameters|json_script:"settings_parameters" }}
   {{ settings_dependency_map|json_script:"settings_dependency_map" }}
   {{ dependency_parameters|json_script:"dependency_parameters" }}
@@ -110,8 +112,9 @@
       <script src="{% static 'js/intro_tour.js' %}" type="text/javascript"></script>
     {% endif %}
     <script src="{% static 'js/state.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/charts.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/sliders.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/results.js' %}" type="text/javascript"></script>
   {% endcompress %}
+    <script src="{% static 'js/results.js' %}" type="module"></script>
 
 {% endblock js_body %}

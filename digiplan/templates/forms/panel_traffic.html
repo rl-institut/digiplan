@@ -1,6 +1,12 @@
-<h2 class="title">Erzeuger</h2>
-{% include "widgets/slider.html" with field=form.v_iv_1 %}
-{% include "widgets/slider.html" with field=form.v_iv_2 %}
-{% include "widgets/slider.html" with field=form.v_sl_1 %}
+{% load i18n %}
 
-<h2 class="title">Verbraucher</h2>
+{% include "widgets/slider.html" with field=form.v_iv_1 %}
+<div class="sidepanel">
+  <p class="sidepanel__heading">
+    {%  trans "Detail settings" %}
+    {% include "widgets/sidepanel_close_btn.html" %}
+    <p>{%  trans "Set the share of electric vehicles in motorized private transport." %}</p>
+    {% include "widgets/slider.html" with field=form.v_iv_3 %}
+    <p>{%  trans "Mit Ihren Einstellungen sind 22 % der privaten Fahrzeuge (Kleinwagen, Mittelklasse, Oberklasse) elektrisch. Davon sind<br>- 10 % batterieelektrisch (BEV) und<br>- 4 % Plugin-Hybrid-Fahrzeuge." %}</p>
+  </p>
+</div>

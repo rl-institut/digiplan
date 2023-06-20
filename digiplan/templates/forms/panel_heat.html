@@ -1,6 +1,68 @@
-<h2 class="title">Erzeuger</h2>
+{% load i18n %}
+<h2 class="panel__title title">{% trans "Generation" %}</h2>
 {% include "widgets/slider.html" with field=form.w_d_wp_1 %}
-{% include "widgets/slider.html" with field=form.w_d_st_1 %}
-{% include "widgets/slider.html" with field=form.w_z_wp_1 %}
+<div class="sidepanel">
+  <p class="sidepanel__heading">
+    {%  trans "Detail settings" %}
+    {% include "widgets/sidepanel_close_btn.html" %}
+    <p>{%  trans "Set the share of heat pumps for consumers with their own heat generation per sector." %}</p>
+    {% include "widgets/slider.html" with field=form.w_d_wp_3 %}
+    {% include "widgets/slider.html" with field=form.w_d_wp_4 %}
+    {% include "widgets/slider.html" with field=form.w_d_wp_5 %}
+    <p>{%  trans "Mit Ihren Einstellungen beträgt der Anteil der mittels Wärmepumpen bereitgestellten Energiemenge 87 %. Die übrige Energie wird bereitgestellt durch:<br>- Direktelektrische Heizung: 10 %<br>- Bioenergie: 5 %<br>- Solarthermie: 20 %<br><br>Hinweis: Fernwärmesysteme werden links im Menü separat konfiguriert." %}</p>
+  </p>
+</div>
 
-<h2 class="title">Verbraucher</h2>
+{% include "widgets/slider.html" with field=form.w_z_wp_1 %}
+<div class="sidepanel">
+  <p class="sidepanel__heading">
+    {%  trans "Detail settings" %}
+    {% include "widgets/sidepanel_close_btn.html" %}
+    <p>{%  trans "Set the share of heat pumps for all consumers with district heating connection. This includes households, tertiary and industrial customers in the Dessau-Roßlau, Bitterfeld-Wolfen, Köthen and Wittenberg district heating networks." %}</p>
+    {% include "widgets/slider.html" with field=form.w_z_wp_3 %}
+    <p>{%  trans "Mit Ihren Einstellungen beträgt der Anteil der mittels Wärmepumpen bereitgestellten Energiemenge 54 %. Die übrige Energie wird bereitgestellt durch:<br>- Direktelektrische Heizung: 12 %<br>- Bioenergie: 6 %<br>- Solarthermie: 52 %<br><br>Hinweis: Dezentrale Verbraucher werden links im Menü separat konfiguriert." %}</p>
+  </p>
+</div>
+
+<span class="panel__separator" aria-hidden="true"></span>
+
+<h2 class="panel__title title">{% trans "Consumption" %}</h2>
+
+{% include "widgets/slider.html" with field=form.w_v_1 %}
+<div class="sidepanel">
+  <p class="sidepanel__heading">
+    {%  trans "Detail settings" %}
+    {% include "widgets/sidepanel_close_btn.html" %}
+    <p>{%  trans "Set the future heat consumption per sector." %}</p>
+    {% include "widgets/slider.html" with field=form.w_v_3 %}
+    {% include "widgets/slider.html" with field=form.w_v_4 %}
+    {% include "widgets/slider.html" with field=form.w_v_5 %}
+    <p>{%  trans "Mit Ihren Einstellungen beträgt der Wärmeverbrauch 27 % des heutigen Wärmeverbrauchs." %}</p>
+  </p>
+</div>
+
+<span class="panel__separator" aria-hidden="true"></span>
+
+<h2 class="panel__title title">{% trans "Storage" %}</h2>
+
+{% include "widgets/slider.html" with field=form.w_d_s_1 %}
+<div class="sidepanel">
+  <p class="sidepanel__heading">
+    {%  trans "Detail settings" %}
+    {% include "widgets/sidepanel_close_btn.html" %}
+    <p>{%  trans "Set how much of the daily heat requirement should be able to be temporarily stored in hot water tanks." %}</p>
+    {% include "widgets/slider.html" with field=form.w_d_s_3 %}
+    <p>{%  trans "Mit Ihren Einstellungen können 32 % des täglichen Wärmeverbrauchs zwischengespeichert werden. Das entspricht einer Speicherkapazität von 3 GWh" %}</p>
+  </p>
+</div>
+
+{% include "widgets/slider.html" with field=form.w_z_s_1 %}
+<div class="sidepanel">
+  <p class="sidepanel__heading">
+    {%  trans "Detail settings" %}
+    {% include "widgets/sidepanel_close_btn.html" %}
+    <p>{%  trans "Set how much of the daily heat requirement should be able to be temporarily stored in hot water tanks." %}</p>
+    {% include "widgets/slider.html" with field=form.w_z_s_3 %}
+    <p>{%  trans "Mit Ihren Einstellungen können 34 % des täglichen Wärmeverbrauchs zwischengespeichert werden. Das entspricht einer Speicherkapazität von 5 GWh" %}</p>
+  </p>
+</div>

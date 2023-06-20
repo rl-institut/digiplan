@@ -1,0 +1,109 @@
+{
+  "backgroundColor": "#FFFFFF",
+  "yAxis": {
+    "show": true,
+    "type": "category",
+    "data": ["Ziel", "Szenario", "Status Quo", "1990"],
+    "nameTextStyle": "Roboto",
+    "fontWeight": "400",
+    "fontSize": "14"
+  },
+  "xAxis": {
+    "type": "value",
+    "show": true,
+    "position": "bottom",
+    "name": "Mt CO₂-Emissionen",
+    "nameLocation": "end",
+    "nameTextStyle": "Roboto",
+    "width": "76",
+    "heigth": "32",
+    "fontWeight": "300",
+    "fontSize": "14"
+  },
+  "series": [
+    {
+      "name": "Sockel",
+      "type": "bar",
+      "barWidth": "16",
+      "stack": "total",
+      "color": "#F2F2F2",
+      "label": {
+        "show": false
+      },
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [20, 20, 20, 20]
+    },
+    {
+      "name": "GHD",
+      "type": "bar",
+      "barWidth": "25",
+      "stack": "total",
+      "color": "#F5F5DC",
+      "label": {
+        "show": false
+      },
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [15, 17, 20, 25]
+    },
+    {
+      "name": "Haushalte",
+      "type": "bar",
+      "barWidth": "25",
+      "stack": "total",
+      "color": "#74A9CF",
+      "label": {
+        "show": false
+      },
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [12, 15, 30, 34]
+    },
+    {
+      "name": "Industrie",
+      "type": "bar",
+      "barWidth": "25",
+      "stack": "total",
+      "color": "#FA9FB5",
+      "label": {
+        "show": false
+      },
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [20, 20, 31, 34]
+    },
+    {
+      "name": "XXX",
+      "type": "bar",
+      "barWidth": "25",
+      "stack": "total",
+      "color": "#FEC44F",
+      "label": {
+        "show": false
+      },
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [5, 12, 15, 24]
+    },
+    {
+      "name": "XXX",
+      "type": "bar",
+      "barWidth": "25",
+      "stack": "total",
+      "color": "#8C96C6",
+      "label": {
+        "show": false
+      },
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [15, 20, 30, 34]
+    }
+  ]
+}

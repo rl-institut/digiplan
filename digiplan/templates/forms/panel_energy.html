@@ -1,53 +1,79 @@
-<h2 class="title">Erzeuger</h2>
+{% load i18n %}
+<h2 class="panel__title title">{%  trans "Generation" %}</h2>
 
 <div id="js-power-mix" class="power-mix"></div>
 
 {% include "widgets/slider.html" with field=form.s_w_1 %}
 <div class="sidepanel">
   <p class="sidepanel__heading">
-    Detaileinstellungen
+    {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    {% include "widgets/slider.html" with field=form.s_w_2 %}
+    <p>{%  trans "Set the use of wind potential areas." %}</p>
     {% include "widgets/slider.html" with field=form.s_w_3 %}
     {% include "widgets/slider.html" with field=form.s_w_4 %}
+    {% include "widgets/slider.html" with field=form.s_w_4_1 %}
+    {% include "widgets/slider.html" with field=form.s_w_4_2 %}
+    {% include "widgets/slider.html" with field=form.s_w_5 %}
+    {% include "widgets/slider.html" with field=form.s_w_5_1 %}
+    {% include "widgets/slider.html" with field=form.s_w_5_2 %}
+    <p>{%  trans "With your settings, a maximum total output of 13 MW and a yield of 7 GWh can be realized.<br>The goals for Saxony-Anhalt from the Wind Energy Area Requirement Act are:<br>- for 2027 (1.4%) achieved.<br>- for 2032 (2.2%) achieved.<br><br>Tip: In the menu on the right you can display the systems that exist today." %}</p>
   </p>
 </div>
 
 {% include "widgets/slider.html" with field=form.s_pv_ff_1 %}
 <div class="sidepanel">
   <p class="sidepanel__heading">
-    Detaileinstellungen
+    {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    {% include "widgets/slider.html" with field=form.s_pv_ff_2 %}
+    <p>{%  trans "Set the use of potential areas for ground-mounted PV." %}</p>
     {% include "widgets/slider.html" with field=form.s_pv_ff_3 %}
     {% include "widgets/slider.html" with field=form.s_pv_ff_4 %}
+    <p>{%  trans "Mit Ihren Einstellungen kann eine maximale Gesamtleistung von 18 MW und ein Ertrag von 3 GWh realisiert werden.<br><br>Tipp: Im rechten Menü können Sie die heute bestehenden Anlagen einblenden." %}</p>
   </p>
 </div>
 
 {% include "widgets/slider.html" with field=form.s_pv_d_1 %}
 <div class="sidepanel">
   <p class="sidepanel__heading">
-    Detaileinstellungen
+    {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    {% include "widgets/slider.html" with field=form.s_pv_d_2 %}
+    <p>{%  trans "Set how much roof area should be used for photovoltaics." %}</p>
+    {% include "widgets/slider.html" with field=form.s_pv_d_3 %}
+    {% include "widgets/slider.html" with field=form.s_pv_d_4 %}
+    <p>{%  trans "Mit Ihren Einstellungen kann eine maximale Gesamtleistung von 4 MW und ein Ertrag von 2 GWh realisiert werden. Die Aufteilung der Ausrichtung ist wie folgt:<br>- Süddächer: 3 %<br>- Westdächer: 3 %<br>- Norddächer: 3 %<br>- Ostdächer: 8 %<br>Denkmalgeschützte Gebäude werden nicht verwendet.<br><br>Tipp: Im rechten Menü können Sie die heute bestehenden Anlagen einblenden." %}</p>
   </p>
 </div>
 
-{% include "widgets/slider.html" with field=form.s_b_1 %}
-{% include "widgets/slider.html" with field=form.s_k_1 %}
+{% include "widgets/slider.html" with field=form.s_h_1 %}
 
-<h2 class="title">Verbraucher</h2>
+{% include "widgets/slider.html" with field=form.s_b_1 %}
+
+<span class="panel__separator" aria-hidden="true"></span>
+
+<h2 class="panel__title title">{%  trans "Consumption" %}</h2>
 {% include "widgets/slider.html" with field=form.s_v_1 %}
 <div class="sidepanel">
   <p class="sidepanel__heading">
-    Detaileinstellungen
+    {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    {% include "widgets/slider.html" with field=form.s_v_2 %}
+    <p>{%  trans "Set the future power consumption per sector." %}</p>
     {% include "widgets/slider.html" with field=form.s_v_3 %}
     {% include "widgets/slider.html" with field=form.s_v_4 %}
+    {% include "widgets/slider.html" with field=form.s_v_5 %}
+    <p>{%  trans "Mit Ihren Einstellungen beträgt der Stromverbrauch 42 % des heutigen Stromverbrauchs." %}</p>
   </p>
 </div>
 
-<h2 class="title">Speicher</h2>
-{% include "widgets/slider.html" with field=form.s_s_k_1 %}
+<span class="panel__separator" aria-hidden="true"></span>
+
+<h2 class="panel__title title">{%  trans "Batteries" %}</h2>
 {% include "widgets/slider.html" with field=form.s_s_g_1 %}
+<div class="sidepanel">
+  <p class="sidepanel__heading">
+    {%  trans "Detail settings" %}
+    {% include "widgets/sidepanel_close_btn.html" %}
+    <p>{%  trans "Set how much of the daily (on average) fed-in energy from wind energy and free-field PV should be able to be temporarily stored using large batteries." %}</p>
+    {% include "widgets/slider.html" with field=form.s_s_g_3 %}
+    <p>{%  trans "Mit Ihren Einstellungen können 73 % zwischengespeichert werden. Das entspricht einer Speicherkapazität von 17 GWh." %}</p>
+  </p>
+</div>

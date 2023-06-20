@@ -3,6 +3,7 @@ import json
 import pathlib
 
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 from digiplan import __version__
 
@@ -10,7 +11,9 @@ from . import utils
 
 # DIRECTORIES
 MAP_DIR = settings.APPS_DIR.path("map")
-POPUPS_DIR = MAP_DIR.path("results").path("popups")
+POPUPS_DIR = MAP_DIR.path("popups")
+CHARTS_DIR = MAP_DIR.path("charts")
+SCENARIOS_DIR = settings.DATA_DIR.path("scenarios")
 
 # FILES
 ENERGY_SETTINGS_PANEL_FILE = settings.APPS_DIR.path("static/config/energy_settings_panel.json")
@@ -46,7 +49,8 @@ STORE_COLD_INIT = {
 
 
 def init_hot_store() -> str:
-    """Initialize hot store for use in JS store.
+    """
+    Initialize hot store for use in JS store.
 
     Returns
     -------
@@ -63,7 +67,8 @@ STORE_HOT_INIT = init_hot_store()
 
 # SOURCES
 def init_sources() -> dict[str, dict]:
-    """Initialize sources to be shown in sources section in app.
+    """
+    Initialize sources to be shown in sources section in app.
 
     Returns
     -------
@@ -82,3 +87,23 @@ def init_sources() -> dict[str, dict]:
 
 
 SOURCES = init_sources()
+
+
+# SIMULATION
+
+SIMULATION_RENEWABLES = {
+    "ABW-solar-pv_ground": _("Freiflächen-PV"),
+    "ABW-solar-pv_rooftop": _("Aufdach-PV"),
+    "ABW-wind-onshore": _("Wind"),
+    "ABW-hydro-ror": _("Hydro"),
+    "ABW-biomass": _("Biomass"),
+}
+
+SIMULATION_DEMANDS = {
+    "ABW-electricity-bev_charging": _("BEV"),
+    "ABW-electricity-demand_hh": _("Electricity Household Demand"),
+    "ABW-electricity-demand_cts": _("Electricity CTS Demand"),
+    "ABW-electricity-demand_ind": _("Electricity Industry Demand"),
+}
+
+SIMULATION_NAME_MAPPING = {} | SIMULATION_RENEWABLES | SIMULATION_DEMANDS

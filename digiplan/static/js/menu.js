@@ -1,6 +1,9 @@
+import {resultsDropdown, resultsTabs} from "./elements.js";
 
 const menuNextBtn = document.getElementById("menu_next_btn");
 const menuPreviousBtn = document.getElementById("menu_previous_btn");
+const mapTab = document.getElementById("map-view-tab");
+const chartTab = document.getElementById("chart-view-tab");
 
 menuNextBtn.addEventListener("click", function () {
     nextMenuTab();
@@ -10,6 +13,23 @@ menuPreviousBtn.addEventListener("click", function() {
     previousMenuTab();
     PubSub.publish(eventTopics.MENU_CHANGED);
 });
+
+mapTab.addEventListener("click", function () {
+    PubSub.publish(eventTopics.MAP_VIEW_SELECTED);
+});
+
+chartTab.addEventListener("click", function () {
+    PubSub.publish(eventTopics.CHART_VIEW_SELECTED);
+});
+
+PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, setMapChartViewVisibility);
+PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, showMapView);
+PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, setMapChartViewVisibility);
+PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, showMapView);
+PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, deactivateChoropleth);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, setMapChartViewVisibility);
+PubSub.subscribe(eventTopics.MAP_VIEW_SELECTED, setResultsView);
+PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, setResultsView);
 
 
 function nextMenuTab() {
@@ -53,4 +73,28 @@ function previousMenuTab() {
 
 function getCurrentMenuTab() {
     return document.querySelector("#js-panel-container > .panel__content > .tab-content > .active");
+}
+
+
+function showMapView(msg) {
+    bootstrap.Tab.getInstance(mapTab).show();
+    PubSub.publish(eventTopics.MAP_VIEW_SELECTED);
+    return logMessage(msg);
+}
+
+function setMapChartViewVisibility(msg) {
+    const view_toggle = document.getElementsByClassName("view-toggle")[0];
+    view_toggle.hidden = msg !== eventTopics.MENU_RESULTS_SELECTED;
+    return logMessage(msg);
+}
+
+function setResultsView(msg) {
+    if (msg === eventTopics.CHART_VIEW_SELECTED) {
+        resultsDropdown.parentElement.setAttribute("style", "display: none !important");
+        resultsTabs.parentElement.setAttribute("style", "");
+    } else {
+        resultsDropdown.parentElement.setAttribute("style", "");
+        resultsTabs.parentElement.setAttribute("style", "display: none !important");
+    }
+    return logMessage(msg);
 }

@@ -4,15 +4,43 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2023-06-20
+### Added
+- complete energy settings
+- calculation for electricity overview chart
+- calculation for heat overview chart
+- function to create echart from options
+- integration of celery for oemof simulations
+- start oemof simulation
+- oemof hooks for adapting RE capacities and electric demand
+
+### Changed
+- updated detailed overview chart
+- deactivate choropleths when switching to settings tab
+- switched to oemof.tabular postprocessing (instead of using oemoflex)
+- removed legacy config
+- moved schema examples to test folder
+- moved map/chart view toggle to nav bar
+- hide map/chart view toggle in status quo and settings menu
+
+### Fixed
+- info tooltips at settings
+- chart tiles and results dropdown visible at same time
+- chart view is closed when navigating to status quo or settings tab
+- settings are translated
+
 ## [0.3.1] - 2023-03-30
 ### Added
 - missing translations
 
 ### Changed
 - removed unnecessary account and user stuff
+- moved view toggle tabs to top right
 
 ## [0.3.0] - 2023-03-30
 ### Added
+- first draft for demand preprocessing for oemof simulation
+- preprocessing oemof build from user settings (#111) using hooks
 - sentry in production
 - intro tour using shepard.js
 - language support

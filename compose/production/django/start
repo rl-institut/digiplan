@@ -5,6 +5,7 @@ set -o pipefail
 set -o nounset
 
 
+python /app/manage.py compilemessages
 python /app/manage.py collectstatic --noinput
 python /app/manage.py compress --force
 python /app/manage.py collectstatic --noinput

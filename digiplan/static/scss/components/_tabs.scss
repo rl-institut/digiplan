@@ -10,12 +10,17 @@
     @extend .border-bottom;
     @extend .border-1;
     @extend .bg-light;
+    @extend .fs-7;
+    margin-left: 1px;
+    margin-right: 1px;
   }
 
   &__nav-link {
     @extend .nav-link;
     @extend .text-primary;
     @extend .border-0;
+    @extend .rounded-0;
+    @extend .px-1;
 
     &:hover {
       @extend .text-info;
@@ -49,21 +54,16 @@
 
 .view-toggle {
   @extend .position-absolute;
-  @extend .start-50;
-  @extend .translate-middle;
-  @extend .bg-white;
-  @extend .rounded;
   @extend .fs-7;
-  top: 5rem;
-  z-index: 100;
-
-  @include media-breakpoint-down(sm) {
-    font-size: $font-size-xsmall;
-  }
+  @extend .rounded;
+  background-color: #EDF1FC;
+  top: 9px;
+  right: $padding-large;
 
   &__nav-tabs {
     @extend .nav;
     @extend .nav-tabs;
+    @extend .border-0;
   }
 
   &__nav-item {
@@ -78,15 +78,28 @@
       @extend .rounded-0;
       @extend .rounded-end;
     }
+
+    .view-toggle__nav-link {
+      border: 1px solid #C3D1DC !important;
+    }
+
+    &:last-of-type .view-toggle__nav-link {
+      @extend .border-start-0;
+    }
   }
 
   &__nav-link {
     @extend .nav-link;
-    @extend .text-primary;
-    @extend .border-0;
+    @extend .text-info;
+    @extend .fw-normal;
+    @extend .py-0;
+    padding: 0.25rem 0.75rem !important;
 
-    @include media-breakpoint-down(sm) {
-      padding: 0.5rem;
+    width: 8rem;
+    height: 2rem;
+
+    @include media-breakpoint-down(xl) {
+      width: auto;
     }
 
     &:hover {
@@ -95,15 +108,25 @@
 
     &.active {
       @extend .active;
-      @extend .text-info;
-      @extend .border-0;
-      @extend .bg-info;
-      @extend .text-white;
+      @extend .border-1;
+      @extend .bg-white;
+      @extend .fw-semibold;
     }
 
     svg {
-      @extend .me-1;
       @include translateY(-2px);
+      margin-right: 0.5rem;
+
+      @include media-breakpoint-down(xl) {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__text {
+    @include media-breakpoint-down(xl) {
+      display: none;
+      visibility: hidden;
     }
   }
 }

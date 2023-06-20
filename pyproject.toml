@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "digiplan"
-version = "0.3.1"
+version = "0.4.0"
 description = "Digiplan"
 authors = [
   "Hendrik Huyskens <hendrik.huyskens@rl-institut.de>",
@@ -35,13 +35,13 @@ django-redis = "^4.12.1"  # https://github.com/niwinz/django-redis
 django-distill = "^2.6"
 django-crispy-forms = "^1.11.2"
 django-geojson = "^3.1.0"
-django-select2 = "^7.7.1"
 
 # Custom apps
 # ------------------------------------------------------------------------------
 django-oemof = {git = "https://github.com/rl-institut/django-oemof.git"}
 django-mapengine = {git = "https://github.com/rl-institut/django-mapengine.git"}
 geojson = "^3.0.1"
+oemof-network = "0.5.0a1"
 
 [tool.poetry.group.dev.dependencies]
 Werkzeug = "^2.0.1" # https://github.com/pallets/werkzeug
@@ -56,7 +56,7 @@ django-coverage-plugin = "^3.0.0"
 # Testing
 # ------------------------------------------------------------------------------
 # mypy = "^0.812"  # https://github.com/python/mypy
-pytest = "^6.2.4"  # https://github.com/pytest-dev/pytest
+pytest = ">=7.2.2"  # https://github.com/pytest-dev/pytest
 pytest-sugar = "^0.9.4"  # https://github.com/Frozenball/pytest-sugar
 
 # Code quality
@@ -78,7 +78,6 @@ black = "^21.12b0"
 # ------------------------------------------------------------------------------
 django-debug-toolbar = "^3.2.1"  # https://github.com/jazzband/django-debug-toolbar
 django-extensions = "^3.1.3"  # https://github.com/django-extensions/django-extensions
-django-raster = { git = "https://github.com/henhuy/django-raster.git", branch = "djagora" }
 pytest-django = "^4.3.0"  # https://github.com/pytest-dev/pytest-django
 
 [build-system]
@@ -93,18 +92,27 @@ profile = "black"
 
 [tool.ruff]
 line-length = 120
-# select = ["ALL"]
+select = ["ALL"]
 ignore = [
   "D203",    # 1 blank line required before class docstring
   "D212",    # Multi-line docstring summary should start at the first line pydocstyle
   "ANN101",  # Missing type annotation for `self` in method
+  "ANN102",  # Missing type annotation for `cls` in classmethod
   "ANN003",  # Missing type annotation for `**kwargs`
   "EM102",   # Exception must not use an f-string literal, assign to variable first
   "TRY003",  # Avoid specifying long messages outside the exception class
   "S101",    # Use of `assert` detected
   "UP007",   # Use `X | Y` for type annotations
   "B905",    # `zip()` without an explicit `strict=` parameter
+  "FIX001",  # Line contains FIXME
+  "FIX002",  # Line contains TODO
+  "RET504",  # Unnecessary variable assignment before `return` statement
 ]
 fix = true
 show-fixes = true
 unfixable = ["UP007"]
+
+[tool.ruff.per-file-ignores]
+"tests/*" = [
+  "PLR2004", # Magic value used in comparison
+]

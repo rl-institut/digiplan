@@ -1,12 +1,11 @@
 {
   "dependencies": {
     "bootstrap": "^5.2.1",
-    "echarts": "^5.3.3",
+    "echarts": "^5.4.2",
     "ion-rangeslider": "^2.3.1",
     "jquery": "^3.6.1",
     "maplibre-gl": "^2.4.0",
-    "pubsub-js": "^1.9.4",
-    "select2": "^4.0.13"
+    "pubsub-js": "^1.9.4"
   },
   "name": "digiplan"
 }

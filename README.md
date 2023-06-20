@@ -60,6 +60,21 @@ I highly recommend to use [postgresql](https://www.postgresql.org/) fot that.
 Please follow online tutorials to set up database correctly and come back here, if
 everything is set up.
 
+In order to run oemof simulations using `django-oemof`,
+you have to set up celery together with a locally running redis server.
+You can find instructions at https://realpython.com/caching-in-django-with-redis/#install-redis on how to install redis.
+Simplest solution to install and run redis it via _apt_:
+```bash
+sudo apt-get install redis-server
+redis-server
+```
+Afterwards, make sure that following variable is set in your environment:
+- `CELERY_BROKER_URL=redis://localhost:6379/0` (default port used here)
+and run celery from your terminal:
+```bash
+export DJANGO_READ_DOT_ENV_FILE=True; celery -A config.celery worker -l INFO
+```
+
 ### Configuration
 
 Configuration is done by django configuration files in _config/settings/_ and by using
