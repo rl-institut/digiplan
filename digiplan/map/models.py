@@ -155,7 +155,7 @@ class Population(models.Model):
         return density
 
     @classmethod
-    def density_history(cls, mun_id: int) -> models.QuerySet:
+    def density_history(cls, mun_id: int) -> dict:
         """
         Get chart for population density for the given municipality in different years.
 
@@ -166,7 +166,7 @@ class Population(models.Model):
 
         Returns
         -------
-        models.QuerySet
+        dict
             Chart data to use in JS
         """
         density_history = []
