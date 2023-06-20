@@ -1246,26 +1246,6 @@ Django = ">=2.2"
 redis = ">=3.0.0"
 
 [[package]]
-name = "django-select2"
-version = "7.11.1"
-description = "Select2 option fields for Django"
-optional = false
-python-versions = "*"
-files = [
-    {file = "django-select2-7.11.1.tar.gz", hash = "sha256:6c56749ca5dd11be9a78a0861086973170c605ace27126c109f3d722cea3c32e"},
-    {file = "django_select2-7.11.1-py2.py3-none-any.whl", hash = "sha256:e558f79fd932fc9013a9dca5e680412403ad8b8a9b5b09754e97c8ce1849c4e1"},
-]
-
-[package.dependencies]
-django = ">=3.2"
-django-appconf = ">=0.6.0"
-
-[package.extras]
-docs = ["sphinx"]
-selenium = ["selenium"]
-test = ["pytest", "pytest-cov", "pytest-django", "selenium"]
-
-[[package]]
 name = "djangorestframework"
 version = "3.14.0"
 description = "Web APIs for Django, made easy."
@@ -4138,4 +4118,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "4c5824d553dde43f1ab731d58b626e77f07b155e8f076e9299e3deca03030c21"
+content-hash = "9ec7af081822fef1082b1f919ebdeac2951766ad9c343e14fa9af0e9ab912b6b"
