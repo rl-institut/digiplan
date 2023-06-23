@@ -107,6 +107,9 @@ class ElectricityOverviewChart(Chart):
         self.simulation_id = simulation_id
         super().__init__()
 
+    def get_chart_data(self):
+        return self.chart_data_function(simulation_id=self.simulation_id)
+
     def render(self) -> dict:
         # TODO(Josi): Apply custom transformation for this chart
         return self.chart_options
