@@ -145,7 +145,7 @@ def get_charts(request: HttpRequest) -> response.JsonResponse:
     simulation_id = map_state["simulation_id"]
     return response.JsonResponse(
         {
-            chart.div_id: charts.create_result_chart(chart.lookup, charts.CHARTS[chart.lookup](simulation_id))
+            chart.div_id: chart.chart(simulation_id).render()
             for chart in charts.RESULT_CHARTS
         },
     )
