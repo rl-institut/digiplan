@@ -121,6 +121,7 @@
     {
       "name": "GHD",
       "type": "bar",
+      "barWidth": "16",
       "stack": "four",
       "color": "#F5F5DC",
       "emphasis": {

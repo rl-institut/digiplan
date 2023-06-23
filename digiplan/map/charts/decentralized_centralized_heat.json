@@ -127,6 +127,7 @@
     {
       "name": "Große Gasheizkessel",
       "type": "bar",
+      "barWidth": "16",
       "stack": "four",
       "color": "#B1BEC6",
       "emphasis": {
