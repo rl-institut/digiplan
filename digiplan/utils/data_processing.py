@@ -8,22 +8,52 @@ import pandas as pd
 from django.db.models import Model
 
 from config.settings.base import DIGIPIPE_DIR, DIGIPIPE_GEODATA_DIR
-from digiplan.map.models import (
-    Biomass,
-    Combustion,
-    Hydro,
-    Municipality,
-    Population,
-    PVground,
-    PVroof,
-    Region,
-    WindTurbine,
-)
+from digiplan.map import models
 from digiplan.utils.ogr_layer_mapping import RelatedModelLayerMapping
 
-REGIONS = [Municipality]
+REGIONS = [models.Municipality]
 
-MODELS = [WindTurbine, PVroof, PVground, Hydro, Biomass, Combustion]
+MODELS = [
+    # Clusters
+    models.WindTurbine,
+    models.PVroof,
+    models.PVground,
+    models.Hydro,
+    models.Biomass,
+    models.Combustion,
+    models.GSGK,
+    models.Storage,
+    # Static
+    models.AirTraffic,
+    models.Aviation,
+    models.BiosphereReserve,
+    models.DrinkingWaterArea,
+    models.FaunaFloraHabitat,
+    models.Floodplain,
+    models.Forest,
+    models.Grid,
+    models.Industry,
+    models.LandscapeProtectionArea,
+    models.LessFavouredAreasAgricultural,
+    models.Military,
+    models.NatureConservationArea,
+    models.Railway,
+    models.Road,
+    models.RoadRailway500m,
+    models.Settlement0m,
+    models.SoilQualityLow,
+    models.SoilQualityHigh,
+    models.SpecialProtectionArea,
+    models.Water,
+    # PotentialAreas
+    models.PotentialareaPVAgricultureLFAOff,
+    models.PotentialareaPVRoadRailway,
+    models.PotentialareaWindSTP2018Vreg,
+    models.PotentialareaWindSTP2027Repowering,
+    models.PotentialareaWindSTP2027SearchAreaForestArea,
+    models.PotentialareaWindSTP2027SearchAreaOpenArea,
+    models.PotentialareaWindSTP2027VR,
+]
 
 
 def load_regions(regions: list[Model] = None, *, verbose: bool = True) -> None:
@@ -40,7 +70,7 @@ def load_regions(regions: list[Model] = None, *, verbose: bool = True) -> None:
             data_path = pathlib.Path(DIGIPIPE_GEODATA_DIR) / region.data_folder / f"{region.data_file}.gpkg"
         else:
             data_path = pathlib.Path(DIGIPIPE_GEODATA_DIR) / f"{region.data_file}.gpkg"
-        region_model = Region(layer_type=region.__name__.lower())
+        region_model = models.Region(layer_type=region.__name__.lower())
         region_model.save()
         instance = RelatedModelLayerMapping(
             model=region,
@@ -82,7 +112,7 @@ def load_population() -> None:
     filename = "population.csv"
 
     path = pathlib.Path(DIGIPIPE_DIR) / "scalars" / filename
-    municipalities = Municipality.objects.all()
+    municipalities = models.Municipality.objects.all()
     dataframe = pd.read_csv(path, header=[0, 1], index_col=0)
     years = dataframe.columns.get_level_values(0)
 
@@ -94,7 +124,7 @@ def load_population() -> None:
             if math.isnan(value):
                 continue
 
-            entry = Population(
+            entry = models.Population(
                 year=year,
                 value=value,
                 entry_type=list(series.index.values)[0],
