@@ -7,7 +7,7 @@ import pathlib
 import pandas as pd
 from django.db.models import Model
 
-from config.settings.base import DIGIPIPE_DATA_DIR, DIGIPIPE_GEODATA_DIR
+from config.settings.base import DIGIPIPE_DIR, DIGIPIPE_GEODATA_DIR
 from digiplan.map.models import (
     Biomass,
     Combustion,
@@ -81,7 +81,7 @@ def load_population() -> None:
     """Load population data into Population model."""
     filename = "population.csv"
 
-    path = pathlib.Path(DIGIPIPE_DATA_DIR) / filename
+    path = pathlib.Path(DIGIPIPE_DIR) / "scalars" / filename
     municipalities = Municipality.objects.all()
     dataframe = pd.read_csv(path, header=[0, 1], index_col=0)
     years = dataframe.columns.get_level_values(0)
