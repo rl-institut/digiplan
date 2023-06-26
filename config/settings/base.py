@@ -9,6 +9,9 @@ from django_mapengine import setup
 ROOT_DIR = environ.Path(__file__) - 3  # (digiplan/config/settings/base.py - 3 = digiplan/)
 APPS_DIR = ROOT_DIR.path("digiplan")
 DATA_DIR = APPS_DIR.path("data")
+DIGIPIPE_DIR = DATA_DIR.path("digipipe")
+DIGIPIPE_DATA_DIR = DIGIPIPE_DIR.path("data")
+DIGIPIPE_GEODATA_DIR = DIGIPIPE_DIR.path("geodata")
 METADATA_DIR = APPS_DIR.path("metadata")
 
 env = environ.Env()
