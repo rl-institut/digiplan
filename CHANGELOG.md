@@ -10,6 +10,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - models, layers and legend items from digipipe geodata
 
 ### Changed
+- static layer order
 - paths for oemof hooks to digipipe scalars
 
 ## [0.4.0] - 2023-06-20
