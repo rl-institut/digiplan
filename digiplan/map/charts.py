@@ -104,6 +104,34 @@ class Chart:
         return
 
 
+class DetailedOverviewChart(Chart):
+    """Detailes Overview Chart."""
+
+    lookup = "detailed_overview"
+
+    def __init__(self, simulation_id: int) -> None:
+        """
+        Init Detailed Overview Chart.
+
+        Parameters
+        ----------
+        simulation_id: any
+            id of used Simulation
+        """
+        self.simulation_id = simulation_id
+        super().__init__()
+
+    def get_chart_data(self):  # noqa: D102, ANN201
+        return calculations.detailed_overview(simulation_id=self.simulation_id)
+
+    def render(self) -> dict:  # noqa: D102
+        for item in self.chart_options["series"]:
+            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
+            item["data"][1] = self.chart_data[profile]
+
+        return self.chart_options
+
+
 class ElectricityOverviewChart(Chart):
     lookup = "electricity_overview"
 

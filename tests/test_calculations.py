@@ -113,4 +113,4 @@ class ElectricityOverviewChartTest(SimulationTest):
     def test_electricity_overview_chart(self):  # noqa: D102,ANN201
         chart = charts.ElectricityOverviewChart(self.simulation_id)
         options = chart.render()
-        assert options
+        assert options["series"][0]["data"][2] == 4369687.261432747

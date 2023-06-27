@@ -53,23 +53,9 @@
   },
   "series": [
     {
-      "name": "Konventionell",
+      "name": "Wind turbine",
       "type": "bar",
-      "barWidth": "16",
-      "stack": "five",
-      "color": "#CFCFCF",
-      "emphasis": {
-        "itemStyle": {
-          "shadowBlur": 10,
-          "shadowColor": "rgba(0,0,0,0.3)"
-        }
-      },
-      "data": [132, 334, 700]
-    },
-    {
-      "name": "Wind",
-      "type": "bar",
-      "stack": "five",
+      "stack": "production",
       "color": "#1F82C0",
       "emphasis": {
         "itemStyle": {
@@ -80,9 +66,9 @@
       "data": [302, 234, 230]
     },
     {
-      "name": "Freiflächen-PV",
+      "name": "Outdoor PV",
       "type": "bar",
-      "stack": "five",
+      "stack": "production",
       "color": "#F6B93B",
       "emphasis": {
         "itemStyle": {
@@ -93,9 +79,9 @@
       "data": [282, 234, 100]
     },
     {
-      "name": "Aufdach-PV",
+      "name": "Roof-mounted PV",
       "type": "bar",
-      "stack": "five",
+      "stack": "production",
       "color": "#FFD660",
       "emphasis": {
         "itemStyle": {
@@ -106,9 +92,9 @@
       "data": [312, 254, 100]
     },
     {
-      "name": "Bioenergie",
+      "name": "Biomass",
       "type": "bar",
-      "stack": "five",
+      "stack": "production",
       "color": "#98D47E",
       "emphasis": {
         "itemStyle": {
@@ -119,10 +105,24 @@
       "data": [136, 134, 130]
     },
     {
-      "name": "GHD",
+      "name": "Hydro",
       "type": "bar",
       "barWidth": "16",
-      "stack": "four",
+      "stack": "production",
+      "color": "#CFCFCF",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [132, 334, 700]
+    },
+    {
+      "name": "Electricity CTS Demand",
+      "type": "bar",
+      "barWidth": "16",
+      "stack": "demand",
       "color": "#F5F5DC",
       "emphasis": {
         "itemStyle": {
@@ -133,9 +133,9 @@
       "data": [300, 344, 380]
     },
     {
-      "name": "Haushalte",
+      "name": "Electricity Household Demand",
       "type": "bar",
-      "stack": "four",
+      "stack": "demand",
       "color": "#A8DADC",
       "emphasis": {
         "itemStyle": {
@@ -146,10 +146,10 @@
       "data": [254, 244, 380]
     },
     {
-      "name": "Industrie",
+      "name": "Electricity Industry Demand",
       "type": "bar",
       "barWidth": "35",
-      "stack": "four",
+      "stack": "demand",
       "color": "#C27BA0",
       "emphasis": {
         "itemStyle": {
@@ -160,9 +160,9 @@
       "data": [280, 300, 350]
     },
     {
-      "name": "Sonstiges",
+      "name": "BEV",
       "type": "bar",
-      "stack": "four",
+      "stack": "demand",
       "color": "#B0BEC5",
       "emphasis": {
         "itemStyle": {
