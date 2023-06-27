@@ -1,3 +1,5 @@
+"""Module for smaller helper functions."""
+
 import json
 import pathlib
 
@@ -6,9 +8,9 @@ from django.template import Template
 from django.template.context import make_context
 
 
-def get_translated_json_from_file(json_filename: str, request: HttpRequest = None):
+def get_translated_json_from_file(json_filename: str, request: HttpRequest = None) -> dict:
     """
-    Renders JSON using translations
+    Render JSON using translations.
 
     Parameters
     ----------

@@ -12,7 +12,7 @@ class RelatedModelLayerMapping(LayerMapping):
         Check the Layer metadata and ensure that it's compatible with the
         mapping information and model. Unlike previous revisions, there is no
         need to increment through each feature in the Layer.
-        """  # noqa: DAR401,DAR101,DAR201
+        """
         # The geometry field of the model is set here.
         # TODO: Support more than one geometry field / model.  However, this
         # depends on the GDAL Driver in use.
@@ -47,16 +47,14 @@ class RelatedModelLayerMapping(LayerMapping):
 
             if isinstance(model_field, GeometryField):
                 if self.geom_field:
-                    raise LayerMapError("LayerMapping does not support more than one GeometryField per model.")
+                    msg = "LayerMapping does not support more than one GeometryField per model."
+                    raise LayerMapError(msg)
 
                 # Getting the coordinate dimension of the geometry field.
                 coord_dim = model_field.dim
 
                 try:
-                    if coord_dim == 3:
-                        gtype = OGRGeomType(ogr_name + "25D")
-                    else:
-                        gtype = OGRGeomType(ogr_name)
+                    gtype = OGRGeomType(ogr_name + "25D") if coord_dim == 3 else OGRGeomType(ogr_name)
                 except GDALException:
                     raise LayerMapError('Invalid mapping for GeometryField "%s".' % field_name)
 
@@ -64,8 +62,8 @@ class RelatedModelLayerMapping(LayerMapping):
                 ltype = self.layer.geom_type
                 if not (ltype.name.startswith(gtype.name) or self.make_multi(ltype, model_field)):
                     raise LayerMapError(
-                        "Invalid mapping geometry; model has %s%s, "
-                        "layer geometry type is %s." % (fld_name, "(dim=3)" if coord_dim == 3 else "", ltype)
+                        "Invalid mapping geometry; model has {}{}, "
+                        "layer geometry type is {}.".format(fld_name, "(dim=3)" if coord_dim == 3 else "", ltype),
                     )
 
                 # Setting the `geom_field` attribute w/the name of the model field
@@ -85,12 +83,12 @@ class RelatedModelLayerMapping(LayerMapping):
                             rel_model._meta.get_field(rel_name.split("__")[0])
                         except FieldDoesNotExist:
                             raise LayerMapError(
-                                'ForeignKey mapping field "%s" not in %s fields.'
-                                % (rel_name, rel_model.__class__.__name__)
+                                f'ForeignKey mapping field "{rel_name}" not in {rel_model.__class__.__name__} fields.',
                             )
                     fields_val = rel_model
                 else:
-                    raise TypeError("ForeignKey mapping must be of dictionary type.")
+                    msg = "ForeignKey mapping must be of dictionary type."
+                    raise TypeError(msg)
             else:
                 # Is the model field type supported by LayerMapping?
                 if model_field.__class__ not in self.FIELD_TYPES:
@@ -106,8 +104,8 @@ class RelatedModelLayerMapping(LayerMapping):
                 # Can the OGR field type be mapped to the Django field type?
                 if not issubclass(ogr_field, self.FIELD_TYPES[model_field.__class__]):
                     raise LayerMapError(
-                        'OGR field "%s" (of type %s) cannot be mapped to Django %s.'
-                        % (ogr_field, ogr_field.__name__, fld_name)
+                        f'OGR field "{ogr_field}" (of type {ogr_field.__name__}) '
+                        f"cannot be mapped to Django {fld_name}.",
                     )
                 fields_val = model_field
 
@@ -117,7 +115,7 @@ class RelatedModelLayerMapping(LayerMapping):
         """
         Given an OGR Feature, the related model and its dictionary mapping,
         retrieve the related model for the ForeignKey mapping.
-        """  # noqa: DAR401,DAR101,DAR201
+        """
         # TODO: It is expensive to retrieve a model for every record --
         #  explore if an efficient mechanism exists for caching related
         #  ForeignKey models.
@@ -126,7 +124,8 @@ class RelatedModelLayerMapping(LayerMapping):
         fk_kwargs = {}
         for field_name, ogr_name in rel_mapping.items():
             fk_kwargs[field_name] = self.verify_ogr_field(
-                feat[ogr_name], rel_model._meta.get_field(field_name.split("__")[0])
+                feat[ogr_name],
+                rel_model._meta.get_field(field_name.split("__")[0]),
             )
 
         # Attempting to retrieve and return the related model.
@@ -140,7 +139,7 @@ class RelatedModelLayerMapping(LayerMapping):
         """
         Given an OGR Feature, return a dictionary of keyword arguments for
         constructing the mapped model.
-        """  # noqa: DAR401,DAR101,DAR201
+        """
         # The keyword arguments for model construction.
         kwargs = {}
 
@@ -154,7 +153,8 @@ class RelatedModelLayerMapping(LayerMapping):
                 try:
                     val = self.verify_geom(feat.geom, model_field)
                 except GDALException:
-                    raise LayerMapError("Could not retrieve geometry from feature.")
+                    msg = "Could not retrieve geometry from feature."
+                    raise LayerMapError(msg)
             elif isinstance(model_field, models.base.ModelBase):
                 # The related _model_, not a field was passed in -- indicating
                 # another mapping for the related Model.
