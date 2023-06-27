@@ -105,7 +105,7 @@ class Chart:
 
 
 class DetailedOverviewChart(Chart):
-    """Detailes Overview Chart."""
+    """Detailed Overview Chart."""
 
     lookup = "detailed_overview"
 
@@ -150,6 +150,34 @@ class ElectricityOverviewChart(Chart):
             except KeyError:
                 profile = config.SIMULATION_DEMANDS[item["name"]]
                 item["data"][0] = self.chart_data[profile]
+
+        return self.chart_options
+
+
+class HeatOverviewChart(Chart):
+    """Heat Overview Chart."""
+
+    lookup = "overview_heat"
+
+    def __init__(self, simulation_id: int) -> None:
+        """
+        Init Heat Overview Chart.
+
+        Parameters
+        ----------
+        simulation_id: any
+            id of used Simulation
+        """
+        self.simulation_id = simulation_id
+        super().__init__()
+
+    def get_chart_data(self):  # noqa: D102, ANN201
+        return calculations.heat_overview(simulation_id=self.simulation_id)
+
+    def render(self) -> dict:  # noqa: D102
+        for item in self.chart_options["series"]:
+            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
+            item["data"][1] = self.chart_data[profile]
 
         return self.chart_options
 

@@ -105,6 +105,7 @@ SIMULATION_RENEWABLES = {
 }
 
 SIMULATION_DEMANDS = {
+    # electricty demands
     "ABW-electricity-bev_charging": _("BEV"),
     "ABW-electricity-demand_hh": _("Electricity Household Demand"),
     "ABW-electricity-demand_cts": _("Electricity CTS Demand"),
@@ -112,6 +113,7 @@ SIMULATION_DEMANDS = {
     "electricity_heat_demand_hh": _("Electricity Household Heat Demand"),
     "electricity_heat_demand_cts": _("Electricity CTS Heat Demand"),
     "electricity_heat_demand_ind": _("Electricity Industry Heat Demand"),
+    # Demands Mapping reversed
     _("BEV"): "ABW-electricity-bev_charging",
     _("Electricity Household Demand"): "ABW-electricity-demand_hh",
     _("Electricity CTS Demand"): "ABW-electricity-demand_cts",
@@ -119,6 +121,13 @@ SIMULATION_DEMANDS = {
     _("Electricity Household Heat Demand"): "electricity_heat_demand_hh",
     _("Electricity CTS Heat Demand"): "electricity_heat_demand_cts",
     _("Electricity Industry Heat Demand"): "electricity_heat_demand_ind",
+    # only heat demands
+    "heat-demand-cts": _("CTS Heat Demand"),
+    "heat-demand-hh": _("Household Heat Demand"),
+    "heat-demand-ind": _("Industry Heat Demand"),
+    _("CTS Heat Demand"): "heat-demand-cts",
+    _("Household Heat Demand"): "heat-demand-hh",
+    _("Industry Heat Demand"): "heat-demand-ind",
 }
 
 SIMULATION_NAME_MAPPING = {} | SIMULATION_RENEWABLES | SIMULATION_DEMANDS
