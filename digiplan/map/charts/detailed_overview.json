@@ -10,8 +10,7 @@
       "Haushalt",
       "Industrie",
       "Sonstiges"
-    ],
-    "bottom": "12"
+    ]
   },
   "brush": {
     "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],

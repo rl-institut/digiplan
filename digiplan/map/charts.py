@@ -132,6 +132,34 @@ class DetailedOverviewChart(Chart):
         return self.chart_options
 
 
+class CTSOverviewChart(Chart):
+    """CTS Overview Chart. Shows greenhouse gas emissions."""
+
+    lookup = "ghg_overview"
+
+    def __init__(self, simulation_id: int) -> None:
+        """
+        Init CTS Overview Chart.
+
+        Parameters
+        ----------
+        simulation_id: any
+            id of used Simulation
+        """
+        self.simulation_id = simulation_id
+        super().__init__()
+
+    def get_chart_data(self):  # noqa: D102, ANN201
+        return calculations.detailed_overview(simulation_id=self.simulation_id)
+
+    def render(self) -> dict:  # noqa: D102
+        for item in self.chart_options["series"]:
+            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
+            item["data"][2] = self.chart_data[profile]
+
+        return self.chart_options
+
+
 class ElectricityOverviewChart(Chart):
     lookup = "electricity_overview"
 
@@ -150,6 +178,34 @@ class ElectricityOverviewChart(Chart):
             except KeyError:
                 profile = config.SIMULATION_DEMANDS[item["name"]]
                 item["data"][0] = self.chart_data[profile]
+
+        return self.chart_options
+
+
+class ElectricityCTSChart(Chart):
+    """Electricity CTS Chart. Shows greenhouse gas emissions."""
+
+    lookup = "electricity_ghg"
+
+    def __init__(self, simulation_id: int) -> None:
+        """
+        Init Electricity CTS Chart.
+
+        Parameters
+        ----------
+        simulation_id: any
+            id of used Simulation
+        """
+        self.simulation_id = simulation_id
+        super().__init__()
+
+    def get_chart_data(self):  # noqa: D102, ANN201
+        return calculations.detailed_overview(simulation_id=self.simulation_id)
+
+    def render(self) -> dict:  # noqa: D102
+        for item in self.chart_options["series"]:
+            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
+            item["data"][2] = self.chart_data[profile]
 
         return self.chart_options
 
@@ -182,7 +238,94 @@ class HeatOverviewChart(Chart):
         return self.chart_options
 
 
-RESULT_CHARTS = (ResultChart(ElectricityOverviewChart, "electricity_overview_chart"),)
+class HeatProductionChart(Chart):
+    """Heat Production Chart. Shows decentralized and centralized heat."""
+
+    lookup = "decentralized_centralized_heat"
+
+    def __init__(self, simulation_id: int) -> None:
+        """
+        Init Heat Production Chart.
+
+        Parameters
+        ----------
+        simulation_id: any
+            id of used Simulation
+        """
+        self.simulation_id = simulation_id
+        super().__init__()
+
+    def get_chart_data(self):  # noqa: D102, ANN201
+        return calculations.heat_overview(simulation_id=self.simulation_id)
+
+    def render(self) -> dict:  # noqa: D102
+        for item in self.chart_options["series"]:
+            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
+            item["data"][1] = self.chart_data[profile]
+
+        return self.chart_options
+
+
+class MobilityOverviewChart(Chart):
+    """Mobility Overview Chart. Shows Number of Cars."""
+
+    lookup = "mobility_overview"
+
+    def __init__(self, simulation_id: int) -> None:
+        """
+        Init Mobility Overview Chart.
+
+        Parameters
+        ----------
+        simulation_id: any
+            id of used Simulation
+        """
+        self.simulation_id = simulation_id
+        super().__init__()
+
+    def get_chart_data(self):  # noqa: D102, ANN201
+        return calculations.heat_overview(simulation_id=self.simulation_id)
+
+    def render(self) -> dict:  # noqa: D102
+        for item in self.chart_options["series"]:
+            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
+            item["data"][1] = self.chart_data[profile]
+
+        return self.chart_options
+
+
+class MobilityCTSChart(Chart):
+    """Mobility CTS Chart. Shows greenhouse gas emissions."""
+
+    lookup = "mobility_ghg"
+
+    def __init__(self, simulation_id: int) -> None:
+        """
+        Init Mobility CTS Chart.
+
+        Parameters
+        ----------
+        simulation_id: any
+            id of used Simulation
+        """
+        self.simulation_id = simulation_id
+        super().__init__()
+
+    def get_chart_data(self):  # noqa: D102, ANN201
+        return calculations.detailed_overview(simulation_id=self.simulation_id)
+
+    def render(self) -> dict:  # noqa: D102
+        for item in self.chart_options["series"]:
+            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
+            item["data"][2] = self.chart_data[profile]
+
+        return self.chart_options
+
+
+RESULT_CHARTS = (
+    ResultChart(ElectricityOverviewChart, "electricity_overview_chart"),
+    ResultChart(HeatOverviewChart, "overview_heat_chart"),
+)
 
 CHARTS: dict[str, Callable] = {}
 
