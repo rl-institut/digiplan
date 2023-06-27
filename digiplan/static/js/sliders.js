@@ -59,6 +59,11 @@ $(".js-slider.js-slider-panel").ionRangeSlider({
     }
   }
 );
+$(".form-check-input").on(
+    'click', function (data) {
+      toggleFormFields(data.target.id);
+    }
+);
 $(".js-slider").ionRangeSlider();
 
 Array.from(sliderMoreLabels).forEach(moreLabel => {
@@ -155,6 +160,33 @@ function showPVLayers(msg) {
     map.setLayoutProperty(layer, "visibility", "visible");
   }
   return logMessage(msg);
+}
+
+function toggleFormFields(formfield_id) {
+  if (formfield_id === "id_s_w_3") {
+    document.getElementById("id_s_w_4").checked = false;
+    document.getElementById("id_s_w_4_1").disabled = true;
+    document.getElementById("id_s_w_4_2").disabled = true;
+    document.getElementById("id_s_w_5").checked = false;
+    document.getElementById("id_s_w_5_1").disabled = true;
+    document.getElementById("id_s_w_5_2").disabled = true;
+  }
+  if (formfield_id === "id_s_w_4") {
+    document.getElementById("id_s_w_3").checked = false;
+    document.getElementById("id_s_w_4_1").disabled = false;
+    document.getElementById("id_s_w_4_2").disabled = false;
+    document.getElementById("id_s_w_5").checked = false;
+    document.getElementById("id_s_w_5_1").disabled = true;
+    document.getElementById("id_s_w_5_2").disabled = true;
+  }
+  if (formfield_id === "id_s_w_5") {
+    document.getElementById("id_s_w_3").checked = false;
+    document.getElementById("id_s_w_4").checked = false;
+    document.getElementById("id_s_w_4_1").disabled = true;
+    document.getElementById("id_s_w_4_2").disabled = true;
+    document.getElementById("id_s_w_5_1").disabled = false;
+    document.getElementById("id_s_w_5_2").disabled = false;
+  }
 }
 
 function showWindLayers(msg) {
