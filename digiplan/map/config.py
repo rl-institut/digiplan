@@ -92,11 +92,16 @@ SOURCES = init_sources()
 # SIMULATION
 
 SIMULATION_RENEWABLES = {
-    "ABW-solar-pv_ground": _("Freiflächen-PV"),
-    "ABW-solar-pv_rooftop": _("Aufdach-PV"),
-    "ABW-wind-onshore": _("Wind"),
+    "ABW-solar-pv_ground": _("Outdoor PV"),
+    "ABW-solar-pv_rooftop": _("Roof-mounted PV"),
+    "ABW-wind-onshore": _("Wind turbine"),
     "ABW-hydro-ror": _("Hydro"),
     "ABW-biomass": _("Biomass"),
+    _("Outdoor PV"): "ABW-solar-pv_ground",
+    _("Roof-mounted PV"): "ABW-solar-pv_rooftop",
+    _("Wind turbine"): "ABW-wind-onshore",
+    _("Hydro"): "ABW-wind-onshore",
+    _("Biomass"): "ABW-biomass",
 }
 
 SIMULATION_DEMANDS = {
@@ -104,6 +109,16 @@ SIMULATION_DEMANDS = {
     "ABW-electricity-demand_hh": _("Electricity Household Demand"),
     "ABW-electricity-demand_cts": _("Electricity CTS Demand"),
     "ABW-electricity-demand_ind": _("Electricity Industry Demand"),
+    "electricity_heat_demand_hh": _("Electricity Household Heat Demand"),
+    "electricity_heat_demand_cts": _("Electricity CTS Heat Demand"),
+    "electricity_heat_demand_ind": _("Electricity Industry Heat Demand"),
+    _("BEV"): "ABW-electricity-bev_charging",
+    _("Electricity Household Demand"): "ABW-electricity-demand_hh",
+    _("Electricity CTS Demand"): "ABW-electricity-demand_cts",
+    _("Electricity Industry Demand"): "ABW-electricity-demand_ind",
+    _("Electricity Household Heat Demand"): "electricity_heat_demand_hh",
+    _("Electricity CTS Heat Demand"): "electricity_heat_demand_cts",
+    _("Electricity Industry Heat Demand"): "electricity_heat_demand_ind",
 }
 
 SIMULATION_NAME_MAPPING = {} | SIMULATION_RENEWABLES | SIMULATION_DEMANDS

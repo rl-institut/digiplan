@@ -20,7 +20,7 @@
   },
   "series": [
     {
-      "name": "Wind",
+      "name": "Wind turbine",
       "type": "bar",
       "barWidth": "16",
       "stack": "total",
@@ -34,7 +34,7 @@
       "data": [0, 502, 400, 334]
     },
     {
-      "name": "Freiflächen - PV",
+      "name": "Outdoor PV",
       "type": "bar",
       "stack": "total",
       "color": "#F6B93B",
@@ -47,7 +47,7 @@
       "data": [0, 382, 300, 234]
     },
     {
-      "name": "Aufdach - PV",
+      "name": "Roof-mounted PV",
       "type": "bar",
       "stack": "total",
       "color": "#FFD660",
@@ -60,7 +60,7 @@
       "data": [0, 312, 280, 254]
     },
     {
-      "name": "Bioenergie",
+      "name": "Biomass",
       "type": "bar",
       "stack": "total",
       "color": "#98D47E",
@@ -73,10 +73,10 @@
       "data": [0, 136, 135, 134]
     },
     {
-      "name": "Konventionell",
+      "name": "Hydro",
       "type": "bar",
       "stack": "total",
-      "color": "#1A1A1A",
+      "color": "#9CC4D9",
       "label": {
         "show": false
       },
@@ -86,7 +86,7 @@
       "data": [0, 132, 200, 534]
     },
     {
-      "name": "GHD",
+      "name": "Electricity CTS Demand",
       "type": "bar",
       "stack": "total",
       "color": "#F5F5DC",
@@ -99,7 +99,20 @@
       "data": [400, 0, 0, 0]
     },
     {
-      "name": "Haushalte",
+      "name": "Electricity CTS Heat Demand",
+      "type": "bar",
+      "stack": "total",
+      "color": "#DBDBB8",
+      "label": {
+        "show": false
+      },
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [400, 0, 0, 0]
+    },
+    {
+      "name": "Electricity Household Demand",
       "type": "bar",
       "stack": "total",
       "color": "#A8DADC",
@@ -112,7 +125,20 @@
       "data": [360, 0, 0, 0]
     },
     {
-      "name": "Industrie",
+      "name": "Electricity Household Heat Demand",
+      "type": "bar",
+      "stack": "total",
+      "color": "#76ABAD",
+      "label": {
+        "show": false
+      },
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [360, 0, 0, 0]
+    },
+    {
+      "name": "Electricity Industry Demand",
       "type": "bar",
       "stack": "total",
       "color": "#C27BA0",
@@ -125,7 +151,20 @@
       "data": [300, 0, 0, 0]
     },
     {
-      "name": "Sonstiges",
+      "name": "Electricity Industry Heat Demand",
+      "type": "bar",
+      "stack": "total",
+      "color": "#965075",
+      "label": {
+        "show": false
+      },
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [300, 0, 0, 0]
+    },
+    {
+      "name": "BEV",
       "type": "bar",
       "stack": "total",
       "color": "#B0BEC5",

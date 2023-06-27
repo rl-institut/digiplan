@@ -101,17 +101,24 @@ class Chart:
 
 class ElectricityOverviewChart(Chart):
     lookup = "electricity_overview"
-    chart_data_function = calculations.detailed_overview
+    chart_data_function = calculations.electricity_overview
 
     def __init__(self, simulation_id) -> None:
         self.simulation_id = simulation_id
         super().__init__()
 
-    def get_chart_data(self):
-        return self.chart_data_function(simulation_id=self.simulation_id)
+    def get_chart_data(self):  # noqa: D102, ANN201
+        return self.chart_data_function(self.simulation_id)
 
-    def render(self) -> dict:
-        # TODO(Josi): Apply custom transformation for this chart
+    def render(self) -> dict:  # noqa: D102
+        for item in self.chart_options["series"]:
+            try:
+                profile = config.SIMULATION_RENEWABLES[item["name"]]
+                item["data"][2] = self.chart_data[profile]
+            except KeyError:
+                profile = config.SIMULATION_DEMANDS[item["name"]]
+                item["data"][0] = self.chart_data[profile]
+
         return self.chart_options
 
 

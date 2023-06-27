@@ -4,7 +4,7 @@ from django.test import SimpleTestCase
 from django_oemof import results as oemof_results
 from django_oemof import simulation
 
-from digiplan.map import calculations
+from digiplan.map import calculations, charts
 
 
 class SimulationTest(SimpleTestCase):
@@ -105,3 +105,12 @@ class HeatOverviewTest(SimulationTest):
     def test_heat_overview(self):  # noqa: D102
         result = calculations.heat_overview(self.simulation_id)
         assert len(result) == 3
+
+
+class ElectricityOverviewChartTest(SimulationTest):
+    """Test electricity overview calculation."""
+
+    def test_electricity_overview_chart(self):  # noqa: D102,ANN201
+        chart = charts.ElectricityOverviewChart(self.simulation_id)
+        options = chart.render()
+        assert options
