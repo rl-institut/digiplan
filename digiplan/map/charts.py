@@ -25,7 +25,6 @@ ResultChart = namedtuple("ResultChart", ("chart", "div_id"))
 
 class Chart:
     lookup: str = None
-    chart_data_function: Callable = None
 
     def __init__(self, lookup: Optional[str] = None, chart_data: Optional[Any] = None) -> None:
         if lookup:
@@ -93,22 +92,27 @@ class Chart:
         options = merge_dicts(general_chart_options, lookup_options)
         return options
 
-    def get_chart_data(self):
-        if self.chart_data_function:
-            return self.chart_data_function()
-        return None
+    def get_chart_data(self) -> None:
+        """
+        Check if chart_data_function is valid.
+
+        Returns
+        -------
+        None
+
+        """
+        return
 
 
 class ElectricityOverviewChart(Chart):
     lookup = "electricity_overview"
-    chart_data_function = calculations.electricity_overview
 
     def __init__(self, simulation_id) -> None:
         self.simulation_id = simulation_id
         super().__init__()
 
     def get_chart_data(self):  # noqa: D102, ANN201
-        return self.chart_data_function(self.simulation_id)
+        return calculations.electricity_overview(simulation_id=self.simulation_id)
 
     def render(self) -> dict:  # noqa: D102
         for item in self.chart_options["series"]:
