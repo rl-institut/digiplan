@@ -9,6 +9,16 @@ const sliderMoreLabels = document.querySelectorAll(".c-slider__label--more > .bu
 const powerMixInfoBanner = document.getElementById("js-power-mix");
 
 
+const potentialPVLayers = ["potentialarea_pv_agriculture_lfa-off", "potentialarea_pv_road_railway"];
+const potentialWindLayers = [
+  "potentialarea_wind_stp_2018_vreg",
+  "potentialarea_wind_stp_2027_repowering",
+  "potentialarea_wind_stp_2027_search_area_forest_area",
+  "potentialarea_wind_stp_2027_search_area_open_area",
+  "potentialarea_wind_stp_2027_vr"
+];
+
+
 // Setup
 
 // Order matters. Start with the most specific, and end with most general sliders.
@@ -30,15 +40,19 @@ Array.from(Object.keys(SETTINGS_DEPENDENCY_MAP)).forEach(dependent_name => {
 });
 $(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
     onChange: function (data) {
-      const msg = eventTopics.POWER_PANEL_SLIDER_CHANGE;
-      PubSub.publish(msg, data);
+      PubSub.publish(eventTopics.POWER_PANEL_SLIDER_CHANGE, data);
+      if (data.input[0].id === "id_s_pv_ff_1") {
+        PubSub.publish(eventTopics.PV_CONTROL_ACTIVATED);
+      }
+      if (data.input[0].id === "id_s_w_1") {
+        PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
+      }
     }
   }
 );
 $(".js-slider.js-slider-panel").ionRangeSlider({
     onChange: function (data) {
-      const msg = eventTopics.PANEL_SLIDER_CHANGE;
-      PubSub.publish(msg, data);
+      PubSub.publish(eventTopics.PANEL_SLIDER_CHANGE, data);
     }
   }
 );
@@ -48,6 +62,12 @@ Array.from(sliderMoreLabels).forEach(moreLabel => {
   moreLabel.addEventListener("click", () => {
     const sliderLabel = moreLabel.parentNode.parentNode.parentNode;
     PubSub.publish(eventTopics.MORE_LABEL_CLICK, sliderLabel);
+    if (sliderLabel.id === "id_s_pv_ff_1") {
+      PubSub.publish(eventTopics.PV_CONTROL_ACTIVATED);
+    }
+    if (sliderLabel.id === "id_s_w_1") {
+      PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
+    }
   });
 });
 
@@ -73,6 +93,8 @@ PubSub.subscribe(eventTopics.DEPENDENCY_PANEL_SLIDER_CHANGE, (msg, payload) => {
   const dependentDataElement = $("#id_" + dependent).data("ionRangeSlider");
   dependentDataElement.update({max: value});
 });
+PubSub.subscribe(eventTopics.PV_CONTROL_ACTIVATED, showPVLayers);
+PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
 
 
 // Subscriber Functions
@@ -120,6 +142,43 @@ function updateSliderMarks(msg) {
         addMarks(data, slider_marks);
       }
     });
+  }
+  return logMessage(msg);
+}
+
+function showPVLayers(msg) {
+  hidePotentialLayers();
+  for (const layer of potentialPVLayers) {
+    map.setLayoutProperty(layer, "visibility", "visible");
+  }
+  return logMessage(msg);
+}
+
+function showWindLayers(msg) {
+  hidePotentialLayers();
+  if (document.getElementById("id_s_w_3").checked) {
+    map.setLayoutProperty("potentialarea_wind_stp_2018_vreg", "visibility", "visible");
+  }
+  if (document.getElementById("id_s_w_4").checked) {
+    if (document.getElementById("id_s_w_4_1").checked) {
+      map.setLayoutProperty("potentialarea_wind_stp_2027_vr", "visibility", "visible");
+    } else {
+      map.setLayoutProperty("potentialarea_wind_stp_2027_repowering", "visibility", "visible");
+    }
+  }
+  if (document.getElementById("id_s_w_5").checked) {
+    if (document.getElementById("id_s_w_5_1").checked) {
+      map.setLayoutProperty("potentialarea_wind_stp_2027_search_area_open_area", "visibility", "visible");
+    } else {
+      map.setLayoutProperty("potentialarea_wind_stp_2027_search_area_forest_area", "visibility", "visible");
+    }
+  }
+  return logMessage(msg);
+}
+
+function hidePotentialLayers(msg) {
+  for (const layer of potentialPVLayers.concat(potentialWindLayers)) {
+    map.setLayoutProperty(layer, "visibility", "none");
   }
   return logMessage(msg);
 }
