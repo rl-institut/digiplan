@@ -9,7 +9,7 @@ const sliderMoreLabels = document.querySelectorAll(".c-slider__label--more > .bu
 const powerMixInfoBanner = document.getElementById("js-power-mix");
 
 
-const potentialPVLayers = ["potentialarea_pv_agriculture_lfa-off", "potentialarea_pv_road_railway"];
+const potentialPVLayers = ["potentialarea_pv_agriculture_lfa-off_region", "potentialarea_pv_road_railway_region"];
 const potentialWindLayers = [
   "potentialarea_wind_stp_2018_vreg",
   "potentialarea_wind_stp_2027_repowering",
@@ -17,7 +17,7 @@ const potentialWindLayers = [
   "potentialarea_wind_stp_2027_search_area_open_area",
   "potentialarea_wind_stp_2027_vr"
 ];
-
+const potentialWindSwitches = document.querySelectorAll("#id_s_w_3, #id_s_w_4, #id_s_w_4_1, #id_s_w_4_2, #id_s_w_5, #id_s_w_5_1, #id_s_w_5_2");
 
 // Setup
 
@@ -50,6 +50,9 @@ $(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
     }
   }
 );
+$(potentialWindSwitches).on("change", function () {
+  PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
+});
 $(".js-slider.js-slider-panel").ionRangeSlider({
     onChange: function (data) {
       PubSub.publish(eventTopics.PANEL_SLIDER_CHANGE, data);
