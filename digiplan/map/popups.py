@@ -129,7 +129,7 @@ class PopulationPopup(RegionPopup):
     def get_municipality_value(self) -> float:  # noqa: D102
         return models.Population.quantity(2022, self.selected_id)
 
-    def get_chart_data(self) -> Iterable:
+    def get_chart_data(self) -> Iterable:  # noqa: D102
         return models.Population.population_history(self.selected_id)
 
 

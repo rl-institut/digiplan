@@ -42,7 +42,7 @@ class SimulationTest(SimpleTestCase):
 class ElectricityProductionTest(SimulationTest):
     """Test electricity production calculation."""
 
-    def test_electricity_production(self):  # noqa: D102,ANN201
+    def test_electricity_production(self):  # noqa: D102
         results = oemof_results.get_results(
             self.simulation_id,
             calculations=[calculations.electricity_production],
@@ -53,7 +53,7 @@ class ElectricityProductionTest(SimulationTest):
 class HeatProductionTest(SimulationTest):
     """Test heat production calculation."""
 
-    def test_heat_production(self):  # noqa: D102,ANN201
+    def test_heat_production(self):  # noqa: D102
         results = oemof_results.get_results(
             self.simulation_id,
             calculations=[calculations.heat_production],
@@ -64,7 +64,7 @@ class HeatProductionTest(SimulationTest):
 class ElectricityDemandTest(SimulationTest):
     """Test electricity demand calculation."""
 
-    def test_electricity_demand(self):  # noqa: D102,ANN201
+    def test_electricity_demand(self):  # noqa: D102
         results = oemof_results.get_results(
             self.simulation_id,
             calculations=[calculations.electricity_demand],
@@ -75,7 +75,7 @@ class ElectricityDemandTest(SimulationTest):
 class HeatDemandTest(SimulationTest):
     """Test heat demand calculation."""
 
-    def test_heat_demand(self):  # noqa: D102,ANN201
+    def test_heat_demand(self):  # noqa: D102
         results = oemof_results.get_results(
             self.simulation_id,
             calculations=[calculations.heat_demand],
@@ -86,7 +86,7 @@ class HeatDemandTest(SimulationTest):
 class ElectricityProductionFromBiomassTest(SimulationTest):
     """Test electricity production from biomass calculation."""
 
-    def test_electricity_production_from_biomass(self):  # noqa: D102,ANN201
+    def test_electricity_production_from_biomass(self):  # noqa: D102
         results = calculations.electricity_from_from_biomass(self.simulation_id)
         assert isinstance(results, float) is True
 
@@ -94,7 +94,7 @@ class ElectricityProductionFromBiomassTest(SimulationTest):
 class ElectricityOverviewTest(SimulationTest):
     """Test electricity overview calculation."""
 
-    def test_electricity_overview(self):  # noqa: D102,ANN201
+    def test_electricity_overview(self):  # noqa: D102
         result = calculations.electricity_overview(self.simulation_id)
         assert len(result) == 12
 
@@ -102,6 +102,6 @@ class ElectricityOverviewTest(SimulationTest):
 class HeatOverviewTest(SimulationTest):
     """Test heat overview calculation."""
 
-    def test_heat_overview(self):  # noqa: D102,ANN201
+    def test_heat_overview(self):  # noqa: D102
         result = calculations.heat_overview(self.simulation_id)
         assert len(result) == 3

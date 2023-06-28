@@ -1,9 +1,13 @@
+"""Module holds helper function for distilling."""
+
+import logging
 from collections import defaultdict
 
 from django_mapengine import distill
 
 
-def check_distill_coordinates():
+def check_distill_coordinates() -> dict:
+    """Return coordinates for all static tiles."""
     tiles = list(distill.get_coordinates_for_distilling("static"))
     coordinates = defaultdict(lambda: {"x": [None, None], "y": [None, None]})
     for tile in tiles:
@@ -20,4 +24,4 @@ def check_distill_coordinates():
 
 
 if __name__ == "__main__":
-    print(check_distill_coordinates())
+    logging.info(check_distill_coordinates())
