@@ -73,7 +73,7 @@ class Choropleth:
         values = self.get_values_per_feature()
         paint_properties = self.get_paint_properties()
         paint_properties["fill-color"] = self.get_fill_color(values)
-        return JsonResponse({"values": self.get_values_per_feature(), "paintProperties": paint_properties})
+        return JsonResponse({"values": values, "paintProperties": paint_properties})
 
 
 class RenewableElectricityProductionChoropleth(Choropleth):  # noqa: D101
