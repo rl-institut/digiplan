@@ -272,15 +272,7 @@ class WindTurbine(models.Model):
         dict[int, int]
             wind turbines per municipality
         """
-        windturbines = {}
-        municipalities = Municipality.objects.all()
-
-        for mun in municipalities:
-            res_windturbine = cls.objects.filter(mun_id=mun.id).aggregate(Sum("unit_count"))["unit_count__sum"]
-            if res_windturbine is None:
-                res_windturbine = 0
-            windturbines[mun.id] = res_windturbine
-        return windturbines
+        return cls.objects.values("mun_id").annotate(units=Sum("unit_count")).values_list("mun_id", "units")
 
     @classmethod
     def wind_turbines_history(cls, municipality_id: int) -> dict:  # noqa: ARG003
