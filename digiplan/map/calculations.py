@@ -81,7 +81,7 @@ def capacity_comparison(municipality_id: int) -> dict:  # noqa: ARG001
     return ([36, 9, 10], [36, 2, 1], [1, 5, 10], [3, 9, 10], [17, 10, 10])
 
 
-def capacity_per_municipality() -> dict[int, int]:
+def capacity_per_municipality() -> pd.DataFrame:
     """
     Calculate capacity of renewables per municipality.
 
@@ -90,20 +90,14 @@ def capacity_per_municipality() -> dict[int, int]:
     dict[int, int]
         Capacity per municipality
     """
-    capacity = {}
-    municipalities = models.Municipality.objects.all()
-
-    for mun in municipalities:
-        res_capacity = 0.0
-        for renewable in models.RENEWABLES:
-            one_capacity = renewable.objects.filter(mun_id__exact=mun.id).aggregate(Sum("capacity_net"))[
-                "capacity_net__sum"
-            ]
-            if one_capacity is None:
-                one_capacity = 0.0
-            res_capacity += one_capacity
-            capacity[mun.id] = res_capacity
-    return capacity
+    capacities = []
+    for renewable in models.RENEWABLES:
+        res_capacity = pd.DataFrame.from_records(
+            renewable.objects.values("mun_id").annotate(capacity=Sum("capacity_net")).values("mun_id", "capacity"),
+        ).set_index("mun_id")
+        res_capacity.columns = [renewable._meta.verbose_name]  # noqa: SLF001
+        capacities.append(res_capacity)
+    return pd.concat(capacities, axis=1).fillna(0.0)
 
 
 def capacity_square(mun_id: Optional[int] = None) -> float:
