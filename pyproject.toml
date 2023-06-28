@@ -107,6 +107,7 @@ ignore = [
   "FIX001",  # Line contains FIXME
   "FIX002",  # Line contains TODO
   "RET504",  # Unnecessary variable assignment before `return` statement
+  "G004",    # Logging statement uses f-string
 ]
 fix = true
 show-fixes = true

@@ -9,6 +9,8 @@ from django_mapengine import setup
 ROOT_DIR = environ.Path(__file__) - 3  # (digiplan/config/settings/base.py - 3 = digiplan/)
 APPS_DIR = ROOT_DIR.path("digiplan")
 DATA_DIR = APPS_DIR.path("data")
+DIGIPIPE_DIR = DATA_DIR.path("digipipe")
+DIGIPIPE_GEODATA_DIR = DIGIPIPE_DIR.path("geodata")
 METADATA_DIR = APPS_DIR.path("metadata")
 
 env = environ.Env()
@@ -267,6 +269,29 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("municipality", "map", "Municipality"),
         setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
     ],
+    "static": [
+        setup.MVTAPI("air_traffic", "map", "AirTraffic"),
+        setup.MVTAPI("aviation", "map", "Aviation"),
+        setup.MVTAPI("biosphere_reserve", "map", "BiosphereReserve"),
+        setup.MVTAPI("drinking_water_protection_area", "map", "DrinkingWaterArea"),
+        setup.MVTAPI("fauna_flora_habitat", "map", "FaunaFloraHabitat"),
+        setup.MVTAPI("floodplain", "map", "Floodplain"),
+        setup.MVTAPI("forest", "map", "Forest"),
+        setup.MVTAPI("grid", "map", "Grid"),
+        setup.MVTAPI("industry", "map", "Industry"),
+        setup.MVTAPI("landscape_protection_area", "map", "LandscapeProtectionArea"),
+        setup.MVTAPI("less_favoured_areas_agricultural", "map", "LessFavouredAreasAgricultural"),
+        setup.MVTAPI("military", "map", "Military"),
+        setup.MVTAPI("nature_conservation_area", "map", "NatureConservationArea"),
+        setup.MVTAPI("railway", "map", "Railway"),
+        setup.MVTAPI("road_default", "map", "Road"),
+        setup.MVTAPI("road_railway-500m_region", "map", "RoadRailway500m"),
+        setup.MVTAPI("settlement-0m", "map", "Settlement0m"),
+        setup.MVTAPI("soil_quality_low", "map", "SoilQualityLow"),
+        setup.MVTAPI("soil_quality_high", "map", "SoilQualityHigh"),
+        setup.MVTAPI("special_protection_area", "map", "SpecialProtectionArea"),
+        setup.MVTAPI("water", "map", "Water"),
+    ],
     "results": [setup.MVTAPI("results", "map", "Municipality")],
 }
 
@@ -277,6 +302,8 @@ MAP_ENGINE_API_CLUSTERS = [
     setup.ClusterAPI("hydro", "map", "Hydro"),
     setup.ClusterAPI("biomass", "map", "Biomass"),
     setup.ClusterAPI("combustion", "map", "Combustion"),
+    setup.ClusterAPI("gsgk", "map", "GSGK"),
+    setup.ClusterAPI("storage", "map", "Storage"),
 ]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"

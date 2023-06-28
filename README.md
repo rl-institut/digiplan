@@ -15,9 +15,8 @@ Obviously, you have to clone this repo first.
 
 ## Prepare Data
 
-In both cases, geometry packages have to be placed into folder _digiplan/data/_,
+In both cases, the datapackage from digipipe have to be placed into folder _digiplan/data/_ and renamed into `digipipe`,
 so that they can be found by the application and uploaded into database.
-All packages are justed dropped into this folder (no hierarchy).
 
 ## Using standard python installation
 

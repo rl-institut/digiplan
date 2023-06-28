@@ -253,6 +253,86 @@
       "text-size": 12
     }
   },
+  "gsgk": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "combustion",
+      "icon-size": 0.4,
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "black"
+    }
+  },
+  "gsgk_cluster": {
+    "type": "circle",
+    "filter": ["has", "point_count"],
+    "paint": {
+      "circle-color": "#1A1A1A",
+      "circle-radius": [
+        "step",
+        ["get", "point_count"],
+        20,
+        15,
+        30,
+        50,
+        40
+      ]
+    }
+  },
+  "gsgk_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    },
+    "paint": {
+      "text-color": "white"
+    }
+  },
+  "storage": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "combustion",
+      "icon-size": 0.4,
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "black"
+    }
+  },
+  "storage_cluster": {
+    "type": "circle",
+    "filter": ["has", "point_count"],
+    "paint": {
+      "circle-color": "#1A1A1A",
+      "circle-radius": [
+        "step",
+        ["get", "point_count"],
+        20,
+        15,
+        30,
+        50,
+        40
+      ]
+    }
+  },
+  "storage_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    },
+    "paint": {
+      "text-color": "white"
+    }
+  },
   "combustion": {
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],
@@ -317,6 +397,132 @@
         "#b30000"
       ],
       "fill-opacity": 0.8
+    }
+  },
+  "air_traffic": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#525252"
+    }
+  },
+  "aviation": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#252525"
+    }
+  },
+  "biosphere_reserve": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#66c2a4"
+    }
+  },
+  "drinking_water_protection_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#006d2c"
+    }
+  },
+  "fauna_flora_habitat": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#238b45"
+    }
+  },
+  "floodplain": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#cc4c02"
+    }
+  },
+  "forest": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#edf8b1"
+    }
+  },
+  "grid": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#000000"
+    }
+  },
+  "industry": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#bdbdbd"
+    }
+  },
+  "landscape_protection_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#c7e9b4"
+    }
+  },
+  "less_favoured_areas_agricultural": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#66c2a4"
+    }
+  },
+  "military": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#fe9929"
+    }
+  },
+  "nature_conservation_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#00441b"
+    }
+  },
+  "railway": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#737373"
+    }
+  },
+  "road_default": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#969696"
+    }
+  },
+  "road_railway-500m_region": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#969696"
+    }
+  },
+  "settlement-0m": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#d9d9d9"
+    }
+  },
+  "soil_quality_low": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#66c2a4"
+    }
+  },
+  "soil_quality_high": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#66c2a4"
+    }
+  },
+  "special_protection_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#41ae76"
+    }
+  },
+  "water": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#ec7014"
     }
   }
 }
