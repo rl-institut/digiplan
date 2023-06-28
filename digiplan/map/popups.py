@@ -1,22 +1,39 @@
 """Provide popups for digiplan."""
 
 import abc
-import json
-import pathlib
+from collections import namedtuple
 from collections.abc import Iterable
 from typing import Optional, Union
 
+import pandas as pd
+from django.utils.translation import gettext_lazy as _
 from django_mapengine import popups
 from django_oemof import results
 from oemof.tabular.postprocessing import core
 
 from . import calculations, charts, config, models
 
+Source = namedtuple("Source", ("name", "url"))
+
 
 class RegionPopup(popups.ChartPopup):
     """Popup containing values for municipality and region in header."""
 
+    title: str = None
+    description: str = None
     unit: str = None
+    sources: Optional[list[Source]] = None
+
+    def __init__(
+        self,
+        lookup: str,
+        selected_id: int,
+        map_state: Optional[dict] = None,
+        template: Optional[str] = None,
+    ) -> None:
+        """Initialize parent popup class and adds initialization of detailed data."""
+        super().__init__(lookup, selected_id, map_state, template)
+        self.detailed_data = self.get_detailed_data()
 
     def get_context_data(self) -> dict:
         """
@@ -27,16 +44,15 @@ class RegionPopup(popups.ChartPopup):
         dict
             context dict including region and municipality data
         """
-        with pathlib.Path(config.POPUPS_DIR.path(f"{self.lookup}.json")).open("r", encoding="utf-8") as data_json:
-            data = json.load(data_json)
-
-        data["id"] = self.selected_id
-        data["data"]["region_value"] = self.get_region_value()
-        data["data"]["municipality_value"] = self.get_municipality_value()
-        data["data"]["unit"] = self.unit
-        data["municipality"] = models.Municipality.objects.get(pk=self.selected_id)
-
-        return data
+        return {
+            "id": self.selected_id,
+            "title": self.title,
+            "description": self.description,
+            "unit": self.unit,
+            "region_value": self.get_region_value(),
+            "municipality_value": self.get_municipality_value(),
+            "municipality": models.Municipality.objects.get(pk=self.selected_id),
+        }
 
     def get_chart_options(self) -> dict:
         """
@@ -51,16 +67,29 @@ class RegionPopup(popups.ChartPopup):
         return charts.create_chart(self.lookup, chart_data)
 
     @abc.abstractmethod
+    def get_detailed_data(self) -> pd.DataFrame:
+        """
+        Return detailed data for each municipality and technology/component.
+
+        Municipality IDs are stored in index, components/technologies/etc. are stored in columns
+        """
+
     def get_region_value(self) -> float:
-        """Must be overwritten."""
+        """Return aggregated data of all municipalities and technologies."""
+        return self.detailed_data.sum().sum()
 
-    @abc.abstractmethod
     def get_municipality_value(self) -> Optional[float]:
-        """Must be overwritten."""
+        """Return aggregated data for all technologies for given municipality ID."""
+        if self.selected_id not in self.detailed_data.index:
+            return 0
+        return self.detailed_data.loc[self.selected_id].sum()
 
-    @abc.abstractmethod
     def get_chart_data(self) -> Iterable:
-        """Must be overwritten."""
+        """Return data for given municipality ID."""
+        if self.selected_id not in self.detailed_data.index:
+            msg = "No chart data available for given ID"
+            raise KeyError(msg)
+        return self.detailed_data.loc[self.selected_id]
 
 
 class SimulationPopup(RegionPopup, abc.ABC):
@@ -166,14 +195,20 @@ class RenewableElectricityProductionPopup(SimulationPopup):
 class NumberWindturbinesPopup(RegionPopup):
     """Popup to show the number of wind turbines."""
 
-    def get_region_value(self) -> float:  # noqa: D102
-        return models.WindTurbine.quantity()
+    title = _("Number of wind turbines")
+    description = _("Description for number of wind turbines")
+    unit = ""
 
-    def get_municipality_value(self) -> float:  # noqa: D102
-        return models.WindTurbine.quantity(self.selected_id)
+    def get_detailed_data(self) -> pd.DataFrame:
+        """Return quantity of wind turbines per municipality (index)."""
+        units_per_municipality = models.WindTurbine.quantity_per_municipality()
+        return pd.DataFrame(units_per_municipality).set_index(0)
 
-    def get_chart_data(self) -> Iterable:  # noqa: D102
-        return models.WindTurbine.wind_turbines_history(self.selected_id)
+    def get_chart_data(self) -> Iterable:
+        """Return single value for wind turbines in current municipality."""
+        if self.selected_id not in self.detailed_data.index:
+            return [0]
+        return [int(self.detailed_data.loc[self.selected_id].iloc[0])]
 
 
 class NumberWindturbinesSquarePopup(RegionPopup):
