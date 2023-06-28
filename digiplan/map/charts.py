@@ -44,7 +44,7 @@ class Chart:
             Containing chart filled with data
 
         """
-        if self.chart_data:
+        if self.chart_data is not None:
             series_type = self.chart_options["series"][0]["type"]
             series_length = len(self.chart_options["series"])
             if series_type == "line":
