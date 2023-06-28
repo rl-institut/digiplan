@@ -4,6 +4,7 @@ import abc
 from collections.abc import Callable
 from typing import Optional, Union
 
+import pandas as pd
 from django.conf import settings
 from django.http.response import JsonResponse
 
@@ -82,8 +83,9 @@ class RenewableElectricityProductionChoropleth(Choropleth):  # noqa: D101
 
 
 class CapacityChoropleth(Choropleth):  # noqa: D101
-    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.capacity_per_municipality()
+    def get_values_per_feature(self) -> pd.DataFrame:  # noqa: D102
+        capacities = calculations.capacity_per_municipality().sum(axis=1)
+        return capacities.to_dict()
 
 
 class CapacitySquareChoropleth(Choropleth):  # noqa: D101
