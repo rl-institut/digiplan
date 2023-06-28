@@ -126,14 +126,8 @@ class SimulationPopup(RegionPopup, abc.ABC):
 class CapacityPopup(RegionPopup):
     """Popup to show capacities."""
 
-    def get_region_value(self) -> float:  # noqa: D102
-        return calculations.capacity()
-
-    def get_municipality_value(self) -> float:  # noqa: D102
-        return calculations.capacity(self.selected_id)
-
-    def get_chart_data(self) -> Iterable:  # noqa: D102
-        return calculations.capacity_comparison(self.selected_id)
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.capacity_per_municipality()
 
 
 class CapacitySquarePopup(RegionPopup):
