@@ -20,7 +20,7 @@
   "xAxis": {
     "type": "category",
     "boundaryGap": true,
-    "data": ["Status Quo", "2045"],
+    "data": ["Status Quo"],
     "axisTick": "alignWithLabel"
   },
   "yAxis": {
@@ -34,31 +34,31 @@
     {
       "type": "bar",
       "stack": "five",
-      "data": [36, 10],
+      "data": [36],
       "name": "Wind"
     },
     {
       "type": "bar",
       "stack": "five",
-      "data": [36, 10],
+      "data": [36],
       "name": "Freiflächen-PV"
     },
     {
       "type": "bar",
       "stack": "five",
-      "data": [10, 10],
+      "data": [10],
       "name": "Aufdach-PV"
     },
     {
       "type": "bar",
       "stack": "five",
-      "data": [10, 10],
+      "data": [10],
       "name": "Bioenergie"
     },
     {
       "type": "bar",
       "stack": "five",
-      "data": [10, 10],
+      "data": [10],
       "name": "Konventionell"
     }
   ],
