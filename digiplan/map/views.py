@@ -144,8 +144,5 @@ def get_charts(request: HttpRequest) -> response.JsonResponse:
     map_state = request.GET.dict()
     simulation_id = map_state["simulation_id"]
     return response.JsonResponse(
-        {
-            chart.div_id: chart.chart(simulation_id).render()
-            for chart in charts.RESULT_CHARTS
-        },
+        {chart.div_id: chart.chart(simulation_id).render() for chart in charts.RESULT_CHARTS},
     )
