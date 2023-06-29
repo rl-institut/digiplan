@@ -9,12 +9,12 @@ LEGEND = {
     _("Renewables"): [
         legend.LegendLayer(_("Wind turbine"), _("Wind turbine layer"), layer_id="wind", color="#6A89CC"),
         legend.LegendLayer(_("Roof-mounted PV"), _("PV roof layer"), layer_id="pvroof", color="#FFD660"),
-        legend.LegendLayer(_("Outdoor PV"), _("Hydro layer"), layer_id="pvground", color="#F6B93B"),
-        legend.LegendLayer(_("Hydro"), _("Hydro layer"), layer_id="hydro", color="#9CC4D9"),
+        legend.LegendLayer(_("Outdoor PV"), _("Hydro layer"), layer_id="pvground", color="#EFAD25"),
+        legend.LegendLayer(_("Hydro"), _("Hydro layer"), layer_id="hydro", color="#A9BDE8"),
         legend.LegendLayer(_("Biomass"), _("Wind turbine layer"), layer_id="biomass", color="#52C41A"),
-        legend.LegendLayer(_("Combustion"), _("Wind turbine layer"), layer_id="combustion", color="#1A1A1A"),
-        legend.LegendLayer(_("GSGK"), _("Wind turbine layer"), layer_id="gsgk", color="#1A1A1A"),
-        legend.LegendLayer(_("Storage"), _("Wind turbine layer"), layer_id="storage", color="#1A1A1A"),
+        legend.LegendLayer(_("Combustion"), _("Wind turbine layer"), layer_id="combustion", color="#E6772E"),
+        legend.LegendLayer(_("GSGK"), _("Wind turbine layer"), layer_id="gsgk", color="#C27BA0"),
+        legend.LegendLayer(_("Storage"), _("Wind turbine layer"), layer_id="storage", color="#8D2D5F"),
     ],
     _("Settlements Infrastructure"): [
         legend.LegendLayer(_("Settlement 0m"), _("Aviation layer"), layer_id="settlement-0m"),
