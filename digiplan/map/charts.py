@@ -6,18 +6,10 @@ from collections import namedtuple
 from collections.abc import Callable
 from typing import Any, Optional
 
-from digiplan.map import calculations, config, models
+from digiplan.map import calculations, config
 from digiplan.map.utils import merge_dicts
 
-CHARTS: dict[str, Callable] = {
-    "capacity": calculations.capacity_comparison,
-    "capacity_square": calculations.capacity_square_comparison,
-    "population": models.Population.population_history,
-    "population_density": models.Population.density_history,
-    "wind_turbines": models.WindTurbine.wind_turbines_history,
-    "wind_turbines_square": models.WindTurbine.wind_turbines_per_area_history,
-    "detailed_overview": calculations.detailed_overview,
-}
+CHARTS: dict[str, Callable] = {}
 
 ResultChart = namedtuple("ResultChart", ("chart", "div_id"))
 
@@ -31,7 +23,7 @@ class Chart:
         """Initialize chart data and chart options."""
         if lookup:
             self.lookup = lookup
-        self.chart_data = chart_data or self.get_chart_data()
+        self.chart_data = chart_data if chart_data is not None else self.get_chart_data()
         self.chart_options = self.get_chart_options()
 
     def render(self) -> dict:
