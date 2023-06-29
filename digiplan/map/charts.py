@@ -6,13 +6,12 @@ from collections import namedtuple
 from collections.abc import Callable
 from typing import Any, Optional
 
-from digiplan.map import calculations, config
+from digiplan.map import calculations, config, models
 from digiplan.map.utils import merge_dicts
 
-
 CHARTS: dict[str, Callable] = {
-    "capacity": calculations.capacity_chart,
-    "capacity_square": calculations.capacity_square_chart,
+    "capacity": calculations.capacity_comparison,
+    "capacity_square": calculations.capacity_square_comparison,
     "population": models.Population.population_history,
     "population_density": models.Population.density_history,
     "wind_turbines": models.WindTurbine.wind_turbines_history,
@@ -24,9 +23,12 @@ ResultChart = namedtuple("ResultChart", ("chart", "div_id"))
 
 
 class Chart:
+    """Base class for charts."""
+
     lookup: str = None
 
     def __init__(self, lookup: Optional[str] = None, chart_data: Optional[Any] = None) -> None:
+        """Initialize chart data and chart options."""
         if lookup:
             self.lookup = lookup
         self.chart_data = chart_data or self.get_chart_data()
@@ -35,9 +37,6 @@ class Chart:
     def render(self) -> dict:
         """
         Create chart based on given lookup and municipality ID or result option.
-
-        Parameters
-        ----------
 
         Returns
         -------
@@ -85,7 +84,8 @@ class Chart:
             lookup_options = json.load(lookup_json)
 
         with pathlib.Path(config.CHARTS_DIR.path("general_options.json")).open(
-            "r", encoding="utf-8",
+            "r",
+            encoding="utf-8",
         ) as general_chart_json:
             general_chart_options = json.load(general_chart_json)
 
@@ -161,16 +161,21 @@ class CTSOverviewChart(Chart):
 
 
 class ElectricityOverviewChart(Chart):
+    """Chart for electricity overview."""
+
     lookup = "electricity_overview"
 
-    def __init__(self, simulation_id) -> None:
+    def __init__(self, simulation_id: int) -> None:
+        """Store simulation ID."""
         self.simulation_id = simulation_id
         super().__init__()
 
-    def get_chart_data(self):  # noqa: D102, ANN201
+    def get_chart_data(self):  # noqa: ANN201
+        """Get chart data from electricity overview calculation."""
         return calculations.electricity_overview(simulation_id=self.simulation_id)
 
-    def render(self) -> dict:  # noqa: D102
+    def render(self) -> dict:
+        """Overwrite render function."""
         for item in self.chart_options["series"]:
             try:
                 profile = config.SIMULATION_RENEWABLES[item["name"]]
@@ -327,11 +332,13 @@ RESULT_CHARTS = (
     ResultChart(HeatOverviewChart, "overview_heat_chart"),
 )
 
-CHARTS: dict[str, Callable] = {}
-
 
 def create_chart(lookup: str, chart_data: Optional[Any] = None) -> dict:
+    """
+    Return chart for given lookup.
+
+    If chart is listed in CHARTS, specific chart is returned. Otherwise, generic chart is returned.
+    """
     if lookup in CHARTS:
         return CHARTS[lookup](lookup, chart_data).render()
-    else:
-        return Chart(lookup, chart_data).render()
+    return Chart(lookup, chart_data).render()

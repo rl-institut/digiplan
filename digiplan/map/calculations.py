@@ -78,7 +78,7 @@ def capacity_comparison(municipality_id: int) -> dict:  # noqa: ARG001
     dict
         Chart data to use in JS
     """
-    return [4, 11, 36, 9, 10]
+    return ([36, 9, 10], [36, 2, 1], [1, 5, 10], [3, 9, 10], [17, 10, 10])
 
 
 def capacity_per_municipality() -> dict[int, int]:
@@ -125,7 +125,7 @@ def capacity_square(mun_id: Optional[int] = None) -> float:
 
 
 # pylint: disable=W0613
-def capacity_square_comparison(municipality_id: int) -> dict:
+def capacity_square_comparison(municipality_id: int) -> dict:  # noqa: ARG001
     """
     Get chart for capacity of renewables per km².
 
@@ -140,8 +140,6 @@ def capacity_square_comparison(municipality_id: int) -> dict:
         Chart data to use in JS
     """
     return ([36, 9, 10], [36, 2, 1], [1, 5, 10], [3, 9, 10], [17, 10, 10])
-
-    return capacity_square
 
 
 def capacity_square_per_municipality() -> dict[int, int]:
