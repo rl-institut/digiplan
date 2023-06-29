@@ -176,14 +176,18 @@ class ElectricityOverviewChart(Chart):
 
     def render(self) -> dict:
         """Overwrite render function."""
-        for item in self.chart_options["series"]:
-            try:
-                profile = config.SIMULATION_RENEWABLES[item["name"]]
-                item["data"][2] = self.chart_data[profile]
-            except KeyError:
-                profile = config.SIMULATION_DEMANDS[item["name"]]
-                item["data"][0] = self.chart_data[profile]
-
+        self.chart_options["series"][0]["data"][2] = self.chart_data["ABW-wind-onshore"]
+        self.chart_options["series"][1]["data"][2] = self.chart_data["ABW-solar-pv_ground"]
+        self.chart_options["series"][2]["data"][2] = self.chart_data["ABW-solar-pv_rooftop"]
+        self.chart_options["series"][3]["data"][2] = self.chart_data["ABW-biomass"]
+        self.chart_options["series"][4]["data"][2] = self.chart_data["ABW-hydro-ror"]
+        self.chart_options["series"][5]["data"][0] = self.chart_data["ABW-electricity-demand_cts"]
+        self.chart_options["series"][6]["data"][0] = self.chart_data["electricity_heat_demand_cts"]
+        self.chart_options["series"][7]["data"][0] = self.chart_data["ABW-electricity-demand_hh"]
+        self.chart_options["series"][8]["data"][0] = self.chart_data["electricity_heat_demand_hh"]
+        self.chart_options["series"][9]["data"][0] = self.chart_data["ABW-electricity-demand_ind"]
+        self.chart_options["series"][10]["data"][0] = self.chart_data["electricity_heat_demand_ind"]
+        self.chart_options["series"][11]["data"][0] = self.chart_data["ABW-electricity-bev_charging"]
         return self.chart_options
 
 
