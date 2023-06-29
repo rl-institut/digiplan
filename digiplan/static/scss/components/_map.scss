@@ -64,7 +64,7 @@
     @extend .p-2;
     @extend .overflow-auto;
     width: $map-layers-box-width;
-    height: $map-layers-box-height;
+    height: calc(100vh - #{$top-nav-height} - #{$steps-height} - #{$map-legend-box-height} - #{$map-legend-box-padding-bottom} - (2 * #{$map-items-padding}));
     top: calc(#{$steps-height} + #{$map-items-padding});
     right: $map-items-padding;
     z-index: $map-layers-box-z-index;
@@ -135,7 +135,6 @@
   @extend .fs-8;
   background-color: rgba(255, 255, 255, 0.8);
   width: calc(100% - 7rem);
-  height: 10rem;
   right: $map-padding-x-small;
   bottom: 5rem;
   z-index: $map-layers-box-z-index;
@@ -143,7 +142,6 @@
   @include media-breakpoint-up(sm) {
     font-size: $font-size-small !important;
     width: $map-layers-box-width;
-    height: calc(100vh - #{$top-nav-height} - #{$steps-height} - #{$map-layers-box-height} - (2 * #{#{$map-items-padding}}) - #{$map-legend-box-padding-bottom});
     right: $map-items-padding;
     bottom: 2rem;
   }
@@ -189,15 +187,19 @@
   }
 }
 
-@media only screen and (max-height: 700px) {
-  .map__layers-box {
-    height: 55vh;
-  }
+#legend.legend {
+  height: $map-legend-box-height;
 
   .legend {
-    height: calc(100vh - #{$top-nav-height} - #{$steps-height} - 55vh - (2 * #{#{$map-items-padding}}) - #{$map-legend-box-padding-bottom});
-  }
-}
+    &__title {
+      @extend .d-none;
+    }
+
+    &__detail {
+      @extend .pb-1;
+    }
+  } 
+} 
 
 #satellite-layer {
   position: absolute;
