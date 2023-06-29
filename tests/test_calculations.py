@@ -110,7 +110,7 @@ class HeatOverviewTest(SimulationTest):
 class ElectricityOverviewChartTest(SimulationTest):
     """Test electricity overview chart creation."""
 
-    def test_electricity_overview_chart(self):  # noqa: D102,ANN201
+    def test_electricity_overview_chart(self):  # noqa: D102
         chart = charts.ElectricityOverviewChart(self.simulation_id)
         options = chart.render()
         assert options["series"][0]["data"][2] == 4369687.261432747
@@ -119,7 +119,7 @@ class ElectricityOverviewChartTest(SimulationTest):
 class HeatOverviewChartTest(SimulationTest):
     """Test heat overview chart creation."""
 
-    def test_heat_overview_chart(self):  # noqa: D102,ANN201
+    def test_heat_overview_chart(self):  # noqa: D102
         chart = charts.HeatOverviewChart(self.simulation_id)
         options = chart.render()
         assert options["series"][0]["data"][1] == 3512007725.957367
