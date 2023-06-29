@@ -62,6 +62,7 @@
     @extend .bg-white;
     @extend .border;
     @extend .p-2;
+    @extend .overflow-auto;
     width: $map-layers-box-width;
     height: $map-layers-box-height;
     top: calc(#{$steps-height} + #{$map-items-padding});
@@ -80,6 +81,10 @@
     @extend .text-uppercase;
     @extend .fw-bold;
     @extend .mb-1;
+
+    &:not(:first-of-type) {
+      @extend .pt-2;
+    }
   }
 }
 
@@ -89,9 +94,14 @@
   @extend .justify-content-between;
 
   &__legend {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .flex-nowrap;
+
     &-color {
       @extend .d-inline-block;
       @include translateY(2px);
+      flex: 0 0 1rem;
       width: 1rem;
       height: 1rem;
       background-color: blue;
@@ -100,6 +110,8 @@
     &-text {
       @extend .d-inline-block;
       @extend .fs-7;
+      @extend .fw-light;
+      @extend .ps-1;
     }
   }
   &__control {
