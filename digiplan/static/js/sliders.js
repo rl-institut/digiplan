@@ -172,8 +172,8 @@ function toggleFormFields(formfield_id) {
     document.getElementById("id_s_w_4_1").disabled = true;
     document.getElementById("id_s_w_4_2").disabled = true;
     document.getElementById("id_s_w_5").checked = false;
-    document.getElementById("id_s_w_5_1").disabled = true;
-    document.getElementById("id_s_w_5_2").disabled = true;
+    $(`#id_s_w_5_1`).data("ionRangeSlider").update({block:true});
+    $(`#id_s_w_5_2`).data("ionRangeSlider").update({block:true});
   }
   if (formfield_id === "id_s_w_4") {
     if (document.getElementById("id_s_w_3").checked === false && document.getElementById("id_s_w_5").checked === false) {
@@ -183,8 +183,8 @@ function toggleFormFields(formfield_id) {
     document.getElementById("id_s_w_4_1").disabled = false;
     document.getElementById("id_s_w_4_2").disabled = false;
     document.getElementById("id_s_w_5").checked = false;
-    document.getElementById("id_s_w_5_1").disabled = true;
-    document.getElementById("id_s_w_5_2").disabled = true;
+    $(`#id_s_w_5_1`).data("ionRangeSlider").update({block:true});
+    $(`#id_s_w_5_2`).data("ionRangeSlider").update({block:true});
   }
   if (formfield_id === "id_s_w_4_1") {
     if (document.getElementById("id_s_w_4_2").checked === false) {
@@ -206,8 +206,8 @@ function toggleFormFields(formfield_id) {
     document.getElementById("id_s_w_4").checked = false;
     document.getElementById("id_s_w_4_1").disabled = true;
     document.getElementById("id_s_w_4_2").disabled = true;
-    document.getElementById("id_s_w_5_1").disabled = false;
-    document.getElementById("id_s_w_5_2").disabled = false;
+    $(`#id_s_w_5_1`).data("ionRangeSlider").update({block:false});
+    $(`#id_s_w_5_2`).data("ionRangeSlider").update({block:false});
   }
 }
 
