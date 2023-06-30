@@ -20,7 +20,7 @@
 
   {% block chart %}{% endblock chart %}
 
-  <div id="js-popup__description" class="popup__description">{{ description }}</div>
+  {% if description %}<div id="js-popup__description" class="popup__description">{{ description }}</div>{%  endif %}
 
   {% if sources %}
     <div id="js-popup__sources" class="popup__sources">
