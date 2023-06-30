@@ -97,7 +97,7 @@ class CapacitySquareChoropleth(Choropleth):  # noqa: D101
 
 class PopulationChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return models.Population.quantity_per_municipality_per_year().to_dict()
+        return models.Population.quantity_per_municipality_per_year().sum(axis=1).to_dict()
 
 
 class PopulationDensityChoropleth(Choropleth):  # noqa: D101
