@@ -1,16 +1,8 @@
-#chart1,
-#chart2 {
-  width: 40%;
-  height: 260px;
-}
-
-#chart3,
-#chart4 {
+#region_chart_statusquo,
+#region_chart_future {
   width: 100%;
   height: 300px;
 }
-
-
 
 .power-mix {
   @extend .position-relative;
