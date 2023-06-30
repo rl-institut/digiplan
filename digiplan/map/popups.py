@@ -19,6 +19,7 @@ Source = namedtuple("Source", ("name", "url"))
 class RegionPopup(popups.ChartPopup):
     """Popup containing values for municipality and region in header."""
 
+    lookup: Optional[str] = None
     title: str = None
     description: str = None
     unit: str = None
@@ -32,6 +33,8 @@ class RegionPopup(popups.ChartPopup):
         template: Optional[str] = None,
     ) -> None:
         """Initialize parent popup class and adds initialization of detailed data."""
+        if self.lookup:
+            lookup = self.lookup
         super().__init__(lookup, selected_id, map_state, template)
         self.detailed_data = self.get_detailed_data()
 
@@ -133,14 +136,19 @@ class CapacityPopup(RegionPopup):
 class CapacitySquarePopup(RegionPopup):
     """Popup to show capacities per km²."""
 
-    def get_region_value(self) -> float:  # noqa: D102
-        return calculations.capacity_square
+    lookup = "capacity"
 
-    def get_municipality_value(self) -> float:  # noqa: D102
-        return calculations.capacity_square(self.selected_id)
+    def get_detailed_data(self) -> pd.DataFrame:
+        """Return capacities per square kilometer."""
+        capacities = calculations.capacity_per_municipality()
+        return calculations.calculate_square_for_value(capacities)
 
-    def get_chart_data(self) -> Iterable:  # noqa: D102
-        return calculations.capacity_square_comparison(self.selected_id)
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Installed capacities per square meter")
+        chart_options["yAxis"]["name"] = _("MW/km²")
+        return chart_options
 
 
 class PopulationPopup(RegionPopup):
@@ -195,27 +203,33 @@ class NumberWindturbinesPopup(RegionPopup):
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return quantity of wind turbines per municipality (index)."""
-        units_per_municipality = models.WindTurbine.quantity_per_municipality()
-        return pd.DataFrame(units_per_municipality).set_index(0)
+        return models.WindTurbine.quantity_per_municipality()
 
     def get_chart_data(self) -> Iterable:
         """Return single value for wind turbines in current municipality."""
-        if self.selected_id not in self.detailed_data.index:
-            return [0]
-        return [int(self.detailed_data.loc[self.selected_id].iloc[0])]
+        return [int(self.detailed_data.loc[self.selected_id])]
 
 
 class NumberWindturbinesSquarePopup(RegionPopup):
     """Popup to show the number of wind turbines per km²."""
 
-    def get_region_value(self) -> float:  # noqa: D102
-        return models.WindTurbine.quantity_per_square()
+    lookup = "wind_turbines"
 
-    def get_municipality_value(self) -> float:  # noqa: D102
-        return models.WindTurbine.quantity_per_square(self.selected_id)
+    def get_detailed_data(self) -> pd.DataFrame:
+        """Return quantity of wind turbines per municipality (index)."""
+        wind_turbines = models.WindTurbine.quantity_per_municipality()
+        return calculations.calculate_square_for_value(wind_turbines)
 
-    def get_chart_data(self) -> Iterable:  # noqa: D102
-        return models.WindTurbine.wind_turbines_per_area_history(self.selected_id)
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit in chart options."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Wind turbines per square meter")
+        chart_options["yAxis"]["name"] = _("WT/km²")
+        return chart_options
+
+    def get_chart_data(self) -> Iterable:
+        """Return single value for wind turbines in current municipality."""
+        return [float(self.detailed_data.loc[self.selected_id])]
 
 
 POPUPS: dict[str, type(popups.Popup)] = {

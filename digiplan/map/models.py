@@ -2,6 +2,7 @@
 
 from typing import Optional
 
+import pandas as pd
 from django.contrib.gis.db import models
 from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
@@ -238,111 +239,18 @@ class WindTurbine(models.Model):
         return self.name
 
     @classmethod
-    def quantity(cls, municipality_id: Optional[int] = None) -> int:
-        """
-        Calculate number of windturbines (either for municipality or for whole region).
-
-        Parameters
-        ----------
-        municipality_id: Optional[int]
-            If given, number of windturbines for given municipality are calculated. If not, for whole region.
-
-        Returns
-        -------
-        int
-            Sum of windturbines
-        """
-        values = cls.quantity_per_municipality()
-        windturbines = 0
-
-        if municipality_id is not None:
-            windturbines = values[municipality_id]
-        else:
-            for index in values:
-                windturbines += values[index]
-        return windturbines
-
-    @classmethod
-    def quantity_per_municipality(cls) -> dict[int, int]:
+    def quantity_per_municipality(cls) -> pd.DataFrame:
         """
         Calculate number of wind turbines per municipality.
 
         Returns
         -------
-        dict[int, int]
+        dpd.DataFrame
             wind turbines per municipality
         """
-        return cls.objects.values("mun_id").annotate(units=Sum("unit_count")).values_list("mun_id", "units")
-
-    @classmethod
-    def wind_turbines_history(cls, municipality_id: int) -> dict:  # noqa: ARG003
-        """
-        Get chart for wind turbines.
-
-        Parameters
-        ----------
-        municipality_id: int
-            Related municipality
-
-        Returns
-        -------
-        dict
-            Chart data to use in JS
-        """
-        return [(2023, 2), (2046, 3), (2050, 4)]
-
-    @classmethod
-    def quantity_per_square(cls, municipality_id: Optional[int] = None) -> float:
-        """
-        Calculate number of windturbines per km² (either for municipality or for whole region).
-
-        Parameters
-        ----------
-        municipality_id: Optional[int]
-            If given, number of windturbines per km² for given municipality are calculated. If not, for whole region.
-
-        Returns
-        -------
-        float
-            Sum of windturbines per km²
-        """
-        windturbines = cls.quantity(municipality_id)
-
-        if municipality_id is not None:
-            return windturbines / Municipality.objects.get(pk=municipality_id).area
-        return windturbines / Municipality.area_whole_region()
-
-    @classmethod
-    def wind_turbines_per_area_history(cls, municipality_id: int) -> dict:  # noqa: ARG003
-        """
-        Get chart for wind turbines per km².
-
-        Parameters
-        ----------
-        municipality_id: int
-            Related municipality
-
-        Returns
-        -------
-        dict
-            Chart data to use in JS
-        """
-        return [(2023, 2), (2046, 3), (2050, 4)]
-
-    @classmethod
-    def quantity_per_mun_and_area(cls) -> dict[int, int]:
-        """
-        Calculate windturbines per km² per municipality.
-
-        Returns
-        -------
-        dict[int, int]
-            windturbines per km² per municipality
-        """
-        windtubines = cls.quantity_per_municipality()
-        for index in windtubines:
-            windtubines[index] = windtubines[index] / Municipality.objects.get(pk=index).area
-        return windtubines
+        queryset = cls.objects.values("mun_id").annotate(units=Sum("unit_count")).values("mun_id", "units")
+        wind_turbines = pd.DataFrame.from_records(queryset).set_index("mun_id")
+        return wind_turbines["units"].reindex(Municipality.objects.all().values_list("id", flat=True), fill_value=0)
 
 
 class PVroof(models.Model):
