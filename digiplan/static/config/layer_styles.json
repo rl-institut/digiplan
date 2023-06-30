@@ -438,7 +438,7 @@
   "forest": {
     "type": "fill",
     "paint": {
-      "fill-color": "#34A0A"
+      "fill-color": "#34A0A4"
     }
   },
   "grid": {
