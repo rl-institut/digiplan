@@ -23,7 +23,7 @@
   },
   "series": [
     {
-      "name": "GHD",
+      "name": "CTS Heat Demand",
       "type": "bar",
       "barWidth": "16",
       "stack": "total",
@@ -37,7 +37,7 @@
       "data": [200, 300, 320]
     },
     {
-      "name": "Haushalte",
+      "name": "Household Heat Demand",
       "type": "bar",
       "stack": "total",
       "color": "#6F9BB2",
@@ -50,7 +50,7 @@
       "data": [260, 300, 310]
     },
     {
-      "name": "Industrie",
+      "name": "Industry Heat Demand",
       "type": "bar",
       "stack": "total",
       "color": "#376984",
@@ -61,19 +61,6 @@
         "focus": "series"
       },
       "data": [200, 250, 350]
-    },
-    {
-      "name": "Sonstiges",
-      "type": "bar",
-      "stack": "total",
-      "color": "#0D425F",
-      "label": {
-        "show": false
-      },
-      "emphasis": {
-        "focus": "series"
-      },
-      "data": [150, 150, 150]
     }
   ]
 }

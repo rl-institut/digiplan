@@ -124,3 +124,25 @@ def get_choropleth(request: HttpRequest, lookup: str, layer_id: str) -> response
     """
     map_state = request.GET.dict()
     return choropleths.CHOROPLETHS[lookup](lookup, map_state)
+
+
+def get_charts(request: HttpRequest) -> response.JsonResponse:
+    """
+    Return all result charts at once.
+
+    Parameters
+    ----------
+    request: HttpRequest
+        request holding simulation ID in map_state dict
+
+    Returns
+    -------
+    JsonResponse
+        holding dict with `div_id` as keys and chart options as values.
+        `div_id` is used in frontend to detect chart container.
+    """
+    map_state = request.GET.dict()
+    simulation_id = map_state["simulation_id"]
+    return response.JsonResponse(
+        {chart.div_id: chart.chart(simulation_id).render() for chart in charts.RESULT_CHARTS},
+    )

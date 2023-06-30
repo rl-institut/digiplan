@@ -6,6 +6,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- url, view and calculations for result charts
 - datapackage from digipipe
 - models, layers and legend items from digipipe geodata
 

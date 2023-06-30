@@ -11,7 +11,6 @@ from . import utils
 
 # DIRECTORIES
 MAP_DIR = settings.APPS_DIR.path("map")
-POPUPS_DIR = MAP_DIR.path("popups")
 CHARTS_DIR = MAP_DIR.path("charts")
 SCENARIOS_DIR = settings.DATA_DIR.path("scenarios")
 
@@ -92,18 +91,26 @@ SOURCES = init_sources()
 # SIMULATION
 
 SIMULATION_RENEWABLES = {
-    "ABW-solar-pv_ground": _("Freiflächen-PV"),
-    "ABW-solar-pv_rooftop": _("Aufdach-PV"),
-    "ABW-wind-onshore": _("Wind"),
+    "ABW-solar-pv_ground": _("Outdoor PV"),
+    "ABW-solar-pv_rooftop": _("Roof-mounted PV"),
+    "ABW-wind-onshore": _("Wind turbine"),
     "ABW-hydro-ror": _("Hydro"),
     "ABW-biomass": _("Biomass"),
 }
 
 SIMULATION_DEMANDS = {
+    # electricty demands
     "ABW-electricity-bev_charging": _("BEV"),
     "ABW-electricity-demand_hh": _("Electricity Household Demand"),
     "ABW-electricity-demand_cts": _("Electricity CTS Demand"),
     "ABW-electricity-demand_ind": _("Electricity Industry Demand"),
+    "electricity_heat_demand_hh": _("Electricity Household Heat Demand"),
+    "electricity_heat_demand_cts": _("Electricity CTS Heat Demand"),
+    "electricity_heat_demand_ind": _("Electricity Industry Heat Demand"),
+    # heat demands
+    "heat-demand-cts": _("CTS Heat Demand"),
+    "heat-demand-hh": _("Household Heat Demand"),
+    "heat-demand-ind": _("Industry Heat Demand"),
 }
 
 SIMULATION_NAME_MAPPING = {} | SIMULATION_RENEWABLES | SIMULATION_DEMANDS
