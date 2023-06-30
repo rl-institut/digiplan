@@ -41,7 +41,7 @@ class Chart:
             series_length = len(self.chart_options["series"])
             if series_type == "line":
                 data = []
-                for key, value in self.chart_data:
+                for key, value in self.chart_data.items():
                     year_as_string = f"{key}"
                     data.append([year_as_string, value])
                 self.chart_options["series"][0]["data"] = data
