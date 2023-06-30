@@ -10,32 +10,32 @@ from oemof.tabular.postprocessing import calculations, core
 from digiplan.map import config, models
 
 
-def calculate_square_for_value(value: int, municipality_id: Optional[int]) -> float:
+def calculate_square_for_value(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Calculate value related to municipality area.
+    Calculate values related to municipality areas.
 
     Parameters
     ----------
-    value: int
-        Value to calculate
-    municipality_id: Optional[int]
-        ID of municipality to get area from
-        If not given, value in relation to area of whole region is calculated.
+    df: pd.DataFrame
+        Index holds municipality IDs, columns hold random entries
 
     Returns
     -------
-    float
-        Value per square meter
+    pd.DataFrame
+        Each value is multiplied by related municipality share
     """
-    area = 0.0
-    if municipality_id is not None:
-        area = models.Municipality.objects.get(pk=municipality_id).area
-    else:
-        for mun in models.Municipality.objects.all():
-            area += models.Municipality.objects.get(pk=mun.id).area
-    if area != 0.0:  # noqa: PLR2004
-        return value / area
-    return value
+    is_series = False
+    if isinstance(df, pd.Series):
+        is_series = True
+        df = pd.DataFrame(df)  # noqa: PD901
+    areas = (
+        pd.DataFrame.from_records(models.Municipality.objects.all().values("id", "area")).set_index("id").sort_index()
+    )
+    areas = areas / areas.sum()
+    result = df.sort_index() * areas.to_numpy()
+    if is_series:
+        return result.iloc[:, 0]
+    return result
 
 
 def capacity(mun_id: Optional[int] = None) -> float:
