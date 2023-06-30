@@ -143,18 +143,6 @@
     "tooltip": "{% trans 'Run-of-river power plants' %}",
     "type": "slider"
   },
-  "s_b_1": {
-    "class": "js-slider js-slider-panel js-power-mix",
-    "color": "#FA9FB5",
-    "label": "{% trans 'Bioenergy (MW)' %}",
-    "max": 30,
-    "min": 0,
-    "start": 5,
-    "status_quo": 15,
-    "step": 5,
-    "tooltip": "{% trans 'Biomass and biogas plants' %}",
-    "type": "slider"
-  },
   "s_v_1": {
     "class": "js-slider js-slider-panel",
     "grid": false,

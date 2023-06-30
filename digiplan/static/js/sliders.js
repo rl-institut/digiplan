@@ -163,7 +163,11 @@ function showPVLayers(msg) {
 }
 
 function toggleFormFields(formfield_id) {
+  console.log("hereA");
   if (formfield_id === "id_s_w_3") {
+    if (document.getElementById("id_s_w_4").checked === false && document.getElementById("id_s_w_5").checked === false) {
+      document.getElementById("id_s_w_3").checked = true;
+    }
     document.getElementById("id_s_w_4").checked = false;
     document.getElementById("id_s_w_4_1").disabled = true;
     document.getElementById("id_s_w_4_2").disabled = true;
@@ -172,6 +176,9 @@ function toggleFormFields(formfield_id) {
     document.getElementById("id_s_w_5_2").disabled = true;
   }
   if (formfield_id === "id_s_w_4") {
+    if (document.getElementById("id_s_w_3").checked === false && document.getElementById("id_s_w_5").checked === false) {
+      document.getElementById("id_s_w_4").checked = true;
+    }
     document.getElementById("id_s_w_3").checked = false;
     document.getElementById("id_s_w_4_1").disabled = false;
     document.getElementById("id_s_w_4_2").disabled = false;
@@ -179,7 +186,22 @@ function toggleFormFields(formfield_id) {
     document.getElementById("id_s_w_5_1").disabled = true;
     document.getElementById("id_s_w_5_2").disabled = true;
   }
+  if (formfield_id === "id_s_w_4_1") {
+    if (document.getElementById("id_s_w_4_2").checked === false) {
+      document.getElementById("id_s_w_4_1").checked = true;
+    }
+    document.getElementById("id_s_w_4_2").checked = false;
+  }
+  if (formfield_id === "id_s_w_4_2") {
+    if (document.getElementById("id_s_w_4_1").checked === false) {
+      document.getElementById("id_s_w_4_2").checked = true;
+    }
+    document.getElementById("id_s_w_4_1").checked = false;
+  }
   if (formfield_id === "id_s_w_5") {
+    if (document.getElementById("id_s_w_3").checked === false && document.getElementById("id_s_w_4").checked === false) {
+      document.getElementById("id_s_w_5").checked = true;
+    }
     document.getElementById("id_s_w_3").checked = false;
     document.getElementById("id_s_w_4").checked = false;
     document.getElementById("id_s_w_4_1").disabled = true;
