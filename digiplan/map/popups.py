@@ -129,6 +129,8 @@ class SimulationPopup(RegionPopup, abc.ABC):
 class CapacityPopup(RegionPopup):
     """Popup to show capacities."""
 
+    lookup = "capacity"
+
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.capacities_per_municipality()
 
@@ -153,6 +155,8 @@ class CapacitySquarePopup(RegionPopup):
 
 class PopulationPopup(RegionPopup):
     """Popup to show Population."""
+
+    lookup = "population"
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return population data."""
@@ -213,6 +217,7 @@ class RenewableElectricityProduction2045Popup(SimulationPopup):
 class NumberWindturbinesPopup(RegionPopup):
     """Popup to show the number of wind turbines."""
 
+    lookup = "wind_turbines"
     title = _("Number of wind turbines")
     description = _("Description for number of wind turbines")
     unit = ""
@@ -249,11 +254,11 @@ class NumberWindturbinesSquarePopup(RegionPopup):
 
 
 POPUPS: dict[str, type(popups.Popup)] = {
-    "capacity": CapacityPopup,
-    "capacity_square": CapacitySquarePopup,
-    "population": PopulationPopup,
-    "population_density": PopulationDensityPopup,
+    "capacity_statusquo": CapacityPopup,
+    "capacity_square_statusquo": CapacitySquarePopup,
+    "population_statusquo": PopulationPopup,
+    "population_density_statusquo": PopulationDensityPopup,
     "renewable_electricity_production": RenewableElectricityProduction2045Popup,
-    "wind_turbines": NumberWindturbinesPopup,
-    "wind_turbines_square": NumberWindturbinesSquarePopup,
+    "wind_turbines_statusquo": NumberWindturbinesPopup,
+    "wind_turbines_square_statusquo": NumberWindturbinesSquarePopup,
 }

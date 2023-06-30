@@ -1,5 +1,5 @@
 
-import {resultsDropdown} from "./elements.js";
+import {statusquoDropdown} from "./elements.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
 const simulation_spinner = document.getElementById("simulation_spinner");
@@ -11,9 +11,9 @@ const SIMULATION_CHECK_TIME = 5000;
 // Disable settings form submit
 $('#settings').submit(false);
 
-resultsDropdown.addEventListener("change", function() {
-    PubSub.publish(mapEvent.CHOROPLETH_SELECTED, resultsDropdown.value);
-    imageResults.title = resultsDropdown.options[resultsDropdown.selectedIndex].title;
+statusquoDropdown.addEventListener("change", function() {
+    PubSub.publish(mapEvent.CHOROPLETH_SELECTED, statusquoDropdown.value);
+    imageResults.title = statusquoDropdown.options[statusquoDropdown.selectedIndex].title;
 });
 
 

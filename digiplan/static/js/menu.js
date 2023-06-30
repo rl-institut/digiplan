@@ -1,4 +1,4 @@
-import {resultsDropdown, resultsTabs} from "./elements.js";
+import {statusquoDropdown, resultsTabs} from "./elements.js";
 
 const menuNextBtn = document.getElementById("menu_next_btn");
 const menuPreviousBtn = document.getElementById("menu_previous_btn");
@@ -90,10 +90,10 @@ function setMapChartViewVisibility(msg) {
 
 function setResultsView(msg) {
     if (msg === eventTopics.CHART_VIEW_SELECTED) {
-        resultsDropdown.parentElement.setAttribute("style", "display: none !important");
+        statusquoDropdown.parentElement.setAttribute("style", "display: none !important");
         resultsTabs.parentElement.setAttribute("style", "");
     } else {
-        resultsDropdown.parentElement.setAttribute("style", "");
+        statusquoDropdown.parentElement.setAttribute("style", "");
         resultsTabs.parentElement.setAttribute("style", "display: none !important");
     }
     return logMessage(msg);

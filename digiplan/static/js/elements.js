@@ -1,2 +1,2 @@
-export const resultsDropdown = document.getElementById("result_views");
+export const statusquoDropdown = document.getElementById("situation_today");
 export const resultsTabs = document.getElementById("results-tabs");

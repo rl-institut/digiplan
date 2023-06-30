@@ -120,11 +120,11 @@ class WindTurbinesSquareChoropleth(Choropleth):  # noqa: D101
 
 
 CHOROPLETHS: dict[str, Union[Callable, type(Choropleth)]] = {
-    "capacity": CapacityChoropleth,
-    "capacity_square": CapacitySquareChoropleth,
-    "population": PopulationChoropleth,
-    "population_density": PopulationDensityChoropleth,
-    "wind_turbines": WindTurbinesChoropleth,
-    "wind_turbines_square": WindTurbinesSquareChoropleth,
+    "capacity_statusquo": CapacityChoropleth,
+    "capacity_square_statusquo": CapacitySquareChoropleth,
+    "population_statusquo": PopulationChoropleth,
+    "population_density_statusquo": PopulationDensityChoropleth,
+    "wind_turbines_statusquo": WindTurbinesChoropleth,
+    "wind_turbines_square_statusquo": WindTurbinesSquareChoropleth,
     "renewable_electricity_production": RenewableElectricityProductionChoropleth,
 }
