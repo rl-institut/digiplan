@@ -569,6 +569,3 @@ class PotentialareaWindSTP2027SearchAreaOpenArea(StaticRegionModel):  # noqa: D1
 class PotentialareaWindSTP2027VR(StaticRegionModel):  # noqa: D101
     data_file = "potentialarea_wind_stp_2027_vr"
     layer = "potentialarea_wind_stp_2027_vr"
-
-
-RENEWABLES = (WindTurbine, PVroof, PVground, Hydro, Biomass)

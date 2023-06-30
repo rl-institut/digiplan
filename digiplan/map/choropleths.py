@@ -79,38 +79,44 @@ class Choropleth:
 
 class RenewableElectricityProductionChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.capacity_per_municipality()
+        return calculations.capacities_per_municipality()
 
 
 class CapacityChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> pd.DataFrame:  # noqa: D102
-        capacities = calculations.capacity_per_municipality().sum(axis=1)
+        capacities = calculations.capacities_per_municipality().sum(axis=1)
         return capacities.to_dict()
 
 
 class CapacitySquareChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.capacity_square_per_municipality()
+        capacities = calculations.capacities_per_municipality()
+        capacities_square = calculations.calculate_square_for_value(capacities)
+        return capacities_square.sum(axis=1).to_dict()
 
 
 class PopulationChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return models.Population.population_per_municipality()
+        return models.Population.quantity_per_municipality_per_year().to_dict()
 
 
 class PopulationDensityChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return models.Population.density_per_municipality()
+        population = models.Population.quantity_per_municipality_per_year()
+        population_square = calculations.calculate_square_for_value(population)
+        return population_square.sum(axis=1).to_dict()
 
 
 class WindTurbinesChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return models.WindTurbine.quantity_per_municipality()
+        return models.WindTurbine.quantity_per_municipality().to_dict()
 
 
 class WindTurbinesSquareChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return models.WindTurbine.quantity_per_square()
+        wind_turbines = models.WindTurbine.quantity_per_municipality()
+        wind_turbines_square = calculations.calculate_square_for_value(wind_turbines)
+        return wind_turbines_square.to_dict()
 
 
 CHOROPLETHS: dict[str, Union[Callable, type(Choropleth)]] = {

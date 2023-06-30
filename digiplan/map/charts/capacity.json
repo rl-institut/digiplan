@@ -7,10 +7,13 @@
   "legend": {
     "data": [
       "Wind",
-      "Freiflächen-PV",
       "Aufdach-PV",
+      "Freiflächen-PV",
+      "Wasserkraft",
       "Bioenergie",
-      "Konventionell"
+      "Konventionell",
+      "GSGK",
+      "Speicher"
     ],
     "orient": "vertical",
     "right": "1%",
@@ -40,6 +43,12 @@
     {
       "type": "bar",
       "stack": "five",
+      "data": [10],
+      "name": "Aufdach-PV"
+    },
+    {
+      "type": "bar",
+      "stack": "five",
       "data": [36],
       "name": "Freiflächen-PV"
     },
@@ -47,7 +56,7 @@
       "type": "bar",
       "stack": "five",
       "data": [10],
-      "name": "Aufdach-PV"
+      "name": "Wasserkraft"
     },
     {
       "type": "bar",
@@ -60,6 +69,18 @@
       "stack": "five",
       "data": [10],
       "name": "Konventionell"
+    },
+    {
+      "type": "bar",
+      "stack": "five",
+      "data": [10],
+      "name": "GSGK"
+    },
+    {
+      "type": "bar",
+      "stack": "five",
+      "data": [10],
+      "name": "Speicher"
     }
   ],
   "title": {"text": "installed capacity of different types"}

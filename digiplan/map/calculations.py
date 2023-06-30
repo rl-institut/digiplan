@@ -1,7 +1,5 @@
 """Module for calculations used for choropleths or charts."""
 
-from typing import Optional
-
 import pandas as pd
 from django.db.models import Sum
 from django_oemof.results import get_results
@@ -38,50 +36,7 @@ def calculate_square_for_value(df: pd.DataFrame) -> pd.DataFrame:
     return result
 
 
-def capacity(mun_id: Optional[int] = None) -> float:
-    """
-    Calculate capacity of renewables (either for municipality or for whole region).
-
-    Parameters
-    ----------
-    mun_id: Optional[int]
-        If given, capacity of renewables for given municipality are calculated. If not, for whole region.
-
-    Returns
-    -------
-    float
-        Sum of installed renewables
-    """
-    capacity = 0.0
-    values = capacity_per_municipality()
-
-    if mun_id is not None:
-        capacity = values[mun_id]
-    else:
-        for _key, value in values.items():
-            capacity += value
-    return capacity
-
-
-# pylint: disable=W0613
-def capacity_comparison(municipality_id: int) -> dict:  # noqa: ARG001
-    """
-    Get chart for capacity of renewables.
-
-    Parameters
-    ----------
-    municipality_id: int
-        Related municipality
-
-    Returns
-    -------
-    dict
-        Chart data to use in JS
-    """
-    return ([36, 9, 10], [36, 2, 1], [1, 5, 10], [3, 9, 10], [17, 10, 10])
-
-
-def capacity_per_municipality() -> pd.DataFrame:
+def capacities_per_municipality() -> pd.DataFrame:
     """
     Calculate capacity of renewables per municipality.
 
@@ -91,64 +46,22 @@ def capacity_per_municipality() -> pd.DataFrame:
         Capacity per municipality
     """
     capacities = []
-    for renewable in models.RENEWABLES:
+    for technology in (
+        models.WindTurbine,
+        models.PVroof,
+        models.PVground,
+        models.Hydro,
+        models.Biomass,
+        models.Combustion,
+        models.GSGK,
+        models.Storage,
+    ):
         res_capacity = pd.DataFrame.from_records(
-            renewable.objects.values("mun_id").annotate(capacity=Sum("capacity_net")).values("mun_id", "capacity"),
+            technology.objects.values("mun_id").annotate(capacity=Sum("capacity_net")).values("mun_id", "capacity"),
         ).set_index("mun_id")
-        res_capacity.columns = [renewable._meta.verbose_name]  # noqa: SLF001
+        res_capacity.columns = [technology._meta.verbose_name]  # noqa: SLF001
         capacities.append(res_capacity)
     return pd.concat(capacities, axis=1).fillna(0.0)
-
-
-def capacity_square(mun_id: Optional[int] = None) -> float:
-    """
-    Calculate capacity of renewables per km² (either for municipality or for whole region).
-
-    Parameters
-    ----------
-    mun_id: Optional[int]
-        If given, capacity of renewables per km² for given municipality are calculated. If not, for whole region.
-
-    Returns
-    -------
-    float
-        Sum of installed renewables
-    """
-    value = capacity(mun_id)
-    return calculate_square_for_value(value, mun_id)
-
-
-# pylint: disable=W0613
-def capacity_square_comparison(municipality_id: int) -> dict:  # noqa: ARG001
-    """
-    Get chart for capacity of renewables per km².
-
-    Parameters
-    ----------
-    municipality_id: int
-        Related municipality
-
-    Returns
-    -------
-    dict
-        Chart data to use in JS
-    """
-    return ([36, 9, 10], [36, 2, 1], [1, 5, 10], [3, 9, 10], [17, 10, 10])
-
-
-def capacity_square_per_municipality() -> dict[int, int]:
-    """
-    Calculate capacity of renewables per km² per municipality.
-
-    Returns
-    -------
-    dict[int, int]
-        Capacity per km² per municipality
-    """
-    capacity = capacity_per_municipality()
-    for key, value in capacity.items():
-        capacity[key] = calculate_square_for_value(value, key)
-    return capacity
 
 
 def detailed_overview(simulation_id: int) -> pd.DataFrame:  # noqa: ARG001

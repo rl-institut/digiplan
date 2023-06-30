@@ -130,7 +130,7 @@ class CapacityPopup(RegionPopup):
     """Popup to show capacities."""
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.capacity_per_municipality()
+        return calculations.capacities_per_municipality()
 
 
 class CapacitySquarePopup(RegionPopup):
@@ -140,7 +140,7 @@ class CapacitySquarePopup(RegionPopup):
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return capacities per square kilometer."""
-        capacities = calculations.capacity_per_municipality()
+        capacities = calculations.capacities_per_municipality()
         return calculations.calculate_square_for_value(capacities)
 
     def get_chart_options(self) -> dict:
@@ -177,7 +177,23 @@ class PopulationDensityPopup(RegionPopup):
         return chart_options
 
 
-class RenewableElectricityProductionPopup(SimulationPopup):
+class RenewableElectricityProductionPopup(RegionPopup):
+    """Popup to show renewable electricity production values."""
+
+    unit = "MWh"
+
+    def get_region_value(self) -> float:  # noqa: D102
+        return self.result.sum() / 1000
+
+    def get_municipality_value(self) -> Optional[float]:  # noqa: D102
+        return None
+
+    def get_chart_data(self) -> Iterable:  # noqa: D102
+        self.result.index = self.result.index.map(lambda x: config.SIMULATION_NAME_MAPPING[x[0]])
+        return self.result
+
+
+class RenewableElectricityProduction2045Popup(SimulationPopup):
     """Popup to show renewable electricity production values."""
 
     unit = "MWh"
@@ -237,7 +253,7 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "capacity_square": CapacitySquarePopup,
     "population": PopulationPopup,
     "population_density": PopulationDensityPopup,
-    "renewable_electricity_production": RenewableElectricityProductionPopup,
+    "renewable_electricity_production": RenewableElectricityProduction2045Popup,
     "wind_turbines": NumberWindturbinesPopup,
     "wind_turbines_square": NumberWindturbinesSquarePopup,
 }
