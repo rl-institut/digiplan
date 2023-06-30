@@ -1,4 +1,7 @@
 {
+  "grid": {
+    "bottom": "28%"
+  },
   "legend": {
     "data": [
       "Kohleofen",
@@ -12,7 +15,7 @@
       "Power to Heat",
       "Große Solarthermiekollektoren"
     ],
-    "bottom": "12"
+    "bottom": "0"
   },
   "brush": {
     "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],

@@ -1,4 +1,7 @@
 {
+  "grid": {
+    "bottom": "25%"
+  },
   "xAxis": {
     "type": "value",
     "show": true,

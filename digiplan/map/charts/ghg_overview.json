@@ -1,4 +1,7 @@
 {
+  "grid": {
+    "bottom": "20%"
+  },
   "backgroundColor": "#FFFFFF",
   "yAxis": {
     "show": true,
