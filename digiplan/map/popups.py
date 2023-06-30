@@ -154,27 +154,27 @@ class CapacitySquarePopup(RegionPopup):
 class PopulationPopup(RegionPopup):
     """Popup to show Population."""
 
-    def get_region_value(self) -> float:  # noqa: D102
-        return models.Population.quantity(2022)
-
-    def get_municipality_value(self) -> float:  # noqa: D102
-        return models.Population.quantity(2022, self.selected_id)
-
-    def get_chart_data(self) -> Iterable:  # noqa: D102
-        return models.Population.population_history(self.selected_id)
+    def get_detailed_data(self) -> pd.DataFrame:
+        """Return population data."""
+        return models.Population.quantity_per_municipality_per_year()
 
 
 class PopulationDensityPopup(RegionPopup):
     """Popup to show Population Density."""
 
-    def get_region_value(self) -> float:  # noqa: D102
-        return models.Population.density(2022)
+    lookup = "population"
 
-    def get_municipality_value(self) -> float:  # noqa: D102
-        return models.Population.density(2022, self.selected_id)
+    def get_detailed_data(self) -> pd.DataFrame:
+        """Return population data squared."""
+        population = models.Population.quantity_per_municipality_per_year()
+        return calculations.calculate_square_for_value(population)
 
-    def get_chart_data(self) -> Iterable:  # noqa: D102
-        return models.Population.density_history(self.selected_id)
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Population density per year")
+        chart_options["yAxis"]["name"] = _("Pop/km²")
+        return chart_options
 
 
 class RenewableElectricityProductionPopup(SimulationPopup):

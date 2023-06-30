@@ -1,6 +1,5 @@
 """Digiplan models."""
 
-from typing import Optional
 
 import pandas as pd
 from django.contrib.gis.db import models
@@ -81,118 +80,22 @@ class Population(models.Model):
         verbose_name_plural = _("Population")
 
     @classmethod
-    def quantity(cls, year: int, mun_id: Optional[int] = None) -> int:
+    def quantity_per_municipality_per_year(cls) -> pd.DataFrame:
         """
-        Calculate population in 2022 (either for municipality or for whole region).
-
-        Parameters
-        ----------
-        year: int
-            Year to filter population for
-        mun_id: Optional[int]
-            If given, population for given municipality are calculated. If not, for whole region.
+        Return population in 2022 per municipality and year.
 
         Returns
         -------
-        int
-            Value of population
+        pd.DataFrame
+            Population per municipality (index) and year (column)
         """
-        if mun_id is not None:
-            return cls.objects.filter(year=year, municipality__id=mun_id).aggregate(sum=Sum("value"))["sum"]
-        return cls.objects.filter(year=year).aggregate(sum=Sum("value"))["sum"]
-
-    @classmethod
-    def population_history(cls, mun_id: int) -> models.QuerySet:
-        """
-        Get chart for population per municipality in different years.
-
-        Parameters
-        ----------
-        mun_id: int
-            Related municipality
-
-        Returns
-        -------
-        models.QuerySet
-            containing list of year/value pairs
-        """
-        return cls.objects.filter(municipality__id=mun_id).values_list("year", "value")
-
-    @classmethod
-    def population_per_municipality(cls) -> dict[int, int]:
-        """
-        Calculate population per municipality.
-
-        Returns
-        -------
-        dict[int, int]
-            Population per municipality
-        """
-        return {row.municipality_id: row.value for row in cls.objects.filter(year=2022)}
-
-    @classmethod
-    def density(cls, year: int, mun_id: Optional[int] = None) -> float:
-        """
-        Calculate population denisty in given year per km² (either for municipality or for whole region).
-
-        Parameters
-        ----------
-        year: int
-            Year to filter population for
-        mun_id: Optional[int]
-            If given, population per km² for given municipality are calculated. If not, for whole region.
-
-        Returns
-        -------
-        float
-            Value of population density
-        """
-        population = cls.quantity(year, mun_id=mun_id)
-
-        if mun_id is not None:
-            density = population / Municipality.objects.get(pk=mun_id).area
-        else:
-            density = population / Municipality.area_whole_region()
-        return density
-
-    @classmethod
-    def density_history(cls, mun_id: int) -> dict:
-        """
-        Get chart for population density for the given municipality in different years.
-
-        Parameters
-        ----------
-        mun_id: int
-            Related municipality
-
-        Returns
-        -------
-        dict
-            Chart data to use in JS
-        """
-        density_history = []
-        population_history = cls.objects.filter(municipality_id=mun_id).values_list("year", "value")
-
-        for year, value in population_history:
-            density = value / Municipality.objects.get(pk=mun_id).area
-            density_history.append((year, density))
-
-        return density_history
-
-    @classmethod
-    def density_per_municipality(cls) -> dict[int, int]:
-        """
-        Calculate population per municipality.
-
-        Returns
-        -------
-        dict[int, int]
-            Population per municipality
-        """
-        density = cls.population_per_municipality()
-        for mun_id in density:
-            density[mun_id] = density[mun_id] / Municipality.objects.get(pk=mun_id).area
-        return density
+        population_per_year = (
+            pd.DataFrame.from_records(cls.objects.all().values("municipality__id", "year", "value"))  # noqa: PD010
+            .set_index("municipality__id")
+            .pivot(columns="year")
+        )
+        population_per_year.columns = population_per_year.columns.droplevel(0)
+        return population_per_year
 
 
 class WindTurbine(models.Model):
