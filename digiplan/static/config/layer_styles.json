@@ -257,7 +257,7 @@
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],
     "layout": {
-      "icon-image": "combustion",
+      "icon-image": "gsgk",
       "icon-size": 0.4,
       "icon-allow-overlap": true
     },
@@ -297,7 +297,7 @@
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],
     "layout": {
-      "icon-image": "combustion",
+      "icon-image": "storage",
       "icon-size": 0.4,
       "icon-allow-overlap": true
     },

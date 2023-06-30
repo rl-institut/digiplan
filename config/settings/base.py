@@ -262,6 +262,8 @@ MAP_ENGINE_IMAGES = [
     setup.MapImage("hydro", "images/icons/map_hydro.png"),
     setup.MapImage("biomass", "images/icons/map_biomass.png"),
     setup.MapImage("combustion", "images/icons/map_combustion.png"),
+    setup.MapImage("gsgk", "images/icons/map_gsgk.png"),
+    setup.MapImage("storage", "images/icons/map_battery.png"),
 ]
 
 MAP_ENGINE_API_MVTS = {
