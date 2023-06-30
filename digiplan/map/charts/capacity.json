@@ -16,7 +16,7 @@
     "right": "1%",
     "bottom": "5%"
   },
-  "color": ["#1F82C0","#F6B93B","#FFD660","#98D47E","#CFCFCF"],
+  "color": ["#6A89CC","#EFAD25","#FFD660","#52C41A","#A1B3BC"],
   "xAxis": {
     "type": "category",
     "boundaryGap": true,

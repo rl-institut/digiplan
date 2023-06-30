@@ -24,7 +24,7 @@
       "type": "bar",
       "barWidth": "16",
       "stack": "total",
-      "color": "#647078",
+      "color": "#DCD9F0",
       "label": {
         "show": false
       },
@@ -37,7 +37,7 @@
       "name": "Benzin",
       "type": "bar",
       "stack": "total",
-      "color": "#866E18",
+      "color": "#B5ADE0",
       "label": {
         "show": false
       },
@@ -50,7 +50,7 @@
       "name": "Hybrid",
       "type": "bar",
       "stack": "total",
-      "color": "#8FDCE1",
+      "color": "#897BD9",
       "label": {
         "show": false
       },
@@ -63,7 +63,7 @@
       "name": "E-Auto",
       "type": "bar",
       "stack": "total",
-      "color": "#98D47E",
+      "color": "#6956D6",
       "label": {
         "show": false
       },

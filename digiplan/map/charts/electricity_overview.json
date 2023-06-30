@@ -24,7 +24,7 @@
       "type": "bar",
       "barWidth": "16",
       "stack": "total",
-      "color": "#1F82C0",
+      "color": "#6A89CC",
       "label": {
         "show": false
       },
@@ -37,7 +37,7 @@
       "name": "Freiflächen - PV",
       "type": "bar",
       "stack": "total",
-      "color": "#F6B93B",
+      "color": "#EFAD25",
       "label": {
         "show": false
       },
@@ -63,7 +63,7 @@
       "name": "Bioenergie",
       "type": "bar",
       "stack": "total",
-      "color": "#98D47E",
+      "color": "#52C41A",
       "label": {
         "show": false
       },
@@ -76,7 +76,7 @@
       "name": "Konventionell",
       "type": "bar",
       "stack": "total",
-      "color": "#1A1A1A",
+      "color": "#A1B3BC",
       "label": {
         "show": false
       },
@@ -89,7 +89,7 @@
       "name": "GHD",
       "type": "bar",
       "stack": "total",
-      "color": "#F5F5DC",
+      "color": "#98C1D7",
       "label": {
         "show": false
       },
@@ -102,7 +102,7 @@
       "name": "Haushalte",
       "type": "bar",
       "stack": "total",
-      "color": "#A8DADC",
+      "color": "#6F9BB2",
       "label": {
         "show": false
       },
@@ -115,7 +115,7 @@
       "name": "Industrie",
       "type": "bar",
       "stack": "total",
-      "color": "#C27BA0",
+      "color": "#376984",
       "label": {
         "show": false
       },
@@ -128,7 +128,7 @@
       "name": "Sonstiges",
       "type": "bar",
       "stack": "total",
-      "color": "#B0BEC5",
+      "color": "#0D425F",
       "label": {
         "show": false
       },

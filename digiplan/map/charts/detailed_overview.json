@@ -57,7 +57,7 @@
       "type": "bar",
       "barWidth": "16",
       "stack": "five",
-      "color": "#CFCFCF",
+      "color": "#A1B3BC",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -70,7 +70,7 @@
       "name": "Wind",
       "type": "bar",
       "stack": "five",
-      "color": "#1F82C0",
+      "color": "#6A89CC",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -83,7 +83,7 @@
       "name": "Freiflächen-PV",
       "type": "bar",
       "stack": "five",
-      "color": "#F6B93B",
+      "color": "#EFAD25",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -109,7 +109,7 @@
       "name": "Bioenergie",
       "type": "bar",
       "stack": "five",
-      "color": "#98D47E",
+      "color": "#52C41A",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -122,7 +122,7 @@
       "name": "GHD",
       "type": "bar",
       "stack": "four",
-      "color": "#F5F5DC",
+      "color": "#98C1D7",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -135,7 +135,7 @@
       "name": "Haushalte",
       "type": "bar",
       "stack": "four",
-      "color": "#A8DADC",
+      "color": "#6F9BB2",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -149,7 +149,7 @@
       "type": "bar",
       "barWidth": "35",
       "stack": "four",
-      "color": "#C27BA0",
+      "color": "#376984",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -162,7 +162,7 @@
       "name": "Sonstiges",
       "type": "bar",
       "stack": "four",
-      "color": "#B0BEC5",
+      "color": "#0D425F",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
