@@ -402,61 +402,61 @@
   "air_traffic": {
     "type": "fill",
     "paint": {
-      "fill-color": "#525252"
+      "fill-color": "#969696"
     }
   },
   "aviation": {
     "type": "fill",
     "paint": {
-      "fill-color": "#4F4F4F"
+      "fill-color": "#CCCCCC"
     }
   },
   "biosphere_reserve": {
     "type": "fill",
     "paint": {
-      "fill-color": "#52B69A"
+      "fill-color": "#238443"
     }
   },
   "drinking_water_protection_area": {
     "type": "fill",
     "paint": {
-      "fill-color": "#B5E48C"
+      "fill-color": "#6BAED6"
     }
   },
   "fauna_flora_habitat": {
     "type": "fill",
     "paint": {
-      "fill-color": "#99D98C"
+      "fill-color": "#78C679"
     }
   },
   "floodplain": {
     "type": "fill",
     "paint": {
-      "fill-color": "#1A759F"
+      "fill-color": "#08306B"
     }
   },
   "forest": {
     "type": "fill",
     "paint": {
-      "fill-color": "#34A0A4"
+      "fill-color": "#004529"
     }
   },
   "grid": {
     "type": "fill",
     "paint": {
-      "fill-color": "#000000"
+      "fill-color": "#252525"
     }
   },
   "industry": {
     "type": "fill",
     "paint": {
-      "fill-color": "#D3D3D3"
+      "fill-color": "#BCBDDC"
     }
   },
   "landscape_protection_area": {
     "type": "fill",
     "paint": {
-      "fill-color": "#1E6091"
+      "fill-color": "#006837"
     }
   },
   "less_favoured_areas_agricultural": {
@@ -468,61 +468,61 @@
   "military": {
     "type": "fill",
     "paint": {
-      "fill-color": "#2F2F2F"
+      "fill-color": "#636363"
     }
   },
   "nature_conservation_area": {
     "type": "fill",
     "paint": {
-      "fill-color": "#D9ED92"
+      "fill-color": "#ADDD8E"
     }
   },
   "railway": {
     "type": "fill",
     "paint": {
-      "fill-color": "#969696"
+      "fill-color": "#54278F"
     }
   },
   "road_default": {
     "type": "fill",
     "paint": {
-      "fill-color": "#B3B3B3"
+      "fill-color": "#756BB1"
     }
   },
   "road_railway-500m_region": {
     "type": "fill",
     "paint": {
-      "fill-color": "#7C7C7C"
+      "fill-color": "#9E9AC8"
     }
   },
   "settlement-0m": {
     "type": "fill",
     "paint": {
-      "fill-color": "#F0F0F0"
+      "fill-color": "#DADAEB"
     }
   },
   "soil_quality_low": {
     "type": "fill",
     "paint": {
-      "fill-color": "#073152"
+      "fill-color": "#A63603"
     }
   },
   "soil_quality_high": {
     "type": "fill",
     "paint": {
-      "fill-color": "#184E77"
+      "fill-color": "#FD8D3C"
     }
   },
   "special_protection_area": {
     "type": "fill",
     "paint": {
-      "fill-color": "#76C893"
+      "fill-color": "#41AB5D"
     }
   },
   "water": {
     "type": "fill",
     "paint": {
-      "fill-color": "#168AAD"
+      "fill-color": "#2171B5"
     }
   }
 }
