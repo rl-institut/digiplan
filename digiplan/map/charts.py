@@ -335,7 +335,7 @@ class CapacityRegionChart(Chart):
         return calculations.capacities_per_municipality().sum()
 
 
-CHARTS: dict[str, Chart] = {
+CHARTS: dict[str, type[Chart]] = {
     "electricity_overview": ElectricityOverviewChart,
     "heat_overview": HeatOverviewChart,
     "capacity_statusquo_region": CapacityRegionChart,
