@@ -11,15 +11,13 @@
       "Freiflächen-PV",
       "Wasserkraft",
       "Bioenergie",
-      "Konventionell",
-      "GSGK",
       "Speicher"
     ],
     "orient": "vertical",
     "right": "1%",
     "bottom": "5%"
   },
-  "color": ["#1F82C0","#F6B93B","#FFD660","#98D47E","#CFCFCF"],
+  "color": ["#1F82C0", "#FFD660", "#F6B93B", "#9CC4D9", "#52C41A", "#000000"],
   "xAxis": {
     "type": "category",
     "boundaryGap": true,
@@ -63,18 +61,6 @@
       "stack": "five",
       "data": [10],
       "name": "Bioenergie"
-    },
-    {
-      "type": "bar",
-      "stack": "five",
-      "data": [10],
-      "name": "Konventionell"
-    },
-    {
-      "type": "bar",
-      "stack": "five",
-      "data": [10],
-      "name": "GSGK"
     },
     {
       "type": "bar",

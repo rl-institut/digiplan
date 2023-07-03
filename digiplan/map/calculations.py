@@ -42,8 +42,8 @@ def capacities_per_municipality() -> pd.DataFrame:
 
     Returns
     -------
-    dict[int, int]
-        Capacity per municipality
+    pd.DataFrame
+        Capacity per municipality (index) and technology (column)
     """
     capacities = []
     for technology in (
@@ -52,8 +52,6 @@ def capacities_per_municipality() -> pd.DataFrame:
         models.PVground,
         models.Hydro,
         models.Biomass,
-        models.Combustion,
-        models.GSGK,
         models.Storage,
     ):
         res_capacity = pd.DataFrame.from_records(
