@@ -1,19 +1,24 @@
 
-import {resultsDropdown} from "./elements.js";
+import {statusquoDropdown} from "./elements.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
 const simulation_spinner = document.getElementById("simulation_spinner");
 
 const SIMULATION_CHECK_TIME = 5000;
 
+const resultCharts = {
+    "detailed_overview": "detailed_overview_chart",
+    "electricity_overview": "electricity_overview_chart"
+};
+
 // Setup
 
 // Disable settings form submit
 $('#settings').submit(false);
 
-resultsDropdown.addEventListener("change", function() {
-    PubSub.publish(mapEvent.CHOROPLETH_SELECTED, resultsDropdown.value);
-    imageResults.title = resultsDropdown.options[resultsDropdown.selectedIndex].title;
+statusquoDropdown.addEventListener("change", function() {
+    PubSub.publish(mapEvent.CHOROPLETH_SELECTED, statusquoDropdown.value);
+    imageResults.title = statusquoDropdown.options[statusquoDropdown.selectedIndex].title;
 });
 
 
@@ -23,9 +28,10 @@ PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, hideSimulationSpinner);
-PubSub.subscribe(eventTopics.SIMULATION_FINISHED, checkResultCharts);
+PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultCharts);
+PubSub.subscribe(mapEvent.CHOROPLETH_SELECTED, showRegionChart);
 // for testing:
-PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, checkResultCharts);
+PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, showResultCharts);
 
 
 // Subscriber Functions
@@ -101,17 +107,31 @@ function hideSimulationSpinner(msg) {
     return logMessage(msg);
 }
 
-function checkResultCharts(msg) {
+function showRegionChart(msg, lookup) {
+    const region_lookup = `${lookup}_region`;
+    let charts = {};
+    charts[region_lookup] = "region_chart_statusquo";
+    showCharts(charts);
+    return logMessage(msg);
+}
+
+function showResultCharts(msg) {
+    showCharts(resultCharts);
+    return logMessage(msg);
+}
+
+function showCharts(charts={}) {
     $.ajax({
         url : "/charts",
         type : "GET",
         data : {
-            //needs correct simulation_id
-            simulation_id: 3,
+            "charts": Object.keys(charts),
+            "map_state": map_store.cold.state
         },
-        success : function(json) {
-            detailed_overview_chart.setOption(json.detailed_overview_chart); // jshint ignore:line
+        success : function(chart_options) {
+            for (const chart in charts) {
+                createChart(charts[chart], chart_options[chart]);
+            }
         },
     });
-    return logMessage(msg);
 }

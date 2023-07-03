@@ -2,16 +2,10 @@
 
 import json
 import pathlib
-from collections import namedtuple
-from collections.abc import Callable
 from typing import Any, Optional
 
 from digiplan.map import calculations, config
 from digiplan.map.utils import merge_dicts
-
-CHARTS: dict[str, Callable] = {}
-
-ResultChart = namedtuple("ResultChart", ("chart", "div_id"))
 
 
 class Chart:
@@ -19,7 +13,12 @@ class Chart:
 
     lookup: str = None
 
-    def __init__(self, lookup: Optional[str] = None, chart_data: Optional[Any] = None) -> None:
+    def __init__(
+        self,
+        lookup: Optional[str] = None,
+        chart_data: Optional[Any] = None,
+        **kwargs,  # noqa: ARG002
+    ) -> None:
         """Initialize chart data and chart options."""
         if lookup:
             self.lookup = lookup
@@ -326,10 +325,21 @@ class MobilityCTSChart(Chart):
         return self.chart_options
 
 
-RESULT_CHARTS = (
-    ResultChart(ElectricityOverviewChart, "electricity_overview_chart"),
-    ResultChart(HeatOverviewChart, "overview_heat_chart"),
-)
+class CapacityRegionChart(Chart):
+    """Chart for regional capacities."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        return calculations.capacities_per_municipality().sum()
+
+
+CHARTS: dict[str, Chart] = {
+    "electricity_overview": ElectricityOverviewChart,
+    "heat_overview": HeatOverviewChart,
+    "capacity_statusquo_region": CapacityRegionChart,
+}
 
 
 def create_chart(lookup: str, chart_data: Optional[Any] = None) -> dict:

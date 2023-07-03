@@ -68,14 +68,14 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         }
         context["sources"] = categorized_sources
         context["store_cold_init"] = config.STORE_COLD_INIT
-        context["detailed_overview"] = charts.create_chart("detailed_overview")
-        context["ghg_overview"] = charts.create_chart("ghg_overview")
-        context["electricity_overview"] = charts.create_chart("electricity_overview")
-        context["electricity_ghg"] = charts.create_chart("electricity_ghg")
-        context["mobility_overview"] = charts.create_chart("mobility_overview")
-        context["mobility_ghg"] = charts.create_chart("mobility_ghg")
-        context["overview_heat"] = charts.create_chart("overview_heat")
-        context["decentralized_centralized_heat"] = charts.create_chart("decentralized_centralized_heat")
+        context["detailed_overview"] = charts.Chart("detailed_overview").render()
+        context["ghg_overview"] = charts.Chart("ghg_overview").render()
+        context["electricity_overview"] = charts.Chart("electricity_overview").render()
+        context["electricity_ghg"] = charts.Chart("electricity_ghg").render()
+        context["mobility_overview"] = charts.Chart("mobility_overview").render()
+        context["mobility_ghg"] = charts.Chart("mobility_ghg").render()
+        context["overview_heat"] = charts.Chart("overview_heat").render()
+        context["decentralized_centralized_heat"] = charts.Chart("decentralized_centralized_heat").render()
 
         return context
 
@@ -141,8 +141,11 @@ def get_charts(request: HttpRequest) -> response.JsonResponse:
         holding dict with `div_id` as keys and chart options as values.
         `div_id` is used in frontend to detect chart container.
     """
-    map_state = request.GET.dict()
-    simulation_id = map_state["simulation_id"]
+    lookups = request.GET.getlist("charts[]")
+    map_state = request.GET.get("map_state")
+    simulation_id = None
+    if map_state:
+        simulation_id = map_state.get("simulation_id")
     return response.JsonResponse(
-        {chart.div_id: chart.chart(simulation_id).render() for chart in charts.RESULT_CHARTS},
+        {lookup: charts.CHARTS[lookup](simulation_id=simulation_id).render() for lookup in lookups},
     )

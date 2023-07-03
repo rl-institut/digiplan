@@ -8,12 +8,6 @@ const renewable_share_scenario_chart = echarts.init(renewable_share_scenario_div
 const co2_emissions_scenario_div = document.getElementById("co2_emissions_scenario_chart");
 const co2_emissions_scenario_chart = echarts.init(co2_emissions_scenario_div);
 
-// Sidebar, initialize charts
-const chart3Element = document.getElementById("chart3");
-const chart3 = echarts.init(chart3Element);
-const chart4Element = document.getElementById("chart4");
-const chart4 = echarts.init(chart4Element);
-
 // Results view, initiliaze charts
 const detailed_overview_chart = echarts.init(document.getElementById("detailed_overview_chart"));
 const ghg_overview_chart = echarts.init(document.getElementById("ghg_overview_chart"));
@@ -276,59 +270,6 @@ const co2_emissions_scenario = {
   ],
 };
 
-const option = {
-  textStyle: chart_text_style,
-  title: {
-    text: 'Anteil Erneuerbare \nEnergien (%)',
-  },
-  tooltip: {
-    trigger: 'axis'
-  },
-  legend: {
-    bottom: 10,
-    data: ['2021', '2035']
-  },
-  toolbox: {
-    show: false
-  },
-  calculable: true,
-  xAxis: [
-    {
-      type: 'category',
-      data: ['Jahre'],
-      axisTick: {
-        show: false
-      }
-    }
-  ],
-  yAxis: [
-    {
-      type: 'value',
-      max: 100
-    }
-  ],
-  series: [
-    {
-      name: '2021',
-      type: 'bar',
-      color: '#D8E2E7',
-      barWidth: chart_bar_width_sm,
-      data: [
-        60
-      ],
-    },
-    {
-      name: '2045',
-      type: 'bar',
-      color: '#06DFA7',
-      barWidth: chart_bar_width_sm,
-      data: [
-        80
-      ]
-    }
-  ]
-};
-
 // get options for result view charts
 const detailed_overview_option = JSON.parse(document.getElementById("detailed_overview").textContent);
 const ghg_overview_option = JSON.parse(document.getElementById("ghg_overview").textContent);
@@ -345,8 +286,6 @@ function resizeCharts() {
     co2_emissions_goal_chart.resize();
     renewable_share_scenario_chart.resize();
     co2_emissions_scenario_chart.resize();
-    chart3.resize();
-    chart4.resize();
     detailed_overview_chart.resize();
     ghg_overview_chart.resize();
     electricity_overview_chart.resize();
@@ -363,10 +302,6 @@ renewable_share_goal_chart.setOption(renewable_share_goal);
 co2_emissions_goal_chart.setOption(co2_emissions_goal);
 renewable_share_scenario_chart.setOption(renewable_share_scenario);
 co2_emissions_scenario_chart.setOption(co2_emissions_scenario);
-
-// Sidebar, setOptions
-chart3.setOption(option);
-chart4.setOption(option);
 
 // Results, setOptions
 detailed_overview_chart.setOption(detailed_overview_option);
@@ -388,4 +323,5 @@ function createChart(div_id, options) {
   const chartElement = document.getElementById(div_id);
   const chart = echarts.init(chartElement, null, {renderer: 'svg'});
   chart.setOption(options);
+  chart.resize();
 }
