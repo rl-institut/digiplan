@@ -65,9 +65,9 @@ def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) ->
     return data
 
 
-def adapt_heat_demand(scenario: str, data: dict, request: HttpRequest) -> dict:  # noqa: ARG001
+def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict:  # noqa: ARG001
     """
-    Read settings and adapt related heat demands.
+    Read settings and adapt related heat demands and capacities.
 
     Parameters
     ----------
@@ -81,20 +81,46 @@ def adapt_heat_demand(scenario: str, data: dict, request: HttpRequest) -> dict: 
     Returns
     -------
     dict
-        Parameters for oemof with adapted heat demands
+        Parameters for oemof with adapted heat demands and capacities
     """
     year = "2045" if scenario == "scenario_2045" else "2022"
-    for sector, slider in (("hh", "w_v_3"), ("cts", "w_v_4"), ("ind", "w_v_5")):
-        percentage = data.pop(slider)
-        for distribution, distribution_name in (("cen", "central"), ("dec", "decentral")):
-            demand = datapackage.get_heat_demand(sector, distribution)[sector][distribution]
-            data[f"ABW-heat_{distribution_name}-demand_{sector}"] = {
-                "amount": float(demand[year].sum()) * percentage / 100,
+
+    demand_sliders = {"hh": "w_v_3", "cts": "w_v_4", "ind": "w_v_5"}
+
+    hp_sliders = {"hh": "w_d_wp_3", "cts": "w_d_wp_4", "ind": "w_d_wp_5"}
+    data["ABW-electricity-heatpump_central"] = {
+        "capacity": 0.0,
+        "output_parameters": {"summed_min": 0.0, "summed_max": 0.0},
+    }
+
+    for dataset_loc, loc in (("cen", "central"), ("dec", "decentral")):
+        for sector in ("hh", "cts", "ind"):
+            # DEMAND
+            percentage = data.pop(demand_sliders[sector]) if loc == "decentral" else data.get(demand_sliders[sector])
+            demand = datapackage.get_heat_demand(sector, dataset_loc)[sector][dataset_loc][year]
+            data[f"ABW-heat_{loc}-demand_{sector}"] = {
+                "amount": float(demand.sum()) * percentage / 100,
             }
+
+            # HP CAPACITIES:
+            if dataset_loc == "cen":
+                hp_share = data.pop(hp_sliders[sector]) / 100
+                data["ABW-electricity-heatpump_central"]["capacity"] += float(demand.max() * hp_share)
+                energy_max = float(demand.sum() * hp_share)
+                data["ABW-electricity-heatpump_central"]["output_parameters"]["summed_min"] += energy_max
+                data["ABW-electricity-heatpump_central"]["output_parameters"]["summed_max"] += energy_max
+            else:
+                if sector == "hh":  # noqa: PLR5501
+                    hp_share = data.pop("w_z_wp_3") / 100
+                    data["ABW-electricity-heatpump_decentral"] = {"capacity": float(demand.max() * hp_share)}
+                    energy_max = float(demand.sum() * hp_share)
+                    data["ABW-electricity-heatpump_decentral"] = {
+                        "output_parameters": {"summed_min": energy_max, "summed_max": energy_max},
+                    }
     return data
 
 
-def adapt_capacities(scenario: str, data: dict, request: HttpRequest) -> dict:  # noqa: ARG001
+def adapt_renewable_capacities(scenario: str, data: dict, request: HttpRequest) -> dict:  # noqa: ARG001
     """
     Read renewable capacities from user input and adapt ES parameters accordingly.
 
@@ -118,9 +144,6 @@ def adapt_capacities(scenario: str, data: dict, request: HttpRequest) -> dict:  
     data["ABW-solar-pv_rooftop"] = {"capacity": data.pop("s_pv_d_1")}
     data["ABW-hydro-ror"] = {"capacity": data.pop("s_h_1")}
     data["ABW-electricity-large_scale_battery"] = {"capacity": data.pop("s_s_g_1")}
-
-    data["ABW-electricity-heatpump_decentral"] = {"capacity": data.pop("w_d_wp_1")}
-    data["ABW-electricity-heatpump_central"] = {"capacity": data.pop("w_z_wp_1")}
 
     # TODO(Hendrik): Get values either from static file or from sliders
     # https://github.com/rl-institut-private/digipipe/issues/119

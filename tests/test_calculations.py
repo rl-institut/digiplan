@@ -21,10 +21,12 @@ class SimulationTest(SimpleTestCase):
         "w_v_5": 100,
         "s_pv_ff_1": 100,
         "s_pv_d_1": 100,
-        "s_b_1": 100,
-        "ror": 100,
-        "w_z_wp_1": 100,
-        "w_d_wp_1": 100,
+        "s_h_1": 100,
+        "s_s_g_1": 100,
+        "w_d_wp_3": 100,
+        "w_d_wp_4": 100,
+        "w_d_wp_5": 100,
+        "w_z_wp_3": 100,
     }
 
     def setUp(self) -> None:
