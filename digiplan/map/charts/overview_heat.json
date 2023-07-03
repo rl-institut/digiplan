@@ -27,7 +27,7 @@
       "type": "bar",
       "barWidth": "16",
       "stack": "total",
-      "color": "#98C1D7",
+      "color": "#B3B3B3",
       "label": {
         "show": false
       },
@@ -40,7 +40,7 @@
       "name": "Household Heat Demand",
       "type": "bar",
       "stack": "total",
-      "color": "#6F9BB2",
+      "color": "#7C7C7C",
       "label": {
         "show": false
       },
@@ -53,7 +53,7 @@
       "name": "Industry Heat Demand",
       "type": "bar",
       "stack": "total",
-      "color": "#376984",
+      "color": "#4F4F4F",
       "label": {
         "show": false
       },

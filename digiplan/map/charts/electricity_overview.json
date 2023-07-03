@@ -92,7 +92,7 @@
       "name": "Electricity CTS Demand",
       "type": "bar",
       "stack": "total",
-      "color": "#98C1D7",
+      "color": "#D3D3D3",
       "label": {
         "show": false
       },
@@ -105,7 +105,7 @@
       "name": "Electricity CTS Heat Demand",
       "type": "bar",
       "stack": "total",
-      "color": "#DBDBB8",
+      "color": "#B3B3B3",
       "label": {
         "show": false
       },
@@ -118,7 +118,7 @@
       "name": "Electricity Household Demand",
       "type": "bar",
       "stack": "total",
-      "color": "#6F9BB2",
+      "color": "#969696",
       "label": {
         "show": false
       },
@@ -131,7 +131,7 @@
       "name": "Electricity Household Heat Demand",
       "type": "bar",
       "stack": "total",
-      "color": "#76ABAD",
+      "color": "#7C7C7C",
       "label": {
         "show": false
       },
@@ -144,7 +144,7 @@
       "name": "Electricity Industry Demand",
       "type": "bar",
       "stack": "total",
-      "color": "#376984",
+      "color": "#616161",
       "label": {
         "show": false
       },
@@ -157,7 +157,7 @@
       "name": "Electricity Industry Heat Demand",
       "type": "bar",
       "stack": "total",
-      "color": "#965075",
+      "color": "#4F4F4F",
       "label": {
         "show": false
       },
@@ -170,7 +170,7 @@
       "name": "BEV",
       "type": "bar",
       "stack": "total",
-      "color": "#0D425F",
+      "color": "#2F2F2F",
       "label": {
         "show": false
       },
