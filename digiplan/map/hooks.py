@@ -112,12 +112,13 @@ def adapt_capacities(scenario: str, data: dict, request: HttpRequest) -> dict:  
     dict
         Adapted parameters dict with set up capacities
     """
+    # ELECTRICITY
     data["ABW-wind-onshore"] = {"capacity": data.pop("s_w_1")}
     data["ABW-solar-pv_ground"] = {"capacity": data.pop("s_pv_ff_1")}
     data["ABW-solar-pv_rooftop"] = {"capacity": data.pop("s_pv_d_1")}
-    # TODO(Hendrik): Slider not yet implemented
-    # https://github.com/rl-institut-private/digiplan/issues/229
-    data["ABW-hydro-ror"] = {"capacity": data.pop("ror")}
+    data["ABW-hydro-ror"] = {"capacity": data.pop("s_h_1")}
+    data["ABW-electricity-large_scale_battery"] = {"capacity": data.pop("s_s_g_1")}
+
     data["ABW-electricity-heatpump_decentral"] = {"capacity": data.pop("w_d_wp_1")}
     data["ABW-electricity-heatpump_central"] = {"capacity": data.pop("w_z_wp_1")}
 
