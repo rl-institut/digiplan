@@ -62,6 +62,24 @@ def capacities_per_municipality() -> pd.DataFrame:
     return pd.concat(capacities, axis=1).fillna(0.0)
 
 
+def energies_per_municipality() -> pd.DataFrame:
+    """
+    Calculate energy of renewables per municipality.
+
+    Returns
+    -------
+    pd.DataFrame
+        Energy per municipality (index) and technology (column)
+    """
+    capacities = capacities_per_municipality()
+    full_load_hours = pd.Series(
+        data=[technology_data["2022"] for technology_data in config.TECHNOLOGY_DATA["full_load_hours"].values()],
+        index=config.TECHNOLOGY_DATA["full_load_hours"].keys(),
+    )
+    full_load_hours = full_load_hours.reindex(index=["wind", "pv_roof", "pv_ground", "ror", "bioenergy", "st"])
+    return capacities * full_load_hours.values
+
+
 def detailed_overview(simulation_id: int) -> pd.DataFrame:  # noqa: ARG001
     """
     Calculate data for detailed overview chart from simulation ID.

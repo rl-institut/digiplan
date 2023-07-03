@@ -116,6 +116,7 @@ ignore = [
   "FIX002",  # Line contains TODO
   "RET504",  # Unnecessary variable assignment before `return` statement
   "G004",    # Logging statement uses f-string
+  "PD011",   # Use `.to_numpy()` instead of `.values`  (does not work out of the box)
 ]
 fix = true
 show-fixes = true

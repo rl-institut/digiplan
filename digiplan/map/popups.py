@@ -153,6 +153,23 @@ class CapacitySquarePopup(RegionPopup):
         return chart_options
 
 
+class EnergyPopup(RegionPopup):
+    """Popup to show capacities."""
+
+    lookup = "capacity"
+    title = "Energies"
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.energies_per_municipality()
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Energies per technology")
+        chart_options["yAxis"]["name"] = _("MWh")
+        return chart_options
+
+
 class PopulationPopup(RegionPopup):
     """Popup to show Population."""
 
@@ -254,10 +271,11 @@ class NumberWindturbinesSquarePopup(RegionPopup):
 
 
 POPUPS: dict[str, type(popups.Popup)] = {
-    "capacity_statusquo": CapacityPopup,
-    "capacity_square_statusquo": CapacitySquarePopup,
     "population_statusquo": PopulationPopup,
     "population_density_statusquo": PopulationDensityPopup,
+    "energy_statusquo": EnergyPopup,
+    "capacity_statusquo": CapacityPopup,
+    "capacity_square_statusquo": CapacitySquarePopup,
     "renewable_electricity_production": RenewableElectricityProduction2045Popup,
     "wind_turbines_statusquo": NumberWindturbinesPopup,
     "wind_turbines_square_statusquo": NumberWindturbinesSquarePopup,

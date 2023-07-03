@@ -336,7 +336,7 @@ MAP_ENGINE_CHOROPLETHS = [
         unit=_(""),
     ),
     setup.Choropleth(
-        "renewable_electricity_production",
+        "energy_statusquo",
         layers=["municipality"],
         title=_("Energie Erneuerbare"),
         unit=_("GWh"),
@@ -354,7 +354,7 @@ MAP_ENGINE_POPUPS = [
             "capacity_square_statusquo",
             "wind_turbines_statusquo",
             "wind_turbines_square_statusquo",
-            "renewable_electricity_production",
+            "energy_statusquo",
         ],
     ),
 ]
