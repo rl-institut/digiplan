@@ -16,8 +16,11 @@ SCENARIOS_DIR = settings.DATA_DIR.path("scenarios")
 
 # FILES
 ENERGY_SETTINGS_PANEL_FILE = settings.APPS_DIR.path("static/config/energy_settings_panel.json")
+ADDITIONAL_ENERGY_SETTINGS_FILE = settings.APPS_DIR.path("static/config/additional_energy_settings_panel.json")
 HEAT_SETTINGS_PANEL_FILE = settings.APPS_DIR.path("static/config/heat_settings_panel.json")
+ADDITIONAL_HEAT_SETTINGS_FILE = settings.APPS_DIR.path("static/config/additional_heat_settings_panel.json")
 TRAFFIC_SETTINGS_PANEL_FILE = settings.APPS_DIR.path("static/config/traffic_settings_panel.json")
+ADDITIONAL_TRAFFIC_SETTINGS_FILE = settings.APPS_DIR.path("static/config/additional_traffic_settings_panel.json")
 SETTINGS_DEPENDENCY_MAP_FILE = settings.APPS_DIR.path("static/config/settings_dependency_map.json")
 DEPENDENCY_PARAMETERS_FILE = settings.APPS_DIR.path("static/config/dependency_parameters.json")
 TECHNOLOGY_DATA_FILE = settings.DIGIPIPE_DIR.path("scalars").path("technology_data.json")

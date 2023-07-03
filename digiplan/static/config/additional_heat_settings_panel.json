@@ -1,0 +1,114 @@
+{
+    "w_d_wp_1": {
+        "max": 100,
+        "min": 0,
+        "start": 30,
+        "status_quo": 10,
+        "future_scenario": 20,
+        "step": 5
+    },
+    "w_d_wp_3": {
+        "max": 100,
+        "min": 50,
+        "start": 50,
+        "status_quo": 10,
+        "future_scenario": 20,
+        "step": 5
+    },
+    "w_d_wp_4": {
+        "max": 100,
+        "min": 50,
+        "start": 50,
+        "status_quo": 10,
+        "future_scenario": 20,
+        "step": 5
+    },
+    "w_d_wp_5": {
+        "max": 100,
+        "min": 50,
+        "start": 50,
+        "status_quo": 10,
+        "future_scenario": 20,
+        "step": 5
+    },
+    "w_z_wp_1": {
+        "max": 100,
+        "min": 0,
+        "start": 10,
+        "status_quo": 10,
+        "future_scenario": 20,
+        "step": 5
+    },
+    "w_z_wp_3": {
+        "max": 200,
+        "min": 50,
+        "start": 50,
+        "status_quo": 10,
+        "future_scenario": 20,
+        "step": 5
+    },
+    "w_v_1": {
+        "max": 100,
+        "min": 50,
+        "start": 10,
+        "status_quo": 10,
+        "future_scenario": 20,
+        "step": 10
+    },
+    "w_v_3": {
+        "max": 200,
+        "min": 50,
+        "start": 50,
+        "status_quo": 10,
+        "future_scenario": 20,
+        "step": 10
+    },
+    "w_v_4": {
+        "max": 200,
+        "min": 50,
+        "start": 10,
+        "status_quo": 10,
+        "future_scenario": 20,
+        "step": 10
+    },
+    "w_v_5": {
+        "max": 200,
+        "min": 50,
+        "start": 50,
+        "status_quo": 10,
+        "future_scenario": 20,
+        "step": 10
+    },
+    "w_d_s_1": {
+        "max": 200,
+        "min": 25,
+        "start": 25,
+        "status_quo": 10,
+        "future_scenario": 20,
+        "step": 5
+    },
+    "w_d_s_3": {
+        "max": 200,
+        "min": 25,
+        "start": 25,
+        "status_quo": 10,
+        "future_scenario": 20,
+        "step": 5
+    },
+    "w_z_s_1": {
+        "max": 200,
+        "min": 25,
+        "start": 25,
+        "status_quo": 10,
+        "future_scenario": 20,
+        "step": 5
+    },
+    "w_z_s_3": {
+        "max": 200,
+        "min": 25,
+        "start": 25,
+        "status_quo": 10,
+        "future_scenario": 20,
+        "step": 5
+    }
+}
