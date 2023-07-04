@@ -11,6 +11,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - models, layers and legend items from digipipe geodata
 
 ### Changed
+- legend layer colors and symbols
 - static layer order
 - paths for oemof hooks to digipipe scalars
 
