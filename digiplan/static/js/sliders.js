@@ -163,7 +163,6 @@ function showPVLayers(msg) {
 }
 
 function toggleFormFields(formfield_id) {
-  console.log("hereA");
   if (formfield_id === "id_s_w_3") {
     if (document.getElementById("id_s_w_4").checked === false && document.getElementById("id_s_w_5").checked === false) {
       document.getElementById("id_s_w_3").checked = true;
@@ -299,3 +298,7 @@ function addMarks(data, marks) {
 
   data.slider.append(html);
 }
+
+$(document).ready(function () {
+  toggleFormFields("id_s_w_3");
+});
