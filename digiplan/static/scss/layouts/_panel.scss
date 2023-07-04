@@ -151,7 +151,8 @@
       }
 
       .c-slider.active {
-        @extend .px-3;
+        @extend .ps-2;
+        @extend .pe-3;
         @extend .bg-light;
       }
 
