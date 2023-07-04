@@ -151,7 +151,8 @@
       }
 
       .c-slider.active {
-        @extend .px-3;
+        @extend .ps-2;
+        @extend .pe-3;
         @extend .bg-light;
       }
 
@@ -273,7 +274,7 @@
     @extend .bg-light;
     @extend .p-3;
     @extend .overflow-auto;
-    width: 18rem;
+    width: 20rem;
     left: $panel-width-sm;
     padding-top: $padding-large !important;
 
@@ -291,8 +292,54 @@
       @extend .d-flex;
       @extend .flex-row;
       @extend .justify-content-between;
-      @extend .fs-7;
+      @extend .fs-6;
       @extend .fw-bold;
+      @extend .mb-1;
+    }
+
+    &__indication {
+      @extend .text-secondary;
+      @extend .fs-7;
+    }
+
+    .sidepanel__block {
+      @extend .border-bottom;
+      @extend .pb-2;
+      @extend .pt-2;
+
+      .c-slider {
+        @extend .d-flex;
+        @extend .flex-row;
+        @extend .justify-content-between;
+        @extend .pb-0;
+
+        &:first-of-type .form-switch .form-check-input {
+          width: 2.25rem;
+          height: 1.25rem;
+        }
+
+        &:not(:first-of-type) {
+          @extend .fw-light;
+          @extend .ps-2;
+        }
+
+        &.s_w_5_1,
+        &.s_w_5_2 {
+          @extend .d-block;
+        }
+      }
+    }
+
+    .sidepanel__block.sidepanel__block--slider {
+      .c-slider {
+        @extend .d-block;
+      }
+    }
+
+    &__results {
+      @extend .pb-1;
+      @extend .pt-3;
+      @extend .fs-7;
     }
 
     &__close {

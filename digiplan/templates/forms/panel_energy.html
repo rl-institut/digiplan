@@ -5,43 +5,70 @@
 
 {% include "widgets/slider.html" with field=form.s_w_1 %}
 <div class="sidepanel">
-  <p class="sidepanel__heading">
+  <div class="sidepanel__heading">
     {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set the use of wind potential areas." %}</p>
+  </div>
+  <p class="sidepanel__indication">
+    {%  trans "Set the use of wind potential areas." %}
+  </p>
+  <div class="sidepanel__block">
     {% include "widgets/slider.html" with field=form.s_w_3 %}
+  </div>
+  <div class="sidepanel__block">
     {% include "widgets/slider.html" with field=form.s_w_4 %}
     {% include "widgets/slider.html" with field=form.s_w_4_1 %}
     {% include "widgets/slider.html" with field=form.s_w_4_2 %}
+  </div>
+  <div class="sidepanel__block">
     {% include "widgets/slider.html" with field=form.s_w_5 %}
     {% include "widgets/slider.html" with field=form.s_w_5_1 %}
     {% include "widgets/slider.html" with field=form.s_w_5_2 %}
+  </div>
+  <div class="sidepanel__results">
     <p>{%  trans "With your settings, a maximum total output of 13 MW and a yield of 7 GWh can be realized.<br>The goals for Saxony-Anhalt from the Wind Energy Area Requirement Act are:<br>- for 2027 (1.4%) achieved.<br>- for 2032 (2.2%) achieved.<br><br>Tip: In the menu on the right you can display the systems that exist today." %}</p>
-  </p>
+  </div>
 </div>
 
 {% include "widgets/slider.html" with field=form.s_pv_ff_1 %}
 <div class="sidepanel">
-  <p class="sidepanel__heading">
+  <div class="sidepanel__heading">
     {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set the use of potential areas for ground-mounted PV." %}</p>
+  </div>
+  <p class="sidepanel__indication">
+    {%  trans "Set the use of potential areas for ground-mounted PV." %}
+  </p>
+  <div class="sidepanel__block sidepanel__block--slider">
     {% include "widgets/slider.html" with field=form.s_pv_ff_3 %}
+  </div>
+  <div class="sidepanel__block sidepanel__block--slider">
     {% include "widgets/slider.html" with field=form.s_pv_ff_4 %}
+  </div>
+  <div class="sidepanel__results">
     <p>{%  trans "Mit Ihren Einstellungen kann eine maximale Gesamtleistung von 18 MW und ein Ertrag von 3 GWh realisiert werden.<br><br>Tipp: Im rechten Menü können Sie die heute bestehenden Anlagen einblenden." %}</p>
+  </div>
   </p>
 </div>
 
 {% include "widgets/slider.html" with field=form.s_pv_d_1 %}
 <div class="sidepanel">
-  <p class="sidepanel__heading">
+  <div class="sidepanel__heading">
     {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set how much roof area should be used for photovoltaics." %}</p>
-    {% include "widgets/slider.html" with field=form.s_pv_d_3 %}
-    {% include "widgets/slider.html" with field=form.s_pv_d_4 %}
-    <p>{%  trans "Mit Ihren Einstellungen kann eine maximale Gesamtleistung von 4 MW und ein Ertrag von 2 GWh realisiert werden. Die Aufteilung der Ausrichtung ist wie folgt:<br>- Süddächer: 3 %<br>- Westdächer: 3 %<br>- Norddächer: 3 %<br>- Ostdächer: 8 %<br>Denkmalgeschützte Gebäude werden nicht verwendet.<br><br>Tipp: Im rechten Menü können Sie die heute bestehenden Anlagen einblenden." %}</p>
+  </div>
+  <p class="sidepanel__indication">
+    {%  trans "Set how much roof area should be used for photovoltaics." %}
   </p>
+  <div class="sidepanel__block sidepanel__block--slider">
+    {% include "widgets/slider.html" with field=form.s_pv_d_3 %}
+  </div>
+  <div class="sidepanel__block sidepanel__block--slider">
+    {% include "widgets/slider.html" with field=form.s_pv_d_4 %}
+  </div>
+  <div class="sidepanel__results">
+    <p>{%  trans "Mit Ihren Einstellungen kann eine maximale Gesamtleistung von 4 MW und ein Ertrag von 2 GWh realisiert werden. Die Aufteilung der Ausrichtung ist wie folgt:<br>- Süddächer: 3 %<br>- Westdächer: 3 %<br>- Norddächer: 3 %<br>- Ostdächer: 8 %<br>Denkmalgeschützte Gebäude werden nicht verwendet.<br><br>Tipp: Im rechten Menü können Sie die heute bestehenden Anlagen einblenden." %}</p>
+  </div>
 </div>
 
 {% include "widgets/slider.html" with field=form.s_h_1 %}
