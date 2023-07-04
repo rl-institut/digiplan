@@ -88,6 +88,10 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
     demand_sliders = {"hh": "w_v_3", "cts": "w_v_4", "ind": "w_v_5"}
 
     hp_sliders = {"hh": "w_d_wp_3", "cts": "w_d_wp_4", "ind": "w_d_wp_5"}
+    data["ABW-electricity-heatpump_decentral"] = {
+        "capacity": 0.0,
+        "output_parameters": {"summed_min": 0.0, "summed_max": 0.0},
+    }
     data["ABW-electricity-heatpump_central"] = {
         "capacity": 0.0,
         "output_parameters": {"summed_min": 0.0, "summed_max": 0.0},
@@ -103,20 +107,38 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
             }
 
             # HP CAPACITIES:
-            if dataset_loc == "cen":
+            if dataset_loc == "dec":
                 hp_share = data.pop(hp_sliders[sector]) / 100
-                data["ABW-electricity-heatpump_central"]["capacity"] += float(demand.max() * hp_share)
+                data["ABW-electricity-heatpump_decentral"]["capacity"] += float(demand.max() * hp_share)
                 energy_max = float(demand.sum() * hp_share)
-                data["ABW-electricity-heatpump_central"]["output_parameters"]["summed_min"] += energy_max
-                data["ABW-electricity-heatpump_central"]["output_parameters"]["summed_max"] += energy_max
+                data["ABW-electricity-heatpump_decentral"]["output_parameters"]["summed_min"] += energy_max
+                data["ABW-electricity-heatpump_decentral"]["output_parameters"]["summed_max"] += energy_max
             else:
                 if sector == "hh":  # noqa: PLR5501
                     hp_share = data.pop("w_z_wp_3") / 100
-                    data["ABW-electricity-heatpump_decentral"] = {"capacity": float(demand.max() * hp_share)}
+                    data["ABW-electricity-heatpump_central"]["capacity"] = float(demand.max() * hp_share)
                     energy_max = float(demand.sum() * hp_share)
-                    data["ABW-electricity-heatpump_decentral"] = {
-                        "output_parameters": {"summed_min": energy_max, "summed_max": energy_max},
+                    data["ABW-electricity-heatpump_central"]["output_parameters"] = {
+                        "summed_min": energy_max,
+                        "summed_max": energy_max,
                     }
+    # HP Flow summed_min/max have tobe normalized:
+    data["ABW-electricity-heatpump_decentral"]["output_parameters"]["summed_min"] = (
+        data["ABW-electricity-heatpump_decentral"]["output_parameters"]["summed_min"]
+        / data["ABW-electricity-heatpump_decentral"]["capacity"]
+    )
+    data["ABW-electricity-heatpump_decentral"]["output_parameters"]["summed_max"] = (
+        data["ABW-electricity-heatpump_decentral"]["output_parameters"]["summed_max"]
+        / data["ABW-electricity-heatpump_decentral"]["capacity"]
+    )
+    data["ABW-electricity-heatpump_central"]["output_parameters"]["summed_min"] = (
+        data["ABW-electricity-heatpump_central"]["output_parameters"]["summed_min"]
+        / data["ABW-electricity-heatpump_central"]["capacity"]
+    )
+    data["ABW-electricity-heatpump_central"]["output_parameters"]["summed_max"] = (
+        data["ABW-electricity-heatpump_central"]["output_parameters"]["summed_max"]
+        / data["ABW-electricity-heatpump_central"]["capacity"]
+    )
     return data
 
 
