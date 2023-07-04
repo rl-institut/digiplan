@@ -2,7 +2,7 @@
     "grid": {
       "top": "24%",
       "right": "30%",
-      "bottom": "5%"
+      "bottom": "28%"
     },
     "legend": {
       "data": [
@@ -15,7 +15,7 @@
       "right": "1%",
       "bottom": "5%"
     },
-    "color": ["#F5F5DC", "#A8DADC", "#C27BA0", "#B0BEC5"],
+    "color": ["#98C1D7", "#6F9BB2", "#376984", "#0D425F"],
     "xAxis": {
       "type": "category",
       "boundaryGap": true,

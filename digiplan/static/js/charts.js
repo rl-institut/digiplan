@@ -25,7 +25,7 @@ PubSub.subscribe(eventTopics.MENU_CHANGED, resizeCharts);
 const chart_tooltip = {
   trigger: 'axis',
   axisPointer: {
-    type: 'shadow'
+  type: 'shadow'
   }
 };
 const chart_bar_width_sm = 16;
@@ -52,9 +52,9 @@ const chart_text_style = {
 };
 const chart_legend = {
   show: true,
-    bottom: '15',
-    itemWidth: 14,
-    itemHeight: 14
+  bottom: '15',
+  itemWidth: 14,
+  itemHeight: 14
 };
 
 // Goal variables
@@ -86,7 +86,7 @@ const renewable_share_goal = {
         {
           value: 30,
           itemStyle: {
-            color: '#C3D1DC'
+            color: '#D8E2E7'
           }
         },
         {
@@ -99,7 +99,7 @@ const renewable_share_goal = {
       markLine: {
         silent: true,
         lineStyle: {
-          color: '#00BC8C',
+          color: '#06DFA7',
           type: 'solid'
         },
         symbol: 'none',
@@ -138,20 +138,20 @@ const co2_emissions_goal = {
         {
           value: 90,
           itemStyle: {
-            color: '#C3D1DC'
+            color: '#D8E2E7'
           }
         },
         {
           value: 30,
           itemStyle: {
-            color: '#E6A100'
+            color: '#E8986B'
           }
         },
       ],
       markLine: {
         silent: true,
         lineStyle: {
-          color: '#BE880B',
+          color: '#E8986B',
           type: 'solid'
         },
         symbol: 'none',
@@ -190,7 +190,7 @@ const renewable_share_scenario = {
         {
           value: 30,
           itemStyle: {
-            color: '#C3D1DC'
+            color: '#D8E2E7'
           }
         },
         {
@@ -203,7 +203,7 @@ const renewable_share_scenario = {
       markLine: {
         silent: true,
         lineStyle: {
-          color: '#00BC8C',
+          color: '#06DFA7',
           type: 'solid'
         },
         symbol: 'none',
@@ -242,20 +242,20 @@ const co2_emissions_scenario = {
         {
           value: 90,
           itemStyle: {
-            color: '#C3D1DC'
+            color: '#D8E2E7'
           }
         },
         {
           value: 30,
           itemStyle: {
-            color: '#E6A100'
+            color: '#E8986B'
           }
         },
       ],
       markLine: {
         silent: true,
         lineStyle: {
-          color: '#BE880B',
+          color: '#E8986B',
           type: 'solid'
         },
         symbol: 'none',

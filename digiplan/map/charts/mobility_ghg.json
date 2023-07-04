@@ -1,4 +1,7 @@
 {
+  "grid": {
+    "bottom": "20%"
+  },
   "xAxis": {
     "type": "value",
     "show": true,
@@ -24,7 +27,7 @@
       "type": "bar",
       "barWidth": "16",
       "stack": "total",
-      "color": "#C8D8E4",
+      "color": "#D8E2E7",
       "label": {
         "show": false
       },
@@ -37,7 +40,7 @@
       "name": "Konventionell",
       "type": "bar",
       "stack": "total",
-      "color": "#647078",
+      "color": "#A1B3BC",
       "label": {
         "show": false
       },
@@ -50,7 +53,7 @@
       "name": "Erneuerbare Energien",
       "type": "bar",
       "stack": "total",
-      "color": "#A8E7BA",
+      "color": "#06DFA7",
       "label": {
         "show": false
       },

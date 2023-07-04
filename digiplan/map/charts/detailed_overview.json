@@ -29,7 +29,7 @@
     "top": "10%",
     "left": "3%",
     "right": "15%",
-    "bottom": "10%",
+    "bottom": "20%",
     "containLabel": true
   },
   "yAxis": {
@@ -55,7 +55,7 @@
       "name": "Wind turbine",
       "type": "bar",
       "stack": "production",
-      "color": "#1F82C0",
+      "color": "#6A89CC",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -68,7 +68,7 @@
       "name": "Outdoor PV",
       "type": "bar",
       "stack": "production",
-      "color": "#F6B93B",
+      "color": "#EFAD25",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -94,7 +94,7 @@
       "name": "Biomass",
       "type": "bar",
       "stack": "production",
-      "color": "#98D47E",
+      "color": "#52C41A",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -108,7 +108,7 @@
       "type": "bar",
       "barWidth": "16",
       "stack": "production",
-      "color": "#CFCFCF",
+      "color": "#A9BDE8",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -122,7 +122,7 @@
       "type": "bar",
       "barWidth": "16",
       "stack": "demand",
-      "color": "#F5F5DC",
+      "color": "#D3D3D3",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -135,7 +135,7 @@
       "name": "Electricity Household Demand",
       "type": "bar",
       "stack": "demand",
-      "color": "#A8DADC",
+      "color": "#969696",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -149,7 +149,7 @@
       "type": "bar",
       "barWidth": "35",
       "stack": "demand",
-      "color": "#C27BA0",
+      "color": "#616161",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -162,7 +162,7 @@
       "name": "BEV",
       "type": "bar",
       "stack": "demand",
-      "color": "#B0BEC5",
+      "color": "#2F2F2F",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,

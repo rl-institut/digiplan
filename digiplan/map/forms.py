@@ -1,19 +1,9 @@
 from itertools import count  # noqa: D100
 
-from django.db.models import Max, Min
-from django.forms import (
-    BooleanField,
-    Form,
-    IntegerField,
-    MultipleChoiceField,
-    MultiValueField,
-    TextInput,
-    renderers,
-)
+from django.forms import BooleanField, Form, IntegerField, TextInput, renderers
 from django.utils.safestring import mark_safe
 from django_mapengine import legend
 
-from . import models
 from .widgets import SwitchWidget
 
 
@@ -43,39 +33,6 @@ class StaticLayerForm(TemplateForm):  # noqa: D101
     def __init__(self, layer: legend.LegendLayer, *args, **kwargs) -> None:  # noqa: ANN002, D107
         super().__init__(*args, **kwargs)
         self.layer = layer
-
-        if hasattr(layer.model, "filters"):
-            self.has_filters = True
-            for filter_ in layer.layer.model.filters:
-                if filter_.type == models.LayerFilterType.Range:
-                    filter_min = layer.layer.model.vector_tiles.aggregate(Min(filter_.name))[f"{filter_.name}__min"]
-                    filter_max = layer.layer.model.vector_tiles.aggregate(Max(filter_.name))[f"{filter_.name}__max"]
-                    self.fields[filter_.name] = MultiValueField(
-                        label=getattr(layer.layer.model, filter_.name).field.verbose_name,
-                        fields=[IntegerField(), IntegerField()],
-                        widget=TextInput(
-                            attrs={
-                                "class": "js-slider",
-                                "data-type": "double",
-                                "data-min": filter_min,
-                                "data-max": filter_max,
-                                "data-from": filter_min,
-                                "data-to": filter_max,
-                                "data-grid": True,
-                            },
-                        ),
-                    )
-                elif filter_.type == models.LayerFilterType.Dropdown:
-                    filter_values = (
-                        layer.layer.model.vector_tiles.values_list(filter_.name, flat=True)
-                        .order_by(filter_.name)
-                        .distinct()
-                    )
-                    self.fields[filter_.name] = MultipleChoiceField(
-                        choices=[(value, value) for value in filter_values],
-                    )
-                else:
-                    raise ValueError(f"Unknown filter type '{filter_.type}'")
 
 
 class PanelForm(TemplateForm):  # noqa: D101

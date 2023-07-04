@@ -1,4 +1,7 @@
 {
+  "grid": {
+    "bottom": "20%"
+  },
   "xAxis": {
     "type": "value",
     "show": true,
@@ -24,7 +27,7 @@
       "type": "bar",
       "barWidth": "16",
       "stack": "total",
-      "color": "#F5F5DC",
+      "color": "#B3B3B3",
       "label": {
         "show": false
       },
@@ -37,7 +40,7 @@
       "name": "Household Heat Demand",
       "type": "bar",
       "stack": "total",
-      "color": "#A8DADC",
+      "color": "#7C7C7C",
       "label": {
         "show": false
       },
@@ -50,7 +53,7 @@
       "name": "Industry Heat Demand",
       "type": "bar",
       "stack": "total",
-      "color": "#C27BA0",
+      "color": "#4F4F4F",
       "label": {
         "show": false
       },

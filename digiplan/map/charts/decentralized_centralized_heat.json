@@ -1,4 +1,7 @@
 {
+  "grid": {
+    "bottom": "28%"
+  },
   "legend": {
     "data": [
       "Kohleofen",
@@ -12,7 +15,7 @@
       "Power to Heat",
       "Große Solarthermiekollektoren"
     ],
-    "bottom": "12"
+    "bottom": "0"
   },
   "brush": {
     "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],
@@ -50,7 +53,7 @@
       "type": "bar",
       "barWidth": "16",
       "stack": "five",
-      "color": "#604F4F",
+      "color": "#FFF7EC",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -63,7 +66,7 @@
       "name": "Holzofen",
       "type": "bar",
       "stack": "five",
-      "color": "#610B0B",
+      "color": "#FEE8C8",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -76,7 +79,7 @@
       "name": "Gasheizkessel",
       "type": "bar",
       "stack": "five",
-      "color": "#B1BEC6",
+      "color": "#FDD49E",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -89,7 +92,7 @@
       "name": "Wärmepumpe",
       "type": "bar",
       "stack": "five",
-      "color": "#E6772E",
+      "color": "#FDBB84",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -102,7 +105,7 @@
       "name": "Thermische Energiespeicher",
       "type": "bar",
       "stack": "five",
-      "color": "#DF3A01",
+      "color": "#FC8D59",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -115,7 +118,7 @@
       "name": "Solarthermiekollektor",
       "type": "bar",
       "stack": "five",
-      "color": "#FFD660",
+      "color": "#EF6548",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -129,7 +132,7 @@
       "type": "bar",
       "barWidth": "16",
       "stack": "four",
-      "color": "#B1BEC6",
+      "color": "#D7301F",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -142,7 +145,7 @@
       "name": "Große Wärmepumpen",
       "type": "bar",
       "stack": "four",
-      "color": "#E6772E",
+      "color": "#B30000",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -156,7 +159,7 @@
       "type": "bar",
       "barWidth": "35",
       "stack": "four",
-      "color": "#D7DF01",
+      "color": "#7F0000",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -169,7 +172,7 @@
       "name": "Große Solarthermiekollektoren",
       "type": "bar",
       "stack": "four",
-      "color": "#FFD660",
+      "color": "#3F0000",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
