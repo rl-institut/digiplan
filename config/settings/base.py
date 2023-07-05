@@ -1,5 +1,7 @@
 """Base settings to build other settings files upon."""
+import logging
 import os
+import sys
 
 import environ
 from django.core.exceptions import ValidationError
@@ -237,6 +239,22 @@ CELERY_BROKER_URL = env("CELERY_BROKER_URL")
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#std:setting-result_backend
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 
+# test
+TESTING = "test" in sys.argv[1:]
+if TESTING:
+    logging.info("In TEST Mode - Disableling Migrations")
+
+    class DisableMigrations:
+        """Disables migrations for test mode."""
+
+        def __contains__(self, item) -> bool:  # noqa: D105, ANN001
+            return True
+
+        def __getitem__(self, item):  # noqa: D105, ANN001, ANN204
+            return None
+
+    MIGRATION_MODULES = DisableMigrations()
+
 # Your stuff...
 # ------------------------------------------------------------------------------
 PASSWORD_PROTECTION = env.bool("PASSWORD_PROTECTION", False)
@@ -341,6 +359,12 @@ MAP_ENGINE_CHOROPLETHS = [
         title=_("Energie Erneuerbare"),
         unit=_("GWh"),
     ),
+    setup.Choropleth(
+        "energy_share_statusquo",
+        layers=["municipality"],
+        title=_("Anteil Erneuerbare Energien am Strombedarf"),
+        unit=_("%"),
+    ),
 ]
 
 MAP_ENGINE_POPUPS = [
@@ -355,6 +379,7 @@ MAP_ENGINE_POPUPS = [
             "wind_turbines_statusquo",
             "wind_turbines_square_statusquo",
             "energy_statusquo",
+            "energy_share_statusquo",
         ],
     ),
 ]
