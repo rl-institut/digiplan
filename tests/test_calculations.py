@@ -39,6 +39,16 @@ class SimulationTest(SimpleTestCase):
         pass
 
 
+class EnergySharePerMunicipalityTest(SimpleTestCase):
+    """Test energy shares per municipality calculation."""
+
+    databases = ("default",)
+
+    def test_energy_shares_per_municipality(self):  # noqa: D102
+        results = calculations.energy_shares_per_municipality()
+        assert len(results) == 20
+
+
 class ElectricityProductionTest(SimulationTest):
     """Test electricity production calculation."""
 

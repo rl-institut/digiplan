@@ -5,7 +5,7 @@ from django.db.models import Sum
 from django_oemof.results import get_results
 from oemof.tabular.postprocessing import calculations, core
 
-from digiplan.map import config, models
+from digiplan.map import config, datapackage, models
 
 
 def calculate_square_for_value(df: pd.DataFrame) -> pd.DataFrame:
@@ -78,6 +78,23 @@ def energies_per_municipality() -> pd.DataFrame:
     )
     full_load_hours = full_load_hours.reindex(index=["wind", "pv_roof", "pv_ground", "ror", "bioenergy", "st"])
     return capacities * full_load_hours.values
+
+
+def energy_shares_per_municipality() -> pd.DataFrame:
+    """
+    Calculate energy shares of renewables from electric demand per municipality.
+
+    Returns
+    -------
+    pd.DataFrame
+        Energy share per municipality (index) and technology (column)
+    """
+    energies = energies_per_municipality()
+    demands = datapackage.get_power_demand()
+    total_demand = pd.concat([d["2022"] for d in demands.values()], axis=1).sum(axis=1)
+    total_demand_share = total_demand / total_demand.sum()
+    energies = energies.reindex(range(20))
+    return energies.mul(total_demand_share, axis=0)
 
 
 def detailed_overview(simulation_id: int) -> pd.DataFrame:  # noqa: ARG001
