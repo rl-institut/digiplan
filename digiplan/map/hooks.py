@@ -1,10 +1,8 @@
 """Module to implement hooks for django-oemof."""
 
-import pandas as pd
-from django.conf import settings
 from django.http import HttpRequest
 
-from digiplan.map import config, forms
+from digiplan.map import config, datapackage, forms
 
 
 def read_parameters(scenario: str, parameters: dict, request: HttpRequest) -> dict:  # noqa: ARG001
@@ -62,8 +60,7 @@ def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) ->
     """
     year = "2045" if scenario == "scenario_2045" else "2022"
     for sector, slider in (("hh", "s_v_2"), ("cts", "s_v_3"), ("ind", "s_v_4")):
-        demand_filename = settings.DIGIPIPE_DIR.path("scalars").path(f"demand_{sector}_power_demand.csv")
-        demand = pd.read_csv(demand_filename)
+        demand = datapackage.get_power_demand(sector)[sector]
         data[f"ABW-electricity-demand_{sector}"] = {"amount": float(demand[year].sum()) * data.pop(slider) / 100}
     return data
 
@@ -89,12 +86,9 @@ def adapt_heat_demand(scenario: str, data: dict, request: HttpRequest) -> dict: 
     year = "2045" if scenario == "scenario_2045" else "2022"
     for sector, slider in (("hh", "w_v_3"), ("cts", "w_v_4"), ("ind", "w_v_5")):
         percentage = data.pop(slider)
-        for dataset_loc, loc in (("cen", "central"), ("dec", "decentral")):
-            demand_filename = settings.DIGIPIPE_DIR.path("scalars").path(
-                f"demand_{sector}_heat_demand_{dataset_loc}.csv",
-            )
-            demand = pd.read_csv(demand_filename)
-            data[f"ABW-heat_{loc}-demand_{sector}"] = {
+        for distribution, distribution_name in (("cen", "central"), ("dec", "decentral")):
+            demand = datapackage.get_heat_demand(sector, distribution)[sector][distribution]
+            data[f"ABW-heat_{distribution_name}-demand_{sector}"] = {
                 "amount": float(demand[year].sum()) * percentage / 100,
             }
     return data
