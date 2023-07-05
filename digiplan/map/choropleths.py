@@ -77,14 +77,21 @@ class Choropleth:
         return JsonResponse({"values": values, "paintProperties": paint_properties})
 
 
+class EnergyShareChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return calculations.energy_shares_per_municipality().sum(axis=1).to_dict()
+
+
 class EnergyChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         return calculations.energies_per_municipality().sum(axis=1).to_dict()
 
 
-class EnergyShareChoropleth(Choropleth):  # noqa: D101
+class EnergyCapitaChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.energy_shares_per_municipality().sum(axis=1).to_dict()
+        energies = calculations.energies_per_municipality()
+        energies_per_capita = calculations.calculate_capita_for_value(energies)
+        return energies_per_capita.sum(axis=1).to_dict()
 
 
 class CapacityChoropleth(Choropleth):  # noqa: D101
@@ -133,4 +140,5 @@ CHOROPLETHS: dict[str, Union[Callable, type(Choropleth)]] = {
     "wind_turbines_square_statusquo": WindTurbinesSquareChoropleth,
     "energy_statusquo": EnergyChoropleth,
     "energy_share_statusquo": EnergyShareChoropleth,
+    "energy_capita_statusquo": EnergyCapitaChoropleth,
 }

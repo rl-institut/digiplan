@@ -36,6 +36,37 @@ def calculate_square_for_value(df: pd.DataFrame) -> pd.DataFrame:
     return result
 
 
+def calculate_capita_for_value(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Calculate values related to municipality population.
+
+    Parameters
+    ----------
+    df: pd.DataFrame
+        Index holds municipality IDs, columns hold random entries
+
+    Returns
+    -------
+    pd.DataFrame
+        Each value is multiplied by related municipality population share
+    """
+    is_series = False
+    if isinstance(df, pd.Series):
+        is_series = True
+        df = pd.DataFrame(df)  # noqa: PD901
+
+    population = (
+        pd.DataFrame.from_records(models.Population.objects.filter(year=2022).values("id", "value"))
+        .set_index("id")
+        .sort_index()
+    )
+    population_share = population / population.sum()
+    result = df.sort_index() * population_share.to_numpy()
+    if is_series:
+        return result.iloc[:, 0]
+    return result
+
+
 def capacities_per_municipality() -> pd.DataFrame:
     """
     Calculate capacity of renewables per municipality.

@@ -365,6 +365,12 @@ MAP_ENGINE_CHOROPLETHS = [
         title=_("Anteil Erneuerbare Energien am Strombedarf"),
         unit=_("%"),
     ),
+    setup.Choropleth(
+        "energy_capita_statusquo",
+        layers=["municipality"],
+        title=_("Gewonnene Energie aus EE je EW"),
+        unit=_("MWh"),
+    ),
 ]
 
 MAP_ENGINE_POPUPS = [
@@ -380,6 +386,7 @@ MAP_ENGINE_POPUPS = [
             "wind_turbines_square_statusquo",
             "energy_statusquo",
             "energy_share_statusquo",
+            "energy_capita_statusquo",
         ],
     ),
 ]
