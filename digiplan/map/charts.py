@@ -454,7 +454,7 @@ class WindTurbinesRegionChart(Chart):
 
     lookup = "wind_turbines"
 
-    def get_chart_data(self) -> None:
+    def get_chart_data(self) -> list[int]:
         """Calculate population for whole region."""
         return [int(models.WindTurbine.quantity_per_municipality().sum())]
 
@@ -464,7 +464,7 @@ class WindTurbinesSquareRegionChart(Chart):
 
     lookup = "wind_turbines"
 
-    def get_chart_data(self) -> None:
+    def get_chart_data(self) -> list[float]:
         """Calculate population for whole region."""
         return [float(calculations.calculate_square_for_value(models.WindTurbine.quantity_per_municipality()).sum())]
 
