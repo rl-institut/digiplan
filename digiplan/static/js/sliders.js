@@ -217,13 +217,15 @@ function toggleFormFields(formfield_id) {
     if (document.getElementById("id_s_w_3").checked === false && document.getElementById("id_s_w_5").checked === false) {
       document.getElementById("id_s_w_4").checked = true;
     }
-    else {
+    if (document.getElementById("id_s_w_3").checked === true) {
       uncheckSW3();
-      checkSW4();
-      document.getElementById("id_s_w_5").checked = false;
-      $(`#id_s_w_5_1`).data("ionRangeSlider").update({block:true});
-      $(`#id_s_w_5_2`).data("ionRangeSlider").update({block:true});
     }
+    if (document.getElementById("id_s_w_5").checked === true) {
+      document.getElementById("id_s_w_5").checked = false;
+      $(`#id_s_w_5_1`).data("ionRangeSlider").update({block: true});
+      $(`#id_s_w_5_2`).data("ionRangeSlider").update({block: true});
+    }
+    checkSW4();
   }
   if (formfield_id === "id_s_w_4_1") {
     if (document.getElementById("id_s_w_4_2").checked === false) {
