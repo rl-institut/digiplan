@@ -202,17 +202,16 @@ function toggleFormFields(formfield_id) {
     if (document.getElementById("id_s_w_4").checked === false && document.getElementById("id_s_w_5").checked === false) {
       document.getElementById("id_s_w_3").checked = true;
     }
-    else {
+    if (document.getElementById("id_s_w_4").checked === true) {
       uncheckSW4();
-      let new_max = $(`#id_s_w_1`).data("ionRangeSlider").result.max * 749;
-      $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_max});
-      document.getElementById("id_s_w_4").checked = false;
-      document.getElementById("id_s_w_4_1").disabled = true;
-      document.getElementById("id_s_w_4_2").disabled = true;
+    }
+    if (document.getElementById("id_s_w_5").checked === true) {
       document.getElementById("id_s_w_5").checked = false;
       $(`#id_s_w_5_1`).data("ionRangeSlider").update({block:true});
       $(`#id_s_w_5_2`).data("ionRangeSlider").update({block:true});
     }
+    let new_max = $(`#id_s_w_1`).data("ionRangeSlider").result.max * 749;
+    $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_max});
   }
   if (formfield_id === "id_s_w_4") {
     if (document.getElementById("id_s_w_3").checked === false && document.getElementById("id_s_w_5").checked === false) {
@@ -254,9 +253,13 @@ function toggleFormFields(formfield_id) {
     if (document.getElementById("id_s_w_3").checked === false && document.getElementById("id_s_w_4").checked === false) {
       document.getElementById("id_s_w_5").checked = true;
     }
-    else {
+    if (document.getElementById("id_s_w_3").checked === true){
       uncheckSW3();
+    }
+    if (document.getElementById("id_s_w_4").checked === true){
       uncheckSW4();
+    }
+    else {
       $(`#id_s_w_5_1`).data("ionRangeSlider").update({block:false});
       $(`#id_s_w_5_2`).data("ionRangeSlider").update({block:false});
     }
@@ -353,12 +356,11 @@ function addMarks(data, marks) {
 }
 
 $(document).ready(function () {
+  document.getElementById("id_s_w_4").checked = true;
   document.getElementById("id_s_w_4_1").checked = true;
   let new_max = $(`#id_s_w_1`).data("ionRangeSlider").result.max * 2077;
   $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_max});
   uncheckSW4();
-  let new_maxx = $(`#id_s_w_1`).data("ionRangeSlider").result.max * 749;
-  $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_maxx});
   toggleFormFields("id_s_w_3");
   $(`#id_s_w_5_1`).data("ionRangeSlider").update({block:true});
   $(`#id_s_w_5_2`).data("ionRangeSlider").update({block:true});
