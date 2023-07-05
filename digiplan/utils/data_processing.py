@@ -56,7 +56,7 @@ MODELS = [
 ]
 
 
-def load_regions(regions: list[Model] = None, *, verbose: bool = True) -> None:
+def load_regions(regions: list[Model] | None = None, *, verbose: bool = True) -> None:
     """Load region geopackages into region models."""
     regions = regions or REGIONS
     for region in regions:
@@ -83,7 +83,7 @@ def load_regions(regions: list[Model] = None, *, verbose: bool = True) -> None:
         instance.save(strict=True, verbose=verbose)
 
 
-def load_data(models: list[Model] = None) -> None:
+def load_data(models: list[Model] | None = None) -> None:
     """Load geopackage-based data into models."""
     models = models or MODELS
     for model in models:
@@ -133,7 +133,7 @@ def load_population() -> None:
             entry.save()
 
 
-def empty_data(models: list[Model] = None) -> None:
+def empty_data(models: list[Model] | None = None) -> None:
     """Delete all data from given models."""
     models = models or MODELS
     for model in models:

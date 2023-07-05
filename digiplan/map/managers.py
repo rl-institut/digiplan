@@ -1,4 +1,6 @@
 """Module to hold MVT managers."""
+from typing import Optional
+
 import django.db.models
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models.functions import Transform
@@ -28,13 +30,19 @@ class Y(models.functions.Func):  # noqa: D101
 class MVTManager(models.Manager):
     """Manager to get MVTs from model geometry using postgres MVT abilities."""
 
-    def __init__(self, *args, geo_col: str = "geom", columns: list[str] = None, **kwargs) -> None:  # noqa: ANN002
+    def __init__(
+        self,
+        *args,  # noqa: ANN002
+        geo_col: str = "geom",
+        columns: Optional[list[str]] = None,
+        **kwargs,
+    ) -> None:
         """Init."""
         super().__init__(*args, **kwargs)
         self.geo_col = geo_col
         self.columns = columns
 
-    def get_mvt_query(self, x: int, y: int, z: int, filters: dict = None) -> tuple:
+    def get_mvt_query(self, x: int, y: int, z: int, filters: Optional[dict] = None) -> tuple:
         """Build MVT query; might be overwritten in child class."""
         filters = filters or {}
         return self._build_mvt_query(x, y, z, filters)

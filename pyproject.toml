@@ -117,6 +117,7 @@ ignore = [
   "RET504",  # Unnecessary variable assignment before `return` statement
   "G004",    # Logging statement uses f-string
   "PD011",   # Use `.to_numpy()` instead of `.values`  (does not work out of the box)
+  "RUF012",  # Mutable class attributes should be annotated with `typing.ClassVar`
 ]
 fix = true
 show-fixes = true
