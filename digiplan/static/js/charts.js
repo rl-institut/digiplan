@@ -321,7 +321,13 @@ document.addEventListener("show.bs.tab", resizeCharts);
 
 function createChart(div_id, options) {
   const chartElement = document.getElementById(div_id);
-  const chart = echarts.init(chartElement, null, {renderer: 'svg'});
+  let chart;
+  if (echarts.getInstanceByDom(chartElement)) {
+    chart =  echarts.getInstanceByDom(chartElement);
+    chart.clear();
+  } else {
+    chart = echarts.init(chartElement, null, {renderer: 'svg'});
+  }
   chart.setOption(options);
   chart.resize();
 }
