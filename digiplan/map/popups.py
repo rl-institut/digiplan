@@ -204,6 +204,23 @@ class EnergyCapitaPopup(RegionPopup):
         return chart_options
 
 
+class EnergySquarePopup(RegionPopup):
+    """Popup to show energy shares per km²."""
+
+    lookup = "capacity"
+    title = _("Gewonnene Energie pro km²")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.calculate_square_for_value(calculations.energies_per_municipality())
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Energie pro km²")
+        chart_options["yAxis"]["name"] = _("MWh")
+        return chart_options
+
+
 class PopulationPopup(RegionPopup):
     """Popup to show Population."""
 
@@ -310,6 +327,7 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "energy_statusquo": EnergyPopup,
     "energy_share_statusquo": EnergySharePopup,
     "energy_capita_statusquo": EnergyCapitaPopup,
+    "energy_square_statusquo": EnergySquarePopup,
     "capacity_statusquo": CapacityPopup,
     "capacity_square_statusquo": CapacitySquarePopup,
     "renewable_electricity_production": RenewableElectricityProduction2045Popup,

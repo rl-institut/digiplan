@@ -94,6 +94,13 @@ class EnergyCapitaChoropleth(Choropleth):  # noqa: D101
         return energies_per_capita.sum(axis=1).to_dict()
 
 
+class EnergySquareChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        energies = calculations.energies_per_municipality()
+        energies_per_square = calculations.calculate_square_for_value(energies)
+        return energies_per_square.sum(axis=1).to_dict()
+
+
 class CapacityChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> pd.DataFrame:  # noqa: D102
         capacities = calculations.capacities_per_municipality().sum(axis=1)
@@ -141,4 +148,5 @@ CHOROPLETHS: dict[str, Union[Callable, type(Choropleth)]] = {
     "energy_statusquo": EnergyChoropleth,
     "energy_share_statusquo": EnergyShareChoropleth,
     "energy_capita_statusquo": EnergyCapitaChoropleth,
+    "energy_square_statusquo": EnergySquareChoropleth,
 }

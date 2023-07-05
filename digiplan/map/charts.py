@@ -388,6 +388,23 @@ class EnergyCapitaRegionChart(Chart):
         return chart_options
 
 
+class EnergySquareRegionChart(Chart):
+    """Chart for regional energy shares per square meter."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        return calculations.calculate_square_for_value(calculations.energy_shares_per_municipality()).sum()
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Energie pro km²")
+        chart_options["yAxis"]["name"] = _("MWh")
+        return chart_options
+
+
 CHARTS: dict[str, type[Chart]] = {
     "electricity_overview": ElectricityOverviewChart,
     "heat_overview": HeatOverviewChart,
@@ -395,6 +412,7 @@ CHARTS: dict[str, type[Chart]] = {
     "energy_statusquo_region": EnergyRegionChart,
     "energy_share_statusquo_region": EnergyShareRegionChart,
     "energy_capita_statusquo_region": EnergyCapitaRegionChart,
+    "energy_square_statusquo_region": EnergySquareRegionChart,
 }
 
 

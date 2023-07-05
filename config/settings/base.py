@@ -371,6 +371,12 @@ MAP_ENGINE_CHOROPLETHS = [
         title=_("Gewonnene Energie aus EE je EW"),
         unit=_("MWh"),
     ),
+    setup.Choropleth(
+        "energy_square_statusquo",
+        layers=["municipality"],
+        title=_("Gewonnene Energie aus EE je km²"),
+        unit=_("MWh"),
+    ),
 ]
 
 MAP_ENGINE_POPUPS = [
@@ -387,6 +393,7 @@ MAP_ENGINE_POPUPS = [
             "energy_statusquo",
             "energy_share_statusquo",
             "energy_capita_statusquo",
+            "energy_square_statusquo",
         ],
     ),
 ]
