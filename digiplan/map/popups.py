@@ -126,6 +126,19 @@ class SimulationPopup(RegionPopup, abc.ABC):
         self.result = list(results.get_results(self.simulation_id, [self.calculation]).values())[0]
 
 
+class ClusterWindPopup(popups.Popup):
+    """Popup for wind clusters."""
+
+    def __init__(self, lookup: str, selected_id: int, **kwargs) -> None:  # noqa: ARG002
+        """Initialize popup with default cluster template."""
+        self.lookup = lookup
+        super().__init__(lookup="cluster", selected_id=selected_id)
+
+    def get_context_data(self) -> dict:
+        """Return wind turbine as context data."""
+        return {"object": models.WindTurbine.objects.get(pk=self.selected_id)}
+
+
 class CapacityPopup(RegionPopup):
     """Popup to show capacities."""
 
@@ -271,6 +284,7 @@ class NumberWindturbinesSquarePopup(RegionPopup):
 
 
 POPUPS: dict[str, type(popups.Popup)] = {
+    "wind": ClusterWindPopup,
     "population_statusquo": PopulationPopup,
     "population_density_statusquo": PopulationDensityPopup,
     "energy_statusquo": EnergyPopup,
