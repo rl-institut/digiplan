@@ -6,7 +6,7 @@ from typing import Any, Optional
 
 from django.utils.translation import gettext_lazy as _
 
-from digiplan.map import calculations, config
+from digiplan.map import calculations, config, models
 from digiplan.map.utils import merge_dicts
 
 
@@ -327,6 +327,33 @@ class MobilityCTSChart(Chart):
         return self.chart_options
 
 
+class PopulationRegionChart(Chart):
+    """Chart for regional population."""
+
+    lookup = "population"
+
+    def get_chart_data(self) -> None:
+        """Calculate population for whole region."""
+        return models.Population.quantity_per_municipality_per_year().sum()
+
+
+class PopulationDensityRegionChart(Chart):
+    """Chart for regional population density."""
+
+    lookup = "population"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        return calculations.calculate_square_for_value(models.Population.quantity_per_municipality_per_year()).sum()
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Bevölkerungsdichte")
+        chart_options["yAxis"]["name"] = _("EW/km²")
+        return chart_options
+
+
 class CapacityRegionChart(Chart):
     """Chart for regional capacities."""
 
@@ -335,6 +362,23 @@ class CapacityRegionChart(Chart):
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
         return calculations.capacities_per_municipality().sum()
+
+
+class CapacitySquareRegionChart(Chart):
+    """Chart for regional capacities per square meter."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        return calculations.calculate_square_for_value(calculations.capacities_per_municipality()).sum()
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Installierte Leistung EE je km²")
+        chart_options["yAxis"]["name"] = _("MW")
+        return chart_options
 
 
 class EnergyRegionChart(Chart):
@@ -405,14 +449,46 @@ class EnergySquareRegionChart(Chart):
         return chart_options
 
 
+class WindTurbinesRegionChart(Chart):
+    """Chart for regional wind turbines."""
+
+    lookup = "wind_turbines"
+
+    def get_chart_data(self) -> None:
+        """Calculate population for whole region."""
+        return [int(models.WindTurbine.quantity_per_municipality().sum())]
+
+
+class WindTurbinesSquareRegionChart(Chart):
+    """Chart for regional wind turbines per square meter."""
+
+    lookup = "wind_turbines"
+
+    def get_chart_data(self) -> None:
+        """Calculate population for whole region."""
+        return [float(calculations.calculate_square_for_value(models.WindTurbine.quantity_per_municipality()).sum())]
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Anzahl Windenergieanlagen pro km²")
+        chart_options["yAxis"]["name"] = _("")
+        return chart_options
+
+
 CHARTS: dict[str, type[Chart]] = {
     "electricity_overview": ElectricityOverviewChart,
     "heat_overview": HeatOverviewChart,
+    "population_statusquo_region": PopulationRegionChart,
+    "population_density_statusquo_region": PopulationDensityRegionChart,
     "capacity_statusquo_region": CapacityRegionChart,
+    "capacity_square_statusquo_region": CapacitySquareRegionChart,
     "energy_statusquo_region": EnergyRegionChart,
     "energy_share_statusquo_region": EnergyShareRegionChart,
     "energy_capita_statusquo_region": EnergyCapitaRegionChart,
     "energy_square_statusquo_region": EnergySquareRegionChart,
+    "wind_turbines_statusquo_region": WindTurbinesRegionChart,
+    "wind_turbines_square_statusquo_region": WindTurbinesSquareRegionChart,
 }
 
 
