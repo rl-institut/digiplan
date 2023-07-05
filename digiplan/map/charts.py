@@ -4,6 +4,8 @@ import json
 import pathlib
 from typing import Any, Optional
 
+from django.utils.translation import gettext_lazy as _
+
 from digiplan.map import calculations, config
 from digiplan.map.utils import merge_dicts
 
@@ -335,10 +337,46 @@ class CapacityRegionChart(Chart):
         return calculations.capacities_per_municipality().sum()
 
 
+class EnergyRegionChart(Chart):
+    """Chart for regional energy."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        return calculations.energies_per_municipality().sum()
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Energies per technology")
+        chart_options["yAxis"]["name"] = _("MWh")
+        return chart_options
+
+
+class EnergyShareRegionChart(Chart):
+    """Chart for regional energy shares."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        return calculations.energy_shares_per_municipality().sum()
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Energy shares per technology")
+        chart_options["yAxis"]["name"] = _("%")
+        return chart_options
+
+
 CHARTS: dict[str, type[Chart]] = {
     "electricity_overview": ElectricityOverviewChart,
     "heat_overview": HeatOverviewChart,
     "capacity_statusquo_region": CapacityRegionChart,
+    "energy_statusquo_region": EnergyRegionChart,
+    "energy_share_statusquo_region": EnergyShareRegionChart,
 }
 
 
