@@ -11,7 +11,7 @@ from django_mapengine import popups
 from django_oemof import results
 from oemof.tabular.postprocessing import core
 
-from . import calculations, charts, config, models
+from . import calculations, charts, models
 
 Source = namedtuple("Source", ("name", "url"))
 
@@ -170,7 +170,7 @@ class EnergyPopup(RegionPopup):
     """Popup to show energies."""
 
     lookup = "capacity"
-    title = "Energies"
+    title = _("Energies")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.energies_per_municipality()
@@ -187,7 +187,7 @@ class EnergySharePopup(RegionPopup):
     """Popup to show energy shares."""
 
     lookup = "capacity"
-    title = "Energie Shares"
+    title = _("Energie Shares")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.energy_shares_per_municipality()
@@ -262,37 +262,48 @@ class PopulationDensityPopup(RegionPopup):
         return chart_options
 
 
-class RenewableElectricityProductionPopup(RegionPopup):
-    """Popup to show renewable electricity production values."""
+class EmployeesPopup(RegionPopup):
+    """Popup to show employees."""
 
-    unit = "MWh"
+    lookup = "wind_turbines"
+    title = _("Beschäftigte")
 
-    def get_region_value(self) -> float:  # noqa: D102
-        return self.result.sum() / 1000
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.employment_per_municipality()
 
-    def get_municipality_value(self) -> Optional[float]:  # noqa: D102
-        return None
+    def get_chart_data(self) -> Iterable:
+        """Return single value for employeess in current municipality."""
+        return [int(self.detailed_data.loc[self.selected_id])]
 
-    def get_chart_data(self) -> Iterable:  # noqa: D102
-        self.result.index = self.result.index.map(lambda x: config.SIMULATION_NAME_MAPPING[x[0]])
-        return self.result
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Beschäftigte")
+        chart_options["yAxis"]["name"] = _("")
+        del chart_options["series"][0]["name"]
+        return chart_options
 
 
-class RenewableElectricityProduction2045Popup(SimulationPopup):
-    """Popup to show renewable electricity production values."""
+class CompaniesPopup(RegionPopup):
+    """Popup to show companies."""
 
-    unit = "MWh"
-    calculation = calculations.electricity_production
+    lookup = "wind_turbines"
+    title = _("Betriebe")
 
-    def get_region_value(self) -> float:  # noqa: D102
-        return self.result.sum() / 1000
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.companies_per_municipality()
 
-    def get_municipality_value(self) -> Optional[float]:  # noqa: D102
-        return None
+    def get_chart_data(self) -> Iterable:
+        """Return single value for companies in current municipality."""
+        return [int(self.detailed_data.loc[self.selected_id])]
 
-    def get_chart_data(self) -> Iterable:  # noqa: D102
-        self.result.index = self.result.index.map(lambda x: config.SIMULATION_NAME_MAPPING[x[0]])
-        return self.result
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Betriebe")
+        chart_options["yAxis"]["name"] = _("")
+        del chart_options["series"][0]["name"]
+        return chart_options
 
 
 class NumberWindturbinesPopup(RegionPopup):
@@ -406,13 +417,14 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "wind": ClusterWindPopup,
     "population_statusquo": PopulationPopup,
     "population_density_statusquo": PopulationDensityPopup,
+    "employees_statusquo": EmployeesPopup,
+    "companies_statusquo": CompaniesPopup,
     "energy_statusquo": EnergyPopup,
     "energy_share_statusquo": EnergySharePopup,
     "energy_capita_statusquo": EnergyCapitaPopup,
     "energy_square_statusquo": EnergySquarePopup,
     "capacity_statusquo": CapacityPopup,
     "capacity_square_statusquo": CapacitySquarePopup,
-    "renewable_electricity_production": RenewableElectricityProduction2045Popup,
     "wind_turbines_statusquo": NumberWindturbinesPopup,
     "wind_turbines_square_statusquo": NumberWindturbinesSquarePopup,
     "electricity_demand_statusquo": ElectricityDemandPopup,

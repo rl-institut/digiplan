@@ -354,6 +354,42 @@ class PopulationDensityRegionChart(Chart):
         return chart_options
 
 
+class EmployeesRegionChart(Chart):
+    """Chart for regional employees."""
+
+    lookup = "wind_turbines"
+
+    def get_chart_data(self) -> list:
+        """Calculate population for whole region."""
+        return [int(calculations.employment_per_municipality().sum())]
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Beschäftigte")
+        chart_options["yAxis"]["name"] = _("")
+        del chart_options["series"][0]["name"]
+        return chart_options
+
+
+class CompaniesRegionChart(Chart):
+    """Chart for regional companies."""
+
+    lookup = "wind_turbines"
+
+    def get_chart_data(self) -> list:
+        """Calculate population for whole region."""
+        return [int(calculations.companies_per_municipality().sum())]
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Betriebe")
+        chart_options["yAxis"]["name"] = _("")
+        del chart_options["series"][0]["name"]
+        return chart_options
+
+
 class CapacityRegionChart(Chart):
     """Chart for regional capacities."""
 
@@ -549,6 +585,8 @@ CHARTS: dict[str, type[Chart]] = {
     "heat_overview": HeatOverviewChart,
     "population_statusquo_region": PopulationRegionChart,
     "population_density_statusquo_region": PopulationDensityRegionChart,
+    "employees_statusquo_region": EmployeesRegionChart,
+    "companies_statusquo_region": CompaniesRegionChart,
     "capacity_statusquo_region": CapacityRegionChart,
     "capacity_square_statusquo_region": CapacitySquareRegionChart,
     "energy_statusquo_region": EnergyRegionChart,

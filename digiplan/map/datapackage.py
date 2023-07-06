@@ -7,6 +7,18 @@ import pandas as pd
 from django.conf import settings
 
 
+def get_employment() -> pd.DataFrame:
+    """Return employment data."""
+    employment_filename = settings.DIGIPIPE_DIR.path("scalars").path("employment.csv")
+    return pd.read_csv(employment_filename, index_col=0)
+
+
+def get_batteries() -> pd.DataFrame:
+    """Return battery data."""
+    battery_filename = settings.DIGIPIPE_DIR.path("scalars").path("bnetza_mastr_storage_stats_muns.csv")
+    return pd.read_csv(battery_filename)
+
+
 def get_power_demand(sector: Optional[str] = None) -> dict[str, pd.DataFrame]:
     """Return power demand for given sector or all sectors."""
     sectors = tuple(sector) if sector else ("hh", "cts", "ind")

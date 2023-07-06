@@ -66,6 +66,16 @@ def calculate_capita_for_value(df: pd.DataFrame) -> pd.DataFrame:
     return result
 
 
+def employment_per_municipality() -> pd.DataFrame:
+    """Return employees per municipality."""
+    return datapackage.get_employment()["employees_total"]
+
+
+def companies_per_municipality() -> pd.DataFrame:
+    """Return companies per municipality."""
+    return datapackage.get_employment()["companies_total"]
+
+
 def capacities_per_municipality() -> pd.DataFrame:
     """
     Calculate capacity of renewables per municipality.

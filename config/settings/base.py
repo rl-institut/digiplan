@@ -356,6 +356,8 @@ MAP_ENGINE_CHOROPLETHS = [
         title=_("Einwohner_innenzahl"),
         unit=_("EW/qm"),
     ),
+    setup.Choropleth("employees_statusquo", layers=["municipality"], title=_("Beschäftigte"), unit=_("")),
+    setup.Choropleth("companies_statusquo", layers=["municipality"], title=_("Betriebe"), unit=_("")),
     setup.Choropleth("capacity_statusquo", layers=["municipality"], title=_("Installierte Leistung"), unit=_("MW")),
     setup.Choropleth(
         "capacity_square_statusquo",
@@ -427,6 +429,8 @@ MAP_ENGINE_POPUPS = [
         choropleths=[
             "population_statusquo",
             "population_density_statusquo",
+            "employees_statusquo",
+            "companies_statusquo",
             "capacity_statusquo",
             "capacity_square_statusquo",
             "wind_turbines_statusquo",

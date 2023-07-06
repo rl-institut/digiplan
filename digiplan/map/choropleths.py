@@ -126,6 +126,16 @@ class PopulationDensityChoropleth(Choropleth):  # noqa: D101
         return population_square.sum(axis=1).to_dict()
 
 
+class EmployeesChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return calculations.employment_per_municipality().to_dict()
+
+
+class CompaniesChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return calculations.companies_per_municipality().to_dict()
+
+
 class WindTurbinesChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         return models.WindTurbine.quantity_per_municipality().to_dict()
@@ -165,16 +175,18 @@ class HeatDemandCapitaChoropleth(Choropleth):  # noqa: D101
 
 
 CHOROPLETHS: dict[str, Union[Callable, type(Choropleth)]] = {
-    "capacity_statusquo": CapacityChoropleth,
-    "capacity_square_statusquo": CapacitySquareChoropleth,
     "population_statusquo": PopulationChoropleth,
     "population_density_statusquo": PopulationDensityChoropleth,
-    "wind_turbines_statusquo": WindTurbinesChoropleth,
-    "wind_turbines_square_statusquo": WindTurbinesSquareChoropleth,
+    "employees_statusquo": EmployeesChoropleth,
+    "companies_statusquo": CompaniesChoropleth,
     "energy_statusquo": EnergyChoropleth,
     "energy_share_statusquo": EnergyShareChoropleth,
     "energy_capita_statusquo": EnergyCapitaChoropleth,
     "energy_square_statusquo": EnergySquareChoropleth,
+    "capacity_statusquo": CapacityChoropleth,
+    "capacity_square_statusquo": CapacitySquareChoropleth,
+    "wind_turbines_statusquo": WindTurbinesChoropleth,
+    "wind_turbines_square_statusquo": WindTurbinesSquareChoropleth,
     "electricity_demand_statusquo": ElectricityDemandChoropleth,
     "electricity_demand_capita_statusquo": ElectricityDemandCapitaChoropleth,
     "heat_demand_statusquo": HeatDemandChoropleth,
