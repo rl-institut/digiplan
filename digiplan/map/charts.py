@@ -580,6 +580,42 @@ class HeatDemandCapitaRegionChart(Chart):
         return chart_options
 
 
+class BatteriesRegionChart(Chart):
+    """Chart for regional battery count."""
+
+    lookup = "wind_turbines"
+
+    def get_chart_data(self) -> list:
+        """Calculate population for whole region."""
+        return [int(calculations.batteries_per_municipality().sum())]
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = _("#")
+        del chart_options["series"][0]["name"]
+        return chart_options
+
+
+class BatteriesCapacityRegionChart(Chart):
+    """Chart for regional battery capacity."""
+
+    lookup = "wind_turbines"
+
+    def get_chart_data(self) -> list:
+        """Calculate population for whole region."""
+        return [int(calculations.battery_capacities_per_municipality().sum())]
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = _("#")
+        del chart_options["series"][0]["name"]
+        return chart_options
+
+
 CHARTS: dict[str, type[Chart]] = {
     "electricity_overview": ElectricityOverviewChart,
     "heat_overview": HeatOverviewChart,
@@ -599,6 +635,8 @@ CHARTS: dict[str, type[Chart]] = {
     "electricity_demand_capita_statusquo_region": ElectricityDemandCapitaRegionChart,
     "heat_demand_statusquo_region": HeatDemandRegionChart,
     "heat_demand_capita_statusquo_region": HeatDemandCapitaRegionChart,
+    "batteries_statusquo_region": BatteriesRegionChart,
+    "batteries_capacity_statusquo_region": BatteriesCapacityRegionChart,
 }
 
 

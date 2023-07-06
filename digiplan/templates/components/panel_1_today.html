@@ -94,6 +94,8 @@
                   title="{% translate "Annual heat consumption per inhabitant for space heating and domestic hot water in gigawatt hours in the household, commercial, trade and services, and agriculture (excluding industry) sectors." %}">
             {% translate "Heat Demand per Capita (kWh)" %}
           </option>
+          <option value="batteries_statusquo" title="{% translate "Anzahl Batteriespeicher" %}" selected>{% translate "Anzahl Batteriespeicher" %}</option>
+          <option value="batteries_capacity_statusquo" title="{%  translate 'Kapazität Batteriespeicher' %}">{% translate "Kapazität Batteriespeicher" %}</option>
         </optgroup>
       </select>
       <img src="{% static 'images/icons/i_info.svg' %}" id="info_tooltip" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="{% translate "Inhabitants 2021" %}">

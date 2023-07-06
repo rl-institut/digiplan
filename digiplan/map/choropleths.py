@@ -174,6 +174,16 @@ class HeatDemandCapitaChoropleth(Choropleth):  # noqa: D101
         )
 
 
+class BatteriesChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return calculations.batteries_per_municipality().to_dict()
+
+
+class BatteriesCapacityChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return calculations.battery_capacities_per_municipality().to_dict()
+
+
 CHOROPLETHS: dict[str, Union[Callable, type(Choropleth)]] = {
     "population_statusquo": PopulationChoropleth,
     "population_density_statusquo": PopulationDensityChoropleth,
@@ -191,4 +201,6 @@ CHOROPLETHS: dict[str, Union[Callable, type(Choropleth)]] = {
     "electricity_demand_capita_statusquo": ElectricityDemandCapitaChoropleth,
     "heat_demand_statusquo": HeatDemandChoropleth,
     "heat_demand_capita_statusquo": HeatDemandCapitaChoropleth,
+    "batteries_statusquo": BatteriesChoropleth,
+    "batteries_capacity_statusquo": BatteriesCapacityChoropleth,
 }

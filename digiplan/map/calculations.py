@@ -76,6 +76,16 @@ def companies_per_municipality() -> pd.DataFrame:
     return datapackage.get_employment()["companies_total"]
 
 
+def batteries_per_municipality() -> pd.DataFrame:
+    """Return battery count per municipality."""
+    return datapackage.get_batteries()["count"]
+
+
+def battery_capacities_per_municipality() -> pd.DataFrame:
+    """Return battery capacity per municipality."""
+    return datapackage.get_batteries()["storage_capacity"]
+
+
 def capacities_per_municipality() -> pd.DataFrame:
     """
     Calculate capacity of renewables per municipality.

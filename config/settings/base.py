@@ -420,6 +420,18 @@ MAP_ENGINE_CHOROPLETHS = [
         title=_("Wärmebedarf pro EinwohnerIn"),
         unit=_("MWh"),
     ),
+    setup.Choropleth(
+        "batteries_statusquo",
+        layers=["municipality"],
+        title=_("Anzahl Batteriespeicher"),
+        unit=_("#"),
+    ),
+    setup.Choropleth(
+        "batteries_capacity_statusquo",
+        layers=["municipality"],
+        title=_("Kapazität Batteriespeicher"),
+        unit=_("MWh"),
+    ),
 ]
 
 MAP_ENGINE_POPUPS = [
@@ -443,6 +455,8 @@ MAP_ENGINE_POPUPS = [
             "electricity_demand_capita_statusquo",
             "heat_demand_statusquo",
             "heat_demand_capita_statusquo",
+            "batteries_statusquo",
+            "batteries_capacity_statusquo",
         ],
     ),
     setup.Popup(

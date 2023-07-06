@@ -413,6 +413,50 @@ class HeatDemandCapitaPopup(RegionPopup):
         return chart_options
 
 
+class BatteriesPopup(RegionPopup):
+    """Popup to show battery count."""
+
+    lookup = "wind_turbines"
+    title = _("Anzahl Batteriespeicher")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.batteries_per_municipality()
+
+    def get_chart_data(self) -> Iterable:
+        """Return single value for employeess in current municipality."""
+        return [int(self.detailed_data.loc[self.selected_id])]
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Anzahl Batteriespeicher")
+        chart_options["yAxis"]["name"] = _("#")
+        del chart_options["series"][0]["name"]
+        return chart_options
+
+
+class BatteriesCapacityPopup(RegionPopup):
+    """Popup to show battery count."""
+
+    lookup = "wind_turbines"
+    title = _("Kapazität Batteriespeicher")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.battery_capacities_per_municipality()
+
+    def get_chart_data(self) -> Iterable:
+        """Return single value for employeess in current municipality."""
+        return [int(self.detailed_data.loc[self.selected_id])]
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Kapazität Batteriespeicher")
+        chart_options["yAxis"]["name"] = _("MWh")
+        del chart_options["series"][0]["name"]
+        return chart_options
+
+
 POPUPS: dict[str, type(popups.Popup)] = {
     "wind": ClusterWindPopup,
     "population_statusquo": PopulationPopup,
@@ -431,4 +475,6 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "electricity_demand_capita_statusquo": ElectricityDemandCapitaPopup,
     "heat_demand_statusquo": HeatDemandPopup,
     "heat_demand_capita_statusquo": HeatDemandCapitaPopup,
+    "batteries_statusquo": BatteriesPopup,
+    "batteries_capacity_statusquo": BatteriesCapacityPopup,
 }
