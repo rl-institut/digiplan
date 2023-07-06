@@ -333,7 +333,7 @@ MAP_ENGINE_API_MVTS = {
 }
 
 MAP_ENGINE_API_CLUSTERS = [
-    setup.ClusterAPI("wind", "map", "WindTurbine"),
+    setup.ClusterAPI("wind", "map", "WindTurbine", properties=["id"]),
     setup.ClusterAPI("pvroof", "map", "PVroof"),
     setup.ClusterAPI("pvground", "map", "PVground"),
     setup.ClusterAPI("hydro", "map", "Hydro"),
@@ -412,5 +412,9 @@ MAP_ENGINE_POPUPS = [
             "energy_capita_statusquo",
             "energy_square_statusquo",
         ],
+    ),
+    setup.Popup(
+        "wind",
+        popup_at_default_layer=True,
     ),
 ]

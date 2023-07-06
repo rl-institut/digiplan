@@ -113,10 +113,6 @@ class WindTurbine(models.Model):
     mun_id = models.IntegerField(null=True)
 
     objects = models.Manager()
-    vector_tiles = StaticMVTManager(
-        geo_col="geom",
-        columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"],
-    )
 
     data_file = "bnetza_mastr_wind_agg_region"
     layer = "bnetza_mastr_wind"

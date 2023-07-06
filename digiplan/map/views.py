@@ -106,7 +106,7 @@ def get_popup(request: HttpRequest, lookup: str, region: int) -> response.JsonRe
         containing HTML to render popup and chart options to be used in E-Chart.
     """
     map_state = request.GET.dict()
-    popup = popups.POPUPS[lookup](lookup, region, map_state)
+    popup = popups.POPUPS[lookup](lookup, region, map_state=map_state)
     return popup.render()
 
 
