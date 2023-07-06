@@ -418,6 +418,10 @@ MAP_ENGINE_POPUPS = [
             "energy_share_statusquo",
             "energy_capita_statusquo",
             "energy_square_statusquo",
+            "electricity_demand_statusquo",
+            "electricity_demand_capita_statusquo",
+            "heat_demand_statusquo",
+            "heat_demand_capita_statusquo",
         ],
     ),
 ]

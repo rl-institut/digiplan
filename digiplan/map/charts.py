@@ -476,6 +476,74 @@ class WindTurbinesSquareRegionChart(Chart):
         return chart_options
 
 
+class ElectricityDemandRegionChart(Chart):
+    """Chart for regional electricity demand."""
+
+    lookup = "electricity_demand"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        return calculations.electricity_demand_per_municipality().sum()
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Strombedarf")
+        chart_options["yAxis"]["name"] = _("GWh")
+        return chart_options
+
+
+class ElectricityDemandCapitaRegionChart(Chart):
+    """Chart for regional electricity demand per population."""
+
+    lookup = "electricity_demand"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        return calculations.calculate_capita_for_value(calculations.electricity_demand_per_municipality()).sum()
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Strombedarf pro EinwohnerIn")
+        chart_options["yAxis"]["name"] = _("kWh")
+        return chart_options
+
+
+class HeatDemandRegionChart(Chart):
+    """Chart for regional heat demand."""
+
+    lookup = "heat_demand"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        return calculations.heat_demand_per_municipality().sum()
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Wärmebedarf")
+        chart_options["yAxis"]["name"] = _("GWh")
+        return chart_options
+
+
+class HeatDemandCapitaRegionChart(Chart):
+    """Chart for regional heat demand per population."""
+
+    lookup = "heat_demand"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        return calculations.calculate_capita_for_value(calculations.heat_demand_per_municipality()).sum()
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Wärmebedarf pro EinwohnerIn")
+        chart_options["yAxis"]["name"] = _("kWh")
+        return chart_options
+
+
 CHARTS: dict[str, type[Chart]] = {
     "electricity_overview": ElectricityOverviewChart,
     "heat_overview": HeatOverviewChart,
@@ -489,6 +557,10 @@ CHARTS: dict[str, type[Chart]] = {
     "energy_square_statusquo_region": EnergySquareRegionChart,
     "wind_turbines_statusquo_region": WindTurbinesRegionChart,
     "wind_turbines_square_statusquo_region": WindTurbinesSquareRegionChart,
+    "electricity_demand_statusquo_region": ElectricityDemandRegionChart,
+    "electricity_demand_capita_statusquo_region": ElectricityDemandCapitaRegionChart,
+    "heat_demand_statusquo_region": HeatDemandRegionChart,
+    "heat_demand_capita_statusquo_region": HeatDemandCapitaRegionChart,
 }
 
 

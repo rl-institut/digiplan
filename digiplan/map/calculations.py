@@ -30,7 +30,6 @@ def calculate_square_for_value(df: pd.DataFrame) -> pd.DataFrame:
     areas = (
         pd.DataFrame.from_records(models.Municipality.objects.all().values("id", "area")).set_index("id").sort_index()
     )
-    areas = areas / areas.sum()
     result = df.sort_index() * areas.to_numpy()
     if is_series:
         return result.iloc[:, 0]
@@ -61,8 +60,7 @@ def calculate_capita_for_value(df: pd.DataFrame) -> pd.DataFrame:
         .set_index("id")
         .sort_index()
     )
-    population_share = population / population.sum()
-    result = df.sort_index() * population_share.to_numpy()
+    result = df.sort_index() * population.to_numpy()
     if is_series:
         return result.iloc[:, 0]
     return result
