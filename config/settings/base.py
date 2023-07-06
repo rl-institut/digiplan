@@ -377,6 +377,30 @@ MAP_ENGINE_CHOROPLETHS = [
         title=_("Gewonnene Energie aus EE je km²"),
         unit=_("MWh"),
     ),
+    setup.Choropleth(
+        "electricity_demand_statusquo",
+        layers=["municipality"],
+        title=_("Strombedarf"),
+        unit=_("MWh"),
+    ),
+    setup.Choropleth(
+        "electricity_demand_capita_statusquo",
+        layers=["municipality"],
+        title=_("Strombedarf pro EinwohnerIn"),
+        unit=_("MWh"),
+    ),
+    setup.Choropleth(
+        "heat_demand_statusquo",
+        layers=["municipality"],
+        title=_("Wärmebedarf"),
+        unit=_("MWh"),
+    ),
+    setup.Choropleth(
+        "heat_demand_capita_statusquo",
+        layers=["municipality"],
+        title=_("Wärmebedarf pro EinwohnerIn"),
+        unit=_("MWh"),
+    ),
 ]
 
 MAP_ENGINE_POPUPS = [
