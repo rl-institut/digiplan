@@ -179,7 +179,7 @@ class EnergyPopup(RegionPopup):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Energies per technology")
-        chart_options["yAxis"]["name"] = _("MWh")
+        chart_options["yAxis"]["name"] = _("GWh")
         return chart_options
 
 
@@ -334,6 +334,74 @@ class NumberWindturbinesSquarePopup(RegionPopup):
         return [float(self.detailed_data.loc[self.selected_id])]
 
 
+class ElectricityDemandPopup(RegionPopup):
+    """Popup to show electricity demand."""
+
+    lookup = "electricity_demand"
+    title = _("Strombedarf")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.electricity_demand_per_municipality()
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Strombedarf")
+        chart_options["yAxis"]["name"] = _("ǴWh")
+        return chart_options
+
+
+class ElectricityDemandCapitaPopup(RegionPopup):
+    """Popup to show electricity demand capita."""
+
+    lookup = "electricity_demand"
+    title = _("Strombedarf je EinwohnerIn")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.calculate_capita_for_value(calculations.electricity_demand_per_municipality())
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Strombedarf je EinwohnerIn")
+        chart_options["yAxis"]["name"] = _("kWh")
+        return chart_options
+
+
+class HeatDemandPopup(RegionPopup):
+    """Popup to show heat demand."""
+
+    lookup = "heat_demand"
+    title = _("Wärmebedarf")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.electricity_demand_per_municipality()
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Wärmebedarf")
+        chart_options["yAxis"]["name"] = _("GWh")
+        return chart_options
+
+
+class HeatDemandCapitaPopup(RegionPopup):
+    """Popup to show heat demand capita."""
+
+    lookup = "heat_demand"
+    title = _("Wärmebedarf je EinwohnerIn")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.calculate_capita_for_value(calculations.electricity_demand_per_municipality())
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Wärmebedarf je EinwohnerIn")
+        chart_options["yAxis"]["name"] = _("kWh")
+        return chart_options
+
+
 POPUPS: dict[str, type(popups.Popup)] = {
     "wind": ClusterWindPopup,
     "population_statusquo": PopulationPopup,
@@ -347,4 +415,8 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "renewable_electricity_production": RenewableElectricityProduction2045Popup,
     "wind_turbines_statusquo": NumberWindturbinesPopup,
     "wind_turbines_square_statusquo": NumberWindturbinesSquarePopup,
+    "electricity_demand_statusquo": ElectricityDemandPopup,
+    "electricity_demand_capita_statusquo": ElectricityDemandCapitaPopup,
+    "heat_demand_statusquo": HeatDemandPopup,
+    "heat_demand_capita_statusquo": HeatDemandCapitaPopup,
 }

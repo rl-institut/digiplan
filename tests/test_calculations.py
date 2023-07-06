@@ -49,6 +49,28 @@ class EnergySharePerMunicipalityTest(SimpleTestCase):
         assert len(results) == 20
 
 
+class ElectricityDemandPerMunicipalityTest(SimpleTestCase):
+    """Test electricity demand per municipality calculation."""
+
+    databases = ("default",)
+
+    def test_electricity_demand_per_municipality(self):  # noqa: D102
+        results = calculations.electricity_demand_per_municipality()
+        assert len(results) == 20
+        assert len(results.columns) == 3
+
+
+class HeatDemandPerMunicipalityTest(SimpleTestCase):
+    """Test heat demand per municipality calculation."""
+
+    databases = ("default",)
+
+    def test_heat_demand_per_municipality(self):  # noqa: D102
+        results = calculations.heat_demand_per_municipality()
+        assert len(results) == 20
+        assert len(results.columns) == 3
+
+
 class ElectricityProductionTest(SimulationTest):
     """Test electricity production calculation."""
 

@@ -138,6 +138,32 @@ class WindTurbinesSquareChoropleth(Choropleth):  # noqa: D101
         return wind_turbines_square.to_dict()
 
 
+class ElectricityDemandChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return calculations.electricity_demand_per_municipality().sum(axis=1).to_dict()
+
+
+class ElectricityDemandCapitaChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return (
+            calculations.calculate_capita_for_value(calculations.electricity_demand_per_municipality())
+            .sum(axis=1)
+            .to_dict()
+        )
+
+
+class HeatDemandChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return calculations.heat_demand_per_municipality().sum(axis=1).to_dict()
+
+
+class HeatDemandCapitaChoropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return (
+            calculations.calculate_capita_for_value(calculations.heat_demand_per_municipality()).sum(axis=1).to_dict()
+        )
+
+
 CHOROPLETHS: dict[str, Union[Callable, type(Choropleth)]] = {
     "capacity_statusquo": CapacityChoropleth,
     "capacity_square_statusquo": CapacitySquareChoropleth,
@@ -149,4 +175,8 @@ CHOROPLETHS: dict[str, Union[Callable, type(Choropleth)]] = {
     "energy_share_statusquo": EnergyShareChoropleth,
     "energy_capita_statusquo": EnergyCapitaChoropleth,
     "energy_square_statusquo": EnergySquareChoropleth,
+    "electricity_demand_statusquo": ElectricityDemandChoropleth,
+    "electricity_demand_capita_statusquo": ElectricityDemandCapitaChoropleth,
+    "heat_demand_statusquo": HeatDemandChoropleth,
+    "heat_demand_capita_statusquo": HeatDemandCapitaChoropleth,
 }

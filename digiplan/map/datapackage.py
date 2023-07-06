@@ -23,12 +23,12 @@ def get_heat_demand(
 ) -> dict[str, dict[str, pd.DataFrame]]:
     """Return heat demand for given sector and distribution."""
     sectors = tuple(sector) if sector else ("hh", "cts", "ind")
-    distributions = tuple(distribution) if distribution else ("den", "dec")
+    distributions = tuple(distribution) if distribution else ("cen", "dec")
     demand = defaultdict(dict)
     for sec in sectors:
         for dist in distributions:
             demand_filename = settings.DIGIPIPE_DIR.path("scalars").path(
                 f"demand_{sec}_heat_demand_{dist}.csv",
             )
-            demand[sector][dist] = pd.read_csv(demand_filename)
+            demand[sec][dist] = pd.read_csv(demand_filename)
     return demand

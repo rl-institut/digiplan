@@ -2,6 +2,7 @@
 
 import pandas as pd
 from django.db.models import Sum
+from django.utils.translation import gettext_lazy as _
 from django_oemof.results import get_results
 from oemof.tabular.postprocessing import calculations, core
 
@@ -29,7 +30,6 @@ def calculate_square_for_value(df: pd.DataFrame) -> pd.DataFrame:
     areas = (
         pd.DataFrame.from_records(models.Municipality.objects.all().values("id", "area")).set_index("id").sort_index()
     )
-    areas = areas / areas.sum()
     result = df.sort_index() * areas.to_numpy()
     if is_series:
         return result.iloc[:, 0]
@@ -60,8 +60,7 @@ def calculate_capita_for_value(df: pd.DataFrame) -> pd.DataFrame:
         .set_index("id")
         .sort_index()
     )
-    population_share = population / population.sum()
-    result = df.sort_index() * population_share.to_numpy()
+    result = df.sort_index() * population.to_numpy()
     if is_series:
         return result.iloc[:, 0]
     return result
@@ -126,6 +125,47 @@ def energy_shares_per_municipality() -> pd.DataFrame:
     total_demand_share = total_demand / total_demand.sum()
     energies = energies.reindex(range(20))
     return energies.mul(total_demand_share, axis=0)
+
+
+def electricity_demand_per_municipality() -> pd.DataFrame:
+    """
+    Calculate electricity demand per sector per municipality.
+
+    Returns
+    -------
+    pd.DataFrame
+        Electricity demand per municipality (index) and sector (column)
+    """
+    demands_raw = datapackage.get_power_demand()
+    demands_per_sector = pd.concat([demand["2022"] for demand in demands_raw.values()], axis=1)
+    demands_per_sector.columns = [
+        _("Electricity Household Demand"),
+        _("Electricity CTS Demand"),
+        _("Electricity Industry Demand"),
+    ]
+    return demands_per_sector
+
+
+def heat_demand_per_municipality() -> pd.DataFrame:
+    """
+    Calculate heat demand per sector per municipality.
+
+    Returns
+    -------
+    pd.DataFrame
+        Heat demand per municipality (index) and sector (column)
+    """
+    demands_raw = datapackage.get_heat_demand()
+    demands_per_sector = pd.concat(
+        [distributions["cen"]["2022"] + distributions["dec"]["2022"] for distributions in demands_raw.values()],
+        axis=1,
+    )
+    demands_per_sector.columns = [
+        _("Electricity Household Demand"),
+        _("Electricity CTS Demand"),
+        _("Electricity Industry Demand"),
+    ]
+    return demands_per_sector
 
 
 def detailed_overview(simulation_id: int) -> pd.DataFrame:  # noqa: ARG001
