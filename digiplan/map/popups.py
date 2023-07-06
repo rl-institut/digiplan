@@ -6,6 +6,7 @@ from collections.abc import Iterable
 from typing import Optional, Union
 
 import pandas as pd
+from django.db.models import F
 from django.utils.translation import gettext_lazy as _
 from django_mapengine import popups
 from django_oemof import results
@@ -126,17 +127,41 @@ class SimulationPopup(RegionPopup, abc.ABC):
         self.result = list(results.get_results(self.simulation_id, [self.calculation]).values())[0]
 
 
-class ClusterWindPopup(popups.Popup):
-    """Popup for wind clusters."""
+class ClusterPopup(popups.Popup):
+    """Popup for clusters."""
 
     def __init__(self, lookup: str, selected_id: int, **kwargs) -> None:  # noqa: ARG002
         """Initialize popup with default cluster template."""
-        self.lookup = lookup
+        self.model_lookup = lookup
         super().__init__(lookup="cluster", selected_id=selected_id)
 
     def get_context_data(self) -> dict:
-        """Return wind turbine as context data."""
-        return {"object": models.WindTurbine.objects.get(pk=self.selected_id)}
+        """Return cluster data as context data."""
+        model = {
+            "wind": models.WindTurbine,
+            "pvroof": models.PVroof,
+            "pvground": models.PVground,
+            "hydro": models.Hydro,
+            "biomass": models.Biomass,
+            "combustion": models.Combustion,
+            "gsgk": models.GSGK,
+            "storage": models.Storage,
+        }[self.model_lookup]
+        # TODO(Hendrik Huyskens): Add mapping
+        # https://github.com/rl-institut-private/digiplan/issues/153
+        default_attributes = {
+            "name": "Name",
+            "mun_name": "Gemeindename",
+            "zip_code": "Postleitzahl",
+            "geometry_approximated": "Geschätzt",
+            "unit_count": "Anzahl",
+            "capacity_net": "Kapazität",
+        }
+        instance = model.objects.annotate(mun_name=F("mun_id__name")).get(pk=self.selected_id)
+        return {
+            "title": model._meta.verbose_name,  # noqa: SLF001
+            "data": {name: getattr(instance, key) for key, name in default_attributes.items()},
+        }
 
 
 class CapacityPopup(RegionPopup):
@@ -458,7 +483,14 @@ class BatteriesCapacityPopup(RegionPopup):
 
 
 POPUPS: dict[str, type(popups.Popup)] = {
-    "wind": ClusterWindPopup,
+    "wind": ClusterPopup,
+    "pvroof": ClusterPopup,
+    "pvground": ClusterPopup,
+    "hydro": ClusterPopup,
+    "biomass": ClusterPopup,
+    "combustion": ClusterPopup,
+    "gsgk": ClusterPopup,
+    "storage": ClusterPopup,
     "population_statusquo": PopulationPopup,
     "population_density_statusquo": PopulationDensityPopup,
     "employees_statusquo": EmployeesPopup,
