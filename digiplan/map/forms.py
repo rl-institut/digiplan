@@ -4,7 +4,7 @@ from django.forms import BooleanField, Form, IntegerField, TextInput, renderers
 from django.utils.safestring import mark_safe
 from django_mapengine import legend
 
-from . import charts, models
+from . import charts
 from .widgets import SwitchWidget
 
 

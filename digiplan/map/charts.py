@@ -336,6 +336,12 @@ class PopulationRegionChart(Chart):
         """Calculate population for whole region."""
         return models.Population.quantity_per_municipality_per_year().sum()
 
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        return chart_options
+
 
 class PopulationDensityRegionChart(Chart):
     """Chart for regional population density."""
@@ -349,7 +355,7 @@ class PopulationDensityRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Bevölkerungsdichte")
+        del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("EW/km²")
         return chart_options
 
@@ -366,7 +372,7 @@ class EmployeesRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Beschäftigte")
+        del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("")
         del chart_options["series"][0]["name"]
         return chart_options
@@ -384,7 +390,7 @@ class CompaniesRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Betriebe")
+        del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("")
         del chart_options["series"][0]["name"]
         return chart_options
@@ -399,6 +405,12 @@ class CapacityRegionChart(Chart):
         """Calculate capacities for whole region."""
         return calculations.capacities_per_municipality().sum()
 
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        return chart_options
+
 
 class CapacitySquareRegionChart(Chart):
     """Chart for regional capacities per square meter."""
@@ -412,7 +424,7 @@ class CapacitySquareRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Installierte Leistung EE je km²")
+        del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("MW")
         return chart_options
 
@@ -429,7 +441,7 @@ class EnergyRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Energies per technology")
+        del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("MWh")
         return chart_options
 
@@ -446,7 +458,7 @@ class EnergyShareRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Energy shares per technology")
+        del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("%")
         return chart_options
 
@@ -463,7 +475,7 @@ class EnergyCapitaRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Energy per capita per technology")
+        del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("MWh")
         return chart_options
 
@@ -480,7 +492,7 @@ class EnergySquareRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Energie pro km²")
+        del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("MWh")
         return chart_options
 
@@ -493,6 +505,12 @@ class WindTurbinesRegionChart(Chart):
     def get_chart_data(self) -> list[int]:
         """Calculate population for whole region."""
         return [int(models.WindTurbine.quantity_per_municipality().sum())]
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        return chart_options
 
 
 class WindTurbinesSquareRegionChart(Chart):
@@ -507,7 +525,7 @@ class WindTurbinesSquareRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Anzahl Windenergieanlagen pro km²")
+        del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("")
         return chart_options
 
@@ -524,7 +542,7 @@ class ElectricityDemandRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Strombedarf")
+        del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("GWh")
         return chart_options
 
@@ -541,7 +559,7 @@ class ElectricityDemandCapitaRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Strombedarf pro EinwohnerIn")
+        del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("kWh")
         return chart_options
 
@@ -558,7 +576,7 @@ class HeatDemandRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Wärmebedarf")
+        del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("GWh")
         return chart_options
 
@@ -575,7 +593,7 @@ class HeatDemandCapitaRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Wärmebedarf pro EinwohnerIn")
+        del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("kWh")
         return chart_options
 
