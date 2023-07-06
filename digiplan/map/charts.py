@@ -512,7 +512,7 @@ class EmployeesRegionChart(Chart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = _("")
+        chart_options["yAxis"]["name"] = "#"
         del chart_options["series"][0]["name"]
         return chart_options
 
@@ -530,7 +530,7 @@ class CompaniesRegionChart(Chart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = _("")
+        chart_options["yAxis"]["name"] = "#"
         del chart_options["series"][0]["name"]
         return chart_options
 
@@ -703,7 +703,7 @@ class WindTurbinesSquareRegionChart(Chart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = _("")
+        chart_options["yAxis"]["name"] = "#"
         return chart_options
 
 
@@ -798,7 +798,7 @@ class BatteriesRegionChart(Chart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = _("#")
+        chart_options["yAxis"]["name"] = "#"
         del chart_options["series"][0]["name"]
         return chart_options
 
@@ -816,7 +816,7 @@ class BatteriesCapacityRegionChart(Chart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = _("#")
+        chart_options["yAxis"]["name"] = "#"
         del chart_options["series"][0]["name"]
         return chart_options
 

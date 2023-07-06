@@ -356,8 +356,8 @@ MAP_ENGINE_CHOROPLETHS = [
         title=_("Einwohner_innenzahl pro km²"),
         unit=_(""),
     ),
-    setup.Choropleth("employees_statusquo", layers=["municipality"], title=_("Beschäftigte"), unit=_("")),
-    setup.Choropleth("companies_statusquo", layers=["municipality"], title=_("Betriebe"), unit=_("")),
+    setup.Choropleth("employees_statusquo", layers=["municipality"], title=_("Beschäftigte"), unit="#"),
+    setup.Choropleth("companies_statusquo", layers=["municipality"], title=_("Betriebe"), unit="#"),
     setup.Choropleth("capacity_statusquo", layers=["municipality"], title=_("Installierte Leistung"), unit=_("MW")),
     setup.Choropleth(
         "capacity_square_statusquo",
@@ -365,12 +365,12 @@ MAP_ENGINE_CHOROPLETHS = [
         title=_("Installierte Leistung pro qm"),
         unit=_("MW"),
     ),
-    setup.Choropleth("wind_turbines_statusquo", layers=["municipality"], title=_("Anzahl Windturbinen"), unit=_("")),
+    setup.Choropleth("wind_turbines_statusquo", layers=["municipality"], title=_("Anzahl Windturbinen"), unit="#"),
     setup.Choropleth(
         "wind_turbines_square_statusquo",
         layers=["municipality"],
         title=_("Anzahl Windturbinen pro qm"),
-        unit=_(""),
+        unit="#",
     ),
     setup.Choropleth(
         "energy_statusquo",
@@ -442,7 +442,7 @@ MAP_ENGINE_CHOROPLETHS = [
         "batteries_statusquo",
         layers=["municipality"],
         title=_("Anzahl Batteriespeicher"),
-        unit=_("#"),
+        unit="#",
     ),
     setup.Choropleth(
         "batteries_capacity_statusquo",
