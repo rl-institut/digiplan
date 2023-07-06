@@ -9,6 +9,16 @@ const sliderMoreLabels = document.querySelectorAll(".c-slider__label--more > .bu
 const powerMixInfoBanner = document.getElementById("js-power-mix");
 
 
+const potentialPVLayers = ["potentialarea_pv_agriculture_lfa-off_region", "potentialarea_pv_road_railway_region"];
+const potentialWindLayers = [
+  "potentialarea_wind_stp_2018_vreg",
+  "potentialarea_wind_stp_2027_repowering",
+  "potentialarea_wind_stp_2027_search_area_forest_area",
+  "potentialarea_wind_stp_2027_search_area_open_area",
+  "potentialarea_wind_stp_2027_vr"
+];
+const potentialWindSwitches = document.querySelectorAll("#id_s_w_3, #id_s_w_4, #id_s_w_4_1, #id_s_w_4_2, #id_s_w_5, #id_s_w_5_1, #id_s_w_5_2");
+
 // Setup
 
 // Order matters. Start with the most specific, and end with most general sliders.
@@ -30,17 +40,29 @@ Array.from(Object.keys(SETTINGS_DEPENDENCY_MAP)).forEach(dependent_name => {
 });
 $(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
     onChange: function (data) {
-      const msg = eventTopics.POWER_PANEL_SLIDER_CHANGE;
-      PubSub.publish(msg, data);
+      PubSub.publish(eventTopics.POWER_PANEL_SLIDER_CHANGE, data);
+      if (data.input[0].id === "id_s_pv_ff_1") {
+        PubSub.publish(eventTopics.PV_CONTROL_ACTIVATED);
+      }
+      if (data.input[0].id === "id_s_w_1") {
+        PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
+      }
     }
   }
 );
+$(potentialWindSwitches).on("change", function () {
+  PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
+});
 $(".js-slider.js-slider-panel").ionRangeSlider({
     onChange: function (data) {
-      const msg = eventTopics.PANEL_SLIDER_CHANGE;
-      PubSub.publish(msg, data);
+      PubSub.publish(eventTopics.PANEL_SLIDER_CHANGE, data);
     }
   }
+);
+$(".form-check-input").on(
+    'click', function (data) {
+      toggleFormFields(data.target.id);
+    }
 );
 $(".js-slider").ionRangeSlider();
 
@@ -48,6 +70,12 @@ Array.from(sliderMoreLabels).forEach(moreLabel => {
   moreLabel.addEventListener("click", () => {
     const sliderLabel = moreLabel.parentNode.parentNode.parentNode;
     PubSub.publish(eventTopics.MORE_LABEL_CLICK, sliderLabel);
+    if (sliderLabel.id === "id_s_pv_ff_1") {
+      PubSub.publish(eventTopics.PV_CONTROL_ACTIVATED);
+    }
+    if (sliderLabel.id === "id_s_w_1") {
+      PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
+    }
   });
 });
 
@@ -73,6 +101,8 @@ PubSub.subscribe(eventTopics.DEPENDENCY_PANEL_SLIDER_CHANGE, (msg, payload) => {
   const dependentDataElement = $("#id_" + dependent).data("ionRangeSlider");
   dependentDataElement.update({max: value});
 });
+PubSub.subscribe(eventTopics.PV_CONTROL_ACTIVATED, showPVLayers);
+PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
 
 
 // Subscriber Functions
@@ -120,6 +150,149 @@ function updateSliderMarks(msg) {
         addMarks(data, slider_marks);
       }
     });
+  }
+  return logMessage(msg);
+}
+
+function showPVLayers(msg) {
+  hidePotentialLayers();
+  for (const layer of potentialPVLayers) {
+    map.setLayoutProperty(layer, "visibility", "visible");
+  }
+  return logMessage(msg);
+}
+
+function uncheckSW3() {
+  document.getElementById("id_s_w_3").checked = false;
+  let new_max = $(`#id_s_w_1`).data("ionRangeSlider").result.max / 749;
+  $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_max});
+}
+
+function checkSW4() {
+  document.getElementById("id_s_w_4").checked = true;
+  document.getElementById("id_s_w_4_1").disabled = false;
+  document.getElementById("id_s_w_4_2").disabled = false;
+  if (document.getElementById("id_s_w_4_1").checked === true) {
+    let new_max = $(`#id_s_w_1`).data("ionRangeSlider").result.max * 2077;
+    $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_max});
+  }
+  if (document.getElementById("id_s_w_4_2").checked === true) {
+    let new_max = $(`#id_s_w_1`).data("ionRangeSlider").result.max * 224;
+    $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_max});
+  }
+}
+
+function uncheckSW4() {
+  document.getElementById("id_s_w_4").checked = false;
+  document.getElementById("id_s_w_4_1").disabled = true;
+  document.getElementById("id_s_w_4_2").disabled = true;
+  if (document.getElementById("id_s_w_4_1").checked === true) {
+    let new_max = $(`#id_s_w_1`).data("ionRangeSlider").result.max / 2077;
+    $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_max});
+  }
+  if (document.getElementById("id_s_w_4_2").checked === true) {
+    let new_max = $(`#id_s_w_1`).data("ionRangeSlider").result.max / 224;
+    $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_max});
+  }
+}
+
+
+function toggleFormFields(formfield_id) {
+  if (formfield_id === "id_s_w_3") {
+    if (document.getElementById("id_s_w_4").checked === false && document.getElementById("id_s_w_5").checked === false) {
+      document.getElementById("id_s_w_3").checked = true;
+    }
+    if (document.getElementById("id_s_w_4").checked === true) {
+      uncheckSW4();
+    }
+    if (document.getElementById("id_s_w_5").checked === true) {
+      document.getElementById("id_s_w_5").checked = false;
+      $(`#id_s_w_5_1`).data("ionRangeSlider").update({block:true});
+      $(`#id_s_w_5_2`).data("ionRangeSlider").update({block:true});
+    }
+    let new_max = $(`#id_s_w_1`).data("ionRangeSlider").result.max * 749;
+    $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_max});
+  }
+  if (formfield_id === "id_s_w_4") {
+    if (document.getElementById("id_s_w_3").checked === false && document.getElementById("id_s_w_5").checked === false) {
+      document.getElementById("id_s_w_4").checked = true;
+    }
+    if (document.getElementById("id_s_w_3").checked === true) {
+      uncheckSW3();
+    }
+    if (document.getElementById("id_s_w_5").checked === true) {
+      document.getElementById("id_s_w_5").checked = false;
+      $(`#id_s_w_5_1`).data("ionRangeSlider").update({block: true});
+      $(`#id_s_w_5_2`).data("ionRangeSlider").update({block: true});
+    }
+    checkSW4();
+  }
+  if (formfield_id === "id_s_w_4_1") {
+    if (document.getElementById("id_s_w_4_2").checked === false) {
+      document.getElementById("id_s_w_4_1").checked = true;
+    }
+    else {
+      document.getElementById("id_s_w_4_2").checked = false;
+      let new_maxx = $(`#id_s_w_1`).data("ionRangeSlider").result.max / 224;
+      $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_maxx});
+      let new_max = $(`#id_s_w_1`).data("ionRangeSlider").result.max * 2077;
+      $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_max});
+    }
+  }
+  if (formfield_id === "id_s_w_4_2") {
+    if (document.getElementById("id_s_w_4_1").checked === false) {
+      document.getElementById("id_s_w_4_2").checked = true;
+    }
+    else {
+      document.getElementById("id_s_w_4_1").checked = false;
+      let new_max = $(`#id_s_w_1`).data("ionRangeSlider").result.max / 2077;
+      $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_max});
+      let new_maxx = $(`#id_s_w_1`).data("ionRangeSlider").result.max * 224;
+      $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_maxx});
+    }
+  }
+  if (formfield_id === "id_s_w_5") {
+    if (document.getElementById("id_s_w_3").checked === false && document.getElementById("id_s_w_4").checked === false) {
+      document.getElementById("id_s_w_5").checked = true;
+    }
+    if (document.getElementById("id_s_w_3").checked === true){
+      uncheckSW3();
+    }
+    if (document.getElementById("id_s_w_4").checked === true){
+      uncheckSW4();
+    }
+    else {
+      $(`#id_s_w_5_1`).data("ionRangeSlider").update({block:false});
+      $(`#id_s_w_5_2`).data("ionRangeSlider").update({block:false});
+    }
+  }
+}
+
+function showWindLayers(msg) {
+  hidePotentialLayers();
+  if (document.getElementById("id_s_w_3").checked) {
+    map.setLayoutProperty("potentialarea_wind_stp_2018_vreg", "visibility", "visible");
+  }
+  if (document.getElementById("id_s_w_4").checked) {
+    if (document.getElementById("id_s_w_4_1").checked) {
+      map.setLayoutProperty("potentialarea_wind_stp_2027_vr", "visibility", "visible");
+    } else {
+      map.setLayoutProperty("potentialarea_wind_stp_2027_repowering", "visibility", "visible");
+    }
+  }
+  if (document.getElementById("id_s_w_5").checked) {
+    if (document.getElementById("id_s_w_5_1").checked) {
+      map.setLayoutProperty("potentialarea_wind_stp_2027_search_area_open_area", "visibility", "visible");
+    } else {
+      map.setLayoutProperty("potentialarea_wind_stp_2027_search_area_forest_area", "visibility", "visible");
+    }
+  }
+  return logMessage(msg);
+}
+
+function hidePotentialLayers(msg) {
+  for (const layer of potentialPVLayers.concat(potentialWindLayers)) {
+    map.setLayoutProperty(layer, "visibility", "none");
   }
   return logMessage(msg);
 }
@@ -183,3 +356,14 @@ function addMarks(data, marks) {
 
   data.slider.append(html);
 }
+
+$(document).ready(function () {
+  document.getElementById("id_s_w_4").checked = true;
+  document.getElementById("id_s_w_4_1").checked = true;
+  let new_max = $(`#id_s_w_1`).data("ionRangeSlider").result.max * 2077;
+  $(`#id_s_w_1`).data("ionRangeSlider").update({max:new_max});
+  uncheckSW4();
+  toggleFormFields("id_s_w_3");
+  $(`#id_s_w_5_1`).data("ionRangeSlider").update({block:true});
+  $(`#id_s_w_5_2`).data("ionRangeSlider").update({block:true});
+});

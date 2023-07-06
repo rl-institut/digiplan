@@ -4,6 +4,7 @@ from django.forms import BooleanField, Form, IntegerField, TextInput, renderers
 from django.utils.safestring import mark_safe
 from django_mapengine import legend
 
+from . import charts, models
 from .widgets import SwitchWidget
 
 
@@ -36,12 +37,14 @@ class StaticLayerForm(TemplateForm):  # noqa: D101
 
 
 class PanelForm(TemplateForm):  # noqa: D101
-    def __init__(self, parameters, **kwargs) -> None:  # noqa: D107, ANN001
+    def __init__(self, parameters, additional_parameters=None, **kwargs) -> None:  # noqa: D107, ANN001
         super().__init__(**kwargs)
-        self.fields = {item["name"]: item["field"] for item in self.generate_fields(parameters)}
+        self.fields = {item["name"]: item["field"] for item in self.generate_fields(parameters, additional_parameters)}
 
     @staticmethod
-    def generate_fields(parameters):  # noqa: ANN001, ANN205, D102
+    def generate_fields(parameters, additional_parameters=None):  # noqa: ANN001, ANN205, D102
+        if additional_parameters is not None:
+            charts.merge_dicts(parameters, additional_parameters)
         for name, item in parameters.items():
             if item["type"] == "slider":
                 attrs = {

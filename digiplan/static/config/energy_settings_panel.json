@@ -37,16 +37,16 @@
     "tooltip": "{% trans 'Priority areas repowering.' %}",
     "type": "switch"
   },
-    "s_w_5": {
+  "s_w_5": {
     "class": "js-sidepanel-switch",
     "label": "{% trans 'Free extension in the search area.' %}",
     "tooltip": "{% trans 'Free extension in the search area.' %}",
     "type": "switch"
   },
     "s_w_5_1": {
+    "class": "js-slider",
     "label": "{% trans 'Use of open country search area.' %}",
     "tooltip": "{% trans 'Use of open country search area.' %}",
-    "class": "js-slider",
     "max": 100,
     "min": 0,
     "start": 0,
@@ -54,9 +54,9 @@
     "type": "slider"
   },
     "s_w_5_2": {
+    "class": "js-slider",
     "label": "{% trans 'Use of forest search space.' %}",
     "tooltip": "{% trans 'Use of forest search space.' %}",
-    "class": "js-slider",
     "max": 100,
     "min": 0,
     "start": 0,
@@ -141,18 +141,6 @@
     "status_quo": 15,
     "step": 1,
     "tooltip": "{% trans 'Run-of-river power plants' %}",
-    "type": "slider"
-  },
-  "s_b_1": {
-    "class": "js-slider js-slider-panel js-power-mix",
-    "color": "#FA9FB5",
-    "label": "{% trans 'Bioenergy (MW)' %}",
-    "max": 30,
-    "min": 0,
-    "start": 5,
-    "status_quo": 15,
-    "step": 5,
-    "tooltip": "{% trans 'Biomass and biogas plants' %}",
     "type": "slider"
   },
   "s_v_1": {

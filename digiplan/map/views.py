@@ -48,10 +48,17 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         context = super().get_context_data(**kwargs)
 
         context["panels"] = [
-            forms.EnergyPanelForm(utils.get_translated_json_from_file(config.ENERGY_SETTINGS_PANEL_FILE, self.request)),
-            forms.HeatPanelForm(utils.get_translated_json_from_file(config.HEAT_SETTINGS_PANEL_FILE, self.request)),
+            forms.EnergyPanelForm(
+                utils.get_translated_json_from_file(config.ENERGY_SETTINGS_PANEL_FILE, self.request),
+                additional_parameters=utils.get_translated_json_from_file(config.ADDITIONAL_ENERGY_SETTINGS_FILE),
+            ),
+            forms.HeatPanelForm(
+                utils.get_translated_json_from_file(config.HEAT_SETTINGS_PANEL_FILE, self.request),
+                additional_parameters=utils.get_translated_json_from_file(config.ADDITIONAL_HEAT_SETTINGS_FILE),
+            ),
             forms.TrafficPanelForm(
                 utils.get_translated_json_from_file(config.TRAFFIC_SETTINGS_PANEL_FILE, self.request),
+                additional_parameters=utils.get_translated_json_from_file(config.ADDITIONAL_TRAFFIC_SETTINGS_FILE),
             ),
         ]
 
