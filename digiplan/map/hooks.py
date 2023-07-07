@@ -98,31 +98,41 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
     }
 
     for dataset_loc, loc in (("cen", "central"), ("dec", "decentral")):
+        total_demand = 0.0
         for sector in ("hh", "cts", "ind"):
             # DEMAND
             percentage = data.pop(demand_sliders[sector]) if loc == "decentral" else data.get(demand_sliders[sector])
             demand = datapackage.get_heat_demand(sector, dataset_loc)[sector][dataset_loc][year]
+            summed_demand = float(demand.sum())  # Convert to float, otherwise float64 is used
+            max_demand = float(demand.max())  # Convert to float, otherwise float64 is used
+            total_demand += summed_demand
             data[f"ABW-heat_{loc}-demand_{sector}"] = {
-                "amount": float(demand.sum()) * percentage / 100,
+                "amount": summed_demand * percentage / 100,
             }
 
             # HP CAPACITIES:
             if dataset_loc == "dec":
                 hp_share = data.pop(hp_sliders[sector]) / 100
-                data["ABW-electricity-heatpump_decentral"]["capacity"] += float(demand.max() * hp_share)
-                energy_max = float(demand.sum() * hp_share)
+                data["ABW-electricity-heatpump_decentral"]["capacity"] += max_demand * hp_share
+                energy_max = summed_demand * hp_share
                 data["ABW-electricity-heatpump_decentral"]["output_parameters"]["summed_min"] += energy_max
                 data["ABW-electricity-heatpump_decentral"]["output_parameters"]["summed_max"] += energy_max
             else:
                 if sector == "hh":  # noqa: PLR5501
                     hp_share = data.pop("w_z_wp_3") / 100
-                    data["ABW-electricity-heatpump_central"]["capacity"] = float(demand.max() * hp_share)
-                    energy_max = float(demand.sum() * hp_share)
+                    data["ABW-electricity-heatpump_central"]["capacity"] = max_demand * hp_share
+                    energy_max = summed_demand * hp_share
                     data["ABW-electricity-heatpump_central"]["output_parameters"] = {
                         "summed_min": energy_max,
                         "summed_max": energy_max,
                     }
-    # HP Flow summed_min/max have tobe normalized:
+
+        # STORAGES
+        storage_sliders = {"decentral": "w_d_s_1", "central": "w_z_s_1"}
+        avg_demand_per_day = total_demand / 365
+        data[f"ABW-heat_{loc}-storage"] = {"capacity": avg_demand_per_day * data.pop(storage_sliders[loc]) / 100}
+
+    # HP Flow summed_min/max have to be normalized:
     data["ABW-electricity-heatpump_decentral"]["output_parameters"]["summed_min"] = (
         data["ABW-electricity-heatpump_decentral"]["output_parameters"]["summed_min"]
         / data["ABW-electricity-heatpump_decentral"]["capacity"]

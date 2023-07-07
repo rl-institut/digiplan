@@ -27,6 +27,8 @@ class SimulationTest(SimpleTestCase):
         "w_d_wp_4": 100,
         "w_d_wp_5": 100,
         "w_z_wp_3": 100,
+        "w_d_s_1": 50,
+        "w_z_s_1": 53,
     }
 
     def setUp(self) -> None:
@@ -103,7 +105,7 @@ class ElectricityDemandTest(SimulationTest):
             self.simulation_id,
             calculations=[calculations.electricity_demand],
         )
-        assert list(results.values())[0].iloc[0] > 0
+        assert list(results.values())[0].iloc[1] > 0
 
 
 class HeatDemandTest(SimulationTest):
