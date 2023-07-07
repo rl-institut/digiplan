@@ -399,13 +399,13 @@
       "fill-opacity": 0.8
     }
   },
-  "potentialarea_pv_agriculture_lfa-off_region": {
+  "potentialarea_pv_road_railway_region": {
     "type": "fill",
     "paint": {
       "fill-color": "#ffd744"
     }
   },
-  "potentialarea_pv_road_railway_region": {
+  "potentialarea_pv_agriculture_lfa-off_region": {
     "type": "fill",
     "paint": {
       "fill-color": "#c19800"
@@ -414,31 +414,31 @@
   "potentialarea_wind_stp_2018_vreg": {
     "type": "fill",
     "paint": {
-      "fill-color": "#30691a"
+      "fill-color": "#6A89CC"
     }
   },
   "potentialarea_wind_stp_2027_vr": {
     "type": "fill",
     "paint": {
-      "fill-color": "#30691a"
+      "fill-color": "#6A89CC"
     }
   },
   "potentialarea_wind_stp_2027_repowering": {
     "type": "fill",
     "paint": {
-      "fill-color": "#499e27"
+      "fill-color": "#273f73"
     }
   },
   "potentialarea_wind_stp_2027_search_area_open_area": {
     "type": "fill",
     "paint": {
-      "fill-color": "#30691a"
+      "fill-color": "#6A89CC"
     }
   },
   "potentialarea_wind_stp_2027_search_area_forest_area": {
     "type": "fill",
     "paint": {
-      "fill-color": "#499e27"
+      "fill-color": "#273f73"
     }
   },
   "air_traffic": {
