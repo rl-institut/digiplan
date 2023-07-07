@@ -41,12 +41,6 @@ Array.from(Object.keys(SETTINGS_DEPENDENCY_MAP)).forEach(dependent_name => {
 $(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
     onChange: function (data) {
       PubSub.publish(eventTopics.POWER_PANEL_SLIDER_CHANGE, data);
-      if (data.input[0].id === "id_s_pv_ff_1") {
-        PubSub.publish(eventTopics.PV_CONTROL_ACTIVATED);
-      }
-      if (data.input[0].id === "id_s_w_1") {
-        PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
-      }
     }
   }
 );
@@ -70,12 +64,6 @@ Array.from(sliderMoreLabels).forEach(moreLabel => {
   moreLabel.addEventListener("click", () => {
     const sliderLabel = moreLabel.parentNode.parentNode.parentNode;
     PubSub.publish(eventTopics.MORE_LABEL_CLICK, sliderLabel);
-    if (sliderLabel.id === "id_s_pv_ff_1") {
-      PubSub.publish(eventTopics.PV_CONTROL_ACTIVATED);
-    }
-    if (sliderLabel.id === "id_s_w_1") {
-      PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
-    }
   });
 });
 
@@ -94,7 +82,12 @@ subscribeToEvents(
   [eventTopics.POWER_PANEL_SLIDER_CHANGE, eventTopics.PANEL_SLIDER_CHANGE],
   showActivePanelSliderOnPanelSliderChange
 );
+subscribeToEvents(
+  [eventTopics.POWER_PANEL_SLIDER_CHANGE, eventTopics.PANEL_SLIDER_CHANGE],
+  hidePotentialLayers
+);
 PubSub.subscribe(eventTopics.MORE_LABEL_CLICK, showOrHideSidepanelsOnMoreLabelClick);
+PubSub.subscribe(eventTopics.MORE_LABEL_CLICK, showOrHidePotentialLayersOnMoreLabelClick);
 PubSub.subscribe(eventTopics.DEPENDENCY_PANEL_SLIDER_CHANGE, (msg, payload) => {
   const {dependent, dependency, data} = payload;
   const value = DEPENDENCY_PARAMETERS[dependency][dependent][data.from];
@@ -106,6 +99,22 @@ PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
 
 
 // Subscriber Functions
+
+function showOrHidePotentialLayersOnMoreLabelClick(msg, moreLabel) {
+  const classes = ["active", "active-sidepanel"];
+  const show = moreLabel.classList.contains(classes[0]);
+  hidePotentialLayers();
+  if (show) {
+    const sliderLabel = moreLabel.getElementsByTagName("input")[0];
+    if (sliderLabel.id === "id_s_pv_ff_1") {
+      PubSub.publish(eventTopics.PV_CONTROL_ACTIVATED);
+    }
+    if (sliderLabel.id === "id_s_w_1") {
+      PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
+    }
+  }
+  return logMessage(msg);
+}
 
 function showOrHideSidepanelsOnMoreLabelClick(msg, moreLabel) {
   const classes = ["active", "active-sidepanel"];
@@ -276,16 +285,14 @@ function showWindLayers(msg) {
   if (document.getElementById("id_s_w_4").checked) {
     if (document.getElementById("id_s_w_4_1").checked) {
       map.setLayoutProperty("potentialarea_wind_stp_2027_vr", "visibility", "visible");
-    } else {
+    }
+    if (document.getElementById("id_s_w_4_2").checked) {
       map.setLayoutProperty("potentialarea_wind_stp_2027_repowering", "visibility", "visible");
     }
   }
   if (document.getElementById("id_s_w_5").checked) {
-    if (document.getElementById("id_s_w_5_1").checked) {
-      map.setLayoutProperty("potentialarea_wind_stp_2027_search_area_open_area", "visibility", "visible");
-    } else {
-      map.setLayoutProperty("potentialarea_wind_stp_2027_search_area_forest_area", "visibility", "visible");
-    }
+    map.setLayoutProperty("potentialarea_wind_stp_2027_search_area_open_area", "visibility", "visible");
+    map.setLayoutProperty("potentialarea_wind_stp_2027_search_area_forest_area", "visibility", "visible");
   }
   return logMessage(msg);
 }

@@ -32,7 +32,8 @@
     "deactivateChoropleth": false,
     "window": false,
     "subscribeToEvents": false,
-    "createChart": false
+    "createChart": false,
+    "hidePotentialLayers": false
   },
   "strict": "implied"
 }
