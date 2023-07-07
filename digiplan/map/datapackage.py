@@ -21,7 +21,7 @@ def get_batteries() -> pd.DataFrame:
 
 def get_power_demand(sector: Optional[str] = None) -> dict[str, pd.DataFrame]:
     """Return power demand for given sector or all sectors."""
-    sectors = tuple(sector) if sector else ("hh", "cts", "ind")
+    sectors = (sector,) if sector else ("hh", "cts", "ind")
     demand = {}
     for sec in sectors:
         demand_filename = settings.DIGIPIPE_DIR.path("scalars").path(f"demand_{sec}_power_demand.csv")
@@ -34,8 +34,8 @@ def get_heat_demand(
     distribution: Optional[str] = None,
 ) -> dict[str, dict[str, pd.DataFrame]]:
     """Return heat demand for given sector and distribution."""
-    sectors = tuple(sector) if sector else ("hh", "cts", "ind")
-    distributions = tuple(distribution) if distribution else ("cen", "dec")
+    sectors = (sector,) if sector else ("hh", "cts", "ind")
+    distributions = (distribution,) if distribution else ("cen", "dec")
     demand = defaultdict(dict)
     for sec in sectors:
         for dist in distributions:
