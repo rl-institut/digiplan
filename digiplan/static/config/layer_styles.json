@@ -414,16 +414,16 @@
   "potentialarea_wind_stp_2018_vreg": {
     "type": "fill",
     "paint": {
-      "fill-color": "#8edb70"
+      "fill-color": "#30691a"
+    }
+  },
+  "potentialarea_wind_stp_2027_vr": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#30691a"
     }
   },
   "potentialarea_wind_stp_2027_repowering": {
-    "type": "fill",
-    "paint": {
-      "fill-color": "#64cd3b"
-    }
-  },
-  "potentialarea_wind_stp_2027_search_area_forest_area": {
     "type": "fill",
     "paint": {
       "fill-color": "#499e27"
@@ -435,10 +435,10 @@
       "fill-color": "#30691a"
     }
   },
-  "potentialarea_wind_stp_2027_vr": {
+  "potentialarea_wind_stp_2027_search_area_forest_area": {
     "type": "fill",
     "paint": {
-      "fill-color": "#18340d"
+      "fill-color": "#499e27"
     }
   },
   "air_traffic": {
