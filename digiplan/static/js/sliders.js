@@ -41,12 +41,6 @@ Array.from(Object.keys(SETTINGS_DEPENDENCY_MAP)).forEach(dependent_name => {
 $(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
     onChange: function (data) {
       PubSub.publish(eventTopics.POWER_PANEL_SLIDER_CHANGE, data);
-      if (data.input[0].id === "id_s_pv_ff_1") {
-        PubSub.publish(eventTopics.PV_CONTROL_ACTIVATED);
-      }
-      if (data.input[0].id === "id_s_w_1") {
-        PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
-      }
     }
   }
 );
@@ -87,6 +81,10 @@ subscribeToEvents(
 subscribeToEvents(
   [eventTopics.POWER_PANEL_SLIDER_CHANGE, eventTopics.PANEL_SLIDER_CHANGE],
   showActivePanelSliderOnPanelSliderChange
+);
+subscribeToEvents(
+  [eventTopics.POWER_PANEL_SLIDER_CHANGE, eventTopics.PANEL_SLIDER_CHANGE],
+  hidePotentialLayers
 );
 PubSub.subscribe(eventTopics.MORE_LABEL_CLICK, showOrHideSidepanelsOnMoreLabelClick);
 PubSub.subscribe(eventTopics.MORE_LABEL_CLICK, showOrHidePotentialLayersOnMoreLabelClick);
