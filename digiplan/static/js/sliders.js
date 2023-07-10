@@ -60,13 +60,25 @@ $(".form-check-input").on(
 );
 $("#id_s_w_5_1").ionRangeSlider({
     onChange: function (data) {
-      calculate_max();
+      calculate_max_wind();
     }
   }
 );
 $("#id_s_w_5_2").ionRangeSlider({
     onChange: function (data) {
-      calculate_max();
+      calculate_max_wind();
+    }
+  }
+);
+$("#id_s_pv_ff_3").ionRangeSlider({
+    onChange: function (data) {
+      calculate_max_pv_ff();
+    }
+  }
+);
+$("#id_s_pv_ff_4").ionRangeSlider({
+    onChange: function (data) {
+      calculate_max_pv_ff();
     }
   }
 );
@@ -183,11 +195,18 @@ function showPVLayers(msg) {
   return logMessage(msg);
 }
 
-function calculate_max() {
+function calculate_max_wind() {
   let slider_one = $("#id_s_w_5_1").data("ionRangeSlider").result.from / 100;
   let slider_two = $("#id_s_w_5_2").data("ionRangeSlider").result.from / 100;
   let new_max = slider_one * 2833 + slider_two * 2676;
   $(`#id_s_w_1`).data("ionRangeSlider").update({max:Math.round(new_max)});
+}
+
+function calculate_max_pv_ff() {
+  let slider_one = $("#id_s_pv_ff_3").data("ionRangeSlider").result.from / 100;
+  let slider_two = $("#id_s_pv_ff_4").data("ionRangeSlider").result.from / 100;
+  let new_max = slider_one * 1216 + slider_two * 2361;
+  $(`#id_s_pv_ff_1`).data("ionRangeSlider").update({max:Math.round(new_max)});
 }
 
 function toggleFormFields(formfield_id) {
@@ -262,7 +281,7 @@ function toggleFormFields(formfield_id) {
       document.getElementById("id_s_w_4_2").disabled = true;
       $(`#id_s_w_5_1`).data("ionRangeSlider").update({block:false});
       $(`#id_s_w_5_2`).data("ionRangeSlider").update({block:false});
-      calculate_max();
+      calculate_max_wind();
     }
   }
 }
@@ -365,4 +384,5 @@ $(document).ready(function () {
   document.getElementById("id_s_w_5_1").disabled = true;
   document.getElementById("id_s_w_5_2").disabled = true;
   $(`#id_s_h_1`).data("ionRangeSlider").update({block:true});
+  calculate_max_pv_ff();
 });
