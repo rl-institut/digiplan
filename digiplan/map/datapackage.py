@@ -5,6 +5,7 @@ from typing import Optional
 
 import pandas as pd
 from django.conf import settings
+from django_oemof.settings import OEMOF_DIR
 
 
 def get_employment() -> pd.DataFrame:
@@ -29,7 +30,7 @@ def get_power_demand(sector: Optional[str] = None) -> dict[str, pd.DataFrame]:
     return demand
 
 
-def get_heat_demand(
+def get_summed_heat_demand_per_municipality(
     sector: Optional[str] = None,
     distribution: Optional[str] = None,
 ) -> dict[str, dict[str, pd.DataFrame]]:
@@ -43,4 +44,21 @@ def get_heat_demand(
                 f"demand_{sec}_heat_demand_{dist}.csv",
             )
             demand[sec][dist] = pd.read_csv(demand_filename)
+    return demand
+
+
+def get_heat_demand(
+    sector: Optional[str] = None,
+    distribution: Optional[str] = None,
+) -> dict[str, dict[str, pd.DataFrame]]:
+    """Return heat demand for given sector and distribution."""
+    sectors = (sector,) if sector else ("hh", "cts", "ind")
+    distributions = (distribution,) if distribution else ("central", "decentral")
+    demand = defaultdict(dict)
+    for sec in sectors:
+        for dist in distributions:
+            demand_filename = (
+                OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "sequences" / f"heat_{dist}-demand_{sec}_profile.csv"
+            )
+            demand[sec][dist] = pd.read_csv(demand_filename, sep=";")[f"ABW-heat_{dist}-demand_{sec}-profile"]
     return demand
