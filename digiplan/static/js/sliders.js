@@ -364,4 +364,5 @@ $(document).ready(function () {
   $(`#id_s_w_5_2`).data("ionRangeSlider").update({from:13, block:true});
   document.getElementById("id_s_w_5_1").disabled = true;
   document.getElementById("id_s_w_5_2").disabled = true;
+  $(`#id_s_h_1`).data("ionRangeSlider").update({block:true});
 });
