@@ -63,14 +63,35 @@ def get_all_settings() -> dict:
     return all_settings
 
 
+def get_slider_marks() -> dict:
+    """
+    get all status quo values and future scenario values for all settings.
+
+    Returns
+    -------
+    dict
+        one dict with all values in correct format for usage
+    """
+    all_settings = get_all_settings().items()
+    slider_marks = {}
+    for param_name, param_data in all_settings:
+        if "status_quo" in param_data:
+            if param_name in slider_marks:
+                slider_marks[param_name].append(("Status Quo", param_data["status_quo"]))
+            else:
+                slider_marks[param_name] = [("Status Quo", param_data["status_quo"])]
+        if "future_scenario" in param_data:
+            if param_name in slider_marks:
+                slider_marks[param_name].append(("Future Scenario", param_data["future_scenario"]))
+            else:
+                slider_marks[param_name] = [("Future Scenario", param_data["future_scenario"])]
+    return slider_marks
+
+
 # STORE
 STORE_COLD_INIT = {
     "version": __version__,
-    "slider_marks": {
-        param_name: [("Status Quo", param_data["status_quo"])]
-        for param_name, param_data in get_all_settings().items()
-        if "status_quo" in param_data
-    },
+    "slider_marks": get_slider_marks(),
     "slider_max": area.get_max_values(),
     "allowedSwitches": ["wind_distance"],
     "detailTab": {"showPotentialLayers": True},
