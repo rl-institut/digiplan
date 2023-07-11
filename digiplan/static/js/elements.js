@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
       } else {
         prevButton.classList.remove('transparent');
       }
-  
+
       if (currentIndex === carouselItems.length - 1) {
         nextButton.classList.add('transparent');
       } else {

@@ -1,15 +1,15 @@
 {% load i18n %}
-<div class="popup">
+<div class="popup popup--cluster">
 
   <div class="popup__header">
     <h1 id="js-popup__title" class="popup__title">{{ title }}</h1>
   </div>
 
   <table>
-    <tr>
-      <th>{% trans 'Parameter' %}</th>
-      <th>{% trans 'Wert' %}</th>
-    </tr>
+    <thead>
+      <th scope="col">{% trans 'Parameter' %}</th>
+      <th scope="col">{% trans 'Wert' %}</th>
+    </thead>
     {% for key, value in data.items %}
       <tr>
         <td>{{ key }}</td>
