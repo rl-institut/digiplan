@@ -1,69 +1,58 @@
 {% load static i18n %}
 
-<div class="modal fade" id="onboardingModal" tabindex="-1" aria-labelledby="onboardingModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+<!-- Modal -->
+<div class="modal fade modal-xl onboarding-modal" id="onboardingModal" tabindex="-1">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="onboardingModalLabel">Willkommen</h5>
+        <p class="modal-title">Willkommen</p>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div id="carouselExampleIndicators" class="carousel carousel-dark slide" data-bs-ride="false">
-          <div class="carousel-inner" style="height: 30rem;">
+        <!-- Carousel -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
             <div class="carousel-item active">
-              <div class="d-flex h-100 align-items-center justify-content-center">
-                <div>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
-                  <p>This is the first slide</p>
+              <div class="row">
+                <div class="col-4">
+                  <img src="{% static 'images/map_clusters.png' %}" alt="...">
+                </div>
+                <div class="carousel-item__content">
+                  <h2>Willkommen beim Digiplan Tool</h2>
+                  <p>StEmp-ABW ist ein Stakeholder-Empowerment-Tool für die Region Anhalt-Bitterfeld-Wittenberg (ABW). Es wurde vom Reiner Lemoine Institut (RLI) im Rahmen des Kopernikus-Projekts „ENavi“ entwickelt. Sie finden das Tool auf den WAM-Seiten des RLI.</p>
                 </div>
               </div>
             </div>
             <div class="carousel-item">
-              <div class="d-flex h-100 align-items-center justify-content-center">
-                <div>
-                  <p>This is the second slide</p>
+              <div class="row">
+                <div class="col-4">
+                  <img src="{% static 'images/ui_map.png' %}" alt="...">
+                </div>
+                <div class="carousel-item__content">
+                  <h2>Windenergie</h2>
+                  <p>Die Energiedialoge der Energieavantgarde Anhalt haben insbesondere im direkten Gespräch mit den Bürgerinnen und Bürgern und in der Mitglieder- und Stakeholderberatung gezeigt, dass die Möglichkeiten zur Partizipation in der Entwicklung eines zukunftsweisenden regionalen Energiesystems zwar formal gegeben sind, in der Praxis aber aufwändig und häufig unbefriedigend sind.</p>
+                  <p>Der ganzheitliche Blick auf die Anforderungen und Chancen eines regionalen und regenerativen Energiesystems fehlt meist. Stattdessen werden landschaftliche Veränderungen (bspw. durch Windenergieanlagen oder Freiland-PV-Anlagen), lokale Auswirkungen auf Nachbarschaften, Naturschutz- und Denkmalschutzbelange sowie Auswirkungen der „Energiewende“ auf Energiepreise etc. meist unverbunden und teils konfrontativ debattiert. Die Rechtsunsicherheit im Umgang mit den Inhalten der Regionalplanung und Raumordnung ist nur ein Ausdruck dieser komplexen Problemlage.</p>
                 </div>
               </div>
             </div>
             <div class="carousel-item">
-              <div class="d-flex h-100 align-items-center justify-content-center">
-                <div>
-                  <p>This is the third slide</p>
+              <div class="row">
+                <div class="col-4">
+                  <img src="{% static 'images/results-charts.png' %}" alt="...">
+                </div>
+                <div class="carousel-item__content">
+                  <h2>PV-Freiflächenanlagen</h2>
+                  <p>Test</p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="carousel-indicators" style="position: absolute; bottom: -40px;">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Zurück</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Weiter</span>
-          </button>
         </div>
+        <!-- End Carousel -->
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Schließen</button>
+        <button class="btn btn-secondary carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">Previous</button>
+        <button class="btn btn-primary carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">Next</button>
       </div>
     </div>
   </div>
