@@ -1,7 +1,9 @@
 """Configuration for map app."""
 import json
 import pathlib
+from pathlib import Path
 
+import pandas as pd
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
@@ -88,11 +90,37 @@ def get_slider_marks() -> dict:
     return slider_marks
 
 
+def get_slider_per_sector() -> dict:
+    """
+    get demand per sector.
+
+    Returns
+    -------
+    dict
+        demand per sector for each slider
+    """
+    sector_dict = {
+        "s_v_1": {"hh": 0, "ind": 0, "cts": 0},
+        "w_v_1": {"hh": 0, "ind": 0, "cts": 0},
+        "w_d_wp_1": {"hh": 0, "ind": 0, "cts": 0},
+    }
+    demand = {"s_v_1": "power_demand", "w_v_1": "heat_demand", "w_d_wp_1": "heat_demand_dec"}
+    sectors = ["hh", "ind", "cts"]
+    for key, value in demand.items():
+        for sector in sectors:
+            file = f"demand_{sector}_{value}.csv"
+            path = Path(settings.DATA_DIR, "digipipe/scalars", file)
+            reader = pd.read_csv(path)
+            sector_dict[key][sector] = reader["2022"].sum()
+    return sector_dict
+
+
 # STORE
 STORE_COLD_INIT = {
     "version": __version__,
     "slider_marks": get_slider_marks(),
     "slider_max": area.get_max_values(),
+    "slider_per_sector": get_slider_per_sector(),
     "allowedSwitches": ["wind_distance"],
     "detailTab": {"showPotentialLayers": True},
     "staticState": 0,

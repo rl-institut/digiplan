@@ -19,6 +19,8 @@ const potentialWindLayers = [
 ];
 const potentialWindSwitches = document.querySelectorAll("#id_s_w_3, #id_s_w_4, #id_s_w_4_1, #id_s_w_4_2, #id_s_w_5, #id_s_w_5_1, #id_s_w_5_2");
 
+const sectorSlider = document.querySelectorAll("#id_s_v_3, #id_s_v_4, #id_s_v_5, #id_w_d_wp_3, #id_w_d_wp_4, #id_w_d_wp_5, #id_w_v_3, #id_w_v_4, #id_w_v_5");
+
 const sliderDependencies = {
   "id_w_z_wp_1": "id_w_z_wp_3",
   "id_w_d_s_1": "id_w_d_s_3",
@@ -54,6 +56,19 @@ $(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
 $(potentialWindSwitches).on("change", function () {
   PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
 });
+$(".js-slider.js-slider-panel").ionRangeSlider({
+    onChange: function (data) {
+      PubSub.publish(eventTopics.PANEL_SLIDER_CHANGE, data);
+    }
+  }
+);
+$(sectorSlider).ionRangeSlider({
+    onChange: function (data) {
+      calculate_slider_value(data);
+    }
+  }
+);
+
 $(".js-slider.js-slider-panel").ionRangeSlider({
     onChange: function (data) {
       PubSub.publish(eventTopics.PANEL_SLIDER_CHANGE, data);
@@ -120,6 +135,7 @@ $("#id_v_iv_3").ionRangeSlider({
     }
   }
 );
+
 $(".js-slider").ionRangeSlider();
 
 Array.from(sliderMoreLabels).forEach(moreLabel => {
@@ -242,6 +258,40 @@ function showPVLayers(msg) {
     map.setLayoutProperty(layer, "visibility", "visible");
   }
   return logMessage(msg);
+}
+
+function calculate_slider_value(data) {
+  if (data.input[0].id === "id_s_v_3" || data.input[0].id === "id_s_v_4" || data.input[0].id === "id_s_v_5") {
+    let factor_hh = $("#id_s_v_3").data("ionRangeSlider").result.from;
+    let factor_ind = $("#id_s_v_4").data("ionRangeSlider").result.from;
+    let factor_cts = $("#id_s_v_5").data("ionRangeSlider").result.from;
+    let demand_hh = store.cold.slider_per_sector.s_v_1.hh;
+    let demand_ind = store.cold.slider_per_sector.s_v_1.ind;
+    let demand_cts = store.cold.slider_per_sector.s_v_1.cts;
+    let new_val = (factor_hh * demand_hh + factor_ind * demand_ind + factor_cts * demand_cts) / (demand_hh + demand_ind + demand_cts);
+    $(`#id_s_v_1`).data("ionRangeSlider").update({from:new_val});
+  }
+  if (data.input[0].id === "id_w_d_wp_3" || data.input[0].id === "id_w_d_wp_4" || data.input[0].id === "id_w_d_wp_5") {
+    let factor_hh = $("#id_w_d_wp_3").data("ionRangeSlider").result.from;
+    let factor_ind = $("#id_w_d_wp_4").data("ionRangeSlider").result.from;
+    let factor_cts = $("#id_w_d_wp_5").data("ionRangeSlider").result.from;
+    let demand_hh = store.cold.slider_per_sector.w_d_wp_1.hh;
+    let demand_ind = store.cold.slider_per_sector.w_d_wp_1.ind;
+    let demand_cts = store.cold.slider_per_sector.w_d_wp_1.cts;
+    let new_val = (factor_hh * demand_hh + factor_ind * demand_ind + factor_cts * demand_cts) / (demand_hh + demand_ind + demand_cts);
+    $(`#id_w_d_wp_1`).data("ionRangeSlider").update({from:new_val});
+  }
+  if (data.input[0].id === "id_w_v_3" || data.input[0].id === "id_w_v_4" || data.input[0].id === "id_w_v_5") {
+    console.log("here");
+    let factor_hh = $("#id_w_v_3").data("ionRangeSlider").result.from;
+    let factor_ind = $("#id_w_v_4").data("ionRangeSlider").result.from;
+    let factor_cts = $("#id_w_v_5").data("ionRangeSlider").result.from;
+    let demand_hh = store.cold.slider_per_sector.w_d_wp_1.hh;
+    let demand_ind = store.cold.slider_per_sector.w_d_wp_1.ind;
+    let demand_cts = store.cold.slider_per_sector.w_d_wp_1.cts;
+    let new_val = (factor_hh * demand_hh + factor_ind * demand_ind + factor_cts * demand_cts) / (demand_hh + demand_ind + demand_cts);
+    $(`#id_w_v_1`).data("ionRangeSlider").update({from:new_val});
+  }
 }
 
 function calculate_max_wind() {
