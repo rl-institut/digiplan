@@ -84,6 +84,26 @@
     }
   }
 
+  .popup--cluster {
+    table {
+      @extend .table;
+      @extend .table-sm;
+      @extend .mb-0;
+
+      thead th {
+        @extend .border-bottom;
+        @extend .border-primary;
+        @extend .fs-7;
+        @extend .p-1;
+      }
+
+      tr th,
+      tr td {
+        @extend .ps-2;
+      }
+    }
+  }
+
   .maplibregl-popup-close-button,
     .mapboxgl-popup-close-button {
       @extend .fs-3;
