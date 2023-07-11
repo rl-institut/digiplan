@@ -91,7 +91,7 @@ $("#id_s_pv_ff_4").ionRangeSlider({
 );
 $("#id_s_pv_d_3").ionRangeSlider({
     onChange: function (data) {
-      let new_max = Math.round(Math.round(store.cold.slider_max.s_pv_d_3) * data.from);
+      let new_max = Math.round(Math.round(store.cold.slider_max.s_pv_d_3) * (data.from/100));
       $(`#id_s_pv_d_1`).data("ionRangeSlider").update({max:new_max});
     }
   }
