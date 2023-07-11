@@ -1,4 +1,5 @@
 export const statusquoDropdown = document.getElementById("situation_today");
+export const futureDropdown = document.getElementById("result_views");
 export const resultsTabs = document.getElementById("results-tabs");
 
 // Show onboarding modal on start

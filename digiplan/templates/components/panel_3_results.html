@@ -42,14 +42,14 @@
                   title="{% translate "Annual balance sheet share of renewable energy (wind energy, photovoltaic, hydroelectric power) in the electricity demand of the sectors agriculture, GHG (trade, commerce, services), households and industry in percent. The demand is the net electricity consumption, i.e. transmission losses and power plant consumption are not taken into account. 49.7% of the electricity demand in Germany was covered by renewable energies in 2022." %}">
                   {% translate "Renewable Energy Share of Demand" %} (%)
           </option>
-          <option value="renewable_electricity_production"
+          <option value="energy_2045"
                   title="{% translate "Annual amount of energy fed into the grid from renewable plants in gigawatt hours (wind energy, photovoltaic, hydro power)." %}">
             {% translate "Renewable Electricity Production (GWh)" %}</option>
-          <option value="production_capita"
+          <option value="energy_capita_2045"
                   title="{% translate "Annual amount of energy fed in from renewable plants (wind energy, photovoltaic, hydro power) in relation to the number of inhabitants in megawatt hours per inhabitant." %}">
             {% translate "Renewable Electricity Production per Capita (MWh)" %}
           </option>
-          <option value="Gewonnene Energie aus EE je km²"
+          <option value="energy_square_2045"
                   title="{% translate "Annual amount of energy fed in from renewable plants (wind energy, photovoltaic, hydro power) related to the area in megawatt hours per km²." %}">
             {% translate "Renewable Electricity Production per km² (MWh)" %}
           </option>
@@ -91,6 +91,11 @@
       </select>
       <img src="{% static 'images/icons/i_info.svg' %}" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" id="info_tooltip_results" title="{% translate "Inhabitants" %}">
     </div>
+    <div class="panel-item">
+    <div class="panel-item__padding">
+      <div id="region_chart_2045" class="panel-item__chart"></div>
+    </div>
+  </div>
     <div class="panel-item__nav" style="display: none !important;">
       <p class="panel-item__nav-header">{% translate "View" %}</p>
 

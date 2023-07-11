@@ -149,10 +149,9 @@ def get_charts(request: HttpRequest) -> response.JsonResponse:
         `div_id` is used in frontend to detect chart container.
     """
     lookups = request.GET.getlist("charts[]")
-    map_state = request.GET.get("map_state")
     simulation_id = None
-    if map_state:
-        simulation_id = map_state.get("simulation_id")
+    if "map_state[simulation_id]" in request.GET.dict():
+        simulation_id = int(request.GET.dict()["map_state[simulation_id]"])
     return response.JsonResponse(
         {lookup: charts.CHARTS[lookup](simulation_id=simulation_id).render() for lookup in lookups},
     )

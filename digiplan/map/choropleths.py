@@ -87,6 +87,11 @@ class EnergyChoropleth(Choropleth):  # noqa: D101
         return calculations.energies_per_municipality().sum(axis=1).to_dict()
 
 
+class Energy2045Choropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return calculations.energies_per_municipality_2045(self.map_state["simulation_id"]).sum(axis=1).to_dict()
+
+
 class EnergyCapitaChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         energies = calculations.energies_per_municipality()
@@ -94,9 +99,23 @@ class EnergyCapitaChoropleth(Choropleth):  # noqa: D101
         return energies_per_capita.sum(axis=1).to_dict()
 
 
+class EnergyCapita2045Choropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        energies = calculations.energies_per_municipality_2045(self.map_state["simulation_id"])
+        energies_per_capita = calculations.calculate_capita_for_value(energies)
+        return energies_per_capita.sum(axis=1).to_dict()
+
+
 class EnergySquareChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         energies = calculations.energies_per_municipality()
+        energies_per_square = calculations.calculate_square_for_value(energies)
+        return energies_per_square.sum(axis=1).to_dict()
+
+
+class EnergySquare2045Choropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        energies = calculations.energies_per_municipality_2045(self.map_state["simulation_id"])
         energies_per_square = calculations.calculate_square_for_value(energies)
         return energies_per_square.sum(axis=1).to_dict()
 
@@ -190,9 +209,12 @@ CHOROPLETHS: dict[str, Union[Callable, type(Choropleth)]] = {
     "employees_statusquo": EmployeesChoropleth,
     "companies_statusquo": CompaniesChoropleth,
     "energy_statusquo": EnergyChoropleth,
+    "energy_2045": Energy2045Choropleth,
     "energy_share_statusquo": EnergyShareChoropleth,
     "energy_capita_statusquo": EnergyCapitaChoropleth,
+    "energy_capita_2045": EnergyCapita2045Choropleth,
     "energy_square_statusquo": EnergySquareChoropleth,
+    "energy_square_2045": EnergySquare2045Choropleth,
     "capacity_statusquo": CapacityChoropleth,
     "capacity_square_statusquo": CapacitySquareChoropleth,
     "wind_turbines_statusquo": WindTurbinesChoropleth,

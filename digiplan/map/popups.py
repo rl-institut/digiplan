@@ -208,6 +208,30 @@ class EnergyPopup(RegionPopup):
         return chart_options
 
 
+class Energy2045Popup(RegionPopup):
+    """Popup to show energies."""
+
+    lookup = "capacity"
+    title = _("Energies")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.energies_per_municipality_2045(self.map_state["simulation_id"])
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Energies per technology")
+        chart_options["yAxis"]["name"] = _("GWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        return chart_options
+
+    def get_chart_data(self) -> Iterable:
+        """Create capacity chart data for SQ and future scenario."""
+        status_quo_data = calculations.energies_per_municipality().loc[self.selected_id]
+        future_data = super().get_chart_data()
+        return list(zip(status_quo_data, future_data))
+
+
 class EnergySharePopup(RegionPopup):
     """Popup to show energy shares."""
 
@@ -242,6 +266,34 @@ class EnergyCapitaPopup(RegionPopup):
         return chart_options
 
 
+class EnergyCapita2045Popup(RegionPopup):
+    """Popup to show energies."""
+
+    lookup = "capacity"
+    title = _("Gewonnene Energie pro EW")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.calculate_capita_for_value(
+            calculations.energies_per_municipality_2045(self.map_state["simulation_id"]),
+        )
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Energies per capita per technology")
+        chart_options["yAxis"]["name"] = _("GWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        return chart_options
+
+    def get_chart_data(self) -> Iterable:
+        """Create capacity chart data for SQ and future scenario."""
+        status_quo_data = calculations.calculate_capita_for_value(calculations.energies_per_municipality()).loc[
+            self.selected_id
+        ]
+        future_data = super().get_chart_data()
+        return list(zip(status_quo_data, future_data))
+
+
 class EnergySquarePopup(RegionPopup):
     """Popup to show energy shares per km²."""
 
@@ -257,6 +309,34 @@ class EnergySquarePopup(RegionPopup):
         chart_options["title"]["text"] = _("Energie pro km²")
         chart_options["yAxis"]["name"] = _("MWh")
         return chart_options
+
+
+class EnergySquare2045Popup(RegionPopup):
+    """Popup to show energies."""
+
+    lookup = "capacity"
+    title = _("Gewonnene Energie pro km²")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.calculate_square_for_value(
+            calculations.energies_per_municipality_2045(self.map_state["simulation_id"]),
+        )
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Gewonnene Energie pro km²")
+        chart_options["yAxis"]["name"] = _("MWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        return chart_options
+
+    def get_chart_data(self) -> Iterable:
+        """Create capacity chart data for SQ and future scenario."""
+        status_quo_data = calculations.calculate_square_for_value(calculations.energies_per_municipality()).loc[
+            self.selected_id
+        ]
+        future_data = super().get_chart_data()
+        return list(zip(status_quo_data, future_data))
 
 
 class PopulationPopup(RegionPopup):
@@ -496,9 +576,12 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "employees_statusquo": EmployeesPopup,
     "companies_statusquo": CompaniesPopup,
     "energy_statusquo": EnergyPopup,
+    "energy_2045": Energy2045Popup,
     "energy_share_statusquo": EnergySharePopup,
     "energy_capita_statusquo": EnergyCapitaPopup,
+    "energy_capita_2045": EnergyCapita2045Popup,
     "energy_square_statusquo": EnergySquarePopup,
+    "energy_square_2045": EnergySquare2045Popup,
     "capacity_statusquo": CapacityPopup,
     "capacity_square_statusquo": CapacitySquarePopup,
     "wind_turbines_statusquo": NumberWindturbinesPopup,

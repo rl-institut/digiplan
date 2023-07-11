@@ -1,5 +1,5 @@
 
-import {statusquoDropdown} from "./elements.js";
+import {statusquoDropdown, futureDropdown} from "./elements.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
 const simulation_spinner = document.getElementById("simulation_spinner");
@@ -19,6 +19,10 @@ $('#settings').submit(false);
 statusquoDropdown.addEventListener("change", function() {
     PubSub.publish(mapEvent.CHOROPLETH_SELECTED, statusquoDropdown.value);
     imageResults.title = statusquoDropdown.options[statusquoDropdown.selectedIndex].title;
+});
+futureDropdown.addEventListener("change", function() {
+    PubSub.publish(mapEvent.CHOROPLETH_SELECTED, futureDropdown.value);
+    imageResults.title = futureDropdown.options[futureDropdown.selectedIndex].title;
 });
 
 
@@ -110,7 +114,11 @@ function hideSimulationSpinner(msg) {
 function showRegionChart(msg, lookup) {
     const region_lookup = `${lookup}_region`;
     let charts = {};
-    charts[region_lookup] = "region_chart_statusquo";
+    if (region_lookup.includes("2045")) {
+        charts[region_lookup] = "region_chart_2045";
+    } else {
+        charts[region_lookup] = "region_chart_statusquo";
+    }
     showCharts(charts);
     return logMessage(msg);
 }

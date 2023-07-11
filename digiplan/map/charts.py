@@ -49,7 +49,7 @@ class Chart:
             elif series_length > 1:
                 for i in range(0, series_length):
                     values = self.chart_data[i]
-                    if not isinstance(values, list):
+                    if not isinstance(values, (list, tuple)):
                         values = [values]
                     self.chart_options["series"][i]["data"] = values
             else:
@@ -98,6 +98,22 @@ class Chart:
 
         """
         return
+
+
+class SimulationChart(Chart):
+    """For charts based on simulations."""
+
+    def __init__(self, simulation_id: int) -> None:
+        """
+        Init Detailed Overview Chart.
+
+        Parameters
+        ----------
+        simulation_id: any
+            id of used Simulation
+        """
+        self.simulation_id = simulation_id
+        super().__init__()
 
 
 class DetailedOverviewChart(Chart):
@@ -446,6 +462,26 @@ class EnergyRegionChart(Chart):
         return chart_options
 
 
+class Energy2045RegionChart(SimulationChart):
+    """Chart for regional energy."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        status_quo_data = calculations.energies_per_municipality().sum()
+        future_data = calculations.energies_per_municipality_2045(self.simulation_id).sum()
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = _("MWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        return chart_options
+
+
 class EnergyShareRegionChart(Chart):
     """Chart for regional energy shares."""
 
@@ -644,6 +680,7 @@ CHARTS: dict[str, type[Chart]] = {
     "capacity_statusquo_region": CapacityRegionChart,
     "capacity_square_statusquo_region": CapacitySquareRegionChart,
     "energy_statusquo_region": EnergyRegionChart,
+    "energy_2045_region": Energy2045RegionChart,
     "energy_share_statusquo_region": EnergyShareRegionChart,
     "energy_capita_statusquo_region": EnergyCapitaRegionChart,
     "energy_square_statusquo_region": EnergySquareRegionChart,

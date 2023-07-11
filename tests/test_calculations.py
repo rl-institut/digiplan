@@ -1,6 +1,7 @@
 """Module to test oemof simulation results."""
 import os
 
+import pandas as pd
 from django.test import SimpleTestCase
 from django_oemof import models
 from django_oemof import results as oemof_results
@@ -107,6 +108,13 @@ class ElectricityProductionTest(SimulationTest):
         assert list(results.values())[0].iloc[0] > 0
 
 
+class ElectricityProductionFutureTest(SimulationTest):
+    """Test electricity production calculation."""
+
+    def test_electricity_production(self):  # noqa: D102
+        calculations.energies_per_municipality_2045(self.simulation_id)
+
+
 class HeatProductionTest(SimulationTest):
     """Test heat production calculation."""
 
@@ -154,6 +162,17 @@ class ElectricityOverviewTest(SimulationTest):
     def test_electricity_overview(self):  # noqa: D102
         result = calculations.electricity_overview(self.simulation_id)
         assert len(result) == 12
+
+
+class MunicipalityTest(SimpleTestCase):
+    """Test."""
+
+    databases = ("default",)
+
+    def test_square(self):
+        """Test."""
+        series = pd.Series([1, 2, 3], index=["a", "b", "c"])
+        calculations.value_per_municipality(series)
 
 
 class HeatOverviewTest(SimulationTest):

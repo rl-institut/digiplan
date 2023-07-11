@@ -36,6 +36,17 @@ def calculate_square_for_value(df: pd.DataFrame) -> pd.DataFrame:
     return result
 
 
+def value_per_municipality(series: pd.Series) -> pd.DataFrame:
+    """Shares values across areas (dummy function)."""
+    data = pd.concat([series] * 20, axis=1).transpose()
+    data.index = range(20)
+    areas = (
+        pd.DataFrame.from_records(models.Municipality.objects.all().values("id", "area")).set_index("id").sort_index()
+    )
+    result = data.sort_index() * areas.to_numpy()
+    return result / areas.sum().sum()
+
+
 def calculate_capita_for_value(df: pd.DataFrame) -> pd.DataFrame:
     """
     Calculate values related to municipality population.
@@ -128,6 +139,25 @@ def energies_per_municipality() -> pd.DataFrame:
     )
     full_load_hours = full_load_hours.reindex(index=["wind", "pv_roof", "pv_ground", "ror", "bioenergy", "st"])
     return capacities * full_load_hours.values
+
+
+def energies_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+    """Calculate energies from 2045 scenario per municipality."""
+    results = get_results(
+        simulation_id,
+        {
+            "electricity_production": electricity_production,
+        },
+    )
+    renewables = results["electricity_production"][
+        results["electricity_production"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
+    ]
+    renewables.index = ["ror", "pv_ground", "pv_roof", "wind"]
+    renewables["bioenergy"] = 0
+    renewables["st"] = 0
+    renewables = renewables.reindex(["wind", "pv_roof", "pv_ground", "ror", "bioenergy", "st"])
+    renewables = renewables * 1e6
+    return value_per_municipality(renewables)
 
 
 def energy_shares_per_municipality() -> pd.DataFrame:
