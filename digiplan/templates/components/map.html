@@ -1,5 +1,96 @@
 {% load static i18n %}
 
+<!-- Modal -->
+<div class="modal fade modal-xl onboarding-modal" id="onboardingModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title">Willkommen</p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Carousel -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="false" data-bs-wrap="false">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row">
+                <div class="col-4">
+                  <img src="{% static 'images/map_clusters.png' %}" alt="...">
+                </div>
+                <div class="carousel-item__content">
+                  <h2>Willkommen beim Digiplan Tool</h2>
+                  <p>StEmp-ABW ist ein Stakeholder-Empowerment-Tool für die Region Anhalt-Bitterfeld-Wittenberg (ABW). Es wurde vom Reiner Lemoine Institut (RLI) im Rahmen des Kopernikus-Projekts „ENavi“ entwickelt. Sie finden das Tool auf den WAM-Seiten des RLI.</p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-4">
+                  <img src="{% static 'images/map-wind.png' %}" alt="...">
+                </div>
+                <div class="carousel-item__content">
+                  <h2>Windenergie</h2>
+                  <p>Die Energiedialoge der Energieavantgarde Anhalt haben insbesondere im direkten Gespräch mit den Bürgerinnen und Bürgern und in der Mitglieder- und Stakeholderberatung gezeigt, dass die Möglichkeiten zur Partizipation in der Entwicklung eines zukunftsweisenden regionalen Energiesystems zwar formal gegeben sind, in der Praxis aber aufwändig und häufig unbefriedigend sind.</p>
+                  <p>Der ganzheitliche Blick auf die Anforderungen und Chancen eines regionalen und regenerativen Energiesystems fehlt meist. Stattdessen werden landschaftliche Veränderungen (bspw. durch Windenergieanlagen oder Freiland-PV-Anlagen), lokale Auswirkungen auf Nachbarschaften, Naturschutz- und Denkmalschutzbelange sowie Auswirkungen der „Energiewende“ auf Energiepreise etc. meist unverbunden und teils konfrontativ debattiert. Die Rechtsunsicherheit im Umgang mit den Inhalten der Regionalplanung und Raumordnung ist nur ein Ausdruck dieser komplexen Problemlage.</p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-4">
+                  <img src="{% static 'images/map-outdoor-pv.png' %}" alt="...">
+                </div>
+                <div class="carousel-item__content">
+                  <h2>PV-Freiflächenanlagen</h2>
+                  <p>Test</p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-4">
+                  <img src="{% static 'images/map-roof-pv.png' %}" alt="...">
+                </div>
+                <div class="carousel-item__content">
+                  <h2>PV-Aufdachanlagen</h2>
+                  <p>Test</p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-4">
+                  <img src="{% static 'images/settings.png' %}" alt="...">
+                </div>
+                <div class="carousel-item__content">
+                  <h2>Energiesystem</h2>
+                  <p>Test</p>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-4">
+                  <img src="{% static 'images/sidebar.png' %}" alt="...">
+                </div>
+                <div class="carousel-item__content">
+                  <h2>Los geht's</h2>
+                  <p>Test</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Carousel -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary carousel-control-prev transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">Previous</button>
+        <button class="btn btn-primary carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <section class="map-wrap">
   <div class="steps">
     <button type="button" id="menu_previous_btn" class="button button--pagination" disabled>
