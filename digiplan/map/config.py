@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 from digiplan import __version__
 
-from . import utils
+from . import area, utils
 
 # DIRECTORIES
 MAP_DIR = settings.APPS_DIR.path("map")
@@ -46,6 +46,7 @@ STORE_COLD_INIT = {
         for param_name, param_data in ENERGY_SETTINGS_PANEL.items()
         if "status_quo" in param_data
     },
+    "slider_max": area.get_max_values(),
     "allowedSwitches": ["wind_distance"],
     "detailTab": {"showPotentialLayers": True},
     "staticState": 0,
