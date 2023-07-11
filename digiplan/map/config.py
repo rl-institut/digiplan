@@ -16,10 +16,10 @@ SCENARIOS_DIR = settings.DATA_DIR.path("scenarios")
 
 # FILES
 ENERGY_SETTINGS_PANEL_FILE = settings.APPS_DIR.path("static/config/energy_settings_panel.json")
-ADDITIONAL_ENERGY_SETTINGS_FILE = settings.DATA_DIR.path("digipipe/settings/energy_settings_panel.json")
 HEAT_SETTINGS_PANEL_FILE = settings.APPS_DIR.path("static/config/heat_settings_panel.json")
-ADDITIONAL_HEAT_SETTINGS_FILE = settings.DATA_DIR.path("digipipe/settings/heat_settings_panel.json")
 TRAFFIC_SETTINGS_PANEL_FILE = settings.APPS_DIR.path("static/config/traffic_settings_panel.json")
+ADDITIONAL_ENERGY_SETTINGS_FILE = settings.DATA_DIR.path("digipipe/settings/energy_settings_panel.json")
+ADDITIONAL_HEAT_SETTINGS_FILE = settings.DATA_DIR.path("digipipe/settings/heat_settings_panel.json")
 ADDITIONAL_TRAFFIC_SETTINGS_FILE = settings.DATA_DIR.path("digipipe/settings/traffic_settings_panel.json")
 SETTINGS_DEPENDENCY_MAP_FILE = settings.APPS_DIR.path("static/config/settings_dependency_map.json")
 DEPENDENCY_PARAMETERS_FILE = settings.APPS_DIR.path("static/config/dependency_parameters.json")
@@ -33,9 +33,34 @@ REGION_FILTER_LAYERS = []
 ENERGY_SETTINGS_PANEL = utils.get_translated_json_from_file(ENERGY_SETTINGS_PANEL_FILE)
 HEAT_SETTINGS_PANEL = utils.get_translated_json_from_file(HEAT_SETTINGS_PANEL_FILE)
 TRAFFIC_SETTINGS_PANEL = utils.get_translated_json_from_file(TRAFFIC_SETTINGS_PANEL_FILE)
+ADDITIONAL_ENERGY_SETTINGS = utils.get_translated_json_from_file(ADDITIONAL_ENERGY_SETTINGS_FILE)
+ADDITIONAL_HEAT_SETTINGS = utils.get_translated_json_from_file(ADDITIONAL_HEAT_SETTINGS_FILE)
+ADDITIONAL_TRAFFIC_SETTINGS = utils.get_translated_json_from_file(ADDITIONAL_TRAFFIC_SETTINGS_FILE)
 SETTINGS_DEPENDENCY_MAP = utils.get_translated_json_from_file(SETTINGS_DEPENDENCY_MAP_FILE)
 DEPENDENCY_PARAMETERS = utils.get_translated_json_from_file(DEPENDENCY_PARAMETERS_FILE)
 TECHNOLOGY_DATA = utils.get_translated_json_from_file(TECHNOLOGY_DATA_FILE)
+
+
+def get_all_settings() -> dict:
+    """
+    Concatenate all Settings.
+
+    Returns
+    -------
+    dict
+        one dict with all settings concatenated
+    """
+    all_settings = {}
+    for setting_dict in [
+        ENERGY_SETTINGS_PANEL,
+        HEAT_SETTINGS_PANEL,
+        TRAFFIC_SETTINGS_PANEL,
+        ADDITIONAL_ENERGY_SETTINGS,
+        ADDITIONAL_HEAT_SETTINGS,
+        ADDITIONAL_TRAFFIC_SETTINGS,
+    ]:
+        all_settings.update(setting_dict)
+    return all_settings
 
 
 # STORE
@@ -43,7 +68,7 @@ STORE_COLD_INIT = {
     "version": __version__,
     "slider_marks": {
         param_name: [("Status Quo", param_data["status_quo"])]
-        for param_name, param_data in ENERGY_SETTINGS_PANEL.items()
+        for param_name, param_data in get_all_settings().items()
         if "status_quo" in param_data
     },
     "slider_max": area.get_max_values(),
