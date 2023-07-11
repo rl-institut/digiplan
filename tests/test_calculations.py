@@ -14,10 +14,12 @@ class SimulationTest(SimpleTestCase):
 
     databases = ("default",)  # Needed, as otherwise django complains about tests using "default" DB
     parameters = {
-        "s_v_2": 100,
+        "s_v_1": None,
         "s_v_3": 100,
         "s_v_4": 100,
+        "s_v_5": 100,
         "s_w_1": 1000,
+        "w_v_1": None,
         "w_v_3": 100,
         "w_v_4": 100,
         "w_v_5": 100,
@@ -31,6 +33,21 @@ class SimulationTest(SimpleTestCase):
         "w_z_wp_3": 100,
         "w_d_s_1": 50,
         "w_z_s_1": 53,
+        "w_d_wp_1": None,
+        "w_z_wp_1": None,
+        "w_d_s_3": None,
+        "w_z_s_3": None,
+        "s_w_3": None,
+        "s_w_4": None,
+        "s_w_4_1": None,
+        "s_w_4_2": None,
+        "s_w_5": None,
+        "s_w_5_1": None,
+        "s_w_5_2": None,
+        "s_pv_ff_3": None,
+        "s_pv_ff_4": None,
+        "s_pv_d_3": None,
+        "s_pv_d_4": None,
     }
 
     def setUp(self) -> None:
