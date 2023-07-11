@@ -334,13 +334,13 @@ MAP_ENGINE_API_MVTS = {
 
 MAP_ENGINE_API_CLUSTERS = [
     setup.ClusterAPI("wind", "map", "WindTurbine", properties=["id"]),
-    setup.ClusterAPI("pvroof", "map", "PVroof"),
-    setup.ClusterAPI("pvground", "map", "PVground"),
-    setup.ClusterAPI("hydro", "map", "Hydro"),
-    setup.ClusterAPI("biomass", "map", "Biomass"),
-    setup.ClusterAPI("combustion", "map", "Combustion"),
-    setup.ClusterAPI("gsgk", "map", "GSGK"),
-    setup.ClusterAPI("storage", "map", "Storage"),
+    setup.ClusterAPI("pvroof", "map", "PVroof", properties=["id"]),
+    setup.ClusterAPI("pvground", "map", "PVground", properties=["id"]),
+    setup.ClusterAPI("hydro", "map", "Hydro", properties=["id"]),
+    setup.ClusterAPI("biomass", "map", "Biomass", properties=["id"]),
+    setup.ClusterAPI("combustion", "map", "Combustion", properties=["id"]),
+    setup.ClusterAPI("gsgk", "map", "GSGK", properties=["id"]),
+    setup.ClusterAPI("storage", "map", "Storage", properties=["id"]),
 ]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
@@ -461,6 +461,34 @@ MAP_ENGINE_POPUPS = [
     ),
     setup.Popup(
         "wind",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "pvground",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "pvroof",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "hydro",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "biomass",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "combustion",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "gsgk",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "storage",
         popup_at_default_layer=True,
     ),
 ]

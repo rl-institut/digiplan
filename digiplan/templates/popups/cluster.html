@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-Kapazität: {{ object.capacity_net }}
-</body>
-</html>
+{% load i18n %}
+<div class="popup">
+
+  <div class="popup__header">
+    <h1 id="js-popup__title" class="popup__title">{{ title }}</h1>
+  </div>
+
+  <table>
+    <tr>
+      <th>{% trans 'Parameter' %}</th>
+      <th>{% trans 'Wert' %}</th>
+    </tr>
+    {% for key, value in data.items %}
+      <tr>
+        <td>{{ key }}</td>
+        <td>{{ value }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  {% if description %}<div id="js-popup__description" class="popup__description">{{ description }}</div>{%  endif %}
+</div>

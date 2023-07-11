@@ -98,21 +98,30 @@ class Population(models.Model):
         return population_per_year
 
 
-class WindTurbine(models.Model):
-    """Model holding wind turbines."""
+class RenewableModel(models.Model):
+    """Base class for renewable cluster models."""
 
     geom = models.PointField(srid=4326)
     name = models.CharField(max_length=255, null=True)
-    name_park = models.CharField(max_length=255, null=True)
     geometry_approximated = models.BooleanField()
     unit_count = models.BigIntegerField(null=True)
     capacity_net = models.FloatField(null=True)
-    hub_height = models.FloatField(null=True)
     zip_code = models.CharField(max_length=50, null=True)
-    rotor_diameter = models.FloatField(null=True)
-    mun_id = models.IntegerField(null=True)
+
+    mun_id = models.ForeignKey(Municipality, on_delete=models.DO_NOTHING, null=True)
 
     objects = models.Manager()
+
+    class Meta:  # noqa: D106
+        abstract = True
+
+
+class WindTurbine(RenewableModel):
+    """Model holding wind turbines."""
+
+    name_park = models.CharField(max_length=255, null=True)
+    hub_height = models.FloatField(null=True)
+    rotor_diameter = models.FloatField(null=True)
 
     data_file = "bnetza_mastr_wind_agg_region"
     layer = "bnetza_mastr_wind"
@@ -152,23 +161,10 @@ class WindTurbine(models.Model):
         return wind_turbines["units"].reindex(Municipality.objects.all().values_list("id", flat=True), fill_value=0)
 
 
-class PVroof(models.Model):
+class PVroof(RenewableModel):
     """Model holding PV roof."""
 
-    geom = models.PointField(srid=4326)
-    name = models.CharField(max_length=255, null=True)
-    zip_code = models.CharField(max_length=50, null=True)
-    geometry_approximated = models.BooleanField()
-    unit_count = models.BigIntegerField(null=True)
-    capacity_net = models.FloatField(null=True)
     power_limitation = models.CharField(max_length=50, null=True)
-    mun_id = models.IntegerField(null=True)
-
-    objects = models.Manager()
-    vector_tiles = StaticMVTManager(
-        geo_col="geom",
-        columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"],
-    )
 
     data_file = "bnetza_mastr_pv_roof_agg_region"
     layer = "bnetza_mastr_pv_roof"
@@ -193,23 +189,10 @@ class PVroof(models.Model):
         return self.name
 
 
-class PVground(models.Model):
+class PVground(RenewableModel):
     """Model holding PV on ground."""
 
-    geom = models.PointField(srid=4326)
-    name = models.CharField(max_length=255, null=True)
-    zip_code = models.CharField(max_length=50, null=True)
-    geometry_approximated = models.BooleanField()
-    unit_count = models.BigIntegerField(null=True)
-    capacity_net = models.FloatField(null=True)
     power_limitation = models.CharField(max_length=50, null=True)
-    mun_id = models.IntegerField(null=True)
-
-    objects = models.Manager()
-    vector_tiles = StaticMVTManager(
-        geo_col="geom",
-        columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"],
-    )
 
     data_file = "bnetza_mastr_pv_ground_agg_region"
     layer = "bnetza_mastr_pv_ground"
@@ -230,23 +213,10 @@ class PVground(models.Model):
         verbose_name_plural = _("Outdoor PVs")
 
 
-class Hydro(models.Model):
+class Hydro(RenewableModel):
     """Hydro model."""
 
-    geom = models.PointField(srid=4326)
-    name = models.CharField(max_length=255, null=True)
-    zip_code = models.CharField(max_length=50, null=True)
-    geometry_approximated = models.BooleanField()
-    unit_count = models.BigIntegerField(null=True)
-    capacity_net = models.FloatField(null=True)
     water_origin = models.CharField(max_length=255, null=True)
-    mun_id = models.IntegerField(null=True)
-
-    objects = models.Manager()
-    vector_tiles = StaticMVTManager(
-        geo_col="geom",
-        columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"],
-    )
 
     data_file = "bnetza_mastr_hydro_agg_region"
     layer = "bnetza_mastr_hydro"
@@ -267,23 +237,10 @@ class Hydro(models.Model):
         verbose_name_plural = _("Hydro")
 
 
-class Biomass(models.Model):
+class Biomass(RenewableModel):
     """Biomass model."""
 
-    geom = models.PointField(srid=4326)
-    name = models.CharField(max_length=255, null=True)
-    zip_code = models.CharField(max_length=50, null=True)
-    geometry_approximated = models.BooleanField()
-    unit_count = models.BigIntegerField(null=True)
-    capacity_net = models.FloatField(null=True)
     fuel_type = models.CharField(max_length=50, null=True)
-    mun_id = models.IntegerField(null=True)
-
-    objects = models.Manager()
-    vector_tiles = StaticMVTManager(
-        geo_col="geom",
-        columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"],
-    )
 
     data_file = "bnetza_mastr_biomass_agg_region"
     layer = "bnetza_mastr_biomass"
@@ -304,23 +261,10 @@ class Biomass(models.Model):
         verbose_name_plural = _("Biomass")
 
 
-class Combustion(models.Model):
+class Combustion(RenewableModel):
     """Combustion model."""
 
-    geom = models.PointField(srid=4326)
-    name = models.CharField(max_length=255, null=True)
     name_block = models.CharField(max_length=255, null=True)
-    zip_code = models.CharField(max_length=50, null=True)
-    geometry_approximated = models.BooleanField()
-    unit_count = models.BigIntegerField(null=True)
-    capacity_net = models.FloatField(null=True)
-    mun_id = models.IntegerField(null=True)
-
-    objects = models.Manager()
-    vector_tiles = StaticMVTManager(
-        geo_col="geom",
-        columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"],
-    )
 
     data_file = "bnetza_mastr_combustion_agg_region"
     layer = "bnetza_mastr_combustion"
@@ -341,23 +285,10 @@ class Combustion(models.Model):
         verbose_name_plural = _("Combustion")
 
 
-class GSGK(models.Model):
+class GSGK(RenewableModel):
     """GSGK model."""
 
-    geom = models.PointField(srid=4326)
-    name = models.CharField(max_length=255, null=True)
-    zip_code = models.CharField(max_length=50, null=True)
-    geometry_approximated = models.BooleanField()
-    unit_count = models.BigIntegerField(null=True)
-    capacity_net = models.FloatField(null=True)
     feedin_type = models.CharField(max_length=50, null=True)
-    mun_id = models.IntegerField(null=True)
-
-    objects = models.Manager()
-    vector_tiles = StaticMVTManager(
-        geo_col="geom",
-        columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"],
-    )
 
     data_file = "bnetza_mastr_gsgk_agg_region"
     layer = "bnetza_mastr_gsgk"
@@ -378,22 +309,8 @@ class GSGK(models.Model):
         verbose_name_plural = _("GSGK")
 
 
-class Storage(models.Model):
+class Storage(RenewableModel):
     """Storage model."""
-
-    geom = models.PointField(srid=4326)
-    name = models.CharField(max_length=255, null=True)
-    zip_code = models.CharField(max_length=50, null=True)
-    geometry_approximated = models.BooleanField()
-    unit_count = models.BigIntegerField(null=True)
-    capacity_net = models.FloatField(null=True)
-    mun_id = models.IntegerField(null=True)
-
-    objects = models.Manager()
-    vector_tiles = StaticMVTManager(
-        geo_col="geom",
-        columns=["id", "name", "unit_count", "capacity_net", "geometry_approximated", "mun_id"],
-    )
 
     data_file = "bnetza_mastr_storage_agg_region"
     layer = "bnetza_mastr_storage"
