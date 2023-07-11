@@ -187,6 +187,21 @@ function checkMainPanelSlider(msg, data) {
     let target = sliderDependencies[data.input[0].id];
     $('#' + target).data("ionRangeSlider").update({from:data.from});
   }
+    if (data.input[0].id === "id_s_v_1") {
+    $(`#id_s_v_3`).data("ionRangeSlider").update({from:data.from});
+    $(`#id_s_v_4`).data("ionRangeSlider").update({from:data.from});
+    $(`#id_s_v_5`).data("ionRangeSlider").update({from:data.from});
+  }
+  if (data.input[0].id === "id_w_d_wp_1") {
+    $(`#id_w_d_wp_3`).data("ionRangeSlider").update({from:data.from});
+    $(`#id_w_d_wp_4`).data("ionRangeSlider").update({from:data.from});
+    $(`#id_w_d_wp_5`).data("ionRangeSlider").update({from:data.from});
+  }
+  if (data.input[0].id === "id_w_v_1") {
+    $(`#id_w_v_3`).data("ionRangeSlider").update({from:data.from});
+    $(`#id_w_v_4`).data("ionRangeSlider").update({from:data.from});
+    $(`#id_w_v_5`).data("ionRangeSlider").update({from:data.from});
+  }
 }
 
 function showOrHidePotentialLayersOnMoreLabelClick(msg, moreLabel) {
@@ -282,7 +297,6 @@ function calculate_slider_value(data) {
     $(`#id_w_d_wp_1`).data("ionRangeSlider").update({from:new_val});
   }
   if (data.input[0].id === "id_w_v_3" || data.input[0].id === "id_w_v_4" || data.input[0].id === "id_w_v_5") {
-    console.log("here");
     let factor_hh = $("#id_w_v_3").data("ionRangeSlider").result.from;
     let factor_ind = $("#id_w_v_4").data("ionRangeSlider").result.from;
     let factor_cts = $("#id_w_v_5").data("ionRangeSlider").result.from;
