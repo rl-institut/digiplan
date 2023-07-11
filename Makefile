@@ -28,6 +28,9 @@ empty_data:
 empty_raster:
 	python manage.py shell --command="from digiplan.utils import data_processing; data_processing.empty_raster()"
 
+empty_simulations:
+	python manage.py shell --command="from django_oemof.models import Simulation; Simulation.objects.all().delete()"
+
 distill:
 	python manage.py distill-local --force --exclude-staticfiles ./digiplan/static/mvts
 

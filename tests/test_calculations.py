@@ -1,6 +1,8 @@
 """Module to test oemof simulation results."""
+import os
 
 from django.test import SimpleTestCase
+from django_oemof import models
 from django_oemof import results as oemof_results
 from django_oemof import simulation
 
@@ -12,24 +14,47 @@ class SimulationTest(SimpleTestCase):
 
     databases = ("default",)  # Needed, as otherwise django complains about tests using "default" DB
     parameters = {
-        "s_v_2": 100,
+        "s_v_1": None,
         "s_v_3": 100,
         "s_v_4": 100,
+        "s_v_5": 100,
         "s_w_1": 1000,
+        "w_v_1": None,
         "w_v_3": 100,
         "w_v_4": 100,
         "w_v_5": 100,
         "s_pv_ff_1": 100,
         "s_pv_d_1": 100,
-        "s_b_1": 100,
-        "ror": 100,
-        "w_z_wp_1": 100,
-        "w_d_wp_1": 100,
+        "s_h_1": 100,
+        "s_s_g_1": 100,
+        "w_d_wp_3": 100,
+        "w_d_wp_4": 100,
+        "w_d_wp_5": 100,
+        "w_z_wp_3": 100,
+        "w_d_s_1": 50,
+        "w_z_s_1": 53,
+        "w_d_wp_1": None,
+        "w_z_wp_1": None,
+        "w_d_s_3": None,
+        "w_z_s_3": None,
+        "s_w_3": None,
+        "s_w_4": None,
+        "s_w_4_1": None,
+        "s_w_4_2": None,
+        "s_w_5": None,
+        "s_w_5_1": None,
+        "s_w_5_2": None,
+        "s_pv_ff_3": None,
+        "s_pv_ff_4": None,
+        "s_pv_d_3": None,
+        "s_pv_d_4": None,
     }
 
     def setUp(self) -> None:
         """Starts/loads oemof simulation for given parameters."""
         self.simulation_id = simulation.simulate_scenario("scenario_2045", self.parameters)
+        if os.environ.get("TEST_SHOW_SIMULATION_RESULTS", "False") == "True":
+            self.results = models.Simulation.objects.get(pk=self.simulation_id).dataset.restore_results()
 
     def tearDown(self) -> None:  # noqa: D102 Needed to keep results in test DB
         pass
@@ -101,7 +126,7 @@ class ElectricityDemandTest(SimulationTest):
             self.simulation_id,
             calculations=[calculations.electricity_demand],
         )
-        assert list(results.values())[0].iloc[0] > 0
+        assert list(results.values())[0].iloc[1] > 0
 
 
 class HeatDemandTest(SimulationTest):
