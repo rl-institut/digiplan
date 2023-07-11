@@ -278,8 +278,8 @@ function showPVLayers(msg) {
 function calculate_slider_value(data) {
   if (data.input[0].id === "id_s_v_3" || data.input[0].id === "id_s_v_4" || data.input[0].id === "id_s_v_5") {
     let factor_hh = $("#id_s_v_3").data("ionRangeSlider").result.from;
-    let factor_ind = $("#id_s_v_4").data("ionRangeSlider").result.from;
-    let factor_cts = $("#id_s_v_5").data("ionRangeSlider").result.from;
+    let factor_ind = $("#id_s_v_5").data("ionRangeSlider").result.from;
+    let factor_cts = $("#id_s_v_4").data("ionRangeSlider").result.from;
     let demand_hh = store.cold.slider_per_sector.s_v_1.hh;
     let demand_ind = store.cold.slider_per_sector.s_v_1.ind;
     let demand_cts = store.cold.slider_per_sector.s_v_1.cts;
@@ -288,8 +288,8 @@ function calculate_slider_value(data) {
   }
   if (data.input[0].id === "id_w_d_wp_3" || data.input[0].id === "id_w_d_wp_4" || data.input[0].id === "id_w_d_wp_5") {
     let factor_hh = $("#id_w_d_wp_3").data("ionRangeSlider").result.from;
-    let factor_ind = $("#id_w_d_wp_4").data("ionRangeSlider").result.from;
-    let factor_cts = $("#id_w_d_wp_5").data("ionRangeSlider").result.from;
+    let factor_ind = $("#id_w_d_wp_5").data("ionRangeSlider").result.from;
+    let factor_cts = $("#id_w_d_wp_4").data("ionRangeSlider").result.from;
     let demand_hh = store.cold.slider_per_sector.w_d_wp_1.hh;
     let demand_ind = store.cold.slider_per_sector.w_d_wp_1.ind;
     let demand_cts = store.cold.slider_per_sector.w_d_wp_1.cts;
@@ -298,8 +298,8 @@ function calculate_slider_value(data) {
   }
   if (data.input[0].id === "id_w_v_3" || data.input[0].id === "id_w_v_4" || data.input[0].id === "id_w_v_5") {
     let factor_hh = $("#id_w_v_3").data("ionRangeSlider").result.from;
-    let factor_ind = $("#id_w_v_4").data("ionRangeSlider").result.from;
-    let factor_cts = $("#id_w_v_5").data("ionRangeSlider").result.from;
+    let factor_ind = $("#id_w_v_5").data("ionRangeSlider").result.from;
+    let factor_cts = $("#id_w_v_4").data("ionRangeSlider").result.from;
     let demand_hh = store.cold.slider_per_sector.w_d_wp_1.hh;
     let demand_ind = store.cold.slider_per_sector.w_d_wp_1.ind;
     let demand_cts = store.cold.slider_per_sector.w_d_wp_1.cts;
