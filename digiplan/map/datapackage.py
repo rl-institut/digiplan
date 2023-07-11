@@ -62,3 +62,19 @@ def get_heat_demand(
             )
             demand[sec][dist] = pd.read_csv(demand_filename, sep=";")[f"ABW-heat_{dist}-demand_{sec}-profile"]
     return demand
+
+
+def get_thermal_efficiency(component: str) -> float:
+    """Return thermal efficiency from given component from oemof scenario."""
+    component_filename = OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "elements" / f"{component}.csv"
+    component_df = pd.read_csv(component_filename, sep=";")
+    if component_df["type"][0] in ("extraction", "backpressure"):
+        return float(pd.read_csv(component_filename, sep=";")["thermal_efficiency"][0])
+
+    if "efficiency" in component_df.columns and isinstance(component_df["efficiency"][0], float):
+        return component_df["efficiency"][0]
+
+    if "heatpump" in component:
+        component = "efficiency"
+    sequence_filename = OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "sequences" / f"{component}_profile.csv"
+    return pd.read_csv(sequence_filename, sep=";").iloc[:, 1]
