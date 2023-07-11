@@ -19,6 +19,13 @@ const potentialWindLayers = [
 ];
 const potentialWindSwitches = document.querySelectorAll("#id_s_w_3, #id_s_w_4, #id_s_w_4_1, #id_s_w_4_2, #id_s_w_5, #id_s_w_5_1, #id_s_w_5_2");
 
+const sliderDependencies = {
+  "id_w_z_wp_1": "id_w_z_wp_3",
+  "id_w_d_s_1": "id_w_d_s_3",
+  "id_w_z_s_1": "id_w_z_s_3",
+  "id_v_iv_1": "id_v_iv_3"
+};
+
 // Setup
 
 // Order matters. Start with the most specific, and end with most general sliders.
@@ -141,6 +148,10 @@ subscribeToEvents(
   [eventTopics.POWER_PANEL_SLIDER_CHANGE, eventTopics.PANEL_SLIDER_CHANGE],
   hidePotentialLayers
 );
+subscribeToEvents(
+  [eventTopics.POWER_PANEL_SLIDER_CHANGE, eventTopics.PANEL_SLIDER_CHANGE],
+  checkMainPanelSlider
+);
 PubSub.subscribe(eventTopics.MORE_LABEL_CLICK, showOrHideSidepanelsOnMoreLabelClick);
 PubSub.subscribe(eventTopics.MORE_LABEL_CLICK, showOrHidePotentialLayersOnMoreLabelClick);
 PubSub.subscribe(eventTopics.DEPENDENCY_PANEL_SLIDER_CHANGE, (msg, payload) => {
@@ -154,6 +165,13 @@ PubSub.subscribe(eventTopics.WIND_CONTROL_ACTIVATED, showWindLayers);
 
 
 // Subscriber Functions
+
+function checkMainPanelSlider(msg, data) {
+  if (sliderDependencies.hasOwnProperty(data.input[0].id)) {
+    let target = sliderDependencies[data.input[0].id];
+    $('#' + target).data("ionRangeSlider").update({from:data.from});
+  }
+}
 
 function showOrHidePotentialLayersOnMoreLabelClick(msg, moreLabel) {
   const classes = ["active", "active-sidepanel"];
