@@ -328,6 +328,52 @@
           @extend .d-block;
         }
       }
+
+      &--wind-light {
+        .form-check.form-switch .form-check-input:checked,
+        .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
+          background-color: $windlight;
+          border-color: $windlight;
+        }
+
+        .irs.irs--flat .irs-single:before {
+          border-top-color: $windlight;
+        }
+      }
+
+      &--wind-dark {
+        .form-check.form-switch .form-check-input:checked,
+        .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
+          background-color: $winddark;
+          border-color: $winddark;
+        }
+
+        .irs.irs--flat .irs-single:before {
+          border-top-color: $winddark;
+        }
+      }
+
+      &--pv-light {
+        .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
+          background-color: $pvlight;
+          border-color: $pvlight;
+        }
+
+        .irs.irs--flat .irs-single:before {
+          border-top-color: $pvlight;
+        }
+      }
+
+      &--pv-dark {
+        .irs.irs--flat .irs-bar, .irs.irs--flat .irs-handle > i:first-child, .irs.irs--flat .irs-single {
+          background-color: $pvdark;
+          border-color: $pvdark;
+        }
+
+        .irs.irs--flat .irs-single:before {
+          border-top-color: $pvdark;
+        }
+      }
     }
 
     .sidepanel__block.sidepanel__block--slider {
