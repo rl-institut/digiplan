@@ -13,20 +13,20 @@ document.addEventListener("DOMContentLoaded", function() {
     var carousel = new bootstrap.Carousel(carouselEl, {
       wrap: false
     });
-  
+
     var prevButton = document.querySelector('.carousel-control-prev');
     var nextButton = document.querySelector('.carousel-control-next');
-  
+
     prevButton.addEventListener('click', function (event) {
       event.preventDefault();
       carousel.prev();
     });
-  
+
     nextButton.addEventListener('click', function (event) {
       event.preventDefault();
       carousel.next();
     });
-    
+
     carouselEl.addEventListener('slid.bs.carousel', function () {
       const carouselItems = carouselEl.querySelectorAll('.carousel-item');
       const currentIndex = Array.prototype.indexOf.call(carouselItems, carouselEl.querySelector('.carousel-item.active'));
@@ -43,4 +43,3 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   });
-  
