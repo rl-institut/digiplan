@@ -189,13 +189,13 @@
   },
   "s_s_g_1": {
     "class": "js-slider js-slider-panel js-power-mix",
-    "label": "{% trans 'Large scale batteries (GWh)' %}",
+    "label": "{% trans 'Large scale batteries (MWh)' %}",
     "max": 20,
     "min": 0,
     "start": 2,
     "status_quo": 3,
     "step": 0.1,
-    "tooltip": "{% trans 'Large scale batteries (GWh)' %}",
+    "tooltip": "{% trans 'Large scale batteries (MWh)' %}",
     "type": "slider",
     "sidepanel": true
   },
