@@ -46,6 +46,12 @@
     @extend .position-relative;
     opacity: 1 !important;
     background-color: $gray-700 !important;
+
+    &.transparent {
+      @extend .bg-white;
+      @extend .text-white;
+      pointer-events: none;
+    }
   }
 
   .carousel-control-prev {
