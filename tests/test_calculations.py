@@ -36,7 +36,7 @@ class SimulationTest(SimpleTestCase):
     def setUp(self) -> None:
         """Starts/loads oemof simulation for given parameters."""
         self.simulation_id = simulation.simulate_scenario("scenario_2045", self.parameters)
-        if os.environ["TEST_SHOW_SIMULATION_RESULTS"]:
+        if os.environ.get("TEST_SHOW_SIMULATION_RESULTS", "False") == "True":
             self.results = models.Simulation.objects.get(pk=self.simulation_id).dataset.restore_results()
 
     def tearDown(self) -> None:  # noqa: D102 Needed to keep results in test DB
