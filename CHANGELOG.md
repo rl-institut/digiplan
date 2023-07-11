@@ -6,6 +6,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- heat settings set for oemof simulation
 - cluster popups
 - url, view and calculations for result charts
 - datapackage from digipipe
