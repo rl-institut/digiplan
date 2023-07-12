@@ -1,5 +1,6 @@
 """Module to implement hooks for django-oemof."""
 
+import logging
 import math
 
 import pandas as pd
@@ -65,7 +66,57 @@ def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) ->
     year = "2045" if scenario == "scenario_2045" else "2022"
     for sector, slider in (("hh", "s_v_3"), ("cts", "s_v_4"), ("ind", "s_v_5")):
         demand = datapackage.get_power_demand(sector)[sector]
+        logging.info(f"Adapting electricity demand at {sector=}.")
         data[f"ABW-electricity-demand_{sector}"] = {"amount": float(demand[year].sum()) * data.pop(slider) / 100}
+    return data
+
+
+def adapt_heat_capacities(distribution: str, remaining_energy: pd.Series) -> dict:
+    """Adapt heat settings for remaining energy."""
+    # TODO (Hendrik): Read values from datapackage  # noqa: TD003
+    heat_shares = {
+        "central": {
+            "ABW-wood-extchp_central": 0,
+            "ABW-biogas-bpchp_central": 0,
+            "ABW-ch4-bpchp_central": 0.5,
+            "ABW-ch4-extchp_central": 0.5,
+            "ABW-solar-thermalcollector_central": 0,
+            "ABW-ch4-boiler_central": 0,
+        },
+        "decentral": {
+            "ABW-wood-extchp_decentral": 0.15,
+            "ABW-biogas-bpchp_decentral": 0.15,
+            "ABW-ch4-bpchp_decentral": 0.15,
+            "ABW-ch4-extchp_decentral": 0.30,
+            "ABW-solar-thermalcollector_decentral": 0,
+            "ABW-ch4-boiler_decentral": 0.15,
+            "ABW-wood-oven": 0.1,
+        },
+    }
+
+    remaining_energy_sum = remaining_energy.sum()
+    data = {}
+    for component, share in heat_shares[distribution].items():
+        if share == 0:
+            continue
+        efficiency = datapackage.get_thermal_efficiency(component[4:])
+        capacity = math.ceil((remaining_energy / efficiency).max() * share)
+        if capacity == 0:
+            continue
+        energy = remaining_energy_sum * share
+        if "extchp" in component or "bpchp" in component:
+            parameter = "input_parameters"
+            energy = energy / efficiency
+        else:
+            parameter = "output_parameters"
+        logging.info(f"Adapting capacity and energy for {component} at {distribution=}.")
+        data[component] = {
+            "capacity": capacity,
+            parameter: {
+                "summed_min": math.floor(energy / capacity),
+                "summed_max": math.ceil(energy / capacity),
+            },
+        }
     return data
 
 
@@ -89,26 +140,6 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
     """
     demand_sliders = {"hh": "w_v_3", "cts": "w_v_4", "ind": "w_v_5"}
     hp_sliders = {"hh": "w_d_wp_3", "cts": "w_d_wp_4", "ind": "w_d_wp_5"}
-    # TODO (Hendrik): Read values from datapackage  # noqa: TD003
-    heat_shares = {
-        "central": {
-            "ABW-wood-extchp_central": 0,
-            "ABW-biogas-bpchp_central": 0,
-            "ABW-ch4-bpchp_central": 0.5,
-            "ABW-ch4-extchp_central": 0.5,
-            "ABW-solar-thermalcollector_central": 0,
-            "ABW-ch4-boiler_central": 0,
-        },
-        "decentral": {
-            "ABW-wood-extchp_decentral": 0.15,
-            "ABW-biogas-bpchp_decentral": 0.15,
-            "ABW-ch4-bpchp_decentral": 0.15,
-            "ABW-ch4-extchp_decentral": 0.30,
-            "ABW-solar-thermalcollector_decentral": 0,
-            "ABW-ch4-boiler_decentral": 0.15,
-            "ABW-wood-oven": 0.1,
-        },
-    }
 
     heat_demand_per_municipality = datapackage.get_summed_heat_demand_per_municipality()
     heat_demand = datapackage.get_heat_demand()
@@ -127,6 +158,7 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
                 data.pop(demand_sliders[sector]) if distribution == "decentral" else data.get(demand_sliders[sector])
             )
             # DEMAND
+            logging.info(f"Adapting heat demand at {distribution=} and {sector=}.")
             data[f"ABW-heat_{distribution}-demand_{sector}"] = {
                 "amount": summed_demand * percentage / 100,
             }
@@ -146,6 +178,7 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
         hp_energy_total = pd.concat(hp_energy.values(), axis=1).sum(axis=1)
         hp_energy_sum = hp_energy_total.sum()
         capacity = math.ceil(hp_energy_total.max())
+        logging.info(f"Adapting capacity and energy for heatpump at {distribution=}.")
         data[f"ABW-electricity-heatpump_{distribution}"] = {
             "capacity": capacity,
             "output_parameters": {
@@ -154,34 +187,16 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
             },
         }
 
-        # HEAT capacities
         total_demand = pd.concat(demand.values(), axis=1).sum(axis=1)
         remaining_energy = total_demand - hp_energy_total
-        remaining_energy_sum = remaining_energy.sum()
-        for component, share in heat_shares[distribution].items():
-            if share == 0:
-                continue
-            efficiency = datapackage.get_thermal_efficiency(component[4:])
-            capacity = math.ceil((remaining_energy / efficiency).max() * share)
-            if capacity == 0:
-                continue
-            energy = remaining_energy_sum * share
-            if "extchp" in component or "bpchp" in component:
-                parameter = "input_parameters"
-                energy = energy / efficiency
-            else:
-                parameter = "output_parameters"
-            data[component] = {
-                "capacity": capacity,
-                parameter: {
-                    "summed_min": math.floor(energy / capacity),
-                    "summed_max": math.ceil(energy / capacity),
-                },
-            }
+
+        # HEAT capacities
+        data.update(adapt_heat_capacities(distribution, remaining_energy))
 
         # STORAGES
         storage_sliders = {"decentral": "w_d_s_1", "central": "w_z_s_1"}
         avg_demand_per_day = total_demand.sum() / 365
+        logging.info(f"Adapting capacity for storage at {distribution=}.")
         data[f"ABW-heat_{distribution}-storage"] = {
             "capacity": float(avg_demand_per_day * data.pop(storage_sliders[distribution]) / 100),
         }
