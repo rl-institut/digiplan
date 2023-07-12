@@ -61,7 +61,12 @@ class PanelForm(TemplateForm):  # noqa: D101
                 if "step" in item:
                     attrs["data-step"] = item["step"]
 
-                field = IntegerField(label=item["label"], widget=TextInput(attrs=attrs), help_text=item["tooltip"])
+                field = IntegerField(
+                    label=item["label"],
+                    widget=TextInput(attrs=attrs),
+                    help_text=item["tooltip"],
+                    required=item.get("required", True),
+                )
                 yield {"name": name, "field": field}
             elif item["type"] == "switch":
                 attrs = {

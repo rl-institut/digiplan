@@ -51,7 +51,8 @@
     "min": 0,
     "start": 0,
     "step": 5,
-    "type": "slider"
+    "type": "slider",
+    "required": false
   },
     "s_w_5_2": {
     "class": "js-slider",
@@ -61,7 +62,8 @@
     "min": 0,
     "start": 0,
     "step": 5,
-    "type": "slider"
+    "type": "slider",
+    "required": false
   },
   "s_pv_ff_1": {
     "class": "js-slider js-slider-panel js-power-mix",
