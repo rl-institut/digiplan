@@ -259,3 +259,11 @@ Example to only load specific data:
 ```
 docker-compose -f production.yml run --rm django python -u manage.py shell --command="from djagora.utils import load_overlays; from djagora.utils.load_configs import DYNAMIC_OVERLAYS; overlays = [item for item in DYNAMIC_OVERLAYS if item['name'].startswith('settlement')]; load_overlays.run(overlays=overlays)"
 ```
+
+If celery does not complete, but shows no errors you can check redis for errors:
+
+```bash
+docker exec -it <redis-container> bash
+redis-cli keys "*"
+redis-cli get <task-meta-with-current-id>
+```
