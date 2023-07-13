@@ -256,7 +256,7 @@ class EnergyCapitaPopup(RegionPopup):
     title = _("Gewonnene Energie pro EW")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.calculate_capita_for_value(calculations.energies_per_municipality())
+        return calculations.calculate_capita_for_value(calculations.energies_per_municipality()) * 1e3
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -301,7 +301,7 @@ class EnergySquarePopup(RegionPopup):
     title = _("Gewonnene Energie pro km²")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.calculate_square_for_value(calculations.energies_per_municipality())
+        return calculations.calculate_square_for_value(calculations.energies_per_municipality()) * 1e3
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""

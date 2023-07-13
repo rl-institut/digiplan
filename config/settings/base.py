@@ -349,12 +349,12 @@ MAP_ENGINE_ZOOM_LEVELS = {
 }
 
 MAP_ENGINE_CHOROPLETHS = [
-    setup.Choropleth("population_statusquo", layers=["municipality"], title=_("Einwohner_innenzahl"), unit=_("EW")),
+    setup.Choropleth("population_statusquo", layers=["municipality"], title=_("Einwohner_innenzahl"), unit=_("")),
     setup.Choropleth(
         "population_density_statusquo",
         layers=["municipality"],
-        title=_("Einwohner_innenzahl"),
-        unit=_("EW/qm"),
+        title=_("Einwohner_innenzahl pro km²"),
+        unit=_(""),
     ),
     setup.Choropleth("employees_statusquo", layers=["municipality"], title=_("Beschäftigte"), unit=_("")),
     setup.Choropleth("companies_statusquo", layers=["municipality"], title=_("Betriebe"), unit=_("")),
@@ -363,7 +363,7 @@ MAP_ENGINE_CHOROPLETHS = [
         "capacity_square_statusquo",
         layers=["municipality"],
         title=_("Installierte Leistung pro qm"),
-        unit=_("MW/qm"),
+        unit=_("MW"),
     ),
     setup.Choropleth("wind_turbines_statusquo", layers=["municipality"], title=_("Anzahl Windturbinen"), unit=_("")),
     setup.Choropleth(

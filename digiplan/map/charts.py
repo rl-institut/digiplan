@@ -458,7 +458,7 @@ class EnergyRegionChart(Chart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = _("MWh")
+        chart_options["yAxis"]["name"] = _("GWh")
         return chart_options
 
 
@@ -506,7 +506,7 @@ class EnergyCapitaRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.calculate_capita_for_value(calculations.energy_shares_per_municipality()).sum()
+        return calculations.calculate_capita_for_value(calculations.energy_shares_per_municipality()).sum() * 1e3
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -523,7 +523,7 @@ class EnergySquareRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.calculate_square_for_value(calculations.energy_shares_per_municipality()).sum()
+        return calculations.calculate_square_for_value(calculations.energy_shares_per_municipality()).sum() * 1e3
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""

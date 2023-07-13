@@ -30,7 +30,7 @@ def calculate_square_for_value(df: pd.DataFrame) -> pd.DataFrame:
     areas = (
         pd.DataFrame.from_records(models.Municipality.objects.all().values("id", "area")).set_index("id").sort_index()
     )
-    result = df.sort_index() * areas.to_numpy()
+    result = df.sort_index() / areas.to_numpy()
     if is_series:
         return result.iloc[:, 0]
     return result
@@ -43,7 +43,7 @@ def value_per_municipality(series: pd.Series) -> pd.DataFrame:
     areas = (
         pd.DataFrame.from_records(models.Municipality.objects.all().values("id", "area")).set_index("id").sort_index()
     )
-    result = data.sort_index() * areas.to_numpy()
+    result = data.sort_index() / areas.to_numpy()
     return result / areas.sum().sum()
 
 
@@ -71,7 +71,7 @@ def calculate_capita_for_value(df: pd.DataFrame) -> pd.DataFrame:
         .set_index("id")
         .sort_index()
     )
-    result = df.sort_index() * population.to_numpy()
+    result = df.sort_index() / population.to_numpy()
     if is_series:
         return result.iloc[:, 0]
     return result
@@ -99,7 +99,7 @@ def battery_capacities_per_municipality() -> pd.DataFrame:
 
 def capacities_per_municipality() -> pd.DataFrame:
     """
-    Calculate capacity of renewables per municipality.
+    Calculate capacity of renewables per municipality in MW.
 
     Returns
     -------
@@ -120,12 +120,12 @@ def capacities_per_municipality() -> pd.DataFrame:
         ).set_index("mun_id")
         res_capacity.columns = [technology._meta.verbose_name]  # noqa: SLF001
         capacities.append(res_capacity)
-    return pd.concat(capacities, axis=1).fillna(0.0)
+    return pd.concat(capacities, axis=1).fillna(0.0) * 1e-3
 
 
 def energies_per_municipality() -> pd.DataFrame:
     """
-    Calculate energy of renewables per municipality.
+    Calculate energy of renewables per municipality in GWh.
 
     Returns
     -------
@@ -138,7 +138,7 @@ def energies_per_municipality() -> pd.DataFrame:
         index=config.TECHNOLOGY_DATA["full_load_hours"].keys(),
     )
     full_load_hours = full_load_hours.reindex(index=["wind", "pv_roof", "pv_ground", "ror", "bioenergy", "st"])
-    return capacities * full_load_hours.values
+    return capacities * full_load_hours.values / 1e3
 
 
 def energies_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
@@ -156,7 +156,7 @@ def energies_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     renewables["bioenergy"] = 0
     renewables["st"] = 0
     renewables = renewables.reindex(["wind", "pv_roof", "pv_ground", "ror", "bioenergy", "st"])
-    renewables = renewables * 1e6
+    renewables = renewables
     return value_per_municipality(renewables)
 
 
