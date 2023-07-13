@@ -2,10 +2,11 @@
 
 import json
 import pathlib
+
+import pandas as pd
+
 from typing import Any, Optional
-
 from django.utils.translation import gettext_lazy as _
-
 from digiplan.map import calculations, config, models
 from digiplan.map.utils import merge_dicts
 
@@ -339,6 +340,66 @@ class MobilityCTSChart(Chart):
         for item in self.chart_options["series"]:
             profile = config.SIMULATION_NAME_MAPPING[item["name"]]
             item["data"][2] = self.chart_data[profile]
+
+        return self.chart_options
+
+
+class GhgHistoryChart(Chart):
+    """GHG history chart."""
+
+    lookup = "ghg_history"
+
+    def __init__(self, simulation_id: int) -> None:
+        """
+        Init GHG history chart.
+
+        Parameters
+        ----------
+        simulation_id: any
+            id of used Simulation
+        """
+        self.simulation_id = simulation_id
+        super().__init__()
+
+    def get_chart_data(self):  # noqa: D102, ANN201
+        # TODO(Hendrik): Get static data from digipipe datapackage  # noqa: TD003
+        return pd.DataFrame()
+
+    def render(self) -> dict:  # noqa: D102
+        for item in self.chart_options["series"]:
+            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
+            item["data"][1] = self.chart_data[profile]
+
+        return self.chart_options
+
+
+class GhgReductionChart(Chart):
+    """GHG reduction chart."""
+
+    lookup = "ghg_reduction"
+
+    def __init__(self, simulation_id: int) -> None:
+        """
+        Init GHG reduction chart.
+
+        Parameters
+        ----------
+        simulation_id: any
+            id of used Simulation
+        """
+        self.simulation_id = simulation_id
+        super().__init__()
+
+    def get_chart_data(self):  # noqa: D102, ANN201
+        # TODO(Hendrik): Get static data (1st column) from  # noqa: TD003
+        #  digipipe datapackage
+        #  and calc reductions for 2nd column.  TD003
+        return pd.DataFrame()
+
+    def render(self) -> dict:  # noqa: D102
+        for item in self.chart_options["series"]:
+            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
+            item["data"][1] = self.chart_data[profile]
 
         return self.chart_options
 

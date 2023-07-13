@@ -17,7 +17,8 @@ const mobility_overview_chart = echarts.init(document.getElementById("mobility_o
 const mobility_THG_chart = echarts.init(document.getElementById("mobility_THG_chart"));
 const overview_heat_chart = echarts.init(document.getElementById("overview_heat_chart"));
 const decentralized_centralized_heat_chart = echarts.init(document.getElementById("decentralized_centralized_heat_chart"));
-
+const ghg_history_chart = echarts.init(document.getElementById("ghg_history_chart"));
+const ghg_reduction_chart = echarts.init(document.getElementById("ghg_reduction_chart"));
 
 PubSub.subscribe(eventTopics.MENU_CHANGED, resizeCharts);
 
@@ -281,6 +282,8 @@ const mobility_overview_option = JSON.parse(document.getElementById("mobility_ov
 const mobility_ghg_option = JSON.parse(document.getElementById("mobility_ghg").textContent);
 const overview_heat_option = JSON.parse(document.getElementById("overview_heat").textContent);
 const decentralized_centralized_heat_option = JSON.parse(document.getElementById("decentralized_centralized_heat").textContent);
+const ghg_history_option = JSON.parse(document.getElementById("ghg_history").textContent);
+const ghg_reduction_option = JSON.parse(document.getElementById("ghg_reduction").textContent);
 
 function resizeCharts() {
   setTimeout(function () {
@@ -296,6 +299,8 @@ function resizeCharts() {
     mobility_THG_chart.resize();
     overview_heat_chart.resize();
     decentralized_centralized_heat_chart.resize();
+    ghg_history_chart.resize();
+    ghg_reduction_chart.resize();
   }, 200);
 }
 
@@ -314,6 +319,8 @@ mobility_overview_chart.setOption(mobility_overview_option);
 mobility_THG_chart.setOption(mobility_ghg_option);
 overview_heat_chart.setOption(overview_heat_option);
 decentralized_centralized_heat_chart.setOption(decentralized_centralized_heat_option);
+ghg_history_chart.setOption(ghg_history_option);
+ghg_reduction_chart.setOption(ghg_reduction_option);
 
 resizeCharts();
 
