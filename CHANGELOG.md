@@ -18,6 +18,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - paths for oemof hooks to digipipe scalars
 
 ### Fixed
+- units
 - tour shows up after onboarding
 
 ## [0.4.0] - 2023-06-20
