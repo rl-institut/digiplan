@@ -3,18 +3,6 @@
     "bottom": "28%"
   },
   "legend": {
-    "data": [
-      "Kohleofen",
-      "Holzofen",
-      "Gasheizkessel",
-      "Solarthermiekollektor",
-      "Wärmepumpe",
-      "Thermische Energiespeicher",
-      "Große Gasheizkessel",
-      "Große Wärmepumpen",
-      "Power to Heat",
-      "Große Solarthermiekollektoren"
-    ],
     "bottom": "0"
   },
   "brush": {
@@ -30,7 +18,7 @@
     }
   },
   "yAxis": {
-    "data": ["Status Quo", "Mein Szenario", "Ziel Szenario"],
+    "data": ["Ziel", "Mein Szenario", "Status Quo"],
     "axisLine": { "onZero": true },
     "splitLine": { "show": false },
     "splitArea": { "show": false }
@@ -39,7 +27,7 @@
     "type": "value",
     "show": true,
     "position": "bottom",
-    "name": "TWh",
+    "name": "GWh",
     "nameLocation": "end",
     "nameTextStyle": "Roboto",
     "width": "76",
@@ -102,20 +90,7 @@
       "data": [136, 134, 130]
     },
     {
-      "name": "Thermische Energiespeicher",
-      "type": "bar",
-      "stack": "five",
-      "color": "#FC8D59",
-      "emphasis": {
-        "itemStyle": {
-          "shadowBlur": 10,
-          "shadowColor": "rgba(0,0,0,0.3)"
-        }
-      },
-      "data": [280, 150, 100]
-    },
-    {
-      "name": "Solarthermiekollektor",
+      "name": "Solarthermie",
       "type": "bar",
       "stack": "five",
       "color": "#EF6548",
@@ -128,7 +103,7 @@
       "data": [412, 254, 100]
     },
     {
-      "name": "Große Gasheizkessel",
+      "name": "FW: Gasheizkessel",
       "type": "bar",
       "barWidth": "16",
       "stack": "four",
@@ -142,7 +117,7 @@
       "data": [300, 344, 380]
     },
     {
-      "name": "Große Wärmepumpen",
+      "name": "FW: Wärmepumpen",
       "type": "bar",
       "stack": "four",
       "color": "#B30000",
@@ -169,7 +144,7 @@
       "data": [280, 300, 350]
     },
     {
-      "name": "Große Solarthermiekollektoren",
+      "name": "FW: Solarthermie",
       "type": "bar",
       "stack": "four",
       "color": "#3F0000",
