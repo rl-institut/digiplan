@@ -14,8 +14,8 @@
       "Speicher"
     ],
     "orient": "vertical",
-    "right": "1%",
-    "bottom": "5%"
+    "right": "-5%",
+    "bottom": "15%"
   },
   "color": ["#6A89CC","#FFD660","#EFAD25","#A9BDE8","#52C41A","#8D2D5F"],
   "xAxis": {
