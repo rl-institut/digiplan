@@ -113,8 +113,8 @@ def adapt_heat_capacities(distribution: str, remaining_energy: pd.Series) -> dic
         data[component] = {
             "capacity": capacity,
             parameter: {
-                "summed_min": math.floor(energy / capacity),
-                "summed_max": math.ceil(energy / capacity),
+                "summed_min": energy / capacity,
+                "summed_max": energy / capacity,
             },
         }
     return data
@@ -182,8 +182,8 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
         data[f"ABW-electricity-heatpump_{distribution}"] = {
             "capacity": capacity,
             "output_parameters": {
-                "summed_min": math.floor(hp_energy_sum / capacity),
-                "summed_max": math.ceil(hp_energy_sum / capacity),
+                "summed_min": hp_energy_sum / capacity,
+                "summed_max": hp_energy_sum / capacity,
             },
         }
 
