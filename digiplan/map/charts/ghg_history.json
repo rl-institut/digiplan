@@ -1,0 +1,229 @@
+{
+  "legend": {
+    "show": true
+  },
+  "tooltip": {
+    "trigger": "item",
+    "formatter": "{a}: <b>{c}</b> kt CO₂-Äq."
+  },
+  "yAxis": {
+    "name": "kt CO₂-Äquivalent"
+  },
+  "xAxis": [
+    {
+      "inverse": false,
+      "splitLine": {
+        "show": true
+      },
+      "axisTick": {
+        "length": 0,
+        "lineStyle": {
+          "color": "#ccc"
+        }
+      },
+      "axisLine": {
+        "lineStyle": {
+          "color": "#ccc"
+        }
+      },
+      "data": [
+        "-",
+        "-"
+      ]
+    },
+    {
+      "name": "",
+      "nameLocation": "start",
+      "nameTextStyle": {
+        "fontWeight": "bold"
+      },
+      "position": "bottom",
+      "offset": 60,
+      "axisLine": {
+        "onZero": false,
+        "show": false
+      },
+      "axisTick": {
+        "length": 30,
+        "inside": true,
+        "lineStyle": {
+          "color": "#ccc"
+        }
+      },
+      "axisLabel": {
+        "inside": true,
+        "fontWeight": "bold"
+      },
+      "inverse": false,
+      "data": [
+        "1990",
+        "2019"
+      ]
+    },
+    {
+      "name": "",
+      "nameLocation": "start",
+      "nameTextStyle": {
+        "fontWeight": "bold"
+      },
+      "position": "bottom",
+      "offset": 30,
+      "axisLine": {
+        "onZero": false,
+        "show": false
+      },
+      "axisTick": {
+        "length": 30,
+        "inside": true,
+        "lineStyle": {
+          "color": "#ccc"
+        }
+      },
+      "axisLabel": {
+        "inside": true
+      },
+      "inverse": false,
+      "data": [
+        "Sachsen-Anhalt",
+        "ABW",
+        "Sachsen-Anhalt",
+        "ABW"
+      ]
+    }
+  ],
+  "series": [
+    {
+      "name": "Energiewirtschaft",
+      "stack": "st",
+      "type": "bar",
+      "color": "#E6772E",
+      "barWidth":"30",
+      "barGap": "250%",
+      "data": [
+        15680,
+        11571
+      ]
+    },
+    {
+      "name": "Industrie",
+      "stack": "st",
+      "type": "bar",
+      "color": "#FA9FB5",
+      "barWidth":"30",
+      "data": [
+        20519,
+        9011
+      ]
+    },
+    {
+      "name": "Verkehr",
+      "stack": "st",
+      "type": "bar",
+      "color": "#6C567B",
+      "barWidth":"30",
+      "data": [
+        3779,
+        4007
+      ]
+    },
+    {
+      "name": "Gebäude",
+      "stack": "st",
+      "type": "bar",
+      "color": "#A8DADC",
+      "barWidth":"30",
+      "data": [
+        13943,
+        3983
+      ]
+    },
+    {
+      "name": "Landwirtschaft",
+      "stack": "st",
+      "type": "bar",
+      "color": "#87D068",
+      "barWidth":"30",
+      "data": [
+        3275,
+        2113
+      ]
+    },
+    {
+      "name": "Abfall und Sonst.",
+      "stack": "st",
+      "type": "bar",
+      "color": "#F5F5DC",
+      "barWidth":"30",
+      "data": [
+        1458,
+        947
+      ]
+    },
+    {
+      "name": "Energiewirtschaft",
+      "stack": "abw",
+      "type": "bar",
+      "color": "#E6772E",
+      "barWidth":"30",
+      "data": [
+        930,
+        538
+      ]
+    },
+    {
+      "name": "Industrie",
+      "stack": "abw",
+      "type": "bar",
+      "color": "#FA9FB5",
+      "barWidth":"30",
+      "data": [
+        4848,
+        2129
+      ]
+    },
+    {
+      "name": "Verkehr",
+      "stack": "abw",
+      "type": "bar",
+      "color": "#6C567B",
+      "barWidth":"30",
+      "data": [
+        698,
+        672
+      ]
+    },
+    {
+      "name": "Gebäude",
+      "stack": "abw",
+      "type": "bar",
+      "color": "#A8DADC",
+      "barWidth":"30",
+      "data": [
+        2434,
+        695
+      ]
+    },
+    {
+      "name": "Landwirtschaft",
+      "type": "bar",
+      "stack": "abw",
+      "color": "#87D068",
+      "barWidth":"30",
+      "data": [
+        501,
+        368
+      ]
+    },
+    {
+      "name": "Abfall und Sonst.",
+      "type": "bar",
+      "stack": "abw",
+      "color": "#F5F5DC",
+      "barWidth":"30",
+      "data": [
+        262,
+        157
+      ]
+    }
+  ]
+}
