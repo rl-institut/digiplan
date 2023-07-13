@@ -532,37 +532,37 @@ msgstr ""
 #: digiplan/static/config/energy_settings_panel.json:18
 #: digiplan/static/config/energy_settings_panel.json:19
 msgid "Only previous priority areas/suitable areas."
-msgstr ""
+msgstr "Nur bisherige VR/EG"
 
 #: digiplan/static/config/energy_settings_panel.json:24
 #: digiplan/static/config/energy_settings_panel.json:25
 msgid "Priority areas according to STP Wind 2027."
-msgstr ""
+msgstr "VR-Gebiete nach STP Wind 2027"
 
 #: digiplan/static/config/energy_settings_panel.json:30
 #: digiplan/static/config/energy_settings_panel.json:31
 msgid "Priority areas."
-msgstr ""
+msgstr "VR-Gebiete"
 
 #: digiplan/static/config/energy_settings_panel.json:36
 #: digiplan/static/config/energy_settings_panel.json:37
 msgid "Priority areas repowering."
-msgstr ""
+msgstr "VR-Gebiete Repowering"
 
 #: digiplan/static/config/energy_settings_panel.json:42
 #: digiplan/static/config/energy_settings_panel.json:43
 msgid "Free extension in the search area."
-msgstr ""
+msgstr "Freier Zubau im Suchraum"
 
 #: digiplan/static/config/energy_settings_panel.json:48
 #: digiplan/static/config/energy_settings_panel.json:49
 msgid "Use of open country search area."
-msgstr ""
+msgstr "Nutzung Suchraum Offenland"
 
 #: digiplan/static/config/energy_settings_panel.json:59
 #: digiplan/static/config/energy_settings_panel.json:60
 msgid "Use of forest search space."
-msgstr ""
+msgstr "Nutzung Suchraum Wald"
 
 #: digiplan/static/config/energy_settings_panel.json:72
 #: digiplan/static/config/energy_settings_panel.json:78
@@ -595,12 +595,12 @@ msgstr "Anteil genutzter Dächer (%%)"
 #: digiplan/static/config/energy_settings_panel.json:133
 #, python-format
 msgid "Proportion of photovoltaic systems with electricity storage (%%)"
-msgstr ""
+msgstr "Anteil PVA mit Stromspeicher (%%)"
 
 #: digiplan/static/config/energy_settings_panel.json:139
 #| msgid "Outdoor PV (MW)"
 msgid "Hydropower (MW)"
-msgstr "Freiflächen-PV (MW)"
+msgstr "Wasserkraft (MW)"
 
 #: digiplan/static/config/energy_settings_panel.json:145
 msgid "Run-of-river power plants"
@@ -662,11 +662,11 @@ msgstr ""
 #: digiplan/static/config/heat_settings_panel.json:121
 #, python-format
 msgid "Decentralized (%%)"
-msgstr ""
+msgstr "Dezentral"
 
 #: digiplan/static/config/heat_settings_panel.json:11
 msgid "Decentralized heat supply"
-msgstr ""
+msgstr "Dezentral"
 
 #: digiplan/static/config/heat_settings_panel.json:23
 #| msgid ""
@@ -694,7 +694,7 @@ msgstr ""
 #: digiplan/static/config/heat_settings_panel.json:51
 #, python-format
 msgid "District heating (%%)"
-msgstr ""
+msgstr "Fernwärme (%%)"
 
 #: digiplan/static/config/heat_settings_panel.json:57
 msgid "District heating supply"
@@ -758,7 +758,7 @@ msgstr ""
 #: digiplan/static/config/heat_settings_panel.json:145
 #| msgid "Forest usage (%%)"
 msgid "Large heat storage (%%)"
-msgstr "Waldnutzungsfläche (%%)"
+msgstr "Großwärmespeicher (%%)"
 
 #: digiplan/static/config/heat_settings_panel.json:151
 msgid "Storage in the district heating supply"
