@@ -46,20 +46,20 @@ const chart_grid_results = {
 };
 const chart_text_style = {
   fontFamily: "Roboto",
-  fontSize: 14,
-  fontWeight: 300,
-  color: '#002C50'
+  fontSize: 10,
+  //fontWeight: 300,
+  //color: '#002C50'
 };
 const chart_legend = {
   show: true,
-  bottom: '15',
-  itemWidth: 14,
-  itemHeight: 14
+  bottom: '0',
+  itemWidth: 10,
+  itemHeight: 10
 };
 
 // Goal variables
-const renewable_share_goal_value = 90;
-const co2_emissions_goal_value = 30;
+// const renewable_share_goal_value = 90;
+// const co2_emissions_goal_value = 30;
 
 // CHARTS
 const renewable_share_goal = {
@@ -68,10 +68,11 @@ const renewable_share_goal = {
   textStyle: chart_text_style,
   xAxis: {
     type: 'category',
-    data: ['2021', '2045'],
+    data: ['2021', 'Szenario'],
     axisTick: {
-      show: false
-    }
+      show: false,
+    },
+    axisLabel: {fontSize: 9}, //, rotate: 20},
   },
   yAxis: {
     show: true,
@@ -96,20 +97,20 @@ const renewable_share_goal = {
           }
         },
       ],
-      markLine: {
-        silent: true,
-        lineStyle: {
-          color: '#06DFA7',
-          type: 'solid'
-        },
-        symbol: 'none',
-        data: [{
-          yAxis: renewable_share_goal_value,
-          label: {
-            show: false
-          }
-        }]
-      }
+      // markLine: {
+      //   silent: true,
+      //   lineStyle: {
+      //     color: '#06DFA7',
+      //     type: 'solid'
+      //   },
+      //   symbol: 'none',
+      //   data: [{
+      //     yAxis: renewable_share_goal_value,
+      //     label: {
+      //       show: false
+      //     }
+      //   }]
+      // }
     },
   ],
 };
@@ -118,12 +119,14 @@ const co2_emissions_goal = {
   grid: chart_grid_goal,
   tooltip: chart_tooltip,
   textStyle: chart_text_style,
+  legend: chart_legend,
   xAxis: {
     type: 'category',
-    data: ['2021', '2045'],
+    data: ['Szenario'],
     axisTick: {
       show: false
-    }
+    },
+    axisLabel: {fontSize: 9}, //, rotate: 20},
   },
   yAxis: {
     show: true,
@@ -133,36 +136,34 @@ const co2_emissions_goal = {
   series: [
     {
       type: 'bar',
+      name: 'Regional',
+      stack: 'reduc',
+      color: '#06DFA7',
       barWidth: chart_bar_width_sm,
-      data: [
-        {
-          value: 90,
-          itemStyle: {
-            color: '#D8E2E7'
-          }
-        },
-        {
-          value: 30,
-          itemStyle: {
-            color: '#E8986B'
-          }
-        },
-      ],
-      markLine: {
-        silent: true,
-        lineStyle: {
-          color: '#E8986B',
-          type: 'solid'
-        },
-        symbol: 'none',
-        data: [{
-          yAxis: co2_emissions_goal_value,
-          label: {
-            show: false
-          }
-        }]
-      }
+      data: [50],
     },
+    {
+      type: 'bar',
+      name: 'Import',
+      stack: 'reduc',
+      color: '#E8986B',
+      barWidth: chart_bar_width_sm,
+      data: [20],
+    },
+      // markLine: {
+      //   silent: true,
+      //   lineStyle: {
+      //     color: '#E8986B',
+      //     type: 'solid'
+      //   },
+      //   symbol: 'none',
+      //   data: [{
+      //     yAxis: co2_emissions_goal_value,
+      //     label: {
+      //       show: false
+      //     }
+      //   }]
+      // }
   ],
 };
 
@@ -172,10 +173,11 @@ const renewable_share_scenario = {
   textStyle: chart_text_style,
   xAxis: {
     type: 'category',
-    data: ['2021', '2045'],
+    data: ['2021', 'Szenario'],
     axisTick: {
-      show: false
-    }
+      show: false,
+    },
+    axisLabel: {fontSize: 9}, //, rotate: 20},
   },
   yAxis: {
     show: true,
@@ -200,20 +202,20 @@ const renewable_share_scenario = {
           }
         },
       ],
-      markLine: {
-        silent: true,
-        lineStyle: {
-          color: '#06DFA7',
-          type: 'solid'
-        },
-        symbol: 'none',
-        data: [{
-          yAxis: renewable_share_goal_value,
-          label: {
-            show: false
-          }
-        }]
-      }
+      // markLine: {
+      //   silent: true,
+      //   lineStyle: {
+      //     color: '#06DFA7',
+      //     type: 'solid'
+      //   },
+      //   symbol: 'none',
+      //   data: [{
+      //     yAxis: renewable_share_goal_value,
+      //     label: {
+      //       show: false
+      //     }
+      //   }]
+      // }
     },
   ],
 };
@@ -222,12 +224,14 @@ const co2_emissions_scenario = {
   grid: chart_grid_goal,
   tooltip: chart_tooltip,
   textStyle: chart_text_style,
+  legend: chart_legend,
   xAxis: {
     type: 'category',
-    data: ['2021', '2045'],
+    data: ['Szenario'],
     axisTick: {
       show: false
-    }
+    },
+    axisLabel: {fontSize: 9}, //, rotate: 20},
   },
   yAxis: {
     show: true,
@@ -237,36 +241,34 @@ const co2_emissions_scenario = {
   series: [
     {
       type: 'bar',
+      name: 'Regional',
+      stack: 'reduc',
+      color: '#06DFA7',
       barWidth: chart_bar_width_sm,
-      data: [
-        {
-          value: 90,
-          itemStyle: {
-            color: '#D8E2E7'
-          }
-        },
-        {
-          value: 30,
-          itemStyle: {
-            color: '#E8986B'
-          }
-        },
-      ],
-      markLine: {
-        silent: true,
-        lineStyle: {
-          color: '#E8986B',
-          type: 'solid'
-        },
-        symbol: 'none',
-        data: [{
-          yAxis: co2_emissions_goal_value,
-          label: {
-            show: false
-          }
-        }]
-      }
+      data: [50],
     },
+    {
+      type: 'bar',
+      name: 'Import',
+      stack: 'reduc',
+      color: '#E8986B',
+      barWidth: chart_bar_width_sm,
+      data: [20],
+    },
+      // markLine: {
+      //   silent: true,
+      //   lineStyle: {
+      //     color: '#E8986B',
+      //     type: 'solid'
+      //   },
+      //   symbol: 'none',
+      //   data: [{
+      //     yAxis: co2_emissions_goal_value,
+      //     label: {
+      //       show: false
+      //     }
+      //   }]
+      // }
   ],
 };
 
