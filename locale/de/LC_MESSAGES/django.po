@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 12:20+0200\n"
+"POT-Creation-Date: 2023-07-13 10:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -801,12 +801,13 @@ msgstr "Wärmebedarf je EinwohnerIn (kWh)"
 
 #: digiplan/templates/components/panel_2_settings.html:18
 #: digiplan/templates/components/panel_3_results.html:116
+#: digiplan/templates/components/results_view.html:35
 msgid "Electricity"
 msgstr "Strom"
 
 #: digiplan/templates/components/panel_2_settings.html:26
 #: digiplan/templates/components/panel_3_results.html:124
-#: digiplan/templates/components/results_view.html:54
+#: digiplan/templates/components/results_view.html:56
 msgid "Heat"
 msgstr "Wärme"
 
@@ -827,7 +828,6 @@ msgstr "Ansicht"
 #: digiplan/templates/components/panel_3_results.html:108
 #: digiplan/templates/components/results_view.html:9
 #: digiplan/templates/components/results_view.html:39
-#: digiplan/templates/components/results_view.html:58
 msgid "Overview"
 msgstr "Überblick"
 
@@ -836,7 +836,6 @@ msgid "CO<sub>2</sub>-Emissionen"
 msgstr ""
 
 #: digiplan/templates/components/results_view.html:5
-#: digiplan/templates/components/results_view.html:35
 msgid "General"
 msgstr "Allgemein"
 
@@ -857,37 +856,59 @@ msgstr "Treibhausgas"
 msgid "Car trip"
 msgstr ""
 
-#: digiplan/templates/components/results_view.html:44
+#: digiplan/templates/components/results_view.html:42
+#: digiplan/templates/components/results_view.html:49
 #: digiplan/templates/components/results_view.html:63
-#: digiplan/templates/components/results_view.html:84
+#: digiplan/templates/components/results_view.html:70
+#: digiplan/templates/components/results_view.html:121
+msgid "Hier folgt ein Beschreibungstext..."
+msgstr ""
+
+#: digiplan/templates/components/results_view.html:46
+#: digiplan/templates/components/results_view.html:88
 msgid "CO2 Emissions"
 msgstr "CO2 Emissionen"
 
-#: digiplan/templates/components/results_view.html:73
+#: digiplan/templates/components/results_view.html:60
+msgid "Endenergiebedarf"
+msgstr ""
+
+#: digiplan/templates/components/results_view.html:67
+msgid "Beheizungsstruktur"
+msgstr ""
+
+#: digiplan/templates/components/results_view.html:77
 msgid "Motorized individual traffic"
 msgstr "Motorisierter Individualverkehr"
 
-#: digiplan/templates/components/results_view.html:77
+#: digiplan/templates/components/results_view.html:81
 msgid "Vehicles"
 msgstr "Fahrzeuge"
 
-#: digiplan/templates/components/results_view.html:80
+#: digiplan/templates/components/results_view.html:84
 msgid "Zugelassene Fahrzeuge nach Antriebsart."
 msgstr ""
 
-#: digiplan/templates/components/results_view.html:90
+#: digiplan/templates/components/results_view.html:94
 msgid "Distance"
 msgstr "Autofahrt"
 
-#: digiplan/templates/components/results_view.html:103
+#: digiplan/templates/components/results_view.html:107
 msgid "Abschätzung CO<sub>2</sub>-Emissionen"
 msgstr ""
 
-#: digiplan/templates/components/results_view.html:107
+#: digiplan/templates/components/results_view.html:111
 msgid "Sachsen-Anhalt und Abschätzung Region ABW"
 msgstr ""
 
-#: digiplan/templates/components/results_view.html:112
+#: digiplan/templates/components/results_view.html:114
+msgid ""
+"Die THG-Emissionen für die Region ABW werden näherungsweise anhand "
+"unterschiedlicher Kriterien und Datenquellen aus den Gesamtemissionen für "
+"Sachsen-Anhalt (<a href=\\"
+msgstr ""
+
+#: digiplan/templates/components/results_view.html:118
 msgid "Abschätzung der Reduktion in der Region ABW"
 msgstr ""
 
