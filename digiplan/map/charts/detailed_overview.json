@@ -1,17 +1,4 @@
 {
-  "legend": {
-    "data": [
-      "Konventionell",
-      "Wind",
-      "Freiflächen-PV",
-      "Aufdach-PV",
-      "Bioenergie",
-      "GHD",
-      "Haushalt",
-      "Industrie",
-      "Sonstiges"
-    ]
-  },
   "brush": {
     "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],
     "xAxisIndex": 0
@@ -33,7 +20,7 @@
     "containLabel": true
   },
   "yAxis": {
-    "data": ["Status Quo", "Mein Szenario", "Ziel Szenario"],
+    "data": ["Ziel 2045", "Mein Szenario", "Status Quo"],
     "axisLine": { "onZero": true },
     "splitLine": { "show": false },
     "splitArea": { "show": false }
@@ -52,7 +39,7 @@
   },
   "series": [
     {
-      "name": "Wind turbine",
+      "name": "Windenergie",
       "type": "bar",
       "stack": "production",
       "color": "#6A89CC",
@@ -65,7 +52,7 @@
       "data": [302, 234, 230]
     },
     {
-      "name": "Outdoor PV",
+      "name": "Freiflächen-PV",
       "type": "bar",
       "stack": "production",
       "color": "#EFAD25",
@@ -78,7 +65,7 @@
       "data": [282, 234, 100]
     },
     {
-      "name": "Roof-mounted PV",
+      "name": "Aufdach-PV",
       "type": "bar",
       "stack": "production",
       "color": "#FFD660",
@@ -91,7 +78,7 @@
       "data": [312, 254, 100]
     },
     {
-      "name": "Biomass",
+      "name": "Bioenergie",
       "type": "bar",
       "stack": "production",
       "color": "#52C41A",
@@ -104,7 +91,7 @@
       "data": [136, 134, 130]
     },
     {
-      "name": "Hydro",
+      "name": "Wasserkraft",
       "type": "bar",
       "barWidth": "16",
       "stack": "production",
@@ -118,7 +105,7 @@
       "data": [132, 334, 700]
     },
     {
-      "name": "Electricity CTS Demand",
+      "name": "Stromverbrauch GHD",
       "type": "bar",
       "barWidth": "16",
       "stack": "demand",
@@ -132,7 +119,7 @@
       "data": [300, 344, 380]
     },
     {
-      "name": "Electricity Household Demand",
+      "name": "Stromverbrauch Haushalte",
       "type": "bar",
       "stack": "demand",
       "color": "#969696",
@@ -145,7 +132,7 @@
       "data": [254, 244, 380]
     },
     {
-      "name": "Electricity Industry Demand",
+      "name": "Stromverbrauch Industrie",
       "type": "bar",
       "barWidth": "35",
       "stack": "demand",
