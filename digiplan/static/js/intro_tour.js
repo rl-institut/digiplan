@@ -1,3 +1,5 @@
+const onbaordingCloseBtn = document.getElementById("close-onboarding");
+
 const tour = new Shepherd.Tour({  // jshint ignore:line
     useModalOverlay: true,
     defaultStepOptions: {
@@ -88,4 +90,6 @@ tour.addStep({
     id: 'creating'
 });
 
-tour.start();
+onbaordingCloseBtn.addEventListener("click", function() {
+  tour.start();
+});
