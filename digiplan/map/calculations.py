@@ -207,10 +207,7 @@ def heat_demand_per_municipality() -> pd.DataFrame:
     """
     demands_raw = datapackage.get_summed_heat_demand_per_municipality()
     demands_per_sector = pd.concat(
-        [
-            distributions["central"]["2022"] + distributions["decentral"]["2022"]
-            for distributions in demands_raw.values()
-        ],
+        [distributions["cen"]["2022"] + distributions["dec"]["2022"] for distributions in demands_raw.values()],
         axis=1,
     )
     demands_per_sector.columns = [
