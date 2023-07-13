@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 from digiplan import __version__
 
-from . import area, utils
+from . import datapackage, utils
 
 # DIRECTORIES
 MAP_DIR = settings.APPS_DIR.path("map")
@@ -119,7 +119,7 @@ def get_slider_per_sector() -> dict:
 STORE_COLD_INIT = {
     "version": __version__,
     "slider_marks": get_slider_marks(),
-    "slider_max": area.get_max_values(),
+    "slider_max": datapackage.get_potential_values(),
     "slider_per_sector": get_slider_per_sector(),
     "allowedSwitches": ["wind_distance"],
     "detailTab": {"showPotentialLayers": True},

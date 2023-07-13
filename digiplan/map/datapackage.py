@@ -1,11 +1,14 @@
 """Read functionality for digipipe datapackage."""
-
+import json
 from collections import defaultdict
+from pathlib import Path
 from typing import Optional
 
 import pandas as pd
 from django.conf import settings
 from django_oemof.settings import OEMOF_DIR
+
+from config.settings.base import DATA_DIR
 
 
 def get_employment() -> pd.DataFrame:
@@ -78,3 +81,62 @@ def get_thermal_efficiency(component: str) -> float:
         component = "efficiency"
     sequence_filename = OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "sequences" / f"{component}_profile.csv"
     return pd.read_csv(sequence_filename, sep=";").iloc[:, 1]
+
+
+def get_potential_values(*, per_municipality: bool = False) -> dict:
+    """
+    Calculate max_values for sliders.
+
+    Parameters
+    ----------
+    per_municipality: bool
+        If set to True, potentials are not aggregated, but given per municipality
+
+    Returns
+    -------
+    dict
+        dictionary with each slider / switch and respective max_value
+    """
+    scalars = {
+        "wind": "potentialarea_wind_area_stats_muns.csv",
+        "pv_ground": "potentialarea_pv_ground_area_stats_muns.csv",
+        "pv_roof": "potentialarea_pv_roof_wo_historic_area_stats_muns.csv",
+    }
+
+    areas = {
+        "wind": {
+            "s_w_3": "stp_2018_vreg",
+            "s_w_4_1": "stp_2027_vr",
+            "s_w_4_2": "stp_2027_repowering",
+            "s_w_5_1": "stp_2027_search_area_open_area",
+            "s_w_5_2": "stp_2027_search_area_forest_area",
+        },
+        "pv_ground": {"s_pv_ff_3": "road_railway_region", "s_pv_ff_4": "agriculture_lfa-off_region"},
+        "pv_roof": {"s_pv_d_3": None},
+    }
+
+    tech_data = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "scalars/technology_data.json")))
+
+    potentials = {}
+    for profile in areas:
+        path = Path(DATA_DIR, "digipipe/scalars", scalars[profile])
+        reader = pd.read_csv(path)
+        for key, value in areas[profile].items():
+            if key == "s_pv_d_3":
+                pv_roof_potential = reader[
+                    [f"installable_power_{orient}" for orient in ["south", "east", "west", "flat"]]
+                ].sum(axis=1)
+                if per_municipality:
+                    potentials = pv_roof_potential
+                else:
+                    potentials[key] = pv_roof_potential.sum()
+            else:
+                if per_municipality:
+                    potentials[key] = reader[value]
+                else:
+                    potentials[key] = reader[value].sum()
+                if profile == "wind":
+                    potentials[key] = potentials[key] * tech_data["power_density"]["wind"]
+                if profile == "pv_ground":
+                    potentials[key] = potentials[key] * tech_data["power_density"]["pv_ground"]
+    return potentials
