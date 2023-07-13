@@ -6,7 +6,7 @@
     "type": "value",
     "show": true,
     "position": "bottom",
-    "name": "TWh",
+    "name": "GWh",
     "nameLocation": "end",
     "nameTextStyle": "Roboto",
     "width": "76",
@@ -16,14 +16,14 @@
   },
   "yAxis": {
     "type": "category",
-    "data": ["Ziel", "Mein Szeanrio", "Status Quo"],
+    "data": ["Ziel", "Mein Szenario", "Status Quo"],
     "axisTick": {
       "show": false
     }
   },
   "series": [
     {
-      "name": "CTS Heat Demand",
+      "name": "GHD",
       "type": "bar",
       "barWidth": "16",
       "stack": "total",
@@ -37,7 +37,7 @@
       "data": [200, 300, 320]
     },
     {
-      "name": "Household Heat Demand",
+      "name": "Haushalte",
       "type": "bar",
       "stack": "total",
       "color": "#7C7C7C",
@@ -50,7 +50,7 @@
       "data": [260, 300, 310]
     },
     {
-      "name": "Industry Heat Demand",
+      "name": "Industrie",
       "type": "bar",
       "stack": "total",
       "color": "#4F4F4F",
