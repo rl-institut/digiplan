@@ -8,12 +8,6 @@ const renewable_share_scenario_chart = echarts.init(renewable_share_scenario_div
 const co2_emissions_scenario_div = document.getElementById("co2_emissions_scenario_chart");
 const co2_emissions_scenario_chart = echarts.init(co2_emissions_scenario_div);
 
-// Sidebar, initialize charts
-const chart3Element = document.getElementById("chart3");
-const chart3 = echarts.init(chart3Element);
-const chart4Element = document.getElementById("chart4");
-const chart4 = echarts.init(chart4Element);
-
 // Results view, initiliaze charts
 const detailed_overview_chart = echarts.init(document.getElementById("detailed_overview_chart"));
 const ghg_overview_chart = echarts.init(document.getElementById("ghg_overview_chart"));
@@ -23,7 +17,8 @@ const mobility_overview_chart = echarts.init(document.getElementById("mobility_o
 const mobility_THG_chart = echarts.init(document.getElementById("mobility_THG_chart"));
 const overview_heat_chart = echarts.init(document.getElementById("overview_heat_chart"));
 const decentralized_centralized_heat_chart = echarts.init(document.getElementById("decentralized_centralized_heat_chart"));
-
+const ghg_history_chart = echarts.init(document.getElementById("ghg_history_chart"));
+const ghg_reduction_chart = echarts.init(document.getElementById("ghg_reduction_chart"));
 
 PubSub.subscribe(eventTopics.MENU_CHANGED, resizeCharts);
 
@@ -31,7 +26,7 @@ PubSub.subscribe(eventTopics.MENU_CHANGED, resizeCharts);
 const chart_tooltip = {
   trigger: 'axis',
   axisPointer: {
-    type: 'shadow'
+  type: 'shadow'
   }
 };
 const chart_bar_width_sm = 16;
@@ -52,20 +47,20 @@ const chart_grid_results = {
 };
 const chart_text_style = {
   fontFamily: "Roboto",
-  fontSize: 14,
-  fontWeight: 300,
-  color: '#002C50'
+  fontSize: 10,
+  //fontWeight: 300,
+  //color: '#002C50'
 };
 const chart_legend = {
   show: true,
-    bottom: '15',
-    itemWidth: 14,
-    itemHeight: 14
+  bottom: '0',
+  itemWidth: 10,
+  itemHeight: 10
 };
 
 // Goal variables
-const renewable_share_goal_value = 90;
-const co2_emissions_goal_value = 30;
+// const renewable_share_goal_value = 90;
+// const co2_emissions_goal_value = 30;
 
 // CHARTS
 const renewable_share_goal = {
@@ -74,10 +69,11 @@ const renewable_share_goal = {
   textStyle: chart_text_style,
   xAxis: {
     type: 'category',
-    data: ['2021', '2045'],
+    data: ['2021', 'Szenario'],
     axisTick: {
-      show: false
-    }
+      show: false,
+    },
+    axisLabel: {fontSize: 9}, //, rotate: 20},
   },
   yAxis: {
     show: true,
@@ -92,7 +88,7 @@ const renewable_share_goal = {
         {
           value: 30,
           itemStyle: {
-            color: '#C3D1DC'
+            color: '#D8E2E7'
           }
         },
         {
@@ -102,20 +98,20 @@ const renewable_share_goal = {
           }
         },
       ],
-      markLine: {
-        silent: true,
-        lineStyle: {
-          color: '#00BC8C',
-          type: 'solid'
-        },
-        symbol: 'none',
-        data: [{
-          yAxis: renewable_share_goal_value,
-          label: {
-            show: false
-          }
-        }]
-      }
+      // markLine: {
+      //   silent: true,
+      //   lineStyle: {
+      //     color: '#06DFA7',
+      //     type: 'solid'
+      //   },
+      //   symbol: 'none',
+      //   data: [{
+      //     yAxis: renewable_share_goal_value,
+      //     label: {
+      //       show: false
+      //     }
+      //   }]
+      // }
     },
   ],
 };
@@ -124,12 +120,14 @@ const co2_emissions_goal = {
   grid: chart_grid_goal,
   tooltip: chart_tooltip,
   textStyle: chart_text_style,
+  legend: chart_legend,
   xAxis: {
     type: 'category',
-    data: ['2021', '2045'],
+    data: ['Szenario'],
     axisTick: {
       show: false
-    }
+    },
+    axisLabel: {fontSize: 9}, //, rotate: 20},
   },
   yAxis: {
     show: true,
@@ -139,36 +137,34 @@ const co2_emissions_goal = {
   series: [
     {
       type: 'bar',
+      name: 'Regional',
+      stack: 'reduc',
+      color: '#06DFA7',
       barWidth: chart_bar_width_sm,
-      data: [
-        {
-          value: 90,
-          itemStyle: {
-            color: '#C3D1DC'
-          }
-        },
-        {
-          value: 30,
-          itemStyle: {
-            color: '#E6A100'
-          }
-        },
-      ],
-      markLine: {
-        silent: true,
-        lineStyle: {
-          color: '#BE880B',
-          type: 'solid'
-        },
-        symbol: 'none',
-        data: [{
-          yAxis: co2_emissions_goal_value,
-          label: {
-            show: false
-          }
-        }]
-      }
+      data: [50],
     },
+    {
+      type: 'bar',
+      name: 'Import',
+      stack: 'reduc',
+      color: '#E8986B',
+      barWidth: chart_bar_width_sm,
+      data: [20],
+    },
+      // markLine: {
+      //   silent: true,
+      //   lineStyle: {
+      //     color: '#E8986B',
+      //     type: 'solid'
+      //   },
+      //   symbol: 'none',
+      //   data: [{
+      //     yAxis: co2_emissions_goal_value,
+      //     label: {
+      //       show: false
+      //     }
+      //   }]
+      // }
   ],
 };
 
@@ -178,10 +174,11 @@ const renewable_share_scenario = {
   textStyle: chart_text_style,
   xAxis: {
     type: 'category',
-    data: ['2021', '2045'],
+    data: ['2021', 'Szenario'],
     axisTick: {
-      show: false
-    }
+      show: false,
+    },
+    axisLabel: {fontSize: 9}, //, rotate: 20},
   },
   yAxis: {
     show: true,
@@ -196,7 +193,7 @@ const renewable_share_scenario = {
         {
           value: 30,
           itemStyle: {
-            color: '#C3D1DC'
+            color: '#D8E2E7'
           }
         },
         {
@@ -206,20 +203,20 @@ const renewable_share_scenario = {
           }
         },
       ],
-      markLine: {
-        silent: true,
-        lineStyle: {
-          color: '#00BC8C',
-          type: 'solid'
-        },
-        symbol: 'none',
-        data: [{
-          yAxis: renewable_share_goal_value,
-          label: {
-            show: false
-          }
-        }]
-      }
+      // markLine: {
+      //   silent: true,
+      //   lineStyle: {
+      //     color: '#06DFA7',
+      //     type: 'solid'
+      //   },
+      //   symbol: 'none',
+      //   data: [{
+      //     yAxis: renewable_share_goal_value,
+      //     label: {
+      //       show: false
+      //     }
+      //   }]
+      // }
     },
   ],
 };
@@ -228,12 +225,14 @@ const co2_emissions_scenario = {
   grid: chart_grid_goal,
   tooltip: chart_tooltip,
   textStyle: chart_text_style,
+  legend: chart_legend,
   xAxis: {
     type: 'category',
-    data: ['2021', '2045'],
+    data: ['Szenario'],
     axisTick: {
       show: false
-    }
+    },
+    axisLabel: {fontSize: 9}, //, rotate: 20},
   },
   yAxis: {
     show: true,
@@ -243,90 +242,35 @@ const co2_emissions_scenario = {
   series: [
     {
       type: 'bar',
-      barWidth: chart_bar_width_sm,
-      data: [
-        {
-          value: 90,
-          itemStyle: {
-            color: '#C3D1DC'
-          }
-        },
-        {
-          value: 30,
-          itemStyle: {
-            color: '#E6A100'
-          }
-        },
-      ],
-      markLine: {
-        silent: true,
-        lineStyle: {
-          color: '#BE880B',
-          type: 'solid'
-        },
-        symbol: 'none',
-        data: [{
-          yAxis: co2_emissions_goal_value,
-          label: {
-            show: false
-          }
-        }]
-      }
-    },
-  ],
-};
-
-const option = {
-  textStyle: chart_text_style,
-  title: {
-    text: 'Anteil Erneuerbare \nEnergien (%)',
-  },
-  tooltip: {
-    trigger: 'axis'
-  },
-  legend: {
-    bottom: 10,
-    data: ['2021', '2035']
-  },
-  toolbox: {
-    show: false
-  },
-  calculable: true,
-  xAxis: [
-    {
-      type: 'category',
-      data: ['Jahre'],
-      axisTick: {
-        show: false
-      }
-    }
-  ],
-  yAxis: [
-    {
-      type: 'value',
-      max: 100
-    }
-  ],
-  series: [
-    {
-      name: '2021',
-      type: 'bar',
-      color: '#C3D1DC',
-      barWidth: '32',
-      data: [
-        60
-      ],
-    },
-    {
-      name: '2035',
-      type: 'bar',
+      name: 'Regional',
+      stack: 'reduc',
       color: '#06DFA7',
-      barWidth: '32',
-      data: [
-        80
-      ]
-    }
-  ]
+      barWidth: chart_bar_width_sm,
+      data: [50],
+    },
+    {
+      type: 'bar',
+      name: 'Import',
+      stack: 'reduc',
+      color: '#E8986B',
+      barWidth: chart_bar_width_sm,
+      data: [20],
+    },
+      // markLine: {
+      //   silent: true,
+      //   lineStyle: {
+      //     color: '#E8986B',
+      //     type: 'solid'
+      //   },
+      //   symbol: 'none',
+      //   data: [{
+      //     yAxis: co2_emissions_goal_value,
+      //     label: {
+      //       show: false
+      //     }
+      //   }]
+      // }
+  ],
 };
 
 // get options for result view charts
@@ -338,6 +282,8 @@ const mobility_overview_option = JSON.parse(document.getElementById("mobility_ov
 const mobility_ghg_option = JSON.parse(document.getElementById("mobility_ghg").textContent);
 const overview_heat_option = JSON.parse(document.getElementById("overview_heat").textContent);
 const decentralized_centralized_heat_option = JSON.parse(document.getElementById("decentralized_centralized_heat").textContent);
+const ghg_history_option = JSON.parse(document.getElementById("ghg_history").textContent);
+const ghg_reduction_option = JSON.parse(document.getElementById("ghg_reduction").textContent);
 
 function resizeCharts() {
   setTimeout(function () {
@@ -345,8 +291,6 @@ function resizeCharts() {
     co2_emissions_goal_chart.resize();
     renewable_share_scenario_chart.resize();
     co2_emissions_scenario_chart.resize();
-    chart3.resize();
-    chart4.resize();
     detailed_overview_chart.resize();
     ghg_overview_chart.resize();
     electricity_overview_chart.resize();
@@ -355,6 +299,8 @@ function resizeCharts() {
     mobility_THG_chart.resize();
     overview_heat_chart.resize();
     decentralized_centralized_heat_chart.resize();
+    ghg_history_chart.resize();
+    ghg_reduction_chart.resize();
   }, 200);
 }
 
@@ -363,10 +309,6 @@ renewable_share_goal_chart.setOption(renewable_share_goal);
 co2_emissions_goal_chart.setOption(co2_emissions_goal);
 renewable_share_scenario_chart.setOption(renewable_share_scenario);
 co2_emissions_scenario_chart.setOption(co2_emissions_scenario);
-
-// Sidebar, setOptions
-chart3.setOption(option);
-chart4.setOption(option);
 
 // Results, setOptions
 detailed_overview_chart.setOption(detailed_overview_option);
@@ -377,6 +319,8 @@ mobility_overview_chart.setOption(mobility_overview_option);
 mobility_THG_chart.setOption(mobility_ghg_option);
 overview_heat_chart.setOption(overview_heat_option);
 decentralized_centralized_heat_chart.setOption(decentralized_centralized_heat_option);
+ghg_history_chart.setOption(ghg_history_option);
+ghg_reduction_chart.setOption(ghg_reduction_option);
 
 resizeCharts();
 
@@ -386,6 +330,13 @@ document.addEventListener("show.bs.tab", resizeCharts);
 
 function createChart(div_id, options) {
   const chartElement = document.getElementById(div_id);
-  const chart = echarts.init(chartElement, null, {renderer: 'svg'});
+  let chart;
+  if (echarts.getInstanceByDom(chartElement)) {
+    chart =  echarts.getInstanceByDom(chartElement);
+    chart.clear();
+  } else {
+    chart = echarts.init(chartElement, null, {renderer: 'svg'});
+  }
   chart.setOption(options);
+  chart.resize();
 }

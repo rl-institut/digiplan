@@ -31,7 +31,9 @@
     "map_store": false,
     "deactivateChoropleth": false,
     "window": false,
-    "subscribeToEvents": false
+    "subscribeToEvents": false,
+    "createChart": false,
+    "hidePotentialLayers": false
   },
   "strict": "implied"
 }

@@ -1,3 +1,7 @@
+"""Module to hold MVT managers."""
+from typing import Optional
+
+import django.db.models
 from django.contrib.gis.db import models
 from django.contrib.gis.db.models.functions import Transform
 from django.contrib.gis.geos import Polygon
@@ -8,48 +12,74 @@ from rest_framework_gis.tilenames import tile_edges
 
 
 # pylint: disable=W0223
-class AsMVTGeom(models.functions.GeomOutputGeoFunc):
+class AsMVTGeom(models.functions.GeomOutputGeoFunc):  # noqa: D101
     function = "ST_AsMVTGeom"
     geom_param_pos = (0, 1)
 
 
 # pylint: disable=W0223
-class X(models.functions.Func):
+class X(models.functions.Func):  # noqa: D101
     function = "ST_X"
 
 
 # pylint: disable=W0223
-class Y(models.functions.Func):
+class Y(models.functions.Func):  # noqa: D101
     function = "ST_Y"
 
 
 class MVTManager(models.Manager):
-    def __init__(self, *args, geo_col="geom", columns=None, **kwargs):
+    """Manager to get MVTs from model geometry using postgres MVT abilities."""
+
+    def __init__(
+        self,
+        *args,  # noqa: ANN002
+        geo_col: str = "geom",
+        columns: Optional[list[str]] = None,
+        **kwargs,
+    ) -> None:
+        """Init."""
         super().__init__(*args, **kwargs)
         self.geo_col = geo_col
         self.columns = columns
 
-    def get_mvt_query(self, x, y, z, filters=None):
+    def get_mvt_query(self, x: int, y: int, z: int, filters: Optional[dict] = None) -> tuple:
+        """Build MVT query; might be overwritten in child class."""
         filters = filters or {}
         return self._build_mvt_query(x, y, z, filters)
 
-    def get_columns(self):
+    def get_columns(self) -> list[str]:
+        """Return columns to use as features in MVT."""
         return self.columns or self._get_non_geom_columns()
 
     # pylint: disable=W0613,R0913
-    def _filter_query(self, query, x, y, z, filters):
+    def _filter_query(  # noqa: PLR0913
+        self,
+        query: django.db.models.QuerySet,
+        x: int,  # noqa: ARG002
+        y: int,  # noqa: ARG002
+        z: int,  # noqa: ARG002
+        filters: dict,
+    ) -> django.db.models.QuerySet:
+        """
+        Filter queryset for given filters.
+
+        Might be overwritten in child class
+        """
         return query.filter(**filters)
 
-    def _get_mvt_geom_query(self, x, y, z):
+    def _get_mvt_geom_query(self, x: int, y: int, z: int) -> django.db.models.QuerySet:
+        """Intersect bbox from given coordinates and return related MVT."""
         bbox = Polygon.from_bbox(tile_edges(x, y, z))
         bbox.srid = 4326
-        query = self.annotate(mvt_geom=AsMVTGeom(Transform(self.geo_col, 3857), Transform(bbox, 3857), 4096, 0, False))
+        query = self.annotate(
+            mvt_geom=AsMVTGeom(Transform(self.geo_col, 3857), Transform(bbox, 3857), 4096, 0, False),  # noqa: FBT003
+        )
         intersect = {f"{self.geo_col}__intersects": bbox}
         return query.filter(**intersect)
 
-    def _build_mvt_query(self, x, y, z, filters):
+    def _build_mvt_query(self, x: int, y: int, z: int, filters: dict) -> str:
         """
-        Creates MVT query
+        Create MVT query.
 
         Parameters
         ----------
@@ -84,9 +114,9 @@ class MVTManager(models.Manager):
         with connection.cursor() as cursor:
             return cursor.mogrify(sql, params).decode("utf-8")
 
-    def _get_non_geom_columns(self):
+    def _get_non_geom_columns(self) -> list[str]:
         """
-        Retrieves all table columns that are NOT the defined geometry column
+        Retrieve all table columns that are NOT the defined geometry column.
 
         Returns
         -------
@@ -94,7 +124,7 @@ class MVTManager(models.Manager):
             List of column names (excluding geom)
         """
         columns = []
-        for field in self.model._meta.get_fields():
+        for field in self.model._meta.get_fields():  # noqa: SLF001
             if hasattr(field, "get_attname_column"):
                 column_name = field.get_attname_column()[1]
                 if column_name != self.geo_col:
@@ -103,41 +133,32 @@ class MVTManager(models.Manager):
 
 
 class RegionMVTManager(MVTManager):
-    def get_queryset(self):
+    """Manager which adds bbox to layer features to better show regions in frontend."""
+
+    def get_queryset(self) -> django.db.models.QuerySet:
+        """Annotate bbox to queryset."""
         return super().get_queryset().annotate(bbox=models.functions.AsGeoJSON(models.functions.Envelope("geom")))
 
 
-class DistrictMVTManager(MVTManager):
-    def get_queryset(self):
-        return (
-            super()
-            .get_queryset()
-            .annotate(bbox=models.functions.AsGeoJSON(models.functions.Envelope("geom")))
-            .annotate(state_name=models.F("state__name"))
-        )
-
-
 class StaticMVTManager(MVTManager):
+    """Manager which does nothing?."""
+
     # pylint: disable=R0913
-    def _filter_query(self, query, x, y, z, filters):
+    def _filter_query(  # noqa: PLR0913
+        self,
+        query: django.db.models.QuerySet,
+        x: int,
+        y: int,
+        z: int,
+        filters: dict,
+    ) -> django.db.models.QuerySet:
         query = super()._filter_query(query, x, y, z, filters)
         return query
 
 
 class LabelMVTManager(MVTManager):
-    def get_queryset(self):
+    """Manager which adds centroid of geom to place label."""
+
+    def get_queryset(self) -> django.db.models.QuerySet:
+        """Return queryset with added centroid."""
         return super().get_queryset().annotate(geom_label=models.functions.Centroid("geom"))
-
-
-class ClusterMVTManager(MVTManager):
-    def get_queryset(self):
-        return (
-            super()
-            .get_queryset()
-            .annotate(center=models.functions.Centroid("geom"))
-            .annotate(state_name=models.F("district__state__name"))
-            .annotate(district_name=models.F("district__name"))
-            .annotate(
-                lat=X("center", output_field=models.DecimalField()), lon=Y("center", output_field=models.DecimalField())
-            )
-        )

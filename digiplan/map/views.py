@@ -48,10 +48,17 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         context = super().get_context_data(**kwargs)
 
         context["panels"] = [
-            forms.EnergyPanelForm(utils.get_translated_json_from_file(config.ENERGY_SETTINGS_PANEL_FILE, self.request)),
-            forms.HeatPanelForm(utils.get_translated_json_from_file(config.HEAT_SETTINGS_PANEL_FILE, self.request)),
+            forms.EnergyPanelForm(
+                utils.get_translated_json_from_file(config.ENERGY_SETTINGS_PANEL_FILE, self.request),
+                additional_parameters=utils.get_translated_json_from_file(config.ADDITIONAL_ENERGY_SETTINGS_FILE),
+            ),
+            forms.HeatPanelForm(
+                utils.get_translated_json_from_file(config.HEAT_SETTINGS_PANEL_FILE, self.request),
+                additional_parameters=utils.get_translated_json_from_file(config.ADDITIONAL_HEAT_SETTINGS_FILE),
+            ),
             forms.TrafficPanelForm(
                 utils.get_translated_json_from_file(config.TRAFFIC_SETTINGS_PANEL_FILE, self.request),
+                additional_parameters=utils.get_translated_json_from_file(config.ADDITIONAL_TRAFFIC_SETTINGS_FILE),
             ),
         ]
 
@@ -68,14 +75,16 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         }
         context["sources"] = categorized_sources
         context["store_cold_init"] = config.STORE_COLD_INIT
-        context["detailed_overview"] = charts.create_chart("detailed_overview")
-        context["ghg_overview"] = charts.create_chart("ghg_overview")
-        context["electricity_overview"] = charts.create_chart("electricity_overview")
-        context["electricity_ghg"] = charts.create_chart("electricity_ghg")
-        context["mobility_overview"] = charts.create_chart("mobility_overview")
-        context["mobility_ghg"] = charts.create_chart("mobility_ghg")
-        context["overview_heat"] = charts.create_chart("overview_heat")
-        context["decentralized_centralized_heat"] = charts.create_chart("decentralized_centralized_heat")
+        context["detailed_overview"] = charts.Chart("detailed_overview").render()
+        context["ghg_overview"] = charts.Chart("ghg_overview").render()
+        context["electricity_overview"] = charts.Chart("electricity_overview").render()
+        context["electricity_ghg"] = charts.Chart("electricity_ghg").render()
+        context["mobility_overview"] = charts.Chart("mobility_overview").render()
+        context["mobility_ghg"] = charts.Chart("mobility_ghg").render()
+        context["overview_heat"] = charts.Chart("overview_heat").render()
+        context["decentralized_centralized_heat"] = charts.Chart("decentralized_centralized_heat").render()
+        context["ghg_history"] = charts.Chart("ghg_history").render()
+        context["ghg_reduction"] = charts.Chart("ghg_reduction").render()
 
         return context
 
@@ -99,7 +108,7 @@ def get_popup(request: HttpRequest, lookup: str, region: int) -> response.JsonRe
         containing HTML to render popup and chart options to be used in E-Chart.
     """
     map_state = request.GET.dict()
-    popup = popups.POPUPS[lookup](lookup, region, map_state)
+    popup = popups.POPUPS[lookup](lookup, region, map_state=map_state)
     return popup.render()
 
 
@@ -124,3 +133,27 @@ def get_choropleth(request: HttpRequest, lookup: str, layer_id: str) -> response
     """
     map_state = request.GET.dict()
     return choropleths.CHOROPLETHS[lookup](lookup, map_state)
+
+
+def get_charts(request: HttpRequest) -> response.JsonResponse:
+    """
+    Return all result charts at once.
+
+    Parameters
+    ----------
+    request: HttpRequest
+        request holding simulation ID in map_state dict
+
+    Returns
+    -------
+    JsonResponse
+        holding dict with `div_id` as keys and chart options as values.
+        `div_id` is used in frontend to detect chart container.
+    """
+    lookups = request.GET.getlist("charts[]")
+    simulation_id = None
+    if "map_state[simulation_id]" in request.GET.dict():
+        simulation_id = int(request.GET.dict()["map_state[simulation_id]"])
+    return response.JsonResponse(
+        {lookup: charts.CHARTS[lookup](simulation_id=simulation_id).render() for lookup in lookups},
+    )

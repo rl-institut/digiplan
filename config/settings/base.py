@@ -1,5 +1,7 @@
 """Base settings to build other settings files upon."""
+import logging
 import os
+import sys
 
 import environ
 from django.core.exceptions import ValidationError
@@ -9,6 +11,8 @@ from django_mapengine import setup
 ROOT_DIR = environ.Path(__file__) - 3  # (digiplan/config/settings/base.py - 3 = digiplan/)
 APPS_DIR = ROOT_DIR.path("digiplan")
 DATA_DIR = APPS_DIR.path("data")
+DIGIPIPE_DIR = DATA_DIR.path("digipipe")
+DIGIPIPE_GEODATA_DIR = DIGIPIPE_DIR.path("geodata")
 METADATA_DIR = APPS_DIR.path("metadata")
 
 env = environ.Env()
@@ -235,6 +239,22 @@ CELERY_BROKER_URL = env("CELERY_BROKER_URL")
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#std:setting-result_backend
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 
+# test
+TESTING = "test" in sys.argv[1:]
+if TESTING:
+    logging.info("In TEST Mode - Disableling Migrations")
+
+    class DisableMigrations:
+        """Disables migrations for test mode."""
+
+        def __contains__(self, item) -> bool:  # noqa: D105, ANN001
+            return True
+
+        def __getitem__(self, item):  # noqa: D105, ANN001, ANN204
+            return None
+
+    MIGRATION_MODULES = DisableMigrations()
+
 # Your stuff...
 # ------------------------------------------------------------------------------
 PASSWORD_PROTECTION = env.bool("PASSWORD_PROTECTION", False)
@@ -260,6 +280,8 @@ MAP_ENGINE_IMAGES = [
     setup.MapImage("hydro", "images/icons/map_hydro.png"),
     setup.MapImage("biomass", "images/icons/map_biomass.png"),
     setup.MapImage("combustion", "images/icons/map_combustion.png"),
+    setup.MapImage("gsgk", "images/icons/map_gsgk.png"),
+    setup.MapImage("storage", "images/icons/map_battery.png"),
 ]
 
 MAP_ENGINE_API_MVTS = {
@@ -267,16 +289,58 @@ MAP_ENGINE_API_MVTS = {
         setup.MVTAPI("municipality", "map", "Municipality"),
         setup.MVTAPI("municipalitylabel", "map", "Municipality", "label_tiles"),
     ],
+    "static": [
+        setup.MVTAPI("soil_quality_low", "map", "SoilQualityLow"),
+        setup.MVTAPI("soil_quality_high", "map", "SoilQualityHigh"),
+        setup.MVTAPI("landscape_protection_area", "map", "LandscapeProtectionArea"),
+        setup.MVTAPI("forest", "map", "Forest"),
+        setup.MVTAPI("special_protection_area", "map", "SpecialProtectionArea"),
+        setup.MVTAPI("air_traffic", "map", "AirTraffic"),
+        setup.MVTAPI("aviation", "map", "Aviation"),
+        setup.MVTAPI("biosphere_reserve", "map", "BiosphereReserve"),
+        setup.MVTAPI("drinking_water_protection_area", "map", "DrinkingWaterArea"),
+        setup.MVTAPI("fauna_flora_habitat", "map", "FaunaFloraHabitat"),
+        setup.MVTAPI("floodplain", "map", "Floodplain"),
+        setup.MVTAPI("grid", "map", "Grid"),
+        setup.MVTAPI("industry", "map", "Industry"),
+        setup.MVTAPI("less_favoured_areas_agricultural", "map", "LessFavouredAreasAgricultural"),
+        setup.MVTAPI("military", "map", "Military"),
+        setup.MVTAPI("nature_conservation_area", "map", "NatureConservationArea"),
+        setup.MVTAPI("railway", "map", "Railway"),
+        setup.MVTAPI("road_default", "map", "Road"),
+        setup.MVTAPI("road_railway-500m_region", "map", "RoadRailway500m"),
+        setup.MVTAPI("settlement-0m", "map", "Settlement0m"),
+        setup.MVTAPI("water", "map", "Water"),
+    ],
+    "potential": [
+        setup.MVTAPI("potentialarea_pv_agriculture_lfa-off_region", "map", "PotentialareaPVAgricultureLFAOff"),
+        setup.MVTAPI("potentialarea_pv_road_railway_region", "map", "PotentialareaPVRoadRailway"),
+        setup.MVTAPI("potentialarea_wind_stp_2018_vreg", "map", "PotentialareaWindSTP2018Vreg"),
+        setup.MVTAPI("potentialarea_wind_stp_2027_repowering", "map", "PotentialareaWindSTP2027Repowering"),
+        setup.MVTAPI(
+            "potentialarea_wind_stp_2027_search_area_forest_area",
+            "map",
+            "PotentialareaWindSTP2027SearchAreaForestArea",
+        ),
+        setup.MVTAPI(
+            "potentialarea_wind_stp_2027_search_area_open_area",
+            "map",
+            "PotentialareaWindSTP2027SearchAreaOpenArea",
+        ),
+        setup.MVTAPI("potentialarea_wind_stp_2027_vr", "map", "PotentialareaWindSTP2027VR"),
+    ],
     "results": [setup.MVTAPI("results", "map", "Municipality")],
 }
 
 MAP_ENGINE_API_CLUSTERS = [
-    setup.ClusterAPI("wind", "map", "WindTurbine"),
-    setup.ClusterAPI("pvroof", "map", "PVroof"),
-    setup.ClusterAPI("pvground", "map", "PVground"),
-    setup.ClusterAPI("hydro", "map", "Hydro"),
-    setup.ClusterAPI("biomass", "map", "Biomass"),
-    setup.ClusterAPI("combustion", "map", "Combustion"),
+    setup.ClusterAPI("wind", "map", "WindTurbine", properties=["id"]),
+    setup.ClusterAPI("pvroof", "map", "PVroof", properties=["id"]),
+    setup.ClusterAPI("pvground", "map", "PVground", properties=["id"]),
+    setup.ClusterAPI("hydro", "map", "Hydro", properties=["id"]),
+    setup.ClusterAPI("biomass", "map", "Biomass", properties=["id"]),
+    setup.ClusterAPI("combustion", "map", "Combustion", properties=["id"]),
+    setup.ClusterAPI("gsgk", "map", "GSGK", properties=["id"]),
+    setup.ClusterAPI("storage", "map", "Storage", properties=["id"]),
 ]
 
 MAP_ENGINE_STYLES_FOLDER = "digiplan/static/config/"
@@ -285,27 +349,106 @@ MAP_ENGINE_ZOOM_LEVELS = {
 }
 
 MAP_ENGINE_CHOROPLETHS = [
-    setup.Choropleth("population", layers=["municipality"], title=_("Einwohner_innenzahl"), unit=_("EW")),
-    setup.Choropleth("population_density", layers=["municipality"], title=_("Einwohner_innenzahl"), unit=_("EW/qm")),
-    setup.Choropleth("capacity", layers=["municipality"], title=_("Installierte Leistung"), unit=_("MW")),
+    setup.Choropleth("population_statusquo", layers=["municipality"], title=_("Einwohner_innenzahl"), unit=_("")),
     setup.Choropleth(
-        "capacity_square",
+        "population_density_statusquo",
+        layers=["municipality"],
+        title=_("Einwohner_innenzahl pro km²"),
+        unit=_(""),
+    ),
+    setup.Choropleth("employees_statusquo", layers=["municipality"], title=_("Beschäftigte"), unit=_("")),
+    setup.Choropleth("companies_statusquo", layers=["municipality"], title=_("Betriebe"), unit=_("")),
+    setup.Choropleth("capacity_statusquo", layers=["municipality"], title=_("Installierte Leistung"), unit=_("MW")),
+    setup.Choropleth(
+        "capacity_square_statusquo",
         layers=["municipality"],
         title=_("Installierte Leistung pro qm"),
-        unit=_("MW/qm"),
+        unit=_("MW"),
     ),
-    setup.Choropleth("wind_turbines", layers=["municipality"], title=_("Anzahl Windturbinen"), unit=_("")),
+    setup.Choropleth("wind_turbines_statusquo", layers=["municipality"], title=_("Anzahl Windturbinen"), unit=_("")),
     setup.Choropleth(
-        "wind_turbines_square",
+        "wind_turbines_square_statusquo",
         layers=["municipality"],
         title=_("Anzahl Windturbinen pro qm"),
         unit=_(""),
     ),
     setup.Choropleth(
-        "renewable_electricity_production",
+        "energy_statusquo",
         layers=["municipality"],
         title=_("Energie Erneuerbare"),
         unit=_("GWh"),
+    ),
+    setup.Choropleth(
+        "energy_2045",
+        layers=["municipality"],
+        title=_("Energie Erneuerbare"),
+        unit=_("GWh"),
+    ),
+    setup.Choropleth(
+        "energy_share_statusquo",
+        layers=["municipality"],
+        title=_("Anteil Erneuerbare Energien am Strombedarf"),
+        unit=_("%"),
+    ),
+    setup.Choropleth(
+        "energy_capita_statusquo",
+        layers=["municipality"],
+        title=_("Gewonnene Energie aus EE je EW"),
+        unit=_("MWh"),
+    ),
+    setup.Choropleth(
+        "energy_capita_2045",
+        layers=["municipality"],
+        title=_("Gewonnene Energie aus EE je EW"),
+        unit=_("MWh"),
+    ),
+    setup.Choropleth(
+        "energy_square_statusquo",
+        layers=["municipality"],
+        title=_("Gewonnene Energie aus EE je km²"),
+        unit=_("MWh"),
+    ),
+    setup.Choropleth(
+        "energy_square_2045",
+        layers=["municipality"],
+        title=_("Gewonnene Energie aus EE je km²"),
+        unit=_("MWh"),
+    ),
+    setup.Choropleth(
+        "electricity_demand_statusquo",
+        layers=["municipality"],
+        title=_("Strombedarf"),
+        unit=_("GWh"),
+    ),
+    setup.Choropleth(
+        "electricity_demand_capita_statusquo",
+        layers=["municipality"],
+        title=_("Strombedarf pro EinwohnerIn"),
+        unit=_("kWh"),
+    ),
+    setup.Choropleth(
+        "heat_demand_statusquo",
+        layers=["municipality"],
+        title=_("Wärmebedarf"),
+        unit=_("GWh"),
+    ),
+    setup.Choropleth(
+        "heat_demand_capita_statusquo",
+        layers=["municipality"],
+        title=_("Wärmebedarf pro EinwohnerIn"),
+        unit=_("kWh"),
+    ),
+    setup.Choropleth(
+        "batteries_statusquo",
+        layers=["municipality"],
+        title=_("Anzahl Batteriespeicher"),
+        unit=_("#"),
+    ),
+    setup.Choropleth(
+        "batteries_capacity_statusquo",
+        layers=["municipality"],
+        title=_("Kapazität Batteriespeicher"),
+        unit=_("MWh"),
     ),
 ]
 
@@ -314,13 +457,59 @@ MAP_ENGINE_POPUPS = [
         "municipality",
         popup_at_default_layer=False,
         choropleths=[
-            "population",
-            "population_density",
-            "capacity",
-            "capacity_square",
-            "wind_turbines",
-            "wind_turbines_square",
-            "renewable_electricity_production",
+            "population_statusquo",
+            "population_density_statusquo",
+            "employees_statusquo",
+            "companies_statusquo",
+            "capacity_statusquo",
+            "capacity_square_statusquo",
+            "wind_turbines_statusquo",
+            "wind_turbines_square_statusquo",
+            "energy_statusquo",
+            "energy_2045",
+            "energy_share_statusquo",
+            "energy_capita_statusquo",
+            "energy_capita_2045",
+            "energy_square_statusquo",
+            "energy_square_2045",
+            "electricity_demand_statusquo",
+            "electricity_demand_capita_statusquo",
+            "heat_demand_statusquo",
+            "heat_demand_capita_statusquo",
+            "batteries_statusquo",
+            "batteries_capacity_statusquo",
         ],
+    ),
+    setup.Popup(
+        "wind",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "pvground",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "pvroof",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "hydro",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "biomass",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "combustion",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "gsgk",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "storage",
+        popup_at_default_layer=True,
     ),
 ]

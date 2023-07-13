@@ -1,19 +1,28 @@
 
-import {resultsDropdown} from "./elements.js";
+import {statusquoDropdown, futureDropdown} from "./elements.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
 const simulation_spinner = document.getElementById("simulation_spinner");
 
 const SIMULATION_CHECK_TIME = 5000;
 
+const resultCharts = {
+    "detailed_overview": "detailed_overview_chart",
+    "electricity_overview": "electricity_overview_chart"
+};
+
 // Setup
 
 // Disable settings form submit
 $('#settings').submit(false);
 
-resultsDropdown.addEventListener("change", function() {
-    PubSub.publish(mapEvent.CHOROPLETH_SELECTED, resultsDropdown.value);
-    imageResults.title = resultsDropdown.options[resultsDropdown.selectedIndex].title;
+statusquoDropdown.addEventListener("change", function() {
+    PubSub.publish(mapEvent.CHOROPLETH_SELECTED, statusquoDropdown.value);
+    imageResults.title = statusquoDropdown.options[statusquoDropdown.selectedIndex].title;
+});
+futureDropdown.addEventListener("change", function() {
+    PubSub.publish(mapEvent.CHOROPLETH_SELECTED, futureDropdown.value);
+    imageResults.title = futureDropdown.options[futureDropdown.selectedIndex].title;
 });
 
 
@@ -23,6 +32,10 @@ PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, hideSimulationSpinner);
+PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultCharts);
+PubSub.subscribe(mapEvent.CHOROPLETH_SELECTED, showRegionChart);
+// for testing:
+PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, showResultCharts);
 
 
 // Subscriber Functions
@@ -96,4 +109,37 @@ function showSimulationSpinner(msg) {
 function hideSimulationSpinner(msg) {
     simulation_spinner.hidden = true;
     return logMessage(msg);
+}
+
+function showRegionChart(msg, lookup) {
+    const region_lookup = `${lookup}_region`;
+    let charts = {};
+    if (region_lookup.includes("2045")) {
+        charts[region_lookup] = "region_chart_2045";
+    } else {
+        charts[region_lookup] = "region_chart_statusquo";
+    }
+    showCharts(charts);
+    return logMessage(msg);
+}
+
+function showResultCharts(msg) {
+    showCharts(resultCharts);
+    return logMessage(msg);
+}
+
+function showCharts(charts={}) {
+    $.ajax({
+        url : "/charts",
+        type : "GET",
+        data : {
+            "charts": Object.keys(charts),
+            "map_state": map_store.cold.state
+        },
+        success : function(chart_options) {
+            for (const chart in charts) {
+                createChart(charts[chart], chart_options[chart]);
+            }
+        },
+    });
 }

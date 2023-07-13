@@ -9,10 +9,10 @@
     "top": "24%"
   },
   "xAxis": {
-    "type": "time",
-    "xAxisLabel":{
-      "formatter": "{yyyy}"
-    }
+    "type": "category",
+    "boundaryGap": true,
+    "data": ["Status Quo"],
+    "axisTick": "alignWithLabel"
   },
   "yAxis": {
     "type": "value",
@@ -23,9 +23,9 @@
   },
   "series": [
     {
-      "type": "line",
+      "type": "bar",
       "barWidth": "16",
-      "data": [5, 20, 36, 10, 10],
+      "data": [5],
       "name": "Wind Turbines"
     }
   ],

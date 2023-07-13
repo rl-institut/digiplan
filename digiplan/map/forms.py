@@ -1,19 +1,10 @@
 from itertools import count  # noqa: D100
 
-from django.db.models import Max, Min
-from django.forms import (
-    BooleanField,
-    Form,
-    IntegerField,
-    MultipleChoiceField,
-    MultiValueField,
-    TextInput,
-    renderers,
-)
+from django.forms import BooleanField, Form, IntegerField, TextInput, renderers
 from django.utils.safestring import mark_safe
 from django_mapengine import legend
 
-from . import models
+from . import charts
 from .widgets import SwitchWidget
 
 
@@ -44,47 +35,16 @@ class StaticLayerForm(TemplateForm):  # noqa: D101
         super().__init__(*args, **kwargs)
         self.layer = layer
 
-        if hasattr(layer.model, "filters"):
-            self.has_filters = True
-            for filter_ in layer.layer.model.filters:
-                if filter_.type == models.LayerFilterType.Range:
-                    filter_min = layer.layer.model.vector_tiles.aggregate(Min(filter_.name))[f"{filter_.name}__min"]
-                    filter_max = layer.layer.model.vector_tiles.aggregate(Max(filter_.name))[f"{filter_.name}__max"]
-                    self.fields[filter_.name] = MultiValueField(
-                        label=getattr(layer.layer.model, filter_.name).field.verbose_name,
-                        fields=[IntegerField(), IntegerField()],
-                        widget=TextInput(
-                            attrs={
-                                "class": "js-slider",
-                                "data-type": "double",
-                                "data-min": filter_min,
-                                "data-max": filter_max,
-                                "data-from": filter_min,
-                                "data-to": filter_max,
-                                "data-grid": True,
-                            },
-                        ),
-                    )
-                elif filter_.type == models.LayerFilterType.Dropdown:
-                    filter_values = (
-                        layer.layer.model.vector_tiles.values_list(filter_.name, flat=True)
-                        .order_by(filter_.name)
-                        .distinct()
-                    )
-                    self.fields[filter_.name] = MultipleChoiceField(
-                        choices=[(value, value) for value in filter_values],
-                    )
-                else:
-                    raise ValueError(f"Unknown filter type '{filter_.type}'")
-
 
 class PanelForm(TemplateForm):  # noqa: D101
-    def __init__(self, parameters, **kwargs) -> None:  # noqa: D107, ANN001
+    def __init__(self, parameters, additional_parameters=None, **kwargs) -> None:  # noqa: D107, ANN001
         super().__init__(**kwargs)
-        self.fields = {item["name"]: item["field"] for item in self.generate_fields(parameters)}
+        self.fields = {item["name"]: item["field"] for item in self.generate_fields(parameters, additional_parameters)}
 
     @staticmethod
-    def generate_fields(parameters):  # noqa: ANN001, ANN205, D102
+    def generate_fields(parameters, additional_parameters=None):  # noqa: ANN001, ANN205, D102
+        if additional_parameters is not None:
+            charts.merge_dicts(parameters, additional_parameters)
         for name, item in parameters.items():
             if item["type"] == "slider":
                 attrs = {
@@ -101,7 +61,12 @@ class PanelForm(TemplateForm):  # noqa: D101
                 if "step" in item:
                     attrs["data-step"] = item["step"]
 
-                field = IntegerField(label=item["label"], widget=TextInput(attrs=attrs), help_text=item["tooltip"])
+                field = IntegerField(
+                    label=item["label"],
+                    widget=TextInput(attrs=attrs),
+                    help_text=item["tooltip"],
+                    required=item.get("required", True),
+                )
                 yield {"name": name, "field": field}
             elif item["type"] == "switch":
                 attrs = {

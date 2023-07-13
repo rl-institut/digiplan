@@ -1,4 +1,30 @@
 {
+  "brush": {
+    "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],
+    "xAxisIndex": 0
+  },
+  "toolbox": {
+    "feature": {
+      "magicType": {
+        "type": ["stack"]
+      },
+      "dataView": {}
+    }
+  },
+  "tooltip": {},
+  "grid": {
+    "top": "10%",
+    "left": "3%",
+    "right": "15%",
+    "bottom": "20%",
+    "containLabel": true
+  },
+  "yAxis": {
+    "data": ["Ziel 2045", "Mein Szenario", "Status Quo"],
+    "axisLine": { "onZero": true },
+    "splitLine": { "show": false },
+    "splitArea": { "show": false }
+  },
   "xAxis": {
     "type": "value",
     "show": true,
@@ -11,131 +37,126 @@
     "fontWeight": "300",
     "fontSize": "14"
   },
-  "yAxis": {
-    "type": "category",
-    "data": ["Bedarf", "Ziel", "Mein Szeanrio", "Status Quo"],
-    "axisTick": {
-      "show": false
-    }
-  },
   "series": [
     {
-      "name": "Wind",
+      "name": "Windenergie",
       "type": "bar",
-      "barWidth": "16",
-      "stack": "total",
-      "color": "#1F82C0",
-      "label": {
-        "show": false
-      },
+      "stack": "production",
+      "color": "#6A89CC",
       "emphasis": {
-        "focus": "series"
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
-      "data": [0, 502, 400, 334]
+      "data": [302, 234, 230]
     },
     {
-      "name": "Freiflächen - PV",
+      "name": "Freiflächen-PV",
       "type": "bar",
-      "stack": "total",
-      "color": "#F6B93B",
-      "label": {
-        "show": false
-      },
+      "stack": "production",
+      "color": "#EFAD25",
       "emphasis": {
-        "focus": "series"
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
-      "data": [0, 382, 300, 234]
+      "data": [282, 234, 100]
     },
     {
-      "name": "Aufdach - PV",
+      "name": "Aufdach-PV",
       "type": "bar",
-      "stack": "total",
+      "stack": "production",
       "color": "#FFD660",
-      "label": {
-        "show": false
-      },
       "emphasis": {
-        "focus": "series"
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
-      "data": [0, 312, 280, 254]
+      "data": [312, 254, 100]
     },
     {
       "name": "Bioenergie",
       "type": "bar",
-      "stack": "total",
-      "color": "#98D47E",
-      "label": {
-        "show": false
-      },
+      "stack": "production",
+      "color": "#52C41A",
       "emphasis": {
-        "focus": "series"
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
-      "data": [0, 136, 135, 134]
+      "data": [136, 134, 130]
     },
     {
-      "name": "Konventionell",
+      "name": "Wasserkraft",
       "type": "bar",
-      "stack": "total",
-      "color": "#1A1A1A",
-      "label": {
-        "show": false
-      },
+      "barWidth": "16",
+      "stack": "production",
+      "color": "#A9BDE8",
       "emphasis": {
-        "focus": "series"
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
-      "data": [0, 132, 200, 534]
+      "data": [132, 334, 700]
     },
     {
-      "name": "GHD",
+      "name": "Stromverbrauch GHD",
       "type": "bar",
-      "stack": "total",
-      "color": "#F5F5DC",
-      "label": {
-        "show": false
-      },
+      "barWidth": "16",
+      "stack": "demand",
+      "color": "#D3D3D3",
       "emphasis": {
-        "focus": "series"
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
-      "data": [400, 0, 0, 0]
+      "data": [300, 344, 380]
     },
     {
-      "name": "Haushalte",
+      "name": "Stromverbrauch Haushalte",
       "type": "bar",
-      "stack": "total",
-      "color": "#A8DADC",
-      "label": {
-        "show": false
-      },
+      "stack": "demand",
+      "color": "#969696",
       "emphasis": {
-        "focus": "series"
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
-      "data": [360, 0, 0, 0]
+      "data": [254, 244, 380]
     },
     {
-      "name": "Industrie",
+      "name": "Stromverbrauch Industrie",
       "type": "bar",
-      "stack": "total",
-      "color": "#C27BA0",
-      "label": {
-        "show": false
-      },
+      "barWidth": "35",
+      "stack": "demand",
+      "color": "#616161",
       "emphasis": {
-        "focus": "series"
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
-      "data": [300, 0, 0, 0]
+      "data": [280, 300, 350]
     },
     {
-      "name": "Sonstiges",
+      "name": "BEV",
       "type": "bar",
-      "stack": "total",
-      "color": "#B0BEC5",
-      "label": {
-        "show": false
-      },
+      "stack": "demand",
+      "color": "#2F2F2F",
       "emphasis": {
-        "focus": "series"
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
-      "data": [350, 0, 0, 0]
+      "data": [145, 144, 180]
     }
   ]
 }

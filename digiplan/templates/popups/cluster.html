@@ -1,0 +1,22 @@
+{% load i18n %}
+<div class="popup popup--cluster">
+
+  <div class="popup__header">
+    <h1 id="js-popup__title" class="popup__title">{{ title }}</h1>
+  </div>
+
+  <table>
+    <thead>
+      <th scope="col">{% trans 'Parameter' %}</th>
+      <th scope="col">{% trans 'Wert' %}</th>
+    </thead>
+    {% for key, value in data.items %}
+      <tr>
+        <td>{{ key }}</td>
+        <td>{{ value }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  {% if description %}<div id="js-popup__description" class="popup__description">{{ description }}</div>{%  endif %}
+</div>

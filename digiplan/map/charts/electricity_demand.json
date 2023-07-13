@@ -2,24 +2,23 @@
     "grid": {
       "top": "24%",
       "right": "30%",
-      "bottom": "5%"
+      "bottom": "25%"
     },
     "legend": {
       "data": [
-        "GHD",
         "Haushalte",
-        "Industrie",
-        "Sonstiges"
+        "GHD",
+        "Industrie"
       ],
       "orient": "vertical",
       "right": "1%",
-      "bottom": "5%"
+      "bottom": "35%"
     },
-    "color": ["#F5F5DC", "#A8DADC", "#C27BA0", "#B0BEC5"],
+    "color": ["#6F9BB2", "#98C1D7", "#376984"],
     "xAxis": {
       "type": "category",
       "boundaryGap": true,
-      "data": ["Status Quo", "2045"],
+      "data": ["Status Quo"],
       "axisTick": "alignWithLabel"
     },
     "yAxis": {
@@ -34,25 +33,19 @@
           "type": "bar",
           "stack": "five",
           "data": [36, 10],
-          "name": "GHD"
+          "name": "Haushalte"
         },
         {
           "type": "bar",
           "stack": "five",
           "data": [36, 10],
-          "name": "Haushalte"
+          "name": "GHD"
         },
         {
           "type": "bar",
           "stack": "five",
           "data": [10, 10],
           "name": "Industrie"
-        },
-        {
-          "type": "bar",
-          "stack": "five",
-          "data": [10, 10],
-          "name": "Sonstiges"
         }
     ],
     "title": { "text": "Electricity Demand" }

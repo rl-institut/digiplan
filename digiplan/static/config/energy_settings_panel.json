@@ -37,23 +37,33 @@
     "tooltip": "{% trans 'Priority areas repowering.' %}",
     "type": "switch"
   },
-    "s_w_5": {
+  "s_w_5": {
     "class": "js-sidepanel-switch",
     "label": "{% trans 'Free extension in the search area.' %}",
     "tooltip": "{% trans 'Free extension in the search area.' %}",
     "type": "switch"
   },
     "s_w_5_1": {
-    "class": "js-sidepanel-switch",
+    "class": "js-slider",
     "label": "{% trans 'Use of open country search area.' %}",
     "tooltip": "{% trans 'Use of open country search area.' %}",
-    "type": "switch"
+    "max": 100,
+    "min": 0,
+    "start": 0,
+    "step": 5,
+    "type": "slider",
+    "required": false
   },
     "s_w_5_2": {
-    "class": "js-sidepanel-switch",
+    "class": "js-slider",
     "label": "{% trans 'Use of forest search space.' %}",
     "tooltip": "{% trans 'Use of forest search space.' %}",
-    "type": "switch"
+    "max": 100,
+    "min": 0,
+    "start": 0,
+    "step": 5,
+    "type": "slider",
+    "required": false
   },
   "s_pv_ff_1": {
     "class": "js-slider js-slider-panel js-power-mix",
@@ -135,18 +145,6 @@
     "tooltip": "{% trans 'Run-of-river power plants' %}",
     "type": "slider"
   },
-  "s_b_1": {
-    "class": "js-slider js-slider-panel js-power-mix",
-    "color": "#FA9FB5",
-    "label": "{% trans 'Bioenergy (MW)' %}",
-    "max": 30,
-    "min": 0,
-    "start": 5,
-    "status_quo": 15,
-    "step": 5,
-    "tooltip": "{% trans 'Biomass and biogas plants' %}",
-    "type": "slider"
-  },
   "s_v_1": {
     "class": "js-slider js-slider-panel",
     "grid": false,
@@ -193,13 +191,13 @@
   },
   "s_s_g_1": {
     "class": "js-slider js-slider-panel js-power-mix",
-    "label": "{% trans 'Large scale batteries (GWh)' %}",
+    "label": "{% trans 'Large scale batteries (MWh)' %}",
     "max": 20,
     "min": 0,
     "start": 2,
     "status_quo": 3,
     "step": 0.1,
-    "tooltip": "{% trans 'Large scale batteries (GWh)' %}",
+    "tooltip": "{% trans 'Large scale batteries (MWh)' %}",
     "type": "slider",
     "sidepanel": true
   },

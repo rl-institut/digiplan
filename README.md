@@ -15,9 +15,8 @@ Obviously, you have to clone this repo first.
 
 ## Prepare Data
 
-In both cases, geometry packages have to be placed into folder _digiplan/data/_,
+In both cases, the datapackage from digipipe have to be placed into folder _digiplan/data/_ and renamed into `digipipe`,
 so that they can be found by the application and uploaded into database.
-All packages are justed dropped into this folder (no hierarchy).
 
 ## Using standard python installation
 
@@ -259,4 +258,12 @@ Example to only load specific data:
 
 ```
 docker-compose -f production.yml run --rm django python -u manage.py shell --command="from djagora.utils import load_overlays; from djagora.utils.load_configs import DYNAMIC_OVERLAYS; overlays = [item for item in DYNAMIC_OVERLAYS if item['name'].startswith('settlement')]; load_overlays.run(overlays=overlays)"
+```
+
+If celery does not complete, but shows no errors you can check redis for errors:
+
+```bash
+docker exec -it <redis-container> bash
+redis-cli keys "*"
+redis-cli get <task-meta-with-current-id>
 ```

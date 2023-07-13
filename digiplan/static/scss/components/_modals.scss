@@ -25,3 +25,46 @@
     @extend .py-4;
   }
 }
+
+.onboarding-modal {
+  .carousel-item {
+    &__content {
+      @extend .col-8;
+      @extend .bg-white;
+      @extend .ps-5;
+      @extend .pe-4;
+    }
+  }
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .carousel-control-next,
+  .carousel-control-prev {
+    @extend .position-relative;
+    opacity: 1 !important;
+    background-color: $gray-700 !important;
+
+    &.transparent {
+      @extend .bg-white;
+      @extend .text-white;
+      pointer-events: none;
+    }
+  }
+
+  .carousel-control-prev {
+    background-color: $gray-200 !important;
+    color: $gray-800 !important;
+  }
+
+  .btn, .modal-footer button {
+    opacity: 1 !important;
+  }
+
+  .modal-body {
+    height: 40rem;
+    overflow: hidden;
+  }
+}

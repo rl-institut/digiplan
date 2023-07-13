@@ -32,10 +32,10 @@ class MapConfig(AppConfig):
 
         hooks.register_hook(
             hooks.HookType.PARAMETER,
-            hooks.Hook(scenario=hooks.ALL_SCENARIOS, function=digiplan_hooks.adapt_heat_demand),
+            hooks.Hook(scenario=hooks.ALL_SCENARIOS, function=digiplan_hooks.adapt_heat_settings),
         )
 
         hooks.register_hook(
             hooks.HookType.PARAMETER,
-            hooks.Hook(scenario=hooks.ALL_SCENARIOS, function=digiplan_hooks.adapt_capacities),
+            hooks.Hook(scenario=hooks.ALL_SCENARIOS, function=digiplan_hooks.adapt_renewable_capacities),
         )

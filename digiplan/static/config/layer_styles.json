@@ -158,7 +158,7 @@
     "type": "circle",
     "filter": ["has", "point_count"],
     "paint": {
-      "circle-color": "#F6B93B",
+      "circle-color": "#EFAD25",
       "circle-radius": [
         "step",
         ["get", "point_count"],
@@ -195,7 +195,7 @@
     "type": "circle",
     "filter": ["has", "point_count"],
     "paint": {
-      "circle-color": "#9CC4D9",
+      "circle-color": "#A9BDE8",
       "circle-radius": [
         "step",
         ["get", "point_count"],
@@ -253,6 +253,86 @@
       "text-size": 12
     }
   },
+  "gsgk": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "gsgk",
+      "icon-size": 0.4,
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "black"
+    }
+  },
+  "gsgk_cluster": {
+    "type": "circle",
+    "filter": ["has", "point_count"],
+    "paint": {
+      "circle-color": "#C27BA0",
+      "circle-radius": [
+        "step",
+        ["get", "point_count"],
+        20,
+        15,
+        30,
+        50,
+        40
+      ]
+    }
+  },
+  "gsgk_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    },
+    "paint": {
+      "text-color": "white"
+    }
+  },
+  "storage": {
+    "type": "symbol",
+    "filter": ["!", ["has", "point_count"]],
+    "layout": {
+      "icon-image": "storage",
+      "icon-size": 0.4,
+      "icon-allow-overlap": true
+    },
+    "paint": {
+      "icon-color": "black"
+    }
+  },
+  "storage_cluster": {
+    "type": "circle",
+    "filter": ["has", "point_count"],
+    "paint": {
+      "circle-color": "#8D2D5F",
+      "circle-radius": [
+        "step",
+        ["get", "point_count"],
+        20,
+        15,
+        30,
+        50,
+        40
+      ]
+    }
+  },
+  "storage_cluster_count": {
+    "type": "symbol",
+    "filter": ["has", "point_count"],
+    "layout": {
+      "text-field": "{point_count_abbreviated}",
+      "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+      "text-size": 12
+    },
+    "paint": {
+      "text-color": "white"
+    }
+  },
   "combustion": {
     "type": "symbol",
     "filter": ["!", ["has", "point_count"]],
@@ -269,7 +349,7 @@
     "type": "circle",
     "filter": ["has", "point_count"],
     "paint": {
-      "circle-color": "#1A1A1A",
+      "circle-color": "#E6772E",
       "circle-radius": [
         "step",
         ["get", "point_count"],
@@ -317,6 +397,174 @@
         "#b30000"
       ],
       "fill-opacity": 0.8
+    }
+  },
+  "potentialarea_pv_road_railway_region": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#ffd744"
+    }
+  },
+  "potentialarea_pv_agriculture_lfa-off_region": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#c19800"
+    }
+  },
+  "potentialarea_wind_stp_2018_vreg": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#6A89CC"
+    }
+  },
+  "potentialarea_wind_stp_2027_vr": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#6A89CC"
+    }
+  },
+  "potentialarea_wind_stp_2027_repowering": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#273f73"
+    }
+  },
+  "potentialarea_wind_stp_2027_search_area_open_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#6A89CC"
+    }
+  },
+  "potentialarea_wind_stp_2027_search_area_forest_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#273f73"
+    }
+  },
+  "air_traffic": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#969696"
+    }
+  },
+  "aviation": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#CCCCCC"
+    }
+  },
+  "biosphere_reserve": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#238443"
+    }
+  },
+  "drinking_water_protection_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#6BAED6"
+    }
+  },
+  "fauna_flora_habitat": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#78C679"
+    }
+  },
+  "floodplain": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#08306B"
+    }
+  },
+  "forest": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#004529"
+    }
+  },
+  "grid": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#252525"
+    }
+  },
+  "industry": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#BCBDDC"
+    }
+  },
+  "landscape_protection_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#006837"
+    }
+  },
+  "less_favoured_areas_agricultural": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#66c2a4"
+    }
+  },
+  "military": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#636363"
+    }
+  },
+  "nature_conservation_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#ADDD8E"
+    }
+  },
+  "railway": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#54278F"
+    }
+  },
+  "road_default": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#756BB1"
+    }
+  },
+  "road_railway-500m_region": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#9E9AC8"
+    }
+  },
+  "settlement-0m": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#DADAEB"
+    }
+  },
+  "soil_quality_low": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#A63603"
+    }
+  },
+  "soil_quality_high": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#FD8D3C"
+    }
+  },
+  "special_protection_area": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#41AB5D"
+    }
+  },
+  "water": {
+    "type": "fill",
+    "paint": {
+      "fill-color": "#2171B5"
     }
   }
 }
