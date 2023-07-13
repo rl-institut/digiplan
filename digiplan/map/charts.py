@@ -4,6 +4,7 @@ import json
 import pathlib
 from typing import Any, Optional
 
+import pandas as pd
 from django.utils.translation import gettext_lazy as _
 
 from digiplan.map import calculations, config, models
@@ -366,7 +367,9 @@ class PopulationDensityRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.calculate_square_for_value(models.Population.quantity_per_municipality_per_year()).sum()
+        return calculations.calculate_square_for_value(
+            pd.DataFrame(models.Population.quantity_per_municipality_per_year().sum()).transpose(),
+        ).sum()
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -435,7 +438,9 @@ class CapacitySquareRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.calculate_square_for_value(calculations.capacities_per_municipality()).sum()
+        return calculations.calculate_square_for_value(
+            pd.DataFrame(calculations.capacities_per_municipality().sum()).transpose(),
+        ).sum()
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -506,7 +511,12 @@ class EnergyCapitaRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.calculate_capita_for_value(calculations.energy_shares_per_municipality()).sum() * 1e3
+        return (
+            calculations.calculate_capita_for_value(
+                pd.DataFrame(calculations.energies_per_municipality().sum()).transpose(),
+            ).sum()
+            * 1e3
+        )
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -523,7 +533,12 @@ class EnergySquareRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.calculate_square_for_value(calculations.energy_shares_per_municipality()).sum() * 1e3
+        return (
+            calculations.calculate_square_for_value(
+                pd.DataFrame(calculations.energies_per_municipality().sum()).transpose(),
+            ).sum()
+            * 1e3
+        )
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -556,7 +571,13 @@ class WindTurbinesSquareRegionChart(Chart):
 
     def get_chart_data(self) -> list[float]:
         """Calculate population for whole region."""
-        return [float(calculations.calculate_square_for_value(models.WindTurbine.quantity_per_municipality()).sum())]
+        return [
+            float(
+                calculations.calculate_square_for_value(
+                    pd.DataFrame({"turbines": models.WindTurbine.quantity_per_municipality().sum()}, index=[1]),
+                ).sum(),
+            ),
+        ]
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -588,9 +609,14 @@ class ElectricityDemandCapitaRegionChart(Chart):
 
     lookup = "electricity_demand"
 
-    def get_chart_data(self) -> None:
+    def get_chart_data(self) -> pd.DataFrame:
         """Calculate capacities for whole region."""
-        return calculations.calculate_capita_for_value(calculations.electricity_demand_per_municipality()).sum()
+        return (
+            calculations.calculate_capita_for_value(
+                pd.DataFrame(calculations.electricity_demand_per_municipality().sum()).transpose(),
+            ).sum()
+            * 1e6
+        )
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -624,7 +650,12 @@ class HeatDemandCapitaRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.calculate_capita_for_value(calculations.heat_demand_per_municipality()).sum()
+        return (
+            calculations.calculate_capita_for_value(
+                pd.DataFrame(calculations.heat_demand_per_municipality().sum()).transpose(),
+            ).sum()
+            * 1e6
+        )
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""

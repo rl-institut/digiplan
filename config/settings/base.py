@@ -367,7 +367,7 @@ MAP_ENGINE_CHOROPLETHS = [
     ),
     setup.Choropleth("wind_turbines_statusquo", layers=["municipality"], title=_("Anzahl Windturbinen"), unit=_("")),
     setup.Choropleth(
-        "wind_turbines_square",
+        "wind_turbines_square_statusquo",
         layers=["municipality"],
         title=_("Anzahl Windturbinen pro qm"),
         unit=_(""),
@@ -418,25 +418,25 @@ MAP_ENGINE_CHOROPLETHS = [
         "electricity_demand_statusquo",
         layers=["municipality"],
         title=_("Strombedarf"),
-        unit=_("MWh"),
+        unit=_("GWh"),
     ),
     setup.Choropleth(
         "electricity_demand_capita_statusquo",
         layers=["municipality"],
         title=_("Strombedarf pro EinwohnerIn"),
-        unit=_("MWh"),
+        unit=_("kWh"),
     ),
     setup.Choropleth(
         "heat_demand_statusquo",
         layers=["municipality"],
         title=_("Wärmebedarf"),
-        unit=_("MWh"),
+        unit=_("GWh"),
     ),
     setup.Choropleth(
         "heat_demand_capita_statusquo",
         layers=["municipality"],
         title=_("Wärmebedarf pro EinwohnerIn"),
-        unit=_("MWh"),
+        unit=_("kWh"),
     ),
     setup.Choropleth(
         "batteries_statusquo",

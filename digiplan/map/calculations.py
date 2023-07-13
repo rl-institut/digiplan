@@ -30,7 +30,7 @@ def calculate_square_for_value(df: pd.DataFrame) -> pd.DataFrame:
     areas = (
         pd.DataFrame.from_records(models.Municipality.objects.all().values("id", "area")).set_index("id").sort_index()
     )
-    result = df.sort_index() / areas.to_numpy()
+    result = df / areas.sum().sum() if len(df) == 1 else df.sort_index() / areas.to_numpy()
     if is_series:
         return result.iloc[:, 0]
     return result
@@ -49,7 +49,7 @@ def value_per_municipality(series: pd.Series) -> pd.DataFrame:
 
 def calculate_capita_for_value(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Calculate values related to municipality population.
+    Calculate values related to population. If only one region is given, whole region is assumed.
 
     Parameters
     ----------
@@ -71,7 +71,7 @@ def calculate_capita_for_value(df: pd.DataFrame) -> pd.DataFrame:
         .set_index("id")
         .sort_index()
     )
-    result = df.sort_index() / population.to_numpy()
+    result = df / population.sum().sum() if len(df) == 1 else df.sort_index() / population.to_numpy()
     if is_series:
         return result.iloc[:, 0]
     return result
@@ -179,7 +179,7 @@ def energy_shares_per_municipality() -> pd.DataFrame:
 
 def electricity_demand_per_municipality() -> pd.DataFrame:
     """
-    Calculate electricity demand per sector per municipality.
+    Calculate electricity demand per sector per municipality in GWh.
 
     Returns
     -------
@@ -193,12 +193,12 @@ def electricity_demand_per_municipality() -> pd.DataFrame:
         _("Electricity CTS Demand"),
         _("Electricity Industry Demand"),
     ]
-    return demands_per_sector
+    return demands_per_sector * 1e-3
 
 
 def heat_demand_per_municipality() -> pd.DataFrame:
     """
-    Calculate heat demand per sector per municipality.
+    Calculate heat demand per sector per municipality in GWh.
 
     Returns
     -------
@@ -215,7 +215,7 @@ def heat_demand_per_municipality() -> pd.DataFrame:
         _("Electricity CTS Demand"),
         _("Electricity Industry Demand"),
     ]
-    return demands_per_sector
+    return demands_per_sector * 1e-3
 
 
 def detailed_overview(simulation_id: int) -> pd.DataFrame:  # noqa: ARG001
