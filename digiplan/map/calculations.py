@@ -159,8 +159,8 @@ def energies_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
 
     parameters = Simulation.objects.get(pk=simulation_id).parameters
     renewables = renewables * calculate_potential_shares(parameters)
-    renewables["bioenergy"] = 0
-    renewables["st"] = 0
+    renewables["bioenergy"] = 0.0
+    renewables["st"] = 0.0
     return renewables
 
 
