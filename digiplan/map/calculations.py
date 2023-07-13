@@ -1,8 +1,10 @@
 """Module for calculations used for choropleths or charts."""
 
 import pandas as pd
+from django.conf import settings
 from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
+from django_oemof.models import Simulation
 from django_oemof.results import get_results
 from oemof.tabular.postprocessing import calculations, core
 
@@ -152,12 +154,14 @@ def energies_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     renewables = results["electricity_production"][
         results["electricity_production"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
     ]
-    renewables.index = ["ror", "pv_ground", "pv_roof", "wind"]
+    renewables.index = ["hydro", "pv_ground", "pv_roof", "wind"]
+    renewables = renewables.reindex(["wind", "pv_roof", "pv_ground", "hydro"])
+
+    parameters = Simulation.objects.get(pk=simulation_id).parameters
+    renewables = renewables * calculate_potential_shares(parameters)
     renewables["bioenergy"] = 0
     renewables["st"] = 0
-    renewables = renewables.reindex(["wind", "pv_roof", "pv_ground", "ror", "bioenergy", "st"])
-    renewables = renewables
-    return value_per_municipality(renewables)
+    return renewables
 
 
 def energy_shares_per_municipality() -> pd.DataFrame:
@@ -352,6 +356,91 @@ def electricity_heat_demand(simulation_id: int) -> pd.Series:
 
     electricity_for_heat_sum = electricity_for_heat_central + electricity_for_heat_decentral
     return electricity_for_heat_sum
+
+
+def calculate_potential_shares(parameters: dict) -> pd.DataFrame:
+    """Calculate potential shares depending on user settings."""
+    # DISAGGREGATION
+    # Wind
+    wind_areas = pd.read_csv(
+        settings.DIGIPIPE_DIR.path("scalars").path("potentialarea_wind_area_stats_muns.csv"),
+        index_col=0,
+    )
+    if parameters["s_w_3"]:
+        wind_area_per_mun = wind_areas["stp_2018_vreg"]
+    elif parameters["s_w_4_1"]:
+        wind_area_per_mun = wind_areas["stp_2027_vr"]
+    elif parameters["s_w_4_2"]:
+        wind_area_per_mun = wind_areas["stp_2027_repowering"]
+    elif parameters["s_w_5"]:
+        wind_area_per_mun = (
+            wind_areas["stp_2027_search_area_open_area"] * parameters["s_w_5_1"] / 100
+            + wind_areas["stp_2027_search_area_forest_area"] * parameters["s_w_5_2"] / 100
+        )
+    else:
+        msg = "No wind switch set"
+        raise KeyError(msg)
+    wind_share_per_mun = wind_area_per_mun / wind_area_per_mun.sum()
+
+    # PV ground
+    pv_ground_areas = pd.read_csv(
+        settings.DIGIPIPE_DIR.path("scalars").path("potentialarea_pv_ground_area_stats_muns.csv", index_col=0),
+    )
+    pv_ground_area_per_mun = (
+        pv_ground_areas["agriculture_lfa-off_region"] * parameters["s_pv_ff_3"] / 100
+        + pv_ground_areas["road_railway_region"] * parameters["s_pv_ff_4"] / 100
+    )
+    pv_ground_share_per_mun = pv_ground_area_per_mun / pv_ground_area_per_mun.sum()
+
+    # PV roof
+    pv_roof_areas = pd.read_csv(
+        settings.DIGIPIPE_DIR.path("scalars").path("potentialarea_pv_roof_area_stats_muns.csv"),
+        index_col=0,
+    )
+    pv_roof_area_per_mun = pv_roof_areas["installable_power_total"]
+    pv_roof_share_per_mun = pv_roof_area_per_mun / pv_roof_area_per_mun.sum()
+
+    # Hydro
+    hydro_areas = pd.read_csv(
+        settings.DIGIPIPE_DIR.path("scalars").path("bnetza_mastr_hydro_stats_muns.csv"),
+        index_col=0,
+    )
+    hydro_area_per_mun = hydro_areas["capacity_net"]
+    hydro_share_per_mun = hydro_area_per_mun / hydro_area_per_mun.sum()
+
+    shares = pd.concat(
+        [wind_share_per_mun, pv_roof_share_per_mun, pv_ground_share_per_mun, hydro_share_per_mun],
+        axis=1,
+    )
+    shares.columns = ["wind", "pv_roof", "pv_ground", "hydro"]
+    return shares
+
+
+def capacities_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+    """
+    Return capacities per municipality.
+
+    Parameters
+    ----------
+    simulation_id: int
+        Simulation ID to get results from
+
+    Returns
+    -------
+    pd.DataFrame
+        containing renewable capacities disaggregated per municipality
+    """
+    results = get_results(simulation_id, {"electricity_production": electricity_production})
+    renewables = results["electricity_production"][
+        results["electricity_production"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
+    ]
+    renewables.index = renewables.index.get_level_values(0)
+
+    parameters = Simulation.objects.get(pk=simulation_id).parameters
+    potential_shares = calculate_potential_shares(parameters)
+    renewable_shares = potential_shares * renewables.values
+    renewable_shares.columns = renewables.index
+    return renewable_shares.fillna(0.0)
 
 
 def electricity_overview(simulation_id: int) -> pd.Series:

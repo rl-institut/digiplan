@@ -34,7 +34,7 @@ class SimulationTest(SimpleTestCase):
         "w_z_wp_3": 100,
         "w_d_s_1": 50,
         "w_z_s_1": 53,
-        "w_d_wp_1": None,
+        "w_d_wp_1": True,
         "w_z_wp_1": None,
         "w_d_s_3": None,
         "w_z_s_3": None,
@@ -95,6 +95,20 @@ class HeatDemandPerMunicipalityTest(SimpleTestCase):
         results = calculations.heat_demand_per_municipality()
         assert len(results) == 20
         assert len(results.columns) == 3
+
+
+class PotentialShareTest(SimpleTestCase):
+    """Test disaggregation of renewable potentials."""
+
+    def test_potential_share(self):
+        """Test renewable capacities."""
+        parameters = {
+            "s_w_3": True,
+            "s_pv_ff_3": 50,
+            "s_pv_ff_4": 50,
+        }
+        calculations.calculate_potential_shares(parameters)
+        # assert results.sum() almost [1,1,1,1]
 
 
 class ElectricityProductionTest(SimulationTest):
