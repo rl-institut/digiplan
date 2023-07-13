@@ -3,12 +3,17 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: config/settings/base.py:359 config/settings/base.py:360
+#: config/settings/base.py:368 config/settings/base.py:373
+#: digiplan/map/charts.py:376 digiplan/map/charts.py:394
+#: digiplan/map/charts.py:529 digiplan/map/popups.py:307
+#: digiplan/map/popups.py:329
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-18 17:49+0000\n"
+"POT-Creation-Date: 2023-07-11 12:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
