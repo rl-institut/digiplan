@@ -1,6 +1,29 @@
 {
+  "brush": {
+    "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],
+    "xAxisIndex": 0
+  },
+  "toolbox": {
+    "feature": {
+      "magicType": {
+        "type": ["stack"]
+      },
+      "dataView": {}
+    }
+  },
+  "tooltip": {},
   "grid": {
-    "bottom": "40%"
+    "top": "10%",
+    "left": "3%",
+    "right": "15%",
+    "bottom": "20%",
+    "containLabel": true
+  },
+  "yAxis": {
+    "data": ["Ziel 2045", "Mein Szenario", "Status Quo"],
+    "axisLine": { "onZero": true },
+    "splitLine": { "show": false },
+    "splitArea": { "show": false }
   },
   "xAxis": {
     "type": "value",
@@ -14,170 +37,126 @@
     "fontWeight": "300",
     "fontSize": "14"
   },
-  "yAxis": {
-    "type": "category",
-    "data": ["Bedarf", "Ziel", "Mein Szeanrio", "Status Quo"],
-    "axisTick": {
-      "show": false
-    }
-  },
   "series": [
     {
-      "name": "Wind turbine",
+      "name": "Windenergie",
+      "type": "bar",
+      "stack": "production",
+      "color": "#6A89CC",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [302, 234, 230]
+    },
+    {
+      "name": "Freiflächen-PV",
+      "type": "bar",
+      "stack": "production",
+      "color": "#EFAD25",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [282, 234, 100]
+    },
+    {
+      "name": "Aufdach-PV",
+      "type": "bar",
+      "stack": "production",
+      "color": "#FFD660",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [312, 254, 100]
+    },
+    {
+      "name": "Bioenergie",
+      "type": "bar",
+      "stack": "production",
+      "color": "#52C41A",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [136, 134, 130]
+    },
+    {
+      "name": "Wasserkraft",
       "type": "bar",
       "barWidth": "16",
-      "stack": "total",
-      "color": "#6A89CC",
-      "label": {
-        "show": false
-      },
-      "emphasis": {
-        "focus": "series"
-      },
-      "data": [0, 502, 400, 334]
-    },
-    {
-      "name": "Outdoor PV",
-      "type": "bar",
-      "stack": "total",
-      "color": "#EFAD25",
-      "label": {
-        "show": false
-      },
-      "emphasis": {
-        "focus": "series"
-      },
-      "data": [0, 382, 300, 234]
-    },
-    {
-      "name": "Roof-mounted PV",
-      "type": "bar",
-      "stack": "total",
-      "color": "#FFD660",
-      "label": {
-        "show": false
-      },
-      "emphasis": {
-        "focus": "series"
-      },
-      "data": [0, 312, 280, 254]
-    },
-    {
-      "name": "Biomass",
-      "type": "bar",
-      "stack": "total",
-      "color": "#52C41A",
-      "label": {
-        "show": false
-      },
-      "emphasis": {
-        "focus": "series"
-      },
-      "data": [0, 136, 135, 134]
-    },
-    {
-      "name": "Hydro",
-      "type": "bar",
-      "stack": "total",
+      "stack": "production",
       "color": "#A9BDE8",
-      "label": {
-        "show": false
-      },
       "emphasis": {
-        "focus": "series"
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
-      "data": [0, 132, 200, 534]
+      "data": [132, 334, 700]
     },
     {
-      "name": "Electricity CTS Demand",
+      "name": "Stromverbrauch GHD",
       "type": "bar",
-      "stack": "total",
+      "barWidth": "16",
+      "stack": "demand",
       "color": "#D3D3D3",
-      "label": {
-        "show": false
-      },
       "emphasis": {
-        "focus": "series"
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
-      "data": [400, 0, 0, 0]
+      "data": [300, 344, 380]
     },
     {
-      "name": "Electricity CTS Heat Demand",
+      "name": "Stromverbrauch Haushalte",
       "type": "bar",
-      "stack": "total",
-      "color": "#B3B3B3",
-      "label": {
-        "show": false
-      },
-      "emphasis": {
-        "focus": "series"
-      },
-      "data": [400, 0, 0, 0]
-    },
-    {
-      "name": "Electricity Household Demand",
-      "type": "bar",
-      "stack": "total",
+      "stack": "demand",
       "color": "#969696",
-      "label": {
-        "show": false
-      },
       "emphasis": {
-        "focus": "series"
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
-      "data": [360, 0, 0, 0]
+      "data": [254, 244, 380]
     },
     {
-      "name": "Electricity Household Heat Demand",
+      "name": "Stromverbrauch Industrie",
       "type": "bar",
-      "stack": "total",
-      "color": "#7C7C7C",
-      "label": {
-        "show": false
-      },
-      "emphasis": {
-        "focus": "series"
-      },
-      "data": [360, 0, 0, 0]
-    },
-    {
-      "name": "Electricity Industry Demand",
-      "type": "bar",
-      "stack": "total",
+      "barWidth": "35",
+      "stack": "demand",
       "color": "#616161",
-      "label": {
-        "show": false
-      },
       "emphasis": {
-        "focus": "series"
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
-      "data": [300, 0, 0, 0]
-    },
-    {
-      "name": "Electricity Industry Heat Demand",
-      "type": "bar",
-      "stack": "total",
-      "color": "#4F4F4F",
-      "label": {
-        "show": false
-      },
-      "emphasis": {
-        "focus": "series"
-      },
-      "data": [300, 0, 0, 0]
+      "data": [280, 300, 350]
     },
     {
       "name": "BEV",
       "type": "bar",
-      "stack": "total",
+      "stack": "demand",
       "color": "#2F2F2F",
-      "label": {
-        "show": false
-      },
       "emphasis": {
-        "focus": "series"
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
-      "data": [350, 0, 0, 0]
+      "data": [145, 144, 180]
     }
   ]
 }
