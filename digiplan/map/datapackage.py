@@ -150,3 +150,10 @@ def get_full_load_hours(year: int) -> pd.Series:
         index=config.TECHNOLOGY_DATA["full_load_hours"].keys(),
     )
     return full_load_hours
+
+
+def get_profile(technology: str) -> pd.Series:
+    """Return profile for given technology from oemof datapackage."""
+    profile_filename = OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "sequences" / f"{technology}_profile.csv"
+    profile = pd.read_csv(profile_filename, sep=";", index_col=0)
+    return profile.iloc[:, 0]
