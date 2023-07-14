@@ -122,11 +122,18 @@ class ElectricityProductionTest(SimulationTest):
         assert list(results.values())[0].iloc[0] > 0
 
 
-class ElectricityProductionFutureTest(SimulationTest):
+class Energies2045Test(SimulationTest):
     """Test electricity production calculation."""
 
     def test_electricity_production(self):  # noqa: D102
         calculations.energies_per_municipality_2045(self.simulation_id)
+
+
+class Capacities2045Test(SimulationTest):
+    """Test electricity production calculation."""
+
+    def test_electricity_production(self):  # noqa: D102
+        calculations.capacities_per_municipality_2045(self.simulation_id)
 
 
 class HeatProductionTest(SimulationTest):
@@ -213,3 +220,12 @@ class HeatOverviewChartTest(SimulationTest):
         chart = charts.HeatOverviewChart(self.simulation_id)
         options = chart.render()
         assert options["series"][0]["data"][1] == 3512007725.957367
+
+
+class CapacityTest(SimulationTest):
+    """Test reading capacities from oemof parameters."""
+
+    def test_oemof_capacities(self):
+        """Test capacity reading from oemof results."""
+        results = oemof_results.get_results(self.simulation_id, {"capacities": calculations.Capacities})
+        assert results["capacities"].loc["ABW-wind-onshore", "None"] == 1000.0

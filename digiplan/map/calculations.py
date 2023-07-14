@@ -6,7 +6,7 @@ from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 from django_oemof.models import Simulation
 from django_oemof.results import get_results
-from oemof.tabular.postprocessing import calculations, core
+from oemof.tabular.postprocessing import calculations, core, helper
 
 from digiplan.map import config, datapackage, models
 
@@ -123,6 +123,27 @@ def capacities_per_municipality() -> pd.DataFrame:
         res_capacity.columns = [technology._meta.verbose_name]  # noqa: SLF001
         capacities.append(res_capacity)
     return pd.concat(capacities, axis=1).fillna(0.0) * 1e-3
+
+
+def capacities_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+    """Calculate capacities from 2045 scenario per municipality."""
+    results = get_results(
+        simulation_id,
+        {
+            "capacities": Capacities,
+        },
+    )
+    renewables = results["capacities"][
+        results["capacities"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
+    ]
+    renewables.index = ["hydro", "pv_ground", "pv_roof", "wind"]
+    renewables = renewables.reindex(["wind", "pv_roof", "pv_ground", "hydro"])
+
+    parameters = Simulation.objects.get(pk=simulation_id).parameters
+    renewables = renewables * calculate_potential_shares(parameters)
+    renewables["bioenergy"] = 0.0
+    renewables["st"] = 0.0
+    return renewables
 
 
 def energies_per_municipality() -> pd.DataFrame:
@@ -413,33 +434,6 @@ def calculate_potential_shares(parameters: dict) -> pd.DataFrame:
     return shares
 
 
-def capacities_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
-    """
-    Return capacities per municipality.
-
-    Parameters
-    ----------
-    simulation_id: int
-        Simulation ID to get results from
-
-    Returns
-    -------
-    pd.DataFrame
-        containing renewable capacities disaggregated per municipality
-    """
-    results = get_results(simulation_id, {"electricity_production": electricity_production})
-    renewables = results["electricity_production"][
-        results["electricity_production"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
-    ]
-    renewables.index = renewables.index.get_level_values(0)
-
-    parameters = Simulation.objects.get(pk=simulation_id).parameters
-    potential_shares = calculate_potential_shares(parameters)
-    renewable_shares = potential_shares * renewables.values
-    renewable_shares.columns = renewables.index
-    return renewable_shares.fillna(0.0)
-
-
 def electricity_overview(simulation_id: int) -> pd.Series:
     """
     Return data for electricity overview chart.
@@ -555,3 +549,17 @@ methane_production = core.ParametrizedCalculation(
         ],
     },
 )
+
+
+class Capacities(core.Calculation):
+    """Oemof postprocessing calculation to read capacities."""
+
+    name = "capacities"
+
+    def calculate_result(self) -> pd.Series:
+        """Read attribute "capacity" from parameters."""
+        capacities = helper.filter_by_var_name(self.scalar_params, "capacity")
+        try:
+            return capacities.unstack(2)["capacity"]  # noqa: PD010
+        except KeyError:
+            return pd.Series(dtype="object")
