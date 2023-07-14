@@ -132,7 +132,7 @@ class Energies2045Test(SimulationTest):
 class Capacities2045Test(SimulationTest):
     """Test electricity production calculation."""
 
-    def test_electricity_production(self):  # noqa: D102
+    def test_capacities_2045(self):  # noqa: D102
         calculations.capacities_per_municipality_2045(self.simulation_id)
 
 
