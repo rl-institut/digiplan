@@ -229,12 +229,23 @@ def adapt_renewable_capacities(scenario: str, data: dict, request: HttpRequest) 
     dict
         Adapted parameters dict with set up capacities
     """
-    # ELECTRICITY
+    # Capacities
     data["ABW-wind-onshore"] = {"capacity": data.pop("s_w_1")}
     data["ABW-solar-pv_ground"] = {"capacity": data.pop("s_pv_ff_1")}
     data["ABW-solar-pv_rooftop"] = {"capacity": data.pop("s_pv_d_1")}
     data["ABW-hydro-ror"] = {"capacity": data.pop("s_h_1")}
     data["ABW-electricity-large_scale_battery"] = {"capacity": data.pop("s_s_g_1")}
+
+    # Full load hours
+    technology_mapping = {
+        "ABW-wind-onshore": "wind",
+        "ABW-solar-pv_ground": "pv_ground",
+        "ABW-solar-pv_rooftop": "pv_roof",
+        "ABW-hydro-ror": "ror",
+    }
+    full_load_hours = datapackage.get_full_load_hours(2045)
+    for technology, mapped_key in technology_mapping.items():
+        data[technology]["profile"] = datapackage.get_profile(technology[4:]) * full_load_hours[mapped_key]
 
     # Remove unnecessary renewable sliders:
     del data["s_w_3"]
