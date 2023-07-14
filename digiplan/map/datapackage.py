@@ -9,6 +9,7 @@ from django.conf import settings
 from django_oemof.settings import OEMOF_DIR
 
 from config.settings.base import DATA_DIR
+from digiplan.map import config
 
 
 def get_employment() -> pd.DataFrame:
@@ -140,3 +141,12 @@ def get_potential_values(*, per_municipality: bool = False) -> dict:
                 if profile == "pv_ground":
                     potentials[key] = potentials[key] * tech_data["power_density"]["pv_ground"]
     return potentials
+
+
+def get_full_load_hours(year: int) -> pd.Series:
+    """Return full load hours for given year."""
+    full_load_hours = pd.Series(
+        data=[technology_data[str(year)] for technology_data in config.TECHNOLOGY_DATA["full_load_hours"].values()],
+        index=config.TECHNOLOGY_DATA["full_load_hours"].keys(),
+    )
+    return full_load_hours
