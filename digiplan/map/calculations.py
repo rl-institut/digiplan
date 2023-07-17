@@ -10,6 +10,10 @@ from oemof.tabular.postprocessing import calculations, core, helper
 
 from digiplan.map import config, datapackage, models
 
+# TODO (Hendrik): Read wind turbine capacity from datapackage
+# https://github.com/rl-institut-private/digiplan/issues/314
+DEFAULT_WIND_TURBINE_CAPACITY = 1.5  # MW
+
 
 def calculate_square_for_value(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -324,6 +328,12 @@ def electricity_from_from_biomass(simulation_id: int) -> pd.Series:
     )
     biomass = pd.concat([biomass, electricity_from_methane])
     return biomass.sum()
+
+
+def wind_turbines_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+    """Calculate number of wind turbines from 2045 scenario per municipality."""
+    capacities = capacities_per_municipality_2045(simulation_id)
+    return capacities["wind"] / DEFAULT_WIND_TURBINE_CAPACITY
 
 
 def electricity_heat_demand(simulation_id: int) -> pd.Series:

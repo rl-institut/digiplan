@@ -136,6 +136,14 @@ class Capacities2045Test(SimulationTest):
         calculations.capacities_per_municipality_2045(self.simulation_id)
 
 
+class WindTurbines2045Test(SimulationTest):
+    """Test wind turbine calculation."""
+
+    def test_wind_turbines_2045(self):  # noqa: D102
+        result = calculations.wind_turbines_per_municipality_2045(self.simulation_id)
+        assert len(result) == 20
+
+
 class HeatProductionTest(SimulationTest):
     """Test heat production calculation."""
 

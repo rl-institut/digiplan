@@ -667,6 +667,25 @@ class WindTurbinesRegionChart(Chart):
         return chart_options
 
 
+class WindTurbines2045RegionChart(SimulationChart):
+    """Chart for regional wind turbines in 2045."""
+
+    lookup = "wind_turbines"
+
+    def get_chart_data(self) -> list[int]:
+        """Calculate population for whole region."""
+        status_quo_data = models.WindTurbine.quantity_per_municipality().sum()
+        future_data = calculations.wind_turbines_per_municipality_2045(self.simulation_id).sum()
+        return [int(status_quo_data), int(future_data)]
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        del chart_options["title"]["text"]
+        return chart_options
+
+
 class WindTurbinesSquareRegionChart(Chart):
     """Chart for regional wind turbines per square meter."""
 
@@ -687,6 +706,33 @@ class WindTurbinesSquareRegionChart(Chart):
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = "#"
+        return chart_options
+
+
+class WindTurbinesSquare2045RegionChart(SimulationChart):
+    """Chart for regional wind turbines per square meter in 2045."""
+
+    lookup = "wind_turbines"
+
+    def get_chart_data(self) -> list[float]:
+        """Calculate population for whole region."""
+        status_quo_data = calculations.calculate_square_for_value(
+            pd.DataFrame({"turbines": models.WindTurbine.quantity_per_municipality().sum()}, index=[1]),
+        ).sum()
+        future_data = calculations.calculate_square_for_value(
+            pd.DataFrame(
+                {"turbines": calculations.wind_turbines_per_municipality_2045(self.simulation_id).sum()},
+                index=[1],
+            ),
+        ).sum()
+        return [float(status_quo_data), float(future_data)]
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = "#"
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
 
@@ -821,7 +867,9 @@ CHARTS: dict[str, type[Chart]] = {
     "energy_capita_statusquo_region": EnergyCapitaRegionChart,
     "energy_square_statusquo_region": EnergySquareRegionChart,
     "wind_turbines_statusquo_region": WindTurbinesRegionChart,
+    "wind_turbines_2045_region": WindTurbines2045RegionChart,
     "wind_turbines_square_statusquo_region": WindTurbinesSquareRegionChart,
+    "wind_turbines_square_2045_region": WindTurbinesSquare2045RegionChart,
     "electricity_demand_statusquo_region": ElectricityDemandRegionChart,
     "electricity_demand_capita_statusquo_region": ElectricityDemandCapitaRegionChart,
     "heat_demand_statusquo_region": HeatDemandRegionChart,

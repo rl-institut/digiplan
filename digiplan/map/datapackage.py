@@ -152,6 +152,13 @@ def get_full_load_hours(year: int) -> pd.Series:
     return full_load_hours
 
 
+def get_power_density(technology: Optional[str] = None) -> dict:
+    """Return power density for technology."""
+    if technology:
+        return config.TECHNOLOGY_DATA["power_density"][technology]
+    return config.TECHNOLOGY_DATA["power_density"]
+
+
 def get_profile(technology: str) -> pd.Series:
     """Return profile for given technology from oemof datapackage."""
     profile_filename = OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "sequences" / f"{technology}_profile.csv"

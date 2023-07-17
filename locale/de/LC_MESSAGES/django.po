@@ -923,7 +923,7 @@ msgstr "Installierte Leistung EE je km² (MW)"
 #: digiplan/templates/components/panel_3_results.html:58
 #: digiplan/templates/components/panel_3_results.html:59
 msgid "Number of Wind Turbines"
-msgstr "Anzahl Windenergieanlagen je km²"
+msgstr "Anzahl Windenergieanlagen"
 
 #: digiplan/templates/components/panel_1_today.html:76
 #: digiplan/templates/components/panel_1_today.html:77

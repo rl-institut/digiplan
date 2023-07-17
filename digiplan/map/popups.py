@@ -476,6 +476,41 @@ class NumberWindturbinesPopup(RegionPopup):
         return [int(self.detailed_data.loc[self.selected_id])]
 
 
+class NumberWindturbines2045Popup(RegionPopup):
+    """Popup to show the number of wind turbines in 2045."""
+
+    lookup = "wind_turbines"
+    title = _("Number of wind turbines")
+    description = _("Description for number of wind turbines")
+    unit = ""
+
+    def get_detailed_data(self) -> pd.DataFrame:
+        """Return quantity of wind turbines per municipality (index)."""
+        return calculations.wind_turbines_per_municipality_2045(self.map_state["simulation_id"])
+
+    def get_region_value(self) -> float:
+        """Return aggregated data of all municipalities and technologies."""
+        return self.detailed_data.sum()
+
+    def get_municipality_value(self) -> Optional[float]:
+        """Return aggregated data for all technologies for given municipality ID."""
+        if self.selected_id not in self.detailed_data.index:
+            return 0
+        return self.detailed_data.loc[self.selected_id]
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        return chart_options
+
+    def get_chart_data(self) -> Iterable:
+        """Create capacity chart data for SQ and future scenario."""
+        status_quo_data = models.WindTurbine.quantity_per_municipality().loc[self.selected_id]
+        future_data = super().get_chart_data()
+        return [int(status_quo_data), int(future_data)]
+
+
 class NumberWindturbinesSquarePopup(RegionPopup):
     """Popup to show the number of wind turbines per km²."""
 
@@ -496,6 +531,43 @@ class NumberWindturbinesSquarePopup(RegionPopup):
     def get_chart_data(self) -> Iterable:
         """Return single value for wind turbines in current municipality."""
         return [float(self.detailed_data.loc[self.selected_id])]
+
+
+class NumberWindturbinesSquare2045Popup(RegionPopup):
+    """Popup to show the number of wind turbines per km² in 2045."""
+
+    lookup = "wind_turbines"
+
+    def get_detailed_data(self) -> pd.DataFrame:
+        """Return quantity of wind turbines per municipality (index)."""
+        wind_turbines = calculations.wind_turbines_per_municipality_2045(self.map_state["simulation_id"])
+        return calculations.calculate_square_for_value(wind_turbines)
+
+    def get_region_value(self) -> float:
+        """Return aggregated data of all municipalities and technologies."""
+        return self.detailed_data.sum()
+
+    def get_municipality_value(self) -> Optional[float]:
+        """Return aggregated data for all technologies for given municipality ID."""
+        if self.selected_id not in self.detailed_data.index:
+            return 0
+        return self.detailed_data.loc[self.selected_id]
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit in chart options."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Wind turbines per square meter")
+        chart_options["yAxis"]["name"] = _("WT/km²")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        return chart_options
+
+    def get_chart_data(self) -> Iterable:
+        """Return single value for wind turbines in current municipality."""
+        status_quo_data = calculations.calculate_square_for_value(models.WindTurbine.quantity_per_municipality()).loc[
+            self.selected_id
+        ]
+        future_data = super().get_chart_data()
+        return [float(status_quo_data), float(future_data)]
 
 
 class ElectricityDemandPopup(RegionPopup):
@@ -635,7 +707,9 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "capacity_2045": Capacity2045Popup,
     "capacity_square_2045": CapacitySquare2045Popup,
     "wind_turbines_statusquo": NumberWindturbinesPopup,
+    "wind_turbines_2045": NumberWindturbines2045Popup,
     "wind_turbines_square_statusquo": NumberWindturbinesSquarePopup,
+    "wind_turbines_square_2045": NumberWindturbinesSquare2045Popup,
     "electricity_demand_statusquo": ElectricityDemandPopup,
     "electricity_demand_capita_statusquo": ElectricityDemandCapitaPopup,
     "heat_demand_statusquo": HeatDemandPopup,
