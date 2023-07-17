@@ -173,6 +173,27 @@ class CapacityPopup(RegionPopup):
         return calculations.capacities_per_municipality()
 
 
+class Capacity2045Popup(RegionPopup):
+    """Popup to show capacities in 2045."""
+
+    lookup = "capacity"
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.capacities_per_municipality_2045(self.map_state["simulation_id"])
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        return chart_options
+
+    def get_chart_data(self) -> Iterable:
+        """Create capacity chart data for SQ and future scenario."""
+        status_quo_data = calculations.capacities_per_municipality().loc[self.selected_id]
+        future_data = super().get_chart_data()
+        return list(zip(status_quo_data, future_data))
+
+
 class CapacitySquarePopup(RegionPopup):
     """Popup to show capacities per km²."""
 
@@ -189,6 +210,33 @@ class CapacitySquarePopup(RegionPopup):
         chart_options["title"]["text"] = _("Installed capacities per square meter")
         chart_options["yAxis"]["name"] = _("MW/km²")
         return chart_options
+
+
+class CapacitySquare2045Popup(RegionPopup):
+    """Popup to show capacities per km² in 2045."""
+
+    lookup = "capacity"
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.calculate_square_for_value(
+            calculations.capacities_per_municipality_2045(self.map_state["simulation_id"]),
+        )
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Installed capacities per square meter")
+        chart_options["yAxis"]["name"] = _("MW/km²")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        return chart_options
+
+    def get_chart_data(self) -> Iterable:
+        """Create capacity chart data for SQ and future scenario."""
+        status_quo_data = calculations.calculate_square_for_value(calculations.capacities_per_municipality()).loc[
+            self.selected_id
+        ]
+        future_data = super().get_chart_data()
+        return list(zip(status_quo_data, future_data))
 
 
 class EnergyPopup(RegionPopup):
@@ -584,6 +632,8 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "energy_square_2045": EnergySquare2045Popup,
     "capacity_statusquo": CapacityPopup,
     "capacity_square_statusquo": CapacitySquarePopup,
+    "capacity_2045": Capacity2045Popup,
+    "capacity_square_2045": CapacitySquare2045Popup,
     "wind_turbines_statusquo": NumberWindturbinesPopup,
     "wind_turbines_square_statusquo": NumberWindturbinesSquarePopup,
     "electricity_demand_statusquo": ElectricityDemandPopup,

@@ -404,66 +404,6 @@ class GhgReductionChart(Chart):
         return self.chart_options
 
 
-class GhgHistoryChart(Chart):
-    """GHG history chart."""
-
-    lookup = "ghg_history"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init GHG history chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        # TODO(Hendrik): Get static data from digipipe datapackage  # noqa: TD003
-        return pd.DataFrame()
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
-        return self.chart_options
-
-
-class GhgReductionChart(Chart):
-    """GHG reduction chart."""
-
-    lookup = "ghg_reduction"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init GHG reduction chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        # TODO(Hendrik): Get static data (1st column) from  # noqa: TD003
-        #  digipipe datapackage
-        #  and calc reductions for 2nd column.  TD003
-        return pd.DataFrame()
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
-        return self.chart_options
-
-
 class PopulationRegionChart(Chart):
     """Chart for regional population."""
 
@@ -551,6 +491,25 @@ class CapacityRegionChart(Chart):
         return chart_options
 
 
+class Capacity2045RegionChart(SimulationChart):
+    """Chart for regional capacities in 2045."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> list:
+        """Calculate capacities for whole region."""
+        status_quo_data = calculations.capacities_per_municipality().sum()
+        future_data = calculations.capacities_per_municipality_2045(self.simulation_id).sum()
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        del chart_options["title"]["text"]
+        return chart_options
+
+
 class CapacitySquareRegionChart(Chart):
     """Chart for regional capacities per square meter."""
 
@@ -567,6 +526,30 @@ class CapacitySquareRegionChart(Chart):
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("MW")
+        return chart_options
+
+
+class CapacitySquare2045RegionChart(SimulationChart):
+    """Chart for regional capacities in 2045."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> list:
+        """Calculate capacities for whole region."""
+        status_quo_data = calculations.calculate_square_for_value(
+            pd.DataFrame(calculations.capacities_per_municipality().sum()).transpose(),
+        ).sum()
+        future_data = calculations.calculate_square_for_value(
+            pd.DataFrame(calculations.capacities_per_municipality_2045(self.simulation_id).sum()).transpose(),
+        ).sum()
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["yAxis"]["name"] = _("MW")
+        del chart_options["title"]["text"]
         return chart_options
 
 
@@ -830,6 +813,8 @@ CHARTS: dict[str, type[Chart]] = {
     "companies_statusquo_region": CompaniesRegionChart,
     "capacity_statusquo_region": CapacityRegionChart,
     "capacity_square_statusquo_region": CapacitySquareRegionChart,
+    "capacity_2045_region": Capacity2045RegionChart,
+    "capacity_square_2045_region": CapacitySquare2045RegionChart,
     "energy_statusquo_region": EnergyRegionChart,
     "energy_2045_region": Energy2045RegionChart,
     "energy_share_statusquo_region": EnergyShareRegionChart,
