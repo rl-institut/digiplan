@@ -190,7 +190,7 @@
     "type": "slider"
   },
   "s_s_g_1": {
-    "class": "js-slider js-slider-panel js-power-mix",
+    "class": "js-slider js-slider-panel",
     "label": "{% trans 'Large scale batteries (MWh)' %}",
     "max": 20,
     "min": 0,
