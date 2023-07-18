@@ -73,7 +73,8 @@ def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) ->
 
 def adapt_heat_capacities(distribution: str, remaining_energy: pd.Series) -> dict:
     """Adapt heat settings for remaining energy."""
-    # TODO (Hendrik): Read values from datapackage  # noqa: TD003
+    # TODO (Hendrik): Read values from datapackage
+    # https://github.com/rl-institut-private/digiplan/issues/308
     heat_shares = {
         "central": {
             "ABW-wood-extchp_central": 0,
