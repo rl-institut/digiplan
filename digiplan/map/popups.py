@@ -587,6 +587,30 @@ class ElectricityDemandPopup(RegionPopup):
         return chart_options
 
 
+class ElectricityDemand2045Popup(RegionPopup):
+    """Popup to show electricity demand in 2045."""
+
+    lookup = "electricity_demand"
+    title = _("Strombedarf")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.electricity_demand_per_municipality_2045(self.map_state["simulation_id"])
+
+    def get_chart_data(self) -> Iterable:
+        """Create capacity chart data for SQ and future scenario."""
+        status_quo_data = calculations.electricity_demand_per_municipality().loc[self.selected_id]
+        future_data = super().get_chart_data()
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Strombedarf")
+        chart_options["yAxis"]["name"] = _("ǴWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        return chart_options
+
+
 class ElectricityDemandCapitaPopup(RegionPopup):
     """Popup to show electricity demand capita."""
 
@@ -601,6 +625,34 @@ class ElectricityDemandCapitaPopup(RegionPopup):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Strombedarf je EinwohnerIn")
         chart_options["yAxis"]["name"] = _("kWh")
+        return chart_options
+
+
+class ElectricityDemandCapita2045Popup(RegionPopup):
+    """Popup to show electricity demand capita in 2045."""
+
+    lookup = "electricity_demand"
+    title = _("Strombedarf je EinwohnerIn")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.calculate_capita_for_value(
+            calculations.electricity_demand_per_municipality_2045(self.map_state["simulation_id"]),
+        )
+
+    def get_chart_data(self) -> Iterable:
+        """Create capacity chart data for SQ and future scenario."""
+        status_quo_data = calculations.calculate_capita_for_value(
+            calculations.electricity_demand_per_municipality(),
+        ).loc[self.selected_id]
+        future_data = super().get_chart_data()
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Strombedarf je EinwohnerIn")
+        chart_options["yAxis"]["name"] = _("kWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
 
@@ -711,7 +763,9 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "wind_turbines_square_statusquo": NumberWindturbinesSquarePopup,
     "wind_turbines_square_2045": NumberWindturbinesSquare2045Popup,
     "electricity_demand_statusquo": ElectricityDemandPopup,
+    "electricity_demand_2045": ElectricityDemand2045Popup,
     "electricity_demand_capita_statusquo": ElectricityDemandCapitaPopup,
+    "electricity_demand_capita_2045": ElectricityDemandCapita2045Popup,
     "heat_demand_statusquo": HeatDemandPopup,
     "heat_demand_capita_statusquo": HeatDemandCapitaPopup,
     "batteries_statusquo": BatteriesPopup,

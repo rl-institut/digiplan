@@ -753,6 +753,26 @@ class ElectricityDemandRegionChart(Chart):
         return chart_options
 
 
+class ElectricityDemand2045RegionChart(SimulationChart):
+    """Chart for regional electricity demand."""
+
+    lookup = "electricity_demand"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        status_quo_data = calculations.electricity_demand_per_municipality().sum()
+        future_data = calculations.electricity_demand_per_municipality_2045(self.simulation_id).sum()
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = _("GWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        return chart_options
+
+
 class ElectricityDemandCapitaRegionChart(Chart):
     """Chart for regional electricity demand per population."""
 
@@ -772,6 +792,38 @@ class ElectricityDemandCapitaRegionChart(Chart):
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("kWh")
+        return chart_options
+
+
+class ElectricityDemandCapita2045RegionChart(SimulationChart):
+    """Chart for regional electricity demand per population in 2045."""
+
+    lookup = "electricity_demand"
+
+    def get_chart_data(self) -> pd.DataFrame:
+        """Calculate capacities for whole region."""
+        status_quo_data = (
+            calculations.calculate_capita_for_value(
+                pd.DataFrame(calculations.electricity_demand_per_municipality().sum()).transpose(),
+            ).sum()
+            * 1e6
+        )
+        future_data = (
+            calculations.calculate_capita_for_value(
+                pd.DataFrame(
+                    calculations.electricity_demand_per_municipality_2045(self.simulation_id).sum(),
+                ).transpose(),
+            ).sum()
+            * 1e6
+        )
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = _("kWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
 
@@ -871,7 +923,9 @@ CHARTS: dict[str, type[Chart]] = {
     "wind_turbines_square_statusquo_region": WindTurbinesSquareRegionChart,
     "wind_turbines_square_2045_region": WindTurbinesSquare2045RegionChart,
     "electricity_demand_statusquo_region": ElectricityDemandRegionChart,
+    "electricity_demand_2045_region": ElectricityDemand2045RegionChart,
     "electricity_demand_capita_statusquo_region": ElectricityDemandCapitaRegionChart,
+    "electricity_demand_capita_2045_region": ElectricityDemandCapita2045RegionChart,
     "heat_demand_statusquo_region": HeatDemandRegionChart,
     "heat_demand_capita_statusquo_region": HeatDemandCapitaRegionChart,
     "batteries_statusquo_region": BatteriesRegionChart,

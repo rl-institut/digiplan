@@ -7,6 +7,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ## [Unreleased]
 ### Added
 - adapt full load hours for renewables
+- demand results for 2045 scenario
 
 ## [0.5.0] - 2023-07-13
 ### Added

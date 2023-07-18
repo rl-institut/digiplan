@@ -219,7 +219,49 @@ def electricity_demand_per_municipality() -> pd.DataFrame:
         _("Electricity CTS Demand"),
         _("Electricity Industry Demand"),
     ]
+    # TODO (Hendrik): Integrate BEV
+    # https://github.com/rl-institut-private/digiplan/issues/315
+    demands_per_sector["BEV"] = 0
     return demands_per_sector * 1e-3
+
+
+def electricity_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+    """
+    Calculate electricity demand per sector per municipality in GWh in 2045.
+
+    Returns
+    -------
+    pd.DataFrame
+        Electricity demand per municipality (index) and sector (column)
+    """
+    results = get_results(
+        simulation_id,
+        {
+            "electricity_demand": electricity_demand,
+        },
+    )
+    demand = results["electricity_demand"][
+        results["electricity_demand"].index.get_level_values(1).isin(config.SIMULATION_DEMANDS)
+    ]
+    demand = demand.droplevel([0, 2])
+    demands_per_sector = datapackage.get_power_demand()
+    # TODO (Hendrik): Read BEV data from datapackage
+    # https://github.com/rl-institut-private/digiplan/issues/315
+    demands_per_sector["bev"] = pd.DataFrame({"2045": [1] * 20})
+    mappings = {
+        "bev": "ABW-electricity-bev_charging",
+        "hh": "ABW-electricity-demand_hh",
+        "cts": "ABW-electricity-demand_cts",
+        "ind": "ABW-electricity-demand_ind",
+    }
+    demand = demand.reindex(mappings.values())
+    sector_shares = pd.DataFrame(
+        {sector: demands_per_sector[sector]["2045"] / demands_per_sector[sector]["2045"].sum() for sector in mappings},
+    )
+    demand = sector_shares * demand.values
+    demand.columns = demand.columns.map(lambda column: config.SIMULATION_DEMANDS[mappings[column]])
+    demand = demand * 1e-3
+    return demand
 
 
 def heat_demand_per_municipality() -> pd.DataFrame:

@@ -8,13 +8,14 @@
       "data": [
         "Haushalte",
         "GHD",
-        "Industrie"
+        "Industrie",
+        "BEV"
       ],
       "orient": "vertical",
       "right": "1%",
       "bottom": "35%"
     },
-    "color": ["#6F9BB2", "#98C1D7", "#376984"],
+    "color": ["#6F9BB2", "#98C1D7", "#376984", "black"],
     "xAxis": {
       "type": "category",
       "boundaryGap": true,
@@ -46,6 +47,12 @@
           "stack": "five",
           "data": [10, 10],
           "name": "Industrie"
+        },
+        {
+          "type": "bar",
+          "stack": "five",
+          "data": [10, 10],
+          "name": "BEV"
         }
     ],
     "title": { "text": "Electricity Demand" }
