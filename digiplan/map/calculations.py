@@ -547,19 +547,31 @@ def electricity_overview(simulation_id: int) -> pd.Series:
     renewables.index = renewables.index.get_level_values(0)
     renewables = pd.concat([renewables, pd.Series(electricity_from_from_biomass(simulation_id), index=["ABW-biomass"])])
 
-    electricity_import = results["electricity_production"].loc[["ABW-electricity-import"]]
-    electricity_import.index = electricity_import.index.get_level_values(0)
-    electricity_export = results["electricity_demand"].loc[:, ["ABW-electricity-export"]]
-    electricity_export.index = electricity_export.index.get_level_values(1)
-
     demand = results["electricity_demand"][
         results["electricity_demand"].index.get_level_values(1).isin(config.SIMULATION_DEMANDS)
     ]
     demand.index = demand.index.get_level_values(1)
 
     electricity_heat_production_result = electricity_heat_demand(simulation_id)
-
-    return pd.concat([renewables, demand, electricity_heat_production_result])
+    demand["ABW-electricity-demand_hh"] += electricity_heat_production_result["electricity_heat_demand_hh"]
+    demand["ABW-electricity-demand_cts"] += electricity_heat_production_result["electricity_heat_demand_cts"]
+    demand["ABW-electricity-demand_ind"] += electricity_heat_production_result["electricity_heat_demand_ind"]
+    overview_data = pd.concat([renewables, demand])
+    overview_data = overview_data.reindex(
+        (
+            "ABW-wind-onshore",
+            "ABW-solar-pv_ground",
+            "ABW-solar-pv_rooftop",
+            "ABW-biomass",
+            "ABW-hydro-ror",
+            "ABW-electricity-demand_cts",
+            "ABW-electricity-demand_hh",
+            "ABW-electricity-demand_ind",
+            "ABW-electricity-bev_charging",
+        ),
+    )
+    overview_data = overview_data * 1e-3
+    return overview_data
 
 
 def heat_overview(simulation_id: int) -> pd.Series:
