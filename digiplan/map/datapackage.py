@@ -1,4 +1,5 @@
 """Read functionality for digipipe datapackage."""
+import csv
 import json
 from collections import defaultdict
 from pathlib import Path
@@ -42,6 +43,23 @@ def get_heat_demand(sector: Optional[str] = None) -> dict[str, pd.DataFrame]:
         demand_filename = settings.DIGIPIPE_DIR.path("scalars").path(f"demand_{sec}_heat_demand.csv")
         demand[sec] = pd.read_csv(demand_filename)
     return demand
+
+
+def get_heat_capacity_shares(distribution: str) -> dict:
+    """Return capacity shares of heating structure."""
+    shares_filename = settings.DIGIPIPE_DIR.path("scalars").path(f"demand_heat_structure_esys_{distribution}.csv")
+    with Path(shares_filename).open("r", encoding="utf-8") as shares_file:
+        reader = csv.DictReader(shares_file)
+        shares = {}
+        summed_shares = 0.0
+        for row in reader:
+            if row["year"] == "2022":
+                continue
+            if row["carrier"] == "heat_pump":
+                continue
+            shares[row["carrier"]] = float(row["demand_rel"])
+            summed_shares += float(row["demand_rel"])
+    return {k: v / summed_shares for k, v in shares.items()}
 
 
 def get_summed_heat_demand_per_municipality(
