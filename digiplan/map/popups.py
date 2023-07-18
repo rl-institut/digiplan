@@ -606,7 +606,7 @@ class ElectricityDemand2045Popup(RegionPopup):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Strombedarf")
-        chart_options["yAxis"]["name"] = _("ǴWh")
+        chart_options["yAxis"]["name"] = _("GWh")
         chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
@@ -673,6 +673,30 @@ class HeatDemandPopup(RegionPopup):
         return chart_options
 
 
+class HeatDemand2045Popup(RegionPopup):
+    """Popup to show heat demand in 2045."""
+
+    lookup = "heat_demand"
+    title = _("Wärmebedarf")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.heat_demand_per_municipality_2045(self.map_state["simulation_id"])
+
+    def get_chart_data(self) -> Iterable:
+        """Create capacity chart data for SQ and future scenario."""
+        status_quo_data = calculations.heat_demand_per_municipality().loc[self.selected_id]
+        future_data = super().get_chart_data()
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Wärmebedarf")
+        chart_options["yAxis"]["name"] = _("GWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        return chart_options
+
+
 class HeatDemandCapitaPopup(RegionPopup):
     """Popup to show heat demand capita."""
 
@@ -687,6 +711,34 @@ class HeatDemandCapitaPopup(RegionPopup):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Wärmebedarf je EinwohnerIn")
         chart_options["yAxis"]["name"] = _("kWh")
+        return chart_options
+
+
+class HeatDemandCapita2045Popup(RegionPopup):
+    """Popup to show heat demand capita in 2045."""
+
+    lookup = "heat_demand"
+    title = _("Wärmebedarf je EinwohnerIn")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.calculate_capita_for_value(
+            calculations.heat_demand_per_municipality_2045(self.map_state["simulation_id"]),
+        )
+
+    def get_chart_data(self) -> Iterable:
+        """Create capacity chart data for SQ and future scenario."""
+        status_quo_data = calculations.calculate_capita_for_value(
+            calculations.heat_demand_per_municipality(),
+        ).loc[self.selected_id]
+        future_data = super().get_chart_data()
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Wärmebedarf je EinwohnerIn")
+        chart_options["yAxis"]["name"] = _("kWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
 
@@ -767,7 +819,9 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "electricity_demand_capita_statusquo": ElectricityDemandCapitaPopup,
     "electricity_demand_capita_2045": ElectricityDemandCapita2045Popup,
     "heat_demand_statusquo": HeatDemandPopup,
+    "heat_demand_2045": HeatDemand2045Popup,
     "heat_demand_capita_statusquo": HeatDemandCapitaPopup,
+    "heat_demand_capita_2045": HeatDemandCapita2045Popup,
     "batteries_statusquo": BatteriesPopup,
     "batteries_capacity_statusquo": BatteriesCapacityPopup,
 }

@@ -142,7 +142,7 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
     hp_sliders = {"hh": "w_d_wp_3", "cts": "w_d_wp_4", "ind": "w_d_wp_5"}
 
     heat_demand_per_municipality = datapackage.get_summed_heat_demand_per_municipality()
-    heat_demand = datapackage.get_heat_demand()
+    heat_demand = datapackage.get_heat_demand_profile()
 
     for distribution in ("central", "decentral"):
         demand = {}

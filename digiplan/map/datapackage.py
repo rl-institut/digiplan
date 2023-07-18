@@ -34,6 +34,16 @@ def get_power_demand(sector: Optional[str] = None) -> dict[str, pd.DataFrame]:
     return demand
 
 
+def get_heat_demand(sector: Optional[str] = None) -> dict[str, pd.DataFrame]:
+    """Return heat demand for given sector or all sectors."""
+    sectors = (sector,) if sector else ("hh", "cts", "ind")
+    demand = {}
+    for sec in sectors:
+        demand_filename = settings.DIGIPIPE_DIR.path("scalars").path(f"demand_{sec}_heat_demand.csv")
+        demand[sec] = pd.read_csv(demand_filename)
+    return demand
+
+
 def get_summed_heat_demand_per_municipality(
     sector: Optional[str] = None,
     distribution: Optional[str] = None,
@@ -51,7 +61,7 @@ def get_summed_heat_demand_per_municipality(
     return demand
 
 
-def get_heat_demand(
+def get_heat_demand_profile(
     sector: Optional[str] = None,
     distribution: Optional[str] = None,
 ) -> dict[str, dict[str, pd.DataFrame]]:

@@ -186,6 +186,15 @@ class HeatDemandTest(SimulationTest):
         assert list(results.values())[0].iloc[0] > 0
 
 
+class HeatDemand2045Test(SimulationTest):
+    """Test heat demand calculation in 2045."""
+
+    def test_electricity_demand(self):  # noqa: D102
+        results = calculations.heat_demand_per_municipality_2045(self.simulation_id)
+        assert len(results) == 20
+        assert len(results.columns) == 3
+
+
 class ElectricityProductionFromBiomassTest(SimulationTest):
     """Test electricity production from biomass calculation."""
 

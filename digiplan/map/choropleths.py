@@ -229,10 +229,26 @@ class HeatDemandChoropleth(Choropleth):  # noqa: D101
         return calculations.heat_demand_per_municipality().sum(axis=1).to_dict()
 
 
+class HeatDemand2045Choropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return calculations.heat_demand_per_municipality_2045(self.map_state["simulation_id"]).sum(axis=1).to_dict()
+
+
 class HeatDemandCapitaChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         capita_demand = (
             calculations.calculate_capita_for_value(calculations.heat_demand_per_municipality()).sum(axis=1) * 1e6
+        )
+        return capita_demand.to_dict()
+
+
+class HeatDemandCapita2045Choropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        capita_demand = (
+            calculations.calculate_capita_for_value(
+                calculations.heat_demand_per_municipality_2045(self.map_state["simulation_id"]),
+            ).sum(axis=1)
+            * 1e6
         )
         return capita_demand.to_dict()
 
@@ -272,7 +288,9 @@ CHOROPLETHS: dict[str, Union[Callable, type(Choropleth)]] = {
     "electricity_demand_capita_statusquo": ElectricityDemandCapitaChoropleth,
     "electricity_demand_capita_2045": ElectricityDemandCapita2045Choropleth,
     "heat_demand_statusquo": HeatDemandChoropleth,
+    "heat_demand_2045": HeatDemand2045Choropleth,
     "heat_demand_capita_statusquo": HeatDemandCapitaChoropleth,
+    "heat_demand_capita_2045": HeatDemandCapita2045Choropleth,
     "batteries_statusquo": BatteriesChoropleth,
     "batteries_capacity_statusquo": BatteriesCapacityChoropleth,
 }

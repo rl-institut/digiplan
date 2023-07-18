@@ -286,6 +286,40 @@ def heat_demand_per_municipality() -> pd.DataFrame:
     return demands_per_sector * 1e-3
 
 
+def heat_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+    """
+    Calculate heat demand per sector per municipality in GWh in 2045.
+
+    Returns
+    -------
+    pd.DataFrame
+        Heat demand per municipality (index) and sector (column)
+    """
+    results = get_results(
+        simulation_id,
+        {
+            "heat_demand": heat_demand,
+        },
+    )
+    demand = results["heat_demand"]
+    demand.index = demand.index.map(lambda ind: f"heat-demand-{ind[1].split('_')[2]}")
+    demand = demand.groupby(level=0).sum()
+    demands_per_sector = datapackage.get_heat_demand()
+    mappings = {
+        "hh": "heat-demand-hh",
+        "cts": "heat-demand-cts",
+        "ind": "heat-demand-ind",
+    }
+    demand = demand.reindex(mappings.values())
+    sector_shares = pd.DataFrame(
+        {sector: demands_per_sector[sector]["2045"] / demands_per_sector[sector]["2045"].sum() for sector in mappings},
+    )
+    demand = sector_shares * demand.values
+    demand.columns = demand.columns.map(lambda column: config.SIMULATION_DEMANDS[mappings[column]])
+    demand = demand * 1e-3
+    return demand
+
+
 def detailed_overview(simulation_id: int) -> pd.DataFrame:  # noqa: ARG001
     """
     Calculate data for detailed overview chart from simulation ID.
