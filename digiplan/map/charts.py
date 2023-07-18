@@ -135,13 +135,11 @@ class DetailedOverviewChart(Chart):
         super().__init__()
 
     def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.detailed_overview(simulation_id=self.simulation_id)
+        return calculations.electricity_overview(simulation_id=self.simulation_id)
 
     def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
+        for i, item in enumerate(self.chart_options["series"]):
+            item["data"][1] = self.chart_data.iloc[i]
         return self.chart_options
 
 
@@ -187,20 +185,9 @@ class ElectricityOverviewChart(Chart):
         """Get chart data from electricity overview calculation."""
         return calculations.electricity_overview(simulation_id=self.simulation_id)
 
-    def render(self) -> dict:
-        """Overwrite render function."""
-        self.chart_options["series"][0]["data"][2] = self.chart_data["ABW-wind-onshore"]
-        self.chart_options["series"][1]["data"][2] = self.chart_data["ABW-solar-pv_ground"]
-        self.chart_options["series"][2]["data"][2] = self.chart_data["ABW-solar-pv_rooftop"]
-        self.chart_options["series"][3]["data"][2] = self.chart_data["ABW-biomass"]
-        self.chart_options["series"][4]["data"][2] = self.chart_data["ABW-hydro-ror"]
-        self.chart_options["series"][5]["data"][0] = self.chart_data["ABW-electricity-demand_cts"]
-        self.chart_options["series"][6]["data"][0] = self.chart_data["electricity_heat_demand_cts"]
-        self.chart_options["series"][7]["data"][0] = self.chart_data["ABW-electricity-demand_hh"]
-        self.chart_options["series"][8]["data"][0] = self.chart_data["electricity_heat_demand_hh"]
-        self.chart_options["series"][9]["data"][0] = self.chart_data["ABW-electricity-demand_ind"]
-        self.chart_options["series"][10]["data"][0] = self.chart_data["electricity_heat_demand_ind"]
-        self.chart_options["series"][11]["data"][0] = self.chart_data["ABW-electricity-bev_charging"]
+    def render(self) -> dict:  # noqa: D102
+        for i, item in enumerate(self.chart_options["series"]):
+            item["data"][1] = self.chart_data.iloc[i]
         return self.chart_options
 
 
@@ -955,6 +942,7 @@ class BatteriesCapacityRegionChart(Chart):
 
 
 CHARTS: dict[str, type[Chart]] = {
+    "detailed_overview": DetailedOverviewChart,
     "electricity_overview": ElectricityOverviewChart,
     "heat_overview": HeatOverviewChart,
     "population_statusquo_region": PopulationRegionChart,
