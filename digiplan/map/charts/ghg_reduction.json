@@ -150,6 +150,7 @@
       "type":"bar",
       "barWidth":"30",
       "stack":"Total",
+      "stackStrategy": "all",
       "color":"#D9B38C",
       "label":{
         "show":false,
@@ -168,6 +169,7 @@
       "type":"bar",
       "barWidth":"30",
       "stack":"Total",
+      "stackStrategy": "all",
       "color":"#48BF91",
       "label":{
         "show":false,
