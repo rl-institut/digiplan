@@ -3,6 +3,7 @@ import {statusquoDropdown, futureDropdown} from "./elements.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
 const simulation_spinner = document.getElementById("simulation_spinner");
+const chartViewTab = document.getElementById("chart-view-tab");
 
 const SIMULATION_CHECK_TIME = 5000;
 
@@ -32,12 +33,12 @@ futureDropdown.addEventListener("change", function() {
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
+PubSub.subscribe(eventTopics.SIMULATION_STARTED, hideResultButtons);
+PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultButtons);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, hideSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultCharts);
 PubSub.subscribe(mapEvent.CHOROPLETH_SELECTED, showRegionChart);
-// for testing:
-PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, showResultCharts);
 
 
 // Subscriber Functions
@@ -110,6 +111,18 @@ function showSimulationSpinner(msg) {
 
 function hideSimulationSpinner(msg) {
     simulation_spinner.hidden = true;
+    return logMessage(msg);
+}
+
+function showResultButtons(msg) {
+    chartViewTab.classList.remove("disabled");
+    futureDropdown.disabled = false;
+    return logMessage(msg);
+}
+
+function hideResultButtons(msg) {
+    chartViewTab.classList.add("disabled");
+    futureDropdown.disabled = true;
     return logMessage(msg);
 }
 
