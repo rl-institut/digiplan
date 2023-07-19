@@ -614,7 +614,7 @@ def heat_overview(simulation_id: int) -> pd.Series:
     )
     demand = results["heat_demand"]
     demand.index = demand.index.map(lambda ind: f"heat-demand-{ind[1].split('_')[2]}")
-    return demand.groupby(level=0).sum()
+    return demand.groupby(level=0).sum() * 1e-3
 
 
 electricity_demand = core.ParametrizedCalculation(

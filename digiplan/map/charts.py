@@ -189,26 +189,8 @@ class HeatOverviewChart(SimulationChart):
         return calculations.heat_overview(simulation_id=self.simulation_id)
 
     def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
-        return self.chart_options
-
-
-class HeatProductionChart(SimulationChart):
-    """Heat Production Chart. Shows decentralized and centralized heat."""
-
-    lookup = "decentralized_centralized_heat"
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.heat_overview(simulation_id=self.simulation_id)
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
+        for i, item in enumerate(self.chart_options["series"]):
+            item["data"][1] = self.chart_data.iloc[i]
         return self.chart_options
 
 
