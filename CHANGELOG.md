@@ -6,6 +6,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- selection to hide choropleth and region chart in SQ and 2045 dropdown
 - results for heat overview chart
 - results for GHG reduction chart
 - adapt full load hours for renewables

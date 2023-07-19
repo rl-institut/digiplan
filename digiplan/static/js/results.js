@@ -20,11 +20,21 @@ const resultCharts = {
 $('#settings').submit(false);
 
 statusquoDropdown.addEventListener("change", function() {
-    PubSub.publish(mapEvent.CHOROPLETH_SELECTED, statusquoDropdown.value);
+    if (statusquoDropdown.value === "") {
+        deactivateChoropleth();
+        PubSub.publish(eventTopics.CHOROPLETH_DEACTIVATED);
+    } else {
+        PubSub.publish(mapEvent.CHOROPLETH_SELECTED, statusquoDropdown.value);
+    }
     imageResults.title = statusquoDropdown.options[statusquoDropdown.selectedIndex].title;
 });
 futureDropdown.addEventListener("change", function() {
-    PubSub.publish(mapEvent.CHOROPLETH_SELECTED, futureDropdown.value);
+    if (futureDropdown.value === "") {
+        deactivateChoropleth();
+        PubSub.publish(eventTopics.CHOROPLETH_DEACTIVATED);
+    } else {
+        PubSub.publish(mapEvent.CHOROPLETH_SELECTED, futureDropdown.value);
+    }
     imageResults.title = futureDropdown.options[futureDropdown.selectedIndex].title;
 });
 
@@ -39,6 +49,7 @@ PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, hideSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultCharts);
 PubSub.subscribe(mapEvent.CHOROPLETH_SELECTED, showRegionChart);
+PubSub.subscribe(eventTopics.CHOROPLETH_DEACTIVATED, hideRegionChart);
 
 
 // Subscriber Functions
@@ -127,11 +138,6 @@ function hideResultButtons(msg) {
 }
 
 function showRegionChart(msg, lookup) {
-    if (lookup === "") {
-        clearChart("region_chart_statusquo");
-        clearChart("region_chart_2045");
-        return logMessage(msg);
-    }
     const region_lookup = `${lookup}_region`;
     let charts = {};
     if (region_lookup.includes("2045")) {
@@ -140,6 +146,12 @@ function showRegionChart(msg, lookup) {
         charts[region_lookup] = "region_chart_statusquo";
     }
     showCharts(charts);
+    return logMessage(msg);
+}
+
+function hideRegionChart(msg) {
+    clearChart("region_chart_statusquo");
+    clearChart("region_chart_2045");
     return logMessage(msg);
 }
 
