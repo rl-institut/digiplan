@@ -117,22 +117,10 @@ class SimulationChart(Chart):
         super().__init__()
 
 
-class DetailedOverviewChart(Chart):
+class DetailedOverviewChart(SimulationChart):
     """Detailed Overview Chart."""
 
     lookup = "detailed_overview"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init Detailed Overview Chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
 
     def get_chart_data(self):  # noqa: D102, ANN201
         return calculations.electricity_overview(simulation_id=self.simulation_id)
@@ -143,43 +131,28 @@ class DetailedOverviewChart(Chart):
         return self.chart_options
 
 
-class CTSOverviewChart(Chart):
-    """CTS Overview Chart. Shows greenhouse gas emissions."""
+class GHGReductionChart(SimulationChart):
+    """GHG Reduction Chart. Shows greenhouse gas emissions."""
 
-    lookup = "ghg_overview"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init CTS Overview Chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
+    lookup = "ghg_reduction"
 
     def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.detailed_overview(simulation_id=self.simulation_id)
+        return calculations.ghg_reduction(simulation_id=self.simulation_id)
 
     def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][2] = self.chart_data[profile]
-
+        # Enter import and energy from renewables
+        for i, item in enumerate(self.chart_options["series"][7:9]):
+            item["data"][1] = self.chart_data.iloc[i]
+        # Calculate emission offset
+        summed_emissions_2019 = sum(item["data"][0] for item in self.chart_options["series"][:7])
+        self.chart_options["series"][0]["data"][1] = summed_emissions_2019 - self.chart_data.sum()
         return self.chart_options
 
 
-class ElectricityOverviewChart(Chart):
+class ElectricityOverviewChart(SimulationChart):
     """Chart for electricity overview."""
 
     lookup = "electricity_overview"
-
-    def __init__(self, simulation_id: int) -> None:
-        """Store simulation ID."""
-        self.simulation_id = simulation_id
-        super().__init__()
 
     def get_chart_data(self):  # noqa: ANN201
         """Get chart data from electricity overview calculation."""
@@ -191,23 +164,11 @@ class ElectricityOverviewChart(Chart):
         return self.chart_options
 
 
-class ElectricityCTSChart(Chart):
+class ElectricityCTSChart(SimulationChart):
     """Electricity CTS Chart. Shows greenhouse gas emissions."""
 
     lookup = "electricity_ghg"
 
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init Electricity CTS Chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
-
     def get_chart_data(self):  # noqa: D102, ANN201
         return calculations.detailed_overview(simulation_id=self.simulation_id)
 
@@ -219,23 +180,11 @@ class ElectricityCTSChart(Chart):
         return self.chart_options
 
 
-class HeatOverviewChart(Chart):
+class HeatOverviewChart(SimulationChart):
     """Heat Overview Chart."""
 
     lookup = "overview_heat"
 
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init Heat Overview Chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
-
     def get_chart_data(self):  # noqa: D102, ANN201
         return calculations.heat_overview(simulation_id=self.simulation_id)
 
@@ -247,23 +196,11 @@ class HeatOverviewChart(Chart):
         return self.chart_options
 
 
-class HeatProductionChart(Chart):
+class HeatProductionChart(SimulationChart):
     """Heat Production Chart. Shows decentralized and centralized heat."""
 
     lookup = "decentralized_centralized_heat"
 
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init Heat Production Chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
-
     def get_chart_data(self):  # noqa: D102, ANN201
         return calculations.heat_overview(simulation_id=self.simulation_id)
 
@@ -275,23 +212,11 @@ class HeatProductionChart(Chart):
         return self.chart_options
 
 
-class MobilityOverviewChart(Chart):
+class MobilityOverviewChart(SimulationChart):
     """Mobility Overview Chart. Shows Number of Cars."""
 
     lookup = "mobility_overview"
 
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init Mobility Overview Chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
-
     def get_chart_data(self):  # noqa: D102, ANN201
         return calculations.heat_overview(simulation_id=self.simulation_id)
 
@@ -303,22 +228,10 @@ class MobilityOverviewChart(Chart):
         return self.chart_options
 
 
-class MobilityCTSChart(Chart):
+class MobilityCTSChart(SimulationChart):
     """Mobility CTS Chart. Shows greenhouse gas emissions."""
 
     lookup = "mobility_ghg"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init Mobility CTS Chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
 
     def get_chart_data(self):  # noqa: D102, ANN201
         return calculations.detailed_overview(simulation_id=self.simulation_id)
@@ -331,22 +244,10 @@ class MobilityCTSChart(Chart):
         return self.chart_options
 
 
-class GhgHistoryChart(Chart):
+class GhgHistoryChart(SimulationChart):
     """GHG history chart."""
 
     lookup = "ghg_history"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init GHG history chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
 
     def get_chart_data(self):  # noqa: D102, ANN201
         # TODO(Hendrik): Get static data from digipipe datapackage  # noqa: TD003
@@ -360,22 +261,10 @@ class GhgHistoryChart(Chart):
         return self.chart_options
 
 
-class GhgReductionChart(Chart):
+class GhgReductionChart(SimulationChart):
     """GHG reduction chart."""
 
     lookup = "ghg_reduction"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init GHG reduction chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
 
     def get_chart_data(self):  # noqa: D102, ANN201
         # TODO(Hendrik): Get static data (1st column) from  # noqa: TD003
@@ -943,6 +832,7 @@ class BatteriesCapacityRegionChart(Chart):
 
 CHARTS: dict[str, type[Chart]] = {
     "detailed_overview": DetailedOverviewChart,
+    "ghg_reduction": GHGReductionChart,
     "electricity_overview": ElectricityOverviewChart,
     "heat_overview": HeatOverviewChart,
     "population_statusquo_region": PopulationRegionChart,
