@@ -340,3 +340,11 @@ function createChart(div_id, options) {
   chart.setOption(options);
   chart.resize();
 }
+
+function clearChart(div_id) {
+  const chartElement = document.getElementById(div_id);
+  if (echarts.getInstanceByDom(chartElement)) {
+    const chart = echarts.getInstanceByDom(chartElement);
+    chart.clear();
+  }
+}

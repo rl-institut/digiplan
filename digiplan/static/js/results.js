@@ -127,6 +127,11 @@ function hideResultButtons(msg) {
 }
 
 function showRegionChart(msg, lookup) {
+    if (lookup === "") {
+        clearChart("region_chart_statusquo");
+        clearChart("region_chart_2045");
+        return logMessage(msg);
+    }
     const region_lookup = `${lookup}_region`;
     let charts = {};
     if (region_lookup.includes("2045")) {

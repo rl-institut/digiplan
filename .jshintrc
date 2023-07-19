@@ -33,6 +33,7 @@
     "window": false,
     "subscribeToEvents": false,
     "createChart": false,
+    "clearChart": false,
     "hidePotentialLayers": false
   },
   "strict": "implied"
