@@ -12,8 +12,8 @@
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="false" data-bs-wrap="false">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <div class="row">
-                <div class="col-4">
+              <div class="carousel-item__row">
+                <div class="carousel-item__img">
                   <img src="{% static 'images/map_clusters.png' %}" alt="...">
                 </div>
                 <div class="carousel-item__content">
@@ -24,8 +24,8 @@
               </div>
             </div>
             <div class="carousel-item">
-              <div class="row">
-                <div class="col-4">
+              <div class="carousel-item__row">
+                <div class="carousel-item__img">
                   <img src="{% static 'images/map-wind.png' %}" alt="...">
                 </div>
                 <div class="carousel-item__content">
@@ -35,8 +35,8 @@
               </div>
             </div>
             <div class="carousel-item">
-              <div class="row">
-                <div class="col-4">
+              <div class="carousel-item__row">
+                <div class="carousel-item__img">
                   <img src="{% static 'images/map-outdoor-pv.png' %}" alt="...">
                 </div>
                 <div class="carousel-item__content">
@@ -46,8 +46,8 @@
               </div>
             </div>
             <div class="carousel-item">
-              <div class="row">
-                <div class="col-4">
+              <div class="carousel-item__row">
+                <div class="carousel-item__img">
                   <img src="{% static 'images/map-roof-pv.png' %}" alt="...">
                 </div>
                 <div class="carousel-item__content">
@@ -57,8 +57,8 @@
               </div>
             </div>
             <div class="carousel-item">
-              <div class="row">
-                <div class="col-4">
+              <div class="carousel-item__row">
+                <div class="carousel-item__img">
                   <img src="{% static 'images/settings.png' %}" alt="...">
                 </div>
                 <div class="carousel-item__content">
@@ -68,8 +68,8 @@
               </div>
             </div>
             <div class="carousel-item">
-              <div class="row">
-                <div class="col-4">
+              <div class="carousel-item__row">
+                <div class="carousel-item__img">
                   <img src="{% static 'images/sidebar.png' %}" alt="...">
                 </div>
                 <div class="carousel-item__content">
@@ -83,9 +83,22 @@
         <!-- End Carousel -->
       </div>
       <div class="modal-footer">
-        <button class="btn btn-secondary carousel-control-prev transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">Previous</button>
-        <button class="btn btn-primary carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">Next</button>
-      </div>
+        <div class="modal-footer__empty"></div>
+        <div class="modal-footer__indicators">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5" aria-label="Slide 6"></button>
+          </div>
+        </div>
+        <div class="modal-footer__nav">
+          <button class="btn btn-secondary carousel-control-prev transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">Previous</button>
+          <button class="btn btn-primary carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">Next</button>
+        </div>
+      </div>      
     </div>
   </div>
 </div>

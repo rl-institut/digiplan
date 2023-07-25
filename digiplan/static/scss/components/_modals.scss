@@ -27,18 +27,44 @@
 }
 
 .onboarding-modal {
-  .carousel-item {
-    &__content {
-      @extend .col-8;
-      @extend .bg-white;
-      @extend .ps-5;
-      @extend .pe-4;
-    }
+  .modal-body {
+    @extend .overflow-hidden;
+    height: 75vh;
+    max-height: 40rem;
   }
 
-  img {
-    height: 100%;
-    object-fit: cover;
+  .carousel-item {
+    &__content {
+      @extend .col-lg-8;
+      @extend .bg-white;
+      @extend .ps-4;
+      @extend .pe-4;
+
+      @include media-breakpoint-up(lg) {
+        padding-left: 1.5rem !important;
+      }
+    }
+
+    &__row {
+      @extend .row;
+    }
+
+    &__img {
+      @extend .col-4;
+      @extend .overflow-hidden;
+
+      @include media-breakpoint-down(lg) {
+        display: none;
+      }
+
+      img {
+        @extend .position-relative;
+        @extend .start-50;
+        @extend .top-50;
+        @extend .h-100;
+        transform: translate(-50%, -50%);
+      }
+    }
   }
 
   .carousel-control-next,
@@ -58,13 +84,54 @@
     background-color: $gray-200 !important;
     color: $gray-800 !important;
   }
+  
+  .modal-footer {
+    @extend .d-flex;
+    @extend .justify-content-between;
 
-  .btn, .modal-footer button {
-    opacity: 1 !important;
-  }
+    &__empty,
+    &__nav {
+      width: 16rem;
+    }
 
-  .modal-body {
-    height: 40rem;
-    overflow: hidden;
-  }
+    &__empty {
+      @include media-breakpoint-down(lg) {
+        display: none;
+      }
+    }
+    
+    &__indicators {
+      @extend .d-flex;
+      @extend .justify-content-center;
+      @extend .flex-grow-1;
+
+      .carousel-indicators {
+        @extend .position-relative;
+        @extend .m-0;
+      }
+
+      .carousel-indicators [data-bs-target] {
+        @extend .bg-primary;
+        @extend .rounded-circle;
+        width: 12px;
+        height: 12px;
+        opacity: 0.2;
+    
+        &.active {
+          opacity: 1 !important;
+        }
+      }
+    }
+
+    &__nav {
+      @extend .d-flex;
+      @extend .flex-row;
+
+      button {
+        @extend .ms-1;
+        width: 7rem;
+        opacity: 1 !important;
+      }
+    }
+  }  
 }
