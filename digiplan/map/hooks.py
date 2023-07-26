@@ -2,6 +2,7 @@
 
 import logging
 import math
+from collections import defaultdict
 
 import pandas as pd
 from django.http import HttpRequest
@@ -73,31 +74,28 @@ def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) ->
 
 def adapt_heat_capacities(distribution: str, remaining_energy: pd.Series) -> dict:
     """Adapt heat settings for remaining energy."""
-    # TODO (Hendrik): Read values from datapackage
-    # https://github.com/rl-institut-private/digiplan/issues/308
-    heat_shares = {
-        "central": {
-            "ABW-wood-extchp_central": 0,
-            "ABW-biogas-bpchp_central": 0,
-            "ABW-ch4-bpchp_central": 0.5,
-            "ABW-ch4-extchp_central": 0.5,
-            "ABW-solar-thermalcollector_central": 0,
-            "ABW-ch4-boiler_central": 0,
-        },
-        "decentral": {
-            "ABW-wood-extchp_decentral": 0.15,
-            "ABW-biogas-bpchp_decentral": 0.15,
-            "ABW-ch4-bpchp_decentral": 0.15,
-            "ABW-ch4-extchp_decentral": 0.30,
-            "ABW-solar-thermalcollector_decentral": 0,
-            "ABW-ch4-boiler_decentral": 0.15,
-            "ABW-wood-oven": 0.1,
-        },
+    heat_shares = datapackage.get_heat_capacity_shares(distribution[:3])
+    mapping = {
+        "wood_extchp": f"ABW-wood-extchp_{distribution}",
+        "biogas_bpchp": f"ABW-biogas-bpchp_{distribution}",
+        "ch4_bpchp": f"ABW-ch4-bpchp_{distribution}",
+        "ch4_extchp": f"ABW-ch4-extchp_{distribution}",
+        "solar_thermal": f"ABW-solar-thermalcollector_{distribution}",
+        "methane": f"ABW-ch4-boiler_{distribution}",
+        "hydrogen": f"ABW-ch4-boiler_{distribution}",  # hydrogen is added to methane bus
+        "electricity_direct_heating": f"ABW-electricity-pth_{distribution}",
     }
+    if distribution == "decentral":
+        mapping["wood_oven"] = "ABW-wood-oven"
+    heat_share_mapped = defaultdict(float)
+    for com, share in heat_shares.items():
+        if com not in mapping:
+            continue
+        heat_share_mapped[mapping[com]] += share
 
     remaining_energy_sum = remaining_energy.sum()
     data = {}
-    for component, share in heat_shares[distribution].items():
+    for component, share in heat_share_mapped.items():
         if share == 0:
             continue
         efficiency = datapackage.get_thermal_efficiency(component[4:])
