@@ -156,6 +156,13 @@ class ClusterPopup(popups.Popup):
             "geometry_approximated": "Geschätzt",
             "unit_count": "Anzahl",
             "capacity_net": "Kapazität",
+            "status": "Einheit Betriebsstatus",
+            "city": "Ort",
+            "commissioning_date": "Inbetriebnahmedatum",
+            "commissioning_date_planned": "Geplantes Inbetriebnahmedatum",
+            "decommissioning_date": "Datum Endgültige Stilllegung",
+            "capacity_gross": "Bruttoleistung",
+            "voltage_level": "Spannungsebene",
         }
         instance = model.objects.annotate(mun_name=F("mun_id__name")).get(pk=self.selected_id)
         return {

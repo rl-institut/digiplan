@@ -107,6 +107,13 @@ class RenewableModel(models.Model):
     unit_count = models.BigIntegerField(null=True)
     capacity_net = models.FloatField(null=True)
     zip_code = models.CharField(max_length=50, null=True)
+    status = models.CharField(max_length=50, null=True)
+    city = models.CharField(max_length=50, null=True)
+    commissioning_date = models.CharField(max_length=50, null=True)
+    commissioning_date_planned = models.CharField(max_length=50, null=True)
+    decommissioning_date = models.CharField(max_length=50, null=True)
+    capacity_gross = models.FloatField(null=True)
+    voltage_level = models.CharField(max_length=50, null=True)
 
     mun_id = models.ForeignKey(Municipality, on_delete=models.DO_NOTHING, null=True)
 
@@ -136,6 +143,13 @@ class WindTurbine(RenewableModel):
         "rotor_diameter": "rotor_diameter",
         "zip_code": "zip_code",
         "mun_id": "municipality_id",
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
     }
 
     class Meta:  # noqa: D106
@@ -178,6 +192,13 @@ class PVroof(RenewableModel):
         "capacity_net": "capacity_net",
         "power_limitation": "power_limitation",
         "mun_id": "municipality_id",
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
     }
 
     class Meta:  # noqa: D106
@@ -206,6 +227,13 @@ class PVground(RenewableModel):
         "capacity_net": "capacity_net",
         "power_limitation": "power_limitation",
         "mun_id": "municipality_id",
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
     }
 
     class Meta:  # noqa: D106
@@ -230,6 +258,13 @@ class Hydro(RenewableModel):
         "capacity_net": "capacity_net",
         "water_origin": "water_origin",
         "mun_id": "municipality_id",
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
     }
 
     class Meta:  # noqa: D106
@@ -254,6 +289,13 @@ class Biomass(RenewableModel):
         "capacity_net": "capacity_net",
         "fuel_type": "fuel_type",
         "mun_id": "municipality_id",
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
     }
 
     class Meta:  # noqa: D106
@@ -278,6 +320,13 @@ class Combustion(RenewableModel):
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
         "mun_id": "municipality_id",
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
     }
 
     class Meta:  # noqa: D106
@@ -302,6 +351,13 @@ class GSGK(RenewableModel):
         "capacity_net": "capacity_net",
         "feedin_type": "feedin_type",
         "mun_id": "municipality_id",
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
     }
 
     class Meta:  # noqa: D106
@@ -323,6 +379,13 @@ class Storage(RenewableModel):
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
         "mun_id": "municipality_id",
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
     }
 
     class Meta:  # noqa: D106
