@@ -164,11 +164,32 @@ class ClusterPopup(popups.Popup):
             "capacity_gross": "Bruttoleistung",
             "voltage_level": "Spannungsebene",
         }
+        specific_attributes = {
+            # Wind Turbines
+            "hub_height": "Nabenhöhe",
+            "rotor_diameter": "Rotordurchmesser",
+            # PV Roof / Ground
+            "power_limitation": "Leistungsbegrenzung",
+            # Hydro
+            "water_origin": "Art des Zuflusses",
+            # Biomass
+            "fuel_type": "Biomasseart",
+            # Combustion
+            "name_block": "Name Kraftwerksblock",
+            # GSGK
+            "feedin_type": "Einspeisungsart",
+        }
         instance = model.objects.annotate(mun_name=F("mun_id__name")).get(pk=self.selected_id)
-        return {
+        data_dict = {
             "title": model._meta.verbose_name,  # noqa: SLF001
             "data": {name: getattr(instance, key) for key, name in default_attributes.items()},
         }
+        for key, name in specific_attributes.items():
+            if hasattr(instance, key):
+                value = getattr(instance, key)
+                data_dict["data"][name] = value
+
+        return data_dict
 
 
 class CapacityPopup(RegionPopup):

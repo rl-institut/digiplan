@@ -135,12 +135,9 @@ class WindTurbine(RenewableModel):
     mapping = {
         "geom": "POINT",
         "name": "name",
-        "name_park": "name_park",
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
-        "hub_height": "hub_height",
-        "rotor_diameter": "rotor_diameter",
         "zip_code": "zip_code",
         "mun_id": "municipality_id",
         "status": "status",
@@ -150,6 +147,9 @@ class WindTurbine(RenewableModel):
         "decommissioning_date": "decommissioning_date",
         "capacity_gross": "capacity_gross",
         "voltage_level": "voltage_level",
+        "name_park": "name_park",
+        "hub_height": "hub_height",
+        "rotor_diameter": "rotor_diameter",
     }
 
     class Meta:  # noqa: D106
@@ -190,7 +190,6 @@ class PVroof(RenewableModel):
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
-        "power_limitation": "power_limitation",
         "mun_id": "municipality_id",
         "status": "status",
         "city": "city",
@@ -199,6 +198,7 @@ class PVroof(RenewableModel):
         "decommissioning_date": "decommissioning_date",
         "capacity_gross": "capacity_gross",
         "voltage_level": "voltage_level",
+        "power_limitation": "power_limitation",
     }
 
     class Meta:  # noqa: D106
@@ -225,7 +225,6 @@ class PVground(RenewableModel):
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
-        "power_limitation": "power_limitation",
         "mun_id": "municipality_id",
         "status": "status",
         "city": "city",
@@ -234,6 +233,7 @@ class PVground(RenewableModel):
         "decommissioning_date": "decommissioning_date",
         "capacity_gross": "capacity_gross",
         "voltage_level": "voltage_level",
+        "power_limitation": "power_limitation",
     }
 
     class Meta:  # noqa: D106
@@ -256,7 +256,6 @@ class Hydro(RenewableModel):
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
-        "water_origin": "water_origin",
         "mun_id": "municipality_id",
         "status": "status",
         "city": "city",
@@ -265,6 +264,7 @@ class Hydro(RenewableModel):
         "decommissioning_date": "decommissioning_date",
         "capacity_gross": "capacity_gross",
         "voltage_level": "voltage_level",
+        "water_origin": "water_origin",
     }
 
     class Meta:  # noqa: D106
@@ -287,7 +287,6 @@ class Biomass(RenewableModel):
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
-        "fuel_type": "fuel_type",
         "mun_id": "municipality_id",
         "status": "status",
         "city": "city",
@@ -296,6 +295,7 @@ class Biomass(RenewableModel):
         "decommissioning_date": "decommissioning_date",
         "capacity_gross": "capacity_gross",
         "voltage_level": "voltage_level",
+        "fuel_type": "fuel_type",
     }
 
     class Meta:  # noqa: D106
@@ -314,7 +314,6 @@ class Combustion(RenewableModel):
     mapping = {
         "geom": "POINT",
         "name": "name",
-        "name_block": "block_name",
         "zip_code": "zip_code",
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
@@ -327,6 +326,7 @@ class Combustion(RenewableModel):
         "decommissioning_date": "decommissioning_date",
         "capacity_gross": "capacity_gross",
         "voltage_level": "voltage_level",
+        "name_block": "block_name",
     }
 
     class Meta:  # noqa: D106
@@ -349,7 +349,6 @@ class GSGK(RenewableModel):
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
-        "feedin_type": "feedin_type",
         "mun_id": "municipality_id",
         "status": "status",
         "city": "city",
@@ -358,6 +357,7 @@ class GSGK(RenewableModel):
         "decommissioning_date": "decommissioning_date",
         "capacity_gross": "capacity_gross",
         "voltage_level": "voltage_level",
+        "feedin_type": "feedin_type",
     }
 
     class Meta:  # noqa: D106
