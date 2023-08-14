@@ -69,8 +69,36 @@
     }
 
     .carousel__text {
-      @extend .flex-grow-1;
+      @extend .row;
+      @extend .p-2;
       @extend .bg-light;
+
+      &-logo {
+        @extend .d-flex;
+        @extend .flex-row;
+        @extend .justify-content-center;
+        @extend .align-items-center;
+
+        img {
+          height: 5rem;
+        }
+      }
+
+      &-content {
+        max-width: 36rem;
+        margin: 0 auto;
+
+        .title {
+          @extend .text-center;
+          @extend .fw-semibold;
+          @extend .fs-4;
+        }
+
+        .content {
+          @extend .text-center;
+          @extend .fs-4;
+        }
+      }
     }
 
     .carousel__logos {
