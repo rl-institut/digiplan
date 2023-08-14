@@ -81,15 +81,76 @@ tour.addStep({
         },
         {
             action() {
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'creating'
+});
+
+
+tour.addStep({
+    title: 'Nächster Schritt',
+    text: 'Hier gehts weiter. Klicken Sie, um zum nächsten Schritt zu kommen.',
+    attachTo: {
+        element: '#menu_next_btn',
+        on: 'bottom'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        }
+    ],
+    id: 'menu_next_btn'
+});
+
+// Add event listeners to the navbar elements
+const navbarTabs = document.getElementById("menu_next_btn");
+
+navbarTabs.addEventListener('click', function() {
+    // Get the ID of the selected tab
+    const selectedTabId = getCurrentMenuTab().id;
+
+    // Show the corresponding step in the tour
+    tour.show(selectedTabId);
+  });
+
+tour.addStep({
+    title: 'Einstellungen',
+    text: 'Verändern Sie die Einstellungen, um Ihr eigenes Szenario zu erstellen.',
+    attachTo: {
+        element: '#panel_2_settings',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
                 return this.complete();
             },
             classes: 'shepherd-button-primary',
             text: 'Fertig'
         }
     ],
-    id: 'creating'
+    id: 'panel_1_today'
 });
 
 onbaordingCloseBtn.addEventListener("click", function() {
   tour.start();
 });
+
+function getCurrentMenuTab() {
+    return document.querySelector("#js-panel-container > .panel__content > .tab-content > .active");
+}
