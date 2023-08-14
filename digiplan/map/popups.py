@@ -156,12 +156,70 @@ class ClusterPopup(popups.Popup):
             "geometry_approximated": "Geschätzt",
             "unit_count": "Anzahl",
             "capacity_net": "Kapazität",
+            "status": "Einheit Betriebsstatus",
+            "city": "Ort",
+            "commissioning_date": "Inbetriebnahmedatum",
+            "commissioning_date_planned": "Geplantes Inbetriebnahmedatum",
+            "decommissioning_date": "Datum Endgültige Stilllegung",
+            "capacity_gross": "Bruttoleistung",
+            "voltage_level": "Spannungsebene",
+            "mastr_id": "Einheit MaStR Nummer",
+        }
+        specific_attributes = {
+            # multiple
+            "kwk_mastr_id": "Kwk MaStR Nummer",
+            "site_type": "Lage",
+            "citizens_unit": "Bürgerenergie",
+            "usage_sector": "Nutzungsbereich",
+            "technology": "Technologie",
+            "feedin_type": "Einspeisungsart",
+            "th_capacity": "Thermische Nutzleistung",
+            # Wind Turbines
+            "hub_height": "Nabenhöhe",
+            "rotor_diameter": "Rotordurchmesser",
+            "manufacturer_name": "Hersteller",
+            "type_name": "Typenbezeichnung",
+            "constraint_deactivation_sound_emission": "Auflage Abschaltung Leistungsbegrenzung",
+            "constraint_deactivation_sound_emission_night": "Auflagen Abschaltung Schallimmissionsschutz Nachts",
+            "constraint_deactivation_sound_emission_day": "Auflagen Abschaltung Schallimmissionsschutz Tagsüber",
+            "constraint_deactivation_shadowing": "Auflagen Abschaltung Schattenwurf",
+            "constraint_deactivation_animals": "Auflagen Abschaltung Tierschutz",
+            "constraint_deactivation_ice": "Auflagen Abschaltung Eiswurf",
+            # PV Roof / Ground
+            "power_limitation": "Leistungsbegrenzung",
+            "module_count": "Anzahl Module",
+            "orientation_primary": "Hauptausrichtung",
+            "orientation_secondary": "Nebenausrichtung",
+            "area_type": "Art Der Fläche",
+            "area_occupied": "In Anspruch Genommene Fläche",
+            "landlord_to_tenant_electricity": "Mieterstrom Zugeordnet",
+            # Hydro
+            "water_origin": "Art Des Zuflusses",
+            "plant_type": "Art Der Wasserkraftanlage",
+            # Biomass
+            "fuel_type": "Biomasseart",
+            "fuel": "Hauptbrennstoff",
+            "biomass_only": "Ausschliessliche Verwendung Biomasse",
+            "flexibility_bonus": "Biogas Inanspruchnahme Flexi Prämie",
+            # Combustion
+            "name_block": "Name Kraftwerksblock",
+            "bnetza_id": "Kraftwerksnummer",
+            "fuel_other": "Weitere Brennstoffe",
+            "fuels": "Hauptbrennstoff",
+            # GSGK
+            "unit_type": "Einheittyp",
         }
         instance = model.objects.annotate(mun_name=F("mun_id__name")).get(pk=self.selected_id)
-        return {
+        data_dict = {
             "title": model._meta.verbose_name,  # noqa: SLF001
             "data": {name: getattr(instance, key) for key, name in default_attributes.items()},
         }
+        for key, name in specific_attributes.items():
+            if hasattr(instance, key):
+                value = getattr(instance, key)
+                data_dict["data"][name] = value
+
+        return data_dict
 
 
 class CapacityPopup(RegionPopup):
