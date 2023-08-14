@@ -13,7 +13,11 @@
     {% for key, value in data.items %}
       <tr>
         <td>{{ key }}</td>
-        <td>{{ value }}</td>
+        {%  if value != None  %}
+          <td>{{ value }}</td>
+          {% else %}
+          <td> - </td>
+        {% endif %}
       </tr>
     {% endfor %}
   </table>
