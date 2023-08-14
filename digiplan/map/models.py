@@ -309,7 +309,7 @@ class Hydro(RenewableModel):
     """Hydro model."""
 
     water_origin = models.CharField(max_length=255, null=True)
-    kwk_mastr_id = models.CharField(max_length=50, null=True)
+    kwk_mastr_id = models.FloatField(null=True)
     plant_type = models.CharField(max_length=255, null=True)
     feedin_type = models.CharField(max_length=255, null=True)
 
@@ -350,8 +350,8 @@ class Biomass(RenewableModel):
     kwk_mastr_id = models.CharField(max_length=50, null=True)
     th_capacity = models.FloatField(null=True)
     feedin_type = models.CharField(max_length=50, null=True)
-    technology = models.CharField(max_length=50, null=True)
-    fuel = models.CharField(max_length=50, null=True)
+    technology = models.CharField(max_length=255, null=True)
+    fuel = models.CharField(max_length=255, null=True)
     biomass_only = models.CharField(max_length=50, null=True)
     flexibility_bonus = models.CharField(max_length=50, null=True)
 
