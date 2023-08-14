@@ -1,7 +1,7 @@
 {
   "s_w_1": {
     "class": "js-slider js-slider-panel js-power-mix",
-    "color": "#99D8C9",
+    "color": "#6A89CC",
     "grid": false,
     "label": "{% trans 'Wind energy (MW)' %}",
     "max": 1512,
@@ -67,7 +67,7 @@
   },
   "s_pv_ff_1": {
     "class": "js-slider js-slider-panel js-power-mix",
-    "color": "#A6BDDB",
+    "color": "#EFAD25",
     "grid": false,
     "label": "{% trans 'Outdoor PV (MW)' %}",
     "max": 1200,
@@ -101,7 +101,7 @@
   },
   "s_pv_d_1": {
     "class": "js-slider js-slider-panel js-power-mix",
-    "color": "#FEC44F",
+    "color": "#FFD660",
     "grid": false,
     "label": "{% trans 'Roof-mounted PV (MW)' %}",
     "max": 400,
@@ -135,7 +135,7 @@
   },
   "s_h_1": {
     "class": "js-slider js-slider-panel js-power-mix",
-    "color": "#FA9FB5",
+    "color": "#A9BDE8",
     "label": "{% trans 'Hydropower (MW)' %}",
     "max": 30,
     "min": 0,
