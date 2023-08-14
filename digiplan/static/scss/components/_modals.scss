@@ -72,6 +72,48 @@
       @extend .flex-grow-1;
       @extend .bg-light;
     }
+
+    .carousel__logos {
+      @extend .row;
+      @extend .px-2;
+      max-height: 20rem;
+
+      @include media-breakpoint-up(xl) {
+        max-height: 11rem;
+      }
+    }
+
+    .carousel__logo {
+      @extend .col-4;
+      @extend .col-xl-2;
+      @extend .d-flex;
+      @extend .align-items-center;
+      @extend .justify-content-center;
+
+      &--rli img {
+        height: 4rem;
+      }
+
+      &--eaa img {
+        height: 5rem;
+      }
+
+      &--gestalten img {
+        height: 5rem;
+      }
+
+      &--bbsr img {
+        height: 9rem;
+      }
+
+      &--bmwsb img {
+        height: 9rem;
+      }
+
+      &--bmi img {
+        height: 9rem;
+      }
+    }
   }
 
   img {
