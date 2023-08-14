@@ -27,12 +27,120 @@
 }
 
 .onboarding-modal {
+  .modal-body {
+    @extend .p-0;
+    height: 75vh;
+    overflow: hidden;
+  }
+
+  .carousel {
+    @extend .h-100;
+  }
+
+  .carousel-inner {
+    @extend .h-100;
+  }
+
   .carousel-item {
+    @extend .h-100;
+    @extend .p-2;
+
+    .row {
+      @extend .h-100;
+    }
+
     &__content {
       @extend .col-8;
       @extend .bg-white;
       @extend .ps-5;
       @extend .pe-4;
+    }
+  }
+
+  .carousel-item.carousel-item--first {
+    @extend .p-0;
+
+    .carousel-item__content {
+      @extend .h-100;
+      @extend .p-0;
+      @extend .d-flex;
+      @extend .flex-column;
+      @extend .w-100;
+    }
+
+    .carousel__text {
+      @extend .row;
+      @extend .p-2;
+      @extend .bg-light;
+
+      &-logo {
+        @extend .d-flex;
+        @extend .flex-row;
+        @extend .justify-content-center;
+        @extend .align-items-center;
+
+        img {
+          height: 5rem;
+        }
+      }
+
+      &-content {
+        max-width: 36rem;
+        margin: 0 auto;
+
+        .title {
+          @extend .text-center;
+          @extend .fw-semibold;
+          @extend .fs-4;
+        }
+
+        .content {
+          @extend .text-center;
+          @extend .fs-4;
+        }
+      }
+    }
+
+    .carousel__logos {
+      @extend .row;
+      @extend .px-2;
+      max-height: 20rem;
+
+      @include media-breakpoint-up(xl) {
+        max-height: 11rem;
+      }
+    }
+
+    .carousel__logo {
+      @extend .col-4;
+      @extend .col-xl-2;
+      @extend .d-flex;
+      @extend .align-items-center;
+      @extend .justify-content-center;
+
+      &--rli img {
+        height: 4rem;
+      }
+
+      &--eaa img {
+        height: 5rem;
+      }
+
+      &--gestalten img {
+        height: 5rem;
+      }
+
+      &--bbsr img {
+        height: 9rem;
+      }
+
+      &--bmwsb img {
+        height: 9rem;
+      }
+
+      &--bmi img {
+        height: 9rem;
+      }
     }
   }
 
@@ -61,10 +169,5 @@
 
   .btn, .modal-footer button {
     opacity: 1 !important;
-  }
-
-  .modal-body {
-    height: 40rem;
-    overflow: hidden;
   }
 }

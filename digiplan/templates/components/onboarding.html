@@ -11,15 +11,40 @@
         <!-- Carousel -->
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="false" data-bs-wrap="false">
           <div class="carousel-inner">
-            <div class="carousel-item active">
+            <div class="carousel-item carousel-item--first active">
               <div class="row">
-                <div class="col-4">
-                  <img src="{% static 'images/map_clusters.png' %}" alt="...">
-                </div>
-                <div class="carousel-item__content">
-                  <h2>Willkommen beim Digiplan Tool</h2>
-                  <p>StEmp-ABW ist ein Stakeholder-Empowerment-Tool für die Region Anhalt-Bitterfeld-Wittenberg (ABW). Es wurde vom Reiner Lemoine Institut (RLI) entwickelt.</p>
-                  <p style="background-color: orange; border-style: dashed; color: black; padding: 1em; text-align: center;">UNDER DEVELOPMENT - Das Tool befindet sich derzeit in der Entwicklung</p>
+                <div class="col">
+                  <div class="carousel-item__content">
+                    <div class="carousel__text">
+                      <div class="carousel__text-logo">
+                        <img src="{% static 'images/logos/digiplan-anhalt-logo.svg' %}" alt="Logo Digiplan Anhalt">
+                      </div>
+                      <div class="carousel__text-content">
+                        <p class="title">Warum das Ganze?</p>
+                        <p class="content">Die Energiewende kann nur gemeinsam erreicht werden. Wie aber können alle Interessensgruppen ihre Sichtweisen und Bedürfnisse in die Energiewendeplanung einbringen? </p>
+                      </div>
+                    </div>
+                    <div class="carousel__logos">
+                      <div class="carousel__logo carousel__logo--rli">
+                        <img src="{% static 'images/logos/RLI_logo_weiss.png' %}" alt="Logo RLI" title="Reiner Lemoine Institut">
+                      </div>
+                      <div class="carousel__logo carousel__logo--eaa">
+                        <img src="{% static 'images/logos/EAA_logo.png' %}" alt="Logo EAA" title="Energieavantgarde Anhalt">
+                      </div>
+                      <div class="carousel__logo carousel__logo--gestalten">
+                        <img src="{% static 'images/logos/VDI-VDE-BULE-BMI_Logo-4C.png' %}" alt="Logo Region Gestalten" title="Region Gestalten">
+                      </div>
+                      <div class="carousel__logo carousel__logo--bbsr">
+                        <img src="{% static 'images/logos/BBSR_geschl_RGB.jpg' %}" alt="Logo Bundesinstitut für Bau-, Stadt- und Raumforschung" title="Bundesinstitut für Bau-, Stadt- und Raumforschung">
+                      </div>
+                      <div class="carousel__logo carousel__logo--bmwsb">
+                        <img src="{% static 'images/logos/CDR_BMWSB_Fz_2021_WebSVG_de.svg' %}" alt="Logo Bundesministerium für Wohnen, Stadtentwicklung und Bauwesen" title="Bundesministerium für Wohnen, Stadtentwicklung und Bauwesen">
+                      </div>
+                      <div class="carousel__logo carousel__logo--bmi">
+                        <img src="{% static 'images/logos/CDR_BMI_Fz_2021_WebSVG_de.svg' %}" alt="Logo Bundesministerium des Innern und für Heimat" title="Bundesministerium des Innern und für Heimat">
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
