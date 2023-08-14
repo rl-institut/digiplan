@@ -27,12 +27,50 @@
 }
 
 .onboarding-modal {
+  .modal-body {
+    @extend .p-0;
+    height: 40rem;
+    overflow: hidden;
+  }
+
+  .carousel {
+    @extend .h-100;
+  }
+
+  .carousel-inner {
+    @extend .h-100;
+  }
+
   .carousel-item {
+    @extend .h-100;
+    @extend .p-2;
+
+    .row {
+      @extend .h-100;
+    }
+
     &__content {
       @extend .col-8;
       @extend .bg-white;
       @extend .ps-5;
       @extend .pe-4;
+    }
+  }
+
+  .carousel-item.carousel-item--first {
+    @extend .p-0;
+
+    .carousel-item__content {
+      @extend .h-100;
+      @extend .p-0;
+      @extend .d-flex;
+      @extend .flex-column;
+      @extend .w-100;
+    }
+
+    .carousel__text {
+      @extend .flex-grow-1;
+      @extend .bg-light;
     }
   }
 
@@ -61,10 +99,5 @@
 
   .btn, .modal-footer button {
     opacity: 1 !important;
-  }
-
-  .modal-body {
-    height: 40rem;
-    overflow: hidden;
   }
 }
