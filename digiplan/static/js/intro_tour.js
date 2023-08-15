@@ -61,7 +61,7 @@ tour.addStep({
             text: 'Weiter'
         }
     ],
-    id: 'creating'
+    id: 'situation_today'
 });
 
 tour.addStep({
@@ -87,7 +87,7 @@ tour.addStep({
             text: 'Weiter'
         }
     ],
-    id: 'creating'
+    id: 'layer_switch'
 });
 
 
@@ -156,13 +156,61 @@ tour.addStep({
         },
         {
             action() {
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'more_slider'
+});
+
+tour.addStep({
+    title: 'Nächster Schritt',
+    text: 'Hier gehts weiter. Klicken Sie, um zum nächsten Schritt zu kommen.',
+    attachTo: {
+        element: '#menu_next_btn',
+        on: 'bottom'
+    },advanceOn: {
+        selector: '#menu_next_btn',
+        event: 'click'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        }
+    ],
+    id: 'menu_next_btn2'
+});
+
+tour.addStep({
+    title: 'Einstellungen',
+    text: 'Schauen Sie sich verschiedene Daten an.',
+    attachTo: {
+        element: '#panel_3_results',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
                 return this.complete();
             },
             classes: 'shepherd-button-primary',
             text: 'Fertig'
         }
     ],
-    id: 'more_slider'
+    id: 'results'
 });
 
 onbaordingCloseBtn.addEventListener("click", function() {
