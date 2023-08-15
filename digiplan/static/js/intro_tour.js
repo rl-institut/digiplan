@@ -81,6 +81,7 @@ tour.addStep({
         },
         {
             action() {
+                document.getElementById("menu_next_btn").click();
                 return this.next();
             },
             classes: 'shepherd-button-primary',
