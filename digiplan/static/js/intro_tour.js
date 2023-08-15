@@ -97,6 +97,9 @@ tour.addStep({
     attachTo: {
         element: '#menu_next_btn',
         on: 'bottom'
+    },advanceOn: {
+        selector: '#menu_next_btn',
+        event: 'click'
     },
     buttons: [
         {
@@ -109,17 +112,6 @@ tour.addStep({
     ],
     id: 'menu_next_btn'
 });
-
-// Add event listeners to the navbar elements
-const navbarTabs = document.getElementById("menu_next_btn");
-
-navbarTabs.addEventListener('click', function() {
-    // Get the ID of the selected tab
-    const selectedTabId = getCurrentMenuTab().id;
-
-    // Show the corresponding step in the tour
-    tour.show(selectedTabId);
-  });
 
 tour.addStep({
     title: 'Einstellungen',
@@ -138,19 +130,41 @@ tour.addStep({
         },
         {
             action() {
+                return this.next();
+            },
+            classes: 'shepherd-button-primary',
+            text: 'Weiter'
+        }
+    ],
+    id: 'panel_1_today'
+});
+
+tour.addStep({
+    title: 'Einstellungen',
+    text: 'Hier können Sie mehr ins Detail gehen.',
+    attachTo: {
+        element: '.c-slider__label--more',
+        on: 'right'
+    },
+    buttons: [
+        {
+            action() {
+                return this.back();
+            },
+            classes: 'shepherd-button-secondary',
+            text: 'Zurück'
+        },
+        {
+            action() {
                 return this.complete();
             },
             classes: 'shepherd-button-primary',
             text: 'Fertig'
         }
     ],
-    id: 'panel_1_today'
+    id: 'more_slider'
 });
 
 onbaordingCloseBtn.addEventListener("click", function() {
   tour.start();
 });
-
-function getCurrentMenuTab() {
-    return document.querySelector("#js-panel-container > .panel__content > .tab-content > .active");
-}
