@@ -91,7 +91,7 @@ LEGEND = {
     _("Nature Landscape"): [
         legend.LegendLayer(_("Nature Conservation Area"), _("Naturschutzgebiete"), layer_id="nature_conservation_area"),
         legend.LegendLayer(_("Fauna Flora Habitat"), _("Fauna-Flora-Habitate"), layer_id="fauna_flora_habitat"),
-        legend.LegendLayer(_("Special Protection Area"), _("layer info"), layer_id="special_protection_area"),
+        legend.LegendLayer(_("Special Protection Area"), _("Vogelschutzgebiete"), layer_id="special_protection_area"),
         legend.LegendLayer(_("Biosphere Reserve"), _("Biosphärenreservate"), layer_id="biosphere_reserve"),
         legend.LegendLayer(
             _("Landscape Protection Area"),
