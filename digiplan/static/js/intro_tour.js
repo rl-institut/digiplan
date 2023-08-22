@@ -363,9 +363,9 @@ tour.addStep({
 
 tour.addStep({
     title: 'Einstellungen',
-    text: 'Wechseln Sie von der Karten- zur Diagramm-Ansicht, sobald die Simulation abgeschlossen ist.',
+    text: 'Wechseln Sie zwischen der Karten- und der Diagramm-Ansicht, sobald die Simulation abgeschlossen ist.',
     attachTo: {
-        element: '#chart-view-tab',
+        element: '#myTab',
         on: 'bottom'
     },
     buttons: [
