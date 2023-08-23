@@ -296,7 +296,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Nächster Schritt',
-    text: 'Hier gehts weiter zu den Ergebnissen und Sie starten auch gleich die Simulierung ihres Szenarios.',
+    text: 'Hier gehts weiter zu den Ergebnissen. Im Hintergrund wird dabei automatisch die Simulation Ihres Szenarios gestartet.',
     attachTo: {
         element: '#menu_next_btn',
         on: 'bottom'
@@ -323,7 +323,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Ergebnisse',
-    text: 'Schauen Sie sich die Ergebnisse der Simulation auf der Karte an. Wählen Sie eine Kategorie aus.',
+    text: 'Sobald die Simulation abgeschlossen ist, können Sie sich die Ergebnisse der Simulation auf der Karte anschauen. Wählen Sie dazu eine Kategorie aus.',
     attachTo: {
         element: '#panel_3_results',
         on: 'right'
@@ -350,7 +350,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Ergebnisse',
-    text: 'Wählen Sie auf der Karte eine Region aus und schauen Sie sich die detailierten Informationen in einem Diagramm an.',
+    text: 'Wählen Sie auf der Karte eine Region aus und schauen Sie sich die detaillierten Informationen in einem Diagramm an.',
     attachTo: {
         element: '.maplibregl-canvas',
         on: 'top'
@@ -392,7 +392,7 @@ tour.addStep({
         },
         {
             action() {
-                document.getElementById("chart_view_tab").click();
+                document.getElementById("chart-view-tab").click();
                 return this.next();
             },
             classes: 'shepherd-button-primary',
