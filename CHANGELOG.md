@@ -13,6 +13,9 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - adapt full load hours for renewables
 - demand results for 2045 scenario
 
+### Changed
+- remove language button
+
 ## [0.5.0] - 2023-07-13
 ### Added
 - heat settings set for oemof simulation

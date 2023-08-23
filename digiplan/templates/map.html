@@ -62,14 +62,6 @@
                 role="button" aria-controls="offcanvasContact">
               <a class="nav-link" href="#">{% translate "Contact" %}</a>
             </li>
-            <li class="top-nav__lang">
-              {% get_current_language as LANGUAGE_CODE %}
-              {% if LANGUAGE_CODE == "de" %}
-                <a href="/en/" class="btn btn-sm btn-outline-secondary">English</a>
-              {% else %}
-                <a href="/de/" class="btn btn-sm btn-outline-secondary">Deutsch</a>
-              {% endif %}
-            </li>
           </ul>
         </div>
       </div>
