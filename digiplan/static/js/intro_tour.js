@@ -29,6 +29,9 @@ tour.addStep({
         },
         {
             action() {
+                const statusquoDropdown = document.getElementById("situation_today");
+                statusquoDropdown.value = "capacity_statusquo";
+                PubSub.publish(mapEvent.CHOROPLETH_SELECTED, statusquoDropdown.value);
                 return this.next();
             },
             text: 'Weiter'
@@ -82,6 +85,15 @@ tour.addStep({
         },
         {
             action() {
+                // Hide status quo choropleth again
+                const statusquoDropdown = document.getElementById("situation_today");
+                statusquoDropdown.value = "";
+                deactivateChoropleth();
+                PubSub.publish(eventTopics.CHOROPLETH_DEACTIVATED);
+
+                // Activate layers
+                document.querySelector(".static-layer #wind").click();
+                document.querySelector(".static-layer #road_default").click();
                 return this.next();
             },
             classes: 'shepherd-button-primary',
@@ -136,6 +148,8 @@ tour.addStep({
         },
         {
             action() {
+                document.querySelector(".static-layer #wind").click();
+                document.querySelector(".static-layer #road_default").click();
                 return this.next();
             },
             classes: 'shepherd-button-primary',
