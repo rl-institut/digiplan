@@ -16,64 +16,39 @@
   },
   "yAxis": {
     "type": "category",
-    "data": ["2022", "Dein Szenario"],
+    "data": ["Dein Szenario", "2022"],
     "axisTick": {
       "show": false
     }
   },
   "series": [
     {
-      "name": "GHD",
+      "name": "Bilanziell",
       "type": "bar",
       "barWidth": "16",
-      "stack": "total",
-      "color": "#98C1D7",
+      "stack": "balance",
+      "color": "#897BD9",
       "label": {
         "show": false
       },
       "emphasis": {
         "focus": "series"
       },
-      "data": [10, 30]
+      "data": [60, 30]
     },
     {
-      "name": "Haushalte",
+      "name": "Zeitgleich",
       "type": "bar",
-      "stack": "total",
-      "color": "#6F9BB2",
+      "barWidth": "16",
+      "stack": "temporal",
+      "color": "#B5ADE0",
       "label": {
         "show": false
       },
       "emphasis": {
         "focus": "series"
       },
-      "data": [20, 25]
-    },
-    {
-      "name": "Industrie",
-      "type": "bar",
-      "stack": "total",
-      "color": "#376984",
-      "label": {
-        "show": false
-      },
-      "emphasis": {
-        "focus": "series"
-      },
-      "data": [30, 40]
-    },
-    {
-      "name": "Sonstiges",
-      "type": "bar",
-      "stack": "total",
-      "color": "#0D425F",
-      "label": {
-        "show": false
-      },
-      "emphasis": {
-        "focus": "series"
-      },
-      "data": [20, 40]
+      "data": [40, 10]
     }
   ]
 }
