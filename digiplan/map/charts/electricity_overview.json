@@ -20,7 +20,7 @@
     "containLabel": true
   },
   "yAxis": {
-    "data": ["Ziel 2045", "Mein Szenario", "Status Quo"],
+    "data": ["Ziel 2045", "Dein Szenario", "2022"],
     "axisLine": { "onZero": true },
     "splitLine": { "show": false },
     "splitArea": { "show": false }
@@ -29,7 +29,7 @@
     "type": "value",
     "show": true,
     "position": "bottom",
-    "name": "TWh",
+    "name": "GWh",
     "nameLocation": "end",
     "nameTextStyle": "Roboto",
     "width": "76",
@@ -105,7 +105,7 @@
       "data": [132, 334, 700]
     },
     {
-      "name": "Stromverbrauch GHD",
+      "name": "Verbrauch GHD",
       "type": "bar",
       "barWidth": "16",
       "stack": "demand",
@@ -119,7 +119,7 @@
       "data": [300, 344, 380]
     },
     {
-      "name": "Stromverbrauch Haushalte",
+      "name": "Verbrauch Haushalte",
       "type": "bar",
       "stack": "demand",
       "color": "#969696",
@@ -132,7 +132,7 @@
       "data": [254, 244, 380]
     },
     {
-      "name": "Stromverbrauch Industrie",
+      "name": "Verbrauch Industrie",
       "type": "bar",
       "barWidth": "35",
       "stack": "demand",
@@ -146,7 +146,7 @@
       "data": [280, 300, 350]
     },
     {
-      "name": "BEV",
+      "name": "EV",
       "type": "bar",
       "stack": "demand",
       "color": "#2F2F2F",
@@ -157,6 +157,34 @@
         }
       },
       "data": [145, 144, 180]
+    },
+    {
+      "name": "Import",
+      "type": "bar",
+      "barWidth": "16",
+      "stack": "import",
+      "color": "#F3AF9C",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [0, 20, 160]
+    },
+    {
+      "name": "Export",
+      "type": "bar",
+      "barWidth": "16",
+      "stack": "export",
+      "color": "#8ECEAB",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [0, 140, 50]
     }
   ]
 }
