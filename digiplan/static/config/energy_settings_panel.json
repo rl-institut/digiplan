@@ -9,7 +9,7 @@
     "start": 30,
     "status_quo": 50,
     "step": 5,
-    "tooltip": "{% trans 'The use of wind potential areas can be set here.\nNote: Since the setting always refers to future, more profitable systems, maintaining the current system capacity also leads to increases in yield.' %} ",
+    "tooltip": "{% trans 'Die Nutzung von Windpotenzialflächen kann hier eingestellt werden. \nHinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität zu Ertragssteigerungen.' %} ",
     "type": "slider",
     "sidepanel": true
   },
@@ -142,7 +142,7 @@
     "start": 5,
     "status_quo": 15,
     "step": 1,
-    "tooltip": "{% trans 'Run-of-river power plants' %}",
+    "tooltip": "{% trans 'Laufwasserkraftwerke' %}",
     "type": "slider"
   },
   "s_v_1": {
@@ -154,7 +154,7 @@
     "start": 50,
     "status_quo": 50,
     "step": 10,
-    "tooltip": "{% trans 'Power consumption without providing heat using power-to-heat (e.g. heat pumps)' %}",
+    "tooltip": "{% trans 'Stromverbrauch ohne Bereitstellung von Wärme durch Power-to-Heat (z. B. Wärmepumpen)' %}",
     "type": "slider",
     "sidepanel": true
   },
@@ -203,12 +203,12 @@
   },
     "s_s_g_3": {
     "class": "js-slider",
-    "label": "{% trans 'Storage of wind and PV energy (%)' %}",
+    "label": "{% trans 'Speicherung von Windernergie und Freiflächen-PV (%)' %}",
     "max": 200,
     "min": 0,
     "start": 5,
     "step": 10,
-    "tooltip": "{% trans 'Storage of wind and PV energy (%)' %}",
+    "tooltip": "{% trans 'Speicherung von Windernergie und Freiflächen-PV (%)' %}",
     "type": "slider"
   }
 }
