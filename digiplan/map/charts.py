@@ -167,7 +167,7 @@ class ElectricityOverviewChart(SimulationChart):
 class ElectricityCTSChart(SimulationChart):
     """Electricity CTS Chart. Shows greenhouse gas emissions."""
 
-    lookup = "electricity_ghg"
+    lookup = "electricity_autarky"
 
     def get_chart_data(self):  # noqa: D102, ANN201
         return calculations.detailed_overview(simulation_id=self.simulation_id)
