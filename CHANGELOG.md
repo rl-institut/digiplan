@@ -16,6 +16,9 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Changed
 - remove language button
 
+### Fixed
+- slider mark at wrong position
+
 ## [0.5.0] - 2023-07-13
 ### Added
 - heat settings set for oemof simulation

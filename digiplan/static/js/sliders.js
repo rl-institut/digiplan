@@ -500,7 +500,9 @@ function addMarks(data, marks) {
   let html = "";
 
   for (let i = 0; i < marks.length; i++) {
-    const percent = convertToPercent(marks[i][1], data.min, data.max);
+    let percent = convertToPercent(marks[i][1], data.min, data.max);
+    // Fix percentage due to offset
+    percent = percent - 2.5 - (3.5 * percent / 100);
     html += `<span class="showcase__mark" style="left: ${percent}%">`;
     html += marks[i][0];
     html += '</span>';
