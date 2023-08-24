@@ -9,8 +9,8 @@ const co2_emissions_scenario_div = document.getElementById("co2_emissions_scenar
 const co2_emissions_scenario_chart = echarts.init(co2_emissions_scenario_div);
 
 // Results view, initiliaze charts
-const detailed_overview_chart = echarts.init(document.getElementById("detailed_overview_chart"));
-const ghg_overview_chart = echarts.init(document.getElementById("ghg_overview_chart"));
+// const detailed_overview_chart = echarts.init(document.getElementById("detailed_overview_chart"));
+// const ghg_overview_chart = echarts.init(document.getElementById("ghg_overview_chart"));
 const electricity_overview_chart = echarts.init(document.getElementById("electricity_overview_chart"));
 const electricity_THG_chart = echarts.init(document.getElementById("electricity_THG_chart"));
 const mobility_overview_chart = echarts.init(document.getElementById("mobility_overview_chart"));
@@ -274,8 +274,8 @@ const co2_emissions_scenario = {
 };
 
 // get options for result view charts
-const detailed_overview_option = JSON.parse(document.getElementById("detailed_overview").textContent);
-const ghg_overview_option = JSON.parse(document.getElementById("ghg_overview").textContent);
+// const detailed_overview_option = JSON.parse(document.getElementById("detailed_overview").textContent);
+// const ghg_overview_option = JSON.parse(document.getElementById("ghg_overview").textContent);
 const electricity_overview_option = JSON.parse(document.getElementById("electricity_overview").textContent);
 const electricity_ghg_option = JSON.parse(document.getElementById("electricity_ghg").textContent);
 const mobility_overview_option = JSON.parse(document.getElementById("mobility_overview").textContent);
@@ -291,8 +291,8 @@ function resizeCharts() {
     co2_emissions_goal_chart.resize();
     renewable_share_scenario_chart.resize();
     co2_emissions_scenario_chart.resize();
-    detailed_overview_chart.resize();
-    ghg_overview_chart.resize();
+    // detailed_overview_chart.resize();
+    // ghg_overview_chart.resize();
     electricity_overview_chart.resize();
     electricity_THG_chart.resize();
     mobility_overview_chart.resize();
@@ -311,8 +311,8 @@ renewable_share_scenario_chart.setOption(renewable_share_scenario);
 co2_emissions_scenario_chart.setOption(co2_emissions_scenario);
 
 // Results, setOptions
-detailed_overview_chart.setOption(detailed_overview_option);
-ghg_overview_chart.setOption(ghg_overview_option);
+// detailed_overview_chart.setOption(detailed_overview_option);
+// ghg_overview_chart.setOption(ghg_overview_option);
 electricity_overview_chart.setOption(electricity_overview_option);
 electricity_THG_chart.setOption(electricity_ghg_option);
 mobility_overview_chart.setOption(mobility_overview_option);
