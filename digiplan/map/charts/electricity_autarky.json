@@ -1,0 +1,79 @@
+{
+  "grid": {
+    "bottom": "25%"
+  },
+  "xAxis": {
+    "type": "value",
+    "show": true,
+    "position": "bottom",
+    "name": "%",
+    "nameLocation": "end",
+    "nameTextStyle": "Roboto",
+    "width": "76",
+    "heigth": "32",
+    "fontWeight": "300",
+    "fontSize": "14"
+  },
+  "yAxis": {
+    "type": "category",
+    "data": ["2022", "Dein Szenario"],
+    "axisTick": {
+      "show": false
+    }
+  },
+  "series": [
+    {
+      "name": "GHD",
+      "type": "bar",
+      "barWidth": "16",
+      "stack": "total",
+      "color": "#98C1D7",
+      "label": {
+        "show": false
+      },
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [10, 30]
+    },
+    {
+      "name": "Haushalte",
+      "type": "bar",
+      "stack": "total",
+      "color": "#6F9BB2",
+      "label": {
+        "show": false
+      },
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [20, 25]
+    },
+    {
+      "name": "Industrie",
+      "type": "bar",
+      "stack": "total",
+      "color": "#376984",
+      "label": {
+        "show": false
+      },
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [30, 40]
+    },
+    {
+      "name": "Sonstiges",
+      "type": "bar",
+      "stack": "total",
+      "color": "#0D425F",
+      "label": {
+        "show": false
+      },
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [20, 40]
+    }
+  ]
+}
