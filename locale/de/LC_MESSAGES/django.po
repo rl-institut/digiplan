@@ -475,7 +475,7 @@ msgstr ""
 
 #: digiplan/map/popups.py:524 digiplan/map/popups.py:541
 msgid "Number of wind turbines"
-msgstr "Anzahl Windenergieanlagen je km²"
+msgstr "Anzahl Windenergieanlagen"
 
 #: digiplan/map/popups.py:525 digiplan/map/popups.py:542
 msgid "Description for number of wind turbines"
