@@ -17,7 +17,7 @@
   "yAxis": {
     "type": "value",
     "show": true,
-    "name": "Wind Turbines",
+    "name": "#",
     "nameLocation": "end",
     "nameTextStyle": "Roboto"
   },
@@ -26,8 +26,8 @@
       "type": "bar",
       "barWidth": "16",
       "data": [5],
-      "name": "Wind Turbines"
+      "name": "Windenergieanlagen"
     }
   ],
-  "title": { "text": "number of wind turbines" }
+  "title": { "text": "Anzahl Windenergieanlagen" }
 }

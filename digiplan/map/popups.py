@@ -226,6 +226,7 @@ class CapacityPopup(RegionPopup):
     """Popup to show capacities."""
 
     lookup = "capacity"
+    title = "Installierte Leistung EE"
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.capacities_per_municipality()
@@ -235,6 +236,7 @@ class Capacity2045Popup(RegionPopup):
     """Popup to show capacities in 2045."""
 
     lookup = "capacity"
+    title = "Installierte Leistung EE"
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.capacities_per_municipality_2045(self.map_state["simulation_id"])
@@ -256,6 +258,7 @@ class CapacitySquarePopup(RegionPopup):
     """Popup to show capacities per km²."""
 
     lookup = "capacity"
+    title = "Installierte Leistung EE pro km²"
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return capacities per square kilometer."""
@@ -265,7 +268,7 @@ class CapacitySquarePopup(RegionPopup):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Installed capacities per square meter")
+        chart_options["title"]["text"] = _("installierte Leistung nach Typ")
         chart_options["yAxis"]["name"] = _("MW/km²")
         return chart_options
 
@@ -274,6 +277,7 @@ class CapacitySquare2045Popup(RegionPopup):
     """Popup to show capacities per km² in 2045."""
 
     lookup = "capacity"
+    title = "Installierte Leistung EE pro km²"
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.calculate_square_for_value(
@@ -283,7 +287,7 @@ class CapacitySquare2045Popup(RegionPopup):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Installed capacities per square meter")
+        chart_options["title"]["text"] = _("installierte Leistung nach Typ")
         chart_options["yAxis"]["name"] = _("MW/km²")
         chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
@@ -301,7 +305,7 @@ class EnergyPopup(RegionPopup):
     """Popup to show energies."""
 
     lookup = "capacity"
-    title = _("Energies")
+    title = _("Gewonnene Energie aus EE")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.energies_per_municipality()
@@ -309,7 +313,7 @@ class EnergyPopup(RegionPopup):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Energies per technology")
+        chart_options["title"]["text"] = _("Energieanteile pro Technologie")
         chart_options["yAxis"]["name"] = _("GWh")
         return chart_options
 
@@ -318,7 +322,7 @@ class Energy2045Popup(RegionPopup):
     """Popup to show energies."""
 
     lookup = "capacity"
-    title = _("Energies")
+    title = _("Gewonnene Energie aus EE")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.energies_per_municipality_2045(self.map_state["simulation_id"])
@@ -326,7 +330,7 @@ class Energy2045Popup(RegionPopup):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Energies per technology")
+        chart_options["title"]["text"] = _("Energieanteile pro Technologie")
         chart_options["yAxis"]["name"] = _("GWh")
         chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
@@ -342,7 +346,7 @@ class EnergySharePopup(RegionPopup):
     """Popup to show energy shares."""
 
     lookup = "capacity"
-    title = _("Energie Shares")
+    title = _("Anteil Energie aus EE")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.energy_shares_per_municipality()
@@ -350,7 +354,7 @@ class EnergySharePopup(RegionPopup):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Energy shares per technology")
+        chart_options["title"]["text"] = _("Energieanteile pro Technologie")
         chart_options["yAxis"]["name"] = _("%")
         return chart_options
 
@@ -367,7 +371,7 @@ class EnergyCapitaPopup(RegionPopup):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Energy per capita per technology")
+        chart_options["title"]["text"] = _("Energieanteile pro Technologie")
         chart_options["yAxis"]["name"] = _("MWh")
         return chart_options
 
@@ -386,7 +390,7 @@ class EnergyCapita2045Popup(RegionPopup):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Energies per capita per technology")
+        chart_options["title"]["text"] = _("Energieanteile pro Technologie")
         chart_options["yAxis"]["name"] = _("GWh")
         chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
@@ -412,7 +416,7 @@ class EnergySquarePopup(RegionPopup):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Energie pro km²")
+        chart_options["title"]["text"] = _("Energieanteile pro km²")
         chart_options["yAxis"]["name"] = _("MWh")
         return chart_options
 
@@ -431,7 +435,7 @@ class EnergySquare2045Popup(RegionPopup):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Gewonnene Energie pro km²")
+        chart_options["title"]["text"] = _("Energieanteile pro km²")
         chart_options["yAxis"]["name"] = _("MWh")
         chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
@@ -449,6 +453,7 @@ class PopulationPopup(RegionPopup):
     """Popup to show Population."""
 
     lookup = "population"
+    title = "Bevölkerung"
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return population data."""
@@ -459,6 +464,7 @@ class PopulationDensityPopup(RegionPopup):
     """Popup to show Population Density."""
 
     lookup = "population"
+    title = "Bevölkerungsdichte"
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return population data squared."""
@@ -469,7 +475,7 @@ class PopulationDensityPopup(RegionPopup):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Population density per year")
-        chart_options["yAxis"]["name"] = _("Pop/km²")
+        chart_options["yAxis"]["name"] = _("EW/km²")
         return chart_options
 
 
@@ -523,7 +529,7 @@ class NumberWindturbinesPopup(RegionPopup):
     lookup = "wind_turbines"
     title = _("Number of wind turbines")
     description = _("Description for number of wind turbines")
-    unit = ""
+    unit = "#"
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return quantity of wind turbines per municipality (index)."""
@@ -540,7 +546,7 @@ class NumberWindturbines2045Popup(RegionPopup):
     lookup = "wind_turbines"
     title = _("Number of wind turbines")
     description = _("Description for number of wind turbines")
-    unit = ""
+    unit = "#"
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return quantity of wind turbines per municipality (index)."""
@@ -573,6 +579,7 @@ class NumberWindturbinesSquarePopup(RegionPopup):
     """Popup to show the number of wind turbines per km²."""
 
     lookup = "wind_turbines"
+    title = "Windenergieanlagen pro km²"
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return quantity of wind turbines per municipality (index)."""
@@ -582,7 +589,7 @@ class NumberWindturbinesSquarePopup(RegionPopup):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit in chart options."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Wind turbines per square meter")
+        chart_options["title"]["text"] = _("Windturbinen pro km²")
         chart_options["yAxis"]["name"] = _("WT/km²")
         return chart_options
 
@@ -595,6 +602,7 @@ class NumberWindturbinesSquare2045Popup(RegionPopup):
     """Popup to show the number of wind turbines per km² in 2045."""
 
     lookup = "wind_turbines"
+    title = "Windenergieanlagen pro km²"
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return quantity of wind turbines per municipality (index)."""
@@ -614,7 +622,7 @@ class NumberWindturbinesSquare2045Popup(RegionPopup):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit in chart options."""
         chart_options = super().get_chart_options()
-        chart_options["title"]["text"] = _("Wind turbines per square meter")
+        chart_options["title"]["text"] = _("Windturbinen pro km²")
         chart_options["yAxis"]["name"] = _("WT/km²")
         chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
