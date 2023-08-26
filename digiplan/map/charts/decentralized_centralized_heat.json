@@ -18,7 +18,7 @@
     }
   },
   "yAxis": {
-    "data": ["Ziel", "Mein Szenario", "Status Quo"],
+    "data": ["Ziel 2045", "Dein Szenario", "2022"],
     "axisLine": { "onZero": true },
     "splitLine": { "show": false },
     "splitArea": { "show": false }
