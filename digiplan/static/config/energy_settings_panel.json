@@ -86,7 +86,7 @@
     "min": 0,
     "start": 0,
     "step": 5,
-    "tooltip": "{% trans 'Stellen Sie ein, welcher Flächenanteil entlang von Autobahnen und Schienenwegen durch PV-Freiflächenanlagen genutzt werden soll (500m-Streifen). 100 % ist hierbei das maximal zur Verfügung stehende Potenzial (Kartendarstellung rechts), das jedoch nur zu einem Teil genutzt werden kann.' %} ",
+    "tooltip": "{% trans 'Welcher Flächenanteil entlang von Autobahnen und Schienenwegen (500 m-Streifen) soll durch PV-Freiflächenanlagen genutzt werden? 100 % ist hierbei das maximal zur Verfügung stehende Potenzial (Kartendarstellung), das jedoch nur zu einem Teil genutzt werden kann. Die Potenzialflächen stammen aus dem PV- und Windflächenrechner des RLI.' %} ",
     "type": "slider"
   },
   "s_pv_ff_4": {
@@ -96,7 +96,7 @@
     "min": 0,
     "start": 0,
     "step": 5,
-    "tooltip": "{% trans 'Stellen Sie ein, welcher Flächenanteil auf Agrar- und Grünlandflächen mit geringer Bodengüte (SQR<40) durch PV-Freiflächenanlagen genutzt werden soll. 100 % ist hierbei das maximal zur Verfügung stehende Potenzial (Kartendarstellung rechts), das jedoch nur zu einem Teil genutzt werden kann.' %} ",
+    "tooltip": "{% trans 'Welcher Flächenanteil auf Agrar- und Grünlandflächen mit geringer Bodengüte (SQR<40) soll durch PV-Freiflächenanlagen genutzt werden? 100 % ist hierbei das maximal zur Verfügung stehende Potenzial (Kartendarstellung), das jedoch nur zu einem Teil genutzt werden kann. Die Potenzialflächen stammen aus dem PV- und Windflächenrechner des RLI.' %} ",
     "type": "slider"
   },
   "s_pv_d_1": {
@@ -120,7 +120,7 @@
     "min": 0,
     "start": 0,
     "step": 5,
-    "tooltip": "{% trans 'Anteil genutzter Dächer (%). Das Maximum liegt hierbei bei 50 % aller Dächer von nicht-denkmalgeschützten Gebäuden mit Ausrichtung Süden, Osten und Westen sowie Flachdächern.' %}",
+    "tooltip": "{% trans 'Anteil genutzter Dächer (%). Das Maximum liegt hierbei bei 50 % aller Dächer von nicht-denkmalgeschützten Gebäuden mit Ausrichtung Süden, Osten und Westen sowie Flachdächern. Die Dachflächenpotenziale wurden auf Basis des Webtools der Regionalen Planungsgemeinschaft berechnet.' %}",
     "type": "slider"
   },
     "s_pv_d_4": {
@@ -142,7 +142,7 @@
     "start": 5,
     "status_quo": 15,
     "step": 1,
-    "tooltip": "{% trans 'Nennleistung der in der Region installierten Laufwasserkraftwerke in Megawatt. Da das Potenzial gilt hier als ausgeschöpft gilt, werden nur bestehende Anlagen berücksichtigt.' %}",
+    "tooltip": "{% trans 'Nennleistung der in der Region installierten Laufwasserkraftwerke in Megawatt. Da das Potenzial hier als ausgeschöpft gilt, werden nur bestehende Anlagen berücksichtigt.' %}",
     "type": "slider"
   },
   "s_v_1": {
