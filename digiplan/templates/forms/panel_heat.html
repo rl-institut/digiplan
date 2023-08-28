@@ -51,18 +51,33 @@
 <span class="panel__separator" aria-hidden="true"></span>
 
 <h2 class="panel__title title">{% trans "Consumption" %}</h2>
-
 {% include "widgets/slider.html" with field=form.w_v_1 %}
 <div class="sidepanel">
-  <p class="sidepanel__heading">
+  <div class="sidepanel__heading">
     {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set the future heat consumption per sector." %}</p>
-    {% include "widgets/slider.html" with field=form.w_v_3 %}
-    {% include "widgets/slider.html" with field=form.w_v_4 %}
-    {% include "widgets/slider.html" with field=form.w_v_5 %}
-    <p>{%  trans "With your settings, the heat consumption is 27% of today's heat consumption." %}</p>
+  </div>
+  <p class="sidepanel__indication">
+    {%  trans "Stelle den zukünftigen Wärmeverbrauch je Sektor ein:" %}
   </p>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.w_v_3 %}
+    </span>
+  </div>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.w_v_4 %}
+    </span>
+  </div>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.w_v_5 %}
+    </span>
+  </div>
+  <div class="sidepanel__results">
+    <p>{%  trans "Links siehst Du die Änderung über alle Sektoren für deine Einstellung (gewichtetes Mittel)." %}</p>
+  </div>
 </div>
 
 <span class="panel__separator" aria-hidden="true"></span>
