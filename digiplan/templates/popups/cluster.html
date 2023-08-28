@@ -6,16 +6,16 @@
   </div>
 
   <table>
-    <thead>
-      <th scope="col">{% trans 'Parameter' %}</th>
-      <th scope="col">{% trans 'Wert' %}</th>
-    </thead>
+<!--    <thead>-->
+<!--      <th scope="col">{% trans 'Parameter' %}</th>-->
+<!--      <th scope="col">{% trans 'Wert' %}</th>-->
+<!--    </thead>-->
     {% for key, value in data.items %}
       <tr>
         <td>{{ key }}</td>
         {%  if value != None  %}
           <td>{{ value }}</td>
-          {% else %}
+        {% else %}
           <td> - </td>
         {% endif %}
       </tr>
