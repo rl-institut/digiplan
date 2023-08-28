@@ -264,7 +264,7 @@ msgstr "Geo- oder Solarthermie-, Grubengas- und Klärschlamm-Anlagen"
 #: digiplan/map/map_config.py:50 digiplan/map/models.py:504
 #: digiplan/templates/forms/panel_heat.html:46
 msgid "Storage"
-msgstr "Batteriespeicher"
+msgstr "Speicher"
 
 #: digiplan/map/map_config.py:52
 msgid "Settlements Infrastructure"
@@ -1226,7 +1226,7 @@ msgstr ""
 #: digiplan/templates/forms/panel_energy.html:2
 #: digiplan/templates/forms/panel_heat.html:2
 msgid "Generation"
-msgstr "Allgemein"
+msgstr "Erzeugung"
 
 #: digiplan/templates/forms/panel_energy.html:9
 #: digiplan/templates/forms/panel_energy.html:50
