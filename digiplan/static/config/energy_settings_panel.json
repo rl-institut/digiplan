@@ -16,25 +16,25 @@
   "s_w_3": {
     "class": "js-sidepanel-switch",
     "label": "{% trans 'Nur bestehende VR/EG' %}",
-    "tooltip": "{% trans 'Nur in 2022 bestehende Vorrang-/Eignungsgebiete nach Sachlichem Teilplan Wind 2018.' %}",
+    "tooltip": "{% trans 'Nur die in 2022 rechtskräftig ausgewiesenen Vorrang-/Eignungsgebiete nach Sachlichem Teilplan Wind 2018 verwenden (ca. 0,9 % der Fläche).' %}",
     "type": "switch"
   },
   "s_w_4": {
     "class": "js-sidepanel-switch",
-    "label": "{% trans 'Vorranggebiete nach STP Wind 2027' %}",
-    "tooltip": "{% trans 'Vorschlag der Regionalen Planungsgemeinschaft nach Entwurf für Sachlichen Teilplan Wind 2027.' %}",
+    "label": "{% trans 'Planabsicht nach STP Wind 2027' %}",
+    "tooltip": "{% trans 'Planabsicht der Regionalen Planungsgemeinschaft nach Entwurf für Sachlichen Teilplan Wind 2027 (ca. 3 % der Fläche).' %}",
     "type": "switch"
   },
     "s_w_4_1": {
     "class": "js-sidepanel-switch",
     "label": "{% trans 'Vorranggebiete' %}",
-    "tooltip": "{% trans 'Vorranggebiete: Vorschlag der Regionalen Planungsgemeinschaft nach Entwurf für Sachlichen Teilplan Wind 2027.' %}",
+    "tooltip": "{% trans 'Vorranggebiete: Planabsicht der Regionalen Planungsgemeinschaft nach Entwurf für Sachlichen Teilplan Wind 2027 (ca. 2,7 % der Fläche).' %}",
     "type": "switch"
   },
     "s_w_4_2": {
     "class": "js-sidepanel-switch",
     "label": "{% trans 'Vorranggebiete Repowering' %}",
-    "tooltip": "{% trans 'Vorranggebiete für Repowering: Vorschlag der Regionalen Planungsgemeinschaft nach Entwurf für Sachlichen Teilplan Wind 2027.' %}",
+    "tooltip": "{% trans 'Vorranggebiete für Repowering: Planabsicht der Regionalen Planungsgemeinschaft nach Entwurf für Sachlichen Teilplan Wind 2027 (ca. 0,3 % der Fläche).' %}",
     "type": "switch"
   },
   "s_w_5": {
@@ -120,12 +120,12 @@
     "min": 0,
     "start": 0,
     "step": 5,
-    "tooltip": "{% trans 'Anteil genutzter Dächer (%)' %}",
+    "tooltip": "{% trans 'Anteil genutzter Dächer (%). Das Maximum liegt hierbei bei 50 % aller Dächer von nicht-denkmalgeschützten Gebäuden mit Ausrichtung Süden, Osten und Westen sowie Flachdächern.' %}",
     "type": "slider"
   },
     "s_pv_d_4": {
     "class": "js-slider",
-    "label": "{% trans 'Anteil PVA mit Stromspeicher (%)' %}",
+    "label": "{% trans 'Anteil Anlagen mit Stromspeicher (%)' %}",
     "max": 100,
     "min": 0,
     "start": 0,
