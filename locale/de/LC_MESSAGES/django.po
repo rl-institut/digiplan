@@ -241,7 +241,7 @@ msgstr "Wasserkraft"
 #: digiplan/map/map_config.py:37 digiplan/map/models.py:284
 #: digiplan/map/models.py:285
 msgid "Combustion"
-msgstr "Fossiles Kraftwerk"
+msgstr "Verbrennungskraftwerk"
 
 #: digiplan/map/map_config.py:43 digiplan/map/models.py:308
 #: digiplan/map/models.py:309
