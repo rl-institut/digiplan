@@ -147,30 +147,25 @@ class ClusterPopup(popups.Popup):
             "gsgk": models.GSGK,
             "storage": models.Storage,
         }[self.model_lookup]
+        # Some attributes have been removed, see
+        # https://github.com/rl-institut/digiplan/issues/332
         # TODO(Hendrik Huyskens): Add mapping
         # https://github.com/rl-institut-private/digiplan/issues/153
         default_attributes = {
             "name": "Name",
-            "mun_name": "Gemeindename",
-            "zip_code": "Postleitzahl",
-            "geometry_approximated": "Geschätzt",
-            "unit_count": "Anzahl",
-            "capacity_net": "Kapazität",
-            "status": "Einheit Betriebsstatus",
+            "mun_name": "Gemeinde",
+            "geometry_approximated": "Standort geschätzt",
+            "unit_count": "Anlagenanzahl",
+            "capacity_net": "Nettonennleistung (kW)",
+            "status": "Betriebsstatus",
             "city": "Ort",
             "commissioning_date": "Inbetriebnahmedatum",
             "commissioning_date_planned": "Geplantes Inbetriebnahmedatum",
-            "decommissioning_date": "Datum Endgültige Stilllegung",
-            "capacity_gross": "Bruttoleistung",
             "voltage_level": "Spannungsebene",
-            "mastr_id": "Einheit MaStR Nummer",
         }
         specific_attributes = {
             # multiple
-            "kwk_mastr_id": "Kwk MaStR Nummer",
-            "site_type": "Lage",
-            "citizens_unit": "Bürgerenergie",
-            "usage_sector": "Nutzungsbereich",
+            "citizens_unit": "Bürgerenergieanlage",
             "technology": "Technologie",
             "feedin_type": "Einspeisungsart",
             "th_capacity": "Thermische Nutzleistung",
@@ -186,12 +181,6 @@ class ClusterPopup(popups.Popup):
             "constraint_deactivation_animals": "Auflagen Abschaltung Tierschutz",
             "constraint_deactivation_ice": "Auflagen Abschaltung Eiswurf",
             # PV Roof / Ground
-            "power_limitation": "Leistungsbegrenzung",
-            "module_count": "Anzahl Module",
-            "orientation_primary": "Hauptausrichtung",
-            "orientation_secondary": "Nebenausrichtung",
-            "area_type": "Art Der Fläche",
-            "area_occupied": "In Anspruch Genommene Fläche",
             "landlord_to_tenant_electricity": "Mieterstrom Zugeordnet",
             # Hydro
             "water_origin": "Art Des Zuflusses",
@@ -199,13 +188,11 @@ class ClusterPopup(popups.Popup):
             # Biomass
             "fuel_type": "Biomasseart",
             "fuel": "Hauptbrennstoff",
-            "biomass_only": "Ausschliessliche Verwendung Biomasse",
-            "flexibility_bonus": "Biogas Inanspruchnahme Flexi Prämie",
             # Combustion
             "name_block": "Name Kraftwerksblock",
             "bnetza_id": "Kraftwerksnummer",
-            "fuel_other": "Weitere Brennstoffe",
             "fuels": "Hauptbrennstoff",
+            "fuel_other": "Weitere Brennstoffe",
             # GSGK
             "unit_type": "Einheittyp",
         }
