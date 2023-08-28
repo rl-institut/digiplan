@@ -31,11 +31,17 @@ LEGEND = {
             symbol="circle",
         ),
         SymbolLegendLayer(
-            _("Outdoor PV"),
+            
+            _("Ground-mounted PV"),
+           
             _("PV-Freiflächenanlagen: Installierte Leistung und Anzahl"),
+           
             layer_id="pvground",
+           
             color="#EFAD25",
+           
             symbol="circle",
+        ,
         ),
         SymbolLegendLayer(
             _("Hydro"),
