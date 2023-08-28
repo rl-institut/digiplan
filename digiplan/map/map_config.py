@@ -30,7 +30,13 @@ LEGEND = {
             color="#FFD660",
             symbol="circle",
         ),
-        SymbolLegendLayer(_("Outdoor PV"), _("Hydro layer"), layer_id="pvground", color="#EFAD25", symbol="circle"),
+        SymbolLegendLayer(
+            _("Ground-mounted PV"),
+            _("Hydro layer"),
+            layer_id="pvground",
+            color="#EFAD25",
+            symbol="circle",
+        ),
         SymbolLegendLayer(_("Hydro"), _("Hydro layer"), layer_id="hydro", color="#A9BDE8", symbol="circle"),
         SymbolLegendLayer(_("Biomass"), _("Wind turbine layer"), layer_id="biomass", color="#52C41A", symbol="circle"),
         SymbolLegendLayer(

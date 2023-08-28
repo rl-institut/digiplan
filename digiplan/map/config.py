@@ -171,7 +171,7 @@ SOURCES = init_sources()
 # SIMULATION
 
 SIMULATION_RENEWABLES = {
-    "ABW-solar-pv_ground": _("Outdoor PV"),
+    "ABW-solar-pv_ground": _("Ground-mounted PV"),
     "ABW-solar-pv_rooftop": _("Roof-mounted PV"),
     "ABW-wind-onshore": _("Wind turbine"),
     "ABW-hydro-ror": _("Hydro"),
