@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-28 10:46+0000\n"
+"POT-Creation-Date: 2023-08-28 11:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -178,7 +178,7 @@ msgstr ""
 msgid "Anzahl"
 msgstr ""
 
-#: digiplan/map/config.py:174 digiplan/map/map_config.py:33
+#: digiplan/map/config.py:174 digiplan/map/map_config.py:34
 #: digiplan/map/models.py:304 digiplan/map/models.py:305
 #, fuzzy
 #| msgid "Roof-mounted PV"
@@ -195,12 +195,12 @@ msgstr "Aufdach-PV"
 msgid "Wind turbine"
 msgstr "Windturbine"
 
-#: digiplan/map/config.py:177 digiplan/map/map_config.py:34
+#: digiplan/map/config.py:177 digiplan/map/map_config.py:40
 #: digiplan/map/models.py:342 digiplan/map/models.py:343
 msgid "Hydro"
 msgstr "Wasserkraft"
 
-#: digiplan/map/config.py:178 digiplan/map/map_config.py:35
+#: digiplan/map/config.py:178 digiplan/map/map_config.py:41
 #: digiplan/map/models.py:388 digiplan/map/models.py:389
 msgid "Biomass"
 msgstr "Biomasse"
@@ -237,9 +237,9 @@ msgstr "Strombedarf"
 msgid "Renewables"
 msgstr "Erneuerbare Energien"
 
-#: digiplan/map/map_config.py:21 digiplan/map/map_config.py:35
-#: digiplan/map/map_config.py:38 digiplan/map/map_config.py:43
-#: digiplan/map/map_config.py:44
+#: digiplan/map/map_config.py:21 digiplan/map/map_config.py:41
+#: digiplan/map/map_config.py:44 digiplan/map/map_config.py:49
+#: digiplan/map/map_config.py:50
 msgid "Wind turbine layer"
 msgstr "Windturbine"
 
@@ -247,133 +247,133 @@ msgstr "Windturbine"
 msgid "PV roof layer"
 msgstr ""
 
-#: digiplan/map/map_config.py:33 digiplan/map/map_config.py:34
+#: digiplan/map/map_config.py:35 digiplan/map/map_config.py:40
 msgid "Hydro layer"
 msgstr "Wasserkraft"
 
-#: digiplan/map/map_config.py:37 digiplan/map/models.py:436
+#: digiplan/map/map_config.py:43 digiplan/map/models.py:436
 #: digiplan/map/models.py:437
 msgid "Combustion"
 msgstr "Verbrennungskraftwerk"
 
-#: digiplan/map/map_config.py:43 digiplan/map/models.py:476
+#: digiplan/map/map_config.py:49 digiplan/map/models.py:476
 #: digiplan/map/models.py:477
 msgid "GSGK"
 msgstr "Geo- oder Solarthermie-, Grubengas- und Klärschlamm-Anlagen"
 
-#: digiplan/map/map_config.py:44 digiplan/map/models.py:504
+#: digiplan/map/map_config.py:50 digiplan/map/models.py:504
 #: digiplan/templates/forms/panel_heat.html:46
 msgid "Storage"
 msgstr "Batteriespeicher"
 
-#: digiplan/map/map_config.py:46
+#: digiplan/map/map_config.py:52
 msgid "Settlements Infrastructure"
 msgstr "Siedlungen und Infrastruktur"
 
-#: digiplan/map/map_config.py:47
+#: digiplan/map/map_config.py:53
 msgid "Settlement 0m"
 msgstr "Siedlungen"
 
-#: digiplan/map/map_config.py:47 digiplan/map/map_config.py:48
-#: digiplan/map/map_config.py:49 digiplan/map/map_config.py:50
-#: digiplan/map/map_config.py:51 digiplan/map/map_config.py:52
-#: digiplan/map/map_config.py:54 digiplan/map/map_config.py:55
+#: digiplan/map/map_config.py:53 digiplan/map/map_config.py:54
+#: digiplan/map/map_config.py:55 digiplan/map/map_config.py:56
+#: digiplan/map/map_config.py:57 digiplan/map/map_config.py:58
+#: digiplan/map/map_config.py:60 digiplan/map/map_config.py:61
 msgid "Aviation layer"
 msgstr "Luftverkehr"
 
-#: digiplan/map/map_config.py:48
+#: digiplan/map/map_config.py:54
 msgid "Industry"
 msgstr "Industrie"
 
-#: digiplan/map/map_config.py:49
+#: digiplan/map/map_config.py:55
 msgid "Road Railway 500m"
 msgstr "Straßen und Bahnverkehr (500 m Puffer)"
 
-#: digiplan/map/map_config.py:50
+#: digiplan/map/map_config.py:56
 msgid "Road"
 msgstr "Straßen"
 
-#: digiplan/map/map_config.py:51
+#: digiplan/map/map_config.py:57
 msgid "Railway"
 msgstr "Bahnverkehr"
 
-#: digiplan/map/map_config.py:52
+#: digiplan/map/map_config.py:58
 msgid "Aviation"
 msgstr "Luftverkehr"
 
-#: digiplan/map/map_config.py:53
+#: digiplan/map/map_config.py:59
 msgid "Air Traffic"
 msgstr "Drehfunkfeuer"
 
-#: digiplan/map/map_config.py:53
+#: digiplan/map/map_config.py:59
 msgid "Air traffic layer"
 msgstr "Drehfunkfeuer"
 
-#: digiplan/map/map_config.py:54
+#: digiplan/map/map_config.py:60
 msgid "Military"
 msgstr "Militär"
 
-#: digiplan/map/map_config.py:55
+#: digiplan/map/map_config.py:61
 msgid "Grid"
 msgstr "Stromnetze (>=110 kV)"
 
-#: digiplan/map/map_config.py:57
+#: digiplan/map/map_config.py:63
 msgid "Nature Landscape"
 msgstr "Natur und Landschaft"
 
-#: digiplan/map/map_config.py:58
+#: digiplan/map/map_config.py:64
 msgid "Nature Conservation Area"
 msgstr "Naturschutzgebiete"
 
-#: digiplan/map/map_config.py:58 digiplan/map/map_config.py:59
-#: digiplan/map/map_config.py:60 digiplan/map/map_config.py:62
-#: digiplan/map/map_config.py:63 digiplan/map/map_config.py:66
-#: digiplan/map/map_config.py:69 digiplan/map/map_config.py:70
-#: digiplan/map/map_config.py:71 digiplan/map/map_config.py:72
+#: digiplan/map/map_config.py:64 digiplan/map/map_config.py:65
+#: digiplan/map/map_config.py:66 digiplan/map/map_config.py:68
+#: digiplan/map/map_config.py:69 digiplan/map/map_config.py:72
+#: digiplan/map/map_config.py:75 digiplan/map/map_config.py:76
+#: digiplan/map/map_config.py:77 digiplan/map/map_config.py:78
 msgid "layer info"
 msgstr ""
 
-#: digiplan/map/map_config.py:59
+#: digiplan/map/map_config.py:65
 msgid "Fauna Flora Habitat"
 msgstr "Fauna Flora Habitat"
 
-#: digiplan/map/map_config.py:60
+#: digiplan/map/map_config.py:66
 msgid "Special Protection Area"
 msgstr "Vogelschutzgebiete"
 
-#: digiplan/map/map_config.py:61
+#: digiplan/map/map_config.py:67
 msgid "Biosphere Reserve"
 msgstr "Biosphärenreservate"
 
-#: digiplan/map/map_config.py:61
+#: digiplan/map/map_config.py:67
 msgid "Biosphere Reserve layer"
 msgstr "Biosphärenreservate"
 
-#: digiplan/map/map_config.py:62
+#: digiplan/map/map_config.py:68
 msgid "Landscape Protection Area"
 msgstr "Landschaftsschutzgebiete"
 
-#: digiplan/map/map_config.py:63
+#: digiplan/map/map_config.py:69
 msgid "Forest"
 msgstr "Wälder"
 
-#: digiplan/map/map_config.py:65
+#: digiplan/map/map_config.py:71
 msgid "Drinking Water Protection Area"
 msgstr "Wasserschutzgebiete"
 
-#: digiplan/map/map_config.py:69
+#: digiplan/map/map_config.py:75
 msgid "Water"
 msgstr "Gewässser"
 
-#: digiplan/map/map_config.py:70
+#: digiplan/map/map_config.py:76
 msgid "Floodplain"
 msgstr "Überschwemmungsgebiete"
 
-#: digiplan/map/map_config.py:71
+#: digiplan/map/map_config.py:77
 msgid "Soil Quality High"
 msgstr "Ackerflächen mit hoher Bodenqualität"
 
-#: digiplan/map/map_config.py:72
+#: digiplan/map/map_config.py:78
 msgid "Soil Quality Low"
 msgstr "Ackerflächen mit geringer Bodenqualität"
 
