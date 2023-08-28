@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-28 11:23+0000\n"
+"POT-Creation-Date: 2023-08-28 12:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -495,6 +495,364 @@ msgstr ""
 #: digiplan/map/popups.py:787 digiplan/map/popups.py:805
 msgid "Wärmebedarf je EinwohnerIn"
 msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:6
+#, fuzzy
+#| msgid "Wind energy (MW)"
+msgid "Windenergie (MW)"
+msgstr "Windenergie"
+
+#: digiplan/static/config/energy_settings_panel.json:12
+#, python-format
+msgid ""
+"Nennleistung der in der Region installierten Windenergieanlagen in Megawatt. "
+"Die dargestellten Ziele für 2045 sind abgeleitet aus den im "
+"Windenergieflächenbedarfsgesetz festgesetzten Zielen für Sachsen-Anhalt (2,2 "
+"%% bis 2032).\\n\\nHinweis: Da sich die Einstellung immer auf zukünftige, "
+"ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen "
+"Anlagenkapazität zu Ertragssteigerungen."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:18
+msgid "Nur bestehende VR/EG"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:19
+msgid ""
+"Nur in 2022 bestehende Vorrang-/Eignungsgebiete nach Sachlichem Teilplan "
+"Wind 2018."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:24
+msgid "Vorranggebiete nach STP Wind 2027"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:25
+msgid ""
+"Vorschlag der Regionalen Planungsgemeinschaft nach Entwurf für Sachlichen "
+"Teilplan Wind 2027."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:30
+msgid "Vorranggebiete"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:31
+msgid ""
+"Vorranggebiete: Vorschlag der Regionalen Planungsgemeinschaft nach Entwurf "
+"für Sachlichen Teilplan Wind 2027."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:36
+msgid "Vorranggebiete Repowering"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:37
+msgid ""
+"Vorranggebiete für Repowering: Vorschlag der Regionalen Planungsgemeinschaft "
+"nach Entwurf für Sachlichen Teilplan Wind 2027."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:42
+msgid "Freier Zubau im Suchraum"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:43
+msgid ""
+"Hier kann die Nutzung der von der Regionalen Planungsgemeinschaft "
+"ermittelten Suchräume frei eingestellt werden.\\nDiese Suchräume können "
+"jedoch nur zu einem Teil für die Windenergie genutzt werden."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:48
+msgid "Nutzung Suchraum Offenland"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:49
+msgid ""
+"Hier kann die Nutzung des von der Regionalen Planungsgemeinschaft "
+"ermittelten Suchraums im Offenland frei eingestellt werden.\\nDieser "
+"Suchraum kann jedoch nur zu einem Teil für die Windenergie genutzt werden."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:59
+msgid "Nutzung Suchraum Wald"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:60
+msgid ""
+"Hier kann die Nutzung des von der Regionalen Planungsgemeinschaft "
+"ermittelten Suchraums in Wäldern frei eingestellt werden.\\nDieser Suchraum "
+"kann jedoch nur zu einem Teil für die Windenergie genutzt werden."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:72
+msgid "Freiflächen-PV (MWp)"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:78
+msgid ""
+"Nennleistung der in der Region installierten Freiflächen-PV-Anlagen in "
+"Megawatt (peak). Die dargestellten Ziele für 2045 sind abgeleitet aus den im "
+"EEG festgesetzten Zielen und den verfügbaren Potenzialen in der Region."
+"\\n\\nHinweis: Da sich die Einstellung immer auf zukünftige, ertragreichere "
+"Anlagen bezieht, führt auch die Beibehaltung der aktuellen Anlagenkapazität "
+"zu Ertragssteigerungen."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:84
+#, python-format
+msgid "Flächen entlang Autobahnen und Schienenwegen (%%)"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:89
+#, python-format
+msgid ""
+"Stellen Sie ein, welcher Flächenanteil entlang von Autobahnen und "
+"Schienenwegen durch PV-Freiflächenanlagen genutzt werden soll (500m-"
+"Streifen). 100 %% ist hierbei das maximal zur Verfügung stehende Potenzial "
+"(Kartendarstellung rechts), das jedoch nur zu einem Teil genutzt werden kann."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:94
+#, python-format
+msgid "Agrar- und Grünlandflächen (%%)"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:99
+#, python-format
+msgid ""
+"Stellen Sie ein, welcher Flächenanteil auf Agrar- und Grünlandflächen mit "
+"geringer Bodengüte (SQR<40) durch PV-Freiflächenanlagen genutzt werden soll. "
+"100 %% ist hierbei das maximal zur Verfügung stehende Potenzial "
+"(Kartendarstellung rechts), das jedoch nur zu einem Teil genutzt werden kann."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:106
+msgid "Aufdach-PV (MWp)"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:112
+msgid ""
+"Nennleistung der in der Region installierten PV-Aufdachanlagen in Megawatt "
+"(peak). Die dargestellten Ziele für 2045 sind abgeleitet aus den im EEG "
+"festgesetzten Zielen und den verfügbaren Potenzialen (Dachflächen) in der "
+"Region.\\n\\nHinweis: Da sich die Einstellung immer auf zukünftige, "
+"ertragreichere Anlagen bezieht, führt auch die Beibehaltung der aktuellen "
+"Anlagenkapazität zu Ertragssteigerungen."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:118
+#: digiplan/static/config/energy_settings_panel.json:123
+#, python-format
+msgid "Anteil genutzter Dächer (%%)"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:128
+#, python-format
+msgid "Anteil PVA mit Stromspeicher (%%)"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:133
+msgid ""
+"Anteil der PV-Aufdachanlagen, die mit einem Strom(heim)speicher ausgestattet "
+"werden."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:139
+msgid "Wasserkraft (MW)"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:145
+msgid ""
+"Nennleistung der in der Region installierten Laufwasserkraftwerke in "
+"Megawatt."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:151
+#, python-format
+msgid "Stromverbrauch, ohne Wärmeerzeugung (%%)"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:157
+msgid ""
+"Stromverbrauch ohne Bereitstellung von Wärme durch Power-to-Heat (z. B. "
+"Wärmepumpen)"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:164
+#, python-format
+msgid "Haushalte (%%)"
+msgstr "Haushalte (%%)"
+
+#: digiplan/static/config/energy_settings_panel.json:169
+#: digiplan/static/config/energy_settings_panel.json:179
+#: digiplan/static/config/energy_settings_panel.json:189
+msgid "Relativer Stromverbrauch gegenüber heute."
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:174
+#, python-format
+msgid "Gewerbe, Handel, Dienstleistungen (%%)"
+msgstr ""
+
+#: digiplan/static/config/energy_settings_panel.json:184
+#, fuzzy, python-format
+#| msgid "Industry (%%)"
+msgid "Industrie (%%)"
+msgstr "Industrie (%%)"
+
+#: digiplan/static/config/energy_settings_panel.json:194
+#: digiplan/static/config/energy_settings_panel.json:200
+#, fuzzy
+#| msgid "Large scale batteries (MWh)"
+msgid "Großbatterien (MWh)"
+msgstr "Großspeicher (GWh)"
+
+#: digiplan/static/config/energy_settings_panel.json:206
+#: digiplan/static/config/energy_settings_panel.json:211
+#, python-format
+msgid "Speicherung von Windenergie und Freiflächen-PV (%%)"
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:5
+#: digiplan/static/config/heat_settings_panel.json:121
+#, python-format
+msgid "Decentralized (%%)"
+msgstr "Dezentral"
+
+#: digiplan/static/config/heat_settings_panel.json:11
+msgid "Dezentrale Wärmeversorgung"
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:17
+#: digiplan/static/config/heat_settings_panel.json:87
+#, python-format
+msgid "Households (%%)"
+msgstr "Haushalte (%%)"
+
+#: digiplan/static/config/heat_settings_panel.json:23
+msgid ""
+"Heat pumps for heating and hot water in households with their own heat "
+"generation"
+msgstr ""
+"Stellen Sie den Anteil von Wärmepumpen für Verbraucher mit eigener "
+"Wärmeerzeugung je Sektor ein."
+
+#: digiplan/static/config/heat_settings_panel.json:28
+#: digiplan/static/config/heat_settings_panel.json:98
+#, python-format
+msgid "Commercial, Trade, Services (%%)"
+msgstr "Gewerbe, Handel, Dienstleistungen (%%)"
+
+#: digiplan/static/config/heat_settings_panel.json:34
+msgid ""
+"Stellen Sie den Anteil von Wärmepumpen für Heizung und Warmwasser im "
+"Gewerbe-, Handels- und Dienstleistungssektor mit eigener Wärmeerzeugung ein."
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:39
+#: digiplan/static/config/heat_settings_panel.json:109
+#, python-format
+msgid "Industry (%%)"
+msgstr "Industrie (%%)"
+
+#: digiplan/static/config/heat_settings_panel.json:45
+msgid ""
+"Stellen Sie den Anteil von Wärmepumpen für Heizung, Warmwasser und "
+"Prozesswärme in der Industrie mit eigener Wärmeerzeugung ein."
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:51
+#, python-format
+msgid "District heating (%%)"
+msgstr "Fernwärme (%%)"
+
+#: digiplan/static/config/heat_settings_panel.json:57
+msgid "Fernwärmeversorgung"
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:63
+#, python-format
+msgid "Share (%%)"
+msgstr "LSG-Nutzung (%%)"
+
+#: digiplan/static/config/heat_settings_panel.json:69
+msgid ""
+"Stellen sie den Anteil von Wärmepumpen für Heizung, Warmwasser und "
+"Prozesswärme in Fernwärmenetzen ein."
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:75
+#, python-format
+msgid "Heat consumption (%%)"
+msgstr "Verbrauch (%%)"
+
+#: digiplan/static/config/heat_settings_panel.json:81
+msgid "Wärmeverbrauch von dezentralen Wärmeerzeugern und Fernwärmenetzen"
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:93
+msgid ""
+"Umfasst Heizung und Warmwasser in Haushalten mit eigener Wärmeerzeugung und "
+"Haushalten in Fernwärmenetzen."
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:104
+msgid ""
+"Umfasst Heizung und Warmwasser im Gewerbe-, Einzelhandels- und "
+"Dienstleistungssektor mit eigener Wärmeerzeugung und in Fernwärmenetzen."
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:115
+msgid ""
+"Umfasst Heizwärme, Warmwasser und Prozesswärme in der Industrie mit eigener "
+"Wärmeerzeugung und in Fernwärmenetzen."
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:127
+msgid "Speicherung in der dezentralen Wärmeversorgung"
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:133
+#: digiplan/static/config/heat_settings_panel.json:157
+#, python-format
+msgid "Hot water tanks (%%)"
+msgstr "Heimspeicher (%%)"
+
+#: digiplan/static/config/heat_settings_panel.json:139
+msgid "Warmwasserspeicher für Heizung, Warmwasser und Prozesswärme"
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:145
+#, python-format
+msgid "Large heat storage (%%)"
+msgstr "Großwärmespeicher (%%)"
+
+#: digiplan/static/config/heat_settings_panel.json:151
+msgid "Speicherung in der Fernwärmeversorgung"
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:163
+msgid "Warmwasserspeicher für Heizung, Warmwasser und Prozesswärme."
+msgstr ""
+
+#: digiplan/static/config/traffic_settings_panel.json:5
+#: digiplan/static/config/traffic_settings_panel.json:11
+#, python-format
+msgid "Share of battery-electric vehicles (%%)"
+msgstr "Anteil privater batterieelektrischer Fahrzeuge (%%)"
+
+#: digiplan/static/config/traffic_settings_panel.json:18
+#, python-format
+msgid "Share of battery electric and plugin-hybrid vehicles (%%)"
+msgstr "Anteil privater batterieelektrischer Fahrzeuge (%%)"
+
+#: digiplan/static/config/traffic_settings_panel.json:24
+#, fuzzy
+#| msgid "Share of battery electric and plugin-hybrid vehicles (%%)"
+msgid "Personal battery electric and plug-in hybrid vehicles"
+msgstr "Anteil privater batterieelektrischer Fahrzeuge (%%)"
 
 #: digiplan/templates/components/map.html:14
 msgid "Region as of today"
@@ -1130,9 +1488,6 @@ msgstr "mehr"
 #~ msgid "Wind turbines per square meter"
 #~ msgstr "Windturbine"
 
-#~ msgid "Wind energy (MW)"
-#~ msgstr "Windenergie"
-
 #~ msgid "Only previous priority areas/suitable areas."
 #~ msgstr "Nur bisherige VR/EG"
 
@@ -1185,66 +1540,8 @@ msgstr "mehr"
 #~ "pumps)"
 #~ msgstr "Stromverbrauch, ohne Wärmeerzeugung (%%)"
 
-#, python-format
-#~ msgid "Households (%%)"
-#~ msgstr "Haushalte (%%)"
-
-#, python-format
-#~ msgid "Haushalte (%%)"
-#~ msgstr "Haushalte (%%)"
-
-#, python-format
-#~ msgid "Commercial, Trade, Services (%%)"
-#~ msgstr "Gewerbe, Handel, Dienstleistungen (%%)"
-
-#, python-format
-#~ msgid "Industry (%%)"
-#~ msgstr "Industrie (%%)"
-
-#~ msgid "Large scale batteries (MWh)"
-#~ msgstr "Großspeicher (GWh)"
-
-#, python-format
-#~ msgid "Decentralized (%%)"
-#~ msgstr "Dezentral"
-
 #~ msgid "Decentralized heat supply"
 #~ msgstr "Dezentral"
-
-#~ msgid ""
-#~ "Heat pumps for heating and hot water in households with their own heat "
-#~ "generation"
-#~ msgstr ""
-#~ "Stellen Sie den Anteil von Wärmepumpen für Verbraucher mit eigener "
-#~ "Wärmeerzeugung je Sektor ein."
-
-#, python-format
-#~ msgid "District heating (%%)"
-#~ msgstr "Fernwärme (%%)"
-
-#, python-format
-#~ msgid "Share (%%)"
-#~ msgstr "LSG-Nutzung (%%)"
-
-#, python-format
-#~ msgid "Heat consumption (%%)"
-#~ msgstr "Verbrauch (%%)"
-
-#, python-format
-#~ msgid "Hot water tanks (%%)"
-#~ msgstr "Heimspeicher (%%)"
-
-#, python-format
-#~ msgid "Large heat storage (%%)"
-#~ msgstr "Großwärmespeicher (%%)"
-
-#, python-format
-#~ msgid "Share of battery-electric vehicles (%%)"
-#~ msgstr "Anteil privater batterieelektrischer Fahrzeuge (%%)"
-
-#, python-format
-#~ msgid "Share of battery electric and plugin-hybrid vehicles (%%)"
-#~ msgstr "Anteil privater batterieelektrischer Fahrzeuge (%%)"
 
 #, fuzzy, python-format
 #~| msgid ""
