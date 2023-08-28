@@ -501,8 +501,8 @@ class Storage(RenewableModel):
     }
 
     class Meta:  # noqa: D106
-        verbose_name = _("Storage")
-        verbose_name_plural = _("Storages")
+        verbose_name = _("Battery storage")
+        verbose_name_plural = _("Battery storages")
 
 
 class StaticRegionModel(models.Model):
