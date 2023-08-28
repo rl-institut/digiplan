@@ -142,19 +142,19 @@
     "start": 5,
     "status_quo": 15,
     "step": 1,
-    "tooltip": "{% trans 'Nennleistung der in der Region installierten Laufwasserkraftwerke in Megawatt.' %}",
+    "tooltip": "{% trans 'Nennleistung der in der Region installierten Laufwasserkraftwerke in Megawatt. Da das Potenzial gilt hier als ausgeschöpft gilt, werden nur bestehende Anlagen berücksichtigt.' %}",
     "type": "slider"
   },
   "s_v_1": {
     "class": "js-slider js-slider-panel",
     "grid": false,
-    "label": "{% trans 'Stromverbrauch, ohne Wärmeerzeugung (%)' %}",
+    "label": "{% trans 'Stromverbrauch, ohne Wärme (%)' %}",
     "max": 210,
     "min": 50,
     "start": 50,
     "status_quo": 50,
     "step": 10,
-    "tooltip": "{% trans 'Stromverbrauch ohne Bereitstellung von Wärme durch Power-to-Heat (z. B. Wärmepumpen)' %}",
+    "tooltip": "{% trans 'Relativer Stromverbrauch von Haushalten, GHD und Industrie gegenüber heute, ohne Bereitstellung von Wärme durch Power-to-Heat (z. B. Wärmepumpen). Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien.' %}",
     "type": "slider",
     "sidepanel": true
   },
@@ -166,7 +166,7 @@
     "min": 50,
     "start": 100,
     "step": 10,
-    "tooltip": "{% trans 'Relativer Stromverbrauch gegenüber heute.' %}",
+    "tooltip": "{% trans 'Relativer Stromverbrauch gegenüber heute. Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien.' %}",
     "type": "slider"
   },
   "s_v_4": {
@@ -176,7 +176,7 @@
     "min": 50,
     "start": 100,
     "step": 10,
-    "tooltip": "{% trans 'Relativer Stromverbrauch gegenüber heute.' %}",
+    "tooltip": "{% trans 'Relativer Stromverbrauch gegenüber heute. Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien.' %}",
     "type": "slider"
   },
   "s_v_5": {
@@ -186,7 +186,7 @@
     "min": 50,
     "start": 100,
     "step": 10,
-    "tooltip": "{% trans 'Relativer Stromverbrauch gegenüber heute.' %}",
+    "tooltip": "{% trans 'Relativer Stromverbrauch gegenüber heute. Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien.' %}",
     "type": "slider"
   },
   "s_s_g_1": {
