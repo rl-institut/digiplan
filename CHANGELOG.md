@@ -18,6 +18,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ### Fixed
 - slider mark at wrong position
+- reduce number of attributes in unit popups
 
 ## [0.5.0] - 2023-07-13
 ### Added
