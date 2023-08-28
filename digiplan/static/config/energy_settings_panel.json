@@ -208,7 +208,7 @@
     "min": 0,
     "start": 5,
     "step": 10,
-    "tooltip": "{% trans 'Wieviel der täglich (im Mittel) eingespeisten Energiemenge aus Windenergie und Freiflächen-PV sollen mit Hilfe von Großbatterien zwischengespeichert werden können?'' %}",
+    "tooltip": "{% trans 'Wieviel der täglich (im Mittel) eingespeisten Energiemenge aus Windenergie und Freiflächen-PV sollen mit Hilfe von Großbatterien zwischengespeichert werden können?' %}",
     "type": "slider"
   }
 }
