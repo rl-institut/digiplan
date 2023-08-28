@@ -83,25 +83,34 @@
 <span class="panel__separator" aria-hidden="true"></span>
 
 <h2 class="panel__title title">{% trans "Storage" %}</h2>
-
 {% include "widgets/slider.html" with field=form.w_d_s_1 %}
 <div class="sidepanel">
-  <p class="sidepanel__heading">
+  <div class="sidepanel__heading">
     {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set how much of the daily heat requirement should be able to be temporarily stored in hot water tanks." %}</p>
-    {% include "widgets/slider.html" with field=form.w_d_s_3 %}
-    <p>{%  trans "Mit Ihren Einstellungen können 32% des täglichen Wärmeverbrauchs zwischengespeichert werden. Das entspricht einer Speicherkapazität von 3 GWh." %}</p>
+  </div>
+  <p class="sidepanel__indication">
+    {%  trans "Stelle ein, wieviel des täglichen Wärmebedarfs in dezentralen Wärmesystemen in kleinen Warmwasserspeichern zwischengespeichert werden können sollen:" %}
   </p>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.w_d_s_3 %}
+    </span>
+  </div>
 </div>
 
 {% include "widgets/slider.html" with field=form.w_z_s_1 %}
 <div class="sidepanel">
-  <p class="sidepanel__heading">
+  <div class="sidepanel__heading">
     {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set how much of the daily heat requirement should be able to be temporarily stored in hot water tanks." %}</p>
-    {% include "widgets/slider.html" with field=form.w_z_s_3 %}
-    <p>{%  trans "With your settings, 57% of the daily heat consumption can be temporarily stored. That corresponds to a storage capacity of 5 GWh" %}</p>
+  </div>
+  <p class="sidepanel__indication">
+    {%  trans "Stelle ein, wieviel des täglichen Wärmebedarfs in Fernwärmenetzen in großen Warmwasserspeichern zwischengespeichert werden können sollen:" %}
   </p>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.w_z_s_3 %}
+    </span>
+  </div>
 </div>
