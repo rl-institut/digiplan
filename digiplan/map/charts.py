@@ -243,25 +243,6 @@ class GhgHistoryChart(SimulationChart):
         return self.chart_options
 
 
-class GhgReductionChart(SimulationChart):
-    """GHG reduction chart."""
-
-    lookup = "ghg_reduction"
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        # TODO(Hendrik): Get static data (1st column) from  # noqa: TD003
-        #  digipipe datapackage
-        #  and calc reductions for 2nd column.  TD003
-        return pd.DataFrame()
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
-        return self.chart_options
-
-
 class PopulationRegionChart(Chart):
     """Chart for regional population."""
 
