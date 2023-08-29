@@ -37,15 +37,6 @@
 <h2 class="panel__title title">{% trans "Storage" %}</h2>
 
 {% include "widgets/slider.html" with field=form.w_d_s_1 %}
-<div class="sidepanel">
-  <p class="sidepanel__heading">
-    {%  trans "Detail settings" %}
-    {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set how much of the daily heat requirement should be able to be temporarily stored in hot water tanks." %}</p>
-    {% include "widgets/slider.html" with field=form.w_d_s_3 %}
-    <p>{%  trans "With your settings, 32% of the daily heat consumption can be temporarily stored. That corresponds to a storage capacity of 3 GWh" %}</p>
-  </p>
-</div>
 
 {% include "widgets/slider.html" with field=form.w_z_s_1 %}
 <div class="sidepanel">

@@ -35,7 +35,6 @@ class SimulationTest(SimpleTestCase):
         "w_z_s_1": 53,
         "w_d_wp_1": True,
         "w_z_wp_1": None,
-        "w_d_s_3": None,
         "w_z_s_3": None,
         "s_w_3": False,
         "s_w_4": True,
