@@ -26,7 +26,8 @@
     ]
   },
   "yAxis":{
-    "type":"value"
+    "type":"value",
+    "name": "kt CO₂-Äq."
   },
   "series":[
     {
@@ -165,7 +166,7 @@
       ]
     },
     {
-      "name":"Regionale Erzeugung",
+      "name":"Regionale Stromerzeugung",
       "type":"bar",
       "barWidth":"30",
       "stack":"Total",
@@ -300,7 +301,7 @@
             "fill":"#333",
             "width":150,
             "overflow":"break",
-            "text":"Reduktion durch",
+            "text":"Reduktion durch Einsparung und",
             "font":"14px Roboto"
           }
         }
@@ -318,7 +319,7 @@
           "top":"middle",
           "shape":{
             "width":160,
-            "height":30
+            "height":35
           },
           "style":{
             "fill":"#48BF91",
@@ -339,7 +340,7 @@
             "fill":"#fff",
             "width":160,
             "overflow":"break",
-            "text":"Regionale Erzeugung",
+            "text":"Regionale Stromerzeugung",
             "font":"14px Roboto"
           }
         }
@@ -357,7 +358,7 @@
           "top":"middle",
           "shape":{
             "width":160,
-            "height":30
+            "height":35
           },
           "style":{
             "fill":"#D9B38C",
