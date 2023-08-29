@@ -105,7 +105,7 @@
       "data": [132, 334, 700]
     },
     {
-      "name": "Verbrauch GHD",
+      "name": "Verbrauch Haushalte",
       "type": "bar",
       "barWidth": "16",
       "stack": "demand",
@@ -119,7 +119,7 @@
       "data": [300, 344, 380]
     },
     {
-      "name": "Verbrauch Haushalte",
+      "name": "Verbrauch GHD",
       "type": "bar",
       "stack": "demand",
       "color": "#969696",
