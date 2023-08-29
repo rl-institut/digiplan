@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-29 14:42+0000\n"
+"POT-Creation-Date: 2023-08-29 14:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1332,22 +1332,23 @@ msgstr ""
 
 #: digiplan/templates/components/results_view.html:44
 msgid ""
-"Bruttostromerzeugung nach Technologie und Nettostromverbrauch nach Sektor "
-"für 2022, Dein Szenario und einem Zielszenario für 2045. Die Ziele sind "
-"abgeleitet aus den <a href=\\"
+"Bruttostromerzeugung nach Technologie und Nettostromverbrauch (ohne Wärme) "
+"nach Sektor für 2022, Dein Szenario und einem Zielszenario für 2045. Die "
+"Ziele sind abgeleitet aus den <a href=\\"
 msgstr ""
 
 #: digiplan/templates/components/results_view.html:48
-msgid "Regionale Unabhängigkeit"
+msgid "Anteil Erneuerbare und regionale Unabhängigkeit (ohne Wärme)"
 msgstr ""
 
 #: digiplan/templates/components/results_view.html:51
 msgid ""
-"Relative Eigenversorgung (Strom) heute und in Deinem Szenario. Hierbei zeigt "
-"'bilanziell' den Anteil des Strombedarfs, der bilanziell über 1 Jahr über "
-"regionale Erzeuger gedeckt werden kann. Unter 'zeitgleich' wird der Anteil "
-"der Zeitpunkte im Jahr dargestellt, in denen die Stromerzeugung den Bedarf "
-"übersteigt, die Region sich also selbst versorgen kann."
+"Anteil Erneuerbarer Energien und relative Eigenversorgung des "
+"Nettostromverbrauchs (ohne Wärme) heute und in Deinem Szenario. Hierbei "
+"zeigt 'bilanziell' den Anteil des Strombedarfs, der bilanziell über 1 Jahr "
+"über regionale Erzeuger gedeckt werden kann. Unter 'zeitgleich' wird der "
+"Anteil der Zeitpunkte im Jahr dargestellt, in denen die Stromerzeugung den "
+"Bedarf übersteigt, die Region sich also selbst versorgen kann."
 msgstr ""
 
 #: digiplan/templates/components/results_view.html:62
