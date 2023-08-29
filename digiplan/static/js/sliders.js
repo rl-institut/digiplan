@@ -28,7 +28,6 @@ const potentialWindSwitches = document.querySelectorAll("#id_s_w_3, #id_s_w_4, #
 const sectorSlider = document.querySelectorAll("#id_s_v_3, #id_s_v_4, #id_s_v_5, #id_w_d_wp_3, #id_w_d_wp_4, #id_w_d_wp_5, #id_w_v_3, #id_w_v_4, #id_w_v_5");
 
 const sliderDependencies = {
-  "id_w_z_wp_1": "id_w_z_wp_3",
   "id_w_d_s_1": "id_w_d_s_3",
   "id_w_z_s_1": "id_w_z_s_3",
   "id_v_iv_1": "id_v_iv_3"
@@ -114,12 +113,6 @@ $("#id_s_pv_d_3").ionRangeSlider({
     onChange: function (data) {
       let new_max = Math.round(Math.round(store.cold.slider_max.s_pv_d_3) * (data.from/100));
       $(`#id_s_pv_d_1`).data("ionRangeSlider").update({max:new_max});
-    }
-  }
-);
-$("#id_w_z_wp_3").ionRangeSlider({
-    onChange: function (data) {
-      $(`#id_w_z_wp_1`).data("ionRangeSlider").update({from:data.from});
     }
   }
 );

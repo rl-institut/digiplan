@@ -170,7 +170,7 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
                 hp_energy[sector] = demand[sector] * hp_share
             else:
                 if sector == "hh":  # noqa: PLR5501
-                    hp_share = data.pop("w_z_wp_3") / 100
+                    hp_share = data.pop("w_z_wp_1") / 100
                     hp_energy[sector] = demand[sector] * hp_share
                 else:
                     hp_energy[sector] = demand[sector] * 0

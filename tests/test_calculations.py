@@ -31,7 +31,6 @@ class SimulationTest(SimpleTestCase):
         "w_d_wp_3": 100,
         "w_d_wp_4": 100,
         "w_d_wp_5": 100,
-        "w_z_wp_3": 100,
         "w_d_s_1": 50,
         "w_z_s_1": 53,
         "w_d_wp_1": True,

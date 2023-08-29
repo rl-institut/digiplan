@@ -14,15 +14,6 @@
 </div>
 
 {% include "widgets/slider.html" with field=form.w_z_wp_1 %}
-<div class="sidepanel">
-  <p class="sidepanel__heading">
-    {%  trans "Detail settings" %}
-    {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set the share of heat pumps for all consumers with district heating connection. This includes households, tertiary and industrial customers in the Dessau-Roßlau, Bitterfeld-Wolfen, Köthen and Wittenberg district heating networks." %}</p>
-    {% include "widgets/slider.html" with field=form.w_z_wp_3 %}
-    <p>{%  trans "With your settings, the proportion of energy provided by heat pumps is 54%. The remaining energy is provided by:<br>- Direct electric heating: 12%<br>- Bioenergy: 6%<br>- Solar thermal: 52%<br> <br>Note: Decentralized consumers are configured separately in the menu on the left." %}</p>
-  </p>
-</div>
 
 <span class="panel__separator" aria-hidden="true"></span>
 

@@ -55,19 +55,7 @@
     "status_quo": 40,
     "step": 5,
     "tooltip": "{% trans 'District heating supply' %}",
-    "type": "slider",
-    "sidepanel": true
-  },
-  "w_z_wp_3": {
-      "class": "js-slider",
-      "label": "{% trans 'Share (%)' %}",
-      "max": 200,
-      "min": 50,
-      "start": 50,
-      "status_quo": 100,
-      "step": 5,
-      "tooltip": "{% trans 'Heat pumps for heating, hot water and process heat in district heating networks' %}",
-      "type": "slider"
+    "type": "slider"
   },
   "w_v_1": {
     "class": "js-slider js-slider-panel",
