@@ -153,7 +153,7 @@
       "emphasis": {
         "focus": "series"
       },
-      "data": [200, 300, 320]
+      "data": [300, 400, 420]
     },
     {
       "name": "Verbrauch GHD",
@@ -166,7 +166,7 @@
       "emphasis": {
         "focus": "series"
       },
-      "data": [260, 300, 310]
+      "data": [360, 400, 410]
     },
     {
       "name": "Verbrauch Industrie",
@@ -179,7 +179,7 @@
       "emphasis": {
         "focus": "series"
       },
-      "data": [200, 250, 350]
+      "data": [300, 350, 450]
     }
   ]
 }
