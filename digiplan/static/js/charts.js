@@ -69,7 +69,7 @@ const renewable_share_goal = {
   textStyle: chart_text_style,
   xAxis: {
     type: 'category',
-    data: ['2021', 'Szenario'],
+    data: ['2022', 'Szenario'],
     axisTick: {
       show: false,
     },
@@ -174,7 +174,7 @@ const renewable_share_scenario = {
   textStyle: chart_text_style,
   xAxis: {
     type: 'category',
-    data: ['2021', 'Szenario'],
+    data: ['2022', 'Szenario'],
     axisTick: {
       show: false,
     },
