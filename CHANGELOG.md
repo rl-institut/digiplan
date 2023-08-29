@@ -15,6 +15,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ### Changed
 - remove language button
+- rework result charts
 
 ### Fixed
 - slider mark at wrong position
