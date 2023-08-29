@@ -2,11 +2,16 @@
 
 {% include "widgets/slider.html" with field=form.v_iv_1 %}
 <div class="sidepanel">
-  <p class="sidepanel__heading">
+  <div class="sidepanel__heading">
     {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set the share of electric vehicles in motorized private transport." %}</p>
-    {% include "widgets/slider.html" with field=form.v_iv_3 %}
-    <p>{%  trans "With your settings, 22% of private vehicles (compact, mid-size, full-size) are electric. Of these,<br>- 50% are battery electric (BEV) and<br>- 50% are plug-in hybrid vehicles." %}</p>
+  </div>
+  <p class="sidepanel__indication">
+    {%  trans "Stelle den Anteil der elektrischen Fahrzeuge am motorisierten Individualverkehr ein:" %}
   </p>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.v_iv_3 %}
+    </span>
+  </div>
 </div>

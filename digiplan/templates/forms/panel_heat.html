@@ -2,67 +2,115 @@
 <h2 class="panel__title title">{% trans "Generation" %}</h2>
 {% include "widgets/slider.html" with field=form.w_d_wp_1 %}
 <div class="sidepanel">
-  <p class="sidepanel__heading">
+  <div class="sidepanel__heading">
     {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set the share of heat pumps for consumers with their own heat generation per sector." %}</p>
-    {% include "widgets/slider.html" with field=form.w_d_wp_3 %}
-    {% include "widgets/slider.html" with field=form.w_d_wp_4 %}
-    {% include "widgets/slider.html" with field=form.w_d_wp_5 %}
-    <p>{%  trans "With your settings, the proportion of energy provided by heat pumps is 87%. The remaining energy is provided by:<br>- Direct electric heating: 10%<br>- Bioenergy: 5%<br>- Solar thermal: 20%<br> <br>Note: District heating systems are configured separately in the menu on the left." %}</p>
+  </div>
+  <p class="sidepanel__indication">
+    {%  trans "Stelle den Anteil von Wärmepumpen für Verbraucher mit eigener Wärmeerzeugung je Sektor ein:" %}
   </p>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.w_d_wp_3 %}
+    </span>
+  </div>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.w_d_wp_4 %}
+    </span>
+  </div>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.w_d_wp_5 %}
+    </span>
+  </div>
+  <div class="sidepanel__results">
+    <p>{%  trans "Die übrige Energie wird bereitgestellt durch direktelektrische Heizung, Bioenergie und Solarthermie (s. Beheizungsstruktur in den Ergebnissen).<br><br>Hinweis: Fernwärmesysteme werden links im Menü separat konfiguriert." %}</p>
+  </div>
 </div>
 
 {% include "widgets/slider.html" with field=form.w_z_wp_1 %}
 <div class="sidepanel">
-  <p class="sidepanel__heading">
+  <div class="sidepanel__heading">
     {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set the share of heat pumps for all consumers with district heating connection. This includes households, tertiary and industrial customers in the Dessau-Roßlau, Bitterfeld-Wolfen, Köthen and Wittenberg district heating networks." %}</p>
-    {% include "widgets/slider.html" with field=form.w_z_wp_3 %}
-    <p>{%  trans "With your settings, the proportion of energy provided by heat pumps is 54%. The remaining energy is provided by:<br>- Direct electric heating: 12%<br>- Bioenergy: 6%<br>- Solar thermal: 52%<br> <br>Note: Decentralized consumers are configured separately in the menu on the left." %}</p>
+  </div>
+  <p class="sidepanel__indication">
+    {%  trans "Stelle den Anteil von Wärmepumpen für alle Verbraucher mit Fernwärmeanschluss ein. Dies umfasst Haushalte, GHD und Industriekunden in den Fernwärmenetzen Dessau-Roßlau, Bitterfeld-Wolfen, Köthen und Wittenberg:" %}
   </p>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.w_z_wp_3 %}
+    </span>
+  </div>
+  <div class="sidepanel__results">
+    <p>{%  trans "Die übrige Energie wird bereitgestellt durch direktelektrische Heizung, Bioenergie und Solarthermie (s. Beheizungsstruktur in den Ergebnissen).<br><br>Hinweis: Dezentrale Wärmesysteme werden links im Menü separat konfiguriert." %}</p>
+  </div>
 </div>
 
 <span class="panel__separator" aria-hidden="true"></span>
 
 <h2 class="panel__title title">{% trans "Consumption" %}</h2>
-
 {% include "widgets/slider.html" with field=form.w_v_1 %}
 <div class="sidepanel">
-  <p class="sidepanel__heading">
+  <div class="sidepanel__heading">
     {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set the future heat consumption per sector." %}</p>
-    {% include "widgets/slider.html" with field=form.w_v_3 %}
-    {% include "widgets/slider.html" with field=form.w_v_4 %}
-    {% include "widgets/slider.html" with field=form.w_v_5 %}
-    <p>{%  trans "With your settings, the heat consumption is 27% of today's heat consumption." %}</p>
+  </div>
+  <p class="sidepanel__indication">
+    {%  trans "Stelle den zukünftigen Wärmeverbrauch je Sektor ein:" %}
   </p>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.w_v_3 %}
+    </span>
+  </div>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.w_v_4 %}
+    </span>
+  </div>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.w_v_5 %}
+    </span>
+  </div>
+  <div class="sidepanel__results">
+    <p>{%  trans "Links siehst Du die Änderung über alle Sektoren für deine Einstellung (gewichtetes Mittel)." %}</p>
+  </div>
 </div>
 
 <span class="panel__separator" aria-hidden="true"></span>
 
 <h2 class="panel__title title">{% trans "Storage" %}</h2>
-
 {% include "widgets/slider.html" with field=form.w_d_s_1 %}
 <div class="sidepanel">
-  <p class="sidepanel__heading">
+  <div class="sidepanel__heading">
     {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set how much of the daily heat requirement should be able to be temporarily stored in hot water tanks." %}</p>
-    {% include "widgets/slider.html" with field=form.w_d_s_3 %}
-    <p>{%  trans "With your settings, 32% of the daily heat consumption can be temporarily stored. That corresponds to a storage capacity of 3 GWh" %}</p>
+  </div>
+  <p class="sidepanel__indication">
+    {%  trans "Stelle ein, wieviel des täglichen Wärmebedarfs in dezentralen Wärmesystemen in kleinen Warmwasserspeichern zwischengespeichert werden können sollen:" %}
   </p>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.w_d_s_3 %}
+    </span>
+  </div>
 </div>
 
 {% include "widgets/slider.html" with field=form.w_z_s_1 %}
 <div class="sidepanel">
-  <p class="sidepanel__heading">
+  <div class="sidepanel__heading">
     {%  trans "Detail settings" %}
     {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set how much of the daily heat requirement should be able to be temporarily stored in hot water tanks." %}</p>
-    {% include "widgets/slider.html" with field=form.w_z_s_3 %}
-    <p>{%  trans "With your settings, 57% of the daily heat consumption can be temporarily stored. That corresponds to a storage capacity of 5 GWh" %}</p>
+  </div>
+  <p class="sidepanel__indication">
+    {%  trans "Stelle ein, wieviel des täglichen Wärmebedarfs in Fernwärmenetzen in großen Warmwasserspeichern zwischengespeichert werden können sollen:" %}
   </p>
+  <div class="sidepanel__block sidepanel__block--slider">
+    <span>
+      {% include "widgets/slider.html" with field=form.w_z_s_3 %}
+    </span>
+  </div>
 </div>

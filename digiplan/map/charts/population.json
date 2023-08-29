@@ -17,7 +17,7 @@
   "yAxis": {
     "type": "value",
     "show": true,
-    "name": "Population",
+    "name": "EW",
     "nameLocation": "end",
     "nameTextStyle": "Roboto"
   },
@@ -26,8 +26,8 @@
       "type": "line",
       "barWidth": "16",
       "data": [5, 20, 36, 10, 10],
-      "name": "Population"
+      "name": "EW"
     }
   ],
-  "title": {"text": "Population per year"}
+  "title": {"text": "Bevölkerung pro Jahr"}
 }
