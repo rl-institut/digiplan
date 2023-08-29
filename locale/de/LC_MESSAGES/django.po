@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-29 11:51+0000\n"
+"POT-Creation-Date: 2023-08-29 12:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1054,13 +1054,13 @@ msgstr "Ziele 2045"
 
 #: digiplan/templates/components/panel_1_today.html:10
 #: digiplan/templates/components/panel_3_results.html:7
-msgid "Share of renewable energies"
-msgstr "Anteil Erneuerbarer Energien"
+msgid "Anteil EE am Stromverbrauch"
+msgstr ""
 
 #: digiplan/templates/components/panel_1_today.html:18
 #: digiplan/templates/components/panel_3_results.html:15
 #, python-format
-msgid "CO<sub>2</sub>-Reduktion ggü. 2019 (%%)"
+msgid "THG-Reduktion ggü. 2019 (%%)"
 msgstr ""
 
 #: digiplan/templates/components/panel_1_today.html:34
