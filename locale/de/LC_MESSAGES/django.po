@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-29 11:42+0000\n"
+"POT-Creation-Date: 2023-08-29 11:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,14 +38,14 @@ msgstr ""
 msgid "Einwohner_innenzahl pro km²"
 msgstr ""
 
-#: config/settings/base.py:359 digiplan/map/popups.py:486
-#: digiplan/map/popups.py:498
+#: config/settings/base.py:359 digiplan/map/popups.py:473
+#: digiplan/map/popups.py:485
 #: digiplan/templates/components/panel_1_today.html:45
 msgid "Beschäftigte"
 msgstr ""
 
-#: config/settings/base.py:360 digiplan/map/popups.py:508
-#: digiplan/map/popups.py:520
+#: config/settings/base.py:360 digiplan/map/popups.py:495
+#: digiplan/map/popups.py:507
 #: digiplan/templates/components/panel_1_today.html:46
 msgid "Betriebe"
 msgstr ""
@@ -56,7 +56,7 @@ msgstr ""
 
 #: config/settings/base.py:361 config/settings/base.py:362
 #: config/settings/base.py:367 config/settings/base.py:373
-#: digiplan/map/charts.py:386 digiplan/map/charts.py:409
+#: digiplan/map/charts.py:367 digiplan/map/charts.py:390
 msgid "MW"
 msgstr ""
 
@@ -79,12 +79,12 @@ msgstr ""
 #: config/settings/base.py:393 config/settings/base.py:399
 #: config/settings/base.py:435 config/settings/base.py:441
 #: config/settings/base.py:459 config/settings/base.py:465
-#: digiplan/map/charts.py:427 digiplan/map/charts.py:610
-#: digiplan/map/charts.py:629 digiplan/map/charts.py:701
-#: digiplan/map/charts.py:720 digiplan/map/popups.py:317
-#: digiplan/map/popups.py:334 digiplan/map/popups.py:394
-#: digiplan/map/popups.py:675 digiplan/map/popups.py:738
-#: digiplan/map/popups.py:761
+#: digiplan/map/charts.py:408 digiplan/map/charts.py:591
+#: digiplan/map/charts.py:610 digiplan/map/charts.py:682
+#: digiplan/map/charts.py:701 digiplan/map/popups.py:304
+#: digiplan/map/popups.py:321 digiplan/map/popups.py:381
+#: digiplan/map/popups.py:662 digiplan/map/popups.py:725
+#: digiplan/map/popups.py:748
 msgid "GWh"
 msgstr ""
 
@@ -98,11 +98,11 @@ msgstr ""
 
 #: config/settings/base.py:411 config/settings/base.py:417
 #: config/settings/base.py:423 config/settings/base.py:429
-#: config/settings/base.py:489 digiplan/map/charts.py:446
-#: digiplan/map/charts.py:486 digiplan/map/charts.py:508
-#: digiplan/map/charts.py:810 digiplan/map/popups.py:375
-#: digiplan/map/popups.py:420 digiplan/map/popups.py:439
-#: digiplan/map/popups.py:850
+#: config/settings/base.py:489 digiplan/map/charts.py:427
+#: digiplan/map/charts.py:467 digiplan/map/charts.py:489
+#: digiplan/map/charts.py:791 digiplan/map/popups.py:362
+#: digiplan/map/popups.py:407 digiplan/map/popups.py:426
+#: digiplan/map/popups.py:837
 msgid "MWh"
 msgstr ""
 
@@ -111,8 +111,8 @@ msgid "Gewonnene Energie aus EE je km²"
 msgstr ""
 
 #: config/settings/base.py:434 config/settings/base.py:440
-#: digiplan/map/popups.py:643 digiplan/map/popups.py:651
-#: digiplan/map/popups.py:660 digiplan/map/popups.py:674
+#: digiplan/map/popups.py:630 digiplan/map/popups.py:638
+#: digiplan/map/popups.py:647 digiplan/map/popups.py:661
 msgid "Strombedarf"
 msgstr ""
 
@@ -122,16 +122,16 @@ msgstr ""
 
 #: config/settings/base.py:447 config/settings/base.py:453
 #: config/settings/base.py:471 config/settings/base.py:477
-#: digiplan/map/charts.py:652 digiplan/map/charts.py:683
-#: digiplan/map/charts.py:743 digiplan/map/charts.py:774
-#: digiplan/map/popups.py:693 digiplan/map/popups.py:720
-#: digiplan/map/popups.py:779 digiplan/map/popups.py:806
+#: digiplan/map/charts.py:633 digiplan/map/charts.py:664
+#: digiplan/map/charts.py:724 digiplan/map/charts.py:755
+#: digiplan/map/popups.py:680 digiplan/map/popups.py:707
+#: digiplan/map/popups.py:766 digiplan/map/popups.py:793
 msgid "kWh"
 msgstr ""
 
 #: config/settings/base.py:458 config/settings/base.py:464
-#: digiplan/map/popups.py:729 digiplan/map/popups.py:737
-#: digiplan/map/popups.py:746 digiplan/map/popups.py:760
+#: digiplan/map/popups.py:716 digiplan/map/popups.py:724
+#: digiplan/map/popups.py:733 digiplan/map/popups.py:747
 msgid "Wärmebedarf"
 msgstr ""
 
@@ -139,14 +139,14 @@ msgstr ""
 msgid "Wärmebedarf pro EinwohnerIn"
 msgstr ""
 
-#: config/settings/base.py:482 digiplan/map/popups.py:815
-#: digiplan/map/popups.py:827
+#: config/settings/base.py:482 digiplan/map/popups.py:802
+#: digiplan/map/popups.py:814
 #: digiplan/templates/components/panel_1_today.html:98
 msgid "Anzahl Batteriespeicher"
 msgstr ""
 
-#: config/settings/base.py:488 digiplan/map/popups.py:837
-#: digiplan/map/popups.py:849
+#: config/settings/base.py:488 digiplan/map/popups.py:824
+#: digiplan/map/popups.py:836
 #: digiplan/templates/components/panel_1_today.html:99
 msgid "Kapazität Batteriespeicher"
 msgstr ""
@@ -166,15 +166,15 @@ msgstr "Strombedarf"
 msgid "Electricity Industry Demand"
 msgstr "Strombedarf"
 
-#: digiplan/map/charts.py:296 digiplan/map/popups.py:478
+#: digiplan/map/charts.py:277 digiplan/map/popups.py:465
 msgid "EW/km²"
 msgstr ""
 
-#: digiplan/map/charts.py:464 digiplan/map/popups.py:358
+#: digiplan/map/charts.py:445 digiplan/map/popups.py:345
 msgid "%"
 msgstr ""
 
-#: digiplan/map/charts.py:792
+#: digiplan/map/charts.py:773
 msgid "Anzahl"
 msgstr ""
 
@@ -570,71 +570,71 @@ msgstr "Batteriespeicher"
 msgid "Battery storages"
 msgstr "Batteriespeicher"
 
-#: digiplan/map/popups.py:271 digiplan/map/popups.py:290
+#: digiplan/map/popups.py:258 digiplan/map/popups.py:277
 msgid "installierte Leistung nach Typ"
 msgstr ""
 
-#: digiplan/map/popups.py:272 digiplan/map/popups.py:291
+#: digiplan/map/popups.py:259 digiplan/map/popups.py:278
 msgid "MW/km²"
 msgstr ""
 
-#: digiplan/map/popups.py:308 digiplan/map/popups.py:325
+#: digiplan/map/popups.py:295 digiplan/map/popups.py:312
 msgid "Gewonnene Energie aus EE"
 msgstr ""
 
-#: digiplan/map/popups.py:316 digiplan/map/popups.py:333
-#: digiplan/map/popups.py:357 digiplan/map/popups.py:374
-#: digiplan/map/popups.py:393
+#: digiplan/map/popups.py:303 digiplan/map/popups.py:320
+#: digiplan/map/popups.py:344 digiplan/map/popups.py:361
+#: digiplan/map/popups.py:380
 msgid "Energieanteile pro Technologie"
 msgstr ""
 
-#: digiplan/map/popups.py:349
+#: digiplan/map/popups.py:336
 msgid "Anteil Energie aus EE"
 msgstr "Erneuerbare Energien"
 
-#: digiplan/map/popups.py:366 digiplan/map/popups.py:383
+#: digiplan/map/popups.py:353 digiplan/map/popups.py:370
 msgid "Gewonnene Energie pro EW"
 msgstr ""
 
-#: digiplan/map/popups.py:411 digiplan/map/popups.py:428
+#: digiplan/map/popups.py:398 digiplan/map/popups.py:415
 msgid "Gewonnene Energie pro km²"
 msgstr ""
 
-#: digiplan/map/popups.py:419 digiplan/map/popups.py:438
+#: digiplan/map/popups.py:406 digiplan/map/popups.py:425
 msgid "Energieanteile pro km²"
 msgstr ""
 
-#: digiplan/map/popups.py:477
+#: digiplan/map/popups.py:464
 msgid "Population density per year"
 msgstr "Bevölkerungsdichte"
 
-#: digiplan/map/popups.py:530 digiplan/map/popups.py:547
+#: digiplan/map/popups.py:517 digiplan/map/popups.py:534
 msgid "Number of wind turbines"
 msgstr "Anzahl Windenergieanlagen"
 
-#: digiplan/map/popups.py:531 digiplan/map/popups.py:548
+#: digiplan/map/popups.py:518 digiplan/map/popups.py:535
 msgid "Description for number of wind turbines"
 msgstr "Anzahl Windenergieanlagen je km²"
 
-#: digiplan/map/popups.py:592 digiplan/map/popups.py:625
+#: digiplan/map/popups.py:579 digiplan/map/popups.py:612
 msgid "Windturbinen pro km²"
 msgstr "Anzahl Windenergieanlagen je km²"
 
-#: digiplan/map/popups.py:593 digiplan/map/popups.py:626
+#: digiplan/map/popups.py:580 digiplan/map/popups.py:613
 msgid "WT/km²"
 msgstr "WEA/km²"
 
-#: digiplan/map/popups.py:652
+#: digiplan/map/popups.py:639
 msgid "ǴWh"
 msgstr ""
 
-#: digiplan/map/popups.py:684 digiplan/map/popups.py:692
-#: digiplan/map/popups.py:701 digiplan/map/popups.py:719
+#: digiplan/map/popups.py:671 digiplan/map/popups.py:679
+#: digiplan/map/popups.py:688 digiplan/map/popups.py:706
 msgid "Strombedarf je EinwohnerIn"
 msgstr ""
 
-#: digiplan/map/popups.py:770 digiplan/map/popups.py:778
-#: digiplan/map/popups.py:787 digiplan/map/popups.py:805
+#: digiplan/map/popups.py:757 digiplan/map/popups.py:765
+#: digiplan/map/popups.py:774 digiplan/map/popups.py:792
 msgid "Wärmebedarf je EinwohnerIn"
 msgstr ""
 
@@ -1276,19 +1276,19 @@ msgid "Heat Demand per Capita (kWh)"
 msgstr "Wärmebedarf je EinwohnerIn (kWh)"
 
 #: digiplan/templates/components/panel_2_settings.html:18
-#: digiplan/templates/components/panel_3_results.html:110
-#: digiplan/templates/components/results_view.html:35
+#: digiplan/templates/components/panel_3_results.html:112
+#: digiplan/templates/components/results_view.html:37
 msgid "Electricity"
 msgstr "Strom"
 
 #: digiplan/templates/components/panel_2_settings.html:26
-#: digiplan/templates/components/panel_3_results.html:118
-#: digiplan/templates/components/results_view.html:56
+#: digiplan/templates/components/panel_3_results.html:120
+#: digiplan/templates/components/results_view.html:58
 msgid "Heat"
 msgstr "Wärme"
 
 #: digiplan/templates/components/panel_2_settings.html:34
-#: digiplan/templates/components/panel_3_results.html:126
+#: digiplan/templates/components/panel_3_results.html:128
 msgid "Transportation"
 msgstr "Verkehr"
 
@@ -1300,21 +1300,20 @@ msgstr ""
 msgid "View"
 msgstr "Ansicht"
 
-#: digiplan/templates/components/panel_3_results.html:102
-#: digiplan/templates/components/results_view.html:9
-#: digiplan/templates/components/results_view.html:39
+#: digiplan/templates/components/panel_3_results.html:103
+#: digiplan/templates/components/results_view.html:10
 msgid "Overview"
 msgstr "Überblick"
 
-#: digiplan/templates/components/panel_3_results.html:140
-msgid "CO<sub>2</sub>-Emissionen"
+#: digiplan/templates/components/panel_3_results.html:142
+msgid "THG-Emissionen"
 msgstr ""
 
-#: digiplan/templates/components/results_view.html:5
+#: digiplan/templates/components/results_view.html:6
 msgid "General"
 msgstr "Allgemein"
 
-#: digiplan/templates/components/results_view.html:12
+#: digiplan/templates/components/results_view.html:13
 msgid ""
 "In dieser Darstellung sind die Ergebnisse der beiden Szenarien für die "
 "Stromerzeugung gegeneinander aufgetragen. Auf der linken Seite findet sich "
@@ -1323,68 +1322,108 @@ msgid ""
 "als auch die Erzeugung der unterschiedlichen Technologien vergleichen."
 msgstr ""
 
-#: digiplan/templates/components/results_view.html:16
+#: digiplan/templates/components/results_view.html:17
 msgid "Greenhouse gas"
 msgstr "Treibhausgas"
 
-#: digiplan/templates/components/results_view.html:22
+#: digiplan/templates/components/results_view.html:23
 msgid "Car trip"
 msgstr ""
 
-#: digiplan/templates/components/results_view.html:42
-#: digiplan/templates/components/results_view.html:49
-#: digiplan/templates/components/results_view.html:63
-#: digiplan/templates/components/results_view.html:70
-#: digiplan/templates/components/results_view.html:121
-msgid "Hier folgt ein Beschreibungstext..."
+#: digiplan/templates/components/results_view.html:41
+msgid "Erzeugung und Verbrauch"
 msgstr ""
 
-#: digiplan/templates/components/results_view.html:46
-#: digiplan/templates/components/results_view.html:88
-msgid "CO2 Emissions"
-msgstr "CO2 Emissionen"
-
-#: digiplan/templates/components/results_view.html:60
-msgid "Endenergiebedarf"
+#: digiplan/templates/components/results_view.html:44
+msgid ""
+"Bruttostromerzeugung nach Technologie und Nettostromverbrauch nach Sektor "
+"für 2022, Dein Szenario und einem Zielszenario für 2045. Die Ziele sind "
+"abgeleitet aus den <a href=\\"
 msgstr ""
 
-#: digiplan/templates/components/results_view.html:67
-msgid "Beheizungsstruktur"
+#: digiplan/templates/components/results_view.html:48
+msgid "Regionale Unabhängigkeit"
 msgstr ""
 
-#: digiplan/templates/components/results_view.html:77
+#: digiplan/templates/components/results_view.html:51
+msgid ""
+"Relative Eigenversorgung (Strom) heute und in Deinem Szenario. Hierbei zeigt "
+"'bilanziell' den Anteil des Strombedarfs, der bilanziell über 1 Jahr über "
+"regionale Erzeuger gedeckt werden kann. Unter 'zeitgleich' wird der Anteil "
+"der Zeitpunkte im Jahr dargestellt, in denen die Stromerzeugung den Bedarf "
+"übersteigt, die Region sich also selbst versorgen kann."
+msgstr ""
+
+#: digiplan/templates/components/results_view.html:62
+msgid "Erzeugung und Verbrauch in dezentralen Wärmesystemen"
+msgstr ""
+
+#: digiplan/templates/components/results_view.html:65
+msgid ""
+"Dezentrale Wärmeerzeugung nach Technologie und Wärmeverbrauch nach Sektor "
+"für 2022, Dein Szenario und einem Zielszenario für 2045. Der Verbrauch "
+"beinhaltet Raumwärme, Warmwasser, Kochen und Prozesswärme. Daten für 2022 "
+"sowie Ziele sind abgeleitet aus den <a href=\\"
+msgstr ""
+
+#: digiplan/templates/components/results_view.html:69
+msgid "Erzeugung und Verbrauch in Fernwärmenetzen"
+msgstr ""
+
+#: digiplan/templates/components/results_view.html:72
+msgid ""
+"Wärmeerzeugung in Fernwärmenetzen (Dessau-Roßlau, Bitterfeld-Wolfen, Köthen, "
+"Wittenberg) nach Technologie und Wärmeverbrauch nach Sektor für 2022, Dein "
+"Szenario und einem Zielszenario für 2045. Der Verbrauch beinhaltet "
+"Raumwärme, Warmwasser, Kochen und Prozesswärme. Daten für 2022 sowie Ziele "
+"sind abgeleitet aus den <a href=\\"
+msgstr ""
+
+#: digiplan/templates/components/results_view.html:79
 msgid "Motorized individual traffic"
 msgstr "Motorisierter Individualverkehr"
 
-#: digiplan/templates/components/results_view.html:81
+#: digiplan/templates/components/results_view.html:83
 msgid "Vehicles"
 msgstr "Fahrzeuge"
 
-#: digiplan/templates/components/results_view.html:84
+#: digiplan/templates/components/results_view.html:86
 msgid "Zugelassene Fahrzeuge nach Antriebsart."
 msgstr ""
 
-#: digiplan/templates/components/results_view.html:94
+#: digiplan/templates/components/results_view.html:90
+msgid "CO2 Emissions"
+msgstr "CO2 Emissionen"
+
+#: digiplan/templates/components/results_view.html:96
 msgid "Distance"
 msgstr "Autofahrt"
 
-#: digiplan/templates/components/results_view.html:107
+#: digiplan/templates/components/results_view.html:109
 msgid "Abschätzung CO<sub>2</sub>-Emissionen"
 msgstr ""
 
-#: digiplan/templates/components/results_view.html:111
+#: digiplan/templates/components/results_view.html:113
 msgid "Sachsen-Anhalt und Abschätzung Region ABW"
 msgstr ""
 
-#: digiplan/templates/components/results_view.html:114
+#: digiplan/templates/components/results_view.html:116
 msgid ""
 "Die THG-Emissionen für die Region ABW werden näherungsweise anhand "
 "unterschiedlicher Kriterien und Datenquellen aus den Gesamtemissionen für "
 "Sachsen-Anhalt (<a href=\\"
 msgstr ""
 
-#: digiplan/templates/components/results_view.html:118
-msgid "Abschätzung der Reduktion in der Region ABW"
+#: digiplan/templates/components/results_view.html:120
+msgid "Abschätzung der Reduktion in Deinem Szenario in der Region ABW*"
+msgstr ""
+
+#: digiplan/templates/components/results_view.html:123
+msgid ""
+"* Die Reduktion der Emissionen bezieht sich nur auf Energiewirtschaft, den "
+"energetischen Anteil der Industrie sowie Gebäude.<br><br>Der linke Balken "
+"zeigt die Emissionen in der Region ABW in 2019 (vgl. Diagramm links).<br>Den "
+"<a href=\\"
 msgstr ""
 
 #: digiplan/templates/forms/panel_energy.html:2
