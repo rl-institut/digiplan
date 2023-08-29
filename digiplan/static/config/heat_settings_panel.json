@@ -125,18 +125,6 @@
     "status_quo": 100,
     "step": 5,
     "tooltip": "{% trans 'Storage in the district heating supply' %}",
-    "type": "slider",
-    "sidepanel": true
-  },
-  "w_z_s_3": {
-    "class": "js-slider",
-    "label": "{% trans 'Hot water tanks (%)' %}",
-    "max": 200,
-    "min": 25,
-    "start": 25,
-    "status_quo": 100,
-    "step": 5,
-    "tooltip": "{% trans 'Hot water tanks for heating, hot water and process heat' %}",
     "type": "slider"
   }
 }

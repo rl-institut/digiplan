@@ -206,7 +206,6 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
     del data["w_v_1"]
     del data["w_d_wp_1"]
     del data["w_z_wp_1"]
-    del data["w_z_s_3"]
 
     return data
 
