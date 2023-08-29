@@ -10,7 +10,6 @@ const SIMULATION_CHECK_TIME = 5000;
 const resultCharts = {
     "detailed_overview": "detailed_overview_chart",
     "electricity_overview": "electricity_overview_chart",
-    "heat_overview": "overview_heat_chart",
     "ghg_reduction": "ghg_reduction_chart"
 };
 
