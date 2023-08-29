@@ -60,7 +60,7 @@
   },
   "w_z_wp_3": {
       "class": "js-slider",
-      "label": "{% trans 'Share (%)' %}",
+      "label": "{% trans 'Anteil Wärmepumpen Fernwärme (%)' %}",
       "max": 200,
       "min": 50,
       "start": 50,
