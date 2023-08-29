@@ -222,7 +222,7 @@ class MunicipalityTest(SimpleTestCase):
         calculations.value_per_municipality(series)
 
 
-class HeatOverviewTest(SimulationTest):
+class HeatStructureTest(SimulationTest):
     """Test heat overview calculation."""
 
     def test_heat_overview(self):  # noqa: D102
@@ -239,11 +239,11 @@ class ElectricityOverviewChartTest(SimulationTest):
         assert options["series"][0]["data"][2] == 4369687.261432747
 
 
-class HeatOverviewChartTest(SimulationTest):
+class HeatStructureChartTest(SimulationTest):
     """Test heat overview chart creation."""
 
     def test_heat_overview_chart(self):  # noqa: D102
-        chart = charts.HeatOverviewChart(self.simulation_id)
+        chart = charts.HeatStructureChart(self.simulation_id)
         options = chart.render()
         assert options["series"][0]["data"][1] == 3512007725.957367
 

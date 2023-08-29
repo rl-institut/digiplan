@@ -9,14 +9,14 @@ const co2_emissions_scenario_div = document.getElementById("co2_emissions_scenar
 const co2_emissions_scenario_chart = echarts.init(co2_emissions_scenario_div);
 
 // Results view, initiliaze charts
-const detailed_overview_chart = echarts.init(document.getElementById("detailed_overview_chart"));
-const ghg_overview_chart = echarts.init(document.getElementById("ghg_overview_chart"));
+// const detailed_overview_chart = echarts.init(document.getElementById("detailed_overview_chart"));
+// const ghg_overview_chart = echarts.init(document.getElementById("ghg_overview_chart"));
 const electricity_overview_chart = echarts.init(document.getElementById("electricity_overview_chart"));
-const electricity_THG_chart = echarts.init(document.getElementById("electricity_THG_chart"));
+const electricity_autarky_chart = echarts.init(document.getElementById("electricity_autarky_chart"));
 const mobility_overview_chart = echarts.init(document.getElementById("mobility_overview_chart"));
 const mobility_THG_chart = echarts.init(document.getElementById("mobility_THG_chart"));
-const overview_heat_chart = echarts.init(document.getElementById("overview_heat_chart"));
-const decentralized_centralized_heat_chart = echarts.init(document.getElementById("decentralized_centralized_heat_chart"));
+const heat_decentralized_chart = echarts.init(document.getElementById("heat_decentralized_chart"));
+const heat_centralized_chart = echarts.init(document.getElementById("heat_centralized_chart"));
 const ghg_history_chart = echarts.init(document.getElementById("ghg_history_chart"));
 const ghg_reduction_chart = echarts.init(document.getElementById("ghg_reduction_chart"));
 
@@ -69,7 +69,7 @@ const renewable_share_goal = {
   textStyle: chart_text_style,
   xAxis: {
     type: 'category',
-    data: ['2021', 'Szenario'],
+    data: ['2022', 'Szenario'],
     axisTick: {
       show: false,
     },
@@ -174,7 +174,7 @@ const renewable_share_scenario = {
   textStyle: chart_text_style,
   xAxis: {
     type: 'category',
-    data: ['2021', 'Szenario'],
+    data: ['2022', 'Szenario'],
     axisTick: {
       show: false,
     },
@@ -274,14 +274,14 @@ const co2_emissions_scenario = {
 };
 
 // get options for result view charts
-const detailed_overview_option = JSON.parse(document.getElementById("detailed_overview").textContent);
-const ghg_overview_option = JSON.parse(document.getElementById("ghg_overview").textContent);
+// const detailed_overview_option = JSON.parse(document.getElementById("detailed_overview").textContent);
+// const ghg_overview_option = JSON.parse(document.getElementById("ghg_overview").textContent);
 const electricity_overview_option = JSON.parse(document.getElementById("electricity_overview").textContent);
-const electricity_ghg_option = JSON.parse(document.getElementById("electricity_ghg").textContent);
+const electricity_autarky_option = JSON.parse(document.getElementById("electricity_autarky").textContent);
 const mobility_overview_option = JSON.parse(document.getElementById("mobility_overview").textContent);
 const mobility_ghg_option = JSON.parse(document.getElementById("mobility_ghg").textContent);
-const overview_heat_option = JSON.parse(document.getElementById("overview_heat").textContent);
-const decentralized_centralized_heat_option = JSON.parse(document.getElementById("decentralized_centralized_heat").textContent);
+const heat_decentralized_option = JSON.parse(document.getElementById("heat_decentralized").textContent);
+const heat_centralized_option = JSON.parse(document.getElementById("heat_centralized").textContent);
 const ghg_history_option = JSON.parse(document.getElementById("ghg_history").textContent);
 const ghg_reduction_option = JSON.parse(document.getElementById("ghg_reduction").textContent);
 
@@ -291,14 +291,14 @@ function resizeCharts() {
     co2_emissions_goal_chart.resize();
     renewable_share_scenario_chart.resize();
     co2_emissions_scenario_chart.resize();
-    detailed_overview_chart.resize();
-    ghg_overview_chart.resize();
+    // detailed_overview_chart.resize();
+    // ghg_overview_chart.resize();
     electricity_overview_chart.resize();
-    electricity_THG_chart.resize();
+    electricity_autarky_chart.resize();
     mobility_overview_chart.resize();
     mobility_THG_chart.resize();
-    overview_heat_chart.resize();
-    decentralized_centralized_heat_chart.resize();
+    heat_decentralized_chart.resize();
+    heat_centralized_chart.resize();
     ghg_history_chart.resize();
     ghg_reduction_chart.resize();
   }, 200);
@@ -311,14 +311,14 @@ renewable_share_scenario_chart.setOption(renewable_share_scenario);
 co2_emissions_scenario_chart.setOption(co2_emissions_scenario);
 
 // Results, setOptions
-detailed_overview_chart.setOption(detailed_overview_option);
-ghg_overview_chart.setOption(ghg_overview_option);
+// detailed_overview_chart.setOption(detailed_overview_option);
+// ghg_overview_chart.setOption(ghg_overview_option);
 electricity_overview_chart.setOption(electricity_overview_option);
-electricity_THG_chart.setOption(electricity_ghg_option);
+electricity_autarky_chart.setOption(electricity_autarky_option);
 mobility_overview_chart.setOption(mobility_overview_option);
 mobility_THG_chart.setOption(mobility_ghg_option);
-overview_heat_chart.setOption(overview_heat_option);
-decentralized_centralized_heat_chart.setOption(decentralized_centralized_heat_option);
+heat_decentralized_chart.setOption(heat_decentralized_option);
+heat_centralized_chart.setOption(heat_centralized_option);
 ghg_history_chart.setOption(ghg_history_option);
 ghg_reduction_chart.setOption(ghg_reduction_option);
 

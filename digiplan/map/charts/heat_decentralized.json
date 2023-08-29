@@ -1,4 +1,10 @@
 {
+  "grid": {
+    "bottom": "28%"
+  },
+  "legend": {
+    "bottom": "0"
+  },
   "brush": {
     "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],
     "xAxisIndex": 0
@@ -10,14 +16,6 @@
       },
       "dataView": {}
     }
-  },
-  "tooltip": {},
-  "grid": {
-    "top": "10%",
-    "left": "3%",
-    "right": "15%",
-    "bottom": "20%",
-    "containLabel": true
   },
   "yAxis": {
     "data": ["Ziel 2045", "Dein Szenario", "2022"],
@@ -39,63 +37,11 @@
   },
   "series": [
     {
-      "name": "Windenergie",
-      "type": "bar",
-      "stack": "production",
-      "color": "#6A89CC",
-      "emphasis": {
-        "itemStyle": {
-          "shadowBlur": 10,
-          "shadowColor": "rgba(0,0,0,0.3)"
-        }
-      },
-      "data": [302, 234, 230]
-    },
-    {
-      "name": "Freiflächen-PV",
-      "type": "bar",
-      "stack": "production",
-      "color": "#EFAD25",
-      "emphasis": {
-        "itemStyle": {
-          "shadowBlur": 10,
-          "shadowColor": "rgba(0,0,0,0.3)"
-        }
-      },
-      "data": [282, 234, 100]
-    },
-    {
-      "name": "Aufdach-PV",
-      "type": "bar",
-      "stack": "production",
-      "color": "#FFD660",
-      "emphasis": {
-        "itemStyle": {
-          "shadowBlur": 10,
-          "shadowColor": "rgba(0,0,0,0.3)"
-        }
-      },
-      "data": [312, 254, 100]
-    },
-    {
-      "name": "Bioenergie",
-      "type": "bar",
-      "stack": "production",
-      "color": "#52C41A",
-      "emphasis": {
-        "itemStyle": {
-          "shadowBlur": 10,
-          "shadowColor": "rgba(0,0,0,0.3)"
-        }
-      },
-      "data": [136, 134, 130]
-    },
-    {
-      "name": "Wasserkraft",
+      "name": "Erdgas",
       "type": "bar",
       "barWidth": "16",
-      "stack": "production",
-      "color": "#A9BDE8",
+      "stack": "decentral",
+      "color": "#FFF7EC",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
@@ -105,86 +51,135 @@
       "data": [132, 334, 700]
     },
     {
-      "name": "Verbrauch Haushalte",
+      "name": "Heizöl",
       "type": "bar",
-      "barWidth": "16",
-      "stack": "demand",
-      "color": "#D3D3D3",
+      "stack": "decentral",
+      "color": "#FEE8C8",
       "emphasis": {
         "itemStyle": {
           "shadowBlur": 10,
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [300, 344, 380]
+      "data": [102, 234, 280]
+    },
+    {
+      "name": "Holz",
+      "type": "bar",
+      "stack": "decentral",
+      "color": "#FDD49E",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [282, 234, 100]
+    },
+    {
+      "name": "Wärmepumpe",
+      "type": "bar",
+      "stack": "decentral",
+      "color": "#FDBB84",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [136, 134, 130]
+    },
+    {
+      "name": "El. Direktheizung",
+      "type": "bar",
+      "stack": "decentral",
+      "color": "#FC8D59",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [412, 254, 100]
+    },
+    {
+      "name": "Biogas",
+      "type": "bar",
+      "stack": "decentral",
+      "color": "#EF6548",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [412, 254, 100]
+    },
+    {
+      "name": "Solarthermie",
+      "type": "bar",
+      "stack": "decentral",
+      "color": "#D7301F",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [412, 254, 100]
+    },
+    {
+      "name": "Sonstige",
+      "type": "bar",
+      "stack": "decentral",
+      "color": "#B30000",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
+      "data": [412, 254, 100]
+    },
+    {
+      "name": "Verbrauch Haushalte",
+      "type": "bar",
+      "barWidth": "16",
+      "stack": "demand",
+      "color": "#98C1D7",
+      "label": {
+        "show": false
+      },
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [300, 400, 420]
     },
     {
       "name": "Verbrauch GHD",
       "type": "bar",
       "stack": "demand",
-      "color": "#969696",
-      "emphasis": {
-        "itemStyle": {
-          "shadowBlur": 10,
-          "shadowColor": "rgba(0,0,0,0.3)"
-        }
+      "color": "#6F9BB2",
+      "label": {
+        "show": false
       },
-      "data": [254, 244, 380]
+      "emphasis": {
+        "focus": "series"
+      },
+      "data": [360, 400, 410]
     },
     {
       "name": "Verbrauch Industrie",
       "type": "bar",
-      "barWidth": "35",
       "stack": "demand",
-      "color": "#616161",
-      "emphasis": {
-        "itemStyle": {
-          "shadowBlur": 10,
-          "shadowColor": "rgba(0,0,0,0.3)"
-        }
+      "color": "#376984",
+      "label": {
+        "show": false
       },
-      "data": [280, 300, 350]
-    },
-    {
-      "name": "EV",
-      "type": "bar",
-      "stack": "demand",
-      "color": "#2F2F2F",
       "emphasis": {
-        "itemStyle": {
-          "shadowBlur": 10,
-          "shadowColor": "rgba(0,0,0,0.3)"
-        }
+        "focus": "series"
       },
-      "data": [145, 144, 180]
-    },
-    {
-      "name": "Import",
-      "type": "bar",
-      "barWidth": "16",
-      "stack": "import",
-      "color": "#F3AF9C",
-      "emphasis": {
-        "itemStyle": {
-          "shadowBlur": 10,
-          "shadowColor": "rgba(0,0,0,0.3)"
-        }
-      },
-      "data": [0, 20, 160]
-    },
-    {
-      "name": "Export",
-      "type": "bar",
-      "barWidth": "16",
-      "stack": "export",
-      "color": "#8ECEAB",
-      "emphasis": {
-        "itemStyle": {
-          "shadowBlur": 10,
-          "shadowColor": "rgba(0,0,0,0.3)"
-        }
-      },
-      "data": [0, 140, 50]
+      "data": [300, 350, 450]
     }
   ]
 }

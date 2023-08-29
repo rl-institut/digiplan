@@ -167,7 +167,7 @@ class ElectricityOverviewChart(SimulationChart):
 class ElectricityCTSChart(SimulationChart):
     """Electricity CTS Chart. Shows greenhouse gas emissions."""
 
-    lookup = "electricity_ghg"
+    lookup = "electricity_autarky"
 
     def get_chart_data(self):  # noqa: D102, ANN201
         return calculations.detailed_overview(simulation_id=self.simulation_id)
@@ -180,10 +180,10 @@ class ElectricityCTSChart(SimulationChart):
         return self.chart_options
 
 
-class HeatOverviewChart(SimulationChart):
+class HeatStructureChart(SimulationChart):
     """Heat Overview Chart."""
 
-    lookup = "overview_heat"
+    lookup = "heat_structure"
 
     def get_chart_data(self):  # noqa: D102, ANN201
         return calculations.heat_overview(simulation_id=self.simulation_id)
@@ -233,25 +233,6 @@ class GhgHistoryChart(SimulationChart):
 
     def get_chart_data(self):  # noqa: D102, ANN201
         # TODO(Hendrik): Get static data from digipipe datapackage  # noqa: TD003
-        return pd.DataFrame()
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
-        return self.chart_options
-
-
-class GhgReductionChart(SimulationChart):
-    """GHG reduction chart."""
-
-    lookup = "ghg_reduction"
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        # TODO(Hendrik): Get static data (1st column) from  # noqa: TD003
-        #  digipipe datapackage
-        #  and calc reductions for 2nd column.  TD003
         return pd.DataFrame()
 
     def render(self) -> dict:  # noqa: D102
@@ -816,7 +797,8 @@ CHARTS: dict[str, type[Chart]] = {
     "detailed_overview": DetailedOverviewChart,
     "ghg_reduction": GHGReductionChart,
     "electricity_overview": ElectricityOverviewChart,
-    "heat_overview": HeatOverviewChart,
+    "heat_decentralized": HeatStructureChart,
+    "heat_centralized": HeatStructureChart,
     "population_statusquo_region": PopulationRegionChart,
     "population_density_statusquo_region": PopulationDensityRegionChart,
     "employees_statusquo_region": EmployeesRegionChart,
