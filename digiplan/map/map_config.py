@@ -92,7 +92,10 @@ LEGEND = {
         ),
         legend.LegendLayer(
             _("Road Railway 500m"),
-            _("Straßen und Bahnverkehr (500 m Puffer)"),
+            _(
+                "Die Flächen längs von Autobahnen oder Schienenwegen werden durch Erstellen einer 500 m breiten "
+                "Pufferzone abzüglich einer 15 m breiten Pufferzone gebildet.",
+            ),
             layer_id="road_railway-500m_region",
         ),
         legend.LegendLayer(
@@ -221,12 +224,24 @@ LEGEND = {
         ),
         legend.LegendLayer(
             _("Soil Quality High"),
-            _("Ackerflächen mit hoher Bodenqualität (Soil Quality Rating >= 40)"),
+            _(
+                "Acker- und Grünlandflächen mit hoher Bodenqualität (Soil Quality Rating (SQR) >= 40). Um die "
+                "Flächenkonkurrenz zwischen landwirtschaftlicher Nutzung und Energiegewinnung zu minimieren, wird bei "
+                "den links einstellbaren PV-Freiflächenpotenzialen als Grenzwert ein SQR von 40 angenommen, es werden "
+                "also lediglich Flächen mit sehr geringer und geringer Ertragsfähigkeit als potenzielle "
+                "Standorte berücksichtigt.",
+            ),
             layer_id="soil_quality_high",
         ),
         legend.LegendLayer(
             _("Soil Quality Low"),
-            _("Ackerflächen mit geringer Bodenqualität (Soil Quality Rating < 40)"),
+            _(
+                "Acker- und Grünlandflächen inner- und außerhalb benachteiligter Gebiete mit geringer Bodenqualität "
+                "(Soil Quality Rating (SQR) < 40). Um die Flächenkonkurrenz zwischen landwirtschaftlicher Nutzung und "
+                "Energiegewinnung zu minimieren, wird bei den links einstellbaren PV-Freiflächenpotenzialen als "
+                "Grenzwert ein SQR von 40 angenommen, es werden also lediglich Flächen mit sehr geringer und geringer "
+                "Ertragsfähigkeit als potenzielle Standorte berücksichtigt.",
+            ),
             layer_id="soil_quality_low",
         ),
     ],
