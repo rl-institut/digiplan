@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-29 06:33+0000\n"
+"POT-Creation-Date: 2023-08-29 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -287,172 +287,238 @@ msgstr ""
 msgid "Settlements Infrastructure"
 msgstr "Siedlungen und Infrastruktur"
 
-#: digiplan/map/map_config.py:77
+#: digiplan/map/map_config.py:78
 msgid "Settlement 0m"
 msgstr "Siedlungen"
 
-#: digiplan/map/map_config.py:77
-msgid "Siedlungen"
+#: digiplan/map/map_config.py:80
+msgid ""
+"Eine Siedlung ist ein Gebiet, welches die menschliche Niederlassung in "
+"beliebiger Form der gruppierten Behausung beschreibt. Sie beinhaltet "
+"überwiegend Wohngebiete."
 msgstr ""
 
-#: digiplan/map/map_config.py:78
+#: digiplan/map/map_config.py:86
 msgid "Industry"
 msgstr "Industrie"
 
-#: digiplan/map/map_config.py:78
-msgid "Industrie- und Gewerbegebiete"
+#: digiplan/map/map_config.py:88
+msgid ""
+"Industrie- und Gewerbegebiete werden ausgewiesen, um störende Einwirkungen "
+"von Betrieben wie Lärm, Geruch oder Gefahren auf Wohnbebauung zu vermeiden."
 msgstr ""
 
-#: digiplan/map/map_config.py:80
+#: digiplan/map/map_config.py:94
 msgid "Road Railway 500m"
 msgstr "Straßen und Bahnverkehr (500 m Puffer)"
 
-#: digiplan/map/map_config.py:81
-msgid "Straßen und Bahnverkehr (500 m Puffer)"
+#: digiplan/map/map_config.py:96
+msgid ""
+"Die Flächen längs von Autobahnen oder Schienenwegen werden durch Erstellen "
+"einer 500 m breiten Pufferzone abzüglich einer 15 m breiten Pufferzone "
+"gebildet."
 msgstr ""
 
-#: digiplan/map/map_config.py:84
+#: digiplan/map/map_config.py:102
 msgid "Road"
 msgstr "Straßen"
 
-#: digiplan/map/map_config.py:84
-msgid "Straßen"
+#: digiplan/map/map_config.py:103
+msgid ""
+"Zu den Straßen gehören unter anderem Bundesautobahnen, Bundesfern-, Landes- "
+"und Kreisstraßen."
 msgstr ""
 
-#: digiplan/map/map_config.py:85
+#: digiplan/map/map_config.py:107
 msgid "Railway"
 msgstr "Bahnverkehr"
 
-#: digiplan/map/map_config.py:85
-msgid "Bahnverkehr"
-msgstr ""
-
-#: digiplan/map/map_config.py:86
-msgid "Aviation"
-msgstr "Luftverkehr"
-
-#: digiplan/map/map_config.py:86
-msgid "Luftverkehr"
-msgstr ""
-
-#: digiplan/map/map_config.py:87
-msgid "Air Traffic"
-msgstr "Drehfunkfeuer"
-
-#: digiplan/map/map_config.py:87
-msgid "Drehfunkfeuer"
-msgstr ""
-
-#: digiplan/map/map_config.py:88
-msgid "Military"
-msgstr "Militär"
-
-#: digiplan/map/map_config.py:88
-msgid "Militärische Sperrgebiete und Liegenschaften"
-msgstr ""
-
-#: digiplan/map/map_config.py:89
-msgid "Grid"
-msgstr "Stromnetze (>=110 kV)"
-
-#: digiplan/map/map_config.py:89
-msgid "Stromnetze (>=110 kV)"
-msgstr ""
-
-#: digiplan/map/map_config.py:91
-msgid "Nature Landscape"
-msgstr "Natur und Landschaft"
-
-#: digiplan/map/map_config.py:92
-msgid "Nature Conservation Area"
-msgstr "Naturschutzgebiete"
-
-#: digiplan/map/map_config.py:92
-msgid "Naturschutzgebiete"
-msgstr ""
-
-#: digiplan/map/map_config.py:93
-msgid "Fauna Flora Habitat"
-msgstr "Fauna Flora Habitat"
-
-#: digiplan/map/map_config.py:93
-#, fuzzy
-#| msgid "Fauna Flora Habitat"
-msgid "Fauna-Flora-Habitate"
-msgstr "Fauna Flora Habitat"
-
-#: digiplan/map/map_config.py:94
-msgid "Special Protection Area"
-msgstr "Vogelschutzgebiete"
-
-#: digiplan/map/map_config.py:94
-msgid "Vogelschutzgebiete"
-msgstr ""
-
-#: digiplan/map/map_config.py:95
-msgid "Biosphere Reserve"
-msgstr "Biosphärenreservate"
-
-#: digiplan/map/map_config.py:95
-#, fuzzy
-#| msgid "Biosphere Reserve"
-msgid "Biosphärenreservate"
-msgstr "Biosphärenreservate"
-
-#: digiplan/map/map_config.py:97
-msgid "Landscape Protection Area"
-msgstr "Landschaftsschutzgebiete"
-
-#: digiplan/map/map_config.py:98
-msgid "Landschaftsschutzgebiete"
-msgstr ""
-
-#: digiplan/map/map_config.py:101
-msgid "Forest"
-msgstr "Wälder"
-
-#: digiplan/map/map_config.py:101
-msgid "Wälder"
-msgstr ""
-
-#: digiplan/map/map_config.py:103
-msgid "Drinking Water Protection Area"
-msgstr "Wasserschutzgebiete"
-
-#: digiplan/map/map_config.py:104
-msgid "Wasserschutzgebiete"
-msgstr ""
-
-#: digiplan/map/map_config.py:107
-msgid "Water"
-msgstr "Gewässser"
-
-#: digiplan/map/map_config.py:107
-msgid "Gewässer"
-msgstr ""
-
-#: digiplan/map/map_config.py:108
-msgid "Floodplain"
-msgstr "Überschwemmungsgebiete"
-
-#: digiplan/map/map_config.py:108
-msgid "Überschwemmungsgebiete"
-msgstr ""
-
-#: digiplan/map/map_config.py:110
-msgid "Soil Quality High"
-msgstr "Ackerflächen mit hoher Bodenqualität"
-
-#: digiplan/map/map_config.py:111
-msgid "Ackerflächen mit hoher Bodenqualität (Soil Quality Rating >= 40)"
+#: digiplan/map/map_config.py:109
+msgid ""
+"Der Bahnverkehr ist ein wichtiger Bestandteil der Verkehrsinfrastruktur. "
+"Berücksichtigt werden Fernverkehrsbahnen, Regionalverkehrsbahnen und S-"
+"Bahnen."
 msgstr ""
 
 #: digiplan/map/map_config.py:115
+msgid "Aviation"
+msgstr "Luftverkehr"
+
+#: digiplan/map/map_config.py:117
+msgid ""
+"Zur Infrastruktur des Luftverkehrs gehören neben Start- und Landebahnen die "
+"Flughafengebäude und Hangars."
+msgstr ""
+
+#: digiplan/map/map_config.py:123
+msgid "Air Traffic"
+msgstr "Drehfunkfeuer"
+
+#: digiplan/map/map_config.py:124
+msgid "Ein Drehfunkfeuer ist ein Funkfeuer für die Luftfahrtnavigation."
+msgstr ""
+
+#: digiplan/map/map_config.py:128
+msgid "Military"
+msgstr "Militär"
+
+#: digiplan/map/map_config.py:129
+msgid ""
+"Zu den militärisch genutzten Flächen gehören militärische Sperrgebiete und "
+"Liegenschaften."
+msgstr ""
+
+#: digiplan/map/map_config.py:133
+msgid "Grid"
+msgstr "Stromnetze (>=110 kV)"
+
+#: digiplan/map/map_config.py:135
+msgid ""
+"Zum Übertragungsnetz zählen die elektrischen Leitungen sowie die "
+"dazugehörigen Einrichtungen wie Schalt- und Umspannwerke der Höchst- und "
+"Hochspannungsebenen."
+msgstr ""
+
+#: digiplan/map/map_config.py:141
+msgid "Nature Landscape"
+msgstr "Natur und Landschaft"
+
+#: digiplan/map/map_config.py:143
+msgid "Nature Conservation Area"
+msgstr "Naturschutzgebiete"
+
+#: digiplan/map/map_config.py:145
+msgid ""
+"Naturschutzgebiete dienen dem Schutz der Natur und Landschaft. Sie tragen "
+"zur Erhaltung, Entwicklung und Wiederherstellung der Lebensstätte für "
+"bestimmte wild lebende Tier- und Pflanzenarten bei. Aber auch aus "
+"wissenschaftlichen, naturgeschichtlichen und ästhetischen Gründen werden "
+"Teile oder die Gesamtheit der Natur in Schutz genommen."
+msgstr ""
+
+#: digiplan/map/map_config.py:153
+msgid "Fauna Flora Habitat"
+msgstr "Fauna Flora Habitat"
+
+#: digiplan/map/map_config.py:155
+msgid ""
+"Die Fauna-Flora-Habitat-Richtlinie ist eine Naturschutz-Richtlinie der "
+"Europäischen Union (EU), die seltene oder bedrohte Arten und Lebensräume "
+"schützt. Sie gehört zum Schutzgebietsnetz Natura 2000."
+msgstr ""
+
+#: digiplan/map/map_config.py:161
+msgid "Special Protection Area"
+msgstr "Vogelschutzgebiete"
+
+#: digiplan/map/map_config.py:163
+msgid ""
+"Die Vogelschutzrichtlinie der Europäischen Union (EU) dient der Erhaltung "
+"der wild lebenden, heimischen Vogelarten. Sie regelt den Schutz dieser "
+"Vögel, ihrer Eier und Lebensräume wie Brut-, Rast- und "
+"Überwinterungsgebiete. Die Vogelschutzgebiete gehören zum Schutzgebietsnetz "
+"Natura 2000."
+msgstr ""
+
+#: digiplan/map/map_config.py:170
+msgid "Biosphere Reserve"
+msgstr "Biosphärenreservate"
+
+#: digiplan/map/map_config.py:172
+msgid ""
+"Biosphärenreservate sind großräumige und für bestimmte Landschaftstypen "
+"charakteristische Gebiete mit interdisziplinärem Ansatz. In diesen von der "
+"UNESCO initiierten Modellregionen soll nachhaltige Entwicklung in "
+"ökologischer, ökonomischer und sozialer Hinsicht exemplarisch verwirklicht "
+"werden. Die Biosphärenreservate sind in drei Zonen eingeteilt: Eine "
+"naturschutzorientierte Kernzone (Schutzfunktion), eine am Landschaftsschutz "
+"orientierte Pflegezone (Forschungs- und Bildungsfunktion) und eine "
+"sozioökonomisch orientierte Entwicklungszone (Entwicklungsfunktion)."
+msgstr ""
+
+#: digiplan/map/map_config.py:182
+msgid "Landscape Protection Area"
+msgstr "Landschaftsschutzgebiete"
+
+#: digiplan/map/map_config.py:184
+msgid ""
+"Landschaftsschutzgebiete sind oft großflächiger angelegt und zielen auf den "
+"Erhalt des Landschaftscharakters, das allgemeine Erscheinungsbild der "
+"Landschaft und dessen Schönheit ab. Sie haben einen geringeren Schutzstatus "
+"als etwa Naturschutzgebiete oder Nationalparke und unterliegen daher weniger "
+"strengen Nutzungsbeschränkungen."
+msgstr ""
+
+#: digiplan/map/map_config.py:192
+msgid "Forest"
+msgstr "Wälder"
+
+#: digiplan/map/map_config.py:194
+msgid ""
+"Wald umfasst eine Vielzahl an mit Bäumen und anderer Vegetation bedeckten "
+"Fläche mit unterschiedlicher forstwirtschaftlicher Nutzung und ökologischer "
+"Bedeutung. Wälder können in Nadel-, Laub- und Mischwald sowie anhand der "
+"Waldfunktionen (z. B. Schutzwald, Erholungswald) unterschieden werden."
+msgstr ""
+
+#: digiplan/map/map_config.py:202
+msgid "Drinking Water Protection Area"
+msgstr "Wasserschutzgebiete"
+
+#: digiplan/map/map_config.py:204
+msgid ""
+"Wasserschutzgebiete stellen die öffentliche Wasserversorgung durch die "
+"Vermeidung schädlicher Eintragungen in die Gewässer (Grundwasser, "
+"oberirdische Gewässer, Küstengewässer) sicher."
+msgstr ""
+
+#: digiplan/map/map_config.py:210
+msgid "Water"
+msgstr "Gewässser"
+
+#: digiplan/map/map_config.py:212
+msgid ""
+"Ein Gewässer ist in der Natur fließendes oder stehendes Wasser. Dazu gehören "
+"der Wasserkörper, das Gewässerbett und der Grundwasserleiter."
+msgstr ""
+
+#: digiplan/map/map_config.py:218
+msgid "Floodplain"
+msgstr "Überschwemmungsgebiete"
+
+#: digiplan/map/map_config.py:220
+msgid ""
+"Bei Überschwemmungsgebieten handelt es sich um die Flächen, die statistisch "
+"gesehen mindestens einmal in hundert Jahren überflutet sein können."
+msgstr ""
+
+#: digiplan/map/map_config.py:226
+msgid "Soil Quality High"
+msgstr "Ackerflächen mit hoher Bodenqualität"
+
+#: digiplan/map/map_config.py:228
+msgid ""
+"Acker- und Grünlandflächen mit hoher Bodenqualität (Soil Quality Rating "
+"(SQR) >= 40). Um die Flächenkonkurrenz zwischen landwirtschaftlicher Nutzung "
+"und Energiegewinnung zu minimieren, wird bei den links einstellbaren PV-"
+"Freiflächenpotenzialen als Grenzwert ein SQR von 40 angenommen, es werden "
+"also lediglich Flächen mit sehr geringer und geringer Ertragsfähigkeit als "
+"potenzielle Standorte berücksichtigt."
+msgstr ""
+
+#: digiplan/map/map_config.py:237
 msgid "Soil Quality Low"
 msgstr "Ackerflächen mit geringer Bodenqualität"
 
-#: digiplan/map/map_config.py:116
-msgid "Ackerflächen mit geringer Bodenqualität (Soil Quality Rating < 40)"
+#: digiplan/map/map_config.py:239
+msgid ""
+"Acker- und Grünlandflächen inner- und außerhalb benachteiligter Gebiete mit "
+"geringer Bodenqualität (Soil Quality Rating (SQR) < 40). Um die "
+"Flächenkonkurrenz zwischen landwirtschaftlicher Nutzung und Energiegewinnung "
+"zu minimieren, wird bei den links einstellbaren PV-Freiflächenpotenzialen "
+"als Grenzwert ein SQR von 40 angenommen, es werden also lediglich Flächen "
+"mit sehr geringer und geringer Ertragsfähigkeit als potenzielle Standorte "
+"berücksichtigt."
 msgstr ""
 
 #: digiplan/map/models.py:20
@@ -501,8 +567,6 @@ msgid "Battery storage"
 msgstr "Batteriespeicher"
 
 #: digiplan/map/models.py:505
-#, fuzzy
-#| msgid "Batteries"
 msgid "Battery storages"
 msgstr "Batteriespeicher"
 
@@ -525,8 +589,6 @@ msgid "Energieanteile pro Technologie"
 msgstr ""
 
 #: digiplan/map/popups.py:349
-#, fuzzy
-#| msgid "Renewable Energies (RE)"
 msgid "Anteil Energie aus EE"
 msgstr "Erneuerbare Energien"
 
@@ -555,8 +617,6 @@ msgid "Description for number of wind turbines"
 msgstr "Anzahl Windenergieanlagen je km²"
 
 #: digiplan/map/popups.py:592 digiplan/map/popups.py:625
-#, fuzzy
-#| msgid "Number of Wind Turbines per km²"
 msgid "Windturbinen pro km²"
 msgstr "Anzahl Windenergieanlagen je km²"
 
@@ -579,8 +639,6 @@ msgid "Wärmebedarf je EinwohnerIn"
 msgstr ""
 
 #: digiplan/static/config/energy_settings_panel.json:6
-#, fuzzy
-#| msgid "Wind energy (MW)"
 msgid "Windenergie (MW)"
 msgstr "Windenergie"
 
@@ -799,8 +857,7 @@ msgid "Gewerbe, Handel, Dienstleistungen (%%)"
 msgstr ""
 
 #: digiplan/static/config/energy_settings_panel.json:184
-#, fuzzy, python-format
-#| msgid "Industry (%%)"
+#, python-format
 msgid "Industrie (%%)"
 msgstr "Industrie (%%)"
 
@@ -918,10 +975,9 @@ msgstr ""
 
 #: digiplan/static/config/heat_settings_panel.json:121
 #: digiplan/static/config/heat_settings_panel.json:133
-#, fuzzy, python-format
-#| msgid "Decentralized (%%)"
+#, python-format
 msgid "Dezentrale Speicherung (%%)"
-msgstr "Dezentral"
+msgstr "Dezentrale Speicherung (%%)"
 
 #: digiplan/static/config/heat_settings_panel.json:127
 msgid ""
@@ -1455,8 +1511,6 @@ msgid ""
 msgstr ""
 
 #: digiplan/templates/map.html:55
-#, fuzzy
-#| msgid "Documentation"
 msgid "Documentation"
 msgstr "Dokumentation"
 
@@ -1465,8 +1519,6 @@ msgid "Sources"
 msgstr "Quellen"
 
 #: digiplan/templates/map.html:63 digiplan/templates/offcanvas/contact.html:4
-#, fuzzy
-#| msgid "Contact"
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -1497,348 +1549,3 @@ msgstr ""
 #: digiplan/templates/widgets/slider.html:18
 msgid "more"
 msgstr "mehr"
-
-#~ msgid "Wind turbine layer"
-#~ msgstr "Windturbine"
-
-#~ msgid "Hydro layer"
-#~ msgstr "Wasserkraft"
-
-#~ msgid "Aviation layer"
-#~ msgstr "Luftverkehr"
-
-#~ msgid "Air traffic layer"
-#~ msgstr "Drehfunkfeuer"
-
-#~ msgid "Biosphere Reserve layer"
-#~ msgstr "Biosphärenreservate"
-
-#, fuzzy
-#~| msgid "Large scale batteries (MWh)"
-#~ msgid "Großbatterien (MWh)"
-#~ msgstr "Großspeicher (GWh)"
-
-#~ msgid ""
-#~ "Heat pumps for heating and hot water in households with their own heat "
-#~ "generation"
-#~ msgstr ""
-#~ "Stellen Sie den Anteil von Wärmepumpen für Verbraucher mit eigener "
-#~ "Wärmeerzeugung je Sektor ein."
-
-#, python-format
-#~ msgid "District heating (%%)"
-#~ msgstr "Fernwärme (%%)"
-
-#, python-format
-#~ msgid "Hot water tanks (%%)"
-#~ msgstr "Heimspeicher (%%)"
-
-#, python-format
-#~ msgid "Large heat storage (%%)"
-#~ msgstr "Großwärmespeicher (%%)"
-
-#, python-format
-#~ msgid "Share of battery-electric vehicles (%%)"
-#~ msgstr "Anteil privater batterieelektrischer Fahrzeuge (%%)"
-
-#, python-format
-#~ msgid "Share of battery electric and plugin-hybrid vehicles (%%)"
-#~ msgstr "Anteil privater batterieelektrischer Fahrzeuge (%%)"
-
-#, fuzzy
-#~| msgid "Share of battery electric and plugin-hybrid vehicles (%%)"
-#~ msgid "Personal battery electric and plug-in hybrid vehicles"
-#~ msgstr "Anteil privater batterieelektrischer Fahrzeuge (%%)"
-
-#~ msgid "Set the use of wind potential areas."
-#~ msgstr "Stelle die Nutzung von Windpotenzialgebieten ein"
-
-#, python-format
-#~ msgid ""
-#~ "With your settings, a maximum total output of 13 MW and a yield of 7 GWh "
-#~ "can be realized.<br>The goals for Saxony-Anhalt from the Wind Energy Area "
-#~ "Requirement Act are:<br>- for 2027 (1.4%%) achieved.<br>- for 2032 "
-#~ "(2.2%%) achieved.<br><br>Tip: In the menu on the right you can display "
-#~ "the systems that exist today."
-#~ msgstr ""
-#~ "Mit Ihren Einstellungen kann eine maximale Gesamtleistung von 13 MW und "
-#~ "ein Ertrag von 7 GWh realisiert werden.<br>Die Ziele für Sachsen-Anhalt "
-#~ "aus dem Windenergieflächenbedarfsgesetz werden:<br>- für 2027 (1,4 %%) "
-#~ "erreicht.<br>- für 2032 (2,2 %%) erreicht.<br><br>Tipp: Im rechten Menü "
-#~ "können Sie die heute bestehenden Anlagen einblenden."
-
-#~ msgid "Set the use of potential areas for ground-mounted PV."
-#~ msgstr "Stelle die Nutzung von Potenzialgebieten für Freiflächen-PV ein"
-
-#~ msgid ""
-#~ "With your settings, a maximum total output of 18 MW and a yield of 3 GWh "
-#~ "can be realized.<br><br>Tip: In the right-hand menu, you can display the "
-#~ "systems that currently exist."
-#~ msgstr ""
-#~ "Mit Ihren Einstellungen kann eine maximale Gesamtleistung von 13 MW und "
-#~ "ein Ertrag von 7 GWh realisiert werden.<br><br>Tipp: Im rechten Menü "
-#~ "können Sie die heute bestehenden Anlagen einblenden."
-
-#~ msgid "Set how much roof area should be used for photovoltaics."
-#~ msgstr ""
-#~ "Stellen Sie ein, wieviel Dachfläche für Photovoltaik genutzt werden soll."
-
-#~ msgid "Set the future power consumption per sector."
-#~ msgstr "Stellen Sie den zukünftigen Stromverbrauch je Sektor ein."
-
-#, python-format
-#~ msgid ""
-#~ "With your settings, the power consumption is 42%% of today's power "
-#~ "consumption."
-#~ msgstr ""
-#~ "Mit Ihren Einstellungen beträgt der Stromverbrauch 42 %% des heutigen "
-#~ "Stromverbrauchs."
-
-#~ msgid ""
-#~ "Set how much of the daily (on average) fed-in energy from wind energy and "
-#~ "free-field PV should be able to be temporarily stored using large "
-#~ "batteries."
-#~ msgstr ""
-#~ "Stellen Sie ein, wieviel der täglich (im Mittel) eingespeisten "
-#~ "Energiemenge aus Windenergie und Freiflächen-PV mit Hilfe von "
-#~ "Großbatterien zwischengespeichert werden können sollen."
-
-#, python-format
-#~ msgid ""
-#~ "With your settings, 73%% can be cached. That corresponds to a storage "
-#~ "capacity of 17 GWh."
-#~ msgstr ""
-#~ "Mit Ihren Einstellungen können 73%% zwischengespeichert werden. Das "
-#~ "entspricht einer Speicherkapazität von 17 GWh."
-
-#~ msgid ""
-#~ "Set the share of heat pumps for consumers with their own heat generation "
-#~ "per sector."
-#~ msgstr ""
-#~ "Stellen Sie den Anteil von Wärmepumpen für Verbraucher mit eigener "
-#~ "Wärmeerzeugung je Sektor ein."
-
-#, python-format
-#~ msgid ""
-#~ "With your settings, the proportion of energy provided by heat pumps is "
-#~ "87%%. The remaining energy is provided by:<br>- Direct electric heating: "
-#~ "10%%<br>- Bioenergy: 5%%<br>- Solar thermal: 20%%<br> <br>Note: District "
-#~ "heating systems are configured separately in the menu on the left."
-#~ msgstr ""
-#~ "Mit Ihren Einstellungen beträgt der Anteil der mittels Wärmepumpen "
-#~ "bereitgestellten Energiemenge 87 %%. Die übrige Energie wird "
-#~ "bereitgestellt durch:<br>- Direktelektrische Heizung: 10 %%<br>- "
-#~ "Bioenergie: 5 %%<br>- Solarthermie: 20 %%<br><br>Hinweis: "
-#~ "Fernwärmesysteme werden links im Menü separat konfiguriert."
-
-#~ msgid ""
-#~ "Set the share of heat pumps for all consumers with district heating "
-#~ "connection. This includes households, tertiary and industrial customers "
-#~ "in the Dessau-Roßlau, Bitterfeld-Wolfen, Köthen and Wittenberg district "
-#~ "heating networks."
-#~ msgstr ""
-#~ "Stellen Sie den Anteil von Wärmepumpen für alle Verbraucher mit "
-#~ "Fernwärmeanschluss ein. Dies umfasst Haushalte, GHD und Industriekunden "
-#~ "in den Fernwärmenetzen Dessau-Roßlau, Bitterfeld-Wolfen, Köthen und "
-#~ "Wittenberg."
-
-#, python-format
-#~ msgid ""
-#~ "With your settings, the proportion of energy provided by heat pumps is "
-#~ "54%%. The remaining energy is provided by:<br>- Direct electric heating: "
-#~ "12%%<br>- Bioenergy: 6%%<br>- Solar thermal: 52%%<br> <br>Note: "
-#~ "Decentralized consumers are configured separately in the menu on the left."
-#~ msgstr ""
-#~ "Mit Ihren Einstellungen beträgt der Anteil der mittels Wärmepumpen "
-#~ "bereitgestellten Energiemenge 54 %%. Die übrige Energie wird "
-#~ "bereitgestellt durch:<br>- Direktelektrische Heizung: 12 %%<br>- "
-#~ "Bioenergie: 6 %%<br>- Solarthermie: 52 %%<br><br>Hinweis: "
-#~ "Fernwärmesysteme werden links im Menü separat konfiguriert."
-
-#~ msgid "Set the future heat consumption per sector."
-#~ msgstr "Stellen Sie den zukünftigen Wärmeverbrauch je Sektor ein."
-
-#, python-format
-#~ msgid ""
-#~ "With your settings, the heat consumption is 27%% of today's heat "
-#~ "consumption."
-#~ msgstr ""
-#~ "Mit Ihren Einstellungen beträgt der Wärmebedarf 42 %% des heutigen "
-#~ "Wärmebedarfs."
-
-#~ msgid ""
-#~ "Set how much of the daily heat requirement should be able to be "
-#~ "temporarily stored in hot water tanks."
-#~ msgstr ""
-#~ "Stellen Sie ein, wieviel des täglichen Wärmebedarfs in "
-#~ "Warmwasserspeichern zwischengespeichert werden können sollen."
-
-#, python-format
-#~ msgid ""
-#~ "With your settings, 57%% of the daily heat consumption can be temporarily "
-#~ "stored. That corresponds to a storage capacity of 5 GWh"
-#~ msgstr ""
-#~ "Mit Ihren Einstellungen können 57%% zwischengespeichert werden. Das "
-#~ "entspricht einer Speicherkapazität von 5 GWh."
-
-#, python-format
-#~ msgid ""
-#~ "With your settings, 22%% of private vehicles (compact, mid-size, full-"
-#~ "size) are electric. Of these,<br>- 50%% are battery electric (BEV) "
-#~ "and<br>- 50%% are plug-in hybrid vehicles."
-#~ msgstr ""
-#~ "Mit Ihren Einstellungen sind 22 %% der privaten Fahrzeuge (Kleinwagen, "
-#~ "Mittelklasse, Oberklasse) elektrisch. Davon sind<br>- 50 %% "
-#~ "batterieelektrisch (BEV) und<br>- 50 %% Plugin-Hybrid-Fahrzeuge."
-
-#~ msgid "Outdoor PV"
-#~ msgstr "Freiflächen-PV"
-
-#~ msgid "Outdoor PVs"
-#~ msgstr "Freiflächen-PVs"
-
-#~ msgid "Wind turbines per square meter"
-#~ msgstr "Windturbine"
-
-#~ msgid "Only previous priority areas/suitable areas."
-#~ msgstr "Nur bisherige VR/EG"
-
-#~ msgid "Priority areas according to STP Wind 2027."
-#~ msgstr "VR-Gebiete nach STP Wind 2027"
-
-#~ msgid "Priority areas repowering."
-#~ msgstr "VR-Gebiete Repowering"
-
-#~ msgid "Free extension in the search area."
-#~ msgstr "Freier Zubau im Suchraum"
-
-#~ msgid "Use of open country search area."
-#~ msgstr "Nutzung Suchraum Offenland"
-
-#~ msgid "Use of forest search space."
-#~ msgstr "Nutzung Suchraum Wald"
-
-#~ msgid "Outdoor PV (MW)"
-#~ msgstr "Freiflächen-PV (MW)"
-
-#, python-format
-#~ msgid "Areas along the federal motorway and rail routes (%%)"
-#~ msgstr "Flächen entlang Autobahnen und Schienenwegen (%%)"
-
-#, python-format
-#~ msgid "Use of agricultural and grassland areas (%%)"
-#~ msgstr "Nutzung von Agrar- und Grünlandflächen (%%)"
-
-#~ msgid "Roof-mounted PV (MW)"
-#~ msgstr "Aufdach-PV (MW)"
-
-#, python-format
-#~ msgid "Share of used roofs (%%)"
-#~ msgstr "Anteil genutzter Dächer (%%)"
-
-#, python-format
-#~ msgid "Proportion of photovoltaic systems with electricity storage (%%)"
-#~ msgstr "Anteil PVA mit Stromspeicher (%%)"
-
-#~ msgid "Hydropower (MW)"
-#~ msgstr "Wasserkraft (MW)"
-
-#, python-format
-#~ msgid "Power consumption without heat generation (%%)"
-#~ msgstr "Stromverbrauch, ohne Wärmeerzeugung (%%)"
-
-#~ msgid ""
-#~ "Power consumption without providing heat using power-to-heat (e.g. heat "
-#~ "pumps)"
-#~ msgstr "Stromverbrauch, ohne Wärmeerzeugung (%%)"
-
-#~ msgid "Decentralized heat supply"
-#~ msgstr "Dezentral"
-
-#, fuzzy, python-format
-#~| msgid ""
-#~| "With your settings, a maximum total output of 4 MW and a yield of 2 GWh "
-#~| "can be realized. The distribution of the orientation is as follows:<br>- "
-#~| "South roofs: 3%%<br>- West roofs: 3%%<br>- North roofs: 3%%<br>- East "
-#~| "roofs: 8%%<br>Buildings under monument protection are not used."
-#~| "<br><br>Tip: In the menu on the right you can show the systems that "
-#~| "exist today."
-#~ msgid ""
-#~ "With your settings, a maximum total output of 4 MW and a yield of 2 GWh "
-#~ "can be realized. The distribution of the orientation is as follows:<br>- "
-#~ "South roofs: 3%%<br>- West roofs: 3%%<br>- North roofs: 3%%<br>- East "
-#~ "roofs: 8%%<br>Buildings under monument protection are not used."
-#~ "<br><br>Tip: In the menu on the right you can show the systems that exist "
-#~ "today."
-#~ msgstr ""
-#~ "Mit Ihren Einstellungen kann eine maximale Gesamtleistung von 13 MW und "
-#~ "ein Ertrag von 7 GWh realisiert werden.<br>Die Ziele für Sachsen-Anhalt "
-#~ "aus dem Windenergieflächenbedarfsgesetz werden:<br>- für 2027 (1,4 %) "
-#~ "erreicht.<br>- für 2032 (2,2 %) erreicht.<br><br>Tipp: Im rechten Menü "
-#~ "können Sie die heute bestehenden Anlagen einblenden."
-
-#, fuzzy, python-format
-#~| msgid ""
-#~| "With your settings, 32%% of the daily heat consumption can be "
-#~| "temporarily stored. That corresponds to a storage capacity of 3 GWh"
-#~ msgid ""
-#~ "With your settings, 32%% of the daily heat consumption can be temporarily "
-#~ "stored. That corresponds to a storage capacity of 3 GWh"
-#~ msgstr ""
-#~ "Mit Ihren Einstellungen können 32% zwischengespeichert werden. Das "
-#~ "entspricht einer Speicherkapazität von 3 GWh."
-
-#, fuzzy
-#~| msgid "Telefax"
-#~ msgid "Telefon"
-#~ msgstr "Telefax"
-
-#, fuzzy
-#~| msgid "Aviation"
-#~ msgid "Motivation"
-#~ msgstr "Luftverkehr"
-
-#~ msgid "CO2-Emissions (Mt)"
-#~ msgstr "CO2-Emissionen (Mt)"
-
-#, fuzzy
-#~| msgid "CO2 Emissions"
-#~ msgid "Emissions"
-#~ msgstr "Emissionen"
-
-#~ msgid "Total Costs"
-#~ msgstr "Gesamtkosten"
-
-#, fuzzy
-#~| msgid "Distance from residential areas"
-#~ msgid "Distance from residential areas (m)"
-#~ msgstr "Siedlungsabstand"
-
-#~ msgid "Remove restrictions on disadvantaged areas."
-#~ msgstr "Begrenzung auf benachteiligte Gebiete aufheben"
-
-#~ msgid "Bioenergy (MW)"
-#~ msgstr "Bioenergie (MW)"
-
-#~ msgid "Conventional Energy (MW)"
-#~ msgstr "Konventionell (MW)"
-
-#, python-format
-#~ msgid "Decentralized: share of households with heat pumps (%%)"
-#~ msgstr "Dezentral: Anteil Haushalte mit Wärmepumpe (%%)"
-
-#, python-format
-#~ msgid "Decentralized: share of households with solar thermal energy (%%)"
-#~ msgstr "Dezentral, Anteil Haushalte mit Solartherme (%%)"
-
-#, python-format
-#~ msgid "Centralized: Share of large scale heat pumps (%%)"
-#~ msgstr "Zentral: Anteil Großwärmepumpen (%%)"
-
-#, python-format
-#~ msgid "Share of plugin-hybrid vehicles (%%)"
-#~ msgstr "Anteil privater Plugin-Hybrid-Fahrzeuge (%%)"
-
-#, python-format
-#~ msgid "Share of heavy-duty trucks with fuel cell (%%)"
-#~ msgstr "Anteil schwerer LKW mit Brennstoffzelle (%%)"
