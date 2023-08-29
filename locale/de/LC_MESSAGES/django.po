@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-29 06:29+0000\n"
+"POT-Creation-Date: 2023-08-29 06:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,8 +180,6 @@ msgstr ""
 
 #: digiplan/map/config.py:174 digiplan/map/map_config.py:34
 #: digiplan/map/models.py:304 digiplan/map/models.py:305
-#, fuzzy
-#| msgid "Roof-mounted PV"
 msgid "Ground-mounted PV"
 msgstr "Freiflächen-PV"
 
