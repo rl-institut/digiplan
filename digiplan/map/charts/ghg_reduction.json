@@ -60,6 +60,12 @@
         "show":false,
         "position":"inside"
       },
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data":[
         538,
         0,
@@ -75,6 +81,12 @@
       "label":{
         "show":false,
         "position":"inside"
+      },
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
       "data":[
         2129,
@@ -92,6 +104,12 @@
         "show":false,
         "position":"inside"
       },
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data":[
         672,
         0,
@@ -107,6 +125,12 @@
       "label":{
         "show":false,
         "position":"inside"
+      },
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
       "data":[
         695,
@@ -124,6 +148,12 @@
         "show":false,
         "position":"inside"
       },
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data":[
         368,
         0,
@@ -139,6 +169,12 @@
       "label":{
         "show":false,
         "position":"inside"
+      },
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
       "data":[
         157,
@@ -159,6 +195,12 @@
         "color":"#666"
       },
       "legend":false,
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data":[
         0,
         500,
@@ -176,6 +218,12 @@
         "show":false,
         "position":"inside",
         "color":"#666"
+      },
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
       },
       "data":[
         0,
