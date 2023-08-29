@@ -301,8 +301,8 @@ class PVground(RenewableModel):
     }
 
     class Meta:  # noqa: D106
-        verbose_name = _("Outdoor PV")
-        verbose_name_plural = _("Outdoor PVs")
+        verbose_name = _("Ground-mounted PV")
+        verbose_name_plural = _("Ground-mounted PV")
 
 
 class Hydro(RenewableModel):
@@ -501,8 +501,8 @@ class Storage(RenewableModel):
     }
 
     class Meta:  # noqa: D106
-        verbose_name = _("Storage")
-        verbose_name_plural = _("Storages")
+        verbose_name = _("Battery storage")
+        verbose_name_plural = _("Battery storages")
 
 
 class StaticRegionModel(models.Model):
