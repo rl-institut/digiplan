@@ -115,12 +115,3 @@
 
 <h2 class="panel__title title">{%  trans "Batteries" %}</h2>
 {% include "widgets/slider.html" with field=form.s_s_g_1 %}
-<div class="sidepanel">
-  <p class="sidepanel__heading">
-    {%  trans "Detail settings" %}
-    {% include "widgets/sidepanel_close_btn.html" %}
-    <p>{%  trans "Set how much of the daily (on average) fed-in energy from wind energy and free-field PV should be able to be temporarily stored using large batteries." %}</p>
-    {% include "widgets/slider.html" with field=form.s_s_g_3 %}
-    <p>{%  trans "With your settings, 73% can be cached. That corresponds to a storage capacity of 17 GWh." %}</p>
-  </p>
-</div>
