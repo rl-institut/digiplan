@@ -28,11 +28,12 @@ class SimulationTest(SimpleTestCase):
         "s_pv_d_1": 100,
         "s_h_1": 100,
         "s_s_g_1": 100,
-        "w_d_wp_3": 100,
-        "w_d_wp_4": 100,
-        "w_d_wp_5": 100,
-        "w_d_s_1": 50,
-        "w_z_s_1": 53,
+        "w_d_wp_3": 80,
+        "w_d_wp_4": 80,
+        "w_d_wp_5": 80,
+        "w_z_wp_3": 20,
+        "w_d_s_1": 100,
+        "w_z_s_1": 100,
         "w_d_wp_1": True,
         "w_z_wp_1": None,
         "s_w_3": False,
@@ -45,7 +46,7 @@ class SimulationTest(SimpleTestCase):
         "s_pv_ff_3": 50,
         "s_pv_ff_4": 50,
         "s_pv_d_3": 50,
-        "s_pv_d_4": 50,
+        "s_pv_d_4": 47,
     }
 
     def setUp(self) -> None:
