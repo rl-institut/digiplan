@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-29 14:52+0000\n"
+"POT-Creation-Date: 2023-08-30 11:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -275,7 +275,7 @@ msgid ""
 "Leistung und Anzahl"
 msgstr ""
 
-#: digiplan/map/map_config.py:69 digiplan/templates/forms/panel_heat.html:85
+#: digiplan/map/map_config.py:69 digiplan/templates/forms/panel_heat.html:68
 msgid "Storage"
 msgstr "Speicher"
 
@@ -862,17 +862,18 @@ msgid "Industrie (%%)"
 msgstr "Industrie (%%)"
 
 #: digiplan/static/config/energy_settings_panel.json:194
-#: digiplan/static/config/energy_settings_panel.json:206
 #, python-format
-msgid "Speicherung von Windenergie und Freiflächen-PV (%%)"
+msgid ""
+"Großbatterien: Zwischenspeicherung der tägl. Einspeisung durch Windenergie "
+"und Freiflächen-PV (%%)"
 msgstr ""
 
 #: digiplan/static/config/energy_settings_panel.json:200
-#: digiplan/static/config/energy_settings_panel.json:211
 msgid ""
 "Wieviel der täglich (im Mittel) eingespeisten Energiemenge aus Windenergie "
 "und Freiflächen-PV sollen mit Hilfe von Großbatterien zwischengespeichert "
-"werden können?"
+"werden können?\\n\\nHinweis: PV-Heimspeicher kannst Du bei Aufdach-PV "
+"einstellen."
 msgstr ""
 
 #: digiplan/static/config/heat_settings_panel.json:5
@@ -893,7 +894,7 @@ msgid ""
 msgstr ""
 
 #: digiplan/static/config/heat_settings_panel.json:28
-#: digiplan/static/config/heat_settings_panel.json:98
+#: digiplan/static/config/heat_settings_panel.json:86
 #, python-format
 msgid "Commercial, Trade, Services (%%)"
 msgstr "Gewerbe, Handel, Dienstleistungen (%%)"
@@ -905,7 +906,7 @@ msgid ""
 msgstr ""
 
 #: digiplan/static/config/heat_settings_panel.json:39
-#: digiplan/static/config/heat_settings_panel.json:109
+#: digiplan/static/config/heat_settings_panel.json:97
 #, python-format
 msgid "Industry (%%)"
 msgstr "Industrie (%%)"
@@ -917,88 +918,81 @@ msgid ""
 msgstr ""
 
 #: digiplan/static/config/heat_settings_panel.json:51
-#: digiplan/static/config/heat_settings_panel.json:63
 #, python-format
 msgid "Anteil Wärmepumpen Fernwärme (%%)"
 msgstr ""
 
 #: digiplan/static/config/heat_settings_panel.json:57
-#: digiplan/static/config/heat_settings_panel.json:69
 msgid ""
 "Energetischer Anteil von Wärmepumpen für Heizung, Warmwasser und "
-"Prozesswärme in Fernwärmenetzen (Dessau-Roßlau, Bitterfeld-Wolfen, Köthen "
-"and Wittenberg). Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK "
-"Langfristszenarien."
+"Prozesswärme in Haushalten, GHD und Industrie in Fernwärmenetzen (Dessau-"
+"Roßlau, Bitterfeld-Wolfen, Köthen and Wittenberg). Die übrige Energie wird "
+"bereitgestellt durch direktelektrische Heizung, Bioenergie und Solarthermie "
+"(s. Beheizungsstruktur in den Ergebnissen). Das dargestellte Ziel für 2045 "
+"ist abgeleitet aus den BMWK Langfristszenarien.\\n\\nHinweis: Dezentrale "
+"Wärmesysteme werden im Menü separat konfiguriert."
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:75
+#: digiplan/static/config/heat_settings_panel.json:63
 #, python-format
 msgid "Heat consumption (%%)"
 msgstr "Verbrauch (%%)"
 
-#: digiplan/static/config/heat_settings_panel.json:81
+#: digiplan/static/config/heat_settings_panel.json:69
 msgid ""
 "Relativer Wärmeverbrauch (Endenergie) von Haushalten, GHD und Industrie "
 "gegenüber heute. Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK "
 "Langfristszenarien."
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:87
+#: digiplan/static/config/heat_settings_panel.json:75
 #, python-format
 msgid "Households (%%)"
 msgstr "Haushalte (%%)"
 
-#: digiplan/static/config/heat_settings_panel.json:93
+#: digiplan/static/config/heat_settings_panel.json:81
 msgid ""
 "Umfasst Heizung, Warmwasser und Kochen in Haushalten mit eigener "
 "Wärmeerzeugung und in Fernwärmenetzen. Das dargestellte Ziel für 2045 ist "
 "abgeleitet aus den BMWK Langfristszenarien."
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:104
+#: digiplan/static/config/heat_settings_panel.json:92
 msgid ""
 "Umfasst Heizung und Warmwasser im Gewerbe-, Handels- und "
 "Dienstleistungssektor mit eigener Wärmeerzeugung und in Fernwärmenetzen. Das "
 "dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien."
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:115
+#: digiplan/static/config/heat_settings_panel.json:103
 msgid ""
 "Umfasst Heizwärme, Warmwasser und Prozesswärme in der Industrie mit eigener "
 "Wärmeerzeugung und in Fernwärmenetzen. Das dargestellte Ziel für 2045 ist "
 "abgeleitet aus den BMWK Langfristszenarien."
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:121
-#: digiplan/static/config/heat_settings_panel.json:133
+#: digiplan/static/config/heat_settings_panel.json:109
 #, python-format
-msgid "Dezentrale Speicherung (%%)"
-msgstr "Dezentrale Speicherung (%%)"
+msgid "Dezentrale Speicher: Zwischenspeicherung des tägl. Wärmebedarfs (%%)"
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:115
+msgid ""
+"Wieviel des täglichen Wärmebedarfs in dezentralen Systemen (Heizung, "
+"Warmwasser und Prozesswärme) sollen in kleinen Warmwasserspeichern "
+"zwischengespeichert werden können?"
+msgstr ""
+
+#: digiplan/static/config/heat_settings_panel.json:121
+#, python-format
+msgid "Großwärmespeicher: Zwischenspeicherung des tägl. Wärmebedarfs (%%)"
+msgstr ""
 
 #: digiplan/static/config/heat_settings_panel.json:127
 msgid ""
-"Wieviel des täglichen Wärmebedarfs in dezentralen Systemen sollen in kleinen "
-"Warmwasserspeichern zwischengespeichert werden können?"
-msgstr ""
-
-#: digiplan/static/config/heat_settings_panel.json:139
-msgid "Warmwasserspeicher für Heizung, Warmwasser und Prozesswärme"
-msgstr ""
-
-#: digiplan/static/config/heat_settings_panel.json:145
-#: digiplan/static/config/heat_settings_panel.json:157
-#, python-format
-msgid "Großwärmespeicher (%%)"
-msgstr ""
-
-#: digiplan/static/config/heat_settings_panel.json:151
-msgid ""
-"Wieviel des täglichen Wärmebedarfs in Fernwärmenetzen sollen in großen "
-"Warmwasserspeichern zwischengespeichert werden können?."
-msgstr ""
-
-#: digiplan/static/config/heat_settings_panel.json:163
-msgid "Warmwasserspeicher für Heizung, Warmwasser und Prozesswärme."
+"Wieviel des täglichen Wärmebedarfs in Fernwärmenetzen (Heizung, Warmwasser "
+"und Prozesswärme) sollen in großen Warmwasserspeichern zwischengespeichert "
+"werden können?"
 msgstr ""
 
 #: digiplan/static/config/traffic_settings_panel.json:5
@@ -1327,28 +1321,29 @@ msgid "Car trip"
 msgstr ""
 
 #: digiplan/templates/components/results_view.html:41
-msgid "Erzeugung und Verbrauch"
+msgid "Erzeugung aus Erneuerbaren Energien und Verbrauch"
 msgstr ""
 
 #: digiplan/templates/components/results_view.html:44
 msgid ""
-"Bruttostromerzeugung nach Technologie und Nettostromverbrauch (ohne Wärme) "
-"nach Sektor für 2022, Dein Szenario und einem Zielszenario für 2045. Die "
-"Ziele sind abgeleitet aus den <a href=\\"
+"Bruttostromerzeugung aus Erneuerbaren Energien nach Technologie und "
+"Nettostromverbrauch (ohne Wärme) nach Sektor für 2022, Dein Szenario und "
+"einem Zielszenario für 2045. Die Ziele für Erzeugung und Verbrauch sind "
+"abgeleitet aus den <a href=\\"
 msgstr ""
 
 #: digiplan/templates/components/results_view.html:48
-msgid "Anteil Erneuerbare und regionale Unabhängigkeit (ohne Wärme)"
+msgid "Regionale Unabhängigkeit (ohne Wärme) mittels Erneuerbarer Energien"
 msgstr ""
 
 #: digiplan/templates/components/results_view.html:51
 msgid ""
-"Anteil Erneuerbarer Energien und relative Eigenversorgung des "
-"Nettostromverbrauchs (ohne Wärme) heute und in Deinem Szenario. Hierbei "
-"zeigt 'bilanziell' den Anteil des Strombedarfs, der bilanziell über 1 Jahr "
-"über regionale Erzeuger gedeckt werden kann. Unter 'zeitgleich' wird der "
-"Anteil der Zeitpunkte im Jahr dargestellt, in denen die Stromerzeugung den "
-"Bedarf übersteigt, die Region sich also selbst versorgen kann."
+"Relative Eigenversorgung aus EE-Strom (ohne Wärmebedarf) heute und in Deinem "
+"Szenario. Hierbei heißt bilanziell der Anteil des Strombedarfs, der "
+"bilanziell über 1 Jahr über regionale Erzeuger gedeckt werden kann. Unter "
+"zeitgleich wird der Anteil der Stunden im Jahr dargestellt, in denen die "
+"Stromerzeugung den Bedarf übersteigt, die Region sich also selbst versorgen "
+"kann."
 msgstr ""
 
 #: digiplan/templates/components/results_view.html:62
@@ -1401,7 +1396,7 @@ msgid "Abschätzung CO<sub>2</sub>-Emissionen"
 msgstr ""
 
 #: digiplan/templates/components/results_view.html:113
-msgid "Sachsen-Anhalt und Abschätzung Region ABW"
+msgid "Sachsen-Anhalt und Abschätzung in ABW"
 msgstr ""
 
 #: digiplan/templates/components/results_view.html:116
@@ -1412,7 +1407,9 @@ msgid ""
 msgstr ""
 
 #: digiplan/templates/components/results_view.html:120
-msgid "Abschätzung der Reduktion in Deinem Szenario in der Region ABW*"
+msgid ""
+"Abschätzung der regionalen Beitrags an der Reduktion in Deinem Szenario in "
+"ABW*"
 msgstr ""
 
 #: digiplan/templates/components/results_view.html:123
@@ -1432,12 +1429,8 @@ msgstr "Erzeugung"
 #: digiplan/templates/forms/panel_energy.html:50
 #: digiplan/templates/forms/panel_energy.html:75
 #: digiplan/templates/forms/panel_energy.html:104
-#: digiplan/templates/forms/panel_energy.html:136
 #: digiplan/templates/forms/panel_heat.html:6
-#: digiplan/templates/forms/panel_heat.html:35
-#: digiplan/templates/forms/panel_heat.html:57
-#: digiplan/templates/forms/panel_heat.html:89
-#: digiplan/templates/forms/panel_heat.html:105
+#: digiplan/templates/forms/panel_heat.html:40
 #: digiplan/templates/forms/panel_traffic.html:6
 msgid "Detail settings"
 msgstr "Detaileinstellungen"
@@ -1470,7 +1463,7 @@ msgid ""
 msgstr ""
 
 #: digiplan/templates/forms/panel_energy.html:100
-#: digiplan/templates/forms/panel_heat.html:53
+#: digiplan/templates/forms/panel_heat.html:36
 msgid "Consumption"
 msgstr "Verbrauch"
 
@@ -1479,7 +1472,7 @@ msgid "Stelle den zukünftigen Stromverbrauch je Sektor ein:"
 msgstr ""
 
 #: digiplan/templates/forms/panel_energy.html:126
-#: digiplan/templates/forms/panel_heat.html:79
+#: digiplan/templates/forms/panel_heat.html:62
 msgid ""
 "Links siehst Du die Änderung über alle Sektoren für deine Einstellung "
 "(gewichtetes Mittel)."
@@ -1488,13 +1481,6 @@ msgstr ""
 #: digiplan/templates/forms/panel_energy.html:132
 msgid "Batteries"
 msgstr "Batterien"
-
-#: digiplan/templates/forms/panel_energy.html:140
-msgid ""
-"Stellen Sie ein, wieviel der täglich (im Mittel) eingespeisten Energiemenge "
-"aus Windenergie und Freiflächen-PV mit Hilfe von Großbatterien "
-"zwischengespeichert werden können sollen."
-msgstr ""
 
 #: digiplan/templates/forms/panel_heat.html:10
 msgid ""
@@ -1509,35 +1495,8 @@ msgid ""
 "<br><br>Hinweis: Fernwärmesysteme werden links im Menü separat konfiguriert."
 msgstr ""
 
-#: digiplan/templates/forms/panel_heat.html:39
-msgid ""
-"Stelle den Anteil von Wärmepumpen für alle Verbraucher mit "
-"Fernwärmeanschluss ein. Dies umfasst Haushalte, GHD und Industriekunden in "
-"den Fernwärmenetzen Dessau-Roßlau, Bitterfeld-Wolfen, Köthen und Wittenberg:"
-msgstr ""
-
-#: digiplan/templates/forms/panel_heat.html:47
-msgid ""
-"Die übrige Energie wird bereitgestellt durch direktelektrische Heizung, "
-"Bioenergie und Solarthermie (s. Beheizungsstruktur in den Ergebnissen)."
-"<br><br>Hinweis: Dezentrale Wärmesysteme werden links im Menü separat "
-"konfiguriert."
-msgstr ""
-
-#: digiplan/templates/forms/panel_heat.html:61
+#: digiplan/templates/forms/panel_heat.html:44
 msgid "Stelle den zukünftigen Wärmeverbrauch je Sektor ein:"
-msgstr ""
-
-#: digiplan/templates/forms/panel_heat.html:93
-msgid ""
-"Stelle ein, wieviel des täglichen Wärmebedarfs in dezentralen Wärmesystemen "
-"in kleinen Warmwasserspeichern zwischengespeichert werden können sollen:"
-msgstr ""
-
-#: digiplan/templates/forms/panel_heat.html:109
-msgid ""
-"Stelle ein, wieviel des täglichen Wärmebedarfs in Fernwärmenetzen in großen "
-"Warmwasserspeichern zwischengespeichert werden können sollen:"
 msgstr ""
 
 #: digiplan/templates/forms/panel_traffic.html:10
