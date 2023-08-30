@@ -30,23 +30,6 @@
 </div>
 
 {% include "widgets/slider.html" with field=form.w_z_wp_1 %}
-<div class="sidepanel">
-  <div class="sidepanel__heading">
-    {%  trans "Detail settings" %}
-    {% include "widgets/sidepanel_close_btn.html" %}
-  </div>
-  <p class="sidepanel__indication">
-    {%  trans "Stelle den Anteil von Wärmepumpen für alle Verbraucher mit Fernwärmeanschluss ein. Dies umfasst Haushalte, GHD und Industriekunden in den Fernwärmenetzen Dessau-Roßlau, Bitterfeld-Wolfen, Köthen und Wittenberg:" %}
-  </p>
-  <div class="sidepanel__block sidepanel__block--slider">
-    <span>
-      {% include "widgets/slider.html" with field=form.w_z_wp_3 %}
-    </span>
-  </div>
-  <div class="sidepanel__results">
-    <p>{%  trans "Die übrige Energie wird bereitgestellt durch direktelektrische Heizung, Bioenergie und Solarthermie (s. Beheizungsstruktur in den Ergebnissen).<br><br>Hinweis: Dezentrale Wärmesysteme werden links im Menü separat konfiguriert." %}</p>
-  </div>
-</div>
 
 <span class="panel__separator" aria-hidden="true"></span>
 
@@ -84,33 +67,5 @@
 
 <h2 class="panel__title title">{% trans "Storage" %}</h2>
 {% include "widgets/slider.html" with field=form.w_d_s_1 %}
-<div class="sidepanel">
-  <div class="sidepanel__heading">
-    {%  trans "Detail settings" %}
-    {% include "widgets/sidepanel_close_btn.html" %}
-  </div>
-  <p class="sidepanel__indication">
-    {%  trans "Stelle ein, wieviel des täglichen Wärmebedarfs in dezentralen Wärmesystemen in kleinen Warmwasserspeichern zwischengespeichert werden können sollen:" %}
-  </p>
-  <div class="sidepanel__block sidepanel__block--slider">
-    <span>
-      {% include "widgets/slider.html" with field=form.w_d_s_3 %}
-    </span>
-  </div>
-</div>
 
 {% include "widgets/slider.html" with field=form.w_z_s_1 %}
-<div class="sidepanel">
-  <div class="sidepanel__heading">
-    {%  trans "Detail settings" %}
-    {% include "widgets/sidepanel_close_btn.html" %}
-  </div>
-  <p class="sidepanel__indication">
-    {%  trans "Stelle ein, wieviel des täglichen Wärmebedarfs in Fernwärmenetzen in großen Warmwasserspeichern zwischengespeichert werden können sollen:" %}
-  </p>
-  <div class="sidepanel__block sidepanel__block--slider">
-    <span>
-      {% include "widgets/slider.html" with field=form.w_z_s_3 %}
-    </span>
-  </div>
-</div>

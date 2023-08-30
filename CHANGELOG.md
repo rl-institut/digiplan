@@ -21,6 +21,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - slider mark at wrong position
 - reduce number of attributes in unit popups
 - add missing German texts
+- remove redundant sliders in settings
 
 ## [0.5.0] - 2023-07-13
 ### Added

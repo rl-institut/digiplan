@@ -28,10 +28,6 @@ const potentialWindSwitches = document.querySelectorAll("#id_s_w_3, #id_s_w_4, #
 const sectorSlider = document.querySelectorAll("#id_s_v_3, #id_s_v_4, #id_s_v_5, #id_w_d_wp_3, #id_w_d_wp_4, #id_w_d_wp_5, #id_w_v_3, #id_w_v_4, #id_w_v_5");
 
 const sliderDependencies = {
-  "id_s_s_g_1": "id_s_s_g_3",
-  "id_w_z_wp_1": "id_w_z_wp_3",
-  "id_w_d_s_1": "id_w_d_s_3",
-  "id_w_z_s_1": "id_w_z_s_3",
   "id_v_iv_1": "id_v_iv_3"
 };
 
@@ -118,33 +114,9 @@ $("#id_s_pv_d_3").ionRangeSlider({
     }
   }
 );
-$("#id_w_z_wp_3").ionRangeSlider({
-    onChange: function (data) {
-      $(`#id_w_z_wp_1`).data("ionRangeSlider").update({from:data.from});
-    }
-  }
-);
-$("#id_w_d_s_3").ionRangeSlider({
-    onChange: function (data) {
-      $(`#id_w_d_s_1`).data("ionRangeSlider").update({from:data.from});
-    }
-  }
-);
-$("#id_w_z_s_3").ionRangeSlider({
-    onChange: function (data) {
-      $(`#id_w_z_s_1`).data("ionRangeSlider").update({from:data.from});
-    }
-  }
-);
 $("#id_v_iv_3").ionRangeSlider({
     onChange: function (data) {
       $(`#id_v_iv_1`).data("ionRangeSlider").update({from:data.from});
-    }
-  }
-);
-$("#id_s_s_g_3").ionRangeSlider({
-    onChange: function (data) {
-      $(`#id_s_s_g_1`).data("ionRangeSlider").update({from:data.from});
     }
   }
 );

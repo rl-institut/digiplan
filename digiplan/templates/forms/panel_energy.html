@@ -131,17 +131,3 @@
 
 <h2 class="panel__title title">{%  trans "Batteries" %}</h2>
 {% include "widgets/slider.html" with field=form.s_s_g_1 %}
-<div class="sidepanel">
-  <div class="sidepanel__heading">
-    {%  trans "Detail settings" %}
-    {% include "widgets/sidepanel_close_btn.html" %}
-  </div>
-  <p class="sidepanel__indication">
-    {%  trans "Stellen Sie ein, wieviel der täglich (im Mittel) eingespeisten Energiemenge aus Windenergie und Freiflächen-PV mit Hilfe von Großbatterien zwischengespeichert werden können sollen." %}
-  </p>
-  <div class="sidepanel__block sidepanel__block--slider">
-    <span>
-      {% include "widgets/slider.html" with field=form.s_s_g_3 %}
-    </span>
-  </div>
-</div>
