@@ -1,0 +1,80 @@
+{
+    "tooltip": {
+      "trigger": "axis",
+      "axisPointer": {
+        "type": "cross",
+        "crossStyle": {
+          "color": "#999"
+        }
+      }
+    },
+    "toolbox": {
+      "feature": {
+        "dataView": { "show": true, "readOnly": false },
+        "magicType": { "show": true, "type": ["line", "bar"] },
+        "restore": { "show": true },
+        "saveAsImage": { "show": true }
+      }
+    },
+    "legend": {
+      "data": ["Installierte Leistung", "Anlagenanzahl"]
+    },
+    "xAxis": [
+      {
+        "type": "category",
+        "data": [
+          "2012",
+          "2013",
+          "2014",
+          "2015",
+          "2016",
+          "2017",
+          "2018",
+          "2019",
+          "2020",
+          "2021",
+          "2022",
+          "2023"
+        ],
+        "axisPointer": {
+          "type": "shadow"
+        }
+      }
+    ],
+    "yAxis": [
+      {
+        "type": "value",
+        "name": "Installierte Leistung",
+        "min": 0,
+        "max": 1000,
+        "interval": 100,
+        "axisLabel": {
+          "formatter": "{value} MW"
+        }
+      },
+      {
+        "type": "value",
+        "name": "Anlagenanzahl",
+        "min": 0,
+        "max": 600,
+        "interval": 100,
+        "axisLabel": {
+          "formatter": "{value}"
+        }
+      }
+    ],
+    "series": [
+      {
+        "name": "Installierte Leistung",
+        "type": "bar",
+        "barWidth": 20,
+        "data": [380, 400, 530, 580, 610, 635, 640, 675, 700, 720, 730, 750]
+      },
+      {
+        "name": "Anlagenanzahl",
+        "type": "line",
+        "yAxisIndex": 1,
+        "data": [180, 200, 330, 380, 390, 400, 440, 455, 470, 475, 485, 510]
+      }
+    ]
+  }
