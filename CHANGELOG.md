@@ -23,6 +23,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - reduce number of attributes in unit popups
 - add missing German texts
 - remove redundant sliders in settings
+- add onboarding texts
 
 ## [0.5.0] - 2023-07-13
 ### Added
