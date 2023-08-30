@@ -29,7 +29,6 @@
       "type": "value",
       "name": "Installierte Leistung",
       "nameLocation": "start",
-      "color": "#EFAD25",
       "min": 0,
       "max": 1000,
       "interval": 100,
@@ -53,12 +52,14 @@
     {
       "name": "Installierte Leistung",
       "type": "bar",
+      "color": "#EFAD25",
       "barWidth": 20,
       "data": [380, 400, 530, 580, 610, 635, 640, 675, 700, 720, 730, 750]
     },
     {
       "name": "Anlagenanzahl",
       "type": "line",
+      "color": "#CCCCCC",
       "yAxisIndex": 1,
       "data": [180, 200, 330, 380, 390, 400, 440, 455, 470, 475, 485, 510]
     }
