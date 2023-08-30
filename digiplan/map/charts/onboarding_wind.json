@@ -29,6 +29,7 @@
       "type": "value",
       "name": "Installierte Leistung",
       "nameLocation": "start",
+      "color": "#6A89CC",
       "min": 0,
       "max": 1000,
       "interval": 100,
