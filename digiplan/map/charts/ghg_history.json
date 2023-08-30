@@ -7,7 +7,7 @@
     "formatter": "{a}: <b>{c}</b> kt CO₂-Äq."
   },
   "yAxis": {
-    "name": "kt CO₂-Äquivalent"
+    "name": "kt CO₂-Äq."
   },
   "xAxis": [
     {
@@ -99,6 +99,12 @@
       "color": "#E6772E",
       "barWidth":"30",
       "barGap": "250%",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data": [
         15680,
         11571
@@ -110,6 +116,12 @@
       "type": "bar",
       "color": "#FA9FB5",
       "barWidth":"30",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data": [
         20519,
         9011
@@ -121,6 +133,12 @@
       "type": "bar",
       "color": "#6C567B",
       "barWidth":"30",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data": [
         3779,
         4007
@@ -132,6 +150,12 @@
       "type": "bar",
       "color": "#A8DADC",
       "barWidth":"30",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data": [
         13943,
         3983
@@ -143,6 +167,12 @@
       "type": "bar",
       "color": "#87D068",
       "barWidth":"30",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data": [
         3275,
         2113
@@ -154,6 +184,12 @@
       "type": "bar",
       "color": "#F5F5DC",
       "barWidth":"30",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data": [
         1458,
         947
@@ -165,6 +201,12 @@
       "type": "bar",
       "color": "#E6772E",
       "barWidth":"30",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data": [
         930,
         538
@@ -176,6 +218,12 @@
       "type": "bar",
       "color": "#FA9FB5",
       "barWidth":"30",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data": [
         4848,
         2129
@@ -187,6 +235,12 @@
       "type": "bar",
       "color": "#6C567B",
       "barWidth":"30",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data": [
         698,
         672
@@ -198,6 +252,12 @@
       "type": "bar",
       "color": "#A8DADC",
       "barWidth":"30",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data": [
         2434,
         695
@@ -209,6 +269,12 @@
       "stack": "abw",
       "color": "#87D068",
       "barWidth":"30",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data": [
         501,
         368
@@ -220,6 +286,12 @@
       "stack": "abw",
       "color": "#F5F5DC",
       "barWidth":"30",
+      "emphasis": {
+        "itemStyle": {
+          "shadowBlur": 10,
+          "shadowColor": "rgba(0,0,0,0.3)"
+        }
+      },
       "data": [
         262,
         157

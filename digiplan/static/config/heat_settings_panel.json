@@ -2,25 +2,25 @@
   "w_d_wp_1": {
     "class": "js-slider js-slider-panel",
     "grid": false,
-    "label": "{% trans 'Decentralized (%)' %}",
+    "label": "{% trans 'Anteil Wärmepumpen dezentral (%)' %}",
     "max": 100,
     "min": 0,
     "start": 30,
     "status_quo": 50,
     "step": 5,
-    "tooltip": "{% trans 'Decentralized heat supply' %}",
+    "tooltip": "{% trans 'Energetischer Anteil von Wärmepumpen in dezentralen Heizungssystemen. Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien.' %}",
     "type": "slider",
     "sidepanel": true
   },
   "w_d_wp_3": {
       "class": "js-slider",
-      "label": "{% trans 'Households (%)' %}",
+      "label": "{% trans 'Haushalte (%)' %}",
       "max": 100,
       "min": 50,
       "start": 50,
       "status_quo": 50,
       "step": 5,
-      "tooltip": "{% trans 'Heat pumps for heating and hot water in households with their own heat generation' %}",
+      "tooltip": "{% trans 'Anteil von Wärmepumpen für Verbraucher mit eigener Wärmeerzeugung im Haushaltssektor.' %}",
       "type": "slider"
   },
   "w_d_wp_4": {
@@ -31,7 +31,7 @@
       "start": 50,
       "status_quo": 50,
       "step": 5,
-      "tooltip": "{% trans 'Heat pumps for heating and hot water in the commercial, retail and service sectors with their own heat generation.' %}",
+      "tooltip": "{% trans 'Anteil von Wärmepumpen für Verbraucher mit eigener Wärmeerzeugung im Gewerbe-, Handels- und Dienstleistungssektor.' %}",
       "type": "slider"
   },
   "w_d_wp_5": {
@@ -42,32 +42,20 @@
       "start": 50,
       "status_quo": 50,
       "step": 5,
-      "tooltip": "{% trans 'Heat pumps for heating, hot water and process heat in industry with their own heat generation.' %}",
+      "tooltip": "{% trans 'Anteil von Wärmepumpen für Verbraucher mit eigener Wärmeerzeugung in der Industrie.' %}",
       "type": "slider"
   },
   "w_z_wp_1": {
     "class": "js-slider js-slider-panel",
     "grid": false,
-    "label": "{% trans 'District heating (%)' %}",
+    "label": "{% trans 'Anteil Wärmepumpen Fernwärme (%)' %}",
     "max": 100,
     "min": 0,
     "start": 10,
     "status_quo": 40,
     "step": 5,
-    "tooltip": "{% trans 'District heating supply' %}",
-    "type": "slider",
-    "sidepanel": true
-  },
-  "w_z_wp_3": {
-      "class": "js-slider",
-      "label": "{% trans 'Share (%)' %}",
-      "max": 200,
-      "min": 50,
-      "start": 50,
-      "status_quo": 100,
-      "step": 5,
-      "tooltip": "{% trans 'Heat pumps for heating, hot water and process heat in district heating networks' %}",
-      "type": "slider"
+    "tooltip": "{% trans 'Energetischer Anteil von Wärmepumpen für Heizung, Warmwasser und Prozesswärme in Haushalten, GHD und Industrie in Fernwärmenetzen (Dessau-Roßlau, Bitterfeld-Wolfen, Köthen and Wittenberg). Die übrige Energie wird bereitgestellt durch direktelektrische Heizung, Bioenergie und Solarthermie (s. Beheizungsstruktur in den Ergebnissen). Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien.\n\nHinweis: Dezentrale Wärmesysteme werden im Menü separat konfiguriert.' %}",
+    "type": "slider"
   },
   "w_v_1": {
     "class": "js-slider js-slider-panel",
@@ -78,7 +66,7 @@
     "start": 10,
     "status_quo": 40,
     "step": 10,
-    "tooltip": "{% trans 'Heat consumption of decentralized heat generators and district heating networks' %}",
+    "tooltip": "{% trans 'Relativer Wärmeverbrauch (Endenergie) von Haushalten, GHD und Industrie gegenüber heute. Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien.' %}",
     "type": "slider",
     "sidepanel": true
   },
@@ -90,7 +78,7 @@
       "start": 50,
       "status_quo": 100,
       "step": 10,
-      "tooltip": "{% trans 'Includes heating and hot water in households with their own heat generation and households in district heating networks.' %}",
+      "tooltip": "{% trans 'Umfasst Heizung, Warmwasser und Kochen in Haushalten mit eigener Wärmeerzeugung und in Fernwärmenetzen. Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien.' %}",
       "type": "slider"
   },
   "w_v_4": {
@@ -101,7 +89,7 @@
     "start": 10,
     "status_quo": 100,
     "step": 10,
-    "tooltip": "{% trans 'Comprises heating and hot water in the commercial, retail and services sector with its own heat generation and in district heating networks.' %}",
+    "tooltip": "{% trans 'Umfasst Heizung und Warmwasser im Gewerbe-, Handels- und Dienstleistungssektor mit eigener Wärmeerzeugung und in Fernwärmenetzen. Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien.' %}",
     "type": "slider"
   },
   "w_v_5": {
@@ -112,55 +100,31 @@
       "start": 50,
       "status_quo": 100,
       "step": 10,
-      "tooltip": "{% trans 'Includes thermal heat, hot water and process heat in industry with its own heat generation and in district heating networks..' %}",
+      "tooltip": "{% trans 'Umfasst Heizwärme, Warmwasser und Prozesswärme in der Industrie mit eigener Wärmeerzeugung und in Fernwärmenetzen. Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien.' %}",
       "type": "slider"
   },
   "w_d_s_1": {
     "class": "js-slider js-slider-panel",
     "grid": false,
-    "label": "{% trans 'Decentralized (%)' %}",
+    "label": "{% trans 'Dezentrale Speicher: Zwischenspeicherung des tägl. Wärmebedarfs (%)' %}",
     "max": 200,
     "min": 25,
     "start": 25,
     "status_quo": 100,
     "step": 5,
-    "tooltip": "{% trans 'Storage in the decentralized heat supply' %}",
-    "type": "slider",
-    "sidepanel": true
-  },
-  "w_d_s_3": {
-    "class": "js-slider",
-    "label": "{% trans 'Hot water tanks (%)' %}",
-    "max": 200,
-    "min": 25,
-    "start": 25,
-    "status_quo": 100,
-    "step": 5,
-    "tooltip": "{% trans 'Hot water tanks for heating, hot water and process heat' %}",
+    "tooltip": "{% trans 'Wieviel des täglichen Wärmebedarfs in dezentralen Systemen (Heizung, Warmwasser und Prozesswärme) sollen in kleinen Warmwasserspeichern zwischengespeichert werden können?' %}",
     "type": "slider"
   },
   "w_z_s_1": {
     "class": "js-slider js-slider-panel",
     "grid": false,
-    "label": "{% trans 'Large heat storage (%)' %}",
+    "label": "{% trans 'Großwärmespeicher: Zwischenspeicherung des tägl. Wärmebedarfs (%)' %}",
     "max": 200,
     "min": 25,
     "start": 25,
     "status_quo": 100,
     "step": 5,
-    "tooltip": "{% trans 'Storage in the district heating supply' %}",
-    "type": "slider",
-    "sidepanel": true
-  },
-  "w_z_s_3": {
-    "class": "js-slider",
-    "label": "{% trans 'Hot water tanks (%)' %}",
-    "max": 200,
-    "min": 25,
-    "start": 25,
-    "status_quo": 100,
-    "step": 5,
-    "tooltip": "{% trans 'Hot water tanks for heating, hot water and process heat' %}",
+    "tooltip": "{% trans 'Wieviel des täglichen Wärmebedarfs in Fernwärmenetzen (Heizung, Warmwasser und Prozesswärme) sollen in großen Warmwasserspeichern zwischengespeichert werden können?' %}",
     "type": "slider"
   }
 }

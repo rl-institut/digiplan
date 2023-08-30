@@ -383,8 +383,8 @@
     }
 
     &__results {
-      @extend .pb-1;
       @extend .pt-3;
+      @extend .text-secondary;
       @extend .fs-7;
     }
 
