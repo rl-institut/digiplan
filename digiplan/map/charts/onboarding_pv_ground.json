@@ -67,7 +67,7 @@
       {
         "name": "Installierte Leistung",
         "type": "bar",
-        "barWidth": 30,
+        "barWidth": 20,
         "data": [380, 400, 530, 580, 610, 635, 640, 675, 700, 720, 730, 750]
       },
       {
