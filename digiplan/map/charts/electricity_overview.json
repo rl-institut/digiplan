@@ -102,7 +102,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [132, 334, 700]
+      "data": [132, 334, 100]
     },
     {
       "name": "Verbrauch Haushalte",
@@ -146,20 +146,7 @@
       "data": [280, 300, 350]
     },
     {
-      "name": "EV",
-      "type": "bar",
-      "stack": "demand",
-      "color": "#2F2F2F",
-      "emphasis": {
-        "itemStyle": {
-          "shadowBlur": 10,
-          "shadowColor": "rgba(0,0,0,0.3)"
-        }
-      },
-      "data": [145, 144, 180]
-    },
-    {
-      "name": "Import",
+      "name": "Import*",
       "type": "bar",
       "barWidth": "16",
       "stack": "import",
@@ -170,10 +157,10 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [0, 20, 160]
+      "data": [0, 20, 0]
     },
     {
-      "name": "Export",
+      "name": "Export*",
       "type": "bar",
       "barWidth": "16",
       "stack": "export",
@@ -184,7 +171,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [0, 140, 50]
+      "data": [0, 140, 0]
     }
   ]
 }
