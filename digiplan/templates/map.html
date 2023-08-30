@@ -54,10 +54,10 @@
                 aria-controls="offcanvasDocumentation">
               <a class="nav-link" href="#">{% translate "Documentation" %}</a>
             </li>
-            <li class="nav-item" data-bs-toggle="offcanvas" href="#offcanvasSources"
-                role="button" aria-controls="offcanvasSources">
-              <a class="nav-link" href="#">{% translate "Sources" %}</a>
-            </li>
+<!--            <li class="nav-item" data-bs-toggle="offcanvas" href="#offcanvasSources"-->
+<!--                role="button" aria-controls="offcanvasSources">-->
+<!--              <a class="nav-link" href="#">{% translate "Sources" %}</a>-->
+<!--            </li>-->
             <li class="nav-item" data-bs-toggle="offcanvas" href="#offcanvasContact"
                 role="button" aria-controls="offcanvasContact">
               <a class="nav-link" href="#">{% translate "Contact" %}</a>
@@ -75,7 +75,6 @@
   </div>
 
   {% include 'offcanvas/documentation.html' %}
-  {% include 'offcanvas/sources.html' %}
   {% include 'offcanvas/contact.html' %}
 
 {% endblock content %}
