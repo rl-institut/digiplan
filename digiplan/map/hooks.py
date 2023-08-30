@@ -72,36 +72,9 @@ def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) ->
     return data
 
 
-def adapt_heat_capacities(distribution: str, remaining_energy: pd.Series) -> dict:  # noqa: C901, PLR0912
+def adapt_heat_capacities(distribution: str, remaining_energy: pd.Series) -> dict:
     """Adapt heat settings for remaining energy."""
     heat_shares = datapackage.get_heat_capacity_shares(distribution[:3])
-    # TODO (Hendrik): Remove hardcoded shares
-    # https://github.com/rl-institut/digiplan/issues/308
-    if distribution == "decentral":
-        heat_shares = {
-            "electricity_direct_heating": 0.1,
-            "wood_oven": 0.1,
-            "methane": 0.1,
-            "hydrogen": 0.1,
-            "solar_thermal": 0.1,
-            "wood_extchp": 0.1,
-            "ch4_bpchp": 0.1,
-            "ch4_extchp": 0.1,
-            "biogas_bpchp": 0.2,
-        }
-    # TODO (Hendrik): Remove hardcoded shares
-    # https://github.com/rl-institut/digiplan/issues/308
-    if distribution == "central":
-        heat_shares = {
-            "electricity_direct_heating": 0.2,
-            "methane": 0.1,
-            "hydrogen": 0.1,
-            "solar_thermal": 0.2,
-            "wood_extchp": 0.1,
-            "ch4_bpchp": 0.1,
-            "ch4_extchp": 0.1,
-            "biogas_bpchp": 0.1,
-        }
     mapping = {
         "wood_extchp": f"ABW-wood-extchp_{distribution}",
         "biogas_bpchp": f"ABW-biogas-bpchp_{distribution}",
@@ -129,8 +102,6 @@ def adapt_heat_capacities(distribution: str, remaining_energy: pd.Series) -> dic
     solar_thermal_energy = remaining_energy_sum * heat_shares["solar_thermal"]
     data = {}
     for component, share in heat_share_mapped.items():
-        if share == 0:
-            continue
         if "solar" in component:
             data[component] = {"capacity": solar_thermal_energy}
             continue
@@ -244,15 +215,24 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
         storage_sliders = {"decentral": "w_d_s_1", "central": "w_z_s_1"}
         avg_demand_per_day = total_demand.sum() / 365
         logging.info(f"Adapting capacity for storage at {distribution=}.")
-        capacity = float(avg_demand_per_day * data.pop(storage_sliders[distribution]) / 100) * 100000
+        capacity = float(avg_demand_per_day * data.pop(storage_sliders[distribution]) / 100)
+        # Adapt storage capacity to solarthermal collector overpowering:
+        solar_capacity = data[f"ABW-solar-thermalcollector_{distribution}"]["capacity"]
+        solar_thermal_energy = (
+            datapackage.get_thermal_efficiency(f"solar-thermalcollector_{distribution}") * solar_capacity
+        )
+        delta_solar = solar_thermal_energy - total_demand
+        solar_peak = delta_solar[delta_solar > 0].max()
+        capacity = max(capacity, solar_peak)
         data[f"ABW-heat_{distribution}-storage"] = {
             "capacity": capacity,
+            "storage_capacity": capacity,
         }
 
     # Adapt biomass to biogas plant size
-    data["ABW-biomass-biogas_plant"] = {
-        "capacity": (data["ABW-biogas-bpchp_decentral"]["capacity"] + data["ABW-biogas-bpchp_central"]["capacity"]),
-    }
+    biogas_capacity = data["ABW-biogas-bpchp_decentral"]["capacity"] + data["ABW-biogas-bpchp_central"]["capacity"]
+    data["ABW-biomass-biogas_plant"] = {"capacity": biogas_capacity}
+    data["ABW-biogas-biogas_upgrading_plant"] = {"capacity": biogas_capacity}
 
     # Remove unnecessary heat settings
     del data["w_v_1"]
