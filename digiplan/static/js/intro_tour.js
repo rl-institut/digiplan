@@ -43,7 +43,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Situation heute',
-    text: 'Schauen Sie sich die Situation heute an. Wählen Sie eine Kategorie aus.',
+    text: 'Schauen Sie sich die Situation heute an.',
     attachTo: {
         element: '#situation_today',
         on: 'right'
@@ -70,7 +70,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Situation heute',
-    text: 'Zu jeder Kategorie gibt es ein Diagramm.',
+    text: 'Zu jeder Kategorie gibt es ein Diagramm für die Region.',
     attachTo: {
         element: '#region_chart_statusquo',
         on: 'right'
@@ -106,7 +106,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Karte',
-    text: 'Lassen Sie sich die unterschiedlichen Anlagentypen auf der Karte anzeigen.',
+    text: 'Lassen Sie sich die heutigen Anlagen und Flächen auf der Karte anzeigen.',
     attachTo: {
         element: '#js-map-layers-box',
         on: 'left'
@@ -133,7 +133,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Karte',
-    text: 'Klicken Sie auf ein einzelnes Icon, um mehr über dieses Kraftwerk etc. zu erfahren.',
+    text: 'Klicken Sie auf ein einzelnes Icon, um mehr über diese Anlage zu erfahren.',
     attachTo: {
         element: '.maplibregl-canvas',
         on: 'top'
@@ -269,7 +269,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Einstellungen',
-    text: 'Wechseln Sie zu den Einstellungen für Wärme und Infrastruktur.',
+    text: 'Wechseln Sie zu den Einstellungen für Wärme.',
     attachTo: {
         element: '#settings_area_tab',
         on: 'right'
@@ -296,7 +296,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Nächster Schritt',
-    text: 'Hier gehts weiter zu den Ergebnissen. Im Hintergrund wird dabei automatisch die Simulation Ihres Szenarios gestartet.',
+    text: 'Hier gehts weiter zu den Ergebnissen. Im Hintergrund wird dabei automatisch die Simulation Ihres Szenarios gestartet (gelber Kreis rotiert).',
     attachTo: {
         element: '#menu_next_btn',
         on: 'bottom'
@@ -323,7 +323,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Ergebnisse',
-    text: 'Sobald die Simulation abgeschlossen ist, können Sie sich die Ergebnisse der Simulation auf der Karte anschauen. Wählen Sie dazu eine Kategorie aus.',
+    text: 'Sobald die Simulation abgeschlossen ist, können Sie sich die Ergebnisse im Diagramm links und auf der Karte anschauen. Wählen Sie dazu eine Kategorie aus.',
     attachTo: {
         element: '#panel_3_results',
         on: 'right'
