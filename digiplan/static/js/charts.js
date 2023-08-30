@@ -13,8 +13,8 @@
 // const ghg_overview_chart = echarts.init(document.getElementById("ghg_overview_chart"));
 const electricity_overview_chart = echarts.init(document.getElementById("electricity_overview_chart"));
 const electricity_autarky_chart = echarts.init(document.getElementById("electricity_autarky_chart"));
-const mobility_overview_chart = echarts.init(document.getElementById("mobility_overview_chart"));
-const mobility_THG_chart = echarts.init(document.getElementById("mobility_THG_chart"));
+// const mobility_overview_chart = echarts.init(document.getElementById("mobility_overview_chart"));
+// const mobility_THG_chart = echarts.init(document.getElementById("mobility_THG_chart"));
 const heat_decentralized_chart = echarts.init(document.getElementById("heat_decentralized_chart"));
 const heat_centralized_chart = echarts.init(document.getElementById("heat_centralized_chart"));
 const ghg_history_chart = echarts.init(document.getElementById("ghg_history_chart"));
@@ -278,8 +278,8 @@ const co2_emissions_scenario = {
 // const ghg_overview_option = JSON.parse(document.getElementById("ghg_overview").textContent);
 const electricity_overview_option = JSON.parse(document.getElementById("electricity_overview").textContent);
 const electricity_autarky_option = JSON.parse(document.getElementById("electricity_autarky").textContent);
-const mobility_overview_option = JSON.parse(document.getElementById("mobility_overview").textContent);
-const mobility_ghg_option = JSON.parse(document.getElementById("mobility_ghg").textContent);
+// const mobility_overview_option = JSON.parse(document.getElementById("mobility_overview").textContent);
+// const mobility_ghg_option = JSON.parse(document.getElementById("mobility_ghg").textContent);
 const heat_decentralized_option = JSON.parse(document.getElementById("heat_decentralized").textContent);
 const heat_centralized_option = JSON.parse(document.getElementById("heat_centralized").textContent);
 const ghg_history_option = JSON.parse(document.getElementById("ghg_history").textContent);
@@ -295,8 +295,8 @@ function resizeCharts() {
     // ghg_overview_chart.resize();
     electricity_overview_chart.resize();
     electricity_autarky_chart.resize();
-    mobility_overview_chart.resize();
-    mobility_THG_chart.resize();
+    // mobility_overview_chart.resize();
+    // mobility_THG_chart.resize();
     heat_decentralized_chart.resize();
     heat_centralized_chart.resize();
     ghg_history_chart.resize();
@@ -315,8 +315,8 @@ function resizeCharts() {
 // ghg_overview_chart.setOption(ghg_overview_option);
 electricity_overview_chart.setOption(electricity_overview_option);
 electricity_autarky_chart.setOption(electricity_autarky_option);
-mobility_overview_chart.setOption(mobility_overview_option);
-mobility_THG_chart.setOption(mobility_ghg_option);
+// mobility_overview_chart.setOption(mobility_overview_option);
+// mobility_THG_chart.setOption(mobility_ghg_option);
 heat_decentralized_chart.setOption(heat_decentralized_option);
 heat_centralized_chart.setOption(heat_centralized_option);
 ghg_history_chart.setOption(ghg_history_option);
