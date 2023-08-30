@@ -23,20 +23,6 @@
   },
   "series": [
     {
-      "name": "Anteil Erneuerbare",
-      "type": "bar",
-      "barWidth": "24",
-      "stack": "renewables",
-      "color": "#06DFA7",
-      "label": {
-        "show": false
-      },
-      "emphasis": {
-        "focus": "series"
-      },
-      "data": [80, 60]
-    },
-    {
       "name": "Bilanzielle Eigenversorgung",
       "type": "bar",
       "barWidth": "16",
