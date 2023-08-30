@@ -194,38 +194,6 @@ class HeatStructureChart(SimulationChart):
         return self.chart_options
 
 
-class MobilityOverviewChart(SimulationChart):
-    """Mobility Overview Chart. Shows Number of Cars."""
-
-    lookup = "mobility_overview"
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.heat_overview(simulation_id=self.simulation_id)
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
-        return self.chart_options
-
-
-class MobilityCTSChart(SimulationChart):
-    """Mobility CTS Chart. Shows greenhouse gas emissions."""
-
-    lookup = "mobility_ghg"
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.detailed_overview(simulation_id=self.simulation_id)
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][2] = self.chart_data[profile]
-
-        return self.chart_options
-
-
 class GhgHistoryChart(SimulationChart):
     """GHG history chart."""
 
