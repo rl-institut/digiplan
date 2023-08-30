@@ -27,7 +27,6 @@
   "yAxis": [
     {
       "type": "value",
-      "name": "Installierte Leistung",
       "nameLocation": "start",
       "min": 0,
       "max": 1000,
@@ -38,7 +37,6 @@
     },
     {
       "type": "value",
-      "name": "Anlagenanzahl",
       "nameLocation": "start",
       "min": 0,
       "max": 600,
