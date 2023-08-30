@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-30 11:39+0000\n"
+"POT-Creation-Date: 2023-08-30 13:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1022,7 +1022,7 @@ msgstr "Einstellungen"
 msgid "Results"
 msgstr "Ergebnisse"
 
-#: digiplan/templates/components/map.html:41 digiplan/templates/map.html:50
+#: digiplan/templates/components/map.html:41
 msgid "Map"
 msgstr "Karte"
 
@@ -1505,6 +1505,10 @@ msgid ""
 "Individualverkehr ein:"
 msgstr ""
 
+#: digiplan/templates/map.html:50
+msgid "App"
+msgstr "App"
+
 #: digiplan/templates/map.html:55
 msgid "Documentation"
 msgstr "Dokumentation"
@@ -1519,11 +1523,11 @@ msgstr "Kontakt"
 
 #: digiplan/templates/offcanvas/contact.html:7
 msgid "Project Lead"
-msgstr "Projektleiterin"
+msgstr "Projektleiter"
 
 #: digiplan/templates/offcanvas/contact.html:12
-msgid "Research Associate"
-msgstr "Wissenschaflticher Mitarbeiter"
+msgid "Head of Unit"
+msgstr "Bereichsleiterin"
 
 #: digiplan/templates/offcanvas/contact.html:24
 msgid "Phone"
@@ -1532,6 +1536,12 @@ msgstr "Telefon"
 #: digiplan/templates/offcanvas/contact.html:25
 msgid "Telefax"
 msgstr "Telefax"
+
+#: digiplan/templates/offcanvas/contact.html:29
+msgid ""
+"Mehr Informationen zu unseren Tools, Karten und Apps zur Energiewende finden "
+"Sie auf dem WAM-Portal des RLI unter"
+msgstr ""
 
 #: digiplan/templates/popups/cluster.html:10
 msgid "Parameter"
