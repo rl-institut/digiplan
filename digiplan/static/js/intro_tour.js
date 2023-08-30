@@ -405,7 +405,7 @@ tour.addStep({
 
 tour.addStep({
     title: 'Fertig',
-    text: 'Viel Spaß mit dem Tool :D.',
+    text: 'Viel Spaß mit dem Digiplan-Anhalt-Tool! :D',
     attachTo: {
         element: '#chart_view_tab',
         on: 'right'
