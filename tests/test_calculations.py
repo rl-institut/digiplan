@@ -6,6 +6,8 @@ from django.test import SimpleTestCase
 from django_oemof import models
 from django_oemof import results as oemof_results
 from django_oemof import simulation
+from oemof.tabular.postprocessing import calculations as oc
+from oemof.tabular.postprocessing import core
 
 from digiplan.map import calculations, charts
 
@@ -28,14 +30,13 @@ class SimulationTest(SimpleTestCase):
         "s_pv_d_1": 100,
         "s_h_1": 100,
         "s_s_g_1": 100,
-        "w_d_wp_3": 80,
-        "w_d_wp_4": 80,
-        "w_d_wp_5": 80,
-        "w_z_wp_3": 20,
+        "w_d_wp_3": 0,
+        "w_d_wp_4": 0,
+        "w_d_wp_5": 0,
+        "w_z_wp_1": 0,
         "w_d_s_1": 100,
         "w_z_s_1": 100,
         "w_d_wp_1": True,
-        "w_z_wp_1": None,
         "s_w_3": False,
         "s_w_4": True,
         "s_w_4_1": True,
@@ -180,6 +181,20 @@ class HeatDemandTest(SimulationTest):
         results = oemof_results.get_results(
             self.simulation_id,
             calculations=[calculations.heat_demand],
+        )
+        assert list(results.values())[0].iloc[0] > 0
+
+    def test_heat_demand_all_outputs(self):  # noqa: D102
+        results = oemof_results.get_results(
+            self.simulation_id,
+            calculations=[
+                core.ParametrizedCalculation(
+                    oc.AggregatedFlows,
+                    {
+                        "from_nodes": ["ABW-heat_central", "ABW-heat_decentral"],
+                    },
+                ),
+            ],
         )
         assert list(results.values())[0].iloc[0] > 0
 
