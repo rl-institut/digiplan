@@ -6,6 +6,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- heat chart overview
 - tour explaining statusquo, settings and results
 - selection to hide choropleth and region chart in SQ and 2045 dropdown
 - results for heat overview chart

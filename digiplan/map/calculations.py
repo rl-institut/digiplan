@@ -592,7 +592,15 @@ def renewable_electricity_production(simulation_id: int) -> pd.Series:
     return renewables
 
 
-def heat_overview(simulation_id: int) -> pd.Series:
+def get_heat_production(distribution: str, year: int) -> dict:
+    """Calculate hea production per technology for given distribution and year."""
+    heat_demand_per_sector = datapackage.get_heat_demand(distribution=distribution)
+    demand = sum(d[str(year)].sum() for d in heat_demand_per_sector.values())
+    heat_shares = datapackage.get_heat_capacity_shares(distribution[:3], year=year, include_heatpumps=True)
+    return {tech: demand * share for tech, share in heat_shares.items()}
+
+
+def heat_overview(simulation_id: int, distribution: str) -> dict:
     """
     Return data for heat overview chart.
 
@@ -600,21 +608,65 @@ def heat_overview(simulation_id: int) -> pd.Series:
     ----------
     simulation_id: int
         Simulation ID to get results from
+    distribution: str
+        central/decentral
 
     Returns
     -------
-    pd.Series
-        containing heat demand for all sectors (hh, cts, ind)
+    dict
+        containing heat demand and production for all sectors (hh, cts, ind) and technologies
     """
+    data = {}
+    for year in (2022, 2045):
+        demand = datapackage.get_heat_demand(distribution=distribution)
+        demand = {f"heat-demand-{sector}": demand[str(year)].sum() for sector, demand in demand.items()}
+        data[str(year)] = demand
+        data[str(year)].update(get_heat_production(distribution, year))
+
     results = get_results(
         simulation_id,
-        {
-            "heat_demand": heat_demand,
-        },
+        {"heat_demand": heat_demand, "heat_production": heat_production},
     )
-    demand = results["heat_demand"]
+    # Filter distribution:
+    if distribution == "central":
+        demand = results["heat_demand"][
+            results["heat_demand"].index.get_level_values(0).map(lambda idx: "decentral" not in idx)
+        ]
+        production = results["heat_production"][
+            results["heat_production"].index.get_level_values(0).map(lambda idx: "decentral" not in idx)
+        ]
+    else:
+        demand = results["heat_demand"][
+            results["heat_demand"].index.get_level_values(0).map(lambda idx: "decentral" in idx)
+        ]
+        production = results["heat_production"][
+            results["heat_production"]
+            .index.get_level_values(0)
+            .map(lambda idx: "decentral" in idx or idx in ("ABW-wood-oven", "ABW-heat-import"))
+        ]
+
+    # Demand from user scenario:
     demand.index = demand.index.map(lambda ind: f"heat-demand-{ind[1].split('_')[2]}")
-    return demand.groupby(level=0).sum() * 1e-3
+    data["user"] = demand.to_dict()
+    # Production from user scenario:
+    production.index = production.index.map(lambda ind: ind[0][4:].split("_")[0])
+    mapping = {
+        "biogas-bpchp": "biogas_bpchp",
+        "ch4-boiler": "biogas_bpchp",  # As in future all methane comes from biogas
+        "ch4-bpchp": "biogas_bpchp",
+        "ch4-extchp": "biogas_bpchp",
+        "electricity-heatpump": "heat_pump",
+        "electricity-pth": "electricity_direct_heating",
+        "solar-thermalcollector": "solar_thermal",
+        "wood-extchp": "wood_extchp",
+        "wood-bpchp": "wood_bpchp",
+        "wood-oven": "wood_oven",
+    }
+    production = production[production.index.map(lambda idx: idx in mapping)]
+    production.index = production.index.map(mapping)
+    production = production.reset_index().groupby("index").sum()["values"]
+    data["user"].update(production.to_dict())
+    return data
 
 
 electricity_demand = core.ParametrizedCalculation(

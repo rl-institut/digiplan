@@ -35,17 +35,25 @@ def get_power_demand(sector: Optional[str] = None) -> dict[str, pd.DataFrame]:
     return demand
 
 
-def get_heat_demand(sector: Optional[str] = None) -> dict[str, pd.DataFrame]:
+def get_heat_demand(sector: Optional[str] = None, distribution: Optional[str] = None) -> dict[str, pd.DataFrame]:
     """Return heat demand for given sector or all sectors."""
     sectors = (sector,) if sector else ("hh", "cts", "ind")
+    distribution_prefix = ("_cen" if distribution == "central" else "_dec") if distribution else ""
     demand = {}
     for sec in sectors:
-        demand_filename = settings.DIGIPIPE_DIR.path("scalars").path(f"demand_{sec}_heat_demand.csv")
+        demand_filename = settings.DIGIPIPE_DIR.path("scalars").path(
+            f"demand_{sec}_heat_demand{distribution_prefix}.csv",
+        )
         demand[sec] = pd.read_csv(demand_filename)
     return demand
 
 
-def get_heat_capacity_shares(distribution: str) -> dict:
+def get_heat_capacity_shares(
+    distribution: str,
+    year: Optional[int] = 2045,
+    *,
+    include_heatpumps: Optional[bool] = False,
+) -> dict:
     """Return capacity shares of heating structure."""
     shares_filename = settings.DIGIPIPE_DIR.path("scalars").path(f"demand_heat_structure_esys_{distribution}.csv")
     with Path(shares_filename).open("r", encoding="utf-8") as shares_file:
@@ -53,9 +61,9 @@ def get_heat_capacity_shares(distribution: str) -> dict:
         shares = {}
         summed_shares = 0.0
         for row in reader:
-            if row["year"] == "2022":
+            if row["year"] != str(year):
                 continue
-            if row["carrier"] == "heat_pump":
+            if row["carrier"] == "heat_pump" and not include_heatpumps:
                 continue
             shares[row["carrier"]] = float(row["demand_rel"])
             summed_shares += float(row["demand_rel"])

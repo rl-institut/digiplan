@@ -239,8 +239,10 @@ class HeatStructureTest(SimulationTest):
     """Test heat overview calculation."""
 
     def test_heat_overview(self):  # noqa: D102
-        result = calculations.heat_overview(self.simulation_id)
-        assert len(result) == 3
+        result = calculations.heat_overview(self.simulation_id, "central")
+        assert list(result.keys()) == ["2022", "2045", "user"]
+        for values in result.values():
+            assert len(values) == 13
 
 
 class ElectricityOverviewChartTest(SimulationTest):

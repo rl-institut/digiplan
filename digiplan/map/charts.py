@@ -183,14 +183,29 @@ class ElectricityCTSChart(SimulationChart):
 class HeatStructureChart(SimulationChart):
     """Heat Overview Chart."""
 
-    lookup = "heat_structure"
+    lookup = "heat_decentralized"
 
     def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.heat_overview(simulation_id=self.simulation_id)
+        return calculations.heat_overview(simulation_id=self.simulation_id, distribution="decentral")
 
     def render(self) -> dict:  # noqa: D102
-        for i, item in enumerate(self.chart_options["series"]):
-            item["data"][1] = self.chart_data.iloc[i]
+        mapping = {
+            "Erdgas": ("methane", "ch4_bpchp", "ch4_extchp"),
+            "Heizöl": ("fuel_oil",),
+            "Holz": ("wood_oven", "wood_bpchp", "wood_extchp"),
+            "Wärmepumpe": ("heat_pump",),
+            "El. Direktheizung": ("electricity_direct_heating",),
+            "Biogas": ("biogas_bpchp",),
+            "Solarthermie": ("solar_thermal",),
+            "Sonstige": ("other",),
+            "Verbrauch Haushalte": ("heat-demand-hh",),
+            "Verbrauch GHD": ("heat-demand-cts",),
+            "Verbrauch Industrie": ("heat-demand-ind",),
+        }
+        for _i, item in enumerate(self.chart_options["series"]):
+            item["data"][0] = sum(self.chart_data["2022"].get(entry, 0.0) for entry in mapping[item["name"]])
+            item["data"][1] = sum(self.chart_data["user"].get(entry, 0.0) for entry in mapping[item["name"]])
+            item["data"][2] = sum(self.chart_data["2045"].get(entry, 0.0) for entry in mapping[item["name"]])
         return self.chart_options
 
 
