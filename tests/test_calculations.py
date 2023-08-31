@@ -221,7 +221,7 @@ class ElectricityOverviewTest(SimulationTest):
 
     def test_electricity_overview(self):  # noqa: D102
         result = calculations.electricity_overview(self.simulation_id)
-        assert len(result) == 12
+        assert len(result) == 10
 
 
 class MunicipalityTest(SimpleTestCase):

@@ -245,11 +245,7 @@ def electricity_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame
     ]
     demand = demand.droplevel([0, 2])
     demands_per_sector = datapackage.get_power_demand()
-    # TODO (Hendrik): Read BEV data from datapackage
-    # https://github.com/rl-institut-private/digiplan/issues/315
-    demands_per_sector["bev"] = pd.DataFrame({"2045": [1] * 20})
     mappings = {
-        "bev": "ABW-electricity-bev_charging",
         "hh": "ABW-electricity-demand_hh",
         "cts": "ABW-electricity-demand_cts",
         "ind": "ABW-electricity-demand_ind",
@@ -547,7 +543,9 @@ def electricity_overview(simulation_id: int) -> pd.Series:
         },
     )
     demand = results["electricity_demand"][
-        results["electricity_demand"].index.get_level_values(1).isin(config.SIMULATION_DEMANDS)
+        results["electricity_demand"]
+        .index.get_level_values(1)
+        .isin([*list(config.SIMULATION_DEMANDS), "ABW-electricity-export"])
     ]
     demand.index = demand.index.get_level_values(1)
 
@@ -569,7 +567,8 @@ def electricity_overview(simulation_id: int) -> pd.Series:
             "ABW-electricity-demand_cts",
             "ABW-electricity-demand_hh",
             "ABW-electricity-demand_ind",
-            "ABW-electricity-bev_charging",
+            "ABW-electricity-import",
+            "ABW-electricity-export",
         ),
     )
     overview_data = overview_data * 1e-3

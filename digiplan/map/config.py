@@ -176,11 +176,11 @@ SIMULATION_RENEWABLES = {
     "ABW-wind-onshore": _("Wind turbine"),
     "ABW-hydro-ror": _("Hydro"),
     "ABW-biomass": _("Biomass"),
+    "ABW-electricity-import": _("Import"),
 }
 
 SIMULATION_DEMANDS = {
     # electricty demands
-    "ABW-electricity-bev_charging": _("BEV"),
     "ABW-electricity-demand_hh": _("Electricity Household Demand"),
     "ABW-electricity-demand_cts": _("Electricity CTS Demand"),
     "ABW-electricity-demand_ind": _("Electricity Industry Demand"),
