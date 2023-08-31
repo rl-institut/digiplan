@@ -17,6 +17,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - remove language button
 - rework result charts
 - rework top navigation and linked pages
+- hide main charts in today and result section
 
 ### Fixed
 - slider mark at wrong position

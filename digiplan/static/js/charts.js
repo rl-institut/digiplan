@@ -1,12 +1,12 @@
 // Goals & scenarios, initioalize charts
-const renewable_share_goal_div = document.getElementById("renewable_share_goal_chart");
-const renewable_share_goal_chart = echarts.init(renewable_share_goal_div);
-const co2_emissions_goal_div = document.getElementById("co2_emissions_goal_chart");
-const co2_emissions_goal_chart = echarts.init(co2_emissions_goal_div);
-const renewable_share_scenario_div = document.getElementById("renewable_share_scenario_chart");
-const renewable_share_scenario_chart = echarts.init(renewable_share_scenario_div);
-const co2_emissions_scenario_div = document.getElementById("co2_emissions_scenario_chart");
-const co2_emissions_scenario_chart = echarts.init(co2_emissions_scenario_div);
+// const renewable_share_goal_div = document.getElementById("renewable_share_goal_chart");
+// const renewable_share_goal_chart = echarts.init(renewable_share_goal_div);
+// const co2_emissions_goal_div = document.getElementById("co2_emissions_goal_chart");
+// const co2_emissions_goal_chart = echarts.init(co2_emissions_goal_div);
+// const renewable_share_scenario_div = document.getElementById("renewable_share_scenario_chart");
+// const renewable_share_scenario_chart = echarts.init(renewable_share_scenario_div);
+// const co2_emissions_scenario_div = document.getElementById("co2_emissions_scenario_chart");
+// const co2_emissions_scenario_chart = echarts.init(co2_emissions_scenario_div);
 
 // Results view, initiliaze charts
 // const detailed_overview_chart = echarts.init(document.getElementById("detailed_overview_chart"));
@@ -287,10 +287,10 @@ const ghg_reduction_option = JSON.parse(document.getElementById("ghg_reduction")
 
 function resizeCharts() {
   setTimeout(function () {
-    renewable_share_goal_chart.resize();
-    co2_emissions_goal_chart.resize();
-    renewable_share_scenario_chart.resize();
-    co2_emissions_scenario_chart.resize();
+    // renewable_share_goal_chart.resize();
+    // co2_emissions_goal_chart.resize();
+    // renewable_share_scenario_chart.resize();
+    // co2_emissions_scenario_chart.resize();
     // detailed_overview_chart.resize();
     // ghg_overview_chart.resize();
     electricity_overview_chart.resize();
@@ -305,10 +305,10 @@ function resizeCharts() {
 }
 
 // Goals & scenarios, setOptions
-renewable_share_goal_chart.setOption(renewable_share_goal);
-co2_emissions_goal_chart.setOption(co2_emissions_goal);
-renewable_share_scenario_chart.setOption(renewable_share_scenario);
-co2_emissions_scenario_chart.setOption(co2_emissions_scenario);
+// renewable_share_goal_chart.setOption(renewable_share_goal);
+// co2_emissions_goal_chart.setOption(co2_emissions_goal);
+// renewable_share_scenario_chart.setOption(renewable_share_scenario);
+// co2_emissions_scenario_chart.setOption(co2_emissions_scenario);
 
 // Results, setOptions
 // detailed_overview_chart.setOption(detailed_overview_option);
