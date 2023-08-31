@@ -1,4 +1,8 @@
 {
+  "brush": {
+    "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],
+    "xAxisIndex": 0
+  },
   "grid": {
     "bottom": "25%"
   },

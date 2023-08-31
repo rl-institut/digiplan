@@ -12,6 +12,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - results for GHG reduction chart
 - adapt full load hours for renewables
 - demand results for 2045 scenario
+- onboarding charts
 
 ### Changed
 - remove language button

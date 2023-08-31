@@ -20,6 +20,14 @@ const heat_centralized_chart = echarts.init(document.getElementById("heat_centra
 const ghg_history_chart = echarts.init(document.getElementById("ghg_history_chart"));
 const ghg_reduction_chart = echarts.init(document.getElementById("ghg_reduction_chart"));
 
+// Onboarding Charts
+const onboarding_wind_div = document.getElementById("onboarding_wind_chart");
+const onboarding_wind_chart = echarts.init(onboarding_wind_div);
+const onboarding_pv_ground_div = document.getElementById("onboarding_pv_ground_chart");
+const onboarding_pv_ground_chart = echarts.init(onboarding_pv_ground_div);
+const onboarding_pv_roof_div = document.getElementById("onboarding_pv_roof_chart");
+const onboarding_pv_roof_chart = echarts.init(onboarding_pv_roof_div);
+
 PubSub.subscribe(eventTopics.MENU_CHANGED, resizeCharts);
 
 // Styling variables
@@ -285,6 +293,11 @@ const heat_centralized_option = JSON.parse(document.getElementById("heat_central
 const ghg_history_option = JSON.parse(document.getElementById("ghg_history").textContent);
 const ghg_reduction_option = JSON.parse(document.getElementById("ghg_reduction").textContent);
 
+// get options for onboarding charts
+const onboarding_wind_option = JSON.parse(document.getElementById("onboarding_wind").textContent);
+const onboarding_pv_ground_option = JSON.parse(document.getElementById("onboarding_pv_ground").textContent);
+const onboarding_pv_roof_option = JSON.parse(document.getElementById("onboarding_pv_roof").textContent);
+
 function resizeCharts() {
   setTimeout(function () {
     // renewable_share_goal_chart.resize();
@@ -301,6 +314,9 @@ function resizeCharts() {
     heat_centralized_chart.resize();
     ghg_history_chart.resize();
     ghg_reduction_chart.resize();
+    onboarding_wind_chart.resize();
+    onboarding_pv_ground_chart.resize();
+    onboarding_pv_roof_chart.resize();
   }, 200);
 }
 
@@ -321,6 +337,11 @@ heat_decentralized_chart.setOption(heat_decentralized_option);
 heat_centralized_chart.setOption(heat_centralized_option);
 ghg_history_chart.setOption(ghg_history_option);
 ghg_reduction_chart.setOption(ghg_reduction_option);
+
+// onboarding Charts
+onboarding_wind_chart.setOption(onboarding_wind_option);
+onboarding_pv_ground_chart.setOption(onboarding_pv_ground_option);
+onboarding_pv_roof_chart.setOption(onboarding_pv_roof_option);
 
 resizeCharts();
 
