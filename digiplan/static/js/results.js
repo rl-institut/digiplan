@@ -42,8 +42,8 @@ futureDropdown.addEventListener("change", function() {
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
-PubSub.subscribe(eventTopics.SIMULATION_STARTED, hideResultButtons);
-PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultButtons);
+// PubSub.subscribe(eventTopics.SIMULATION_STARTED, hideResultButtons);
+// PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultButtons);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, hideSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultCharts);
@@ -124,17 +124,17 @@ function hideSimulationSpinner(msg) {
     return logMessage(msg);
 }
 
-function showResultButtons(msg) {
-    chartViewTab.classList.remove("disabled");
-    futureDropdown.disabled = false;
-    return logMessage(msg);
-}
-
-function hideResultButtons(msg) {
-    chartViewTab.classList.add("disabled");
-    futureDropdown.disabled = true;
-    return logMessage(msg);
-}
+// function showResultButtons(msg) {
+//     chartViewTab.classList.remove("disabled");
+//     futureDropdown.disabled = false;
+//     return logMessage(msg);
+// }
+//
+// function hideResultButtons(msg) {
+//     chartViewTab.classList.add("disabled");
+//     futureDropdown.disabled = true;
+//     return logMessage(msg);
+// }
 
 function showRegionChart(msg, lookup) {
     const region_lookup = `${lookup}_region`;
