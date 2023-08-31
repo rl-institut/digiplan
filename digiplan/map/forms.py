@@ -60,6 +60,8 @@ class PanelForm(TemplateForm):  # noqa: D101
                     attrs["data-to"] = item["to"]
                 if "step" in item:
                     attrs["data-step"] = item["step"]
+                if "from-min" in item:
+                    attrs["data-from-min"] = item["from-min"]
 
                 field = IntegerField(
                     label=item["label"],

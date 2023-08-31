@@ -8,6 +8,7 @@
     "start": 30,
     "status_quo": 50,
     "step": 5,
+    "from-min": 50,
     "tooltip": "{% trans 'Energetischer Anteil von Wärmepumpen in dezentralen Heizungssystemen. Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien.' %}",
     "type": "slider",
     "sidepanel": true
@@ -20,6 +21,7 @@
       "start": 50,
       "status_quo": 50,
       "step": 5,
+      "from-min": 50,
       "tooltip": "{% trans 'Anteil von Wärmepumpen für Verbraucher mit eigener Wärmeerzeugung im Haushaltssektor.' %}",
       "type": "slider"
   },
@@ -31,6 +33,7 @@
       "start": 50,
       "status_quo": 50,
       "step": 5,
+      "from-min": 50,
       "tooltip": "{% trans 'Anteil von Wärmepumpen für Verbraucher mit eigener Wärmeerzeugung im Gewerbe-, Handels- und Dienstleistungssektor.' %}",
       "type": "slider"
   },
@@ -42,6 +45,7 @@
       "start": 50,
       "status_quo": 50,
       "step": 5,
+      "from-min": 50,
       "tooltip": "{% trans 'Anteil von Wärmepumpen für Verbraucher mit eigener Wärmeerzeugung in der Industrie.' %}",
       "type": "slider"
   },
@@ -54,6 +58,7 @@
     "start": 10,
     "status_quo": 40,
     "step": 5,
+    "from-min": 50,
     "tooltip": "{% trans 'Energetischer Anteil von Wärmepumpen für Heizung, Warmwasser und Prozesswärme in Haushalten, GHD und Industrie in Fernwärmenetzen (Dessau-Roßlau, Bitterfeld-Wolfen, Köthen and Wittenberg). Die übrige Energie wird bereitgestellt durch direktelektrische Heizung, Bioenergie und Solarthermie (s. Beheizungsstruktur in den Ergebnissen). Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien.\n\nHinweis: Dezentrale Wärmesysteme werden im Menü separat konfiguriert.' %}",
     "type": "slider"
   },
