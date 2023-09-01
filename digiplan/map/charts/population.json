@@ -1,10 +1,5 @@
 {
-  "tooltip": {
-    "trigger": "item",
-    "axisPointer": {
-      "type": "cross"
-    }
-  },
+  "tooltip": {},
   "grid": {
     "top": "24%"
   },
