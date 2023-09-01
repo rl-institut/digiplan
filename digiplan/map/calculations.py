@@ -740,7 +740,7 @@ def heat_overview(simulation_id: int, distribution: str) -> dict:
     }
     production = production[production.index.map(lambda idx: idx in mapping)]
     production.index = production.index.map(mapping)
-    production = production.reset_index().groupby("index").sum()["values"]
+    production = production.reset_index().groupby("index").sum().iloc[:, 0]
     data["user"].update(production.to_dict())
     return data
 
