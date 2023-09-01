@@ -364,7 +364,7 @@ class CapacityRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.capacities_per_municipality().sum()
+        return calculations.capacities_per_municipality().sum().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -380,8 +380,8 @@ class Capacity2045RegionChart(SimulationChart):
 
     def get_chart_data(self) -> list:
         """Calculate capacities for whole region."""
-        status_quo_data = calculations.capacities_per_municipality().sum()
-        future_data = calculations.capacities_per_municipality_2045(self.simulation_id).sum()
+        status_quo_data = calculations.capacities_per_municipality().sum().round(1)
+        future_data = calculations.capacities_per_municipality_2045(self.simulation_id).sum().round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -399,9 +399,13 @@ class CapacitySquareRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.calculate_square_for_value(
-            pd.DataFrame(calculations.capacities_per_municipality().sum()).transpose(),
-        ).sum()
+        return (
+            calculations.calculate_square_for_value(
+                pd.DataFrame(calculations.capacities_per_municipality().sum()).transpose(),
+            )
+            .round(2)
+            .sum()
+        )
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -418,12 +422,20 @@ class CapacitySquare2045RegionChart(SimulationChart):
 
     def get_chart_data(self) -> list:
         """Calculate capacities for whole region."""
-        status_quo_data = calculations.calculate_square_for_value(
-            pd.DataFrame(calculations.capacities_per_municipality().sum()).transpose(),
-        ).sum()
-        future_data = calculations.calculate_square_for_value(
-            pd.DataFrame(calculations.capacities_per_municipality_2045(self.simulation_id).sum()).transpose(),
-        ).sum()
+        status_quo_data = (
+            calculations.calculate_square_for_value(
+                pd.DataFrame(calculations.capacities_per_municipality().sum()).transpose(),
+            )
+            .sum()
+            .round(2)
+        )
+        future_data = (
+            calculations.calculate_square_for_value(
+                pd.DataFrame(calculations.capacities_per_municipality_2045(self.simulation_id).sum()).transpose(),
+            )
+            .sum()
+            .round(2)
+        )
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -442,7 +454,7 @@ class EnergyRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.energies_per_municipality().sum()
+        return calculations.energies_per_municipality().sum().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -459,8 +471,8 @@ class Energy2045RegionChart(SimulationChart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        status_quo_data = calculations.energies_per_municipality().sum()
-        future_data = calculations.energies_per_municipality_2045(self.simulation_id).sum()
+        status_quo_data = calculations.energies_per_municipality().sum().round(1)
+        future_data = calculations.energies_per_municipality_2045(self.simulation_id).sum().round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -479,7 +491,7 @@ class EnergyShareRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.energy_shares_per_municipality().sum()
+        return calculations.energy_shares_per_municipality().sum().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -501,7 +513,7 @@ class EnergyCapitaRegionChart(Chart):
                 pd.DataFrame(calculations.energies_per_municipality().sum()).transpose(),
             ).sum()
             * 1e3
-        )
+        ).round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -523,7 +535,7 @@ class EnergySquareRegionChart(Chart):
                 pd.DataFrame(calculations.energies_per_municipality().sum()).transpose(),
             ).sum()
             * 1e3
-        )
+        ).round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -579,7 +591,9 @@ class WindTurbinesSquareRegionChart(Chart):
             float(
                 calculations.calculate_square_for_value(
                     pd.DataFrame({"turbines": models.WindTurbine.quantity_per_municipality().sum()}, index=[1]),
-                ).sum(),
+                )
+                .sum()
+                .round(2),
             ),
         ]
 
@@ -598,15 +612,23 @@ class WindTurbinesSquare2045RegionChart(SimulationChart):
 
     def get_chart_data(self) -> list[float]:
         """Calculate population for whole region."""
-        status_quo_data = calculations.calculate_square_for_value(
-            pd.DataFrame({"turbines": models.WindTurbine.quantity_per_municipality().sum()}, index=[1]),
-        ).sum()
-        future_data = calculations.calculate_square_for_value(
-            pd.DataFrame(
-                {"turbines": calculations.wind_turbines_per_municipality_2045(self.simulation_id).sum()},
-                index=[1],
-            ),
-        ).sum()
+        status_quo_data = (
+            calculations.calculate_square_for_value(
+                pd.DataFrame({"turbines": models.WindTurbine.quantity_per_municipality().sum()}, index=[1]),
+            )
+            .sum()
+            .round(2)
+        )
+        future_data = (
+            calculations.calculate_square_for_value(
+                pd.DataFrame(
+                    {"turbines": calculations.wind_turbines_per_municipality_2045(self.simulation_id).sum()},
+                    index=[1],
+                ),
+            )
+            .sum()
+            .round(2)
+        )
         return [float(status_quo_data), float(future_data)]
 
     def get_chart_options(self) -> dict:
@@ -625,7 +647,7 @@ class ElectricityDemandRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.electricity_demand_per_municipality().sum()
+        return calculations.electricity_demand_per_municipality().sum().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -642,8 +664,8 @@ class ElectricityDemand2045RegionChart(SimulationChart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        status_quo_data = calculations.electricity_demand_per_municipality().sum()
-        future_data = calculations.electricity_demand_per_municipality_2045(self.simulation_id).sum()
+        status_quo_data = calculations.electricity_demand_per_municipality().sum().round(1)
+        future_data = calculations.electricity_demand_per_municipality_2045(self.simulation_id).sum().round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -667,7 +689,7 @@ class ElectricityDemandCapitaRegionChart(Chart):
                 pd.DataFrame(calculations.electricity_demand_per_municipality().sum()).transpose(),
             ).sum()
             * 1e6
-        )
+        ).round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -689,7 +711,7 @@ class ElectricityDemandCapita2045RegionChart(SimulationChart):
                 pd.DataFrame(calculations.electricity_demand_per_municipality().sum()).transpose(),
             ).sum()
             * 1e6
-        )
+        ).round(1)
         future_data = (
             calculations.calculate_capita_for_value(
                 pd.DataFrame(
@@ -697,7 +719,7 @@ class ElectricityDemandCapita2045RegionChart(SimulationChart):
                 ).transpose(),
             ).sum()
             * 1e6
-        )
+        ).round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -716,7 +738,7 @@ class HeatDemandRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.heat_demand_per_municipality().sum()
+        return calculations.heat_demand_per_municipality().sum().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -733,8 +755,8 @@ class HeatDemand2045RegionChart(SimulationChart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        status_quo_data = calculations.heat_demand_per_municipality().sum()
-        future_data = calculations.heat_demand_per_municipality_2045(self.simulation_id).sum()
+        status_quo_data = calculations.heat_demand_per_municipality().sum().round(1)
+        future_data = calculations.heat_demand_per_municipality_2045(self.simulation_id).sum().round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -758,7 +780,7 @@ class HeatDemandCapitaRegionChart(Chart):
                 pd.DataFrame(calculations.heat_demand_per_municipality().sum()).transpose(),
             ).sum()
             * 1e6
-        )
+        ).round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -780,7 +802,7 @@ class HeatDemandCapita2045RegionChart(SimulationChart):
                 pd.DataFrame(calculations.heat_demand_per_municipality().sum()).transpose(),
             ).sum()
             * 1e6
-        )
+        ).round(1)
         future_data = (
             calculations.calculate_capita_for_value(
                 pd.DataFrame(
@@ -788,7 +810,7 @@ class HeatDemandCapita2045RegionChart(SimulationChart):
                 ).transpose(),
             ).sum()
             * 1e6
-        )
+        ).round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
