@@ -154,17 +154,17 @@ msgstr ""
 #: digiplan/map/calculations.py:218 digiplan/map/calculations.py:282
 #: digiplan/map/config.py:184
 msgid "Electricity Household Demand"
-msgstr "Strombedarf"
+msgstr "Strombedarf Haushalte"
 
 #: digiplan/map/calculations.py:219 digiplan/map/calculations.py:283
 #: digiplan/map/config.py:185
 msgid "Electricity CTS Demand"
-msgstr "Strombedarf"
+msgstr "Strombedarf GDP"
 
 #: digiplan/map/calculations.py:220 digiplan/map/calculations.py:284
 #: digiplan/map/config.py:186
 msgid "Electricity Industry Demand"
-msgstr "Strombedarf"
+msgstr "Strombedarf Industrie"
 
 #: digiplan/map/charts.py:277 digiplan/map/popups.py:465
 msgid "EW/km²"

@@ -188,6 +188,22 @@ def get_full_load_hours(year: int) -> pd.Series:
     return full_load_hours
 
 
+def get_capacities(year: int) -> pd.Series:
+    """Return renewable capacities for given year."""
+    if year == 2022:  # noqa: PLR2004
+        lookup = "status_quo"
+    elif year == 2045:  # noqa: PLR2004
+        lookup = "future_scenario"
+    else:
+        msg = "Unknown year"
+        raise ValueError(msg)
+    energy_settings = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "settings/energy_settings_panel.json")))
+    technologies = {"wind": "s_w_1", "pv_ground": "s_pv_ff_1", "pv_roof": "s_pv_d_1", "ror": "s_h_1"}
+    return pd.Series(
+        data={technology: energy_settings[key].get(lookup, 0.0) for technology, key in technologies.items()},
+    )
+
+
 def get_power_density(technology: Optional[str] = None) -> dict:
     """Return power density for technology."""
     if technology:

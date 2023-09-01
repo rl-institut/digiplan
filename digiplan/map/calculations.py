@@ -203,7 +203,7 @@ def energy_shares_per_municipality() -> pd.DataFrame:
     return energies.mul(total_demand_share, axis=0)
 
 
-def electricity_demand_per_municipality() -> pd.DataFrame:
+def electricity_demand_per_municipality(year: int = 2022) -> pd.DataFrame:
     """
     Calculate electricity demand per sector per municipality in GWh.
 
@@ -213,15 +213,12 @@ def electricity_demand_per_municipality() -> pd.DataFrame:
         Electricity demand per municipality (index) and sector (column)
     """
     demands_raw = datapackage.get_power_demand()
-    demands_per_sector = pd.concat([demand["2022"] for demand in demands_raw.values()], axis=1)
+    demands_per_sector = pd.concat([demand[str(year)] for demand in demands_raw.values()], axis=1)
     demands_per_sector.columns = [
         _("Electricity Household Demand"),
         _("Electricity CTS Demand"),
         _("Electricity Industry Demand"),
     ]
-    # TODO (Hendrik): Integrate BEV
-    # https://github.com/rl-institut-private/digiplan/issues/315
-    demands_per_sector["BEV"] = 0
     return demands_per_sector * 1e-3
 
 
@@ -522,9 +519,29 @@ def calculate_potential_shares(parameters: dict) -> pd.DataFrame:
     return shares
 
 
-def electricity_overview(simulation_id: int) -> pd.Series:
+def electricity_overview(year: int) -> pd.Series:
     """
-    Return data for electricity overview chart.
+    Return static data for electricity overview chart for given year.
+
+    Parameters
+    ----------
+    year: int
+        Year, either 2022 or 2045
+
+    Returns
+    -------
+    pd.Series
+        containing electricity productions and demands (including heat sector demand for electricity)
+    """
+    demand = electricity_demand_per_municipality(year).sum()
+    production = datapackage.get_full_load_hours(year) * datapackage.get_capacities(year)
+    production = production[production.notna()] * 1e-3
+    return pd.concat([demand, production])
+
+
+def electricity_overview_from_user(simulation_id: int) -> pd.Series:
+    """
+    Return user specific data for electricity overview chart.
 
     Parameters
     ----------
@@ -540,6 +557,7 @@ def electricity_overview(simulation_id: int) -> pd.Series:
         simulation_id,
         {
             "electricity_demand": electricity_demand,
+            "electricity_production": electricity_production,
         },
     )
     demand = results["electricity_demand"][
@@ -556,7 +574,12 @@ def electricity_overview(simulation_id: int) -> pd.Series:
 
     renewables = renewable_electricity_production(simulation_id)
 
-    overview_data = pd.concat([renewables, demand])
+    production_import = results["electricity_production"][
+        results["electricity_production"].index.get_level_values(0).isin(["ABW-electricity-import"])
+    ]
+    production_import.index = ["ABW-electricity-import"]
+
+    overview_data = pd.concat([renewables, demand, production_import])
     overview_data = overview_data.reindex(
         (
             "ABW-wind-onshore",

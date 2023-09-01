@@ -176,7 +176,6 @@ SIMULATION_RENEWABLES = {
     "ABW-wind-onshore": _("Wind turbine"),
     "ABW-hydro-ror": _("Hydro"),
     "ABW-biomass": _("Biomass"),
-    "ABW-electricity-import": _("Import"),
 }
 
 SIMULATION_DEMANDS = {
