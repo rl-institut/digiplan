@@ -10,8 +10,7 @@
       "Aufdach-PV",
       "Freiflächen-PV",
       "Wasserkraft",
-      "Bioenergie",
-      "Speicher"
+      "Bioenergie"
     ],
     "orient": "vertical",
     "right": "-5%",
@@ -61,12 +60,6 @@
       "stack": "five",
       "data": [10],
       "name": "Bioenergie"
-    },
-    {
-      "type": "bar",
-      "stack": "five",
-      "data": [10],
-      "name": "Speicher"
     }
   ],
   "title": {"text": "Installierte Leistung nach Typ"}
