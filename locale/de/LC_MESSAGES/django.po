@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-01 10:23+0000\n"
+"POT-Creation-Date: 2023-09-01 10:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1064,19 +1064,26 @@ msgid "Planning Region"
 msgstr "Planungsregion"
 
 #: digiplan/templates/components/panel_1_today.html:40
-#: digiplan/templates/components/panel_1_today.html:102
-msgid "Inhabitants 2021"
-msgstr "Einwohner:innen 2021"
+msgid "EinwohnerInnen - Historische Daten, heute und Zukunftsprognosen"
+msgstr ""
 
 #: digiplan/templates/components/panel_1_today.html:42
 msgid ""
-"In 2021 the population density in Germany was 238 per km² and 106 per km² in "
-"Saxony-Anhalt."
+"Bevölkerung im Jahr 2022 in EinwohnerInnen je km². 2021 betrug die "
+"Bevölkerungsdichte in Deutschland 238 und in Sachsen-Anhalt 106."
 msgstr ""
 
 #: digiplan/templates/components/panel_1_today.html:43
 msgid "Population Density"
 msgstr "Bevölkerungsdichte"
+
+#: digiplan/templates/components/panel_1_today.html:45
+msgid "Anzahl der sozialversicherungspflichtig Beschäftigten im Jahr 2022."
+msgstr ""
+
+#: digiplan/templates/components/panel_1_today.html:46
+msgid "Anzahl der Betriebsstätten im Jahr 2022."
+msgstr ""
 
 #: digiplan/templates/components/panel_1_today.html:48
 #: digiplan/templates/components/panel_3_results.html:34
@@ -1096,10 +1103,10 @@ msgid ""
 msgstr ""
 "Jährlicher bilanzieller Anteil erneuerbar produzierter Energiemenge "
 "(Windenergie, Photovoltaik, Wasserkraft) am Strombedarf der Sektoren "
-"Landwirtschaft, GHG (Gewerbe, Handel, Dienstleistungen), Haushalte und "
+"Landwirtschaft, GHD (Gewerbe, Handel, Dienstleistungen), Haushalte und "
 "Industrie in Prozent. Beim Bedarf handelt es sich um den "
 "Nettostromverbrauch, d.h. Übertragungsverluste und Kraftwerkeigenverbauch "
-"werden darin nicht berücksichtigt.In Deutschland wurde 2022 ein Strombedarf "
+"werden darin nicht berücksichtigt. In Deutschland wurde 2022 ein Strombedarf "
 "von 49,7%% von Erneuerbaren Energien gedeckt."
 
 #: digiplan/templates/components/panel_1_today.html:51
@@ -1112,9 +1119,7 @@ msgstr "Anteil Energie aus EE an Strombedarf"
 msgid ""
 "Annual amount of energy fed into the grid from renewable plants in gigawatt "
 "hours (wind energy, photovoltaic, hydro power)."
-msgstr ""
-"Jährlich eingespeiste Energiemenge aus erneuerbaren Anlagen in "
-"Gigawattstunden (Windenergie, Photovoltaik, Wasserkraft)."
+msgstr "Jährlich eingespeiste Energiemenge aus erneuerbaren Anlagen."
 
 #: digiplan/templates/components/panel_1_today.html:55
 #: digiplan/templates/components/panel_3_results.html:41
@@ -1128,9 +1133,8 @@ msgid ""
 "photovoltaic, hydro power) in relation to the number of inhabitants in "
 "megawatt hours per inhabitant."
 msgstr ""
-"Jährliche eingespeiste Energiemenge aus erneuerbaren Anlagen (Windenergie, "
-"Photovoltaik, Wasserkraft) bezogen auf die Einwohnerzahl in Megawattstunden "
-"pro EinwohnerIn."
+"Jährliche eingespeiste Energiemenge aus erneuerbaren Anlagen bezogen auf die "
+"Einwohnerzahl."
 
 #: digiplan/templates/components/panel_1_today.html:58
 #: digiplan/templates/components/panel_3_results.html:44
@@ -1142,9 +1146,7 @@ msgstr "Gewonnene Energie aus EE je EinwohnerIn (MWh)"
 msgid ""
 "Annual amount of energy fed in from renewable plants (wind energy, "
 "photovoltaic, hydro power) related to the area in megawatt hours per km²."
-msgstr ""
-"Jährlich eingespeiste Energiemenge aus erneuerbaren Anlagen (Windenergie, "
-"Photovoltaik, Wasserkraft) bezogen auf die Fläche in Megawattstunden pro km²."
+msgstr "Jährlich eingespeiste Energiemenge aus erneuerbaren Anlagen"
 
 #: digiplan/templates/components/panel_1_today.html:62
 #: digiplan/templates/components/panel_3_results.html:48
@@ -1156,9 +1158,7 @@ msgstr "Gewonnene Energie aus EE je km² (MWh)"
 msgid ""
 "Installed capacity from renewable energy plants (wind energy, photovoltaic, "
 "hydro power, biomass and biogas) in megawatts."
-msgstr ""
-"Installierte Leistung aus erneuerbaren Energieanlagen (Windenergie, "
-"Photovoltaik, Wasserkraft, Biomasse und Biogas) in Megawatt ."
+msgstr "Installierte Leistung erneuerbarer Energieanlagen"
 
 #: digiplan/templates/components/panel_1_today.html:66
 #: digiplan/templates/components/panel_3_results.html:52
@@ -1170,9 +1170,7 @@ msgstr "Installierte Leistung EE (MW)"
 msgid ""
 "Installed capacity from renewable energy plants (wind energy, photovoltaic, "
 "hydro power, biomass and biogas) in megawatts per km²."
-msgstr ""
-"Installierte Leistung aus erneuerbaren Energieanlagen (Windenergie, "
-"Photovoltaik, Wasserkraft, Biomasse und Biogas) in Megawatt pro km² ."
+msgstr "Installierte Leistung aus erneuerbaren Energieanlagen je km² ."
 
 #: digiplan/templates/components/panel_1_today.html:70
 #: digiplan/templates/components/panel_3_results.html:56
@@ -1206,8 +1204,8 @@ msgid ""
 "is the net electricity consumption."
 msgstr ""
 "Jährlicher Strombedarf in Gigawattstunden der Sektoren, Haushalte, GHD "
-"(Gewerbe, Handel Dienstleistungen), Landwirtschaft und Industrie. Es handelt "
-"sich dabei um den Nettostromverbrauch."
+"(Gewerbe, Handel, Dienstleistungen), Landwirtschaft und Industrie. Es "
+"handelt sich dabei um den Nettostromverbrauch."
 
 #: digiplan/templates/components/panel_1_today.html:84
 #: digiplan/templates/components/panel_3_results.html:70
@@ -1222,7 +1220,7 @@ msgid ""
 "inhabitant This is the net electricity consumption."
 msgstr ""
 "Jährlicher Strombedarf in Gigawattstunden der Sektoren, Haushalte, GHD "
-"(Gewerbe, Handel Dienstleistungen), Landwirtschaft und Industrie je "
+"(Gewerbe, Handel, Dienstleistungen), Landwirtschaft und Industrie je "
 "EinwohnerIn. Es handelt sich dabei um den Nettostromverbrauch."
 
 #: digiplan/templates/components/panel_1_today.html:88
@@ -1237,9 +1235,9 @@ msgid ""
 "hours in the household, commercial, trade and services, and agriculture "
 "(excluding industry) sectors."
 msgstr ""
-"Jährlich verbrauchte Wärmemenge für Raumwärme und Trinkwassererwärmung in "
-"Gigawattstunden der Sektoren Haushalte, GHD (Gewerbe, Handel, "
-"Dienstleistungen), Landwirtschaft (ohne Industrie)."
+"Jährlich verbrauchte Wärmemenge (Endenergie) für Raumwärme, "
+"Trinkwassererwärmung und Prozeswärme der Sektoren Haushalte, GHD (Gewerbe, "
+"Handel, Dienstleistungen) und Industrie."
 
 #: digiplan/templates/components/panel_1_today.html:92
 #: digiplan/templates/components/panel_3_results.html:78
@@ -1253,14 +1251,18 @@ msgid ""
 "water in gigawatt hours in the household, commercial, trade and services, "
 "and agriculture (excluding industry) sectors."
 msgstr ""
-"Jährlich verbrauchte Wärmemenge je EinwohnerIn für Raumwärme und "
-"Trinkwassererwärmung in Gigawattstunden der Sektoren Haushalte, GHD "
-"(Gewerbe, Handel, Dienstleistungen), Landwirtschaft (ohne Industrie)."
+"Jährlich verbrauchte Wärmemenge (Endenergie) je EinwohnerIn für Raumwärme, "
+"Trinkwassererwärmung und Prozeswärme der Sektoren Haushalte, GHD (Gewerbe, "
+"Handel, Dienstleistungen) und Industrie."
 
 #: digiplan/templates/components/panel_1_today.html:96
 #: digiplan/templates/components/panel_3_results.html:82
 msgid "Heat Demand per Capita (kWh)"
 msgstr "Wärmebedarf je EinwohnerIn (kWh)"
+
+#: digiplan/templates/components/panel_1_today.html:102
+msgid "Inhabitants 2021"
+msgstr "Einwohner:innen 2021"
 
 #: digiplan/templates/components/panel_2_settings.html:18
 #: digiplan/templates/components/panel_3_results.html:112
