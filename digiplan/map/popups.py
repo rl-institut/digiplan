@@ -689,7 +689,7 @@ class ElectricityDemandCapitaPopup(RegionPopup):
     title = _("Strombedarf je EinwohnerIn")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.calculate_capita_for_value(calculations.electricity_demand_per_municipality())
+        return calculations.calculate_capita_for_value(calculations.electricity_demand_per_municipality()) * 1e6
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -734,7 +734,7 @@ class HeatDemandPopup(RegionPopup):
     title = _("Wärmebedarf")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.electricity_demand_per_municipality()
+        return calculations.heat_demand_per_municipality()
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -775,7 +775,7 @@ class HeatDemandCapitaPopup(RegionPopup):
     title = _("Wärmebedarf je EinwohnerIn")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.calculate_capita_for_value(calculations.electricity_demand_per_municipality())
+        return calculations.calculate_capita_for_value(calculations.heat_demand_per_municipality()) * 1e6
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""

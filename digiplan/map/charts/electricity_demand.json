@@ -46,11 +46,6 @@
           "stack": "five",
           "data": [10, 10],
           "name": "Industrie"
-        },
-        {
-          "type": "bar",
-          "stack": "five",
-          "data": [10, 10]
         }
     ],
     "title": { "text": "Electricity Demand" }

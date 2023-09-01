@@ -75,8 +75,8 @@ def calculate_capita_for_value(df: pd.DataFrame) -> pd.DataFrame:
         df = pd.DataFrame(df)  # noqa: PD901
 
     population = (
-        pd.DataFrame.from_records(models.Population.objects.filter(year=2022).values("id", "value"))
-        .set_index("id")
+        pd.DataFrame.from_records(models.Population.objects.filter(year=2022).values("municipality__id", "value"))
+        .set_index("municipality__id")
         .sort_index()
     )
     result = df / population.sum().sum() if len(df) == 1 else df.sort_index() / population.to_numpy()
