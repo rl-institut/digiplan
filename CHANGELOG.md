@@ -4,6 +4,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2023-09-01
+### Added
+- electricity autarky chart
+- import and export to electricity overview chart
+- heat chart overview
+- tour explaining statusquo, settings and results
+- selection to hide choropleth and region chart in SQ and 2045 dropdown
+- results for heat overview chart
+- results for GHG reduction chart
+- adapt full load hours for renewables
+- demand results for 2045 scenario
+- onboarding charts
+
+### Changed
+- remove language button
+- rework result charts
+- rework top navigation and linked pages
+- hide main charts in today and result section
+- remove transport sector
+
+### Fixed
+- ghg reduction chart
+- slider mark at wrong position
+- reduce number of attributes in unit popups
+- add missing German texts
+- remove redundant sliders in settings
+- add onboarding texts
+
 ## [0.5.0] - 2023-07-13
 ### Added
 - heat settings set for oemof simulation

@@ -171,7 +171,7 @@ SOURCES = init_sources()
 # SIMULATION
 
 SIMULATION_RENEWABLES = {
-    "ABW-solar-pv_ground": _("Outdoor PV"),
+    "ABW-solar-pv_ground": _("Ground-mounted PV"),
     "ABW-solar-pv_rooftop": _("Roof-mounted PV"),
     "ABW-wind-onshore": _("Wind turbine"),
     "ABW-hydro-ror": _("Hydro"),
@@ -180,7 +180,6 @@ SIMULATION_RENEWABLES = {
 
 SIMULATION_DEMANDS = {
     # electricty demands
-    "ABW-electricity-bev_charging": _("BEV"),
     "ABW-electricity-demand_hh": _("Electricity Household Demand"),
     "ABW-electricity-demand_cts": _("Electricity CTS Demand"),
     "ABW-electricity-demand_ind": _("Electricity Industry Demand"),

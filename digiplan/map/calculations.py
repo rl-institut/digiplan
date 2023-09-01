@@ -1,12 +1,14 @@
 """Module for calculations used for choropleths or charts."""
 
+from typing import Optional
+
 import pandas as pd
 from django.conf import settings
 from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 from django_oemof.models import Simulation
 from django_oemof.results import get_results
-from oemof.tabular.postprocessing import calculations, core
+from oemof.tabular.postprocessing import calculations, core, helper
 
 from digiplan.map import config, datapackage, models
 
@@ -69,8 +71,8 @@ def calculate_capita_for_value(df: pd.DataFrame) -> pd.DataFrame:
         df = pd.DataFrame(df)  # noqa: PD901
 
     population = (
-        pd.DataFrame.from_records(models.Population.objects.filter(year=2022).values("id", "value"))
-        .set_index("id")
+        pd.DataFrame.from_records(models.Population.objects.filter(year=2022).values("municipality__id", "value"))
+        .set_index("municipality__id")
         .sort_index()
     )
     result = df / population.sum().sum() if len(df) == 1 else df.sort_index() / population.to_numpy()
@@ -125,6 +127,34 @@ def capacities_per_municipality() -> pd.DataFrame:
     return pd.concat(capacities, axis=1).fillna(0.0) * 1e-3
 
 
+def capacities_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+    """Calculate capacities from 2045 scenario per municipality."""
+    results = get_results(
+        simulation_id,
+        {
+            "capacities": Capacities,
+        },
+    )
+    renewables = results["capacities"][
+        results["capacities"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
+    ]
+    mapping = {
+        "ABW-solar-pv_ground": "pv_roof",
+        "ABW-solar-pv_rooftop": "pv_ground",
+        "ABW-wind-onshore": "wind",
+        "ABW-hydro-ror": "hydro",
+        "ABW-biomass": "biomass",
+    }
+    renewables.index = renewables.index.droplevel(1).map(mapping)
+    renewables = renewables.reindex(["wind", "pv_roof", "pv_ground", "hydro"])
+
+    parameters = Simulation.objects.get(pk=simulation_id).parameters
+    renewables = renewables * calculate_potential_shares(parameters)
+    renewables["bioenergy"] = 0.0
+    renewables["st"] = 0.0
+    return renewables
+
+
 def energies_per_municipality() -> pd.DataFrame:
     """
     Calculate energy of renewables per municipality in GWh.
@@ -135,10 +165,7 @@ def energies_per_municipality() -> pd.DataFrame:
         Energy per municipality (index) and technology (column)
     """
     capacities = capacities_per_municipality()
-    full_load_hours = pd.Series(
-        data=[technology_data["2022"] for technology_data in config.TECHNOLOGY_DATA["full_load_hours"].values()],
-        index=config.TECHNOLOGY_DATA["full_load_hours"].keys(),
-    )
+    full_load_hours = datapackage.get_full_load_hours(year=2022)
     full_load_hours = full_load_hours.reindex(index=["wind", "pv_roof", "pv_ground", "ror", "bioenergy", "st"])
     return capacities * full_load_hours.values / 1e3
 
@@ -154,7 +181,14 @@ def energies_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     renewables = results["electricity_production"][
         results["electricity_production"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
     ]
-    renewables.index = ["hydro", "pv_ground", "pv_roof", "wind"]
+    mapping = {
+        "ABW-solar-pv_ground": "pv_roof",
+        "ABW-solar-pv_rooftop": "pv_ground",
+        "ABW-wind-onshore": "wind",
+        "ABW-hydro-ror": "hydro",
+        "ABW-biomass": "biomass",
+    }
+    renewables.index = renewables.index.droplevel([1, 2]).map(mapping)
     renewables = renewables.reindex(["wind", "pv_roof", "pv_ground", "hydro"])
 
     parameters = Simulation.objects.get(pk=simulation_id).parameters
@@ -181,7 +215,7 @@ def energy_shares_per_municipality() -> pd.DataFrame:
     return energies.mul(total_demand_share, axis=0)
 
 
-def electricity_demand_per_municipality() -> pd.DataFrame:
+def electricity_demand_per_municipality(year: int = 2022) -> pd.DataFrame:
     """
     Calculate electricity demand per sector per municipality in GWh.
 
@@ -191,13 +225,48 @@ def electricity_demand_per_municipality() -> pd.DataFrame:
         Electricity demand per municipality (index) and sector (column)
     """
     demands_raw = datapackage.get_power_demand()
-    demands_per_sector = pd.concat([demand["2022"] for demand in demands_raw.values()], axis=1)
+    demands_per_sector = pd.concat([demand[str(year)] for demand in demands_raw.values()], axis=1)
     demands_per_sector.columns = [
         _("Electricity Household Demand"),
         _("Electricity CTS Demand"),
         _("Electricity Industry Demand"),
     ]
     return demands_per_sector * 1e-3
+
+
+def electricity_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+    """
+    Calculate electricity demand per sector per municipality in GWh in 2045.
+
+    Returns
+    -------
+    pd.DataFrame
+        Electricity demand per municipality (index) and sector (column)
+    """
+    results = get_results(
+        simulation_id,
+        {
+            "electricity_demand": electricity_demand,
+        },
+    )
+    demand = results["electricity_demand"][
+        results["electricity_demand"].index.get_level_values(1).isin(config.SIMULATION_DEMANDS)
+    ]
+    demand = demand.droplevel([0, 2])
+    demands_per_sector = datapackage.get_power_demand()
+    mappings = {
+        "hh": "ABW-electricity-demand_hh",
+        "cts": "ABW-electricity-demand_cts",
+        "ind": "ABW-electricity-demand_ind",
+    }
+    demand = demand.reindex(mappings.values())
+    sector_shares = pd.DataFrame(
+        {sector: demands_per_sector[sector]["2045"] / demands_per_sector[sector]["2045"].sum() for sector in mappings},
+    )
+    demand = sector_shares * demand.values
+    demand.columns = demand.columns.map(lambda column: config.SIMULATION_DEMANDS[mappings[column]])
+    demand = demand * 1e-3
+    return demand
 
 
 def heat_demand_per_municipality() -> pd.DataFrame:
@@ -222,9 +291,43 @@ def heat_demand_per_municipality() -> pd.DataFrame:
     return demands_per_sector * 1e-3
 
 
-def detailed_overview(simulation_id: int) -> pd.DataFrame:  # noqa: ARG001
+def heat_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     """
-    Calculate data for detailed overview chart from simulation ID.
+    Calculate heat demand per sector per municipality in GWh in 2045.
+
+    Returns
+    -------
+    pd.DataFrame
+        Heat demand per municipality (index) and sector (column)
+    """
+    results = get_results(
+        simulation_id,
+        {
+            "heat_demand": heat_demand,
+        },
+    )
+    demand = results["heat_demand"]
+    demand.index = demand.index.map(lambda ind: f"heat-demand-{ind[1].split('_')[2]}")
+    demand = demand.groupby(level=0).sum()
+    demands_per_sector = datapackage.get_heat_demand()
+    mappings = {
+        "hh": "heat-demand-hh",
+        "cts": "heat-demand-cts",
+        "ind": "heat-demand-ind",
+    }
+    demand = demand.reindex(mappings.values())
+    sector_shares = pd.DataFrame(
+        {sector: demands_per_sector[sector]["2045"] / demands_per_sector[sector]["2045"].sum() for sector in mappings},
+    )
+    demand = sector_shares * demand.values
+    demand.columns = demand.columns.map(lambda column: config.SIMULATION_DEMANDS[mappings[column]])
+    demand = demand * 1e-3
+    return demand
+
+
+def ghg_reduction(simulation_id: int) -> pd.Series:
+    """
+    Calculate data for GHG reduction chart from simulation ID.
 
     Parameters
     ----------
@@ -233,15 +336,21 @@ def detailed_overview(simulation_id: int) -> pd.DataFrame:  # noqa: ARG001
 
     Returns
     -------
-    pandas.DataFrame
-        holding data for detailed overview chart
+    pandas.Series
+        holding data for GHG reduction chart
     """
-    # TODO(Hendrik): Calculate real data
-    # https://github.com/rl-institut-private/digiplan/issues/164
-    return pd.DataFrame(
-        data={"production": [300, 200, 200, 150, 520, 0], "consumption": [0, 0, 0, 0, 0, 1300]},
-        index=["wind", "pv_roof", "pv_ground", "biomass", "fossil", "consumption"],
+    renewables = renewable_electricity_production(simulation_id).sum()
+
+    results = get_results(
+        simulation_id,
+        {
+            "electricity_production": electricity_production,
+        },
     )
+    electricity_import = results["electricity_production"].loc[["ABW-electricity-import"]]
+    electricity_import.index = electricity_import.index.get_level_values(0)
+    electricity_import["ABW-renewables"] = renewables
+    return electricity_import * 1e-3
 
 
 def electricity_from_from_biomass(simulation_id: int) -> pd.Series:
@@ -306,6 +415,12 @@ def electricity_from_from_biomass(simulation_id: int) -> pd.Series:
     )
     biomass = pd.concat([biomass, electricity_from_methane])
     return biomass.sum()
+
+
+def wind_turbines_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+    """Calculate number of wind turbines from 2045 scenario per municipality."""
+    capacities = capacities_per_municipality_2045(simulation_id)
+    return capacities["wind"] / config.TECHNOLOGY_DATA["nominal_power_per_unit"]["wind"]
 
 
 def electricity_heat_demand(simulation_id: int) -> pd.Series:
@@ -416,36 +531,29 @@ def calculate_potential_shares(parameters: dict) -> pd.DataFrame:
     return shares
 
 
-def capacities_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
+def electricity_overview(year: int) -> pd.Series:
     """
-    Return capacities per municipality.
+    Return static data for electricity overview chart for given year.
 
     Parameters
     ----------
-    simulation_id: int
-        Simulation ID to get results from
+    year: int
+        Year, either 2022 or 2045
 
     Returns
     -------
-    pd.DataFrame
-        containing renewable capacities disaggregated per municipality
+    pd.Series
+        containing electricity productions and demands (including heat sector demand for electricity)
     """
-    results = get_results(simulation_id, {"electricity_production": electricity_production})
-    renewables = results["electricity_production"][
-        results["electricity_production"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
-    ]
-    renewables.index = renewables.index.get_level_values(0)
-
-    parameters = Simulation.objects.get(pk=simulation_id).parameters
-    potential_shares = calculate_potential_shares(parameters)
-    renewable_shares = potential_shares * renewables.values
-    renewable_shares.columns = renewables.index
-    return renewable_shares.fillna(0.0)
+    demand = electricity_demand_per_municipality(year).sum()
+    production = datapackage.get_full_load_hours(year) * datapackage.get_capacities(year)
+    production = production[production.notna()] * 1e-3
+    return pd.concat([demand, production])
 
 
-def electricity_overview(simulation_id: int) -> pd.Series:
+def electricity_overview_from_user(simulation_id: int) -> pd.Series:
     """
-    Return data for electricity overview chart.
+    Return user specific data for electricity overview chart.
 
     Parameters
     ----------
@@ -464,28 +572,119 @@ def electricity_overview(simulation_id: int) -> pd.Series:
             "electricity_production": electricity_production,
         },
     )
+    demand = results["electricity_demand"][
+        results["electricity_demand"]
+        .index.get_level_values(1)
+        .isin([*list(config.SIMULATION_DEMANDS), "ABW-electricity-export"])
+    ]
+    demand.index = demand.index.get_level_values(1)
+
+    electricity_heat_production_result = electricity_heat_demand(simulation_id)
+    demand["ABW-electricity-demand_hh"] += electricity_heat_production_result["electricity_heat_demand_hh"]
+    demand["ABW-electricity-demand_cts"] += electricity_heat_production_result["electricity_heat_demand_cts"]
+    demand["ABW-electricity-demand_ind"] += electricity_heat_production_result["electricity_heat_demand_ind"]
+
+    renewables = renewable_electricity_production(simulation_id)
+
+    production_import = results["electricity_production"][
+        results["electricity_production"].index.get_level_values(0).isin(["ABW-electricity-import"])
+    ]
+    production_import.index = ["ABW-electricity-import"]
+
+    overview_data = pd.concat([renewables, demand, production_import])
+    overview_data = overview_data.reindex(
+        (
+            "ABW-wind-onshore",
+            "ABW-solar-pv_ground",
+            "ABW-solar-pv_rooftop",
+            "ABW-biomass",
+            "ABW-hydro-ror",
+            "ABW-electricity-demand_cts",
+            "ABW-electricity-demand_hh",
+            "ABW-electricity-demand_ind",
+            "ABW-electricity-import",
+            "ABW-electricity-export",
+        ),
+    )
+    overview_data = overview_data * 1e-3
+    return overview_data
+
+
+def renewable_electricity_production(simulation_id: int) -> pd.Series:
+    """Return electricity production from renewables including biomass."""
+    results = get_results(
+        simulation_id,
+        {
+            "electricity_production": electricity_production,
+        },
+    )
     renewables = results["electricity_production"][
         results["electricity_production"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
     ]
     renewables.index = renewables.index.get_level_values(0)
     renewables = pd.concat([renewables, pd.Series(electricity_from_from_biomass(simulation_id), index=["ABW-biomass"])])
-
-    electricity_import = results["electricity_production"].loc[["ABW-electricity-import"]]
-    electricity_import.index = electricity_import.index.get_level_values(0)
-    electricity_export = results["electricity_demand"].loc[:, ["ABW-electricity-export"]]
-    electricity_export.index = electricity_export.index.get_level_values(1)
-
-    demand = results["electricity_demand"][
-        results["electricity_demand"].index.get_level_values(1).isin(config.SIMULATION_DEMANDS)
-    ]
-    demand.index = demand.index.get_level_values(1)
-
-    electricity_heat_production_result = electricity_heat_demand(simulation_id)
-
-    return pd.concat([renewables, demand, electricity_heat_production_result])
+    return renewables
 
 
-def heat_overview(simulation_id: int) -> pd.Series:
+def get_regional_independency(simulation_id: int) -> tuple[int, int, int, int]:
+    """Return electricity autarky for 2022 and user scenario."""
+    # 2022
+    demand = datapackage.get_hourly_electricity_demand(2022)
+    full_load_hours = datapackage.get_full_load_hours(2022)
+    capacities = datapackage.get_capacities(2022)
+    technology_mapping = {
+        "ABW-wind-onshore": "wind",
+        "ABW-solar-pv_ground": "pv_ground",
+        "ABW-solar-pv_rooftop": "pv_roof",
+        "ABW-hydro-ror": "ror",
+    }
+    renewables = []
+    for technology, mapped_key in technology_mapping.items():
+        renewables.append(
+            datapackage.get_profile(technology[4:]) * full_load_hours[mapped_key] * capacities[mapped_key],
+        )
+    renewables_summed_flow = pd.concat(renewables, axis=1).sum(axis=1)
+    # summary
+    independency_summary_2022 = round(renewables_summed_flow.sum() / demand.sum() * 100)
+    # temporal
+    independency_temporal_2022 = renewables_summed_flow - demand
+    independency_temporal_2022 = round(sum(independency_temporal_2022 > 0) / 8760 * 100)
+
+    # USER
+    results = get_results(
+        simulation_id,
+        {"renewable_flows": renewable_flows, "demand_flows": demand_flows},
+    )
+    # summary
+    independency_summary = round(results["renewable_flows"].sum().sum() / results["demand_flows"].sum().sum() * 100)
+    # temporal
+    independency_temporal = results["renewable_flows"].sum(axis=1) - results["demand_flows"].sum(axis=1)
+    independency_temporal = round(sum(independency_temporal > 0) / 8760 * 100)
+    return independency_summary_2022, independency_temporal_2022, independency_summary, independency_temporal
+
+
+def get_heat_production(distribution: str, year: int) -> dict:
+    """Calculate hea production per technology for given distribution and year."""
+    heat_demand_per_sector = datapackage.get_heat_demand(distribution=distribution)
+    demand = sum(d[str(year)].sum() for d in heat_demand_per_sector.values())
+    heat_shares = datapackage.get_heat_capacity_shares(distribution[:3], year=year, include_heatpumps=True)
+    return {tech: demand * share for tech, share in heat_shares.items()}
+
+
+def get_reduction(simulation_id: int) -> tuple[int, int]:
+    """Return electricity reduction from renewables and imports."""
+    results = get_results(
+        simulation_id,
+        {"renewables": reduction_from_renewables, "imports": reduction_from_imports},
+    )
+    reduction = 2425.9
+    res_reduction = results["renewables"].sum()
+    import_reduction = results["imports"].sum()
+    summed_reduction = res_reduction + import_reduction
+    return round(import_reduction / summed_reduction * reduction), round(res_reduction / summed_reduction * reduction)
+
+
+def heat_overview(simulation_id: int, distribution: str) -> dict:
     """
     Return data for heat overview chart.
 
@@ -493,21 +692,67 @@ def heat_overview(simulation_id: int) -> pd.Series:
     ----------
     simulation_id: int
         Simulation ID to get results from
+    distribution: str
+        central/decentral
 
     Returns
     -------
-    pd.Series
-        containing heat demand for all sectors (hh, cts, ind)
+    dict
+        containing heat demand and production for all sectors (hh, cts, ind) and technologies
     """
+    data = {}
+    for year in (2022, 2045):
+        demand = datapackage.get_heat_demand(distribution=distribution)
+        demand = {f"heat-demand-{sector}": demand[str(year)].sum() for sector, demand in demand.items()}
+        data[str(year)] = demand
+        data[str(year)].update(get_heat_production(distribution, year))
+
     results = get_results(
         simulation_id,
-        {
-            "heat_demand": heat_demand,
-        },
+        {"heat_demand": heat_demand, "heat_production": heat_production},
     )
-    demand = results["heat_demand"]
+    # Filter distribution:
+    if distribution == "central":
+        demand = results["heat_demand"][
+            results["heat_demand"].index.get_level_values(0).map(lambda idx: "decentral" not in idx)
+        ]
+        production = results["heat_production"][
+            results["heat_production"]
+            .index.get_level_values(0)
+            .map(lambda idx: "decentral" not in idx and idx not in ("ABW-wood-oven", "ABW-heat-import"))
+        ]
+    else:
+        demand = results["heat_demand"][
+            results["heat_demand"].index.get_level_values(0).map(lambda idx: "decentral" in idx)
+        ]
+        production = results["heat_production"][
+            results["heat_production"]
+            .index.get_level_values(0)
+            .map(lambda idx: "decentral" in idx or idx in ("ABW-wood-oven", "ABW-heat-import"))
+        ]
+
+    # Demand from user scenario:
     demand.index = demand.index.map(lambda ind: f"heat-demand-{ind[1].split('_')[2]}")
-    return demand.groupby(level=0).sum()
+    data["user"] = demand.to_dict()
+    # Production from user scenario:
+    production.index = production.index.map(lambda ind: ind[0][4:].split("_")[0])
+    mapping = {
+        "biogas-bpchp": "biogas_bpchp",
+        "ch4-boiler": "biogas_bpchp",  # As in future all methane comes from biogas
+        "ch4-bpchp": "biogas_bpchp",
+        "ch4-extchp": "biogas_bpchp",
+        "electricity-heatpump": "heat_pump",
+        "electricity-pth": "electricity_direct_heating",
+        "solar-thermalcollector": "solar_thermal",
+        "wood-extchp": "wood_extchp",
+        "wood-bpchp": "wood_bpchp",
+        "wood-oven": "wood_oven",
+    }
+    production = production[production.index.map(lambda idx: idx in mapping)]
+    production.index = production.index.map(mapping)
+    production = production.reset_index().groupby("index").sum().iloc[:, 0]
+    data["user"].update(production.to_dict())
+    return data
 
 
 electricity_demand = core.ParametrizedCalculation(
@@ -555,6 +800,99 @@ methane_production = core.ParametrizedCalculation(
     {
         "to_nodes": [
             "ABW-ch4",
+        ],
+    },
+)
+
+reduction_from_renewables = core.ParametrizedCalculation(
+    calculations.AggregatedFlows,
+    {
+        "from_nodes": [
+            "ABW-wind-onshore",
+            "ABW-pv_rooftop",
+            "ABW-pv_ground",
+            "ABW-hydro-ror",
+            "ABW-solar-thermalcollector_central",
+            "ABW-solar-thermalcollector_decentral",
+        ],
+    },
+)
+
+reduction_from_imports = core.ParametrizedCalculation(
+    calculations.AggregatedFlows,
+    {
+        "from_nodes": [
+            "ABW-electricity-import",
+            "ABW-ch4-import",
+            "ABW-wood-shortage",
+            "ABW-lignite-shortage",
+            "ABW-biomass-shortage",
+        ],
+    },
+)
+
+
+class Capacities(core.Calculation):
+    """Oemof postprocessing calculation to read capacities."""
+
+    name = "capacities"
+
+    def calculate_result(self) -> pd.Series:
+        """Read attribute "capacity" from parameters."""
+        capacities = helper.filter_by_var_name(self.scalar_params, "capacity")
+        try:
+            return capacities.unstack(2)["capacity"]  # noqa: PD010
+        except KeyError:
+            return pd.Series(dtype="object")
+
+
+class Flows(core.Calculation):
+    """Oemof postprocessing calculation to read flows."""
+
+    name = "flows"
+
+    def __init__(
+        self,
+        calculator: core.Calculator,
+        from_nodes: Optional[list[str]] = None,
+        to_nodes: Optional[list[str]] = None,
+    ) -> None:
+        """Init flows."""
+        if not from_nodes and not to_nodes:
+            msg = "Either from or to nodes must be set"
+            raise ValueError(msg)
+        self.from_nodes = from_nodes
+        self.to_nodes = to_nodes
+
+        super().__init__(calculator)
+
+    def calculate_result(self) -> pd.DataFrame:
+        """Read attribute "capacity" from parameters."""
+        from_node_flows = pd.DataFrame()
+        to_node_flows = pd.DataFrame()
+        if self.from_nodes:
+            from_node_flows = self.sequences.iloc[:, self.sequences.columns.get_level_values(0).isin(self.from_nodes)]
+            from_node_flows.columns = from_node_flows.columns.droplevel([1, 2])
+        if self.to_nodes:
+            to_node_flows = self.sequences.iloc[:, self.sequences.columns.get_level_values(1).isin(self.to_nodes)]
+            to_node_flows.columns = to_node_flows.columns.droplevel([0, 2])
+        return pd.concat([from_node_flows, to_node_flows], axis=1)
+
+
+renewable_flows = core.ParametrizedCalculation(
+    Flows,
+    {
+        "from_nodes": ["ABW-wind-onshore", "ABW-solar-pv_rooftop", "ABW-solar-pv_ground", "ABW-hydro-ror"],
+    },
+)
+
+demand_flows = core.ParametrizedCalculation(
+    Flows,
+    {
+        "to_nodes": [
+            "ABW-electricity-demand_hh",
+            "ABW-electricity-demand_cts",
+            "ABW-electricity-demand_ind",
         ],
     },
 )

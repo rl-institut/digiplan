@@ -36,6 +36,7 @@
         <a class="top-nav__logo top-nav__logo--gestalten" href="https://www.region-gestalten.bund.de/" target="_blank" rel="noopener noreferrer">
           <img src="{% static 'images/logos/VDI-VDE-BULE-BMI_Logo-4C.png' %}" alt="Logo Region gestalten">
         </a>
+        <div style="background-color: orange; border-style: dashed; color: black; padding: 1em; text-align: center; margin-left: 20em">UNDER DEVELOPMENT</div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarsExample03" aria-controls="navbarsExample03"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -46,28 +47,20 @@
           <ul class="navbar-nav ms-auto mb-2 mb-sm-0">
             <li class="nav-item">
               <a class="nav-link active" id="mapView" aria-current="page"
-                 href="#">{% translate "Map" %}</a>
+                 href="#">{% translate "App" %}</a>
             </li>
             <li class="nav-item" data-bs-toggle="offcanvas"
                 href="#offcanvasDocumentation" role="button"
                 aria-controls="offcanvasDocumentation">
               <a class="nav-link" href="#">{% translate "Documentation" %}</a>
             </li>
-            <li class="nav-item" data-bs-toggle="offcanvas" href="#offcanvasSources"
-                role="button" aria-controls="offcanvasSources">
-              <a class="nav-link" href="#">{% translate "Sources" %}</a>
-            </li>
+<!--            <li class="nav-item" data-bs-toggle="offcanvas" href="#offcanvasSources"-->
+<!--                role="button" aria-controls="offcanvasSources">-->
+<!--              <a class="nav-link" href="#">{% translate "Sources" %}</a>-->
+<!--            </li>-->
             <li class="nav-item" data-bs-toggle="offcanvas" href="#offcanvasContact"
                 role="button" aria-controls="offcanvasContact">
               <a class="nav-link" href="#">{% translate "Contact" %}</a>
-            </li>
-            <li class="top-nav__lang">
-              {% get_current_language as LANGUAGE_CODE %}
-              {% if LANGUAGE_CODE == "de" %}
-                <a href="/en/" class="btn btn-sm btn-outline-secondary">English</a>
-              {% else %}
-                <a href="/de/" class="btn btn-sm btn-outline-secondary">Deutsch</a>
-              {% endif %}
             </li>
           </ul>
         </div>
@@ -82,7 +75,6 @@
   </div>
 
   {% include 'offcanvas/documentation.html' %}
-  {% include 'offcanvas/sources.html' %}
   {% include 'offcanvas/contact.html' %}
 
 {% endblock content %}
@@ -96,13 +88,16 @@
   {{ detailed_overview|json_script:"detailed_overview" }}
   {{ ghg_overview|json_script:"ghg_overview" }}
   {{ electricity_overview|json_script:"electricity_overview" }}
-  {{ electricity_ghg|json_script:"electricity_ghg" }}
-  {{ mobility_overview|json_script:"mobility_overview" }}
-  {{ mobility_ghg|json_script:"mobility_ghg" }}
-  {{ overview_heat|json_script:"overview_heat" }}
-  {{ decentralized_centralized_heat|json_script:"decentralized_centralized_heat" }}
+  {{ electricity_autarky|json_script:"electricity_autarky" }}
+<!--  {{ mobility_overview|json_script:"mobility_overview" }}-->
+<!--  {{ mobility_ghg|json_script:"mobility_ghg" }}-->
+  {{ heat_decentralized|json_script:"heat_decentralized" }}
+  {{ heat_centralized|json_script:"heat_centralized" }}
   {{ ghg_history|json_script:"ghg_history" }}
   {{ ghg_reduction|json_script:"ghg_reduction" }}
+  {{ onboarding_wind|json_script:"onboarding_wind" }}
+  {{ onboarding_pv_ground|json_script:"onboarding_pv_ground" }}
+  {{ onboarding_pv_roof|json_script:"onboarding_pv_roof" }}
   {{ settings_parameters|json_script:"settings_parameters" }}
   {{ settings_dependency_map|json_script:"settings_dependency_map" }}
   {{ dependency_parameters|json_script:"dependency_parameters" }}

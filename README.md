@@ -142,6 +142,8 @@ You may have to put `sudo` in front of the commands.
 While using the following commands, exchange _production.yml_ (production server) and _
 local.yml_ (local development) accordingly to your needs!
 
+`USE_DISTILLED_MVTS` should be set to False at first in the env file.
+
 ### Start container
 
 ```
@@ -167,7 +169,7 @@ Following steps are necessary to refresh/load data on production server:
 ```
 docker-compose -f production.yml run --rm django python manage.py migrate
 docker-compose -f production.yml run --rm django make empty_data empty_regions
-docker-compose -f production.yml run --rm django make load_regions load_data
+docker-compose -f production.yml run --rm django make load_regions load_data load_population
 ```
 
 In order to increase loading speed of vector tiles, the tiles can be prerenderd. This is

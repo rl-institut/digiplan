@@ -2,26 +2,26 @@
   "v_iv_1": {
     "class": "js-slider js-slider-panel",
     "grid": false,
-    "label": "{% trans 'Share of battery-electric vehicles (%)' %}",
+    "label": "{% trans 'Anteil privater E-Fahrzeuge (%)' %}",
     "max": 100,
     "min": 0,
     "start": 30,
     "status_quo": 50,
     "step": 5,
-    "tooltip": "{% trans 'Share of battery-electric vehicles (%)' %}",
+    "tooltip": "{% trans 'Anteil privater elektrischer Fahrzeuge (batterieelektrisch und Plug-in-Hybride).' %}",
     "type": "slider",
     "sidepanel": true
   },
   "v_iv_3": {
     "class": "js-slider js-slider-panel",
     "grid": false,
-    "label": "{% trans 'Share of battery electric and plugin-hybrid vehicles (%)' %}",
+    "label": "{% trans 'Anteil privater E-Fahrzeuge (%)' %}",
     "max": 100,
     "min": 0,
     "start": 25,
     "status_quo": 45,
     "step": 5,
-    "tooltip": "{% trans 'Personal battery electric and plug-in hybrid vehicles' %}",
+    "tooltip": "{% trans 'Anteil privater elektrischer Fahrzeuge (batterieelektrisch und Plug-in-Hybride).' %}",
     "type": "slider"
   }
 }

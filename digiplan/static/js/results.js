@@ -3,12 +3,16 @@ import {statusquoDropdown, futureDropdown} from "./elements.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
 const simulation_spinner = document.getElementById("simulation_spinner");
+const chartViewTab = document.getElementById("chart-view-tab");
 
 const SIMULATION_CHECK_TIME = 5000;
 
 const resultCharts = {
-    "detailed_overview": "detailed_overview_chart",
-    "electricity_overview": "electricity_overview_chart"
+    "electricity_overview": "electricity_overview_chart",
+    "electricity_autarky": "electricity_autarky_chart",
+    "ghg_reduction": "ghg_reduction_chart",
+    "heat_centralized": "heat_centralized_chart",
+    "heat_decentralized": "heat_decentralized_chart",
 };
 
 // Setup
@@ -17,11 +21,21 @@ const resultCharts = {
 $('#settings').submit(false);
 
 statusquoDropdown.addEventListener("change", function() {
-    PubSub.publish(mapEvent.CHOROPLETH_SELECTED, statusquoDropdown.value);
+    if (statusquoDropdown.value === "") {
+        deactivateChoropleth();
+        PubSub.publish(eventTopics.CHOROPLETH_DEACTIVATED);
+    } else {
+        PubSub.publish(mapEvent.CHOROPLETH_SELECTED, statusquoDropdown.value);
+    }
     imageResults.title = statusquoDropdown.options[statusquoDropdown.selectedIndex].title;
 });
 futureDropdown.addEventListener("change", function() {
-    PubSub.publish(mapEvent.CHOROPLETH_SELECTED, futureDropdown.value);
+    if (futureDropdown.value === "") {
+        deactivateChoropleth();
+        PubSub.publish(eventTopics.CHOROPLETH_DEACTIVATED);
+    } else {
+        PubSub.publish(mapEvent.CHOROPLETH_SELECTED, futureDropdown.value);
+    }
     imageResults.title = futureDropdown.options[futureDropdown.selectedIndex].title;
 });
 
@@ -30,12 +44,13 @@ futureDropdown.addEventListener("change", function() {
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
+// PubSub.subscribe(eventTopics.SIMULATION_STARTED, hideResultButtons);
+// PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultButtons);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, hideSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultCharts);
 PubSub.subscribe(mapEvent.CHOROPLETH_SELECTED, showRegionChart);
-// for testing:
-PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, showResultCharts);
+PubSub.subscribe(eventTopics.CHOROPLETH_DEACTIVATED, hideRegionChart);
 
 
 // Subscriber Functions
@@ -111,6 +126,18 @@ function hideSimulationSpinner(msg) {
     return logMessage(msg);
 }
 
+// function showResultButtons(msg) {
+//     chartViewTab.classList.remove("disabled");
+//     futureDropdown.disabled = false;
+//     return logMessage(msg);
+// }
+//
+// function hideResultButtons(msg) {
+//     chartViewTab.classList.add("disabled");
+//     futureDropdown.disabled = true;
+//     return logMessage(msg);
+// }
+
 function showRegionChart(msg, lookup) {
     const region_lookup = `${lookup}_region`;
     let charts = {};
@@ -120,6 +147,12 @@ function showRegionChart(msg, lookup) {
         charts[region_lookup] = "region_chart_statusquo";
     }
     showCharts(charts);
+    return logMessage(msg);
+}
+
+function hideRegionChart(msg) {
+    clearChart("region_chart_statusquo");
+    clearChart("region_chart_2045");
     return logMessage(msg);
 }
 

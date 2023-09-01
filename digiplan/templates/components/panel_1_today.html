@@ -1,28 +1,28 @@
 {% load static i18n %}
 
-<div class="panel__goal">
-<!--  <div class="panel__goal-header">-->
-<!--    <span>{% translate "Goals 2045" %}</span>-->
+<!--<div class="panel__goal">-->
+<!--&lt;!&ndash;  <div class="panel__goal-header">&ndash;&gt;-->
+<!--&lt;!&ndash;    <span>{% translate "Goals 2045" %}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--  <div class="panel__charts">-->
+<!--    <div class="panel__chart">-->
+<!--      <div class="panel__chart-title">-->
+<!--        {% translate "Anteil EE am Stromverbrauch" %} (%)-->
+<!--      </div>-->
+<!--      <div class="panel__chart-content">-->
+<!--        <div id="renewable_share_goal_chart" class="goal-chart"></div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="panel__chart">-->
+<!--      <div class="panel__chart-title">-->
+<!--        {% translate "THG-Reduktion ggü. 2019 (%)" %}-->
+<!--      </div>-->
+<!--      <div class="panel__chart-content">-->
+<!--        <div id="co2_emissions_goal_chart" class="goal-chart"></div>-->
+<!--      </div>-->
+<!--    </div>-->
 <!--  </div>-->
-  <div class="panel__charts">
-    <div class="panel__chart">
-      <div class="panel__chart-title">
-        {% translate "Share of renewable energies" %} (%)
-      </div>
-      <div class="panel__chart-content">
-        <div id="renewable_share_goal_chart" class="goal-chart"></div>
-      </div>
-    </div>
-    <div class="panel__chart">
-      <div class="panel__chart-title">
-        {% translate "CO<sub>2</sub>-Reduktion ggü. 2019 (%)" %}
-      </div>
-      <div class="panel__chart-content">
-        <div id="co2_emissions_goal_chart" class="goal-chart"></div>
-      </div>
-    </div>
-  </div>
-</div>
+<!--</div>-->
 <div class="panel__settings panel__settings--padding">
   <div class="panel-item">
     <h2 class="panel-item__heading panel-item__heading--nopadding">
@@ -35,14 +35,15 @@
     </h2>
     <div class="panel-item__form">
       <select class="form-select" aria-label="Default select example" id="situation_today">
+        <option value="" title="{% translate "Keine Auswahl" %}" selected>{% translate "Keine Auswahl" %}</option>
         <optgroup label="{% translate "Planning Region" %}">
-          <option value="population_statusquo" title="{% translate "Inhabitants 2021" %}" selected>{% translate "Population" %}</option>
+          <option value="population_statusquo" title="{% translate "EinwohnerInnen - Historische Daten, heute und Zukunftsprognosen" %}">{% translate "Population" %}</option>
           <option value="population_density_statusquo"
-                  title="{% translate "In 2021 the population density in Germany was 238 per km² and 106 per km² in Saxony-Anhalt." %}">
+                  title="{% translate "Bevölkerung im Jahr 2022 in EinwohnerInnen je km². 2021 betrug die Bevölkerungsdichte in Deutschland 238 und in Sachsen-Anhalt 106." %}">
             {% translate "Population Density" %}
           </option>
-          <option value="employees_statusquo" title="{% translate "Beschäftigte" %}" selected>{% translate "Beschäftigte" %}</option>
-          <option value="companies_statusquo" title="{%  translate 'Betriebe' %}">{% translate "Betriebe" %}</option>
+          <option value="employees_statusquo" title="{% translate "Anzahl der sozialversicherungspflichtig Beschäftigten im Jahr 2022." %}">{% translate "Beschäftigte" %}</option>
+          <option value="companies_statusquo" title="{%  translate "Anzahl der Betriebsstätten im Jahr 2022." %}">{% translate "Betriebe" %}</option>
         </optgroup>
         <optgroup label="{% translate "Renewable Energies (RE)" %}">
           <option value="energy_share_statusquo"
@@ -66,7 +67,7 @@
           </option>
           <option value="capacity_square_statusquo"
                   title="{% translate "Installed capacity from renewable energy plants (wind energy, photovoltaic, hydro power, biomass and biogas) in megawatts per km²." %}">
-            {% translate "Installed Renewable Capacity per km² (MW)" %}
+            {% translate "Installed Renewable Capacity (MW/km²)" %}
           </option>
           <option value="wind_turbines_statusquo"
                   title="{% translate "Number of Wind Turbines" %}">
@@ -94,7 +95,7 @@
                   title="{% translate "Annual heat consumption per inhabitant for space heating and domestic hot water in gigawatt hours in the household, commercial, trade and services, and agriculture (excluding industry) sectors." %}">
             {% translate "Heat Demand per Capita (kWh)" %}
           </option>
-          <option value="batteries_statusquo" title="{% translate "Anzahl Batteriespeicher" %}" selected>{% translate "Anzahl Batteriespeicher" %}</option>
+          <option value="batteries_statusquo" title="{% translate "Anzahl Batteriespeicher" %}">{% translate "Anzahl Batteriespeicher" %}</option>
           <option value="batteries_capacity_statusquo" title="{%  translate 'Kapazität Batteriespeicher' %}">{% translate "Kapazität Batteriespeicher" %}</option>
         </optgroup>
       </select>

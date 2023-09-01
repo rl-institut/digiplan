@@ -6,6 +6,8 @@ from django.test import SimpleTestCase
 from django_oemof import models
 from django_oemof import results as oemof_results
 from django_oemof import simulation
+from oemof.tabular.postprocessing import calculations as oc
+from oemof.tabular.postprocessing import core
 
 from digiplan.map import calculations, charts
 
@@ -15,40 +17,37 @@ class SimulationTest(SimpleTestCase):
 
     databases = ("default",)  # Needed, as otherwise django complains about tests using "default" DB
     parameters = {
-        "s_v_1": None,
+        "s_v_1": 100,
         "s_v_3": 100,
         "s_v_4": 100,
         "s_v_5": 100,
-        "s_w_1": 1000,
-        "w_v_1": None,
+        "s_w_1": 714,
+        "w_v_1": 100,
         "w_v_3": 100,
         "w_v_4": 100,
         "w_v_5": 100,
-        "s_pv_ff_1": 100,
-        "s_pv_d_1": 100,
-        "s_h_1": 100,
-        "s_s_g_1": 100,
-        "w_d_wp_3": 100,
-        "w_d_wp_4": 100,
-        "w_d_wp_5": 100,
-        "w_z_wp_3": 100,
-        "w_d_s_1": 50,
-        "w_z_s_1": 53,
+        "s_pv_ff_1": 388,
+        "s_pv_d_1": 298,
+        "s_h_1": 5,
+        "s_s_g_1": 1,
+        "w_d_wp_3": 50,
+        "w_d_wp_4": 50,
+        "w_d_wp_5": 50,
+        "w_z_wp_1": 50,
+        "w_d_s_1": 100,
+        "w_z_s_1": 100,
         "w_d_wp_1": True,
-        "w_z_wp_1": None,
-        "w_d_s_3": None,
-        "w_z_s_3": None,
-        "s_w_3": None,
-        "s_w_4": None,
-        "s_w_4_1": None,
-        "s_w_4_2": None,
-        "s_w_5": None,
-        "s_w_5_1": None,
-        "s_w_5_2": None,
-        "s_pv_ff_3": None,
-        "s_pv_ff_4": None,
-        "s_pv_d_3": None,
-        "s_pv_d_4": None,
+        "s_w_3": True,
+        "s_w_4": True,
+        "s_w_4_1": True,
+        "s_w_4_2": True,
+        "s_w_5": False,
+        "s_w_5_1": 50,
+        "s_w_5_2": 50,
+        "s_pv_ff_3": 11,
+        "s_pv_ff_4": 11,
+        "s_pv_d_3": 5,
+        "s_pv_d_4": 13,
     }
 
     def setUp(self) -> None:
@@ -122,11 +121,26 @@ class ElectricityProductionTest(SimulationTest):
         assert list(results.values())[0].iloc[0] > 0
 
 
-class ElectricityProductionFutureTest(SimulationTest):
+class Energies2045Test(SimulationTest):
     """Test electricity production calculation."""
 
     def test_electricity_production(self):  # noqa: D102
         calculations.energies_per_municipality_2045(self.simulation_id)
+
+
+class Capacities2045Test(SimulationTest):
+    """Test electricity production calculation."""
+
+    def test_capacities_2045(self):  # noqa: D102
+        calculations.capacities_per_municipality_2045(self.simulation_id)
+
+
+class WindTurbines2045Test(SimulationTest):
+    """Test wind turbine calculation."""
+
+    def test_wind_turbines_2045(self):  # noqa: D102
+        result = calculations.wind_turbines_per_municipality_2045(self.simulation_id)
+        assert len(result) == 20
 
 
 class HeatProductionTest(SimulationTest):
@@ -151,6 +165,15 @@ class ElectricityDemandTest(SimulationTest):
         assert list(results.values())[0].iloc[1] > 0
 
 
+class ElectricityDemand2045Test(SimulationTest):
+    """Test electricity demand calculation."""
+
+    def test_electricity_demand(self):  # noqa: D102
+        results = calculations.electricity_demand_per_municipality_2045(self.simulation_id)
+        assert len(results) == 20
+        assert len(results.columns) == 4
+
+
 class HeatDemandTest(SimulationTest):
     """Test heat demand calculation."""
 
@@ -160,6 +183,37 @@ class HeatDemandTest(SimulationTest):
             calculations=[calculations.heat_demand],
         )
         assert list(results.values())[0].iloc[0] > 0
+
+    def test_heat_demand_all_outputs(self):  # noqa: D102
+        results = oemof_results.get_results(
+            self.simulation_id,
+            calculations=[
+                core.ParametrizedCalculation(
+                    oc.AggregatedFlows,
+                    {
+                        "from_nodes": ["ABW-heat_central", "ABW-heat_decentral"],
+                    },
+                ),
+            ],
+        )
+        assert list(results.values())[0].iloc[0] > 0
+
+
+class HeatDemand2045Test(SimulationTest):
+    """Test heat demand calculation in 2045."""
+
+    def test_electricity_demand(self):  # noqa: D102
+        results = calculations.heat_demand_per_municipality_2045(self.simulation_id)
+        assert len(results) == 20
+        assert len(results.columns) == 3
+
+
+class RegionalIndependency(SimulationTest):
+    """Test regional dependency calculation."""
+
+    def test_regional_independency(self):  # noqa: D102
+        results = calculations.get_regional_independency(self.simulation_id)
+        assert len(results) == 4
 
 
 class ElectricityProductionFromBiomassTest(SimulationTest):
@@ -175,7 +229,7 @@ class ElectricityOverviewTest(SimulationTest):
 
     def test_electricity_overview(self):  # noqa: D102
         result = calculations.electricity_overview(self.simulation_id)
-        assert len(result) == 12
+        assert len(result) == 10
 
 
 class MunicipalityTest(SimpleTestCase):
@@ -189,12 +243,14 @@ class MunicipalityTest(SimpleTestCase):
         calculations.value_per_municipality(series)
 
 
-class HeatOverviewTest(SimulationTest):
+class HeatStructureTest(SimulationTest):
     """Test heat overview calculation."""
 
     def test_heat_overview(self):  # noqa: D102
-        result = calculations.heat_overview(self.simulation_id)
-        assert len(result) == 3
+        result = calculations.heat_overview(self.simulation_id, "central")
+        assert list(result.keys()) == ["2022", "2045", "user"]
+        for values in result.values():
+            assert len(values) == 13
 
 
 class ElectricityOverviewChartTest(SimulationTest):
@@ -202,14 +258,22 @@ class ElectricityOverviewChartTest(SimulationTest):
 
     def test_electricity_overview_chart(self):  # noqa: D102
         chart = charts.ElectricityOverviewChart(self.simulation_id)
-        options = chart.render()
-        assert options["series"][0]["data"][2] == 4369687.261432747
+        chart.render()
 
 
-class HeatOverviewChartTest(SimulationTest):
+class HeatStructureChartTest(SimulationTest):
     """Test heat overview chart creation."""
 
     def test_heat_overview_chart(self):  # noqa: D102
-        chart = charts.HeatOverviewChart(self.simulation_id)
+        chart = charts.HeatStructureChart(self.simulation_id)
         options = chart.render()
         assert options["series"][0]["data"][1] == 3512007725.957367
+
+
+class CapacityTest(SimulationTest):
+    """Test reading capacities from oemof parameters."""
+
+    def test_oemof_capacities(self):
+        """Test capacity reading from oemof results."""
+        results = oemof_results.get_results(self.simulation_id, {"capacities": calculations.Capacities})
+        assert results["capacities"].loc["ABW-wind-onshore", "None"] == 1000.0

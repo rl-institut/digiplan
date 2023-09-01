@@ -78,13 +78,14 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         context["detailed_overview"] = charts.Chart("detailed_overview").render()
         context["ghg_overview"] = charts.Chart("ghg_overview").render()
         context["electricity_overview"] = charts.Chart("electricity_overview").render()
-        context["electricity_ghg"] = charts.Chart("electricity_ghg").render()
-        context["mobility_overview"] = charts.Chart("mobility_overview").render()
-        context["mobility_ghg"] = charts.Chart("mobility_ghg").render()
-        context["overview_heat"] = charts.Chart("overview_heat").render()
-        context["decentralized_centralized_heat"] = charts.Chart("decentralized_centralized_heat").render()
+        context["electricity_autarky"] = charts.Chart("electricity_autarky").render()
+        context["heat_decentralized"] = charts.Chart("heat_decentralized").render()
+        context["heat_centralized"] = charts.Chart("heat_centralized").render()
         context["ghg_history"] = charts.Chart("ghg_history").render()
         context["ghg_reduction"] = charts.Chart("ghg_reduction").render()
+        context["onboarding_wind"] = charts.Chart("onboarding_wind").render()
+        context["onboarding_pv_ground"] = charts.Chart("onboarding_pv_ground").render()
+        context["onboarding_pv_roof"] = charts.Chart("onboarding_pv_roof").render()
 
         return context
 

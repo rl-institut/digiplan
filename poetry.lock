@@ -1168,7 +1168,7 @@ libsass = ">=0.7.0,<1"
 
 [[package]]
 name = "django-mapengine"
-version = "0.13.1"
+version = "0.13.2"
 description = "Map engine for maplibre in django"
 optional = false
 python-versions = ">=3.9,<3.12"
@@ -1188,11 +1188,11 @@ range-key-dict = "^1.1.0"
 type = "git"
 url = "https://github.com/rl-institut/django-mapengine.git"
 reference = "HEAD"
-resolved_reference = "e28699847acb59849ad18cec5105c71bb4f3715a"
+resolved_reference = "14204e2ee3bc5e8146c17928b68130832be6e63b"
 
 [[package]]
 name = "django-oemof"
-version = "0.13.0"
+version = "0.14.0"
 description = "Django application to run oemof"
 optional = false
 python-versions = "^3.9"
@@ -1210,7 +1210,7 @@ djangorestframework = "^3.14.0"
 type = "git"
 url = "https://github.com/rl-institut/django-oemof.git"
 reference = "HEAD"
-resolved_reference = "ef46e36ab9e204abdfa527767d1bc7420f2ea673"
+resolved_reference = "05f595d95c2d2c83c770d52a12b9bd0222bb6925"
 
 [[package]]
 name = "django-redis"
@@ -2164,18 +2164,6 @@ files = [
 setuptools = "*"
 
 [[package]]
-name = "nose"
-version = "1.3.7"
-description = "nose extends unittest to make testing easier"
-optional = false
-python-versions = "*"
-files = [
-    {file = "nose-1.3.7-py2-none-any.whl", hash = "sha256:dadcddc0aefbf99eea214e0f1232b94f2fa9bd98fa8353711dacb112bfcbbb2a"},
-    {file = "nose-1.3.7-py3-none-any.whl", hash = "sha256:9ff7c6cc443f8c51994b34a667bbcf45afd6d945be7477b52e97516fd17c53ac"},
-    {file = "nose-1.3.7.tar.gz", hash = "sha256:f1bffef9cbc82628f6e7d7b40d7e255aefaa1adb6a1b1d26c69a8b79e6208a98"},
-]
-
-[[package]]
 name = "numpy"
 version = "1.23.5"
 description = "NumPy is the fundamental package for array computing with Python."
@@ -2249,34 +2237,39 @@ pandas = "*"
 dev = ["pytest"]
 
 [[package]]
-name = "oemof-solph"
-version = "0.4.5"
-description = "A model generator for energy system modelling and optimisation."
+name = "oemof.solph"
+version = "0.5.1.dev2"
+description = ""
 optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "oemof.solph-0.4.5-py2.py3-none-any.whl", hash = "sha256:dc0b5e680a7cb61cabf711f7afcccac2bfde2f7a07195085a39a52ca269e2457"},
-    {file = "oemof.solph-0.4.5.tar.gz", hash = "sha256:d0228afd565596fb6dba8c7282876ac749273325bc0a34d02c36726805450c26"},
-]
+python-versions = ">=3.8"
+files = []
+develop = false
 
 [package.dependencies]
 blinker = "*"
 dill = "*"
 networkx = "*"
-numpy = "<1.24"
-"oemof.network" = "*"
-"oemof.tools" = "*"
-pandas = "*"
-pyomo = ">=5.7.0,<5.7.3"
+numpy = "*"
+"oemof.network" = ">=0.5.0a1"
+"oemof.tools" = ">=0.4.2"
+pandas = ">=1.5.3"
+pyomo = ">=6.6.0,<7.0"
 
 [package.extras]
-dev = ["pytest", "sphinx", "sphinx-rtd-theme"]
+dev = ["matplotlib", "nbformat", "pytest", "sphinx", "sphinx_rtd_theme", "termcolor"]
 dummy = ["oemof"]
+examples = ["matplotlib"]
+
+[package.source]
+type = "git"
+url = "https://github.com/oemof/oemof-solph.git"
+reference = "v0.5.1.dev2"
+resolved_reference = "3947141964ae13903e7c89e822dc85a2f9630766"
 
 [[package]]
 name = "oemof.tabular"
-version = "0.0.5.dev0"
-description = "Load oemof energy systems from tabular data sources."
+version = "0.0.4dev1"
+description = ""
 optional = false
 python-versions = "*"
 files = []
@@ -2284,7 +2277,7 @@ develop = false
 
 [package.dependencies]
 datapackage = "1.5.1"
-"oemof.solph" = "0.4.5"
+"oemof.solph" = {git = "https://github.com/oemof/oemof-solph.git", rev = "v0.5.1.dev2"}
 pandas = ">=0.22"
 paramiko = "*"
 tableschema = "1.7.4"
@@ -2300,7 +2293,7 @@ plots = ["matplotlib", "plotly"]
 type = "git"
 url = "https://github.com/oemof/oemof-tabular.git"
 reference = "feature/postprocessing"
-resolved_reference = "3a5708a99c7857ef0ce3c8d15482310cbd03dd5f"
+resolved_reference = "0b17194eedf4940aa3abdbdb53cdcddb81880d12"
 
 [[package]]
 name = "oemof-tools"
@@ -2757,40 +2750,36 @@ tests = ["hypothesis (>=3.27.0)", "pytest (>=3.2.1,!=3.3.0)"]
 
 [[package]]
 name = "pyomo"
-version = "5.7.2"
+version = "6.6.1"
 description = "Pyomo: Python Optimization Modeling Objects"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+python-versions = ">=3.7"
 files = [
-    {file = "Pyomo-5.7.2-cp27-cp27m-macosx_10_14_x86_64.whl", hash = "sha256:86f122650fd4949507bd647ef49155d7ee5916e9a78dffae5d8ff2a97a0482aa"},
-    {file = "Pyomo-5.7.2-cp27-cp27mu-manylinux1_x86_64.whl", hash = "sha256:e67f25344eaea1a9c0d364e317e4ee1a26b2988ccb7a9bb559889e933d53278a"},
-    {file = "Pyomo-5.7.2-cp27-cp27mu-manylinux2010_x86_64.whl", hash = "sha256:968c7fb8db7dc47fb27895f565dfa916acba0c2499a2e49d1d4221ccc2845cab"},
-    {file = "Pyomo-5.7.2-cp35-cp35m-macosx_10_14_x86_64.whl", hash = "sha256:fd866ebf71ca41c5f4dea5662f15d110183dad31b5a5ef831c016af005d01cb4"},
-    {file = "Pyomo-5.7.2-cp35-cp35m-manylinux1_x86_64.whl", hash = "sha256:ace76a9bf0b89e8462c12b166511709c065f5c2dac3a78260adc81c22fe6264d"},
-    {file = "Pyomo-5.7.2-cp35-cp35m-manylinux2010_x86_64.whl", hash = "sha256:3600e2b63722569244f35432e310c39215342576d6707abf89bc6e43c9b10236"},
-    {file = "Pyomo-5.7.2-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:da60346b3c7f096e72776312fab058fc8463efc1b37a565de1a462356e5a9e31"},
-    {file = "Pyomo-5.7.2-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:c088c1c1748a07d25bde5268057077bf6957780cfa926bac079f5084bccfb701"},
-    {file = "Pyomo-5.7.2-cp36-cp36m-manylinux2010_x86_64.whl", hash = "sha256:498ba9a3294da3a9188dfaf2089c7d91984866d5a618d6864910b677cd966025"},
-    {file = "Pyomo-5.7.2-cp36-cp36m-win_amd64.whl", hash = "sha256:051c782b136a182c881197110c668a42582e5b6c950975cfd3268c686b04eb32"},
-    {file = "Pyomo-5.7.2-cp37-cp37m-macosx_10_14_x86_64.whl", hash = "sha256:f24e87c98ae31e0c2c1a3bc86420d1dc26462946651499fe7b135b1faaa04504"},
-    {file = "Pyomo-5.7.2-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:879ea064e1ecb2c47262d79efe3769725687aa2bad3f296b2e99cf7abe9bb7cd"},
-    {file = "Pyomo-5.7.2-cp37-cp37m-manylinux2010_x86_64.whl", hash = "sha256:f07933b98398aa06080ec58b2d044b58ba539064a69c3295530dca718f3abd5a"},
-    {file = "Pyomo-5.7.2-cp37-cp37m-win_amd64.whl", hash = "sha256:6e3ee758c9b58fb04500a82e967ebb29e0b5278343583996fd6f766caa5c427c"},
-    {file = "Pyomo-5.7.2-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:59984b5d438ae6450888189df43c74dd544ad0eb5a6b5000254a30afdda8f6d1"},
-    {file = "Pyomo-5.7.2-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:075ef81be5d29e0be1733f86981416d7c9695c0e5f477a55e5824ab07e22dfa9"},
-    {file = "Pyomo-5.7.2-cp38-cp38-manylinux2010_x86_64.whl", hash = "sha256:c89a481fbddf735ceb4f09a6d6f8973dd97efcf143097b87bdde4bc98eb98d3f"},
-    {file = "Pyomo-5.7.2-cp38-cp38-win_amd64.whl", hash = "sha256:9c619fe04bad636cbaa28487961cfde525f205d08668217008951d95fed76d91"},
-    {file = "Pyomo-5.7.2-cp39-cp39-macosx_10_14_x86_64.whl", hash = "sha256:e3df7290c017ecc4b8e84dd4b307d60d5d5ab5fc2480086c464375c0882094da"},
-    {file = "Pyomo-5.7.2-cp39-cp39-manylinux1_x86_64.whl", hash = "sha256:7c65185a57643821847874ab35c1bebd0703e88118fca8153672f70413b7f47e"},
-    {file = "Pyomo-5.7.2-cp39-cp39-manylinux2010_x86_64.whl", hash = "sha256:7907f380c1fd1e2b13730087fdef57230ba6638d6c499605a105b3a048c61530"},
-    {file = "Pyomo-5.7.2-cp39-cp39-win_amd64.whl", hash = "sha256:68ee8ce0b8a941efaa7108ab3dbc73d940ebd51406f8a1bdc0beeb6aaaad5ecd"},
-    {file = "Pyomo-5.7.2.tar.gz", hash = "sha256:f10ada18ade84b16225dc519ef1788dd6d5f22cb22d0ea44db64c96d14cb7bb0"},
+    {file = "Pyomo-6.6.1-cp310-cp310-macosx_11_0_x86_64.whl", hash = "sha256:ca93f624c536bd043cfa9dad7426cc8e317b95eb854d1f9796a4629fa8c37830"},
+    {file = "Pyomo-6.6.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d5ee14bdbfbe532379329d0e50306bdc609feb548b5e77c2d51b43077b6bbd7c"},
+    {file = "Pyomo-6.6.1-cp310-cp310-win_amd64.whl", hash = "sha256:32644ad06a962917bcc1246ebbdc825b30342ea8cada39e01ef483d1eb60456c"},
+    {file = "Pyomo-6.6.1-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:fa2442abdd4872320c0a8eca960136fdd9d4faa14353be3391eff11403547027"},
+    {file = "Pyomo-6.6.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1f795a4fb345ab5676acf57b39643a3605f1d88c6d10d6710514d959bd52bfb1"},
+    {file = "Pyomo-6.6.1-cp311-cp311-win_amd64.whl", hash = "sha256:44e0b12f82f0c70ed246bb8b5eed8279cee07d7f2218bc8dd955562b9a82e595"},
+    {file = "Pyomo-6.6.1-cp37-cp37m-macosx_10_15_x86_64.whl", hash = "sha256:05764117cecff51897ef473b000afbb6b353f51b70ce2101f16c9c447c8c0d31"},
+    {file = "Pyomo-6.6.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:96302d16a5fa94e6985d388fc42d7bfbcddd6f65a165edf92497bdc40bd33bec"},
+    {file = "Pyomo-6.6.1-cp37-cp37m-win_amd64.whl", hash = "sha256:1283eb424a4f23eeefb82716124dc43611a6131e3a1cfee45c7bd7d3901ad392"},
+    {file = "Pyomo-6.6.1-cp38-cp38-macosx_10_15_x86_64.whl", hash = "sha256:2a6311679f60d1e2f3e611029d4436188e4873e33dcc7f110426e5b96248164f"},
+    {file = "Pyomo-6.6.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2b14a4b72f9a10cc28303ba9625f493cf19d4398d91632b7bff5bd36f6bfe670"},
+    {file = "Pyomo-6.6.1-cp38-cp38-win_amd64.whl", hash = "sha256:f9b99bbbc9cada3af590627a1daba21676f7c63f55f957c8025f5da3c8cca7fd"},
+    {file = "Pyomo-6.6.1-cp39-cp39-macosx_11_0_x86_64.whl", hash = "sha256:d27678616ea4e619554b158a9321f3d71702504ed6b0df4f3d38c2a2940a6eae"},
+    {file = "Pyomo-6.6.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:024fec287be5bc7bde660888f9f9309f71cb76dfef99a2b61ec286045a2c03a3"},
+    {file = "Pyomo-6.6.1-cp39-cp39-win_amd64.whl", hash = "sha256:f32de1a02f35bf3888229d3ddee3e2e176f3de8ec6d506d2660830794991afa2"},
+    {file = "Pyomo-6.6.1.tar.gz", hash = "sha256:3fb0aba7b0f4120e6ce0f242502c0e61478d61e326bc90b7dc392bbefd114b34"},
 ]
 
 [package.dependencies]
 ply = "*"
-PyUtilib = ">=6.0.0"
-six = ">=1.4"
+
+[package.extras]
+docs = ["Sphinx (>2)", "numpy", "scipy", "sphinx-copybutton", "sphinx-rtd-theme (>0.5)", "sphinxcontrib-jsmath", "sphinxcontrib-napoleon"]
+optional = ["casadi", "dill", "ipython", "matplotlib (!=3.6.1)", "networkx", "numdifftools", "numpy", "openpyxl", "pandas", "pint", "plotly", "python-louvain", "pywin32", "pyyaml", "scipy", "seaborn", "sympy", "xlrd", "z3-solver"]
+tests = ["coverage", "parameterized", "pybind11", "pytest", "pytest-parallel"]
 
 [[package]]
 name = "pytest"
@@ -2911,21 +2900,6 @@ files = [
     {file = "pytz-2023.3-py2.py3-none-any.whl", hash = "sha256:a151b3abb88eda1d4e34a9814df37de2a80e301e68ba0fd856fb9b46bfbbbffb"},
     {file = "pytz-2023.3.tar.gz", hash = "sha256:1d8ce29db189191fb55338ee6d0387d82ab59f3d00eac103412d64e0ebd0c588"},
 ]
-
-[[package]]
-name = "pyutilib"
-version = "6.0.0"
-description = "PyUtilib: A collection of Python utilities"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-files = [
-    {file = "PyUtilib-6.0.0-py2.py3-none-any.whl", hash = "sha256:f1f82d05ad8c42baeef915c8d3d97c0a3cbed6c506c857ab0ab7694dea50ebd8"},
-    {file = "PyUtilib-6.0.0.tar.gz", hash = "sha256:d3c14f8ed9028a831b2bf51b8ab7776eba87e66cfc58a06b99c359aaa640f040"},
-]
-
-[package.dependencies]
-nose = "*"
-six = "*"
 
 [[package]]
 name = "pyyaml"

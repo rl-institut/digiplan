@@ -1,4 +1,5 @@
 """Read functionality for digipipe datapackage."""
+import csv
 import json
 from collections import defaultdict
 from pathlib import Path
@@ -9,6 +10,7 @@ from django.conf import settings
 from django_oemof.settings import OEMOF_DIR
 
 from config.settings.base import DATA_DIR
+from digiplan.map import config
 
 
 def get_employment() -> pd.DataFrame:
@@ -33,6 +35,51 @@ def get_power_demand(sector: Optional[str] = None) -> dict[str, pd.DataFrame]:
     return demand
 
 
+def get_hourly_electricity_demand(year: int) -> pd.Series:
+    """Return hourly electricity demand per sector."""
+    demand_per_sector = get_power_demand()
+    demand_profile = get_electricity_demand_profile()
+    demand = []
+    for sector, demand_sector_per_mun in demand_per_sector.items():
+        demand.append(demand_profile[sector] * demand_sector_per_mun[str(year)].sum())
+    return pd.concat(demand, axis=1).sum(axis=1)
+
+
+def get_heat_demand(sector: Optional[str] = None, distribution: Optional[str] = None) -> dict[str, pd.DataFrame]:
+    """Return heat demand for given sector or all sectors."""
+    sectors = (sector,) if sector else ("hh", "cts", "ind")
+    distribution_prefix = ("_cen" if distribution == "central" else "_dec") if distribution else ""
+    demand = {}
+    for sec in sectors:
+        demand_filename = settings.DIGIPIPE_DIR.path("scalars").path(
+            f"demand_{sec}_heat_demand{distribution_prefix}.csv",
+        )
+        demand[sec] = pd.read_csv(demand_filename)
+    return demand
+
+
+def get_heat_capacity_shares(
+    distribution: str,
+    year: Optional[int] = 2045,
+    *,
+    include_heatpumps: Optional[bool] = False,
+) -> dict:
+    """Return capacity shares of heating structure."""
+    shares_filename = settings.DIGIPIPE_DIR.path("scalars").path(f"demand_heat_structure_esys_{distribution}.csv")
+    with Path(shares_filename).open("r", encoding="utf-8") as shares_file:
+        reader = csv.DictReader(shares_file)
+        shares = {}
+        summed_shares = 0.0
+        for row in reader:
+            if row["year"] != str(year):
+                continue
+            if row["carrier"] == "heat_pump" and not include_heatpumps:
+                continue
+            shares[row["carrier"]] = float(row["demand_rel"])
+            summed_shares += float(row["demand_rel"])
+    return {k: v / summed_shares for k, v in shares.items()}
+
+
 def get_summed_heat_demand_per_municipality(
     sector: Optional[str] = None,
     distribution: Optional[str] = None,
@@ -50,7 +97,7 @@ def get_summed_heat_demand_per_municipality(
     return demand
 
 
-def get_heat_demand(
+def get_heat_demand_profile(
     sector: Optional[str] = None,
     distribution: Optional[str] = None,
 ) -> dict[str, dict[str, pd.DataFrame]]:
@@ -64,6 +111,20 @@ def get_heat_demand(
                 OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "sequences" / f"heat_{dist}-demand_{sec}_profile.csv"
             )
             demand[sec][dist] = pd.read_csv(demand_filename, sep=";")[f"ABW-heat_{dist}-demand_{sec}-profile"]
+    return demand
+
+
+def get_electricity_demand_profile(
+    sector: Optional[str] = None,
+) -> dict[str, pd.DataFrame]:
+    """Return heat demand for given sector and distribution."""
+    sectors = (sector,) if sector else ("hh", "cts", "ind")
+    demand = defaultdict(dict)
+    for sec in sectors:
+        demand_filename = (
+            OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "sequences" / f"electricity-demand_{sec}_profile.csv"
+        )
+        demand[sec] = pd.read_csv(demand_filename, sep=";")[f"ABW-electricity-demand_{sec}-profile"]
     return demand
 
 
@@ -140,3 +201,42 @@ def get_potential_values(*, per_municipality: bool = False) -> dict:
                 if profile == "pv_ground":
                     potentials[key] = potentials[key] * tech_data["power_density"]["pv_ground"]
     return potentials
+
+
+def get_full_load_hours(year: int) -> pd.Series:
+    """Return full load hours for given year."""
+    full_load_hours = pd.Series(
+        data=[technology_data[str(year)] for technology_data in config.TECHNOLOGY_DATA["full_load_hours"].values()],
+        index=config.TECHNOLOGY_DATA["full_load_hours"].keys(),
+    )
+    return full_load_hours
+
+
+def get_capacities(year: int) -> pd.Series:
+    """Return renewable capacities for given year."""
+    if year == 2022:  # noqa: PLR2004
+        lookup = "status_quo"
+    elif year == 2045:  # noqa: PLR2004
+        lookup = "future_scenario"
+    else:
+        msg = "Unknown year"
+        raise ValueError(msg)
+    energy_settings = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "settings/energy_settings_panel.json")))
+    technologies = {"wind": "s_w_1", "pv_ground": "s_pv_ff_1", "pv_roof": "s_pv_d_1", "ror": "s_h_1"}
+    return pd.Series(
+        data={technology: energy_settings[key].get(lookup, 0.0) for technology, key in technologies.items()},
+    )
+
+
+def get_power_density(technology: Optional[str] = None) -> dict:
+    """Return power density for technology."""
+    if technology:
+        return config.TECHNOLOGY_DATA["power_density"][technology]
+    return config.TECHNOLOGY_DATA["power_density"]
+
+
+def get_profile(technology: str) -> pd.Series:
+    """Return profile for given technology from oemof datapackage."""
+    profile_filename = OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "sequences" / f"{technology}_profile.csv"
+    profile = pd.read_csv(profile_filename, sep=";", index_col=0)
+    return profile.iloc[:, 0]

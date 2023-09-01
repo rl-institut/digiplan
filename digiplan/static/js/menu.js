@@ -1,9 +1,10 @@
-import {statusquoDropdown, resultsTabs} from "./elements.js";
+import {resultsTabs, futureDropdown} from "./elements.js";
 
 const menuNextBtn = document.getElementById("menu_next_btn");
 const menuPreviousBtn = document.getElementById("menu_previous_btn");
 const mapTab = document.getElementById("map-view-tab");
 const chartTab = document.getElementById("chart-view-tab");
+const regionChart = document.getElementById("region_chart_2045");
 
 menuNextBtn.addEventListener("click", function () {
     nextMenuTab();
@@ -92,10 +93,12 @@ function setMapChartViewVisibility(msg) {
 
 function setResultsView(msg) {
     if (msg === eventTopics.CHART_VIEW_SELECTED) {
-        statusquoDropdown.parentElement.setAttribute("style", "display: none !important");
+        futureDropdown.parentElement.setAttribute("style", "display: none !important");
+        regionChart.setAttribute("style", "display: none");
         resultsTabs.parentElement.setAttribute("style", "");
     } else {
-        statusquoDropdown.parentElement.setAttribute("style", "");
+        futureDropdown.parentElement.setAttribute("style", "");
+        regionChart.setAttribute("style", "");
         resultsTabs.parentElement.setAttribute("style", "display: none !important");
     }
     return logMessage(msg);

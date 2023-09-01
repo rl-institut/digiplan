@@ -332,7 +332,9 @@ digiplan/media/
 !.envs/.local/
 
 .idea/*
+dump.rdb
 /digiplan/data/
 /digiplan/static/mvts/
 
 distill/
+/dump.rdb

@@ -117,109 +117,98 @@ class SimulationChart(Chart):
         super().__init__()
 
 
-class DetailedOverviewChart(Chart):
+class DetailedOverviewChart(SimulationChart):
     """Detailed Overview Chart."""
 
     lookup = "detailed_overview"
 
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init Detailed Overview Chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
-
     def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.detailed_overview(simulation_id=self.simulation_id)
+        return calculations.electricity_overview(simulation_id=self.simulation_id)
 
     def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
+        for i, item in enumerate(self.chart_options["series"]):
+            item["data"][1] = self.chart_data.iloc[i]
         return self.chart_options
 
 
-class CTSOverviewChart(Chart):
-    """CTS Overview Chart. Shows greenhouse gas emissions."""
+class GHGReductionChart(SimulationChart):
+    """GHG Reduction Chart. Shows greenhouse gas emissions."""
 
-    lookup = "ghg_overview"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init CTS Overview Chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
+    lookup = "ghg_reduction"
 
     def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.detailed_overview(simulation_id=self.simulation_id)
+        return calculations.get_reduction(simulation_id=self.simulation_id)
 
     def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][2] = self.chart_data[profile]
-
+        # Enter import and energy from renewables
+        for i, item in enumerate(self.chart_options["series"][7:9]):
+            item["data"][1] = self.chart_data[i]
+        # Calculate emission offset
+        summed_emissions_2019 = sum(item["data"][0] for item in self.chart_options["series"][:7])
+        self.chart_options["series"][0]["data"][1] = summed_emissions_2019 - sum(self.chart_data)
         return self.chart_options
 
 
-class ElectricityOverviewChart(Chart):
+class ElectricityOverviewChart(SimulationChart):
     """Chart for electricity overview."""
 
     lookup = "electricity_overview"
 
-    def __init__(self, simulation_id: int) -> None:
-        """Store simulation ID."""
-        self.simulation_id = simulation_id
-        super().__init__()
+    def get_chart_data(self):  # noqa: ANN201
+        """Get chart data from electricity overview calculation."""
+        return {
+            "2022": calculations.electricity_overview(2022),
+            "2045": calculations.electricity_overview(2045),
+            "user": calculations.electricity_overview_from_user(simulation_id=self.simulation_id),
+        }
+
+    def render(self) -> dict:  # noqa: D102
+        mapping = {
+            "Aufdach-PV": ("ABW-solar-pv_rooftop", "pv_roof"),
+            "Bioenergie": ("ABW-biomass", ""),
+            "Export*": ("ABW-electricity-export", ""),
+            "Freiflächen-PV": ("ABW-solar-pv_grund", "pv_ground"),
+            "Import*": ("ABW-electricity-import", ""),
+            "Verbrauch GHD": ("ABW-electricity-demand_cts", "Strombedarf GDP"),
+            "Verbrauch Haushalte": ("ABW-electricity-demand_hh", "Strombedarf Haushalte"),
+            "Verbrauch Industrie": ("ABW-electricity-demand_ind", "Strombedarf Industrie"),
+            "Wasserkraft": ("ABW-hydro-ror", "ror"),
+            "Windenergie": ("ABW-wind-onshore", "wind"),
+        }
+        for _i, item in enumerate(self.chart_options["series"]):
+            mapped_keys = mapping[item["name"]]
+            item["data"][0] = round(
+                self.chart_data["2022"].get(mapped_keys[0], self.chart_data["2022"].get(mapped_keys[1], 0.0)),
+            )
+            item["data"][1] = round(
+                self.chart_data["user"].get(mapped_keys[0], self.chart_data["user"].get(mapped_keys[1], 0.0)),
+            )
+            item["data"][2] = round(
+                self.chart_data["2045"].get(mapped_keys[0], self.chart_data["2045"].get(mapped_keys[1], 0.0)),
+            )
+        return self.chart_options
+
+
+class ElectricityAutarkyChart(SimulationChart):
+    """Chart for electricity autarky."""
+
+    lookup = "electricity_autarky"
 
     def get_chart_data(self):  # noqa: ANN201
         """Get chart data from electricity overview calculation."""
-        return calculations.electricity_overview(simulation_id=self.simulation_id)
+        return calculations.get_regional_independency(self.simulation_id)
 
-    def render(self) -> dict:
-        """Overwrite render function."""
-        self.chart_options["series"][0]["data"][2] = self.chart_data["ABW-wind-onshore"]
-        self.chart_options["series"][1]["data"][2] = self.chart_data["ABW-solar-pv_ground"]
-        self.chart_options["series"][2]["data"][2] = self.chart_data["ABW-solar-pv_rooftop"]
-        self.chart_options["series"][3]["data"][2] = self.chart_data["ABW-biomass"]
-        self.chart_options["series"][4]["data"][2] = self.chart_data["ABW-hydro-ror"]
-        self.chart_options["series"][5]["data"][0] = self.chart_data["ABW-electricity-demand_cts"]
-        self.chart_options["series"][6]["data"][0] = self.chart_data["electricity_heat_demand_cts"]
-        self.chart_options["series"][7]["data"][0] = self.chart_data["ABW-electricity-demand_hh"]
-        self.chart_options["series"][8]["data"][0] = self.chart_data["electricity_heat_demand_hh"]
-        self.chart_options["series"][9]["data"][0] = self.chart_data["ABW-electricity-demand_ind"]
-        self.chart_options["series"][10]["data"][0] = self.chart_data["electricity_heat_demand_ind"]
-        self.chart_options["series"][11]["data"][0] = self.chart_data["ABW-electricity-bev_charging"]
+    def render(self) -> dict:  # noqa: D102
+        for i, item in enumerate(self.chart_options["series"]):
+            item["data"][0] = self.chart_data[i + 2]
+            item["data"][1] = self.chart_data[i]
         return self.chart_options
 
 
-class ElectricityCTSChart(Chart):
+class ElectricityCTSChart(SimulationChart):
     """Electricity CTS Chart. Shows greenhouse gas emissions."""
 
-    lookup = "electricity_ghg"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init Electricity CTS Chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
+    lookup = "electricity_autarky"
 
     def get_chart_data(self):  # noqa: D102, ANN201
         return calculations.detailed_overview(simulation_id=self.simulation_id)
@@ -232,228 +221,61 @@ class ElectricityCTSChart(Chart):
         return self.chart_options
 
 
-class HeatOverviewChart(Chart):
-    """Heat Overview Chart."""
-
-    lookup = "overview_heat"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init Heat Overview Chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.heat_overview(simulation_id=self.simulation_id)
+class HeatStructureChart(SimulationChart):
+    """Heat Structure Chart."""
 
     def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
+        mapping = {
+            "Erdgas": ("methane", "ch4_bpchp", "ch4_extchp"),
+            "Heizöl": ("fuel_oil",),
+            "Holz": ("wood_oven", "wood_bpchp", "wood_extchp"),
+            "Wärmepumpe": ("heat_pump",),
+            "El. Direktheizung": ("electricity_direct_heating",),
+            "Biogas": ("biogas_bpchp",),
+            "Solarthermie": ("solar_thermal",),
+            "Sonstige": ("other",),
+            "Verbrauch Haushalte": ("heat-demand-hh",),
+            "Verbrauch GHD": ("heat-demand-cts",),
+            "Verbrauch Industrie": ("heat-demand-ind",),
+        }
+        for _i, item in enumerate(self.chart_options["series"]):
+            item["data"][0] = round(
+                sum(self.chart_data["2045"].get(entry, 0.0) for entry in mapping[item["name"]]) * 1e-3,
+            )
+            item["data"][1] = round(
+                sum(self.chart_data["user"].get(entry, 0.0) for entry in mapping[item["name"]]) * 1e-3,
+            )
+            item["data"][2] = round(
+                sum(self.chart_data["2022"].get(entry, 0.0) for entry in mapping[item["name"]]) * 1e-3,
+            )
         return self.chart_options
 
 
-class HeatProductionChart(Chart):
-    """Heat Production Chart. Shows decentralized and centralized heat."""
+class HeatStructureCentralChart(HeatStructureChart):
+    """Heat structure for centralized heat."""
 
-    lookup = "decentralized_centralized_heat"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init Heat Production Chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
+    lookup = "heat_centralized"
 
     def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.heat_overview(simulation_id=self.simulation_id)
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
-        return self.chart_options
+        return calculations.heat_overview(simulation_id=self.simulation_id, distribution="central")
 
 
-class MobilityOverviewChart(Chart):
-    """Mobility Overview Chart. Shows Number of Cars."""
+class HeatStructureDecentralChart(HeatStructureChart):
+    """Heat structure for decentralized heat."""
 
-    lookup = "mobility_overview"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init Mobility Overview Chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
+    lookup = "heat_decentralized"
 
     def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.heat_overview(simulation_id=self.simulation_id)
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
-        return self.chart_options
+        return calculations.heat_overview(simulation_id=self.simulation_id, distribution="decentral")
 
 
-class MobilityCTSChart(Chart):
-    """Mobility CTS Chart. Shows greenhouse gas emissions."""
-
-    lookup = "mobility_ghg"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init Mobility CTS Chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.detailed_overview(simulation_id=self.simulation_id)
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][2] = self.chart_data[profile]
-
-        return self.chart_options
-
-
-class GhgHistoryChart(Chart):
+class GhgHistoryChart(SimulationChart):
     """GHG history chart."""
 
     lookup = "ghg_history"
 
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init GHG history chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
-
     def get_chart_data(self):  # noqa: D102, ANN201
         # TODO(Hendrik): Get static data from digipipe datapackage  # noqa: TD003
-        return pd.DataFrame()
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
-        return self.chart_options
-
-
-class GhgReductionChart(Chart):
-    """GHG reduction chart."""
-
-    lookup = "ghg_reduction"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init GHG reduction chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        # TODO(Hendrik): Get static data (1st column) from  # noqa: TD003
-        #  digipipe datapackage
-        #  and calc reductions for 2nd column.  TD003
-        return pd.DataFrame()
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
-        return self.chart_options
-
-
-class GhgHistoryChart(Chart):
-    """GHG history chart."""
-
-    lookup = "ghg_history"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init GHG history chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        # TODO(Hendrik): Get static data from digipipe datapackage  # noqa: TD003
-        return pd.DataFrame()
-
-    def render(self) -> dict:  # noqa: D102
-        for item in self.chart_options["series"]:
-            profile = config.SIMULATION_NAME_MAPPING[item["name"]]
-            item["data"][1] = self.chart_data[profile]
-
-        return self.chart_options
-
-
-class GhgReductionChart(Chart):
-    """GHG reduction chart."""
-
-    lookup = "ghg_reduction"
-
-    def __init__(self, simulation_id: int) -> None:
-        """
-        Init GHG reduction chart.
-
-        Parameters
-        ----------
-        simulation_id: any
-            id of used Simulation
-        """
-        self.simulation_id = simulation_id
-        super().__init__()
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        # TODO(Hendrik): Get static data (1st column) from  # noqa: TD003
-        #  digipipe datapackage
-        #  and calc reductions for 2nd column.  TD003
         return pd.DataFrame()
 
     def render(self) -> dict:  # noqa: D102
@@ -512,7 +334,7 @@ class EmployeesRegionChart(Chart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = _("")
+        chart_options["yAxis"]["name"] = "Beschäftigte"
         del chart_options["series"][0]["name"]
         return chart_options
 
@@ -530,7 +352,7 @@ class CompaniesRegionChart(Chart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = _("")
+        chart_options["yAxis"]["name"] = "Betriebe"
         del chart_options["series"][0]["name"]
         return chart_options
 
@@ -542,11 +364,30 @@ class CapacityRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.capacities_per_municipality().sum()
+        return calculations.capacities_per_municipality().sum().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        return chart_options
+
+
+class Capacity2045RegionChart(SimulationChart):
+    """Chart for regional capacities in 2045."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> list:
+        """Calculate capacities for whole region."""
+        status_quo_data = calculations.capacities_per_municipality().sum().round(1)
+        future_data = calculations.capacities_per_municipality_2045(self.simulation_id).sum().astype(float).round(1)
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         del chart_options["title"]["text"]
         return chart_options
 
@@ -558,15 +399,52 @@ class CapacitySquareRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.calculate_square_for_value(
-            pd.DataFrame(calculations.capacities_per_municipality().sum()).transpose(),
-        ).sum()
+        return (
+            calculations.calculate_square_for_value(
+                pd.DataFrame(calculations.capacities_per_municipality().sum()).transpose(),
+            )
+            .round(2)
+            .sum()
+        )
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("MW")
+        return chart_options
+
+
+class CapacitySquare2045RegionChart(SimulationChart):
+    """Chart for regional capacities in 2045."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> list:
+        """Calculate capacities for whole region."""
+        status_quo_data = (
+            calculations.calculate_square_for_value(
+                pd.DataFrame(calculations.capacities_per_municipality().sum()).transpose(),
+            )
+            .sum()
+            .round(2)
+        )
+        future_data = (
+            calculations.calculate_square_for_value(
+                pd.DataFrame(calculations.capacities_per_municipality_2045(self.simulation_id).sum()).transpose(),
+            )
+            .sum()
+            .astype(float)
+            .round(2)
+        )
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["yAxis"]["name"] = _("MW")
+        del chart_options["title"]["text"]
         return chart_options
 
 
@@ -577,7 +455,7 @@ class EnergyRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.energies_per_municipality().sum()
+        return calculations.energies_per_municipality().sum().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -594,15 +472,16 @@ class Energy2045RegionChart(SimulationChart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        status_quo_data = calculations.energies_per_municipality().sum()
-        future_data = calculations.energies_per_municipality_2045(self.simulation_id).sum()
+        status_quo_data = calculations.energies_per_municipality().sum().round(1)
+        future_data = calculations.energies_per_municipality_2045(self.simulation_id).sum().astype(float) * 1e-3
+        future_data = future_data.round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = _("MWh")
+        chart_options["yAxis"]["name"] = _("GWh")
         chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
@@ -614,7 +493,7 @@ class EnergyShareRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.energy_shares_per_municipality().sum()
+        return calculations.energy_shares_per_municipality().sum().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -636,13 +515,47 @@ class EnergyCapitaRegionChart(Chart):
                 pd.DataFrame(calculations.energies_per_municipality().sum()).transpose(),
             ).sum()
             * 1e3
-        )
+        ).round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("MWh")
+        return chart_options
+
+
+class EnergyCapita2045RegionChart(SimulationChart):
+    """Chart for regional energy."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        status_quo_data = (
+            calculations.calculate_capita_for_value(
+                pd.DataFrame(calculations.energies_per_municipality().sum()).transpose(),
+            ).sum()
+            * 1e3
+        ).round(1)
+        future_data = (
+            (
+                calculations.calculate_capita_for_value(
+                    pd.DataFrame(calculations.energies_per_municipality_2045(self.simulation_id).sum()).transpose(),
+                ).sum()
+            )
+            .astype(float)
+            .round(1)
+        )
+        future_data = future_data.round(1)
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = _("MWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
 
@@ -658,13 +571,47 @@ class EnergySquareRegionChart(Chart):
                 pd.DataFrame(calculations.energies_per_municipality().sum()).transpose(),
             ).sum()
             * 1e3
-        )
+        ).round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("MWh")
+        return chart_options
+
+
+class EnergySquare2045RegionChart(SimulationChart):
+    """Chart for regional energy shares per square meter."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        status_quo_data = (
+            calculations.calculate_square_for_value(
+                pd.DataFrame(calculations.energies_per_municipality().sum()).transpose(),
+            ).sum()
+            * 1e3
+        ).round(1)
+        future_data = (
+            (
+                calculations.calculate_square_for_value(
+                    pd.DataFrame(calculations.energies_per_municipality_2045(self.simulation_id).sum()).transpose(),
+                ).sum()
+            )
+            .astype(float)
+            .round(1)
+        )
+        future_data = future_data.round(1)
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = _("MWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
 
@@ -684,6 +631,25 @@ class WindTurbinesRegionChart(Chart):
         return chart_options
 
 
+class WindTurbines2045RegionChart(SimulationChart):
+    """Chart for regional wind turbines in 2045."""
+
+    lookup = "wind_turbines"
+
+    def get_chart_data(self) -> list[int]:
+        """Calculate population for whole region."""
+        status_quo_data = models.WindTurbine.quantity_per_municipality().sum()
+        future_data = calculations.wind_turbines_per_municipality_2045(self.simulation_id).sum()
+        return [int(status_quo_data), int(future_data)]
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        del chart_options["title"]["text"]
+        return chart_options
+
+
 class WindTurbinesSquareRegionChart(Chart):
     """Chart for regional wind turbines per square meter."""
 
@@ -695,7 +661,9 @@ class WindTurbinesSquareRegionChart(Chart):
             float(
                 calculations.calculate_square_for_value(
                     pd.DataFrame({"turbines": models.WindTurbine.quantity_per_municipality().sum()}, index=[1]),
-                ).sum(),
+                )
+                .sum()
+                .round(2),
             ),
         ]
 
@@ -703,7 +671,42 @@ class WindTurbinesSquareRegionChart(Chart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = _("")
+        chart_options["yAxis"]["name"] = "Anzahl Windenergieanlagen"
+        return chart_options
+
+
+class WindTurbinesSquare2045RegionChart(SimulationChart):
+    """Chart for regional wind turbines per square meter in 2045."""
+
+    lookup = "wind_turbines"
+
+    def get_chart_data(self) -> list[float]:
+        """Calculate population for whole region."""
+        status_quo_data = (
+            calculations.calculate_square_for_value(
+                pd.DataFrame({"turbines": models.WindTurbine.quantity_per_municipality().sum()}, index=[1]),
+            )
+            .sum()
+            .round(2)
+        )
+        future_data = (
+            calculations.calculate_square_for_value(
+                pd.DataFrame(
+                    {"turbines": calculations.wind_turbines_per_municipality_2045(self.simulation_id).sum()},
+                    index=[1],
+                ),
+            )
+            .sum()
+            .round(2)
+        )
+        return [float(status_quo_data), float(future_data)]
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = ""
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
 
@@ -714,13 +717,35 @@ class ElectricityDemandRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.electricity_demand_per_municipality().sum()
+        return calculations.electricity_demand_per_municipality().sum().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("GWh")
+        return chart_options
+
+
+class ElectricityDemand2045RegionChart(SimulationChart):
+    """Chart for regional electricity demand."""
+
+    lookup = "electricity_demand"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        status_quo_data = calculations.electricity_demand_per_municipality().sum().round(1)
+        future_data = (
+            calculations.electricity_demand_per_municipality_2045(self.simulation_id).sum().astype(float).round(1)
+        )
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = _("GWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
 
@@ -736,13 +761,49 @@ class ElectricityDemandCapitaRegionChart(Chart):
                 pd.DataFrame(calculations.electricity_demand_per_municipality().sum()).transpose(),
             ).sum()
             * 1e6
-        )
+        ).round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("kWh")
+        return chart_options
+
+
+class ElectricityDemandCapita2045RegionChart(SimulationChart):
+    """Chart for regional electricity demand per population in 2045."""
+
+    lookup = "electricity_demand"
+
+    def get_chart_data(self) -> pd.DataFrame:
+        """Calculate capacities for whole region."""
+        status_quo_data = (
+            calculations.calculate_capita_for_value(
+                pd.DataFrame(calculations.electricity_demand_per_municipality().sum()).transpose(),
+            ).sum()
+            * 1e6
+        ).round(1)
+        future_data = (
+            (
+                calculations.calculate_capita_for_value(
+                    pd.DataFrame(
+                        calculations.electricity_demand_per_municipality_2045(self.simulation_id).sum(),
+                    ).transpose(),
+                ).sum()
+                * 1e6
+            )
+            .astype(float)
+            .round(1)
+        )
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = _("kWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
 
@@ -753,13 +814,33 @@ class HeatDemandRegionChart(Chart):
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.heat_demand_per_municipality().sum()
+        return calculations.heat_demand_per_municipality().sum().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("GWh")
+        return chart_options
+
+
+class HeatDemand2045RegionChart(SimulationChart):
+    """Chart for regional heat demand in 2045."""
+
+    lookup = "heat_demand"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        status_quo_data = calculations.heat_demand_per_municipality().sum().round(1)
+        future_data = calculations.heat_demand_per_municipality_2045(self.simulation_id).sum().astype(float).round(1)
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = _("GWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
 
@@ -775,13 +856,49 @@ class HeatDemandCapitaRegionChart(Chart):
                 pd.DataFrame(calculations.heat_demand_per_municipality().sum()).transpose(),
             ).sum()
             * 1e6
-        )
+        ).round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("kWh")
+        return chart_options
+
+
+class HeatDemandCapita2045RegionChart(SimulationChart):
+    """Chart for regional heat demand per population in 2045."""
+
+    lookup = "heat_demand"
+
+    def get_chart_data(self) -> pd.DataFrame:
+        """Calculate capacities for whole region."""
+        status_quo_data = (
+            calculations.calculate_capita_for_value(
+                pd.DataFrame(calculations.heat_demand_per_municipality().sum()).transpose(),
+            ).sum()
+            * 1e6
+        ).round(1)
+        future_data = (
+            (
+                calculations.calculate_capita_for_value(
+                    pd.DataFrame(
+                        calculations.heat_demand_per_municipality_2045(self.simulation_id).sum(),
+                    ).transpose(),
+                ).sum()
+                * 1e6
+            )
+            .astype(float)
+            .round(1)
+        )
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = _("kWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
 
@@ -798,7 +915,7 @@ class BatteriesRegionChart(Chart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = _("#")
+        chart_options["yAxis"]["name"] = _("Anzahl")
         del chart_options["series"][0]["name"]
         return chart_options
 
@@ -816,31 +933,45 @@ class BatteriesCapacityRegionChart(Chart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = _("#")
+        chart_options["yAxis"]["name"] = _("MWh")
         del chart_options["series"][0]["name"]
         return chart_options
 
 
 CHARTS: dict[str, type[Chart]] = {
+    "detailed_overview": DetailedOverviewChart,
+    "ghg_reduction": GHGReductionChart,
     "electricity_overview": ElectricityOverviewChart,
-    "heat_overview": HeatOverviewChart,
+    "electricity_autarky": ElectricityAutarkyChart,
+    "heat_decentralized": HeatStructureDecentralChart,
+    "heat_centralized": HeatStructureCentralChart,
     "population_statusquo_region": PopulationRegionChart,
     "population_density_statusquo_region": PopulationDensityRegionChart,
     "employees_statusquo_region": EmployeesRegionChart,
     "companies_statusquo_region": CompaniesRegionChart,
     "capacity_statusquo_region": CapacityRegionChart,
     "capacity_square_statusquo_region": CapacitySquareRegionChart,
+    "capacity_2045_region": Capacity2045RegionChart,
+    "capacity_square_2045_region": CapacitySquare2045RegionChart,
     "energy_statusquo_region": EnergyRegionChart,
     "energy_2045_region": Energy2045RegionChart,
     "energy_share_statusquo_region": EnergyShareRegionChart,
     "energy_capita_statusquo_region": EnergyCapitaRegionChart,
+    "energy_capita_2045_region": EnergyCapita2045RegionChart,
     "energy_square_statusquo_region": EnergySquareRegionChart,
+    "energy_square_2045_region": EnergySquare2045RegionChart,
     "wind_turbines_statusquo_region": WindTurbinesRegionChart,
+    "wind_turbines_2045_region": WindTurbines2045RegionChart,
     "wind_turbines_square_statusquo_region": WindTurbinesSquareRegionChart,
+    "wind_turbines_square_2045_region": WindTurbinesSquare2045RegionChart,
     "electricity_demand_statusquo_region": ElectricityDemandRegionChart,
+    "electricity_demand_2045_region": ElectricityDemand2045RegionChart,
     "electricity_demand_capita_statusquo_region": ElectricityDemandCapitaRegionChart,
+    "electricity_demand_capita_2045_region": ElectricityDemandCapita2045RegionChart,
     "heat_demand_statusquo_region": HeatDemandRegionChart,
+    "heat_demand_2045_region": HeatDemand2045RegionChart,
     "heat_demand_capita_statusquo_region": HeatDemandCapitaRegionChart,
+    "heat_demand_capita_2045_region": HeatDemandCapita2045RegionChart,
     "batteries_statusquo_region": BatteriesRegionChart,
     "batteries_capacity_statusquo_region": BatteriesCapacityRegionChart,
 }

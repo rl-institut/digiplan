@@ -1,12 +1,16 @@
 {
+  "brush": {
+    "toolbox": ["rect", "polygon", "lineX", "lineY", "keep", "clear"],
+    "xAxisIndex": 0
+  },
   "grid": {
-    "bottom": "20%"
+    "bottom": "25%"
   },
   "xAxis": {
     "type": "value",
     "show": true,
     "position": "bottom",
-    "name": "GWh",
+    "name": "%",
     "nameLocation": "end",
     "nameTextStyle": "Roboto",
     "width": "76",
@@ -16,51 +20,39 @@
   },
   "yAxis": {
     "type": "category",
-    "data": ["Ziel 2045", "Dein Szenario", "2022"],
+    "data": ["Dein Szenario", "2022"],
     "axisTick": {
       "show": false
     }
   },
   "series": [
     {
-      "name": "GHD",
+      "name": "Bilanzielle Eigenversorgung",
       "type": "bar",
       "barWidth": "16",
-      "stack": "total",
-      "color": "#B3B3B3",
+      "stack": "balance",
+      "color": "#897BD9",
       "label": {
         "show": false
       },
       "emphasis": {
         "focus": "series"
       },
-      "data": [200, 300, 320]
+      "data": [60, 30]
     },
     {
-      "name": "Haushalte",
+      "name": "Zeitgleiche Eigenversorgung",
       "type": "bar",
-      "stack": "total",
-      "color": "#7C7C7C",
+      "barWidth": "16",
+      "stack": "temporal",
+      "color": "#B5ADE0",
       "label": {
         "show": false
       },
       "emphasis": {
         "focus": "series"
       },
-      "data": [260, 300, 310]
-    },
-    {
-      "name": "Industrie",
-      "type": "bar",
-      "stack": "total",
-      "color": "#4F4F4F",
-      "label": {
-        "show": false
-      },
-      "emphasis": {
-        "focus": "series"
-      },
-      "data": [200, 250, 350]
+      "data": [40, 10]
     }
   ]
 }

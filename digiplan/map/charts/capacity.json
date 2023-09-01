@@ -10,14 +10,13 @@
       "Aufdach-PV",
       "Freiflächen-PV",
       "Wasserkraft",
-      "Bioenergie",
-      "Speicher"
+      "Bioenergie"
     ],
     "orient": "vertical",
     "right": "-5%",
     "bottom": "15%"
   },
-  "color": ["#6A89CC","#FFD660","#EFAD25","#A9BDE8","#52C41A","#8D2D5F"],
+  "color": ["#6A89CC","#FFD660","#EFAD25","#A9BDE8","#52C41A"],
   "xAxis": {
     "type": "category",
     "boundaryGap": true,
@@ -61,13 +60,7 @@
       "stack": "five",
       "data": [10],
       "name": "Bioenergie"
-    },
-    {
-      "type": "bar",
-      "stack": "five",
-      "data": [10],
-      "name": "Speicher"
     }
   ],
-  "title": {"text": "installed capacity of different types"}
+  "title": {"text": "Installierte Leistung nach Typ"}
 }

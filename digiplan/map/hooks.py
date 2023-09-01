@@ -2,6 +2,7 @@
 
 import logging
 import math
+from collections import defaultdict
 
 import pandas as pd
 from django.http import HttpRequest
@@ -73,50 +74,66 @@ def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) ->
 
 def adapt_heat_capacities(distribution: str, remaining_energy: pd.Series) -> dict:
     """Adapt heat settings for remaining energy."""
-    # TODO (Hendrik): Read values from datapackage  # noqa: TD003
-    heat_shares = {
-        "central": {
-            "ABW-wood-extchp_central": 0,
-            "ABW-biogas-bpchp_central": 0,
-            "ABW-ch4-bpchp_central": 0.5,
-            "ABW-ch4-extchp_central": 0.5,
-            "ABW-solar-thermalcollector_central": 0,
-            "ABW-ch4-boiler_central": 0,
-        },
-        "decentral": {
-            "ABW-wood-extchp_decentral": 0.15,
-            "ABW-biogas-bpchp_decentral": 0.15,
-            "ABW-ch4-bpchp_decentral": 0.15,
-            "ABW-ch4-extchp_decentral": 0.30,
-            "ABW-solar-thermalcollector_decentral": 0,
-            "ABW-ch4-boiler_decentral": 0.15,
-            "ABW-wood-oven": 0.1,
-        },
+    heat_shares = datapackage.get_heat_capacity_shares(distribution[:3])
+    mapping = {
+        "wood_extchp": f"ABW-wood-extchp_{distribution}",
+        "biogas_bpchp": f"ABW-biogas-bpchp_{distribution}",
+        "ch4_bpchp": f"ABW-ch4-bpchp_{distribution}",
+        "ch4_extchp": f"ABW-ch4-extchp_{distribution}",
+        "solar_thermal": f"ABW-solar-thermalcollector_{distribution}",
+        "methane": f"ABW-ch4-boiler_{distribution}",
+        "hydrogen": f"ABW-ch4-boiler_{distribution}",  # hydrogen is added to methane bus
+        "electricity_direct_heating": f"ABW-electricity-pth_{distribution}",
     }
+    if distribution == "decentral":
+        mapping["wood_oven"] = "ABW-wood-oven"
+    heat_share_mapped = defaultdict(float)
+    for com, share in heat_shares.items():
+        if com not in mapping:
+            continue
+        heat_share_mapped[mapping[com]] += share
 
     remaining_energy_sum = remaining_energy.sum()
+    solar_thermal_max_energy = (
+        remaining_energy_sum
+        * heat_shares["solar_thermal"]
+        * datapackage.get_thermal_efficiency(mapping["solar_thermal"][4:]).max()
+    )
+    solar_thermal_energy = remaining_energy_sum * heat_shares["solar_thermal"]
     data = {}
-    for component, share in heat_shares[distribution].items():
-        if share == 0:
+    for component, share in heat_share_mapped.items():
+        if "solar" in component:
+            data[component] = {"capacity": solar_thermal_energy}
             continue
-        efficiency = datapackage.get_thermal_efficiency(component[4:])
-        capacity = math.ceil((remaining_energy / efficiency).max() * share)
+        capacity = math.ceil(remaining_energy.max() * share)
+        if "boiler" in component:
+            capacity += solar_thermal_max_energy
         if capacity == 0:
             continue
         energy = remaining_energy_sum * share
         if "extchp" in component or "bpchp" in component:
             parameter = "input_parameters"
+            efficiency = datapackage.get_thermal_efficiency(component[4:])
             energy = energy / efficiency
+            capacity = capacity / efficiency
         else:
             parameter = "output_parameters"
         logging.info(f"Adapting capacity and energy for {component} at {distribution=}.")
         data[component] = {
+            # Capacity has to be increased, so that times without energy from solar thermal can be covered by other
+            # components
             "capacity": capacity,
             parameter: {
-                "summed_min": energy / capacity,
-                "summed_max": energy / capacity,
+                "full_load_time_min": energy / capacity,
+                "full_load_time_max": energy / capacity + solar_thermal_energy
+                if "boiler" in component
+                else energy / capacity,
             },
         }
+        if "extchp" in component or "bpchp" in component:
+            # Nominal value must be set, if summed_min or summed_max are set in flow.
+            # In output_parameters, nominal_value is read from component.
+            data[component]["input_parameters"]["nominal_value"] = capacity
     return data
 
 
@@ -142,7 +159,7 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
     hp_sliders = {"hh": "w_d_wp_3", "cts": "w_d_wp_4", "ind": "w_d_wp_5"}
 
     heat_demand_per_municipality = datapackage.get_summed_heat_demand_per_municipality()
-    heat_demand = datapackage.get_heat_demand()
+    heat_demand = datapackage.get_heat_demand_profile()
 
     for distribution in ("central", "decentral"):
         demand = {}
@@ -169,7 +186,7 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
                 hp_energy[sector] = demand[sector] * hp_share
             else:
                 if sector == "hh":  # noqa: PLR5501
-                    hp_share = data.pop("w_z_wp_3") / 100
+                    hp_share = data.pop("w_z_wp_1") / 100
                     hp_energy[sector] = demand[sector] * hp_share
                 else:
                     hp_energy[sector] = demand[sector] * 0
@@ -181,11 +198,12 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
         logging.info(f"Adapting capacity and energy for heatpump at {distribution=}.")
         data[f"ABW-electricity-heatpump_{distribution}"] = {
             "capacity": capacity,
-            "output_parameters": {
-                "summed_min": hp_energy_sum / capacity,
-                "summed_max": hp_energy_sum / capacity,
-            },
         }
+        if capacity > 0:
+            data[f"ABW-electricity-heatpump_{distribution}"]["output_parameters"] = {
+                "full_load_time_min": hp_energy_sum / capacity,
+                "full_load_time_max": hp_energy_sum / capacity,
+            }
 
         total_demand = pd.concat(demand.values(), axis=1).sum(axis=1)
         remaining_energy = total_demand - hp_energy_total
@@ -197,16 +215,28 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
         storage_sliders = {"decentral": "w_d_s_1", "central": "w_z_s_1"}
         avg_demand_per_day = total_demand.sum() / 365
         logging.info(f"Adapting capacity for storage at {distribution=}.")
+        capacity = float(avg_demand_per_day * data.pop(storage_sliders[distribution]) / 100)
+        # Adapt storage capacity to solarthermal collector overpowering:
+        solar_capacity = data[f"ABW-solar-thermalcollector_{distribution}"]["capacity"]
+        solar_thermal_energy = (
+            datapackage.get_thermal_efficiency(f"solar-thermalcollector_{distribution}") * solar_capacity
+        )
+        delta_solar = solar_thermal_energy - total_demand
+        solar_peak = delta_solar[delta_solar > 0].max()
+        capacity = max(capacity, solar_peak)
         data[f"ABW-heat_{distribution}-storage"] = {
-            "capacity": float(avg_demand_per_day * data.pop(storage_sliders[distribution]) / 100),
+            "capacity": capacity,
+            "storage_capacity": capacity,
         }
+
+    # Adapt biomass to biogas plant size
+    biogas_capacity = data["ABW-biogas-bpchp_decentral"]["capacity"] + data["ABW-biogas-bpchp_central"]["capacity"]
+    data["ABW-biomass-biogas_plant"] = {"capacity": biogas_capacity}
+    data["ABW-biogas-biogas_upgrading_plant"] = {"capacity": biogas_capacity}
 
     # Remove unnecessary heat settings
     del data["w_v_1"]
     del data["w_d_wp_1"]
-    del data["w_z_wp_1"]
-    del data["w_d_s_3"]
-    del data["w_z_s_3"]
 
     return data
 
@@ -229,12 +259,23 @@ def adapt_renewable_capacities(scenario: str, data: dict, request: HttpRequest) 
     dict
         Adapted parameters dict with set up capacities
     """
-    # ELECTRICITY
+    # Capacities
     data["ABW-wind-onshore"] = {"capacity": data.pop("s_w_1")}
     data["ABW-solar-pv_ground"] = {"capacity": data.pop("s_pv_ff_1")}
     data["ABW-solar-pv_rooftop"] = {"capacity": data.pop("s_pv_d_1")}
     data["ABW-hydro-ror"] = {"capacity": data.pop("s_h_1")}
     data["ABW-electricity-large_scale_battery"] = {"capacity": data.pop("s_s_g_1")}
+
+    # Full load hours
+    technology_mapping = {
+        "ABW-wind-onshore": "wind",
+        "ABW-solar-pv_ground": "pv_ground",
+        "ABW-solar-pv_rooftop": "pv_roof",
+        "ABW-hydro-ror": "ror",
+    }
+    full_load_hours = datapackage.get_full_load_hours(2045)
+    for technology, mapped_key in technology_mapping.items():
+        data[technology]["profile"] = datapackage.get_profile(technology[4:]) * full_load_hours[mapped_key]
 
     # Remove unnecessary renewable sliders:
     del data["s_w_3"]

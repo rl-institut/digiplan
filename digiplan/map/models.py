@@ -107,6 +107,14 @@ class RenewableModel(models.Model):
     unit_count = models.BigIntegerField(null=True)
     capacity_net = models.FloatField(null=True)
     zip_code = models.CharField(max_length=50, null=True)
+    status = models.CharField(max_length=50, null=True)
+    city = models.CharField(max_length=50, null=True)
+    commissioning_date = models.CharField(max_length=50, null=True)
+    commissioning_date_planned = models.CharField(max_length=50, null=True)
+    decommissioning_date = models.CharField(max_length=50, null=True)
+    capacity_gross = models.FloatField(null=True)
+    voltage_level = models.CharField(max_length=50, null=True)
+    mastr_id = models.CharField(max_length=50, null=True)
 
     mun_id = models.ForeignKey(Municipality, on_delete=models.DO_NOTHING, null=True)
 
@@ -122,20 +130,48 @@ class WindTurbine(RenewableModel):
     name_park = models.CharField(max_length=255, null=True)
     hub_height = models.FloatField(null=True)
     rotor_diameter = models.FloatField(null=True)
+    site_type = models.CharField(max_length=255, null=True)
+    manufacturer_name = models.CharField(max_length=255, null=True)
+    type_name = models.CharField(max_length=255, null=True)
+    constraint_deactivation_sound_emission = models.CharField(max_length=50, null=True)
+    constraint_deactivation_sound_emission_night = models.CharField(max_length=50, null=True)
+    constraint_deactivation_sound_emission_day = models.CharField(max_length=50, null=True)
+    constraint_deactivation_shadowing = models.CharField(max_length=50, null=True)
+    constraint_deactivation_animals = models.CharField(max_length=50, null=True)
+    constraint_deactivation_ice = models.CharField(max_length=50, null=True)
+    citizens_unit = models.CharField(max_length=50, null=True)
 
     data_file = "bnetza_mastr_wind_agg_region"
     layer = "bnetza_mastr_wind"
     mapping = {
         "geom": "POINT",
         "name": "name",
-        "name_park": "name_park",
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
+        "zip_code": "zip_code",
+        "mun_id": {"id": "municipality_id"},
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
+        "mastr_id": "mastr_id",
+        "name_park": "name_park",
         "hub_height": "hub_height",
         "rotor_diameter": "rotor_diameter",
-        "zip_code": "zip_code",
-        "mun_id": "municipality_id",
+        "site_type": "site_type",
+        "manufacturer_name": "manufacturer_name",
+        "type_name": "type_name",
+        "constraint_deactivation_sound_emission": "constraint_deactivation_sound_emission",
+        "constraint_deactivation_sound_emission_night": "constraint_deactivation_sound_emission_night",
+        "constraint_deactivation_sound_emission_day": "constraint_deactivation_sound_emission_day",
+        "constraint_deactivation_shadowing": "constraint_deactivation_shadowing",
+        "constraint_deactivation_animals": "constraint_deactivation_animals",
+        "constraint_deactivation_ice": "constraint_deactivation_ice",
+        "citizens_unit": "citizens_unit",
     }
 
     class Meta:  # noqa: D106
@@ -165,6 +201,16 @@ class PVroof(RenewableModel):
     """Model holding PV roof."""
 
     power_limitation = models.CharField(max_length=50, null=True)
+    site_type = models.CharField(max_length=255, null=True)
+    feedin_type = models.CharField(max_length=255, null=True)
+    module_count = models.FloatField(null=True)
+    usage_sector = models.CharField(max_length=50, null=True)
+    orientation_primary = models.CharField(max_length=50, null=True)
+    orientation_secondary = models.CharField(max_length=50, null=True)
+    area_type = models.FloatField(null=True)
+    area_occupied = models.FloatField(null=True)
+    citizens_unit = models.CharField(max_length=50, null=True)
+    landlord_to_tenant_electricity = models.CharField(max_length=50, null=True)
 
     data_file = "bnetza_mastr_pv_roof_agg_region"
     layer = "bnetza_mastr_pv_roof"
@@ -176,8 +222,26 @@ class PVroof(RenewableModel):
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
+        "mun_id": {"id": "municipality_id"},
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
+        "mastr_id": "mastr_id",
         "power_limitation": "power_limitation",
-        "mun_id": "municipality_id",
+        "site_type": "site_type",
+        "feedin_type": "feedin_type",
+        "module_count": "module_count",
+        "usage_sector": "usage_sector",
+        "orientation_primary": "orientation_primary",
+        "orientation_secondary": "orientation_secondary",
+        "area_type": "area_type",
+        "area_occupied": "area_occupied",
+        "citizens_unit": "citizens_unit",
+        "landlord_to_tenant_electricity": "landlord_to_tenant_electricity",
     }
 
     class Meta:  # noqa: D106
@@ -193,6 +257,16 @@ class PVground(RenewableModel):
     """Model holding PV on ground."""
 
     power_limitation = models.CharField(max_length=50, null=True)
+    site_type = models.CharField(max_length=255, null=True)
+    feedin_type = models.CharField(max_length=255, null=True)
+    module_count = models.FloatField(null=True)
+    usage_sector = models.CharField(max_length=50, null=True)
+    orientation_primary = models.CharField(max_length=50, null=True)
+    orientation_secondary = models.CharField(max_length=50, null=True)
+    area_type = models.FloatField(null=True)
+    area_occupied = models.FloatField(null=True)
+    citizens_unit = models.CharField(max_length=50, null=True)
+    landlord_to_tenant_electricity = models.CharField(max_length=50, null=True)
 
     data_file = "bnetza_mastr_pv_ground_agg_region"
     layer = "bnetza_mastr_pv_ground"
@@ -204,19 +278,40 @@ class PVground(RenewableModel):
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
+        "mun_id": {"id": "municipality_id"},
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
+        "mastr_id": "mastr_id",
         "power_limitation": "power_limitation",
-        "mun_id": "municipality_id",
+        "site_type": "site_type",
+        "feedin_type": "feedin_type",
+        "module_count": "module_count",
+        "usage_sector": "usage_sector",
+        "orientation_primary": "orientation_primary",
+        "orientation_secondary": "orientation_secondary",
+        "area_type": "area_type",
+        "area_occupied": "area_occupied",
+        "citizens_unit": "citizens_unit",
+        "landlord_to_tenant_electricity": "landlord_to_tenant_electricity",
     }
 
     class Meta:  # noqa: D106
-        verbose_name = _("Outdoor PV")
-        verbose_name_plural = _("Outdoor PVs")
+        verbose_name = _("Ground-mounted PV")
+        verbose_name_plural = _("Ground-mounted PV")
 
 
 class Hydro(RenewableModel):
     """Hydro model."""
 
     water_origin = models.CharField(max_length=255, null=True)
+    kwk_mastr_id = models.FloatField(null=True)
+    plant_type = models.CharField(max_length=255, null=True)
+    feedin_type = models.CharField(max_length=255, null=True)
 
     data_file = "bnetza_mastr_hydro_agg_region"
     layer = "bnetza_mastr_hydro"
@@ -228,8 +323,19 @@ class Hydro(RenewableModel):
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
+        "mun_id": {"id": "municipality_id"},
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
+        "mastr_id": "mastr_id",
         "water_origin": "water_origin",
-        "mun_id": "municipality_id",
+        "kwk_mastr_id": "kwk_mastr_id",
+        "plant_type": "plant_type",
+        "feedin_type": "feedin_type",
     }
 
     class Meta:  # noqa: D106
@@ -241,6 +347,13 @@ class Biomass(RenewableModel):
     """Biomass model."""
 
     fuel_type = models.CharField(max_length=50, null=True)
+    kwk_mastr_id = models.CharField(max_length=50, null=True)
+    th_capacity = models.FloatField(null=True)
+    feedin_type = models.CharField(max_length=50, null=True)
+    technology = models.CharField(max_length=255, null=True)
+    fuel = models.CharField(max_length=255, null=True)
+    biomass_only = models.CharField(max_length=50, null=True)
+    flexibility_bonus = models.CharField(max_length=50, null=True)
 
     data_file = "bnetza_mastr_biomass_agg_region"
     layer = "bnetza_mastr_biomass"
@@ -252,8 +365,23 @@ class Biomass(RenewableModel):
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
+        "mun_id": {"id": "municipality_id"},
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
+        "mastr_id": "mastr_id",
         "fuel_type": "fuel_type",
-        "mun_id": "municipality_id",
+        "kwk_mastr_id": "kwk_mastr_id",
+        "th_capacity": "th_capacity",
+        "feedin_type": "feedin_type",
+        "technology": "technology",
+        "fuel": "fuel",
+        "biomass_only": "biomass_only",
+        "flexibility_bonus": "flexibility_bonus",
     }
 
     class Meta:  # noqa: D106
@@ -265,6 +393,14 @@ class Combustion(RenewableModel):
     """Combustion model."""
 
     name_block = models.CharField(max_length=255, null=True)
+    kwk_mastr_id = models.CharField(max_length=50, null=True)
+    bnetza_id = models.CharField(max_length=50, null=True)
+    usage_sector = models.CharField(max_length=50, null=True)
+    th_capacity = models.FloatField(null=True)
+    feedin_type = models.CharField(max_length=255, null=True)
+    technology = models.CharField(max_length=255, null=True)
+    fuel_other = models.CharField(max_length=255, null=True)
+    fuels = models.CharField(max_length=255, null=True)
 
     data_file = "bnetza_mastr_combustion_agg_region"
     layer = "bnetza_mastr_combustion"
@@ -272,12 +408,28 @@ class Combustion(RenewableModel):
     mapping = {
         "geom": "POINT",
         "name": "name",
-        "name_block": "block_name",
         "zip_code": "zip_code",
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
-        "mun_id": "municipality_id",
+        "mun_id": {"id": "municipality_id"},
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
+        "mastr_id": "mastr_id",
+        "name_block": "block_name",
+        "kwk_mastr_id": "kwk_mastr_id",
+        "bnetza_id": "bnetza_id",
+        "usage_sector": "usage_sector",
+        "th_capacity": "th_capacity",
+        "feedin_type": "feedin_type",
+        "technology": "technology",
+        "fuel_other": "fuel_other",
+        "fuels": "fuels",
     }
 
     class Meta:  # noqa: D106
@@ -289,6 +441,10 @@ class GSGK(RenewableModel):
     """GSGK model."""
 
     feedin_type = models.CharField(max_length=50, null=True)
+    kwk_mastr_id = models.CharField(max_length=50, null=True)
+    th_capacity = models.FloatField(null=True)
+    unit_type = models.CharField(max_length=255, null=True)
+    technology = models.CharField(max_length=255, null=True)
 
     data_file = "bnetza_mastr_gsgk_agg_region"
     layer = "bnetza_mastr_gsgk"
@@ -300,8 +456,20 @@ class GSGK(RenewableModel):
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
+        "mun_id": {"id": "municipality_id"},
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
+        "mastr_id": "mastr_id",
         "feedin_type": "feedin_type",
-        "mun_id": "municipality_id",
+        "kwk_mastr_id": "kwk_mastr_id",
+        "th_capacity": "th_capacity",
+        "unit_type": "type",
+        "technology": "technology",
     }
 
     class Meta:  # noqa: D106
@@ -322,12 +490,19 @@ class Storage(RenewableModel):
         "geometry_approximated": "geometry_approximated",
         "unit_count": "unit_count",
         "capacity_net": "capacity_net",
-        "mun_id": "municipality_id",
+        "mun_id": {"id": "municipality_id"},
+        "status": "status",
+        "city": "city",
+        "commissioning_date": "commissioning_date",
+        "commissioning_date_planned": "commissioning_date_planned",
+        "decommissioning_date": "decommissioning_date",
+        "capacity_gross": "capacity_gross",
+        "voltage_level": "voltage_level",
     }
 
     class Meta:  # noqa: D106
-        verbose_name = _("Storage")
-        verbose_name_plural = _("Storages")
+        verbose_name = _("Battery storage")
+        verbose_name_plural = _("Battery storages")
 
 
 class StaticRegionModel(models.Model):

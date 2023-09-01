@@ -1,0 +1,80 @@
+{
+  "legend": {
+    "data": ["Installierte Leistung", "Anlagenanzahl"]
+  },
+  "xAxis": [
+    {
+      "type": "category",
+      "data": [
+        "1993",
+        "1994",
+        "1995",
+        "1998",
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022"
+      ],
+      "axisPointer": {
+        "type": "shadow"
+      }
+    }
+  ],
+  "yAxis": [
+    {
+      "type": "value",
+      "nameLocation": "start",
+      "min": 0,
+      "max": 390,
+      "interval": 60,
+      "axisLabel": {
+        "formatter": "{value} MW"
+      }
+    },
+    {
+      "type": "value",
+      "nameLocation": "start",
+      "min": 0,
+      "max": 10400,
+      "interval": 800,
+      "axisLabel": {
+        "formatter": "{value}"
+      }
+    }
+  ],
+  "series": [
+    {
+      "name": "Installierte Leistung",
+      "type": "bar",
+      "color": "#FFD660",
+      "barWidth": 8,
+      "data": [0.0, 0.0, 0.0, 0.1, 0.1, 0.1, 0.2, 0.3, 1.1, 2.7, 5.0, 7.5, 12.7, 25.0, 51.4, 77.1, 107.1, 122.4, 130.0, 134.6, 145.8, 158.1, 187.5, 226.4, 256.2, 276.8, 295.2]
+    },
+    {
+      "name": "Anlagenanzahl",
+      "type": "line",
+      "color": "#CCCCCC",
+      "yAxisIndex": 1,
+      "data": [5, 14, 17, 19, 22, 46, 63, 82, 166, 314, 541, 774, 1145, 1621, 2333, 3145, 3826, 4371, 4709, 4970, 5228, 5559, 5958, 6608, 7597, 8678, 10308]
+    }
+  ]
+}

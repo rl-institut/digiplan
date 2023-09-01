@@ -1,25 +1,25 @@
 {% load static i18n %}
 
-<div class="panel__goal">
-  <div class="panel__charts">
-    <div class="panel__chart">
-      <div class="panel__chart-title">
-        {% translate "Share of renewable energies" %} (%)
-      </div>
-      <div class="panel__chart-content">
-        <div id="renewable_share_scenario_chart" class="goal-chart"></div>
-      </div>
-    </div>
-    <div class="panel__chart">
-      <div class="panel__chart-title">
-       {% translate "CO<sub>2</sub>-Reduktion ggü. 2019 (%)" %}
-      </div>
-      <div class="panel__chart-content">
-        <div id="co2_emissions_scenario_chart" class="goal-chart"></div>
-      </div>
-    </div>
-  </div>
-</div>
+<!--<div class="panel__goal">-->
+<!--  <div class="panel__charts">-->
+<!--    <div class="panel__chart">-->
+<!--      <div class="panel__chart-title">-->
+<!--        {% translate "Anteil EE am Stromverbrauch" %} (%)-->
+<!--      </div>-->
+<!--      <div class="panel__chart-content">-->
+<!--        <div id="renewable_share_scenario_chart" class="goal-chart"></div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="panel__chart">-->
+<!--      <div class="panel__chart-title">-->
+<!--       {% translate "THG-Reduktion ggü. 2019 (%)" %}-->
+<!--      </div>-->
+<!--      <div class="panel__chart-content">-->
+<!--        <div id="co2_emissions_scenario_chart" class="goal-chart"></div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 <div class="panel__settings panel__settings--padding">
   <div class="panel-item">
     <h2 class="panel-item__heading panel-item__heading--nopadding">
@@ -30,13 +30,7 @@
     </h2>
     <div class="panel-item__form">
       <select id="result_views" class="form-select" aria-label="Default select example">
-        <optgroup label="{% translate "Planning Region" %}">
-          <option value="population" title="{% translate "Inhabitants" %}" selected>{% translate "Population" %}</option>
-          <option value="population_density"
-                  title="{% translate "In 2021 the population density in Germany was 238 per km² and 106 per km² in Saxony-Anhalt." %}">
-            {% translate "Population Density" %}
-          </option>
-        </optgroup>
+        <option value="" title="{% translate "Keine Auswahl" %}" selected>{% translate "Keine Auswahl" %}</option>
         <optgroup label="{% translate "Renewable Energies (RE)" %}">
           <option value="re_power_percentage"
                   title="{% translate "Annual balance sheet share of renewable energy (wind energy, photovoltaic, hydroelectric power) in the electricity demand of the sectors agriculture, GHG (trade, commerce, services), households and industry in percent. The demand is the net electricity consumption, i.e. transmission losses and power plant consumption are not taken into account. 49.7% of the electricity demand in Germany was covered by renewable energies in 2022." %}">
@@ -53,37 +47,37 @@
                   title="{% translate "Annual amount of energy fed in from renewable plants (wind energy, photovoltaic, hydro power) related to the area in megawatt hours per km²." %}">
             {% translate "Renewable Electricity Production per km² (MWh)" %}
           </option>
-          <option value="capacity"
+          <option value="capacity_2045"
                   title="{% translate "Installed capacity from renewable energy plants (wind energy, photovoltaic, hydro power, biomass and biogas) in megawatts." %}">
             {% translate "Installed Renewable Capacity (MW)" %}
           </option>
-          <option value="capacity_square"
+          <option value="capacity_square_2045"
                   title="{% translate "Installed capacity from renewable energy plants (wind energy, photovoltaic, hydro power, biomass and biogas) in megawatts per km²." %}">
-            {% translate "Installed Renewable Capacity per km² (MW)" %}
+            {% translate "Installed Renewable Capacity (MW/km²)" %}
           </option>
-          <option value="wind_turbines"
+          <option value="wind_turbines_2045"
                   title="{% translate "Number of Wind Turbines" %}">
             {% translate "Number of Wind Turbines" %}
           </option>
-          <option value="wind_turbines_square"
+          <option value="wind_turbines_square_2045"
                   title="{% translate "Number of Wind Turbines per km²" %}">
             {% translate "Number of Wind Turbines per km²" %}
           </option>
         </optgroup>
         <optgroup label="{% translate "Energy Demand" %}">
-          <option value="electricity_demand"
+          <option value="electricity_demand_2045"
                   title="{% translate "Annual electricity demand in gigawatt hours of the sectors, households, tertiary sector (trade, commerce, services), agriculture and industry. This is the net electricity consumption." %}">
             {% translate "Electricity Demand (GWh)" %}
           </option>
-          <option value="electricity_demand_capita"
+          <option value="electricity_demand_capita_2045"
                   title="{% translate "Annual electricity demand in gigawatt hours of the sectors, households, tertiary sector (trade, commerce, services), agriculture and industry per inhabitant This is the net electricity consumption." %}">
             {% translate "Electricity Demand per Capita (kWh)" %}
           </option>
-          <option value="heat_demand"
+          <option value="heat_demand_2045"
                   title="{% translate "Annual heat consumption for space heating and domestic hot water in gigawatt hours in the household, commercial, trade and services, and agriculture (excluding industry) sectors." %}">
             {% translate "Heat Demand (GWh)" %}
           </option>
-          <option value="heat_demand_capita"
+          <option value="heat_demand_capita_2045"
                   title="{% translate "Annual heat consumption per inhabitant for space heating and domestic hot water in gigawatt hours in the household, commercial, trade and services, and agriculture (excluding industry) sectors." %}">
             {% translate "Heat Demand per Capita (kWh)" %}
           </option>
@@ -100,6 +94,7 @@
       <p class="panel-item__nav-header">{% translate "View" %}</p>
 
       <ul class="nav nav-pills" id="results-tabs" role="tablist">
+        <!--
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="results-general-tab" data-bs-toggle="tab" data-bs-target="#results-general" type="button" role="tab" aria-controls="results-general" aria-selected="true">
             <svg width="20" height="20" version="1.1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -108,8 +103,9 @@
             {% translate "Overview" %}
           </button>
         </li>
+        -->
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="results-electricity-tab" data-bs-toggle="tab" data-bs-target="#results-electricity" type="button" role="tab" aria-controls="results-electricity" aria-selected="false">
+          <button class="nav-link active" id="results-electricity-tab" data-bs-toggle="tab" data-bs-target="#results-electricity" type="button" role="tab" aria-controls="results-electricity" aria-selected="false">
             <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
               <path d="m8.2021 0.025372-5.4677 8.4414h9.5898l-4.9159 8.4665h1.3229l5.4035-9.5251h-9.4609l4.8512-7.3828z"/>
             </svg>
@@ -124,14 +120,14 @@
             {% translate "Heat" %}
           </button>
         </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="results-mobility-tab" data-bs-toggle="tab" data-bs-target="#results-mobility" type="button" role="tab" aria-controls="results-mobility" aria-selected="false">
-            <svg width="24" height="24" version="1.1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M22,10.2l-4.6-1c-1.2-2.3-3.9-3.6-4.2-3.6c-0.5-0.1-6.4-0.4-7.7,0c-1.3,0.4-4.4,3-5,5c-0.5,1.8,0.2,4.9,0.2,5 c0,0.1,0.1,0.2,0.2,0.3c0.1,0,1.2,0.5,2.4,0.8c0.4,0.9,1.3,1.5,2.4,1.5c0.9,0,1.7-0.5,2.2-1.2C8,17,8,17,8.1,17c0.7,0,2.5,0,3.3,0 c1.1,0,3.2,0,4.4-0.1c0.5,0.7,1.3,1.1,2.2,1.1c1,0,1.9-0.6,2.4-1.5c1.4-0.3,3-0.9,3.1-0.9c0.2-0.1,0.3-0.2,0.3-0.4v-3 C23.8,11.1,22.6,10.4,22,10.2L22,10.2z M5.7,17.3c-1,0-1.9-0.8-1.9-1.9c0-1,0.8-1.9,1.9-1.9c1,0,1.9,0.8,1.9,1.9 C7.6,16.5,6.7,17.3,5.7,17.3z M18,17.3c-0.7,0-1.2-0.3-1.6-0.9c0,0,0-0.1-0.1-0.1c-0.1-0.3-0.2-0.6-0.2-0.9c0-1,0.8-1.9,1.9-1.9 c1,0,1.9,0.8,1.9,1.9C19.9,16.5,19,17.3,18,17.3L18,17.3z M22.9,15.1c-0.5,0.2-1.4,0.5-2.3,0.7c0-0.1,0-0.2,0-0.3 c0-1.5-1.2-2.7-2.7-2.7s-2.7,1.2-2.7,2.7c0,0.3,0,0.5,0.1,0.7c-1.2,0-3,0.1-4,0.1c-0.7,0-2.3,0-3.1,0c0.1-0.2,0.1-0.5,0.1-0.8 c0-1.5-1.2-2.7-2.7-2.7S3,14,3,15.5c0,0.1,0,0.2,0,0.2c-0.7-0.2-1.4-0.4-1.7-0.5c-0.1-0.7-0.6-3-0.2-4.4c0.5-1.6,3.4-4,4.5-4.4 c1.1-0.4,6.9-0.1,7.3,0c0.3,0.1,2.8,1.3,3.8,3.4C16.8,9.9,16.9,10,17,10l4.8,1c0,0,1.1,0.3,1.1,1.4L22.9,15.1z"/>
-            </svg>
-            {% translate "Transportation" %}
-          </button>
-        </li>
+<!--        <li class="nav-item" role="presentation">-->
+<!--          <button class="nav-link" id="results-mobility-tab" data-bs-toggle="tab" data-bs-target="#results-mobility" type="button" role="tab" aria-controls="results-mobility" aria-selected="false">-->
+<!--            <svg width="24" height="24" version="1.1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">-->
+<!--              <path d="M22,10.2l-4.6-1c-1.2-2.3-3.9-3.6-4.2-3.6c-0.5-0.1-6.4-0.4-7.7,0c-1.3,0.4-4.4,3-5,5c-0.5,1.8,0.2,4.9,0.2,5 c0,0.1,0.1,0.2,0.2,0.3c0.1,0,1.2,0.5,2.4,0.8c0.4,0.9,1.3,1.5,2.4,1.5c0.9,0,1.7-0.5,2.2-1.2C8,17,8,17,8.1,17c0.7,0,2.5,0,3.3,0 c1.1,0,3.2,0,4.4-0.1c0.5,0.7,1.3,1.1,2.2,1.1c1,0,1.9-0.6,2.4-1.5c1.4-0.3,3-0.9,3.1-0.9c0.2-0.1,0.3-0.2,0.3-0.4v-3 C23.8,11.1,22.6,10.4,22,10.2L22,10.2z M5.7,17.3c-1,0-1.9-0.8-1.9-1.9c0-1,0.8-1.9,1.9-1.9c1,0,1.9,0.8,1.9,1.9 C7.6,16.5,6.7,17.3,5.7,17.3z M18,17.3c-0.7,0-1.2-0.3-1.6-0.9c0,0,0-0.1-0.1-0.1c-0.1-0.3-0.2-0.6-0.2-0.9c0-1,0.8-1.9,1.9-1.9 c1,0,1.9,0.8,1.9,1.9C19.9,16.5,19,17.3,18,17.3L18,17.3z M22.9,15.1c-0.5,0.2-1.4,0.5-2.3,0.7c0-0.1,0-0.2,0-0.3 c0-1.5-1.2-2.7-2.7-2.7s-2.7,1.2-2.7,2.7c0,0.3,0,0.5,0.1,0.7c-1.2,0-3,0.1-4,0.1c-0.7,0-2.3,0-3.1,0c0.1-0.2,0.1-0.5,0.1-0.8 c0-1.5-1.2-2.7-2.7-2.7S3,14,3,15.5c0,0.1,0,0.2,0,0.2c-0.7-0.2-1.4-0.4-1.7-0.5c-0.1-0.7-0.6-3-0.2-4.4c0.5-1.6,3.4-4,4.5-4.4 c1.1-0.4,6.9-0.1,7.3,0c0.3,0.1,2.8,1.3,3.8,3.4C16.8,9.9,16.9,10,17,10l4.8,1c0,0,1.1,0.3,1.1,1.4L22.9,15.1z"/>-->
+<!--            </svg>-->
+<!--            {% translate "Transportation" %}-->
+<!--          </button>-->
+<!--        </li>-->
         <li class="nav-item" role="presentation">
           <button class="nav-link" id="results-ghg-tab" data-bs-toggle="tab" data-bs-target="#results-ghg" type="button" role="tab" aria-controls="results-general" aria-selected="true">
             <svg width="20" height="20" version="1.1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -143,7 +139,7 @@
               <path d="m6.72,8.4c0,.58.22.9.38,1.14.1.15.27.23.45.23.11,0,.21-.03.31-.1.25-.17.31-.51.14-.76-.12-.18-.19-.27-.19-.52s.07-.34.19-.52c.16-.23.38-.55.38-1.13,0-.69-.28-1.06-.48-1.34-.03-.04-.06-.08-.09-.13-.08-.12-.2-.2-.35-.23-.14-.03-.29,0-.41.08-.25.17-.31.51-.15.76.04.06.08.11.12.17.16.22.27.36.27.69,0,.25-.07.34-.19.52-.16.23-.38.55-.38,1.14Zm.99,1.07h0s0,0,0,0Z"/>
               <path d="m8.53,8.4c0,.58.22.9.38,1.14.1.15.27.23.45.23.11,0,.21-.03.31-.1.12-.08.2-.21.23-.35.03-.14,0-.29-.09-.41-.12-.18-.19-.27-.19-.52s.07-.34.19-.52c.16-.23.38-.55.38-1.13,0-.7-.28-1.07-.49-1.35-.03-.04-.06-.08-.08-.12-.17-.25-.5-.31-.75-.15-.12.08-.2.2-.23.35-.03.14,0,.29.08.41l.12.17c.16.22.27.36.27.69,0,.25-.07.34-.19.52-.16.23-.38.55-.38,1.13Z"/>
             </svg>
-            {% translate "CO<sub>2</sub>-Emissionen" %}
+            {% translate "THG-Emissionen" %}
           </button>
         </li>
       </ul>

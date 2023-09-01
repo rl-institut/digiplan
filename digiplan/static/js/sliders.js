@@ -8,6 +8,12 @@ const powerPanelSliders = document.querySelectorAll(".js-slider.js-slider-panel.
 const sliderMoreLabels = document.querySelectorAll(".c-slider__label--more > .button");
 const powerMixInfoBanner = document.getElementById("js-power-mix");
 
+const powerIcons = {
+      "s_h_1": `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="16" width="16" viewBox="0 0 16 16"><path d="m5.22.89l-.18-.44-.45.16c-.13.05-3.13,1.17-4.11,3.39-.61,1.38.02,3,1.41,3.61.35.16.73.23,1.1.23.34,0,.67-.06.99-.19.68-.27,1.22-.78,1.51-1.45.98-2.22-.23-5.2-.28-5.32Zm-.63,4.92c-.39.88-1.42,1.28-2.3.9s-1.28-1.42-.9-2.3c.6-1.37,2.26-2.28,3.08-2.66.27.86.72,2.7.12,4.07Z"/><path d="m14.44,3.17l-.19-.44-.45.17c-.24.09-5.83,2.25-7.59,6.38-.51,1.19-.52,2.5-.04,3.69s1.4,2.13,2.59,2.64c.62.26,1.26.39,1.89.39,1.88,0,3.67-1.1,4.45-2.93,1.76-4.13-.55-9.66-.65-9.9Zm-.26,9.51c-.4.94-1.15,1.67-2.1,2.05-.95.38-1.99.37-2.93-.03s-1.67-1.15-2.05-2.1-.37-1.99.03-2.93c1.32-3.09,5.24-5.06,6.58-5.65.5,1.38,1.8,5.56.48,8.66Z"/></svg>`,
+      "s_pv_ff_1": `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="16" width="16" viewBox="0 0 16 16"><path d="m12.07,15v-2.95h3.23L11.94.86h-7.88L.71,12.05h3.22v2.95H.35v1h15.29v-1h-3.58ZM8.51,1.88h2.67l.61,2.03h-3.28V1.88Zm0,3.05h3.59l.61,2.03h-4.2v-2.03Zm0,3.05h4.5l.92,3.05h-5.42v-3.05ZM4.82,1.88h2.67v2.03h-3.28l.61-2.03Zm-.92,3.05h3.59v2.03H3.29l.61-2.03Zm-1.83,6.1l.92-3.05h4.5v3.05H2.07Zm2.88,1.02h6.1v2.95h-6.1v-2.95Z"/></svg>`,
+      "s_pv_d_1": `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="16" width="16" viewBox="0 0 16 16"><path d="m15.96,16l-3.91-2.36h.02v-2.92h3.23L11.94,0h-7.88L.71,10.71h3.22v2.92h.02L.04,16h15.92Zm-12.34-1l4.38-2.65,4.38,2.65H3.62ZM8.51.97h2.67l.61,1.95h-3.28V.97Zm0,2.92h3.59l.61,1.95h-4.2v-1.95Zm0,2.92h4.5l.92,2.92h-5.42v-2.92ZM4.82.97h2.67v1.95h-3.28l.61-1.95Zm-.92,2.92h3.59v1.95H3.29l.61-1.95Zm-1.83,5.85l.92-2.92h4.5v2.92H2.07Zm2.88.97h6.1v2.32l-3.05-1.85-3.05,1.85v-2.32Z"/></svg>`,
+      "s_w_1": `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="16" width="16" viewBox="0 0 16 16"><path class="cls-1" d="m7.5,0v4.05c-.85.23-1.48,1.01-1.48,1.93,0,.16.02.31.05.46l-3.21,1.85.5.87,3.17-1.83c.25.28.58.48.96.58v7.09H1.49v1h6.01s1,0,1,0h0s6.01,0,6.01,0v-1h-6.01v-7.09c.39-.1.74-.33,1-.63l3.26,1.88.5-.87-3.32-1.91s0,0,0,0c.03-.13.04-.26.04-.4,0-.92-.63-1.71-1.48-1.93V0h-1,0Zm.5,4.98c.55,0,.98.44.98,1s-.44,1-.98,1-.98-.44-.98-1,.44-1,.98-1Z"/></svg>`
+};
 
 const potentialPVLayers = ["potentialarea_pv_agriculture_lfa-off_region", "potentialarea_pv_road_railway_region"];
 const potentialWindLayers = [
@@ -22,10 +28,6 @@ const potentialWindSwitches = document.querySelectorAll("#id_s_w_3, #id_s_w_4, #
 const sectorSlider = document.querySelectorAll("#id_s_v_3, #id_s_v_4, #id_s_v_5, #id_w_d_wp_3, #id_w_d_wp_4, #id_w_d_wp_5, #id_w_v_3, #id_w_v_4, #id_w_v_5");
 
 const sliderDependencies = {
-  "id_s_s_g_1": "id_s_s_g_3",
-  "id_w_z_wp_1": "id_w_z_wp_3",
-  "id_w_d_s_1": "id_w_d_s_3",
-  "id_w_z_s_1": "id_w_z_s_3",
   "id_v_iv_1": "id_v_iv_3"
 };
 
@@ -112,33 +114,9 @@ $("#id_s_pv_d_3").ionRangeSlider({
     }
   }
 );
-$("#id_w_z_wp_3").ionRangeSlider({
-    onChange: function (data) {
-      $(`#id_w_z_wp_1`).data("ionRangeSlider").update({from:data.from});
-    }
-  }
-);
-$("#id_w_d_s_3").ionRangeSlider({
-    onChange: function (data) {
-      $(`#id_w_d_s_1`).data("ionRangeSlider").update({from:data.from});
-    }
-  }
-);
-$("#id_w_z_s_3").ionRangeSlider({
-    onChange: function (data) {
-      $(`#id_w_z_s_1`).data("ionRangeSlider").update({from:data.from});
-    }
-  }
-);
 $("#id_v_iv_3").ionRangeSlider({
     onChange: function (data) {
       $(`#id_v_iv_1`).data("ionRangeSlider").update({from:data.from});
-    }
-  }
-);
-$("#id_s_s_g_3").ionRangeSlider({
-    onChange: function (data) {
-      $(`#id_s_s_g_1`).data("ionRangeSlider").update({from:data.from});
     }
   }
 );
@@ -257,7 +235,8 @@ function createPercentagesOfPowerSources(msg) {
   const total = getTotalOfValues(values);
   const weights = getWeightsInPercent(values, total);
   const colors = getColorsByIds(ids);
-  updatePowerMix(weights, colors);
+  const icons = getIconsByIds(ids);
+  updatePowerMix(weights, colors, icons);
   return logMessage(msg);
 }
 
@@ -445,12 +424,21 @@ function getColorsByIds(ids) {
   return colors;
 }
 
-function updatePowerMix(weights, colors) {
+function getIconsByIds(ids) {
+  let icons = [];
+  for (let id of ids) {
+    const cleanedId = id.replace(/^id_/, "");
+    icons.push(powerIcons[cleanedId]);
+  }
+  return icons;
+}
+
+function updatePowerMix(weights, colors, icons) {
   const msg = "Unequal amount of weights and colors";
   if (weights.length !== colors.length) throw new Error(msg);
   let html = `<div class="power-mix__chart"><div class="power-mix__icons">`;
   for (const index of weights.keys()) {
-    html += `<div style="width: ${weights[index]}%;"><svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg"><path d="m4.3692 1.0589-3.4923 11.64h0.71107 2.6443v3.176h1.0589v-3.176h6.3516v3.176h1.0563v-3.176h3.3574l-3.4918-11.64h-8.1954zm0.78703 1.0583h2.7812v2.1151h-3.4163l0.6351-2.1151zm3.8401 0h2.7812l0.6351 2.1151h-3.4163v-2.1151zm-4.793 3.174h3.7341v2.1172h-4.3692l0.6351-2.1172zm4.793 0h3.7341l0.6351 2.1172h-4.3692v-2.1172zm-5.7459 3.1755h4.6871v3.176h-5.6405l0.95343-3.176zm5.7459 0h4.6871l0.95343 3.176h-5.6405v-3.176z"/></svg></div>`;
+    html += `<div style="width: ${weights[index]}%;">${icons[index]}</div>`;
   }
   html += `</div><div class="power-mix__colors">`;
   for (const index of weights.keys()) {
@@ -484,7 +472,9 @@ function addMarks(data, marks) {
   let html = "";
 
   for (let i = 0; i < marks.length; i++) {
-    const percent = convertToPercent(marks[i][1], data.min, data.max);
+    let percent = convertToPercent(marks[i][1], data.min, data.max);
+    // Fix percentage due to offset
+    percent = percent - 2.5 - (3.5 * percent / 100);
     html += `<span class="showcase__mark" style="left: ${percent}%">`;
     html += marks[i][0];
     html += '</span>';
