@@ -632,7 +632,9 @@ def heat_overview(simulation_id: int, distribution: str) -> dict:
             results["heat_demand"].index.get_level_values(0).map(lambda idx: "decentral" not in idx)
         ]
         production = results["heat_production"][
-            results["heat_production"].index.get_level_values(0).map(lambda idx: "decentral" not in idx)
+            results["heat_production"]
+            .index.get_level_values(0)
+            .map(lambda idx: "decentral" not in idx and idx not in ("ABW-wood-oven", "ABW-heat-import"))
         ]
     else:
         demand = results["heat_demand"][

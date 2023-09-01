@@ -181,12 +181,7 @@ class ElectricityCTSChart(SimulationChart):
 
 
 class HeatStructureChart(SimulationChart):
-    """Heat Overview Chart."""
-
-    lookup = "heat_decentralized"
-
-    def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.heat_overview(simulation_id=self.simulation_id, distribution="decentral")
+    """Heat Structure Chart."""
 
     def render(self) -> dict:  # noqa: D102
         mapping = {
@@ -203,10 +198,34 @@ class HeatStructureChart(SimulationChart):
             "Verbrauch Industrie": ("heat-demand-ind",),
         }
         for _i, item in enumerate(self.chart_options["series"]):
-            item["data"][0] = sum(self.chart_data["2022"].get(entry, 0.0) for entry in mapping[item["name"]])
-            item["data"][1] = sum(self.chart_data["user"].get(entry, 0.0) for entry in mapping[item["name"]])
-            item["data"][2] = sum(self.chart_data["2045"].get(entry, 0.0) for entry in mapping[item["name"]])
+            item["data"][0] = round(
+                sum(self.chart_data["2022"].get(entry, 0.0) for entry in mapping[item["name"]]) * 1e-3,
+            )
+            item["data"][1] = round(
+                sum(self.chart_data["user"].get(entry, 0.0) for entry in mapping[item["name"]]) * 1e-3,
+            )
+            item["data"][2] = round(
+                sum(self.chart_data["2045"].get(entry, 0.0) for entry in mapping[item["name"]]) * 1e-3,
+            )
         return self.chart_options
+
+
+class HeatStructureCentralChart(HeatStructureChart):
+    """Heat structure for centralized heat."""
+
+    lookup = "heat_centralized"
+
+    def get_chart_data(self):  # noqa: D102, ANN201
+        return calculations.heat_overview(simulation_id=self.simulation_id, distribution="central")
+
+
+class HeatStructureDecentralChart(HeatStructureChart):
+    """Heat structure for decentralized heat."""
+
+    lookup = "heat_decentralized"
+
+    def get_chart_data(self):  # noqa: D102, ANN201
+        return calculations.heat_overview(simulation_id=self.simulation_id, distribution="decentral")
 
 
 class GhgHistoryChart(SimulationChart):
@@ -780,8 +799,8 @@ CHARTS: dict[str, type[Chart]] = {
     "detailed_overview": DetailedOverviewChart,
     "ghg_reduction": GHGReductionChart,
     "electricity_overview": ElectricityOverviewChart,
-    "heat_decentralized": HeatStructureChart,
-    "heat_centralized": HeatStructureChart,
+    "heat_decentralized": HeatStructureDecentralChart,
+    "heat_centralized": HeatStructureCentralChart,
     "population_statusquo_region": PopulationRegionChart,
     "population_density_statusquo_region": PopulationDensityRegionChart,
     "employees_statusquo_region": EmployeesRegionChart,
