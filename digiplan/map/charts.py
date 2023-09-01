@@ -240,13 +240,13 @@ class HeatStructureChart(SimulationChart):
         }
         for _i, item in enumerate(self.chart_options["series"]):
             item["data"][0] = round(
-                sum(self.chart_data["2022"].get(entry, 0.0) for entry in mapping[item["name"]]) * 1e-3,
+                sum(self.chart_data["2045"].get(entry, 0.0) for entry in mapping[item["name"]]) * 1e-3,
             )
             item["data"][1] = round(
                 sum(self.chart_data["user"].get(entry, 0.0) for entry in mapping[item["name"]]) * 1e-3,
             )
             item["data"][2] = round(
-                sum(self.chart_data["2045"].get(entry, 0.0) for entry in mapping[item["name"]]) * 1e-3,
+                sum(self.chart_data["2022"].get(entry, 0.0) for entry in mapping[item["name"]]) * 1e-3,
             )
         return self.chart_options
 
