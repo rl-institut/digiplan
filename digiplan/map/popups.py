@@ -446,6 +446,14 @@ class PopulationPopup(RegionPopup):
         """Return population data."""
         return models.Population.quantity_per_municipality_per_year()
 
+    def get_municipality_value(self) -> Optional[float]:
+        """Return municipality value for status quo year."""
+        return self.detailed_data.loc[self.selected_id][2022]
+
+    def get_region_value(self) -> float:
+        """Return region value for status quo year."""
+        return self.detailed_data.sum()[2022]
+
 
 class PopulationDensityPopup(RegionPopup):
     """Popup to show Population Density."""
@@ -457,6 +465,16 @@ class PopulationDensityPopup(RegionPopup):
         """Return population data squared."""
         population = models.Population.quantity_per_municipality_per_year()
         return calculations.calculate_square_for_value(population)
+
+    def get_municipality_value(self) -> Optional[float]:
+        """Return municipality value for status quo year."""
+        return self.detailed_data.loc[self.selected_id][2022]
+
+    def get_region_value(self) -> float:
+        """Return region value for status quo year."""
+        return calculations.calculate_square_for_value(
+            pd.DataFrame(models.Population.quantity_per_municipality_per_year().sum()).transpose(),
+        ).sum()[2022]
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
