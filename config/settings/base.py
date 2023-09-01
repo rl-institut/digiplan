@@ -363,14 +363,14 @@ MAP_ENGINE_CHOROPLETHS = [
     setup.Choropleth(
         "capacity_square_statusquo",
         layers=["municipality"],
-        title=_("Installierte Leistung pro qm"),
-        unit=_("MW"),
+        title=_("Installierte Leistung"),
+        unit=_("MW/km²"),
     ),
     setup.Choropleth(
         "capacity_square_2045",
         layers=["municipality"],
-        title=_("Installierte Leistung pro qm"),
-        unit=_("MW"),
+        title=_("Installierte Leistung"),
+        unit=_("MW/km²"),
     ),
     setup.Choropleth("wind_turbines_statusquo", layers=["municipality"], title=_("Anzahl Windturbinen"), unit=""),
     setup.Choropleth("wind_turbines_2045", layers=["municipality"], title=_("Anzahl Windturbinen"), unit=""),
