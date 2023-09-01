@@ -208,6 +208,14 @@ class HeatDemand2045Test(SimulationTest):
         assert len(results.columns) == 3
 
 
+class RegionalIndependency(SimulationTest):
+    """Test regional dependency calculation."""
+
+    def test_regional_independency(self):  # noqa: D102
+        results = calculations.get_regional_independency(self.simulation_id)
+        assert len(results) == 4
+
+
 class ElectricityProductionFromBiomassTest(SimulationTest):
     """Test electricity production from biomass calculation."""
 

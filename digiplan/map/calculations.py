@@ -1,5 +1,7 @@
 """Module for calculations used for choropleths or charts."""
 
+from typing import Optional
+
 import pandas as pd
 from django.conf import settings
 from django.db.models import Sum
@@ -614,6 +616,43 @@ def renewable_electricity_production(simulation_id: int) -> pd.Series:
     return renewables
 
 
+def get_regional_independency(simulation_id: int) -> tuple[int, int, int, int]:
+    """Return electricity autarky for 2022 and user scenario."""
+    # 2022
+    demand = datapackage.get_hourly_electricity_demand(2022)
+    full_load_hours = datapackage.get_full_load_hours(2022)
+    capacities = datapackage.get_capacities(2022)
+    technology_mapping = {
+        "ABW-wind-onshore": "wind",
+        "ABW-solar-pv_ground": "pv_ground",
+        "ABW-solar-pv_rooftop": "pv_roof",
+        "ABW-hydro-ror": "ror",
+    }
+    renewables = []
+    for technology, mapped_key in technology_mapping.items():
+        renewables.append(
+            datapackage.get_profile(technology[4:]) * full_load_hours[mapped_key] * capacities[mapped_key],
+        )
+    renewables_summed_flow = pd.concat(renewables, axis=1).sum(axis=1)
+    # summary
+    independency_summary_2022 = round(renewables_summed_flow.sum() / demand.sum() * 100)
+    # temporal
+    independency_temporal_2022 = renewables_summed_flow - demand
+    independency_temporal_2022 = round(sum(independency_temporal_2022 > 0) / 8760 * 100)
+
+    # USER
+    results = get_results(
+        simulation_id,
+        {"renewable_flows": renewable_flows, "demand_flows": demand_flows},
+    )
+    # summary
+    independency_summary = round(results["renewable_flows"].sum().sum() / results["demand_flows"].sum().sum() * 100)
+    # temporal
+    independency_temporal = results["renewable_flows"].sum(axis=1) - results["demand_flows"].sum(axis=1)
+    independency_temporal = round(sum(independency_temporal > 0) / 8760 * 100)
+    return independency_summary_2022, independency_temporal_2022, independency_summary, independency_temporal
+
+
 def get_heat_production(distribution: str, year: int) -> dict:
     """Calculate hea production per technology for given distribution and year."""
     heat_demand_per_sector = datapackage.get_heat_demand(distribution=distribution)
@@ -755,3 +794,55 @@ class Capacities(core.Calculation):
             return capacities.unstack(2)["capacity"]  # noqa: PD010
         except KeyError:
             return pd.Series(dtype="object")
+
+
+class Flows(core.Calculation):
+    """Oemof postprocessing calculation to read flows."""
+
+    name = "flows"
+
+    def __init__(
+        self,
+        calculator: core.Calculator,
+        from_nodes: Optional[list[str]] = None,
+        to_nodes: Optional[list[str]] = None,
+    ) -> None:
+        """Init flows."""
+        if not from_nodes and not to_nodes:
+            msg = "Either from or to nodes must be set"
+            raise ValueError(msg)
+        self.from_nodes = from_nodes
+        self.to_nodes = to_nodes
+
+        super().__init__(calculator)
+
+    def calculate_result(self) -> pd.DataFrame:
+        """Read attribute "capacity" from parameters."""
+        from_node_flows = pd.DataFrame()
+        to_node_flows = pd.DataFrame()
+        if self.from_nodes:
+            from_node_flows = self.sequences.iloc[:, self.sequences.columns.get_level_values(0).isin(self.from_nodes)]
+            from_node_flows.columns = from_node_flows.columns.droplevel([1, 2])
+        if self.to_nodes:
+            to_node_flows = self.sequences.iloc[:, self.sequences.columns.get_level_values(1).isin(self.to_nodes)]
+            to_node_flows.columns = to_node_flows.columns.droplevel([0, 2])
+        return pd.concat([from_node_flows, to_node_flows], axis=1)
+
+
+renewable_flows = core.ParametrizedCalculation(
+    Flows,
+    {
+        "from_nodes": ["ABW-wind-onshore", "ABW-solar-pv_rooftop", "ABW-solar-pv_ground", "ABW-hydro-ror"],
+    },
+)
+
+demand_flows = core.ParametrizedCalculation(
+    Flows,
+    {
+        "to_nodes": [
+            "ABW-electricity-demand_hh",
+            "ABW-electricity-demand_cts",
+            "ABW-electricity-demand_ind",
+        ],
+    },
+)

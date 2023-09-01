@@ -189,6 +189,22 @@ class ElectricityOverviewChart(SimulationChart):
         return self.chart_options
 
 
+class ElectricityAutarkyChart(SimulationChart):
+    """Chart for electricity autarky."""
+
+    lookup = "electricity_autarky"
+
+    def get_chart_data(self):  # noqa: ANN201
+        """Get chart data from electricity overview calculation."""
+        return calculations.get_regional_independency(self.simulation_id)
+
+    def render(self) -> dict:  # noqa: D102
+        for i, item in enumerate(self.chart_options["series"]):
+            item["data"][0] = self.chart_data[i + 2]
+            item["data"][1] = self.chart_data[i]
+        return self.chart_options
+
+
 class ElectricityCTSChart(SimulationChart):
     """Electricity CTS Chart. Shows greenhouse gas emissions."""
 
@@ -824,6 +840,7 @@ CHARTS: dict[str, type[Chart]] = {
     "detailed_overview": DetailedOverviewChart,
     "ghg_reduction": GHGReductionChart,
     "electricity_overview": ElectricityOverviewChart,
+    "electricity_autarky": ElectricityAutarkyChart,
     "heat_decentralized": HeatStructureDecentralChart,
     "heat_centralized": HeatStructureCentralChart,
     "population_statusquo_region": PopulationRegionChart,

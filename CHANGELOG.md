@@ -6,6 +6,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+- electricity autarky chart
 - import and export to electricity overview chart
 - heat chart overview
 - tour explaining statusquo, settings and results

@@ -35,6 +35,16 @@ def get_power_demand(sector: Optional[str] = None) -> dict[str, pd.DataFrame]:
     return demand
 
 
+def get_hourly_electricity_demand(year: int) -> pd.Series:
+    """Return hourly electricity demand per sector."""
+    demand_per_sector = get_power_demand()
+    demand_profile = get_electricity_demand_profile()
+    demand = []
+    for sector, demand_sector_per_mun in demand_per_sector.items():
+        demand.append(demand_profile[sector] * demand_sector_per_mun[str(year)].sum())
+    return pd.concat(demand, axis=1).sum(axis=1)
+
+
 def get_heat_demand(sector: Optional[str] = None, distribution: Optional[str] = None) -> dict[str, pd.DataFrame]:
     """Return heat demand for given sector or all sectors."""
     sectors = (sector,) if sector else ("hh", "cts", "ind")
@@ -101,6 +111,20 @@ def get_heat_demand_profile(
                 OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "sequences" / f"heat_{dist}-demand_{sec}_profile.csv"
             )
             demand[sec][dist] = pd.read_csv(demand_filename, sep=";")[f"ABW-heat_{dist}-demand_{sec}-profile"]
+    return demand
+
+
+def get_electricity_demand_profile(
+    sector: Optional[str] = None,
+) -> dict[str, pd.DataFrame]:
+    """Return heat demand for given sector and distribution."""
+    sectors = (sector,) if sector else ("hh", "cts", "ind")
+    demand = defaultdict(dict)
+    for sec in sectors:
+        demand_filename = (
+            OEMOF_DIR / settings.OEMOF_SCENARIO / "data" / "sequences" / f"electricity-demand_{sec}_profile.csv"
+        )
+        demand[sec] = pd.read_csv(demand_filename, sep=";")[f"ABW-electricity-demand_{sec}-profile"]
     return demand
 
 

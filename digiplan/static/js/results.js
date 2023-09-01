@@ -9,6 +9,7 @@ const SIMULATION_CHECK_TIME = 5000;
 
 const resultCharts = {
     "electricity_overview": "electricity_overview_chart",
+    "electricity_autarky": "electricity_autarky_chart",
     "ghg_reduction": "ghg_reduction_chart",
     "heat_centralized": "heat_centralized_chart",
     "heat_decentralized": "heat_decentralized_chart",
