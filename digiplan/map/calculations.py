@@ -661,6 +661,19 @@ def get_heat_production(distribution: str, year: int) -> dict:
     return {tech: demand * share for tech, share in heat_shares.items()}
 
 
+def get_reduction(simulation_id: int) -> tuple[int, int]:
+    """Return electricity reduction from renewables and imports."""
+    results = get_results(
+        simulation_id,
+        {"renewables": reduction_from_renewables, "imports": reduction_from_imports},
+    )
+    reduction = 2425.9
+    res_reduction = results["renewables"].sum()
+    import_reduction = results["imports"].sum()
+    summed_reduction = res_reduction + import_reduction
+    return round(import_reduction / summed_reduction * reduction), round(res_reduction / summed_reduction * reduction)
+
+
 def heat_overview(simulation_id: int, distribution: str) -> dict:
     """
     Return data for heat overview chart.
@@ -777,6 +790,33 @@ methane_production = core.ParametrizedCalculation(
     {
         "to_nodes": [
             "ABW-ch4",
+        ],
+    },
+)
+
+reduction_from_renewables = core.ParametrizedCalculation(
+    calculations.AggregatedFlows,
+    {
+        "from_nodes": [
+            "ABW-wind-onshore",
+            "ABW-pv_rooftop",
+            "ABW-pv_ground",
+            "ABW-hydro-ror",
+            "ABW-solar-thermalcollector_central",
+            "ABW-solar-thermalcollector_decentral",
+        ],
+    },
+)
+
+reduction_from_imports = core.ParametrizedCalculation(
+    calculations.AggregatedFlows,
+    {
+        "from_nodes": [
+            "ABW-electricity-import",
+            "ABW-ch4-import",
+            "ABW-wood-shortage",
+            "ABW-lignite-shortage",
+            "ABW-biomass-shortage",
         ],
     },
 )

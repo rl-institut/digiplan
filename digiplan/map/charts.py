@@ -137,15 +137,15 @@ class GHGReductionChart(SimulationChart):
     lookup = "ghg_reduction"
 
     def get_chart_data(self):  # noqa: D102, ANN201
-        return calculations.ghg_reduction(simulation_id=self.simulation_id)
+        return calculations.get_reduction(simulation_id=self.simulation_id)
 
     def render(self) -> dict:  # noqa: D102
         # Enter import and energy from renewables
         for i, item in enumerate(self.chart_options["series"][7:9]):
-            item["data"][1] = self.chart_data.iloc[i]
+            item["data"][1] = self.chart_data[i]
         # Calculate emission offset
         summed_emissions_2019 = sum(item["data"][0] for item in self.chart_options["series"][:7])
-        self.chart_options["series"][0]["data"][1] = summed_emissions_2019 - self.chart_data.sum()
+        self.chart_options["series"][0]["data"][1] = summed_emissions_2019 - sum(self.chart_data)
         return self.chart_options
 
 

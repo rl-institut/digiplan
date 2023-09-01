@@ -25,6 +25,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - remove transport sector
 
 ### Fixed
+- ghg reduction chart
 - slider mark at wrong position
 - reduce number of attributes in unit popups
 - add missing German texts
