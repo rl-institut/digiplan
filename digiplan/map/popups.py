@@ -483,7 +483,7 @@ class EmployeesPopup(RegionPopup):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Beschäftigte")
-        chart_options["yAxis"]["name"] = "#"
+        chart_options["yAxis"]["name"] = ""
         del chart_options["series"][0]["name"]
         return chart_options
 
@@ -505,7 +505,7 @@ class CompaniesPopup(RegionPopup):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Betriebe")
-        chart_options["yAxis"]["name"] = "#"
+        chart_options["yAxis"]["name"] = ""
         del chart_options["series"][0]["name"]
         return chart_options
 
@@ -516,7 +516,7 @@ class NumberWindturbinesPopup(RegionPopup):
     lookup = "wind_turbines"
     title = _("Number of wind turbines")
     description = _("Description for number of wind turbines")
-    unit = "#"
+    unit = ""
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return quantity of wind turbines per municipality (index)."""
@@ -533,7 +533,7 @@ class NumberWindturbines2045Popup(RegionPopup):
     lookup = "wind_turbines"
     title = _("Number of wind turbines")
     description = _("Description for number of wind turbines")
-    unit = "#"
+    unit = ""
 
     def get_detailed_data(self) -> pd.DataFrame:
         """Return quantity of wind turbines per municipality (index)."""
@@ -812,7 +812,7 @@ class BatteriesPopup(RegionPopup):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Anzahl Batteriespeicher")
-        chart_options["yAxis"]["name"] = "#"
+        chart_options["yAxis"]["name"] = ""
         del chart_options["series"][0]["name"]
         return chart_options
 

@@ -334,7 +334,7 @@ class EmployeesRegionChart(Chart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = "#"
+        chart_options["yAxis"]["name"] = "Beschäftigte"
         del chart_options["series"][0]["name"]
         return chart_options
 
@@ -352,7 +352,7 @@ class CompaniesRegionChart(Chart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = "#"
+        chart_options["yAxis"]["name"] = "Betriebe"
         del chart_options["series"][0]["name"]
         return chart_options
 
@@ -613,7 +613,7 @@ class WindTurbinesSquare2045RegionChart(SimulationChart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = "#"
+        chart_options["yAxis"]["name"] = ""
         chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 

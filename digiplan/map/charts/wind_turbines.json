@@ -17,7 +17,7 @@
   "yAxis": {
     "type": "value",
     "show": true,
-    "name": "#",
+    "name": "",
     "nameLocation": "end",
     "nameTextStyle": "Roboto"
   },
