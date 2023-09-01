@@ -349,11 +349,11 @@ MAP_ENGINE_ZOOM_LEVELS = {
 }
 
 MAP_ENGINE_CHOROPLETHS = [
-    setup.Choropleth("population_statusquo", layers=["municipality"], title=_("Einwohner_innenzahl"), unit=_("EW")),
+    setup.Choropleth("population_statusquo", layers=["municipality"], title=_("EinwohnerInnenzahl"), unit=_("EW")),
     setup.Choropleth(
         "population_density_statusquo",
         layers=["municipality"],
-        title=_("Einwohner_innenzahl pro km²"),
+        title=_("EinwohnerInnenzahl pro km²"),
         unit=_(""),
     ),
     setup.Choropleth("employees_statusquo", layers=["municipality"], title=_("Beschäftigte"), unit=""),

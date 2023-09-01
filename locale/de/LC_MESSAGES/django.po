@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-30 13:11+0000\n"
+"POT-Creation-Date: 2023-09-01 10:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgid "German"
 msgstr "Deutsch"
 
 #: config/settings/base.py:352
-msgid "Einwohner_innenzahl"
+msgid "EinwohnerInnenzahl"
 msgstr ""
 
 #: config/settings/base.py:352
@@ -35,7 +35,7 @@ msgid "EW"
 msgstr ""
 
 #: config/settings/base.py:356
-msgid "Einwohner_innenzahl pro km²"
+msgid "EinwohnerInnenzahl pro km²"
 msgstr ""
 
 #: config/settings/base.py:359 digiplan/map/popups.py:473
@@ -51,17 +51,18 @@ msgid "Betriebe"
 msgstr ""
 
 #: config/settings/base.py:361 config/settings/base.py:362
+#: config/settings/base.py:366 config/settings/base.py:372
 msgid "Installierte Leistung"
 msgstr ""
 
 #: config/settings/base.py:361 config/settings/base.py:362
-#: config/settings/base.py:367 config/settings/base.py:373
-#: digiplan/map/charts.py:367 digiplan/map/charts.py:390
+#: digiplan/map/charts.py:339 digiplan/map/charts.py:370
 msgid "MW"
 msgstr ""
 
-#: config/settings/base.py:366 config/settings/base.py:372
-msgid "Installierte Leistung pro qm"
+#: config/settings/base.py:367 config/settings/base.py:373
+#: digiplan/map/popups.py:259 digiplan/map/popups.py:278
+msgid "MW/km²"
 msgstr ""
 
 #: config/settings/base.py:375 config/settings/base.py:376
@@ -79,9 +80,9 @@ msgstr ""
 #: config/settings/base.py:393 config/settings/base.py:399
 #: config/settings/base.py:435 config/settings/base.py:441
 #: config/settings/base.py:459 config/settings/base.py:465
-#: digiplan/map/charts.py:408 digiplan/map/charts.py:591
-#: digiplan/map/charts.py:610 digiplan/map/charts.py:682
-#: digiplan/map/charts.py:701 digiplan/map/popups.py:304
+#: digiplan/map/charts.py:388 digiplan/map/charts.py:581
+#: digiplan/map/charts.py:600 digiplan/map/charts.py:672
+#: digiplan/map/charts.py:691 digiplan/map/popups.py:304
 #: digiplan/map/popups.py:321 digiplan/map/popups.py:381
 #: digiplan/map/popups.py:662 digiplan/map/popups.py:725
 #: digiplan/map/popups.py:748
@@ -98,9 +99,9 @@ msgstr ""
 
 #: config/settings/base.py:411 config/settings/base.py:417
 #: config/settings/base.py:423 config/settings/base.py:429
-#: config/settings/base.py:489 digiplan/map/charts.py:427
-#: digiplan/map/charts.py:467 digiplan/map/charts.py:489
-#: digiplan/map/charts.py:791 digiplan/map/popups.py:362
+#: config/settings/base.py:489 digiplan/map/charts.py:407
+#: digiplan/map/charts.py:447 digiplan/map/charts.py:469
+#: digiplan/map/charts.py:781 digiplan/map/popups.py:362
 #: digiplan/map/popups.py:407 digiplan/map/popups.py:426
 #: digiplan/map/popups.py:837
 msgid "MWh"
@@ -122,8 +123,8 @@ msgstr ""
 
 #: config/settings/base.py:447 config/settings/base.py:453
 #: config/settings/base.py:471 config/settings/base.py:477
-#: digiplan/map/charts.py:633 digiplan/map/charts.py:664
-#: digiplan/map/charts.py:724 digiplan/map/charts.py:755
+#: digiplan/map/charts.py:623 digiplan/map/charts.py:654
+#: digiplan/map/charts.py:714 digiplan/map/charts.py:745
 #: digiplan/map/popups.py:680 digiplan/map/popups.py:707
 #: digiplan/map/popups.py:766 digiplan/map/popups.py:793
 msgid "kWh"
@@ -166,15 +167,15 @@ msgstr "Strombedarf GDP"
 msgid "Electricity Industry Demand"
 msgstr "Strombedarf Industrie"
 
-#: digiplan/map/charts.py:277 digiplan/map/popups.py:465
+#: digiplan/map/charts.py:245 digiplan/map/popups.py:465
 msgid "EW/km²"
 msgstr ""
 
-#: digiplan/map/charts.py:445 digiplan/map/popups.py:345
+#: digiplan/map/charts.py:425 digiplan/map/popups.py:345
 msgid "%"
 msgstr ""
 
-#: digiplan/map/charts.py:773
+#: digiplan/map/charts.py:763
 msgid "Anzahl"
 msgstr ""
 
@@ -572,10 +573,6 @@ msgstr "Batteriespeicher"
 
 #: digiplan/map/popups.py:258 digiplan/map/popups.py:277
 msgid "installierte Leistung nach Typ"
-msgstr ""
-
-#: digiplan/map/popups.py:259 digiplan/map/popups.py:278
-msgid "MW/km²"
 msgstr ""
 
 #: digiplan/map/popups.py:295 digiplan/map/popups.py:312
@@ -1179,8 +1176,8 @@ msgstr ""
 
 #: digiplan/templates/components/panel_1_today.html:70
 #: digiplan/templates/components/panel_3_results.html:56
-msgid "Installed Renewable Capacity per km² (MW)"
-msgstr "Installierte Leistung EE je km² (MW)"
+msgid "Installed Renewable Capacity (MW/km²)"
+msgstr "Installierte Leistung EE (MW/km²)"
 
 #: digiplan/templates/components/panel_1_today.html:73
 #: digiplan/templates/components/panel_1_today.html:74
