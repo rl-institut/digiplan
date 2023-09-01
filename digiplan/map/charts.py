@@ -481,7 +481,7 @@ class Energy2045RegionChart(SimulationChart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = _("MWh")
+        chart_options["yAxis"]["name"] = _("GWh")
         chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
@@ -525,6 +525,40 @@ class EnergyCapitaRegionChart(Chart):
         return chart_options
 
 
+class EnergyCapita2045RegionChart(SimulationChart):
+    """Chart for regional energy."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        status_quo_data = (
+            calculations.calculate_capita_for_value(
+                pd.DataFrame(calculations.energies_per_municipality().sum()).transpose(),
+            ).sum()
+            * 1e3
+        ).round(1)
+        future_data = (
+            (
+                calculations.calculate_capita_for_value(
+                    pd.DataFrame(calculations.energies_per_municipality_2045(self.simulation_id).sum()).transpose(),
+                ).sum()
+            )
+            .astype(float)
+            .round(1)
+        )
+        future_data = future_data.round(1)
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = _("MWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        return chart_options
+
+
 class EnergySquareRegionChart(Chart):
     """Chart for regional energy shares per square meter."""
 
@@ -544,6 +578,40 @@ class EnergySquareRegionChart(Chart):
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("MWh")
+        return chart_options
+
+
+class EnergySquare2045RegionChart(SimulationChart):
+    """Chart for regional energy shares per square meter."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> None:
+        """Calculate capacities for whole region."""
+        status_quo_data = (
+            calculations.calculate_square_for_value(
+                pd.DataFrame(calculations.energies_per_municipality().sum()).transpose(),
+            ).sum()
+            * 1e3
+        ).round(1)
+        future_data = (
+            (
+                calculations.calculate_square_for_value(
+                    pd.DataFrame(calculations.energies_per_municipality_2045(self.simulation_id).sum()).transpose(),
+                ).sum()
+            )
+            .astype(float)
+            .round(1)
+        )
+        future_data = future_data.round(1)
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = _("MWh")
+        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
         return chart_options
 
 
@@ -889,7 +957,9 @@ CHARTS: dict[str, type[Chart]] = {
     "energy_2045_region": Energy2045RegionChart,
     "energy_share_statusquo_region": EnergyShareRegionChart,
     "energy_capita_statusquo_region": EnergyCapitaRegionChart,
+    "energy_capita_2045_region": EnergyCapita2045RegionChart,
     "energy_square_statusquo_region": EnergySquareRegionChart,
+    "energy_square_2045_region": EnergySquare2045RegionChart,
     "wind_turbines_statusquo_region": WindTurbinesRegionChart,
     "wind_turbines_2045_region": WindTurbines2045RegionChart,
     "wind_turbines_square_statusquo_region": WindTurbinesSquareRegionChart,
