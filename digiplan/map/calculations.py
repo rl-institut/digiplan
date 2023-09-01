@@ -188,7 +188,7 @@ def energies_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
         "ABW-hydro-ror": "hydro",
         "ABW-biomass": "biomass",
     }
-    renewables.index = renewables.index.droplevel(1).map(mapping)
+    renewables.index = renewables.index.droplevel([1, 2]).map(mapping)
     renewables = renewables.reindex(["wind", "pv_roof", "pv_ground", "hydro"])
 
     parameters = Simulation.objects.get(pk=simulation_id).parameters

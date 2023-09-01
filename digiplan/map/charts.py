@@ -381,7 +381,7 @@ class Capacity2045RegionChart(SimulationChart):
     def get_chart_data(self) -> list:
         """Calculate capacities for whole region."""
         status_quo_data = calculations.capacities_per_municipality().sum().round(1)
-        future_data = calculations.capacities_per_municipality_2045(self.simulation_id).sum().round(1)
+        future_data = calculations.capacities_per_municipality_2045(self.simulation_id).sum().astype(float).round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -434,6 +434,7 @@ class CapacitySquare2045RegionChart(SimulationChart):
                 pd.DataFrame(calculations.capacities_per_municipality_2045(self.simulation_id).sum()).transpose(),
             )
             .sum()
+            .astype(float)
             .round(2)
         )
         return list(zip(status_quo_data, future_data))
@@ -472,7 +473,8 @@ class Energy2045RegionChart(SimulationChart):
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
         status_quo_data = calculations.energies_per_municipality().sum().round(1)
-        future_data = calculations.energies_per_municipality_2045(self.simulation_id).sum().round(1)
+        future_data = calculations.energies_per_municipality_2045(self.simulation_id).sum().astype(float) * 1e-3
+        future_data = future_data.round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -665,7 +667,9 @@ class ElectricityDemand2045RegionChart(SimulationChart):
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
         status_quo_data = calculations.electricity_demand_per_municipality().sum().round(1)
-        future_data = calculations.electricity_demand_per_municipality_2045(self.simulation_id).sum().round(1)
+        future_data = (
+            calculations.electricity_demand_per_municipality_2045(self.simulation_id).sum().astype(float).round(1)
+        )
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -713,13 +717,17 @@ class ElectricityDemandCapita2045RegionChart(SimulationChart):
             * 1e6
         ).round(1)
         future_data = (
-            calculations.calculate_capita_for_value(
-                pd.DataFrame(
-                    calculations.electricity_demand_per_municipality_2045(self.simulation_id).sum(),
-                ).transpose(),
-            ).sum()
-            * 1e6
-        ).round(1)
+            (
+                calculations.calculate_capita_for_value(
+                    pd.DataFrame(
+                        calculations.electricity_demand_per_municipality_2045(self.simulation_id).sum(),
+                    ).transpose(),
+                ).sum()
+                * 1e6
+            )
+            .astype(float)
+            .round(1)
+        )
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -756,7 +764,7 @@ class HeatDemand2045RegionChart(SimulationChart):
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
         status_quo_data = calculations.heat_demand_per_municipality().sum().round(1)
-        future_data = calculations.heat_demand_per_municipality_2045(self.simulation_id).sum().round(1)
+        future_data = calculations.heat_demand_per_municipality_2045(self.simulation_id).sum().astype(float).round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -804,13 +812,17 @@ class HeatDemandCapita2045RegionChart(SimulationChart):
             * 1e6
         ).round(1)
         future_data = (
-            calculations.calculate_capita_for_value(
-                pd.DataFrame(
-                    calculations.heat_demand_per_municipality_2045(self.simulation_id).sum(),
-                ).transpose(),
-            ).sum()
-            * 1e6
-        ).round(1)
+            (
+                calculations.calculate_capita_for_value(
+                    pd.DataFrame(
+                        calculations.heat_demand_per_municipality_2045(self.simulation_id).sum(),
+                    ).transpose(),
+                ).sum()
+                * 1e6
+            )
+            .astype(float)
+            .round(1)
+        )
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:

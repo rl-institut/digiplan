@@ -325,7 +325,7 @@ class Energy2045Popup(RegionPopup):
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
         status_quo_data = calculations.energies_per_municipality().loc[self.selected_id]
-        future_data = super().get_chart_data()
+        future_data = super().get_chart_data() * 1e-3
         return list(zip(status_quo_data, future_data))
 
 
@@ -387,7 +387,7 @@ class EnergyCapita2045Popup(RegionPopup):
         status_quo_data = calculations.calculate_capita_for_value(calculations.energies_per_municipality()).loc[
             self.selected_id
         ]
-        future_data = super().get_chart_data()
+        future_data = super().get_chart_data() * 1e-3
         return list(zip(status_quo_data, future_data))
 
 
@@ -432,7 +432,7 @@ class EnergySquare2045Popup(RegionPopup):
         status_quo_data = calculations.calculate_square_for_value(calculations.energies_per_municipality()).loc[
             self.selected_id
         ]
-        future_data = super().get_chart_data()
+        future_data = super().get_chart_data() * 1e-3
         return list(zip(status_quo_data, future_data))
 
 
