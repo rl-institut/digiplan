@@ -231,7 +231,7 @@ class Capacity2045Popup(RegionPopup):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
         return chart_options
 
     def get_chart_data(self) -> Iterable:
@@ -276,7 +276,7 @@ class CapacitySquare2045Popup(RegionPopup):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("installierte Leistung nach Typ")
         chart_options["yAxis"]["name"] = _("MW/km²")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
         return chart_options
 
     def get_chart_data(self) -> Iterable:
@@ -319,7 +319,7 @@ class Energy2045Popup(RegionPopup):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Energieanteile pro Technologie")
         chart_options["yAxis"]["name"] = _("GWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
         return chart_options
 
     def get_chart_data(self) -> Iterable:
@@ -379,7 +379,7 @@ class EnergyCapita2045Popup(RegionPopup):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Energieanteile pro Technologie")
         chart_options["yAxis"]["name"] = _("GWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
         return chart_options
 
     def get_chart_data(self) -> Iterable:
@@ -424,7 +424,7 @@ class EnergySquare2045Popup(RegionPopup):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Energieanteile pro km²")
         chart_options["yAxis"]["name"] = _("MWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
         return chart_options
 
     def get_chart_data(self) -> Iterable:
@@ -570,7 +570,7 @@ class NumberWindturbines2045Popup(RegionPopup):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
         return chart_options
 
     def get_chart_data(self) -> Iterable:
@@ -629,7 +629,7 @@ class NumberWindturbinesSquare2045Popup(RegionPopup):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Windturbinen pro km²")
         chart_options["yAxis"]["name"] = _("WT/km²")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
         return chart_options
 
     def get_chart_data(self) -> Iterable:
@@ -678,7 +678,7 @@ class ElectricityDemand2045Popup(RegionPopup):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Strombedarf")
         chart_options["yAxis"]["name"] = _("GWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
         return chart_options
 
 
@@ -770,7 +770,7 @@ class HeatDemand2045Popup(RegionPopup):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Wärmebedarf")
         chart_options["yAxis"]["name"] = _("GWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
         return chart_options
 
 
@@ -821,7 +821,7 @@ class HeatDemandCapita2045Popup(RegionPopup):
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Wärmebedarf je EinwohnerIn")
         chart_options["yAxis"]["name"] = _("kWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
         return chart_options
 
 
