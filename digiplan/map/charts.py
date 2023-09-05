@@ -387,7 +387,7 @@ class Capacity2045RegionChart(SimulationChart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         del chart_options["title"]["text"]
         return chart_options
 
@@ -442,7 +442,7 @@ class CapacitySquare2045RegionChart(SimulationChart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         chart_options["yAxis"]["name"] = _("MW")
         del chart_options["title"]["text"]
         return chart_options
@@ -482,7 +482,7 @@ class Energy2045RegionChart(SimulationChart):
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("GWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 
@@ -555,7 +555,7 @@ class EnergyCapita2045RegionChart(SimulationChart):
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("MWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 
@@ -611,7 +611,7 @@ class EnergySquare2045RegionChart(SimulationChart):
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("MWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 
@@ -645,7 +645,7 @@ class WindTurbines2045RegionChart(SimulationChart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
         del chart_options["title"]["text"]
         return chart_options
 
@@ -706,7 +706,7 @@ class WindTurbinesSquare2045RegionChart(SimulationChart):
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = ""
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
         return chart_options
 
 
@@ -745,7 +745,7 @@ class ElectricityDemand2045RegionChart(SimulationChart):
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("GWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 
@@ -803,7 +803,7 @@ class ElectricityDemandCapita2045RegionChart(SimulationChart):
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("kWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 
@@ -840,7 +840,7 @@ class HeatDemand2045RegionChart(SimulationChart):
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("GWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 
@@ -898,7 +898,7 @@ class HeatDemandCapita2045RegionChart(SimulationChart):
         chart_options = super().get_chart_options()
         del chart_options["title"]["text"]
         chart_options["yAxis"]["name"] = _("kWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 

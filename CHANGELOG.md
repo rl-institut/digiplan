@@ -12,7 +12,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 
 ### Fixed
-
+- various fixes in charts, texts and units
 
 ## [0.6.0] - 2023-09-01
 ### Added

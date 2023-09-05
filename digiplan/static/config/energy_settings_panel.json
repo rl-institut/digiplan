@@ -22,19 +22,19 @@
   "s_w_4": {
     "class": "js-sidepanel-switch",
     "label": "{% trans 'Planabsicht nach STP Wind 2027' %}",
-    "tooltip": "{% trans 'Planabsicht der Regionalen Planungsgemeinschaft nach Entwurf für Sachlichen Teilplan Wind 2027 (ca. 3 % der Fläche).' %}",
+    "tooltip": "{% trans 'Planabsicht der Regionalen Planungsgemeinschaft nach Ideenkarte für Sachlichen Teilplan Wind 2027 (ca. 3 % der Fläche).' %}",
     "type": "switch"
   },
     "s_w_4_1": {
     "class": "js-sidepanel-switch",
     "label": "{% trans 'Vorranggebiete' %}",
-    "tooltip": "{% trans 'Vorranggebiete: Planabsicht der Regionalen Planungsgemeinschaft nach Entwurf für Sachlichen Teilplan Wind 2027 (ca. 2,7 % der Fläche).' %}",
+    "tooltip": "{% trans 'Vorranggebiete: Planabsicht der Regionalen Planungsgemeinschaft nach Ideenkarte für Sachlichen Teilplan Wind 2027 (ca. 2,7 % der Fläche).' %}",
     "type": "switch"
   },
     "s_w_4_2": {
     "class": "js-sidepanel-switch",
     "label": "{% trans 'Vorranggebiete Repowering' %}",
-    "tooltip": "{% trans 'Vorranggebiete für Repowering: Planabsicht der Regionalen Planungsgemeinschaft nach Entwurf für Sachlichen Teilplan Wind 2027 (ca. 0,3 % der Fläche).' %}",
+    "tooltip": "{% trans 'Vorranggebiete für Repowering: Planabsicht der Regionalen Planungsgemeinschaft nach Ideenkarte für Sachlichen Teilplan Wind 2027 (ca. 0,3 % der Fläche).' %}",
     "type": "switch"
   },
   "s_w_5": {

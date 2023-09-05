@@ -19,7 +19,7 @@
   "series": [
     {
       "type": "bar",
-      "barWidth": "16",
+      "barWidth": "60",
       "data": [5],
       "name": "Windenergieanlagen"
     }
