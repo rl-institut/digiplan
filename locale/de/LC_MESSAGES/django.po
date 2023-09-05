@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-01 10:40+0000\n"
+"POT-Creation-Date: 2023-09-04 13:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,14 +38,14 @@ msgstr ""
 msgid "EinwohnerInnenzahl pro km²"
 msgstr ""
 
-#: config/settings/base.py:359 digiplan/map/popups.py:473
-#: digiplan/map/popups.py:485
+#: config/settings/base.py:359 digiplan/map/popups.py:491
+#: digiplan/map/popups.py:503
 #: digiplan/templates/components/panel_1_today.html:45
 msgid "Beschäftigte"
 msgstr ""
 
-#: config/settings/base.py:360 digiplan/map/popups.py:495
-#: digiplan/map/popups.py:507
+#: config/settings/base.py:360 digiplan/map/popups.py:513
+#: digiplan/map/popups.py:525
 #: digiplan/templates/components/panel_1_today.html:46
 msgid "Betriebe"
 msgstr ""
@@ -56,7 +56,7 @@ msgid "Installierte Leistung"
 msgstr ""
 
 #: config/settings/base.py:361 config/settings/base.py:362
-#: digiplan/map/charts.py:339 digiplan/map/charts.py:370
+#: digiplan/map/charts.py:414 digiplan/map/charts.py:446
 msgid "MW"
 msgstr ""
 
@@ -80,12 +80,12 @@ msgstr ""
 #: config/settings/base.py:393 config/settings/base.py:399
 #: config/settings/base.py:435 config/settings/base.py:441
 #: config/settings/base.py:459 config/settings/base.py:465
-#: digiplan/map/charts.py:388 digiplan/map/charts.py:581
-#: digiplan/map/charts.py:600 digiplan/map/charts.py:672
-#: digiplan/map/charts.py:691 digiplan/map/popups.py:304
-#: digiplan/map/popups.py:321 digiplan/map/popups.py:381
-#: digiplan/map/popups.py:662 digiplan/map/popups.py:725
-#: digiplan/map/popups.py:748
+#: digiplan/map/charts.py:464 digiplan/map/charts.py:484
+#: digiplan/map/charts.py:726 digiplan/map/charts.py:747
+#: digiplan/map/charts.py:823 digiplan/map/charts.py:842
+#: digiplan/map/popups.py:304 digiplan/map/popups.py:321
+#: digiplan/map/popups.py:381 digiplan/map/popups.py:680
+#: digiplan/map/popups.py:749 digiplan/map/popups.py:772
 msgid "GWh"
 msgstr ""
 
@@ -99,11 +99,11 @@ msgstr ""
 
 #: config/settings/base.py:411 config/settings/base.py:417
 #: config/settings/base.py:423 config/settings/base.py:429
-#: config/settings/base.py:489 digiplan/map/charts.py:407
-#: digiplan/map/charts.py:447 digiplan/map/charts.py:469
-#: digiplan/map/charts.py:781 digiplan/map/popups.py:362
-#: digiplan/map/popups.py:407 digiplan/map/popups.py:426
-#: digiplan/map/popups.py:837
+#: config/settings/base.py:489 digiplan/map/charts.py:524
+#: digiplan/map/charts.py:557 digiplan/map/charts.py:580
+#: digiplan/map/charts.py:613 digiplan/map/charts.py:936
+#: digiplan/map/popups.py:362 digiplan/map/popups.py:407
+#: digiplan/map/popups.py:426 digiplan/map/popups.py:867
 msgid "MWh"
 msgstr ""
 
@@ -112,8 +112,8 @@ msgid "Gewonnene Energie aus EE je km²"
 msgstr ""
 
 #: config/settings/base.py:434 config/settings/base.py:440
-#: digiplan/map/popups.py:630 digiplan/map/popups.py:638
-#: digiplan/map/popups.py:647 digiplan/map/popups.py:661
+#: digiplan/map/popups.py:648 digiplan/map/popups.py:656
+#: digiplan/map/popups.py:665 digiplan/map/popups.py:679
 msgid "Strombedarf"
 msgstr ""
 
@@ -123,16 +123,16 @@ msgstr ""
 
 #: config/settings/base.py:447 config/settings/base.py:453
 #: config/settings/base.py:471 config/settings/base.py:477
-#: digiplan/map/charts.py:623 digiplan/map/charts.py:654
-#: digiplan/map/charts.py:714 digiplan/map/charts.py:745
-#: digiplan/map/popups.py:680 digiplan/map/popups.py:707
-#: digiplan/map/popups.py:766 digiplan/map/popups.py:793
+#: digiplan/map/charts.py:770 digiplan/map/charts.py:805
+#: digiplan/map/charts.py:865 digiplan/map/charts.py:900
+#: digiplan/map/popups.py:701 digiplan/map/popups.py:731
+#: digiplan/map/popups.py:793 digiplan/map/popups.py:823
 msgid "kWh"
 msgstr ""
 
 #: config/settings/base.py:458 config/settings/base.py:464
-#: digiplan/map/popups.py:716 digiplan/map/popups.py:724
-#: digiplan/map/popups.py:733 digiplan/map/popups.py:747
+#: digiplan/map/popups.py:740 digiplan/map/popups.py:748
+#: digiplan/map/popups.py:757 digiplan/map/popups.py:771
 msgid "Wärmebedarf"
 msgstr ""
 
@@ -140,42 +140,42 @@ msgstr ""
 msgid "Wärmebedarf pro EinwohnerIn"
 msgstr ""
 
-#: config/settings/base.py:482 digiplan/map/popups.py:802
-#: digiplan/map/popups.py:814
+#: config/settings/base.py:482 digiplan/map/popups.py:832
+#: digiplan/map/popups.py:844
 #: digiplan/templates/components/panel_1_today.html:98
 msgid "Anzahl Batteriespeicher"
 msgstr ""
 
-#: config/settings/base.py:488 digiplan/map/popups.py:824
-#: digiplan/map/popups.py:836
+#: config/settings/base.py:488 digiplan/map/popups.py:854
+#: digiplan/map/popups.py:866
 #: digiplan/templates/components/panel_1_today.html:99
 msgid "Kapazität Batteriespeicher"
 msgstr ""
 
-#: digiplan/map/calculations.py:218 digiplan/map/calculations.py:282
-#: digiplan/map/config.py:184
+#: digiplan/map/calculations.py:230 digiplan/map/calculations.py:287
+#: digiplan/map/config.py:183
 msgid "Electricity Household Demand"
 msgstr "Strombedarf Haushalte"
 
-#: digiplan/map/calculations.py:219 digiplan/map/calculations.py:283
-#: digiplan/map/config.py:185
+#: digiplan/map/calculations.py:231 digiplan/map/calculations.py:288
+#: digiplan/map/config.py:184
 msgid "Electricity CTS Demand"
 msgstr "Strombedarf GDP"
 
-#: digiplan/map/calculations.py:220 digiplan/map/calculations.py:284
-#: digiplan/map/config.py:186
+#: digiplan/map/calculations.py:232 digiplan/map/calculations.py:289
+#: digiplan/map/config.py:185
 msgid "Electricity Industry Demand"
 msgstr "Strombedarf Industrie"
 
-#: digiplan/map/charts.py:245 digiplan/map/popups.py:465
+#: digiplan/map/charts.py:320 digiplan/map/popups.py:483
 msgid "EW/km²"
 msgstr ""
 
-#: digiplan/map/charts.py:425 digiplan/map/popups.py:345
+#: digiplan/map/charts.py:502 digiplan/map/popups.py:345
 msgid "%"
 msgstr ""
 
-#: digiplan/map/charts.py:763
+#: digiplan/map/charts.py:918
 msgid "Anzahl"
 msgstr ""
 
@@ -204,31 +204,27 @@ msgstr "Wasserkraft"
 msgid "Biomass"
 msgstr "Biomasse"
 
-#: digiplan/map/config.py:183
-msgid "BEV"
-msgstr ""
-
-#: digiplan/map/config.py:187
+#: digiplan/map/config.py:186
 msgid "Electricity Household Heat Demand"
 msgstr "Strombedarf"
 
-#: digiplan/map/config.py:188
+#: digiplan/map/config.py:187
 msgid "Electricity CTS Heat Demand"
 msgstr "Strombedarf"
 
-#: digiplan/map/config.py:189
+#: digiplan/map/config.py:188
 msgid "Electricity Industry Heat Demand"
 msgstr "Strombedarf"
 
-#: digiplan/map/config.py:191
+#: digiplan/map/config.py:190
 msgid "CTS Heat Demand"
 msgstr "Wärmebedarf (GWh)"
 
-#: digiplan/map/config.py:192
+#: digiplan/map/config.py:191
 msgid "Household Heat Demand"
 msgstr ""
 
-#: digiplan/map/config.py:193
+#: digiplan/map/config.py:192
 msgid "Industry Heat Demand"
 msgstr "Strombedarf"
 
@@ -601,43 +597,43 @@ msgstr ""
 msgid "Energieanteile pro km²"
 msgstr ""
 
-#: digiplan/map/popups.py:464
+#: digiplan/map/popups.py:482
 msgid "Population density per year"
 msgstr "Bevölkerungsdichte"
 
-#: digiplan/map/popups.py:517 digiplan/map/popups.py:534
+#: digiplan/map/popups.py:535 digiplan/map/popups.py:552
 msgid "Number of wind turbines"
 msgstr "Anzahl Windenergieanlagen"
 
-#: digiplan/map/popups.py:518 digiplan/map/popups.py:535
+#: digiplan/map/popups.py:536 digiplan/map/popups.py:553
 msgid "Description for number of wind turbines"
 msgstr "Anzahl Windenergieanlagen je km²"
 
-#: digiplan/map/popups.py:579 digiplan/map/popups.py:612
+#: digiplan/map/popups.py:597 digiplan/map/popups.py:630
 msgid "Windturbinen pro km²"
 msgstr "Anzahl Windenergieanlagen je km²"
 
-#: digiplan/map/popups.py:580 digiplan/map/popups.py:613
+#: digiplan/map/popups.py:598 digiplan/map/popups.py:631
 msgid "WT/km²"
 msgstr "WEA/km²"
 
-#: digiplan/map/popups.py:639
+#: digiplan/map/popups.py:657
 msgid "ǴWh"
 msgstr ""
 
-#: digiplan/map/popups.py:671 digiplan/map/popups.py:679
-#: digiplan/map/popups.py:688 digiplan/map/popups.py:706
+#: digiplan/map/popups.py:689 digiplan/map/popups.py:700
+#: digiplan/map/popups.py:709 digiplan/map/popups.py:730
 msgid "Strombedarf je EinwohnerIn"
 msgstr ""
 
-#: digiplan/map/popups.py:757 digiplan/map/popups.py:765
-#: digiplan/map/popups.py:774 digiplan/map/popups.py:792
+#: digiplan/map/popups.py:781 digiplan/map/popups.py:792
+#: digiplan/map/popups.py:801 digiplan/map/popups.py:822
 msgid "Wärmebedarf je EinwohnerIn"
 msgstr ""
 
 #: digiplan/static/config/energy_settings_panel.json:6
 msgid "Windenergie (MW)"
-msgstr "Windenergie"
+msgstr ""
 
 #: digiplan/static/config/energy_settings_panel.json:12
 #, python-format
@@ -668,8 +664,8 @@ msgstr ""
 #: digiplan/static/config/energy_settings_panel.json:25
 #, python-format
 msgid ""
-"Planabsicht der Regionalen Planungsgemeinschaft nach Entwurf für Sachlichen "
-"Teilplan Wind 2027 (ca. 3 %% der Fläche)."
+"Planabsicht der Regionalen Planungsgemeinschaft nach Ideenkarte für "
+"Sachlichen Teilplan Wind 2027 (ca. 3 %% der Fläche)."
 msgstr ""
 
 #: digiplan/static/config/energy_settings_panel.json:30
@@ -679,8 +675,8 @@ msgstr ""
 #: digiplan/static/config/energy_settings_panel.json:31
 #, python-format
 msgid ""
-"Vorranggebiete: Planabsicht der Regionalen Planungsgemeinschaft nach Entwurf "
-"für Sachlichen Teilplan Wind 2027 (ca. 2,7 %% der Fläche)."
+"Vorranggebiete: Planabsicht der Regionalen Planungsgemeinschaft nach "
+"Ideenkarte für Sachlichen Teilplan Wind 2027 (ca. 2,7 %% der Fläche)."
 msgstr ""
 
 #: digiplan/static/config/energy_settings_panel.json:36
@@ -691,8 +687,8 @@ msgstr ""
 #, python-format
 msgid ""
 "Vorranggebiete für Repowering: Planabsicht der Regionalen "
-"Planungsgemeinschaft nach Entwurf für Sachlichen Teilplan Wind 2027 (ca. 0,3 "
-"%% der Fläche)."
+"Planungsgemeinschaft nach Ideenkarte für Sachlichen Teilplan Wind 2027 (ca. "
+"0,3 %% der Fläche)."
 msgstr ""
 
 #: digiplan/static/config/energy_settings_panel.json:42
@@ -835,7 +831,7 @@ msgid ""
 msgstr ""
 
 #: digiplan/static/config/energy_settings_panel.json:164
-#: digiplan/static/config/heat_settings_panel.json:17
+#: digiplan/static/config/heat_settings_panel.json:18
 #, python-format
 msgid "Haushalte (%%)"
 msgstr "Haushalte (%%)"
@@ -878,48 +874,48 @@ msgstr ""
 msgid "Anteil Wärmepumpen dezentral (%%)"
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:11
+#: digiplan/static/config/heat_settings_panel.json:12
 msgid ""
 "Energetischer Anteil von Wärmepumpen in dezentralen Heizungssystemen. Das "
 "dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien."
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:23
+#: digiplan/static/config/heat_settings_panel.json:25
 msgid ""
 "Anteil von Wärmepumpen für Verbraucher mit eigener Wärmeerzeugung im "
 "Haushaltssektor."
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:28
-#: digiplan/static/config/heat_settings_panel.json:86
+#: digiplan/static/config/heat_settings_panel.json:30
+#: digiplan/static/config/heat_settings_panel.json:91
 #, python-format
 msgid "Commercial, Trade, Services (%%)"
 msgstr "Gewerbe, Handel, Dienstleistungen (%%)"
 
-#: digiplan/static/config/heat_settings_panel.json:34
+#: digiplan/static/config/heat_settings_panel.json:37
 msgid ""
 "Anteil von Wärmepumpen für Verbraucher mit eigener Wärmeerzeugung im "
 "Gewerbe-, Handels- und Dienstleistungssektor."
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:39
-#: digiplan/static/config/heat_settings_panel.json:97
+#: digiplan/static/config/heat_settings_panel.json:42
+#: digiplan/static/config/heat_settings_panel.json:102
 #, python-format
 msgid "Industry (%%)"
 msgstr "Industrie (%%)"
 
-#: digiplan/static/config/heat_settings_panel.json:45
+#: digiplan/static/config/heat_settings_panel.json:49
 msgid ""
 "Anteil von Wärmepumpen für Verbraucher mit eigener Wärmeerzeugung in der "
 "Industrie."
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:51
+#: digiplan/static/config/heat_settings_panel.json:55
 #, python-format
 msgid "Anteil Wärmepumpen Fernwärme (%%)"
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:57
+#: digiplan/static/config/heat_settings_panel.json:62
 msgid ""
 "Energetischer Anteil von Wärmepumpen für Heizung, Warmwasser und "
 "Prozesswärme in Haushalten, GHD und Industrie in Fernwärmenetzen (Dessau-"
@@ -930,62 +926,62 @@ msgid ""
 "Wärmesysteme werden im Menü separat konfiguriert."
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:63
+#: digiplan/static/config/heat_settings_panel.json:68
 #, python-format
 msgid "Heat consumption (%%)"
 msgstr "Verbrauch (%%)"
 
-#: digiplan/static/config/heat_settings_panel.json:69
+#: digiplan/static/config/heat_settings_panel.json:74
 msgid ""
 "Relativer Wärmeverbrauch (Endenergie) von Haushalten, GHD und Industrie "
 "gegenüber heute. Das dargestellte Ziel für 2045 ist abgeleitet aus den BMWK "
 "Langfristszenarien."
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:75
+#: digiplan/static/config/heat_settings_panel.json:80
 #, python-format
 msgid "Households (%%)"
 msgstr "Haushalte (%%)"
 
-#: digiplan/static/config/heat_settings_panel.json:81
+#: digiplan/static/config/heat_settings_panel.json:86
 msgid ""
 "Umfasst Heizung, Warmwasser und Kochen in Haushalten mit eigener "
 "Wärmeerzeugung und in Fernwärmenetzen. Das dargestellte Ziel für 2045 ist "
 "abgeleitet aus den BMWK Langfristszenarien."
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:92
+#: digiplan/static/config/heat_settings_panel.json:97
 msgid ""
 "Umfasst Heizung und Warmwasser im Gewerbe-, Handels- und "
 "Dienstleistungssektor mit eigener Wärmeerzeugung und in Fernwärmenetzen. Das "
 "dargestellte Ziel für 2045 ist abgeleitet aus den BMWK Langfristszenarien."
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:103
+#: digiplan/static/config/heat_settings_panel.json:108
 msgid ""
 "Umfasst Heizwärme, Warmwasser und Prozesswärme in der Industrie mit eigener "
 "Wärmeerzeugung und in Fernwärmenetzen. Das dargestellte Ziel für 2045 ist "
 "abgeleitet aus den BMWK Langfristszenarien."
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:109
+#: digiplan/static/config/heat_settings_panel.json:114
 #, python-format
 msgid "Dezentrale Speicher: Zwischenspeicherung des tägl. Wärmebedarfs (%%)"
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:115
+#: digiplan/static/config/heat_settings_panel.json:120
 msgid ""
 "Wieviel des täglichen Wärmebedarfs in dezentralen Systemen (Heizung, "
 "Warmwasser und Prozesswärme) sollen in kleinen Warmwasserspeichern "
 "zwischengespeichert werden können?"
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:121
+#: digiplan/static/config/heat_settings_panel.json:126
 #, python-format
 msgid "Großwärmespeicher: Zwischenspeicherung des tägl. Wärmebedarfs (%%)"
 msgstr ""
 
-#: digiplan/static/config/heat_settings_panel.json:127
+#: digiplan/static/config/heat_settings_panel.json:132
 msgid ""
 "Wieviel des täglichen Wärmebedarfs in Fernwärmenetzen (Heizung, Warmwasser "
 "und Prozesswärme) sollen in großen Warmwasserspeichern zwischengespeichert "
