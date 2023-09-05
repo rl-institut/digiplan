@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-05 07:51+0000\n"
+"POT-Creation-Date: 2023-09-05 08:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1177,14 +1177,12 @@ msgstr "Installierte Leistung EE (MW/km²)"
 
 #: digiplan/templates/components/panel_1_today.html:73
 #: digiplan/templates/components/panel_1_today.html:74
-#: digiplan/templates/components/panel_3_results.html:59
 #: digiplan/templates/components/panel_3_results.html:60
 msgid "Number of Wind Turbines"
 msgstr "Anzahl Windenergieanlagen"
 
 #: digiplan/templates/components/panel_1_today.html:77
 #: digiplan/templates/components/panel_1_today.html:78
-#: digiplan/templates/components/panel_3_results.html:63
 #: digiplan/templates/components/panel_3_results.html:64
 msgid "Number of Wind Turbines per km²"
 msgstr "Anzahl Windenergieanlagen je km²"
@@ -1278,6 +1276,24 @@ msgstr "Wärme"
 #: digiplan/templates/components/panel_3_results.html:128
 msgid "Transportation"
 msgstr "Verkehr"
+
+#: digiplan/templates/components/panel_3_results.html:59
+msgid ""
+"Number of Wind Turbines. The number for your (future) scenario is determined "
+"from the installed capacity using a 6.5 MW turbine type."
+msgstr ""
+"Anzahl Windenergieanlagen. Die Anlagenanzahl in Deinem (Zukunfts-)Szenario "
+"wird aus der installierten Gesamtleistung berechnet, unter Verwendung einer "
+"Standardanlage mit einer Nennleistung von 6.5 MW."
+
+#: digiplan/templates/components/panel_3_results.html:63
+msgid ""
+"Number of Wind Turbines per km². The number for your (future) scenario is "
+"determined from the installed capacity using a 6.5 MW turbine type."
+msgstr ""
+"Anzahl Windenergieanlagen pro km². Die Anlagenanzahl in Deinem "
+"(Zukunfts-)Szenario wird aus der installierten Gesamtleistung berechnet, "
+"unter Verwendung einer Standardanlage mit einer Nennleistung von 6.5 MW."
 
 #: digiplan/templates/components/panel_3_results.html:86
 msgid "Inhabitants"
