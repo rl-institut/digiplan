@@ -9,7 +9,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 
 ### Changed
-
+- Remove locale EN
 
 ### Fixed
 - various fixes in charts, texts and units
