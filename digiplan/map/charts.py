@@ -503,6 +503,26 @@ class EnergyShareRegionChart(Chart):
         return chart_options
 
 
+class EnergyShare2045RegionChart(SimulationChart):
+    """Chart for regional energy shares."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> None:
+        """Calculate RES energy shares for whole region."""
+        status_quo_data = calculations.energy_shares_region().round(1)
+        future_data = calculations.energy_shares_2045_region(self.simulation_id).round(1)
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        del chart_options["title"]["text"]
+        chart_options["yAxis"]["name"] = _("%")
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
+        return chart_options
+
+
 class EnergyCapitaRegionChart(Chart):
     """Chart for regional energy shares per capita."""
 
@@ -956,6 +976,7 @@ CHARTS: dict[str, type[Chart]] = {
     "energy_statusquo_region": EnergyRegionChart,
     "energy_2045_region": Energy2045RegionChart,
     "energy_share_statusquo_region": EnergyShareRegionChart,
+    "energy_share_2045_region": EnergyShare2045RegionChart,
     "energy_capita_statusquo_region": EnergyCapitaRegionChart,
     "energy_capita_2045_region": EnergyCapita2045RegionChart,
     "energy_square_statusquo_region": EnergySquareRegionChart,

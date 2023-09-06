@@ -346,6 +346,30 @@ class EnergySharePopup(RegionPopup):
         return chart_options
 
 
+class EnergyShare2045Popup(RegionPopup):
+    """Popup to show energy shares."""
+
+    lookup = "capacity"
+    title = _("Anteil Energie aus EE")
+
+    def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
+        return calculations.energy_shares_2045_per_municipality(self.map_state["simulation_id"])
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = _("Energieanteile pro Technologie")
+        chart_options["yAxis"]["name"] = _("%")
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
+        return chart_options
+
+    def get_chart_data(self) -> Iterable:
+        """Create capacity chart data for SQ and future scenario."""
+        status_quo_data = calculations.energy_shares_per_municipality().loc[self.selected_id].round(1)
+        future_data = super().get_chart_data().round(1)
+        return list(zip(status_quo_data, future_data))
+
+
 class EnergyCapitaPopup(RegionPopup):
     """Popup to show energy shares per population."""
 
@@ -885,6 +909,7 @@ POPUPS: dict[str, type(popups.Popup)] = {
     "energy_statusquo": EnergyPopup,
     "energy_2045": Energy2045Popup,
     "energy_share_statusquo": EnergySharePopup,
+    "energy_share_2045": EnergyShare2045Popup,
     "energy_capita_statusquo": EnergyCapitaPopup,
     "energy_capita_2045": EnergyCapita2045Popup,
     "energy_square_statusquo": EnergySquarePopup,

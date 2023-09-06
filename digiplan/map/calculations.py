@@ -253,6 +253,41 @@ def electricity_demand_per_municipality(year: int = 2022) -> pd.DataFrame:
     return demands_per_sector * 1e-3
 
 
+def energy_shares_2045_per_municipality(simulation_id: int) -> pd.DataFrame:
+    """
+    Calculate energy shares of renewables from electric demand per municipality in 2045.
+
+    Returns
+    -------
+    pd.DataFrame
+        Energy share per municipality (index) and technology (column)
+    """
+    energies = energies_per_municipality_2045(simulation_id).mul(1e-3)
+    demands = electricity_demand_per_municipality_2045(simulation_id).sum(axis=1)
+    energy_shares = energies.div(demands, axis=0)
+    return energy_shares.astype(float).mul(1e2)
+
+
+def energy_shares_2045_region(simulation_id: int) -> pd.DataFrame:
+    """
+    Calculate energy shares of renewables from electric demand for region in 2045.
+
+    Like energy_shares_2045_per_municipality() but with weighted demand for
+    correct totals.
+
+    Returns
+    -------
+    pd.DataFrame
+        Energy share per municipality (index) and technology (column)
+    """
+    energies = energies_per_municipality_2045(simulation_id)
+    demands = electricity_demand_per_municipality_2045(simulation_id).sum(axis=1).mul(1e3)
+
+    demand_share = demands / demands.sum()
+    energy_shares = energies.div(demands, axis=0).mul(demand_share, axis=0).sum(axis=0)
+    return energy_shares.astype(float).mul(1e2)
+
+
 def electricity_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     """
     Calculate electricity demand per sector per municipality in GWh in 2045.
