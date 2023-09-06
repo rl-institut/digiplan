@@ -79,7 +79,12 @@ class Choropleth:
 
 class EnergyShareChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.energy_shares_per_municipality().sum(axis=1).to_dict()
+        return calculations.energy_shares_per_municipality().sum(axis=1).round().to_dict()
+
+
+class EnergyShare2045Choropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return calculations.energy_shares_2045_per_municipality(self.map_state["simulation_id"]).sum(axis=1).to_dict()
 
 
 class EnergyChoropleth(Choropleth):  # noqa: D101
@@ -271,6 +276,7 @@ CHOROPLETHS: dict[str, Union[Callable, type(Choropleth)]] = {
     "energy_statusquo": EnergyChoropleth,
     "energy_2045": Energy2045Choropleth,
     "energy_share_statusquo": EnergyShareChoropleth,
+    "energy_share_2045": EnergyShare2045Choropleth,
     "energy_capita_statusquo": EnergyCapitaChoropleth,
     "energy_capita_2045": EnergyCapita2045Choropleth,
     "energy_square_statusquo": EnergySquareChoropleth,

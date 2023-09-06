@@ -6,13 +6,14 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
-
+- RES share charts and choropleth for user scenario
 
 ### Changed
 
 
 ### Fixed
 - various fixes in charts, texts and units
+- RES share calculation for SQ
 
 ## [0.6.0] - 2023-09-01
 ### Added

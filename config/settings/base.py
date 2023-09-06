@@ -405,6 +405,12 @@ MAP_ENGINE_CHOROPLETHS = [
         unit="%",
     ),
     setup.Choropleth(
+        "energy_share_2045",
+        layers=["municipality"],
+        title=_("Anteil Erneuerbare Energien am Strombedarf"),
+        unit="%",
+    ),
+    setup.Choropleth(
         "energy_capita_statusquo",
         layers=["municipality"],
         title=_("Gewonnene Energie aus EE je EW"),
@@ -510,6 +516,7 @@ MAP_ENGINE_POPUPS = [
             "energy_statusquo",
             "energy_2045",
             "energy_share_statusquo",
+            "energy_share_2045",
             "energy_capita_statusquo",
             "energy_capita_2045",
             "energy_square_statusquo",
