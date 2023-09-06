@@ -336,7 +336,7 @@ class EnergySharePopup(RegionPopup):
     title = _("Anteil Energie aus EE")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.energy_shares_per_municipality()
+        return calculations.energy_shares_per_municipality().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""

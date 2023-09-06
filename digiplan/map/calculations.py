@@ -210,9 +210,28 @@ def energy_shares_per_municipality() -> pd.DataFrame:
     energies = energies_per_municipality()
     demands = datapackage.get_power_demand()
     total_demand = pd.concat([d["2022"] for d in demands.values()], axis=1).sum(axis=1)
+    energy_shares = energies.mul(1e3).div(total_demand, axis=0)
+    return energy_shares.mul(1e2)
+
+
+def energy_shares_region() -> pd.DataFrame:
+    """
+    Calculate energy shares of renewables from electric demand for region.
+
+    Like energy_shares_per_municipality() but with weighted demand for correct
+    totals.
+
+    Returns
+    -------
+    pd.DataFrame
+        Energy share per municipality (index) and technology (column)
+    """
+    energies = energies_per_municipality()
+    demands = datapackage.get_power_demand()
+    total_demand = pd.concat([d["2022"] for d in demands.values()], axis=1).sum(axis=1)
     total_demand_share = total_demand / total_demand.sum()
-    energies = energies.reindex(range(20))
-    return energies.mul(total_demand_share, axis=0)
+    energy_shares = energies.mul(1e3).div(total_demand, axis=0).mul(total_demand_share, axis=0).sum(axis=0)
+    return energy_shares.mul(1e2)
 
 
 def electricity_demand_per_municipality(year: int = 2022) -> pd.DataFrame:

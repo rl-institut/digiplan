@@ -487,13 +487,13 @@ class Energy2045RegionChart(SimulationChart):
 
 
 class EnergyShareRegionChart(Chart):
-    """Chart for regional energy shares."""
+    """Calculate RES energy shares for whole region."""
 
     lookup = "capacity"
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.energy_shares_per_municipality().sum().round(1)
+        return calculations.energy_shares_region().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
