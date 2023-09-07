@@ -15,6 +15,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - various fixes in charts, texts and units
 - RES share calculation for SQ
 - power and heat demand scaling for future scenario
+- swap mapping of PV roof and PV ground in result calculation
 
 ## [0.6.0] - 2023-09-01
 ### Added

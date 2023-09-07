@@ -139,8 +139,8 @@ def capacities_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
         results["capacities"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
     ]
     mapping = {
-        "ABW-solar-pv_ground": "pv_roof",
-        "ABW-solar-pv_rooftop": "pv_ground",
+        "ABW-solar-pv_ground": "pv_ground",
+        "ABW-solar-pv_rooftop": "pv_roof",
         "ABW-wind-onshore": "wind",
         "ABW-hydro-ror": "hydro",
         "ABW-biomass": "biomass",
@@ -182,8 +182,8 @@ def energies_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
         results["electricity_production"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
     ]
     mapping = {
-        "ABW-solar-pv_ground": "pv_roof",
-        "ABW-solar-pv_rooftop": "pv_ground",
+        "ABW-solar-pv_ground": "pv_ground",
+        "ABW-solar-pv_rooftop": "pv_roof",
         "ABW-wind-onshore": "wind",
         "ABW-hydro-ror": "hydro",
         "ABW-biomass": "biomass",
