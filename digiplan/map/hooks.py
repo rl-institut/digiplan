@@ -64,11 +64,10 @@ def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) ->
         Parameters for oemof with adapted demands
     """
     del data["s_v_1"]
-    year = "2045" if scenario == "scenario_2045" else "2022"
     for sector, slider in (("hh", "s_v_3"), ("cts", "s_v_4"), ("ind", "s_v_5")):
         demand = datapackage.get_power_demand(sector)[sector]
         logging.info(f"Adapting electricity demand at {sector=}.")
-        data[f"ABW-electricity-demand_{sector}"] = {"amount": float(demand[year].sum()) * data.pop(slider) / 100}
+        data[f"ABW-electricity-demand_{sector}"] = {"amount": float(demand["2022"].sum()) * data.pop(slider) / 100}
     return data
 
 
@@ -168,7 +167,7 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
         # Calculate demands per sector
         for sector in ("hh", "cts", "ind"):
             summed_demand = int(  # Convert to int, otherwise int64 is used
-                heat_demand_per_municipality[sector][distribution[:3]]["2045"].sum(),
+                heat_demand_per_municipality[sector][distribution[:3]]["2022"].sum(),
             )
             demand[sector] = heat_demand[sector][distribution] * summed_demand
             percentage = (
