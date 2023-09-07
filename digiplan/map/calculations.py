@@ -315,7 +315,7 @@ def electricity_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame
     }
     demand = demand.reindex(mappings.values())
     sector_shares = pd.DataFrame(
-        {sector: demands_per_sector[sector]["2045"] / demands_per_sector[sector]["2045"].sum() for sector in mappings},
+        {sector: demands_per_sector[sector]["2022"] / demands_per_sector[sector]["2022"].sum() for sector in mappings},
     )
     demand = sector_shares * demand.values
     demand.columns = demand.columns.map(lambda column: config.SIMULATION_DEMANDS[mappings[column]])
@@ -371,7 +371,7 @@ def heat_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     }
     demand = demand.reindex(mappings.values())
     sector_shares = pd.DataFrame(
-        {sector: demands_per_sector[sector]["2045"] / demands_per_sector[sector]["2045"].sum() for sector in mappings},
+        {sector: demands_per_sector[sector]["2022"] / demands_per_sector[sector]["2022"].sum() for sector in mappings},
     )
     demand = sector_shares * demand.values
     demand.columns = demand.columns.map(lambda column: config.SIMULATION_DEMANDS[mappings[column]])
