@@ -120,7 +120,10 @@ def capacities_per_municipality() -> pd.DataFrame:
         models.Storage,
     ):
         res_capacity = pd.DataFrame.from_records(
-            technology.objects.values("mun_id").annotate(capacity=Sum("capacity_net")).values("mun_id", "capacity"),
+            technology.objects.filter(status="In Betrieb")
+            .values("mun_id")
+            .annotate(capacity=Sum("capacity_net"))
+            .values("mun_id", "capacity"),
         ).set_index("mun_id")
         res_capacity.columns = [technology._meta.verbose_name]  # noqa: SLF001
         capacities.append(res_capacity)
