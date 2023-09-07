@@ -24,5 +24,10 @@
       "name": "EW"
     }
   ],
-  "title": {"text": "Bevölkerung pro Jahr"}
+  "title": {
+    "text": "Bevölkerung pro Jahr",
+    "textStyle": {
+      "fontSize": 14
+    }
+  }
 }

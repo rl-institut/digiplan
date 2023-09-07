@@ -48,5 +48,10 @@
           "name": "Industrie"
         }
     ],
-    "title": { "text": "Heat Demand" }
+    "title": {
+      "text": "Heat Demand",
+      "textStyle": {
+        "fontSize": 14
+      }
+    }
   }

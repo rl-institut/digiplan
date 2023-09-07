@@ -24,5 +24,10 @@
       "name": "Windenergieanlagen"
     }
   ],
-  "title": { "text": "Anzahl Windenergieanlagen" }
+  "title": {
+    "text": "Anzahl Windenergieanlagen",
+    "textStyle": {
+      "fontSize": 14
+    }
+  }
 }
