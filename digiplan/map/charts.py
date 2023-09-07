@@ -947,7 +947,7 @@ class BatteriesCapacityRegionChart(Chart):
 
     def get_chart_data(self) -> list:
         """Calculate population for whole region."""
-        return [int(calculations.battery_capacities_per_municipality().sum())]
+        return [calculations.battery_capacities_per_municipality().sum().round(1)]
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""

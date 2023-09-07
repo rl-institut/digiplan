@@ -216,7 +216,7 @@ class CapacityPopup(RegionPopup):
     title = "Installierte Leistung EE"
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.capacities_per_municipality()
+        return calculations.capacities_per_municipality().round(1)
 
 
 class Capacity2045Popup(RegionPopup):
@@ -236,8 +236,8 @@ class Capacity2045Popup(RegionPopup):
 
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
-        status_quo_data = calculations.capacities_per_municipality().loc[self.selected_id]
-        future_data = super().get_chart_data()
+        status_quo_data = calculations.capacities_per_municipality().loc[self.selected_id].round(1)
+        future_data = super().get_chart_data().round(1)
         return list(zip(status_quo_data, future_data))
 
 
@@ -250,7 +250,7 @@ class CapacitySquarePopup(RegionPopup):
     def get_detailed_data(self) -> pd.DataFrame:
         """Return capacities per square kilometer."""
         capacities = calculations.capacities_per_municipality()
-        return calculations.calculate_square_for_value(capacities)
+        return calculations.calculate_square_for_value(capacities).round(2)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -281,10 +281,12 @@ class CapacitySquare2045Popup(RegionPopup):
 
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
-        status_quo_data = calculations.calculate_square_for_value(calculations.capacities_per_municipality()).loc[
-            self.selected_id
-        ]
-        future_data = super().get_chart_data()
+        status_quo_data = (
+            calculations.calculate_square_for_value(calculations.capacities_per_municipality())
+            .loc[self.selected_id]
+            .round(2)
+        )
+        future_data = super().get_chart_data().round(2)
         return list(zip(status_quo_data, future_data))
 
 
@@ -295,7 +297,7 @@ class EnergyPopup(RegionPopup):
     title = _("Gewonnene Energie aus EE")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.energies_per_municipality()
+        return calculations.energies_per_municipality().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -324,8 +326,8 @@ class Energy2045Popup(RegionPopup):
 
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
-        status_quo_data = calculations.energies_per_municipality().loc[self.selected_id]
-        future_data = super().get_chart_data() * 1e-3
+        status_quo_data = calculations.energies_per_municipality().loc[self.selected_id].round(1)
+        future_data = (super().get_chart_data() * 1e-3).round(1)
         return list(zip(status_quo_data, future_data))
 
 
@@ -377,7 +379,7 @@ class EnergyCapitaPopup(RegionPopup):
     title = _("Gewonnene Energie pro EW")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.calculate_capita_for_value(calculations.energies_per_municipality()) * 1e3
+        return (calculations.calculate_capita_for_value(calculations.energies_per_municipality()) * 1e3).round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -408,10 +410,12 @@ class EnergyCapita2045Popup(RegionPopup):
 
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
-        status_quo_data = calculations.calculate_capita_for_value(calculations.energies_per_municipality()).loc[
-            self.selected_id
-        ]
-        future_data = super().get_chart_data() * 1e-3
+        status_quo_data = (
+            calculations.calculate_capita_for_value(calculations.energies_per_municipality())
+            .loc[self.selected_id]
+            .round(1)
+        )
+        future_data = (super().get_chart_data() * 1e-3).round(1)
         return list(zip(status_quo_data, future_data))
 
 
@@ -422,7 +426,7 @@ class EnergySquarePopup(RegionPopup):
     title = _("Gewonnene Energie pro km²")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.calculate_square_for_value(calculations.energies_per_municipality()) * 1e3
+        return (calculations.calculate_square_for_value(calculations.energies_per_municipality()) * 1e3).round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -453,10 +457,12 @@ class EnergySquare2045Popup(RegionPopup):
 
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
-        status_quo_data = calculations.calculate_square_for_value(calculations.energies_per_municipality()).loc[
-            self.selected_id
-        ]
-        future_data = super().get_chart_data() * 1e-3
+        status_quo_data = (
+            calculations.calculate_square_for_value(calculations.energies_per_municipality())
+            .loc[self.selected_id]
+            .round(1)
+        )
+        future_data = (super().get_chart_data() * 1e-3).round(1)
         return list(zip(status_quo_data, future_data))
 
 
@@ -488,7 +494,7 @@ class PopulationDensityPopup(RegionPopup):
     def get_detailed_data(self) -> pd.DataFrame:
         """Return population data squared."""
         population = models.Population.quantity_per_municipality_per_year()
-        return calculations.calculate_square_for_value(population)
+        return calculations.calculate_square_for_value(population).round(1)
 
     def get_municipality_value(self) -> Optional[float]:
         """Return municipality value for status quo year."""
@@ -658,10 +664,12 @@ class NumberWindturbinesSquare2045Popup(RegionPopup):
 
     def get_chart_data(self) -> Iterable:
         """Return single value for wind turbines in current municipality."""
-        status_quo_data = calculations.calculate_square_for_value(models.WindTurbine.quantity_per_municipality()).loc[
-            self.selected_id
-        ]
-        future_data = super().get_chart_data()
+        status_quo_data = (
+            calculations.calculate_square_for_value(models.WindTurbine.quantity_per_municipality())
+            .loc[self.selected_id]
+            .round(1)
+        )
+        future_data = super().get_chart_data().round(1)
         return [float(status_quo_data), float(future_data)]
 
 
@@ -672,7 +680,7 @@ class ElectricityDemandPopup(RegionPopup):
     title = _("Strombedarf")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.electricity_demand_per_municipality()
+        return calculations.electricity_demand_per_municipality().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -693,8 +701,8 @@ class ElectricityDemand2045Popup(RegionPopup):
 
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
-        status_quo_data = calculations.electricity_demand_per_municipality().loc[self.selected_id]
-        future_data = super().get_chart_data()
+        status_quo_data = calculations.electricity_demand_per_municipality().loc[self.selected_id].round(1)
+        future_data = super().get_chart_data().round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -713,7 +721,9 @@ class ElectricityDemandCapitaPopup(RegionPopup):
     title = _("Strombedarf je EinwohnerIn")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.calculate_capita_for_value(calculations.electricity_demand_per_municipality()) * 1e6
+        return (
+            calculations.calculate_capita_for_value(calculations.electricity_demand_per_municipality()) * 1e6
+        ).round(1)
 
     def get_region_value(self) -> float:  # noqa: D102
         return self.detailed_data.sum(axis=1).mean()
@@ -742,10 +752,14 @@ class ElectricityDemandCapita2045Popup(RegionPopup):
 
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
-        status_quo_data = calculations.calculate_capita_for_value(
-            calculations.electricity_demand_per_municipality(),
-        ).loc[self.selected_id]
-        future_data = super().get_chart_data()
+        status_quo_data = (
+            calculations.calculate_capita_for_value(
+                calculations.electricity_demand_per_municipality(),
+            )
+            .loc[self.selected_id]
+            .round(1)
+        )
+        future_data = super().get_chart_data().round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -764,7 +778,7 @@ class HeatDemandPopup(RegionPopup):
     title = _("Wärmebedarf")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.heat_demand_per_municipality()
+        return calculations.heat_demand_per_municipality().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
@@ -785,8 +799,8 @@ class HeatDemand2045Popup(RegionPopup):
 
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
-        status_quo_data = calculations.heat_demand_per_municipality().loc[self.selected_id]
-        future_data = super().get_chart_data()
+        status_quo_data = calculations.heat_demand_per_municipality().loc[self.selected_id].round(1)
+        future_data = super().get_chart_data().round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -805,7 +819,7 @@ class HeatDemandCapitaPopup(RegionPopup):
     title = _("Wärmebedarf je EinwohnerIn")
 
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
-        return calculations.calculate_capita_for_value(calculations.heat_demand_per_municipality()) * 1e6
+        return (calculations.calculate_capita_for_value(calculations.heat_demand_per_municipality()) * 1e6).round(1)
 
     def get_region_value(self) -> float:  # noqa: D102
         return self.detailed_data.sum(axis=1).mean()
@@ -827,17 +841,22 @@ class HeatDemandCapita2045Popup(RegionPopup):
     def get_detailed_data(self) -> pd.DataFrame:  # noqa: D102
         return calculations.calculate_capita_for_value(
             calculations.heat_demand_per_municipality_2045(self.map_state["simulation_id"]),
-        )
+        ).mul(1e6)
 
     def get_region_value(self) -> float:  # noqa: D102
         return self.detailed_data.sum(axis=1).mean()
 
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
-        status_quo_data = calculations.calculate_capita_for_value(
-            calculations.heat_demand_per_municipality(),
-        ).loc[self.selected_id]
-        future_data = super().get_chart_data()
+        status_quo_data = (
+            calculations.calculate_capita_for_value(
+                calculations.heat_demand_per_municipality(),
+            )
+            .loc[self.selected_id]
+            .mul(1e6)
+            .round(1)
+        )
+        future_data = super().get_chart_data().round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
@@ -882,7 +901,7 @@ class BatteriesCapacityPopup(RegionPopup):
 
     def get_chart_data(self) -> Iterable:
         """Return single value for employeess in current municipality."""
-        return [int(self.detailed_data.loc[self.selected_id])]
+        return [self.detailed_data.loc[self.selected_id].round(1)]
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
