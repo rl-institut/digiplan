@@ -250,7 +250,7 @@ def electricity_demand_per_municipality(year: int = 2022) -> pd.DataFrame:
         _("Electricity CTS Demand"),
         _("Electricity Industry Demand"),
     ]
-    return demands_per_sector * 1e-3
+    return demands_per_sector.astype(float) * 1e-3
 
 
 def energy_shares_2045_per_municipality(simulation_id: int) -> pd.DataFrame:
@@ -320,7 +320,7 @@ def electricity_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame
     demand = sector_shares * demand.values
     demand.columns = demand.columns.map(lambda column: config.SIMULATION_DEMANDS[mappings[column]])
     demand = demand * 1e-3
-    return demand
+    return demand.astype(float)
 
 
 def heat_demand_per_municipality() -> pd.DataFrame:
@@ -342,7 +342,7 @@ def heat_demand_per_municipality() -> pd.DataFrame:
         _("Electricity CTS Demand"),
         _("Electricity Industry Demand"),
     ]
-    return demands_per_sector * 1e-3
+    return demands_per_sector.astype(float) * 1e-3
 
 
 def heat_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
@@ -376,7 +376,7 @@ def heat_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     demand = sector_shares * demand.values
     demand.columns = demand.columns.map(lambda column: config.SIMULATION_DEMANDS[mappings[column]])
     demand = demand * 1e-3
-    return demand
+    return demand.astype(float)
 
 
 def ghg_reduction(simulation_id: int) -> pd.Series:
