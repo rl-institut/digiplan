@@ -48,5 +48,10 @@
           "name": "Industrie"
         }
     ],
-    "title": { "text": "Electricity Demand" }
+    "title": {
+      "text": "Electricity Demand",
+      "textStyle": {
+        "fontSize": 14
+      }
+    }
   }
