@@ -18,6 +18,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - swap mapping of PV roof and PV ground in result calculation
 - heat per capita calculation in results
 - round chart values to decent fps
+- diverging capacities in digipipe datapackage and app due to operational status
 
 ## [0.6.0] - 2023-09-01
 ### Added
