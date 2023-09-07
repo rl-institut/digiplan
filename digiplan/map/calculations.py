@@ -120,7 +120,7 @@ def capacities_per_municipality() -> pd.DataFrame:
         models.Storage,
     ):
         res_capacity = pd.DataFrame.from_records(
-            technology.objects.filter(status="In Betrieb")
+            technology.objects.filter(status__in=["In Betrieb", "In Betrieb oder in Planung"])
             .values("mun_id")
             .annotate(capacity=Sum("capacity_net"))
             .values("mun_id", "capacity"),
