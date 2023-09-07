@@ -152,7 +152,7 @@ def capacities_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     renewables = renewables * calculate_potential_shares(parameters)
     renewables["bioenergy"] = 0.0
     renewables["st"] = 0.0
-    return renewables
+    return renewables.astype(float)
 
 
 def energies_per_municipality() -> pd.DataFrame:
@@ -195,7 +195,7 @@ def energies_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     renewables = renewables * calculate_potential_shares(parameters)
     renewables["bioenergy"] = 0.0
     renewables["st"] = 0.0
-    return renewables
+    return renewables.astype(float)
 
 
 def energy_shares_per_municipality() -> pd.DataFrame:
