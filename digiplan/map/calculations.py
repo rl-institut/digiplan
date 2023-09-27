@@ -4,7 +4,6 @@ from typing import Optional
 
 import pandas as pd
 from django.conf import settings
-from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 from django_oemof.models import Simulation
 from django_oemof.results import get_results
@@ -110,24 +109,7 @@ def capacities_per_municipality() -> pd.DataFrame:
     pd.DataFrame
         Capacity per municipality (index) and technology (column)
     """
-    capacities = []
-    for technology in (
-        models.WindTurbine,
-        models.PVroof,
-        models.PVground,
-        models.Hydro,
-        models.Biomass,
-        models.Storage,
-    ):
-        res_capacity = pd.DataFrame.from_records(
-            technology.objects.filter(status__in=["In Betrieb", "In Betrieb oder in Planung"])
-            .values("mun_id")
-            .annotate(capacity=Sum("capacity_net"))
-            .values("mun_id", "capacity"),
-        ).set_index("mun_id")
-        res_capacity.columns = [technology._meta.verbose_name]  # noqa: SLF001
-        capacities.append(res_capacity)
-    return pd.concat(capacities, axis=1).fillna(0.0) * 1e-3
+    return datapackage.get_capacities_from_datapackage()
 
 
 def capacities_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
@@ -603,7 +585,7 @@ def electricity_overview(year: int) -> pd.Series:
         containing electricity productions and demands (including heat sector demand for electricity)
     """
     demand = electricity_demand_per_municipality(year).sum()
-    production = datapackage.get_full_load_hours(year) * datapackage.get_capacities(year)
+    production = datapackage.get_full_load_hours(year) * datapackage.get_capacities_from_sliders(year)
     production = production[production.notna()] * 1e-3
     return pd.concat([demand, production])
 
@@ -688,7 +670,7 @@ def get_regional_independency(simulation_id: int) -> tuple[int, int, int, int]:
     # 2022
     demand = datapackage.get_hourly_electricity_demand(2022)
     full_load_hours = datapackage.get_full_load_hours(2022)
-    capacities = datapackage.get_capacities(2022)
+    capacities = datapackage.get_capacities_from_sliders(2022)
     technology_mapping = {
         "ABW-wind-onshore": "wind",
         "ABW-solar-pv_ground": "pv_ground",
