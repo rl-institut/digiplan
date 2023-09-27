@@ -212,8 +212,25 @@ def get_full_load_hours(year: int) -> pd.Series:
     return full_load_hours
 
 
-def get_capacities(year: int) -> pd.Series:
-    """Return renewable capacities for given year."""
+def get_capacities_from_datapackage() -> pd.DataFrame:
+    """Return renewable capacities for given year from datapackage."""
+    capacities = pd.concat(
+        [
+            pd.read_csv(
+                settings.DIGIPIPE_DIR.path("scalars").path(f"bnetza_mastr_{tech}_stats_muns.csv"),
+                index_col="municipality_id",
+                usecols=["municipality_id", "capacity_net"],
+            ).rename(columns={"capacity_net": tech})
+            for tech in ["wind", "pv_roof", "pv_ground", "hydro", "biomass"]
+        ],
+        axis=1,
+    )
+    capacities.index.name = "mun_id"
+    return capacities
+
+
+def get_capacities_from_sliders(year: int) -> pd.Series:
+    """Return renewable capacities for given year from slider settings (totals for each technology)."""
     if year == 2022:  # noqa: PLR2004
         lookup = "status_quo"
     elif year == 2045:  # noqa: PLR2004
