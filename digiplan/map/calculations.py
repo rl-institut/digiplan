@@ -150,8 +150,8 @@ def energies_per_municipality() -> pd.DataFrame:
         Energy per municipality (index) and technology (column)
     """
     capacities = capacities_per_municipality()
-    full_load_hours = datapackage.get_full_load_hours(year=2022)
-    full_load_hours = full_load_hours.reindex(index=["wind", "pv_roof", "pv_ground", "ror", "bioenergy", "st"])
+    full_load_hours = datapackage.get_full_load_hours(year=2022).drop("st").rename({"ror": "hydro"})
+    full_load_hours = full_load_hours.reindex(index=["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"])
     return capacities * full_load_hours.values / 1e3
 
 
