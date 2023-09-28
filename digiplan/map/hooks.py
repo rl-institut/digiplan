@@ -258,12 +258,12 @@ def adapt_renewable_capacities(scenario: str, data: dict, request: HttpRequest) 
     dict
         Adapted parameters dict with set up capacities
     """
-    # Capacities
+    # 1) Capacities: renewables
+    logging.info("Adapting capacities: renewables")
     data["ABW-wind-onshore"] = {"capacity": data.pop("s_w_1")}
     data["ABW-solar-pv_ground"] = {"capacity": data.pop("s_pv_ff_1")}
     data["ABW-solar-pv_rooftop"] = {"capacity": data.pop("s_pv_d_1")}
     data["ABW-hydro-ror"] = {"capacity": data.pop("s_h_1")}
-    data["ABW-electricity-large_scale_battery"] = {"capacity": data.pop("s_s_g_1")}
 
     # Full load hours
     technology_mapping = {
@@ -276,6 +276,39 @@ def adapt_renewable_capacities(scenario: str, data: dict, request: HttpRequest) 
     for technology, mapped_key in technology_mapping.items():
         data[technology]["profile"] = datapackage.get_profile(technology[4:]) * full_load_hours[mapped_key]
 
+    # 2) Capacities: batteries
+    logging.info("Adapting capacities: batteries")
+
+    # Large scale
+    wind_pv_ground_energy_daily = (
+        float(
+            data["ABW-wind-onshore"]["capacity"] * data["ABW-wind-onshore"]["profile"].sum()
+            + data["ABW-solar-pv_ground"]["capacity"] * data["ABW-solar-pv_ground"]["profile"].sum(),
+        )
+        / 365
+    )
+    storage_capacity = data.pop("s_s_g_1") / 100 * wind_pv_ground_energy_daily
+    data["ABW-electricity-large_scale_battery"] = {
+        "storage_capacity": storage_capacity,
+        "capacity": (
+            storage_capacity * config.TECHNOLOGY_DATA["batteries"]["large"]["nominal_power_per_storage_capacity"]
+        ),
+    }
+
+    # Home storages
+    storage_capacity = (
+        data.pop("s_pv_d_4")
+        / 100
+        * data["ABW-solar-pv_rooftop"]["capacity"]
+        * config.TECHNOLOGY_DATA["batteries"]["small"]["storage_capacity_per_pv_power"]
+    )
+    data["ABW-electricity-small_scale_battery"] = {
+        "storage_capacity": storage_capacity,
+        "capacity": (
+            storage_capacity * config.TECHNOLOGY_DATA["batteries"]["small"]["nominal_power_per_storage_capacity"]
+        ),
+    }
+
     # Remove unnecessary renewable sliders:
     del data["s_w_3"]
     del data["s_w_4"]
@@ -287,5 +320,5 @@ def adapt_renewable_capacities(scenario: str, data: dict, request: HttpRequest) 
     del data["s_pv_ff_3"]
     del data["s_pv_ff_4"]
     del data["s_pv_d_3"]
-    del data["s_pv_d_4"]
+
     return data
