@@ -109,8 +109,7 @@ $("#id_s_pv_ff_4").ionRangeSlider({
 );
 $("#id_s_pv_d_3").ionRangeSlider({
     onChange: function (data) {
-      let new_max = Math.round(Math.round(store.cold.slider_max.s_pv_d_3) * (data.from/100));
-      $(`#id_s_pv_d_1`).data("ionRangeSlider").update({max:new_max});
+      calculate_max_pv_d();
     }
   }
 );
@@ -308,6 +307,12 @@ function calculate_max_pv_ff() {
   $(`#id_s_pv_ff_1`).data("ionRangeSlider").update({max:Math.round(new_max)});
 }
 
+function calculate_max_pv_d() {
+  let slider = $("#id_s_pv_d_3").data("ionRangeSlider").result.from / 100;
+  let new_max = Math.round(slider * store.cold.slider_max.s_pv_d_3);
+  $(`#id_s_pv_d_1`).data("ionRangeSlider").update({max:new_max});
+}
+
 function toggleFormFields(formfield_id) {
   if (formfield_id === "id_s_w_3") {
     if (document.getElementById("id_s_w_4").checked === false && document.getElementById("id_s_w_5").checked === false) {
@@ -495,4 +500,5 @@ $(document).ready(function () {
   document.getElementById("id_s_w_5_2").disabled = true;
   $(`#id_s_h_1`).data("ionRangeSlider").update({block:true});
   calculate_max_pv_ff();
+  calculate_max_pv_d();
 });

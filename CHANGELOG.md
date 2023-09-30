@@ -20,6 +20,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - heat per capita calculation in results
 - round chart values to decent fps
 - diverging capacities in digipipe datapackage and app due to operational status
+- fix PV roof slider values and update slider on startup
 
 ## [0.6.0] - 2023-09-01
 ### Added

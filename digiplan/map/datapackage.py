@@ -185,7 +185,7 @@ def get_potential_values(*, per_municipality: bool = False) -> dict:
         for key, value in areas[profile].items():
             if key == "s_pv_d_3":
                 pv_roof_potential = reader[
-                    [f"installable_power_{orient}" for orient in ["south", "east", "west", "flat"]]
+                    [f"installable_power_{orient}" for orient in ["south", "north", "east", "west", "flat"]]
                 ].sum(axis=1)
                 if per_municipality:
                     potentials = pv_roof_potential
