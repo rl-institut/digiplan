@@ -120,7 +120,7 @@
     "min": 0,
     "start": 0,
     "step": 5,
-    "tooltip": "{% trans 'Anteil genutzter Dächer (%). Das Maximum liegt hierbei bei 50 % aller Dächer von nicht-denkmalgeschützten Gebäuden mit Ausrichtung Süden, Osten und Westen sowie Flachdächern. Die Dachflächenpotenziale wurden auf Basis des Webtools der Regionalen Planungsgemeinschaft berechnet.' %}",
+    "tooltip": "{% trans 'Anteil genutzter Dächer (%). Das Maximum liegt hierbei bei 50 % aller Dächer von nicht-denkmalgeschützten Gebäuden aller Ausrichtungen inkl. Flachdächer. Die Dachflächenpotenziale wurden auf Basis des Webtools der Regionalen Planungsgemeinschaft berechnet.' %}",
     "type": "slider"
   },
     "s_pv_d_4": {

@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: config/settings/base.py:357
+#: config/settings/base.py:354
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-05 08:10+0000\n"
+"POT-Creation-Date: 2023-10-04 13:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,164 +18,161 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: config/settings/base.py:36
-msgid "English"
-msgstr "Englisch"
-
-#: config/settings/base.py:37
+#: config/settings/base.py:35
 msgid "German"
 msgstr "Deutsch"
 
-#: config/settings/base.py:352
+#: config/settings/base.py:349
 msgid "EinwohnerInnenzahl"
 msgstr ""
 
-#: config/settings/base.py:352
+#: config/settings/base.py:349
 msgid "EW"
 msgstr ""
 
-#: config/settings/base.py:356
+#: config/settings/base.py:353
 msgid "EinwohnerInnenzahl pro km²"
 msgstr ""
 
-#: config/settings/base.py:359 digiplan/map/popups.py:491
-#: digiplan/map/popups.py:503
+#: config/settings/base.py:356 digiplan/map/popups.py:521
+#: digiplan/map/popups.py:533
 #: digiplan/templates/components/panel_1_today.html:45
 msgid "Beschäftigte"
 msgstr ""
 
-#: config/settings/base.py:360 digiplan/map/popups.py:513
-#: digiplan/map/popups.py:525
+#: config/settings/base.py:357 digiplan/map/popups.py:543
+#: digiplan/map/popups.py:555
 #: digiplan/templates/components/panel_1_today.html:46
 msgid "Betriebe"
 msgstr ""
 
-#: config/settings/base.py:361 config/settings/base.py:362
-#: config/settings/base.py:366 config/settings/base.py:372
+#: config/settings/base.py:358 config/settings/base.py:359
+#: config/settings/base.py:363 config/settings/base.py:369
 msgid "Installierte Leistung"
 msgstr ""
 
-#: config/settings/base.py:361 config/settings/base.py:362
+#: config/settings/base.py:358 config/settings/base.py:359
 #: digiplan/map/charts.py:414 digiplan/map/charts.py:446
 msgid "MW"
 msgstr ""
 
-#: config/settings/base.py:367 config/settings/base.py:373
+#: config/settings/base.py:364 config/settings/base.py:370
 #: digiplan/map/popups.py:259 digiplan/map/popups.py:278
 msgid "MW/km²"
 msgstr ""
 
-#: config/settings/base.py:375 config/settings/base.py:376
+#: config/settings/base.py:372 config/settings/base.py:373
 msgid "Anzahl Windturbinen"
 msgstr ""
 
-#: config/settings/base.py:380 config/settings/base.py:386
+#: config/settings/base.py:377 config/settings/base.py:383
 msgid "Anzahl Windturbinen pro km²"
 msgstr ""
 
-#: config/settings/base.py:392 config/settings/base.py:398
+#: config/settings/base.py:389 config/settings/base.py:395
 msgid "Energie Erneuerbare"
 msgstr ""
 
-#: config/settings/base.py:393 config/settings/base.py:399
-#: config/settings/base.py:435 config/settings/base.py:441
-#: config/settings/base.py:459 config/settings/base.py:465
+#: config/settings/base.py:390 config/settings/base.py:396
+#: config/settings/base.py:438 config/settings/base.py:444
+#: config/settings/base.py:462 config/settings/base.py:468
 #: digiplan/map/charts.py:464 digiplan/map/charts.py:484
-#: digiplan/map/charts.py:726 digiplan/map/charts.py:747
-#: digiplan/map/charts.py:823 digiplan/map/charts.py:842
-#: digiplan/map/popups.py:304 digiplan/map/popups.py:321
-#: digiplan/map/popups.py:381 digiplan/map/popups.py:680
-#: digiplan/map/popups.py:749 digiplan/map/popups.py:772
+#: digiplan/map/charts.py:746 digiplan/map/charts.py:767
+#: digiplan/map/charts.py:843 digiplan/map/charts.py:862
+#: digiplan/map/popups.py:306 digiplan/map/popups.py:323
+#: digiplan/map/popups.py:407 digiplan/map/popups.py:712
+#: digiplan/map/popups.py:787 digiplan/map/popups.py:810
 msgid "GWh"
 msgstr ""
 
-#: config/settings/base.py:404
+#: config/settings/base.py:401 config/settings/base.py:407
 msgid "Anteil Erneuerbare Energien am Strombedarf"
 msgstr ""
 
-#: config/settings/base.py:410 config/settings/base.py:416
+#: config/settings/base.py:413 config/settings/base.py:419
 msgid "Gewonnene Energie aus EE je EW"
 msgstr ""
 
-#: config/settings/base.py:411 config/settings/base.py:417
-#: config/settings/base.py:423 config/settings/base.py:429
-#: config/settings/base.py:489 digiplan/map/charts.py:524
-#: digiplan/map/charts.py:557 digiplan/map/charts.py:580
-#: digiplan/map/charts.py:613 digiplan/map/charts.py:936
-#: digiplan/map/popups.py:362 digiplan/map/popups.py:407
-#: digiplan/map/popups.py:426 digiplan/map/popups.py:867
+#: config/settings/base.py:414 config/settings/base.py:420
+#: config/settings/base.py:426 config/settings/base.py:432
+#: config/settings/base.py:492 digiplan/map/charts.py:544
+#: digiplan/map/charts.py:577 digiplan/map/charts.py:600
+#: digiplan/map/charts.py:633 digiplan/map/charts.py:956
+#: digiplan/map/popups.py:388 digiplan/map/popups.py:435
+#: digiplan/map/popups.py:454 digiplan/map/popups.py:910
 msgid "MWh"
 msgstr ""
 
-#: config/settings/base.py:422 config/settings/base.py:428
+#: config/settings/base.py:425 config/settings/base.py:431
 msgid "Gewonnene Energie aus EE je km²"
 msgstr ""
 
-#: config/settings/base.py:434 config/settings/base.py:440
-#: digiplan/map/popups.py:648 digiplan/map/popups.py:656
-#: digiplan/map/popups.py:665 digiplan/map/popups.py:679
+#: config/settings/base.py:437 config/settings/base.py:443
+#: digiplan/map/popups.py:680 digiplan/map/popups.py:688
+#: digiplan/map/popups.py:697 digiplan/map/popups.py:711
 msgid "Strombedarf"
 msgstr ""
 
-#: config/settings/base.py:446 config/settings/base.py:452
+#: config/settings/base.py:449 config/settings/base.py:455
 msgid "Strombedarf pro EinwohnerIn"
 msgstr ""
 
-#: config/settings/base.py:447 config/settings/base.py:453
-#: config/settings/base.py:471 config/settings/base.py:477
-#: digiplan/map/charts.py:770 digiplan/map/charts.py:805
-#: digiplan/map/charts.py:865 digiplan/map/charts.py:900
-#: digiplan/map/popups.py:701 digiplan/map/popups.py:731
-#: digiplan/map/popups.py:793 digiplan/map/popups.py:823
+#: config/settings/base.py:450 config/settings/base.py:456
+#: config/settings/base.py:474 config/settings/base.py:480
+#: digiplan/map/charts.py:790 digiplan/map/charts.py:825
+#: digiplan/map/charts.py:885 digiplan/map/charts.py:920
+#: digiplan/map/popups.py:735 digiplan/map/popups.py:769
+#: digiplan/map/popups.py:831 digiplan/map/popups.py:866
 msgid "kWh"
 msgstr ""
 
-#: config/settings/base.py:458 config/settings/base.py:464
-#: digiplan/map/popups.py:740 digiplan/map/popups.py:748
-#: digiplan/map/popups.py:757 digiplan/map/popups.py:771
+#: config/settings/base.py:461 config/settings/base.py:467
+#: digiplan/map/popups.py:778 digiplan/map/popups.py:786
+#: digiplan/map/popups.py:795 digiplan/map/popups.py:809
 msgid "Wärmebedarf"
 msgstr ""
 
-#: config/settings/base.py:470 config/settings/base.py:476
+#: config/settings/base.py:473 config/settings/base.py:479
 msgid "Wärmebedarf pro EinwohnerIn"
 msgstr ""
 
-#: config/settings/base.py:482 digiplan/map/popups.py:832
-#: digiplan/map/popups.py:844
+#: config/settings/base.py:485 digiplan/map/popups.py:875
+#: digiplan/map/popups.py:887
 #: digiplan/templates/components/panel_1_today.html:98
 msgid "Anzahl Batteriespeicher"
 msgstr ""
 
-#: config/settings/base.py:488 digiplan/map/popups.py:854
-#: digiplan/map/popups.py:866
+#: config/settings/base.py:491 digiplan/map/popups.py:897
+#: digiplan/map/popups.py:909
 #: digiplan/templates/components/panel_1_today.html:99
 msgid "Kapazität Batteriespeicher"
 msgstr ""
 
-#: digiplan/map/calculations.py:230 digiplan/map/calculations.py:287
+#: digiplan/map/calculations.py:234 digiplan/map/calculations.py:326
 #: digiplan/map/config.py:183
 msgid "Electricity Household Demand"
 msgstr "Strombedarf Haushalte"
 
-#: digiplan/map/calculations.py:231 digiplan/map/calculations.py:288
+#: digiplan/map/calculations.py:235 digiplan/map/calculations.py:327
 #: digiplan/map/config.py:184
 msgid "Electricity CTS Demand"
 msgstr "Strombedarf GDP"
 
-#: digiplan/map/calculations.py:232 digiplan/map/calculations.py:289
+#: digiplan/map/calculations.py:236 digiplan/map/calculations.py:328
 #: digiplan/map/config.py:185
 msgid "Electricity Industry Demand"
 msgstr "Strombedarf Industrie"
 
-#: digiplan/map/charts.py:320 digiplan/map/popups.py:483
+#: digiplan/map/charts.py:320 digiplan/map/popups.py:513
 msgid "EW/km²"
 msgstr ""
 
-#: digiplan/map/charts.py:502 digiplan/map/popups.py:345
+#: digiplan/map/charts.py:502 digiplan/map/charts.py:521
+#: digiplan/map/popups.py:347 digiplan/map/popups.py:364
 msgid "%"
 msgstr ""
 
-#: digiplan/map/charts.py:918
+#: digiplan/map/charts.py:938
 msgid "Anzahl"
 msgstr ""
 
@@ -571,63 +568,63 @@ msgstr "Batteriespeicher"
 msgid "installierte Leistung nach Typ"
 msgstr ""
 
-#: digiplan/map/popups.py:295 digiplan/map/popups.py:312
+#: digiplan/map/popups.py:297 digiplan/map/popups.py:314
 msgid "Gewonnene Energie aus EE"
 msgstr ""
 
-#: digiplan/map/popups.py:303 digiplan/map/popups.py:320
-#: digiplan/map/popups.py:344 digiplan/map/popups.py:361
-#: digiplan/map/popups.py:380
+#: digiplan/map/popups.py:305 digiplan/map/popups.py:322
+#: digiplan/map/popups.py:346 digiplan/map/popups.py:363
+#: digiplan/map/popups.py:387 digiplan/map/popups.py:406
 msgid "Energieanteile pro Technologie"
 msgstr ""
 
-#: digiplan/map/popups.py:336
+#: digiplan/map/popups.py:338 digiplan/map/popups.py:355
 msgid "Anteil Energie aus EE"
 msgstr "Erneuerbare Energien"
 
-#: digiplan/map/popups.py:353 digiplan/map/popups.py:370
+#: digiplan/map/popups.py:379 digiplan/map/popups.py:396
 msgid "Gewonnene Energie pro EW"
 msgstr ""
 
-#: digiplan/map/popups.py:398 digiplan/map/popups.py:415
+#: digiplan/map/popups.py:426 digiplan/map/popups.py:443
 msgid "Gewonnene Energie pro km²"
 msgstr ""
 
-#: digiplan/map/popups.py:406 digiplan/map/popups.py:425
+#: digiplan/map/popups.py:434 digiplan/map/popups.py:453
 msgid "Energieanteile pro km²"
 msgstr ""
 
-#: digiplan/map/popups.py:482
+#: digiplan/map/popups.py:512
 msgid "Population density per year"
 msgstr "Bevölkerungsdichte"
 
-#: digiplan/map/popups.py:535 digiplan/map/popups.py:552
+#: digiplan/map/popups.py:565 digiplan/map/popups.py:582
 msgid "Number of wind turbines"
 msgstr "Anzahl Windenergieanlagen"
 
-#: digiplan/map/popups.py:536 digiplan/map/popups.py:553
+#: digiplan/map/popups.py:566 digiplan/map/popups.py:583
 msgid "Description for number of wind turbines"
 msgstr "Anzahl Windenergieanlagen je km²"
 
-#: digiplan/map/popups.py:597 digiplan/map/popups.py:630
+#: digiplan/map/popups.py:627 digiplan/map/popups.py:660
 msgid "Windturbinen pro km²"
 msgstr "Anzahl Windenergieanlagen je km²"
 
-#: digiplan/map/popups.py:598 digiplan/map/popups.py:631
+#: digiplan/map/popups.py:628 digiplan/map/popups.py:661
 msgid "WT/km²"
 msgstr "WEA/km²"
 
-#: digiplan/map/popups.py:657
+#: digiplan/map/popups.py:689
 msgid "ǴWh"
 msgstr ""
 
-#: digiplan/map/popups.py:689 digiplan/map/popups.py:700
-#: digiplan/map/popups.py:709 digiplan/map/popups.py:730
+#: digiplan/map/popups.py:721 digiplan/map/popups.py:734
+#: digiplan/map/popups.py:743 digiplan/map/popups.py:768
 msgid "Strombedarf je EinwohnerIn"
 msgstr ""
 
-#: digiplan/map/popups.py:781 digiplan/map/popups.py:792
-#: digiplan/map/popups.py:801 digiplan/map/popups.py:822
+#: digiplan/map/popups.py:819 digiplan/map/popups.py:830
+#: digiplan/map/popups.py:839 digiplan/map/popups.py:865
 msgid "Wärmebedarf je EinwohnerIn"
 msgstr ""
 
@@ -791,9 +788,9 @@ msgstr ""
 #, python-format
 msgid ""
 "Anteil genutzter Dächer (%%). Das Maximum liegt hierbei bei 50 %% aller "
-"Dächer von nicht-denkmalgeschützten Gebäuden mit Ausrichtung Süden, Osten "
-"und Westen sowie Flachdächern. Die Dachflächenpotenziale wurden auf Basis "
-"des Webtools der Regionalen Planungsgemeinschaft berechnet."
+"Dächer von nicht-denkmalgeschützten Gebäuden aller Ausrichtungen inkl. "
+"Flachdächer. Die Dachflächenpotenziale wurden auf Basis des Webtools der "
+"Regionalen Planungsgemeinschaft berechnet."
 msgstr ""
 
 #: digiplan/static/config/energy_settings_panel.json:128
@@ -1567,3 +1564,6 @@ msgstr ""
 #: digiplan/templates/widgets/slider.html:18
 msgid "more"
 msgstr "mehr"
+
+#~ msgid "English"
+#~ msgstr "Englisch"
