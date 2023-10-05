@@ -97,6 +97,11 @@ function checkResults() {
                 map_store.cold.state.simulation_id = json.simulation_id;
                 PubSub.publish(eventTopics.SIMULATION_FINISHED);
             }
+        },
+        error: function(json) {
+            store.cold.task_id = null;
+            map_store.cold.state.simulation_id = null;
+            PubSub.publish(eventTopics.SIMULATION_FINISHED);
         }
     });
 }
