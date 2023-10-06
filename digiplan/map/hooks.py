@@ -219,10 +219,19 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
         )
         delta_solar = solar_thermal_energy - total_demand
         solar_peak = delta_solar[delta_solar > 0].max()
-        capacity = max(capacity, solar_peak)
+
+        tech_mapping = {"central": "large", "decentral": "small"}
+        power = (
+            capacity
+            * config.TECHNOLOGY_DATA["hot_water_storages"][tech_mapping[distribution]][
+                "nominal_power_per_storage_capacity"
+            ]
+        )
+        power = max(power, solar_peak)
+
         data[f"ABW-heat_{distribution}-storage"] = {
-            "capacity": capacity,
             "storage_capacity": capacity,
+            "capacity": power,
         }
 
     # Adapt biomass to biogas plant size
