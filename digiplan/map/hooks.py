@@ -212,7 +212,8 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
         avg_demand_per_day = total_demand.sum() / 365
         logging.info(f"Adapting capacity for storage at {distribution=}.")
         capacity = float(avg_demand_per_day * data.pop(storage_sliders[distribution]) / 100)
-        # Adapt storage capacity to solarthermal collector overpowering:
+        # Adapt storage capacity to solarthermal collector overpowering (make sure the maximum feedin power of ST can
+        # be absorbed by the storage):
         solar_capacity = data[f"ABW-solar-thermalcollector_{distribution}"]["capacity"]
         solar_thermal_energy = (
             datapackage.get_thermal_efficiency(f"solar-thermalcollector_{distribution}") * solar_capacity
