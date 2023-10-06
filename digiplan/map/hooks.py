@@ -184,11 +184,8 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
                 hp_share = data.pop(hp_sliders[sector]) / 100
                 hp_energy[sector] = demand[sector] * hp_share
             else:
-                if sector == "hh":  # noqa: PLR5501
-                    hp_share = data.pop("w_z_wp_1") / 100
-                    hp_energy[sector] = demand[sector] * hp_share
-                else:
-                    hp_energy[sector] = demand[sector] * 0
+                hp_share = data["w_z_wp_1"] / 100
+                hp_energy[sector] = demand[sector] * hp_share
 
         # HP Capacity and Energies
         hp_energy_total = pd.concat(hp_energy.values(), axis=1).sum(axis=1)
@@ -215,17 +212,27 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
         avg_demand_per_day = total_demand.sum() / 365
         logging.info(f"Adapting capacity for storage at {distribution=}.")
         capacity = float(avg_demand_per_day * data.pop(storage_sliders[distribution]) / 100)
-        # Adapt storage capacity to solarthermal collector overpowering:
+        # Adapt storage capacity to solarthermal collector overpowering (make sure the maximum feedin power of ST can
+        # be absorbed by the storage):
         solar_capacity = data[f"ABW-solar-thermalcollector_{distribution}"]["capacity"]
         solar_thermal_energy = (
             datapackage.get_thermal_efficiency(f"solar-thermalcollector_{distribution}") * solar_capacity
         )
         delta_solar = solar_thermal_energy - total_demand
         solar_peak = delta_solar[delta_solar > 0].max()
-        capacity = max(capacity, solar_peak)
+
+        tech_mapping = {"central": "large", "decentral": "small"}
+        power = (
+            capacity
+            * config.TECHNOLOGY_DATA["hot_water_storages"][tech_mapping[distribution]][
+                "nominal_power_per_storage_capacity"
+            ]
+        )
+        power = max(power, solar_peak)
+
         data[f"ABW-heat_{distribution}-storage"] = {
-            "capacity": capacity,
             "storage_capacity": capacity,
+            "capacity": power,
         }
 
     # Adapt biomass to biogas plant size
