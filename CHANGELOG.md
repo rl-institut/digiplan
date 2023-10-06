@@ -8,6 +8,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Added
 - RES share charts and choropleth for user scenario
 - Battery storages hook to esys model
+- Add note on tech requirements to onboarding modal
 
 ### Changed
 - Remove locale EN

@@ -85,7 +85,7 @@
       }
 
       &-content {
-        max-width: 50rem;
+        max-width: 60rem;
         margin: 0 auto;
 
         .title {
@@ -97,6 +97,13 @@
         .content {
           @extend .text-center;
           @extend .fs-4;
+        }
+
+        .techspecs {
+          @extend .text-center;
+          @extend .fs-6;
+          color: #2348C3;
+          @extend .fw-semibold;
         }
       }
     }
