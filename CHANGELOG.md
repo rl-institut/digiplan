@@ -11,6 +11,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ### Changed
 - Remove locale EN
+- Abort simulation run when switching to settings tab
 
 ### Fixed
 - various fixes in charts, texts and units

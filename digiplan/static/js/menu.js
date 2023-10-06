@@ -29,6 +29,7 @@ PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hidePotentialLayers);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, showMapView);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, deactivateChoropleth);
+PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, terminateSimulation);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hidePotentialLayers);
 PubSub.subscribe(eventTopics.MAP_VIEW_SELECTED, setResultsView);
@@ -100,6 +101,21 @@ function setResultsView(msg) {
         futureDropdown.parentElement.setAttribute("style", "");
         regionChart.setAttribute("style", "");
         resultsTabs.parentElement.setAttribute("style", "display: none !important");
+    }
+    return logMessage(msg);
+}
+
+function terminateSimulation(msg) {
+    if (store.cold.task_id != null) {
+        $.ajax({
+            url: "/oemof/terminate",
+            type: "POST",
+            data: {task_id: store.cold.task_id},
+            success: function () {
+                store.cold.task_id = null;
+            }
+        });
+        document.getElementById("simulation_spinner").hidden = true;
     }
     return logMessage(msg);
 }

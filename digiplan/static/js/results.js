@@ -44,8 +44,6 @@ futureDropdown.addEventListener("change", function() {
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
-// PubSub.subscribe(eventTopics.SIMULATION_STARTED, hideResultButtons);
-// PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultButtons);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, hideSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultCharts);
@@ -63,6 +61,9 @@ function simulate(msg) {
             url : "/oemof/terminate",
             type : "POST",
             data : {task_id: store.cold.task_id},
+            success: function() {
+                store.cold.task_id = null;
+            }
         });
     }
     $.ajax({
@@ -97,6 +98,11 @@ function checkResults() {
                 map_store.cold.state.simulation_id = json.simulation_id;
                 PubSub.publish(eventTopics.SIMULATION_FINISHED);
             }
+        },
+        error: function(json) {
+            store.cold.task_id = null;
+            map_store.cold.state.simulation_id = null;
+            PubSub.publish(eventTopics.SIMULATION_FINISHED);
         }
     });
 }
