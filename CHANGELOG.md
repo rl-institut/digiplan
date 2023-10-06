@@ -22,6 +22,8 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - round chart values to decent fps
 - diverging capacities in digipipe datapackage and app due to operational status
 - fix PV roof slider values and update slider on startup
+- central heat pump share
+- capacity and power of thermal storages
 
 ## [0.6.0] - 2023-09-01
 ### Added
