@@ -1192,7 +1192,7 @@ resolved_reference = "14204e2ee3bc5e8146c17928b68130832be6e63b"
 
 [[package]]
 name = "django-oemof"
-version = "0.15.0"
+version = "0.15.1"
 description = "Django application to run oemof"
 optional = false
 python-versions = "^3.9"
@@ -1210,7 +1210,7 @@ djangorestframework = "^3.14.0"
 type = "git"
 url = "https://github.com/rl-institut/django-oemof.git"
 reference = "HEAD"
-resolved_reference = "e982e4510fc855e0296544fa7a5370430ba89ff4"
+resolved_reference = "d1bb3b35f486ee594def08362a53d5025812b9e4"
 
 [[package]]
 name = "django-redis"
