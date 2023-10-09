@@ -188,6 +188,11 @@ function checkMainPanelSlider(msg, data) {
   }
 }
 
+function closeSidepanel(panelCloseBtn) {
+    panelCloseBtn.parentNode.parentNode.previousElementSibling.classList.remove('active', 'active-sidepanel');
+    hidePotentialLayers();
+}
+
 function showOrHidePotentialLayersOnMoreLabelClick(msg, moreLabel) {
   const classes = ["active", "active-sidepanel"];
   const show = moreLabel.classList.contains(classes[0]);
