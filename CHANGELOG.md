@@ -25,6 +25,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - fix PV roof slider values and update slider on startup
 - central heat pump share
 - capacity and power of thermal storages
+- full load times of heat production adaption from heat demand settings
 
 ## [0.6.0] - 2023-09-01
 ### Added
