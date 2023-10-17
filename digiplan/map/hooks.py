@@ -175,8 +175,9 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
             )
             # DEMAND
             logging.info(f"Adapting heat demand at {distribution=} and {sector=}.")
+            demand[sector] = demand[sector] * percentage / 100
             data[f"ABW-heat_{distribution}-demand_{sector}"] = {
-                "amount": summed_demand * percentage / 100,
+                "amount": demand[sector].sum(),
             }
 
             # HP contribution per sector:
