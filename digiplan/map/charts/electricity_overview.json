@@ -49,7 +49,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [302, 234, 230]
+      "data": [0, 0, 0]
     },
     {
       "name": "Freiflächen-PV",
@@ -62,7 +62,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [282, 234, 100]
+      "data": [0, 0, 0]
     },
     {
       "name": "Aufdach-PV",
@@ -75,7 +75,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [312, 254, 100]
+      "data": [0, 0, 0]
     },
     {
       "name": "Bioenergie",
@@ -88,7 +88,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [136, 134, 130]
+      "data": [0, 0, 0]
     },
     {
       "name": "Wasserkraft",
@@ -102,7 +102,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [132, 334, 100]
+      "data": [0, 0, 0]
     },
     {
       "name": "Verbrauch Haushalte",
@@ -116,7 +116,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [300, 344, 380]
+      "data": [0, 0, 0]
     },
     {
       "name": "Verbrauch GHD",
@@ -129,7 +129,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [254, 244, 380]
+      "data": [0, 0, 0]
     },
     {
       "name": "Verbrauch Industrie",
@@ -143,7 +143,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [280, 300, 350]
+      "data": [0, 0, 0]
     },
     {
       "name": "Import*",
@@ -157,7 +157,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [0, 20, 0]
+      "data": [0, 0, 0]
     },
     {
       "name": "Export*",
@@ -171,7 +171,7 @@
           "shadowColor": "rgba(0,0,0,0.3)"
         }
       },
-      "data": [0, 140, 0]
+      "data": [0, 0, 0]
     }
   ]
 }
