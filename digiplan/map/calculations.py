@@ -684,10 +684,10 @@ def get_regional_independency(simulation_id: int) -> tuple[int, int, int, int]:
         )
     renewables_summed_flow = pd.concat(renewables, axis=1).sum(axis=1)
     # summary
-    independency_summary_2022 = round(renewables_summed_flow.sum() / demand.sum() * 100)
+    independency_summary_2022 = round(renewables_summed_flow.sum() / demand.sum() * 100, 1)
     # temporal
     independency_temporal_2022 = renewables_summed_flow - demand
-    independency_temporal_2022 = round(sum(independency_temporal_2022 > 0) / 8760 * 100)
+    independency_temporal_2022 = round(sum(independency_temporal_2022 > 0) / 8760 * 100, 1)
 
     # USER
     results = get_results(
@@ -695,10 +695,10 @@ def get_regional_independency(simulation_id: int) -> tuple[int, int, int, int]:
         {"renewable_flows": renewable_flows, "demand_flows": demand_flows},
     )
     # summary
-    independency_summary = round(results["renewable_flows"].sum().sum() / results["demand_flows"].sum().sum() * 100)
+    independency_summary = round(results["renewable_flows"].sum().sum() / results["demand_flows"].sum().sum() * 100, 1)
     # temporal
     independency_temporal = results["renewable_flows"].sum(axis=1) - results["demand_flows"].sum(axis=1)
-    independency_temporal = round(sum(independency_temporal > 0) / 8760 * 100)
+    independency_temporal = round(sum(independency_temporal > 0) / 8760 * 100, 1)
     return independency_summary_2022, independency_temporal_2022, independency_summary, independency_temporal
 
 
