@@ -5,18 +5,18 @@
     <h2 id="js-popup__municipality" class="popup__municipality">{{ municipality }}</h2>
   </div>
 
-  <div id="js-popup__key-values" class="popup__key-values">
-    {% block data %}
-      <span class="key-values__municipality">
-        {% if region_value != None %}
-          <span class="key-values__region_value">ABW Region {{ region_value|floatformat:0 }}{% if unit %} {{ unit }}{%  endif %}</span>
-        {% endif %}
-        {% if municipality_value != None %}
-          <span class="key-values__municipality_value">{{ municipality }} {{ municipality_value|floatformat:0 }}{% if unit %} {{ unit }}{%  endif %}</span>
-        {% endif %}
-      </span>
-    {% endblock data%}
-  </div>
+<!--  <div id="js-popup__key-values" class="popup__key-values">-->
+<!--    {% block data %}-->
+<!--      <span class="key-values__municipality">-->
+<!--        {% if region_value != None %}-->
+<!--          <span class="key-values__region_value">ABW Region {{ region_value|floatformat:0 }}{% if unit %} {{ unit }}{%  endif %}</span>-->
+<!--        {% endif %}-->
+<!--        {% if municipality_value != None %}-->
+<!--          <span class="key-values__municipality_value">{{ municipality }} {{ municipality_value|floatformat:0 }}{% if unit %} {{ unit }}{%  endif %}</span>-->
+<!--        {% endif %}-->
+<!--      </span>-->
+<!--    {% endblock data%}-->
+<!--  </div>-->
 
   {% block chart %}{% endblock chart %}
 
