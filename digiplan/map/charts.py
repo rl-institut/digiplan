@@ -178,13 +178,13 @@ class ElectricityOverviewChart(SimulationChart):
         for _i, item in enumerate(self.chart_options["series"]):
             mapped_keys = mapping[item["name"]]
             item["data"][0] = round(
-                self.chart_data["2022"].get(mapped_keys[0], self.chart_data["2022"].get(mapped_keys[1], 0.0)),
+                self.chart_data["2045"].get(mapped_keys[0], self.chart_data["2045"].get(mapped_keys[1], 0.0)),
             )
             item["data"][1] = round(
                 self.chart_data["user"].get(mapped_keys[0], self.chart_data["user"].get(mapped_keys[1], 0.0)),
             )
             item["data"][2] = round(
-                self.chart_data["2045"].get(mapped_keys[0], self.chart_data["2045"].get(mapped_keys[1], 0.0)),
+                self.chart_data["2022"].get(mapped_keys[0], self.chart_data["2022"].get(mapped_keys[1], 0.0)),
             )
         return self.chart_options
 
