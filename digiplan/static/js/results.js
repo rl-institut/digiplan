@@ -4,6 +4,7 @@ import {statusquoDropdown, futureDropdown} from "./elements.js";
 const imageResults = document.getElementById("info_tooltip_results");
 const simulation_spinner = document.getElementById("simulation_spinner");
 const chartViewTab = document.getElementById("chart-view-tab");
+const mapViewTab = document.getElementById("map-view-tab");
 
 const SIMULATION_CHECK_TIME = 5000;
 
@@ -44,6 +45,8 @@ futureDropdown.addEventListener("change", function() {
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
+PubSub.subscribe(eventTopics.SIMULATION_STARTED, hideResultButtons);
+PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultButtons);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, hideSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultCharts);
@@ -132,17 +135,19 @@ function hideSimulationSpinner(msg) {
     return logMessage(msg);
 }
 
-// function showResultButtons(msg) {
-//     chartViewTab.classList.remove("disabled");
-//     futureDropdown.disabled = false;
-//     return logMessage(msg);
-// }
-//
-// function hideResultButtons(msg) {
-//     chartViewTab.classList.add("disabled");
-//     futureDropdown.disabled = true;
-//     return logMessage(msg);
-// }
+function showResultButtons(msg) {
+    chartViewTab.classList.remove("disabled");
+    mapViewTab.classList.remove("disabled");
+    futureDropdown.disabled = false;
+    return logMessage(msg);
+}
+
+function hideResultButtons(msg) {
+    chartViewTab.classList.add("disabled");
+    mapViewTab.classList.add("disabled");
+    futureDropdown.disabled = true;
+    return logMessage(msg);
+}
 
 function showRegionChart(msg, lookup) {
     const region_lookup = `${lookup}_region`;
