@@ -636,7 +636,8 @@ def electricity_overview_from_user(simulation_id: int) -> pd.Series:
             "ABW-wind-onshore",
             "ABW-solar-pv_ground",
             "ABW-solar-pv_rooftop",
-            "ABW-biomass",
+            # Bioenergy: Had to be calculated from power output side of BHPs, use decentral as placeholder
+            "ABW-biogas-bpchp_decentral",
             "ABW-hydro-ror",
             "ABW-electricity-demand_cts",
             "ABW-electricity-demand_hh",
