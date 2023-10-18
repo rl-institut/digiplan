@@ -1,4 +1,3 @@
-
 import {statusquoDropdown, futureDropdown} from "./elements.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
@@ -21,7 +20,7 @@ const resultCharts = {
 // Disable settings form submit
 $('#settings').submit(false);
 
-statusquoDropdown.addEventListener("change", function() {
+statusquoDropdown.addEventListener("change", function () {
     if (statusquoDropdown.value === "") {
         deactivateChoropleth();
         PubSub.publish(eventTopics.CHOROPLETH_DEACTIVATED);
@@ -30,7 +29,7 @@ statusquoDropdown.addEventListener("change", function() {
     }
     imageResults.title = statusquoDropdown.options[statusquoDropdown.selectedIndex].title;
 });
-futureDropdown.addEventListener("change", function() {
+futureDropdown.addEventListener("change", function () {
     if (futureDropdown.value === "") {
         deactivateChoropleth();
         PubSub.publish(eventTopics.CHOROPLETH_DEACTIVATED);
@@ -46,6 +45,8 @@ PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, hideResultButtons);
+PubSub.subscribe(eventTopics.SIMULATION_STARTED, hideRegionChart);
+PubSub.subscribe(eventTopics.SIMULATION_STARTED, resetResultDropdown);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultButtons);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, hideSimulationSpinner);
@@ -61,21 +62,21 @@ function simulate(msg) {
     const formData = new FormData(settings); // jshint ignore:line
     if (store.cold.task_id != null) {
         $.ajax({
-            url : "/oemof/terminate",
-            type : "POST",
-            data : {task_id: store.cold.task_id},
-            success: function() {
+            url: "/oemof/terminate",
+            type: "POST",
+            data: {task_id: store.cold.task_id},
+            success: function () {
                 store.cold.task_id = null;
             }
         });
     }
     $.ajax({
-        url : "/oemof/simulate",
-        type : "POST",
+        url: "/oemof/simulate",
+        type: "POST",
         processData: false,
         contentType: false,
-        data : formData,
-        success : function(json) {
+        data: formData,
+        success: function (json) {
             store.cold.task_id = json.task_id;
             PubSub.publish(eventTopics.SIMULATION_STARTED);
         },
@@ -91,9 +92,9 @@ function checkResultsPeriodically(msg) {
 function checkResults() {
     $.ajax({
         url: "/oemof/simulate",
-        type : "GET",
-        data : {task_id: store.cold.task_id},
-        success: function(json) {
+        type: "GET",
+        data: {task_id: store.cold.task_id},
+        success: function (json) {
             if (json.simulation_id == null) {
                 setTimeout(checkResults, SIMULATION_CHECK_TIME);
             } else {
@@ -102,7 +103,7 @@ function checkResults() {
                 PubSub.publish(eventTopics.SIMULATION_FINISHED);
             }
         },
-        error: function(json) {
+        error: function (json) {
             store.cold.task_id = null;
             map_store.cold.state.simulation_id = null;
             PubSub.publish(eventTopics.SIMULATION_FINISHED);
@@ -112,13 +113,13 @@ function checkResults() {
 
 function showResults(msg, simulation_id) {
     $.ajax({
-        url : "/visualization",
-        type : "GET",
-        data : {
+        url: "/visualization",
+        type: "GET",
+        data: {
             simulation_ids: simulation_id,
             visualization: "total_system_costs",
         },
-        success : function(json) {
+        success: function (json) {
             console.log(json);
         },
     });
@@ -172,15 +173,20 @@ function showResultCharts(msg) {
     return logMessage(msg);
 }
 
-function showCharts(charts={}) {
+function resetResultDropdown(msg) {
+    futureDropdown.selectedIndex = 0;
+    return logMessage(msg);
+}
+
+function showCharts(charts = {}) {
     $.ajax({
-        url : "/charts",
-        type : "GET",
-        data : {
+        url: "/charts",
+        type: "GET",
+        data: {
             "charts": Object.keys(charts),
             "map_state": map_store.cold.state
         },
-        success : function(chart_options) {
+        success: function (chart_options) {
             for (const chart in charts) {
                 createChart(charts[chart], chart_options[chart]);
             }
