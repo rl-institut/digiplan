@@ -4,6 +4,7 @@ const imageResults = document.getElementById("info_tooltip_results");
 const simulation_spinner = document.getElementById("simulation_spinner");
 const chartViewTab = document.getElementById("chart-view-tab");
 const mapViewTab = document.getElementById("map-view-tab");
+const resultSimNote = document.getElementById("result_simnote");
 
 const SIMULATION_CHECK_TIME = 5000;
 
@@ -165,11 +166,13 @@ function showRegionChart(msg, lookup) {
 function hideRegionChart(msg) {
     clearChart("region_chart_statusquo");
     clearChart("region_chart_2045");
+    resultSimNote.innerText = "Berechnung läuft ...";
     return logMessage(msg);
 }
 
 function showResultCharts(msg) {
     showCharts(resultCharts);
+    resultSimNote.innerText = "";
     return logMessage(msg);
 }
 
