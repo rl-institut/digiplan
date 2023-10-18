@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-04 13:24+0000\n"
+"POT-Creation-Date: 2023-10-18 15:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1048,7 +1048,9 @@ msgid "Situation today"
 msgstr "Situation heute"
 
 #: digiplan/templates/components/panel_1_today.html:38
+#: digiplan/templates/components/panel_1_today.html:102
 #: digiplan/templates/components/panel_3_results.html:33
+#: digiplan/templates/components/panel_3_results.html:86
 msgid "Keine Auswahl"
 msgstr ""
 
@@ -1253,10 +1255,6 @@ msgstr ""
 msgid "Heat Demand per Capita (kWh)"
 msgstr "Wärmebedarf je EinwohnerIn (kWh)"
 
-#: digiplan/templates/components/panel_1_today.html:102
-msgid "Inhabitants 2021"
-msgstr "Einwohner:innen 2021"
-
 #: digiplan/templates/components/panel_2_settings.html:18
 #: digiplan/templates/components/panel_3_results.html:112
 #: digiplan/templates/components/results_view.html:37
@@ -1291,10 +1289,6 @@ msgstr ""
 "Anzahl Windenergieanlagen pro km². Die Anlagenanzahl in Deinem "
 "(Zukunfts-)Szenario wird aus der installierten Gesamtleistung berechnet, "
 "unter Verwendung einer Standardanlage mit einer Nennleistung von 6.5 MW."
-
-#: digiplan/templates/components/panel_3_results.html:86
-msgid "Inhabitants"
-msgstr ""
 
 #: digiplan/templates/components/panel_3_results.html:94
 msgid "View"
@@ -1515,19 +1509,19 @@ msgid ""
 "Individualverkehr ein:"
 msgstr ""
 
-#: digiplan/templates/map.html:50
+#: digiplan/templates/map.html:49
 msgid "App"
 msgstr "App"
 
-#: digiplan/templates/map.html:55
+#: digiplan/templates/map.html:54
 msgid "Documentation"
 msgstr "Dokumentation"
 
-#: digiplan/templates/map.html:59
+#: digiplan/templates/map.html:58
 msgid "Sources"
 msgstr "Quellen"
 
-#: digiplan/templates/map.html:63 digiplan/templates/offcanvas/contact.html:4
+#: digiplan/templates/map.html:62 digiplan/templates/offcanvas/contact.html:4
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -1564,6 +1558,3 @@ msgstr ""
 #: digiplan/templates/widgets/slider.html:18
 msgid "more"
 msgstr "mehr"
-
-#~ msgid "English"
-#~ msgstr "Englisch"
