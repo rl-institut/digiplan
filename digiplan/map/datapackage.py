@@ -233,16 +233,22 @@ def get_capacities_from_sliders(year: int) -> pd.Series:
     """Return renewable capacities for given year from slider settings (totals for each technology)."""
     if year == 2022:  # noqa: PLR2004
         lookup = "status_quo"
+        bioenergy_power = 55.7  # Workaround for bioenergy as there's no slider
     elif year == 2045:  # noqa: PLR2004
         lookup = "future_scenario"
+        bioenergy_power = 0
     else:
         msg = "Unknown year"
         raise ValueError(msg)
     energy_settings = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "settings/energy_settings_panel.json")))
     technologies = {"wind": "s_w_1", "pv_ground": "s_pv_ff_1", "pv_roof": "s_pv_d_1", "ror": "s_h_1"}
-    return pd.Series(
-        data={technology: energy_settings[key].get(lookup, 0.0) for technology, key in technologies.items()},
+    slider_settings = pd.Series(
+        data={
+            **{technology: energy_settings[key].get(lookup, 0.0) for technology, key in technologies.items()},
+            "bioenergy": bioenergy_power,
+        },
     )
+    return slider_settings
 
 
 def get_power_density(technology: Optional[str] = None) -> dict:
