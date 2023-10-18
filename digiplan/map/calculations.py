@@ -618,10 +618,10 @@ def electricity_overview_from_user(simulation_id: int) -> pd.Series:
     ]
     demand.index = demand.index.get_level_values(1)
 
-    electricity_heat_production_result = electricity_heat_demand(simulation_id)
-    demand["ABW-electricity-demand_hh"] += electricity_heat_production_result["electricity_heat_demand_hh"]
-    demand["ABW-electricity-demand_cts"] += electricity_heat_production_result["electricity_heat_demand_cts"]
-    demand["ABW-electricity-demand_ind"] += electricity_heat_production_result["electricity_heat_demand_ind"]
+    # electricity_heat_production_result = electricity_heat_demand(simulation_id)
+    # demand["ABW-electricity-demand_hh"] += electricity_heat_production_result["electricity_heat_demand_hh"]
+    # demand["ABW-electricity-demand_cts"] += electricity_heat_production_result["electricity_heat_demand_cts"]
+    # demand["ABW-electricity-demand_ind"] += electricity_heat_production_result["electricity_heat_demand_ind"]
 
     renewables = renewable_electricity_production(simulation_id)
 
