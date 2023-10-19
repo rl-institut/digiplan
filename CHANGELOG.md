@@ -15,6 +15,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - Abort simulation run when switching to settings tab
 
 ### Fixed
+- population popups for missing data
 - various fixes in charts, texts and units
 - RES share calculation for SQ
 - power and heat demand scaling for future scenario
