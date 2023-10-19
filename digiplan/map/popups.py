@@ -5,6 +5,7 @@ from collections import namedtuple
 from collections.abc import Iterable
 from typing import Optional, Union
 
+import numpy as np
 import pandas as pd
 from django.db.models import F
 from django.utils.translation import gettext_lazy as _
@@ -68,6 +69,7 @@ class RegionPopup(popups.ChartPopup):
             chart data ready to use in ECharts in JS
         """
         chart_data = self.get_chart_data()
+        chart_data = chart_data.replace([np.nan], [None])
         return charts.create_chart(self.lookup, chart_data)
 
     @abc.abstractmethod
