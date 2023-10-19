@@ -44,7 +44,7 @@ class Choropleth:
         dict
             containing paint properties for choropleth layer in maplibre
         """
-        return {"fill-opacity": 1}
+        return {"fill-opacity": 0.75}
 
     def get_fill_color(self, values: dict[int, float]) -> dict:
         """
