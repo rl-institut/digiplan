@@ -691,7 +691,7 @@ class WindTurbinesSquareRegionChart(Chart):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = "Region ABW"
-        chart_options["yAxis"]["name"] = "Anzahl Windenergieanlagen"
+        chart_options["yAxis"]["name"] = "WEA/km²"
         return chart_options
 
 

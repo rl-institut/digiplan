@@ -404,18 +404,17 @@ class EnergyCapita2045Popup(RegionPopup):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Energieanteile pro Technologie")
-        chart_options["yAxis"]["name"] = _("GWh")
+        chart_options["yAxis"]["name"] = _("MWh")
         chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
         return chart_options
 
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
         status_quo_data = (
-            calculations.calculate_capita_for_value(calculations.energies_per_municipality())
-            .loc[self.selected_id]
-            .round(1)
-        )
-        future_data = (super().get_chart_data() * 1e-3).round(1)
+            calculations.calculate_capita_for_value(calculations.energies_per_municipality()).loc[self.selected_id]
+            * 1e3
+        ).round(1)
+        future_data = super().get_chart_data().round(1)
         return list(zip(status_quo_data, future_data))
 
 
@@ -458,11 +457,10 @@ class EnergySquare2045Popup(RegionPopup):
     def get_chart_data(self) -> Iterable:
         """Create capacity chart data for SQ and future scenario."""
         status_quo_data = (
-            calculations.calculate_square_for_value(calculations.energies_per_municipality())
-            .loc[self.selected_id]
-            .round(1)
-        )
-        future_data = (super().get_chart_data() * 1e-3).round(1)
+            calculations.calculate_square_for_value(calculations.energies_per_municipality()).loc[self.selected_id]
+            * 1e3
+        ).round(1)
+        future_data = super().get_chart_data().round(1)
         return list(zip(status_quo_data, future_data))
 
 
@@ -686,7 +684,7 @@ class ElectricityDemandPopup(RegionPopup):
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
         chart_options["title"]["text"] = _("Strombedarf")
-        chart_options["yAxis"]["name"] = _("ǴWh")
+        chart_options["yAxis"]["name"] = _("GWh")
         return chart_options
 
 
@@ -755,11 +753,10 @@ class ElectricityDemandCapita2045Popup(RegionPopup):
         status_quo_data = (
             calculations.calculate_capita_for_value(
                 calculations.electricity_demand_per_municipality(),
-            )
-            .loc[self.selected_id]
-            .round(1)
-        )
-        future_data = super().get_chart_data().round(1)
+            ).loc[self.selected_id]
+            * 1e6
+        ).round(1)
+        future_data = (super().get_chart_data() * 1e6).round(1)
         return list(zip(status_quo_data, future_data))
 
     def get_chart_options(self) -> dict:
