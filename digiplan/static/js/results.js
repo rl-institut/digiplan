@@ -166,7 +166,7 @@ function showRegionChart(msg, lookup) {
 function hideRegionChart(msg) {
     clearChart("region_chart_statusquo");
     clearChart("region_chart_2045");
-    resultSimNote.innerText = "Berechnung läuft ...";
+    resultSimNote.innerText = "Berechnung läuft ... (max. 3 min)";
     return logMessage(msg);
 }
 
