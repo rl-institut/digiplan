@@ -153,14 +153,14 @@ class CapacitySquareChoropleth(Choropleth):  # noqa: D101
 
 class PopulationChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return models.Population.quantity_per_municipality_per_year().sum(axis=1).to_dict()
+        return models.Population.quantity_per_municipality_per_year()[2022].to_dict()
 
 
 class PopulationDensityChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        population = models.Population.quantity_per_municipality_per_year()
+        population = models.Population.quantity_per_municipality_per_year()[2022]
         population_square = calculations.calculate_square_for_value(population)
-        return population_square.sum(axis=1).to_dict()
+        return population_square.to_dict()
 
 
 class EmployeesChoropleth(Choropleth):  # noqa: D101
