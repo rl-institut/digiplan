@@ -69,7 +69,7 @@ class RegionPopup(popups.ChartPopup):
             chart data ready to use in ECharts in JS
         """
         chart_data = self.get_chart_data()
-        chart_data = chart_data.replace([np.nan], [None])
+        chart_data = chart_data.replace([np.nan], [None]) if isinstance(chart_data, pd.DataFrame) else chart_data
         return charts.create_chart(self.lookup, chart_data)
 
     @abc.abstractmethod
