@@ -94,7 +94,8 @@ class EnergyChoropleth(Choropleth):  # noqa: D101
 
 class Energy2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.energies_per_municipality_2045(self.map_state["simulation_id"]).sum(axis=1).to_dict()
+        energies = calculations.energies_per_municipality_2045(self.map_state["simulation_id"]).sum(axis=1) * 1e-3
+        return energies.to_dict()
 
 
 class EnergyCapitaChoropleth(Choropleth):  # noqa: D101
@@ -107,7 +108,7 @@ class EnergyCapitaChoropleth(Choropleth):  # noqa: D101
 class EnergyCapita2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         energies = calculations.energies_per_municipality_2045(self.map_state["simulation_id"])
-        energies_per_capita = calculations.calculate_capita_for_value(energies) * 1e3
+        energies_per_capita = calculations.calculate_capita_for_value(energies)
         return energies_per_capita.sum(axis=1).to_dict()
 
 
@@ -121,7 +122,7 @@ class EnergySquareChoropleth(Choropleth):  # noqa: D101
 class EnergySquare2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         energies = calculations.energies_per_municipality_2045(self.map_state["simulation_id"])
-        energies_per_square = calculations.calculate_square_for_value(energies) * 1e3
+        energies_per_square = calculations.calculate_square_for_value(energies)
         return energies_per_square.sum(axis=1).to_dict()
 
 
@@ -140,7 +141,7 @@ class Capacity2045Choropleth(Choropleth):  # noqa: D101
 class CapacitySquare2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         capacities = calculations.capacities_per_municipality_2045(self.map_state["simulation_id"])
-        capacities_per_square = calculations.calculate_square_for_value(capacities) * 1e3
+        capacities_per_square = calculations.calculate_square_for_value(capacities)
         return capacities_per_square.sum(axis=1).to_dict()
 
 
