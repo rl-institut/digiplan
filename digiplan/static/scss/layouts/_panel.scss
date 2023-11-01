@@ -28,6 +28,11 @@
     @extend .flex-shrink-0;
   }
 
+  &__simnote {
+    @extend .pt-2;
+    color: #E6A100;
+  }
+
   &__goal {
     @extend .d-flex;
     @extend .flex-column;

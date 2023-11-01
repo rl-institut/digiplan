@@ -32,10 +32,7 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 # In Windows, this must be set to your system time zone.
 TIME_ZONE = "UTC"
 # https://docs.djangoproject.com/en/dev/ref/settings/#languages
-LANGUAGES = (
-    ("en", _("English")),
-    ("de", _("German")),
-)
+LANGUAGES = (("de", _("German")),)
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 # 'de' is the standard language
 LANGUAGE_CODE = "de"
@@ -405,6 +402,12 @@ MAP_ENGINE_CHOROPLETHS = [
         unit="%",
     ),
     setup.Choropleth(
+        "energy_share_2045",
+        layers=["municipality"],
+        title=_("Anteil Erneuerbare Energien am Strombedarf"),
+        unit="%",
+    ),
+    setup.Choropleth(
         "energy_capita_statusquo",
         layers=["municipality"],
         title=_("Gewonnene Energie aus EE je EW"),
@@ -510,6 +513,7 @@ MAP_ENGINE_POPUPS = [
             "energy_statusquo",
             "energy_2045",
             "energy_share_statusquo",
+            "energy_share_2045",
             "energy_capita_statusquo",
             "energy_capita_2045",
             "energy_square_statusquo",

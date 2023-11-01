@@ -19,10 +19,15 @@
   "series": [
     {
       "type": "bar",
-      "barWidth": "16",
+      "barWidth": "60",
       "data": [5],
       "name": "Windenergieanlagen"
     }
   ],
-  "title": { "text": "Anzahl Windenergieanlagen" }
+  "title": {
+    "text": "Anzahl Windenergieanlagen",
+    "textStyle": {
+      "fontSize": 14
+    }
+  }
 }

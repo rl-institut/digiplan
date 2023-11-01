@@ -44,7 +44,7 @@ class Choropleth:
         dict
             containing paint properties for choropleth layer in maplibre
         """
-        return {"fill-opacity": 1}
+        return {"fill-opacity": 0.75}
 
     def get_fill_color(self, values: dict[int, float]) -> dict:
         """
@@ -79,7 +79,12 @@ class Choropleth:
 
 class EnergyShareChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.energy_shares_per_municipality().sum(axis=1).to_dict()
+        return calculations.energy_shares_per_municipality().sum(axis=1).round().to_dict()
+
+
+class EnergyShare2045Choropleth(Choropleth):  # noqa: D101
+    def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
+        return calculations.energy_shares_2045_per_municipality(self.map_state["simulation_id"]).sum(axis=1).to_dict()
 
 
 class EnergyChoropleth(Choropleth):  # noqa: D101
@@ -89,7 +94,8 @@ class EnergyChoropleth(Choropleth):  # noqa: D101
 
 class Energy2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return calculations.energies_per_municipality_2045(self.map_state["simulation_id"]).sum(axis=1).to_dict()
+        energies = calculations.energies_per_municipality_2045(self.map_state["simulation_id"]).sum(axis=1) * 1e-3
+        return energies.to_dict()
 
 
 class EnergyCapitaChoropleth(Choropleth):  # noqa: D101
@@ -102,7 +108,7 @@ class EnergyCapitaChoropleth(Choropleth):  # noqa: D101
 class EnergyCapita2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         energies = calculations.energies_per_municipality_2045(self.map_state["simulation_id"])
-        energies_per_capita = calculations.calculate_capita_for_value(energies) * 1e3
+        energies_per_capita = calculations.calculate_capita_for_value(energies)
         return energies_per_capita.sum(axis=1).to_dict()
 
 
@@ -116,7 +122,7 @@ class EnergySquareChoropleth(Choropleth):  # noqa: D101
 class EnergySquare2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         energies = calculations.energies_per_municipality_2045(self.map_state["simulation_id"])
-        energies_per_square = calculations.calculate_square_for_value(energies) * 1e3
+        energies_per_square = calculations.calculate_square_for_value(energies)
         return energies_per_square.sum(axis=1).to_dict()
 
 
@@ -135,7 +141,7 @@ class Capacity2045Choropleth(Choropleth):  # noqa: D101
 class CapacitySquare2045Choropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
         capacities = calculations.capacities_per_municipality_2045(self.map_state["simulation_id"])
-        capacities_per_square = calculations.calculate_square_for_value(capacities) * 1e3
+        capacities_per_square = calculations.calculate_square_for_value(capacities)
         return capacities_per_square.sum(axis=1).to_dict()
 
 
@@ -148,14 +154,14 @@ class CapacitySquareChoropleth(Choropleth):  # noqa: D101
 
 class PopulationChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        return models.Population.quantity_per_municipality_per_year().sum(axis=1).to_dict()
+        return models.Population.quantity_per_municipality_per_year()[2022].to_dict()
 
 
 class PopulationDensityChoropleth(Choropleth):  # noqa: D101
     def get_values_per_feature(self) -> dict[int, float]:  # noqa: D102
-        population = models.Population.quantity_per_municipality_per_year()
+        population = models.Population.quantity_per_municipality_per_year()[2022]
         population_square = calculations.calculate_square_for_value(population)
-        return population_square.sum(axis=1).to_dict()
+        return population_square.to_dict()
 
 
 class EmployeesChoropleth(Choropleth):  # noqa: D101
@@ -271,6 +277,7 @@ CHOROPLETHS: dict[str, Union[Callable, type(Choropleth)]] = {
     "energy_statusquo": EnergyChoropleth,
     "energy_2045": Energy2045Choropleth,
     "energy_share_statusquo": EnergyShareChoropleth,
+    "energy_share_2045": EnergyShare2045Choropleth,
     "energy_capita_statusquo": EnergyCapitaChoropleth,
     "energy_capita_2045": EnergyCapita2045Choropleth,
     "energy_square_statusquo": EnergySquareChoropleth,

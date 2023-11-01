@@ -9,6 +9,7 @@ from django.http import HttpRequest, response
 from django.views.generic import TemplateView
 from django_mapengine import views
 
+from digiplan import __version__
 from digiplan.map import config
 
 from . import charts, choropleths, forms, map_config, popups, utils
@@ -86,6 +87,8 @@ class MapGLView(TemplateView, views.MapEngineMixin):
         context["onboarding_wind"] = charts.Chart("onboarding_wind").render()
         context["onboarding_pv_ground"] = charts.Chart("onboarding_pv_ground").render()
         context["onboarding_pv_roof"] = charts.Chart("onboarding_pv_roof").render()
+
+        context["app_version"] = str(__version__)
 
         return context
 

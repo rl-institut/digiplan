@@ -38,7 +38,7 @@
       "emphasis": {
         "focus": "series"
       },
-      "data": [60, 30]
+      "data": [0, 0]
     },
     {
       "name": "Zeitgleiche Eigenversorgung",
@@ -52,7 +52,7 @@
       "emphasis": {
         "focus": "series"
       },
-      "data": [40, 10]
+      "data": [0, 0]
     }
   ]
 }

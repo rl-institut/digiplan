@@ -4,6 +4,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project tries to adhere to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Added
+
+### Changed
+
+### Fixed
+
+## [1.0.0] - 2023-11-01
+### Added
+- RES share charts and choropleth for user scenario
+- Battery storages hook to esys model
+- Add note on tech requirements to onboarding modal
+- Version info in doc modal
+
+### Changed
+- Remove locale EN
+- Abort simulation run when switching to settings tab
+
+### Fixed
+- population popups for missing data
+- various fixes in charts, texts and units
+- RES share calculation for SQ
+- power and heat demand scaling for future scenario
+- swap mapping of PV roof and PV ground in result calculation
+- heat per capita calculation in results
+- round chart values to decent fps
+- diverging capacities in digipipe datapackage and app due to operational status
+- fix PV roof slider values and update slider on startup
+- central heat pump share
+- capacity and power of thermal storages
+- full load times of heat production adaption from heat demand settings
+
 ## [0.6.0] - 2023-09-01
 ### Added
 - electricity autarky chart

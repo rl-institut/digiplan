@@ -1,9 +1,10 @@
-
 import {statusquoDropdown, futureDropdown} from "./elements.js";
 
 const imageResults = document.getElementById("info_tooltip_results");
 const simulation_spinner = document.getElementById("simulation_spinner");
 const chartViewTab = document.getElementById("chart-view-tab");
+const mapViewTab = document.getElementById("map-view-tab");
+const resultSimNote = document.getElementById("result_simnote");
 
 const SIMULATION_CHECK_TIME = 5000;
 
@@ -20,7 +21,7 @@ const resultCharts = {
 // Disable settings form submit
 $('#settings').submit(false);
 
-statusquoDropdown.addEventListener("change", function() {
+statusquoDropdown.addEventListener("change", function () {
     if (statusquoDropdown.value === "") {
         deactivateChoropleth();
         PubSub.publish(eventTopics.CHOROPLETH_DEACTIVATED);
@@ -29,7 +30,7 @@ statusquoDropdown.addEventListener("change", function() {
     }
     imageResults.title = statusquoDropdown.options[statusquoDropdown.selectedIndex].title;
 });
-futureDropdown.addEventListener("change", function() {
+futureDropdown.addEventListener("change", function () {
     if (futureDropdown.value === "") {
         deactivateChoropleth();
         PubSub.publish(eventTopics.CHOROPLETH_DEACTIVATED);
@@ -44,8 +45,10 @@ futureDropdown.addEventListener("change", function() {
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, simulate);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_STARTED, checkResultsPeriodically);
-// PubSub.subscribe(eventTopics.SIMULATION_STARTED, hideResultButtons);
-// PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultButtons);
+PubSub.subscribe(eventTopics.SIMULATION_STARTED, hideResultButtons);
+PubSub.subscribe(eventTopics.SIMULATION_STARTED, hideRegionChart);
+PubSub.subscribe(eventTopics.SIMULATION_STARTED, resetResultDropdown);
+PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultButtons);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResults);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, hideSimulationSpinner);
 PubSub.subscribe(eventTopics.SIMULATION_FINISHED, showResultCharts);
@@ -60,18 +63,21 @@ function simulate(msg) {
     const formData = new FormData(settings); // jshint ignore:line
     if (store.cold.task_id != null) {
         $.ajax({
-            url : "/oemof/terminate",
-            type : "POST",
-            data : {task_id: store.cold.task_id},
+            url: "/oemof/terminate",
+            type: "POST",
+            data: {task_id: store.cold.task_id},
+            success: function () {
+                store.cold.task_id = null;
+            }
         });
     }
     $.ajax({
-        url : "/oemof/simulate",
-        type : "POST",
+        url: "/oemof/simulate",
+        type: "POST",
         processData: false,
         contentType: false,
-        data : formData,
-        success : function(json) {
+        data: formData,
+        success: function (json) {
             store.cold.task_id = json.task_id;
             PubSub.publish(eventTopics.SIMULATION_STARTED);
         },
@@ -87,9 +93,9 @@ function checkResultsPeriodically(msg) {
 function checkResults() {
     $.ajax({
         url: "/oemof/simulate",
-        type : "GET",
-        data : {task_id: store.cold.task_id},
-        success: function(json) {
+        type: "GET",
+        data: {task_id: store.cold.task_id},
+        success: function (json) {
             if (json.simulation_id == null) {
                 setTimeout(checkResults, SIMULATION_CHECK_TIME);
             } else {
@@ -97,19 +103,24 @@ function checkResults() {
                 map_store.cold.state.simulation_id = json.simulation_id;
                 PubSub.publish(eventTopics.SIMULATION_FINISHED);
             }
+        },
+        error: function (json) {
+            store.cold.task_id = null;
+            map_store.cold.state.simulation_id = null;
+            PubSub.publish(eventTopics.SIMULATION_FINISHED);
         }
     });
 }
 
 function showResults(msg, simulation_id) {
     $.ajax({
-        url : "/visualization",
-        type : "GET",
-        data : {
+        url: "/visualization",
+        type: "GET",
+        data: {
             simulation_ids: simulation_id,
             visualization: "total_system_costs",
         },
-        success : function(json) {
+        success: function (json) {
             console.log(json);
         },
     });
@@ -126,17 +137,19 @@ function hideSimulationSpinner(msg) {
     return logMessage(msg);
 }
 
-// function showResultButtons(msg) {
-//     chartViewTab.classList.remove("disabled");
-//     futureDropdown.disabled = false;
-//     return logMessage(msg);
-// }
-//
-// function hideResultButtons(msg) {
-//     chartViewTab.classList.add("disabled");
-//     futureDropdown.disabled = true;
-//     return logMessage(msg);
-// }
+function showResultButtons(msg) {
+    chartViewTab.classList.remove("disabled");
+    mapViewTab.classList.remove("disabled");
+    futureDropdown.disabled = false;
+    return logMessage(msg);
+}
+
+function hideResultButtons(msg) {
+    chartViewTab.classList.add("disabled");
+    mapViewTab.classList.add("disabled");
+    futureDropdown.disabled = true;
+    return logMessage(msg);
+}
 
 function showRegionChart(msg, lookup) {
     const region_lookup = `${lookup}_region`;
@@ -153,23 +166,30 @@ function showRegionChart(msg, lookup) {
 function hideRegionChart(msg) {
     clearChart("region_chart_statusquo");
     clearChart("region_chart_2045");
+    resultSimNote.innerText = "Berechnung läuft ... (max. 3 min)";
     return logMessage(msg);
 }
 
 function showResultCharts(msg) {
     showCharts(resultCharts);
+    resultSimNote.innerText = "";
     return logMessage(msg);
 }
 
-function showCharts(charts={}) {
+function resetResultDropdown(msg) {
+    futureDropdown.selectedIndex = 0;
+    return logMessage(msg);
+}
+
+function showCharts(charts = {}) {
     $.ajax({
-        url : "/charts",
-        type : "GET",
-        data : {
+        url: "/charts",
+        type: "GET",
+        data: {
             "charts": Object.keys(charts),
             "map_state": map_store.cold.state
         },
-        success : function(chart_options) {
+        success: function (chart_options) {
             for (const chart in charts) {
                 createChart(charts[chart], chart_options[chart]);
             }

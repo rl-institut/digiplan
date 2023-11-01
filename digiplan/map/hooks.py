@@ -64,11 +64,10 @@ def adapt_electricity_demand(scenario: str, data: dict, request: HttpRequest) ->
         Parameters for oemof with adapted demands
     """
     del data["s_v_1"]
-    year = "2045" if scenario == "scenario_2045" else "2022"
     for sector, slider in (("hh", "s_v_3"), ("cts", "s_v_4"), ("ind", "s_v_5")):
         demand = datapackage.get_power_demand(sector)[sector]
         logging.info(f"Adapting electricity demand at {sector=}.")
-        data[f"ABW-electricity-demand_{sector}"] = {"amount": float(demand[year].sum()) * data.pop(slider) / 100}
+        data[f"ABW-electricity-demand_{sector}"] = {"amount": float(demand["2022"].sum()) * data.pop(slider) / 100}
     return data
 
 
@@ -168,7 +167,7 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
         # Calculate demands per sector
         for sector in ("hh", "cts", "ind"):
             summed_demand = int(  # Convert to int, otherwise int64 is used
-                heat_demand_per_municipality[sector][distribution[:3]]["2045"].sum(),
+                heat_demand_per_municipality[sector][distribution[:3]]["2022"].sum(),
             )
             demand[sector] = heat_demand[sector][distribution] * summed_demand
             percentage = (
@@ -176,8 +175,9 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
             )
             # DEMAND
             logging.info(f"Adapting heat demand at {distribution=} and {sector=}.")
+            demand[sector] = demand[sector] * percentage / 100
             data[f"ABW-heat_{distribution}-demand_{sector}"] = {
-                "amount": summed_demand * percentage / 100,
+                "amount": demand[sector].sum(),
             }
 
             # HP contribution per sector:
@@ -185,11 +185,8 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
                 hp_share = data.pop(hp_sliders[sector]) / 100
                 hp_energy[sector] = demand[sector] * hp_share
             else:
-                if sector == "hh":  # noqa: PLR5501
-                    hp_share = data.pop("w_z_wp_1") / 100
-                    hp_energy[sector] = demand[sector] * hp_share
-                else:
-                    hp_energy[sector] = demand[sector] * 0
+                hp_share = data["w_z_wp_1"] / 100
+                hp_energy[sector] = demand[sector] * hp_share
 
         # HP Capacity and Energies
         hp_energy_total = pd.concat(hp_energy.values(), axis=1).sum(axis=1)
@@ -216,17 +213,27 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
         avg_demand_per_day = total_demand.sum() / 365
         logging.info(f"Adapting capacity for storage at {distribution=}.")
         capacity = float(avg_demand_per_day * data.pop(storage_sliders[distribution]) / 100)
-        # Adapt storage capacity to solarthermal collector overpowering:
+        # Adapt storage capacity to solarthermal collector overpowering (make sure the maximum feedin power of ST can
+        # be absorbed by the storage):
         solar_capacity = data[f"ABW-solar-thermalcollector_{distribution}"]["capacity"]
         solar_thermal_energy = (
             datapackage.get_thermal_efficiency(f"solar-thermalcollector_{distribution}") * solar_capacity
         )
         delta_solar = solar_thermal_energy - total_demand
         solar_peak = delta_solar[delta_solar > 0].max()
-        capacity = max(capacity, solar_peak)
+
+        tech_mapping = {"central": "large", "decentral": "small"}
+        power = (
+            capacity
+            * config.TECHNOLOGY_DATA["hot_water_storages"][tech_mapping[distribution]][
+                "nominal_power_per_storage_capacity"
+            ]
+        )
+        power = max(power, solar_peak)
+
         data[f"ABW-heat_{distribution}-storage"] = {
-            "capacity": capacity,
             "storage_capacity": capacity,
+            "capacity": power,
         }
 
     # Adapt biomass to biogas plant size
@@ -237,6 +244,7 @@ def adapt_heat_settings(scenario: str, data: dict, request: HttpRequest) -> dict
     # Remove unnecessary heat settings
     del data["w_v_1"]
     del data["w_d_wp_1"]
+    del data["w_z_wp_1"]
 
     return data
 
@@ -259,12 +267,12 @@ def adapt_renewable_capacities(scenario: str, data: dict, request: HttpRequest) 
     dict
         Adapted parameters dict with set up capacities
     """
-    # Capacities
+    # 1) Capacities: renewables
+    logging.info("Adapting capacities: renewables")
     data["ABW-wind-onshore"] = {"capacity": data.pop("s_w_1")}
     data["ABW-solar-pv_ground"] = {"capacity": data.pop("s_pv_ff_1")}
     data["ABW-solar-pv_rooftop"] = {"capacity": data.pop("s_pv_d_1")}
     data["ABW-hydro-ror"] = {"capacity": data.pop("s_h_1")}
-    data["ABW-electricity-large_scale_battery"] = {"capacity": data.pop("s_s_g_1")}
 
     # Full load hours
     technology_mapping = {
@@ -277,6 +285,39 @@ def adapt_renewable_capacities(scenario: str, data: dict, request: HttpRequest) 
     for technology, mapped_key in technology_mapping.items():
         data[technology]["profile"] = datapackage.get_profile(technology[4:]) * full_load_hours[mapped_key]
 
+    # 2) Capacities: batteries
+    logging.info("Adapting capacities: batteries")
+
+    # Large scale
+    wind_pv_ground_energy_daily = (
+        float(
+            data["ABW-wind-onshore"]["capacity"] * data["ABW-wind-onshore"]["profile"].sum()
+            + data["ABW-solar-pv_ground"]["capacity"] * data["ABW-solar-pv_ground"]["profile"].sum(),
+        )
+        / 365
+    )
+    storage_capacity = data.pop("s_s_g_1") / 100 * wind_pv_ground_energy_daily
+    data["ABW-electricity-large_scale_battery"] = {
+        "storage_capacity": storage_capacity,
+        "capacity": (
+            storage_capacity * config.TECHNOLOGY_DATA["batteries"]["large"]["nominal_power_per_storage_capacity"]
+        ),
+    }
+
+    # Home storages
+    storage_capacity = (
+        data.pop("s_pv_d_4")
+        / 100
+        * data["ABW-solar-pv_rooftop"]["capacity"]
+        * config.TECHNOLOGY_DATA["batteries"]["small"]["storage_capacity_per_pv_power"]
+    )
+    data["ABW-electricity-small_scale_battery"] = {
+        "storage_capacity": storage_capacity,
+        "capacity": (
+            storage_capacity * config.TECHNOLOGY_DATA["batteries"]["small"]["nominal_power_per_storage_capacity"]
+        ),
+    }
+
     # Remove unnecessary renewable sliders:
     del data["s_w_3"]
     del data["s_w_4"]
@@ -288,5 +329,5 @@ def adapt_renewable_capacities(scenario: str, data: dict, request: HttpRequest) 
     del data["s_pv_ff_3"]
     del data["s_pv_ff_4"]
     del data["s_pv_d_3"]
-    del data["s_pv_d_4"]
+
     return data

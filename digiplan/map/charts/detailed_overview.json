@@ -20,7 +20,7 @@
     "containLabel": true
   },
   "yAxis": {
-    "data": ["Ziel 2045", "Mein Szenario", "Status Quo"],
+    "data": ["Ziel 2045", "Dein Szenario", "Status Quo"],
     "axisLine": { "onZero": true },
     "splitLine": { "show": false },
     "splitArea": { "show": false }

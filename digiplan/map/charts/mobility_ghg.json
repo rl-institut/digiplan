@@ -16,7 +16,7 @@
   },
   "yAxis": {
     "type": "category",
-    "data": ["Ziel", "Mein Szenario", "Status Quo", "1990"],
+    "data": ["Ziel", "Dein Szenario", "Status Quo", "1990"],
     "axisTick": {
       "show": false
     }

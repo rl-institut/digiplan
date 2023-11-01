@@ -62,5 +62,10 @@
       "name": "Bioenergie"
     }
   ],
-  "title": {"text": "Installierte Leistung nach Typ"}
+  "title": {
+    "text": "Installierte Leistung nach Typ",
+    "textStyle": {
+      "fontSize": 14
+    }
+  }
 }

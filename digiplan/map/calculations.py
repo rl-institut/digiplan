@@ -4,7 +4,6 @@ from typing import Optional
 
 import pandas as pd
 from django.conf import settings
-from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 from django_oemof.models import Simulation
 from django_oemof.results import get_results
@@ -110,21 +109,7 @@ def capacities_per_municipality() -> pd.DataFrame:
     pd.DataFrame
         Capacity per municipality (index) and technology (column)
     """
-    capacities = []
-    for technology in (
-        models.WindTurbine,
-        models.PVroof,
-        models.PVground,
-        models.Hydro,
-        models.Biomass,
-        models.Storage,
-    ):
-        res_capacity = pd.DataFrame.from_records(
-            technology.objects.values("mun_id").annotate(capacity=Sum("capacity_net")).values("mun_id", "capacity"),
-        ).set_index("mun_id")
-        res_capacity.columns = [technology._meta.verbose_name]  # noqa: SLF001
-        capacities.append(res_capacity)
-    return pd.concat(capacities, axis=1).fillna(0.0) * 1e-3
+    return datapackage.get_capacities_from_datapackage()
 
 
 def capacities_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
@@ -139,8 +124,8 @@ def capacities_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
         results["capacities"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
     ]
     mapping = {
-        "ABW-solar-pv_ground": "pv_roof",
-        "ABW-solar-pv_rooftop": "pv_ground",
+        "ABW-solar-pv_ground": "pv_ground",
+        "ABW-solar-pv_rooftop": "pv_roof",
         "ABW-wind-onshore": "wind",
         "ABW-hydro-ror": "hydro",
         "ABW-biomass": "biomass",
@@ -152,7 +137,7 @@ def capacities_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     renewables = renewables * calculate_potential_shares(parameters)
     renewables["bioenergy"] = 0.0
     renewables["st"] = 0.0
-    return renewables
+    return renewables.astype(float)
 
 
 def energies_per_municipality() -> pd.DataFrame:
@@ -165,8 +150,8 @@ def energies_per_municipality() -> pd.DataFrame:
         Energy per municipality (index) and technology (column)
     """
     capacities = capacities_per_municipality()
-    full_load_hours = datapackage.get_full_load_hours(year=2022)
-    full_load_hours = full_load_hours.reindex(index=["wind", "pv_roof", "pv_ground", "ror", "bioenergy", "st"])
+    full_load_hours = datapackage.get_full_load_hours(year=2022).drop("st").rename({"ror": "hydro"})
+    full_load_hours = full_load_hours.reindex(index=["wind", "pv_roof", "pv_ground", "hydro", "bioenergy"])
     return capacities * full_load_hours.values / 1e3
 
 
@@ -182,8 +167,8 @@ def energies_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
         results["electricity_production"].index.get_level_values(0).isin(config.SIMULATION_RENEWABLES)
     ]
     mapping = {
-        "ABW-solar-pv_ground": "pv_roof",
-        "ABW-solar-pv_rooftop": "pv_ground",
+        "ABW-solar-pv_ground": "pv_ground",
+        "ABW-solar-pv_rooftop": "pv_roof",
         "ABW-wind-onshore": "wind",
         "ABW-hydro-ror": "hydro",
         "ABW-biomass": "biomass",
@@ -195,7 +180,7 @@ def energies_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     renewables = renewables * calculate_potential_shares(parameters)
     renewables["bioenergy"] = 0.0
     renewables["st"] = 0.0
-    return renewables
+    return renewables.astype(float)
 
 
 def energy_shares_per_municipality() -> pd.DataFrame:
@@ -210,9 +195,28 @@ def energy_shares_per_municipality() -> pd.DataFrame:
     energies = energies_per_municipality()
     demands = datapackage.get_power_demand()
     total_demand = pd.concat([d["2022"] for d in demands.values()], axis=1).sum(axis=1)
+    energy_shares = energies.mul(1e3).div(total_demand, axis=0)
+    return energy_shares.mul(1e2)
+
+
+def energy_shares_region() -> pd.DataFrame:
+    """
+    Calculate energy shares of renewables from electric demand for region.
+
+    Like energy_shares_per_municipality() but with weighted demand for correct
+    totals.
+
+    Returns
+    -------
+    pd.DataFrame
+        Energy share per municipality (index) and technology (column)
+    """
+    energies = energies_per_municipality()
+    demands = datapackage.get_power_demand()
+    total_demand = pd.concat([d["2022"] for d in demands.values()], axis=1).sum(axis=1)
     total_demand_share = total_demand / total_demand.sum()
-    energies = energies.reindex(range(20))
-    return energies.mul(total_demand_share, axis=0)
+    energy_shares = energies.mul(1e3).div(total_demand, axis=0).mul(total_demand_share, axis=0).sum(axis=0)
+    return energy_shares.mul(1e2)
 
 
 def electricity_demand_per_municipality(year: int = 2022) -> pd.DataFrame:
@@ -231,7 +235,42 @@ def electricity_demand_per_municipality(year: int = 2022) -> pd.DataFrame:
         _("Electricity CTS Demand"),
         _("Electricity Industry Demand"),
     ]
-    return demands_per_sector * 1e-3
+    return demands_per_sector.astype(float) * 1e-3
+
+
+def energy_shares_2045_per_municipality(simulation_id: int) -> pd.DataFrame:
+    """
+    Calculate energy shares of renewables from electric demand per municipality in 2045.
+
+    Returns
+    -------
+    pd.DataFrame
+        Energy share per municipality (index) and technology (column)
+    """
+    energies = energies_per_municipality_2045(simulation_id).mul(1e-3)
+    demands = electricity_demand_per_municipality_2045(simulation_id).sum(axis=1)
+    energy_shares = energies.div(demands, axis=0)
+    return energy_shares.astype(float).mul(1e2)
+
+
+def energy_shares_2045_region(simulation_id: int) -> pd.DataFrame:
+    """
+    Calculate energy shares of renewables from electric demand for region in 2045.
+
+    Like energy_shares_2045_per_municipality() but with weighted demand for
+    correct totals.
+
+    Returns
+    -------
+    pd.DataFrame
+        Energy share per municipality (index) and technology (column)
+    """
+    energies = energies_per_municipality_2045(simulation_id)
+    demands = electricity_demand_per_municipality_2045(simulation_id).sum(axis=1).mul(1e3)
+
+    demand_share = demands / demands.sum()
+    energy_shares = energies.div(demands, axis=0).mul(demand_share, axis=0).sum(axis=0)
+    return energy_shares.astype(float).mul(1e2)
 
 
 def electricity_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
@@ -261,12 +300,12 @@ def electricity_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame
     }
     demand = demand.reindex(mappings.values())
     sector_shares = pd.DataFrame(
-        {sector: demands_per_sector[sector]["2045"] / demands_per_sector[sector]["2045"].sum() for sector in mappings},
+        {sector: demands_per_sector[sector]["2022"] / demands_per_sector[sector]["2022"].sum() for sector in mappings},
     )
     demand = sector_shares * demand.values
     demand.columns = demand.columns.map(lambda column: config.SIMULATION_DEMANDS[mappings[column]])
     demand = demand * 1e-3
-    return demand
+    return demand.astype(float)
 
 
 def heat_demand_per_municipality() -> pd.DataFrame:
@@ -288,7 +327,7 @@ def heat_demand_per_municipality() -> pd.DataFrame:
         _("Electricity CTS Demand"),
         _("Electricity Industry Demand"),
     ]
-    return demands_per_sector * 1e-3
+    return demands_per_sector.astype(float) * 1e-3
 
 
 def heat_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
@@ -317,12 +356,12 @@ def heat_demand_per_municipality_2045(simulation_id: int) -> pd.DataFrame:
     }
     demand = demand.reindex(mappings.values())
     sector_shares = pd.DataFrame(
-        {sector: demands_per_sector[sector]["2045"] / demands_per_sector[sector]["2045"].sum() for sector in mappings},
+        {sector: demands_per_sector[sector]["2022"] / demands_per_sector[sector]["2022"].sum() for sector in mappings},
     )
     demand = sector_shares * demand.values
     demand.columns = demand.columns.map(lambda column: config.SIMULATION_DEMANDS[mappings[column]])
     demand = demand * 1e-3
-    return demand
+    return demand.astype(float)
 
 
 def ghg_reduction(simulation_id: int) -> pd.Series:
@@ -546,7 +585,7 @@ def electricity_overview(year: int) -> pd.Series:
         containing electricity productions and demands (including heat sector demand for electricity)
     """
     demand = electricity_demand_per_municipality(year).sum()
-    production = datapackage.get_full_load_hours(year) * datapackage.get_capacities(year)
+    production = datapackage.get_full_load_hours(year) * datapackage.get_capacities_from_sliders(year)
     production = production[production.notna()] * 1e-3
     return pd.concat([demand, production])
 
@@ -579,10 +618,14 @@ def electricity_overview_from_user(simulation_id: int) -> pd.Series:
     ]
     demand.index = demand.index.get_level_values(1)
 
-    electricity_heat_production_result = electricity_heat_demand(simulation_id)
-    demand["ABW-electricity-demand_hh"] += electricity_heat_production_result["electricity_heat_demand_hh"]
-    demand["ABW-electricity-demand_cts"] += electricity_heat_production_result["electricity_heat_demand_cts"]
-    demand["ABW-electricity-demand_ind"] += electricity_heat_production_result["electricity_heat_demand_ind"]
+    # Electric share of heat production
+    # electricity_heat_production_result = electricity_heat_demand(simulation_id)  # noqa: ERA001
+    # demand["ABW-electricity-demand_hh"] += electricity_heat_production_result[
+    #     "electricity_heat_demand_hh"]
+    # demand["ABW-electricity-demand_cts"] += electricity_heat_production_result[
+    #     "electricity_heat_demand_cts"]
+    # demand["ABW-electricity-demand_ind"] += electricity_heat_production_result[
+    #     "electricity_heat_demand_ind"]
 
     renewables = renewable_electricity_production(simulation_id)
 
@@ -597,7 +640,8 @@ def electricity_overview_from_user(simulation_id: int) -> pd.Series:
             "ABW-wind-onshore",
             "ABW-solar-pv_ground",
             "ABW-solar-pv_rooftop",
-            "ABW-biomass",
+            # Bioenergy: Had to be calculated from power output side of BHPs, use decentral as placeholder
+            "ABW-biogas-bpchp_decentral",
             "ABW-hydro-ror",
             "ABW-electricity-demand_cts",
             "ABW-electricity-demand_hh",
@@ -631,7 +675,7 @@ def get_regional_independency(simulation_id: int) -> tuple[int, int, int, int]:
     # 2022
     demand = datapackage.get_hourly_electricity_demand(2022)
     full_load_hours = datapackage.get_full_load_hours(2022)
-    capacities = datapackage.get_capacities(2022)
+    capacities = datapackage.get_capacities_from_sliders(2022)
     technology_mapping = {
         "ABW-wind-onshore": "wind",
         "ABW-solar-pv_ground": "pv_ground",
@@ -645,10 +689,10 @@ def get_regional_independency(simulation_id: int) -> tuple[int, int, int, int]:
         )
     renewables_summed_flow = pd.concat(renewables, axis=1).sum(axis=1)
     # summary
-    independency_summary_2022 = round(renewables_summed_flow.sum() / demand.sum() * 100)
+    independency_summary_2022 = round(renewables_summed_flow.sum() / demand.sum() * 100, 1)
     # temporal
     independency_temporal_2022 = renewables_summed_flow - demand
-    independency_temporal_2022 = round(sum(independency_temporal_2022 > 0) / 8760 * 100)
+    independency_temporal_2022 = round(sum(independency_temporal_2022 > 0) / 8760 * 100, 1)
 
     # USER
     results = get_results(
@@ -656,10 +700,10 @@ def get_regional_independency(simulation_id: int) -> tuple[int, int, int, int]:
         {"renewable_flows": renewable_flows, "demand_flows": demand_flows},
     )
     # summary
-    independency_summary = round(results["renewable_flows"].sum().sum() / results["demand_flows"].sum().sum() * 100)
+    independency_summary = round(results["renewable_flows"].sum().sum() / results["demand_flows"].sum().sum() * 100, 1)
     # temporal
     independency_temporal = results["renewable_flows"].sum(axis=1) - results["demand_flows"].sum(axis=1)
-    independency_temporal = round(sum(independency_temporal > 0) / 8760 * 100)
+    independency_temporal = round(sum(independency_temporal > 0) / 8760 * 100, 1)
     return independency_summary_2022, independency_temporal_2022, independency_summary, independency_temporal
 
 

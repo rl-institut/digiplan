@@ -185,7 +185,7 @@ def get_potential_values(*, per_municipality: bool = False) -> dict:
         for key, value in areas[profile].items():
             if key == "s_pv_d_3":
                 pv_roof_potential = reader[
-                    [f"installable_power_{orient}" for orient in ["south", "east", "west", "flat"]]
+                    [f"installable_power_{orient}" for orient in ["south", "north", "east", "west", "flat"]]
                 ].sum(axis=1)
                 if per_municipality:
                     potentials = pv_roof_potential
@@ -212,20 +212,43 @@ def get_full_load_hours(year: int) -> pd.Series:
     return full_load_hours
 
 
-def get_capacities(year: int) -> pd.Series:
-    """Return renewable capacities for given year."""
+def get_capacities_from_datapackage() -> pd.DataFrame:
+    """Return renewable capacities for given year from datapackage."""
+    capacities = pd.concat(
+        [
+            pd.read_csv(
+                settings.DIGIPIPE_DIR.path("scalars").path(f"bnetza_mastr_{tech}_stats_muns.csv"),
+                index_col="municipality_id",
+                usecols=["municipality_id", "capacity_net"],
+            ).rename(columns={"capacity_net": tech})
+            for tech in ["wind", "pv_roof", "pv_ground", "hydro", "biomass"]
+        ],
+        axis=1,
+    )
+    capacities.index.name = "mun_id"
+    return capacities
+
+
+def get_capacities_from_sliders(year: int) -> pd.Series:
+    """Return renewable capacities for given year from slider settings (totals for each technology)."""
     if year == 2022:  # noqa: PLR2004
         lookup = "status_quo"
+        bioenergy_power = 55.7  # Workaround for bioenergy as there's no slider
     elif year == 2045:  # noqa: PLR2004
         lookup = "future_scenario"
+        bioenergy_power = 0
     else:
         msg = "Unknown year"
         raise ValueError(msg)
     energy_settings = json.load(Path.open(Path(settings.DIGIPIPE_DIR, "settings/energy_settings_panel.json")))
     technologies = {"wind": "s_w_1", "pv_ground": "s_pv_ff_1", "pv_roof": "s_pv_d_1", "ror": "s_h_1"}
-    return pd.Series(
-        data={technology: energy_settings[key].get(lookup, 0.0) for technology, key in technologies.items()},
+    slider_settings = pd.Series(
+        data={
+            **{technology: energy_settings[key].get(lookup, 0.0) for technology, key in technologies.items()},
+            "bioenergy": bioenergy_power,
+        },
     )
+    return slider_settings
 
 
 def get_power_density(technology: Optional[str] = None) -> dict:

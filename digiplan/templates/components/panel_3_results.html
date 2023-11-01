@@ -32,7 +32,7 @@
       <select id="result_views" class="form-select" aria-label="Default select example">
         <option value="" title="{% translate "Keine Auswahl" %}" selected>{% translate "Keine Auswahl" %}</option>
         <optgroup label="{% translate "Renewable Energies (RE)" %}">
-          <option value="re_power_percentage"
+          <option value="energy_share_2045"
                   title="{% translate "Annual balance sheet share of renewable energy (wind energy, photovoltaic, hydroelectric power) in the electricity demand of the sectors agriculture, GHG (trade, commerce, services), households and industry in percent. The demand is the net electricity consumption, i.e. transmission losses and power plant consumption are not taken into account. 49.7% of the electricity demand in Germany was covered by renewable energies in 2022." %}">
                   {% translate "Renewable Energy Share of Demand" %} (%)
           </option>
@@ -56,11 +56,11 @@
             {% translate "Installed Renewable Capacity (MW/km²)" %}
           </option>
           <option value="wind_turbines_2045"
-                  title="{% translate "Number of Wind Turbines" %}">
+                  title="{% translate "Number of Wind Turbines. The number for your (future) scenario is determined from the installed capacity using a 6.5 MW turbine type." %}">
             {% translate "Number of Wind Turbines" %}
           </option>
           <option value="wind_turbines_square_2045"
-                  title="{% translate "Number of Wind Turbines per km²" %}">
+                  title="{% translate "Number of Wind Turbines per km². The number for your (future) scenario is determined from the installed capacity using a 6.5 MW turbine type." %}">
             {% translate "Number of Wind Turbines per km²" %}
           </option>
         </optgroup>
@@ -83,13 +83,14 @@
           </option>
         </optgroup>
       </select>
-      <img src="{% static 'images/icons/i_info.svg' %}" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" id="info_tooltip_results" title="{% translate "Inhabitants" %}">
+      <img src="{% static 'images/icons/i_info.svg' %}" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" id="info_tooltip_results" title="{% translate "Keine Auswahl" %}">
     </div>
+    <div id="result_simnote" class="panel__simnote"></div>
     <div class="panel-item">
-    <div class="panel-item__padding">
-      <div id="region_chart_2045" class="panel-item__chart"></div>
+      <div class="panel-item__padding">
+        <div id="region_chart_2045" class="panel-item__chart"></div>
+      </div>
     </div>
-  </div>
     <div class="panel-item__nav" style="display: none !important;">
       <p class="panel-item__nav-header">{% translate "View" %}</p>
 

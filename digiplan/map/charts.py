@@ -165,9 +165,9 @@ class ElectricityOverviewChart(SimulationChart):
     def render(self) -> dict:  # noqa: D102
         mapping = {
             "Aufdach-PV": ("ABW-solar-pv_rooftop", "pv_roof"),
-            "Bioenergie": ("ABW-biomass", ""),
+            "Bioenergie": ("ABW-biomass", "bioenergy"),
             "Export*": ("ABW-electricity-export", ""),
-            "Freiflächen-PV": ("ABW-solar-pv_grund", "pv_ground"),
+            "Freiflächen-PV": ("ABW-solar-pv_ground", "pv_ground"),
             "Import*": ("ABW-electricity-import", ""),
             "Verbrauch GHD": ("ABW-electricity-demand_cts", "Strombedarf GDP"),
             "Verbrauch Haushalte": ("ABW-electricity-demand_hh", "Strombedarf Haushalte"),
@@ -178,13 +178,13 @@ class ElectricityOverviewChart(SimulationChart):
         for _i, item in enumerate(self.chart_options["series"]):
             mapped_keys = mapping[item["name"]]
             item["data"][0] = round(
-                self.chart_data["2022"].get(mapped_keys[0], self.chart_data["2022"].get(mapped_keys[1], 0.0)),
+                self.chart_data["2045"].get(mapped_keys[0], self.chart_data["2045"].get(mapped_keys[1], 0.0)),
             )
             item["data"][1] = round(
                 self.chart_data["user"].get(mapped_keys[0], self.chart_data["user"].get(mapped_keys[1], 0.0)),
             )
             item["data"][2] = round(
-                self.chart_data["2045"].get(mapped_keys[0], self.chart_data["2045"].get(mapped_keys[1], 0.0)),
+                self.chart_data["2022"].get(mapped_keys[0], self.chart_data["2022"].get(mapped_keys[1], 0.0)),
             )
         return self.chart_options
 
@@ -298,7 +298,7 @@ class PopulationRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         return chart_options
 
 
@@ -316,7 +316,7 @@ class PopulationDensityRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("EW/km²")
         return chart_options
 
@@ -333,7 +333,7 @@ class EmployeesRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = "Beschäftigte"
         del chart_options["series"][0]["name"]
         return chart_options
@@ -351,7 +351,7 @@ class CompaniesRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = "Betriebe"
         del chart_options["series"][0]["name"]
         return chart_options
@@ -369,7 +369,7 @@ class CapacityRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         return chart_options
 
 
@@ -387,8 +387,8 @@ class Capacity2045RegionChart(SimulationChart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
-        del chart_options["title"]["text"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
+        chart_options["title"]["text"] = "Region ABW"
         return chart_options
 
 
@@ -410,7 +410,7 @@ class CapacitySquareRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("MW")
         return chart_options
 
@@ -442,9 +442,9 @@ class CapacitySquare2045RegionChart(SimulationChart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         chart_options["yAxis"]["name"] = _("MW")
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         return chart_options
 
 
@@ -460,7 +460,7 @@ class EnergyRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("GWh")
         return chart_options
 
@@ -480,26 +480,46 @@ class Energy2045RegionChart(SimulationChart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("GWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 
 class EnergyShareRegionChart(Chart):
-    """Chart for regional energy shares."""
+    """Calculate RES energy shares for whole region."""
 
     lookup = "capacity"
 
     def get_chart_data(self) -> None:
         """Calculate capacities for whole region."""
-        return calculations.energy_shares_per_municipality().sum().round(1)
+        return calculations.energy_shares_region().round(1)
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("%")
+        return chart_options
+
+
+class EnergyShare2045RegionChart(SimulationChart):
+    """Chart for regional energy shares."""
+
+    lookup = "capacity"
+
+    def get_chart_data(self) -> None:
+        """Calculate RES energy shares for whole region."""
+        status_quo_data = calculations.energy_shares_region().round(1)
+        future_data = calculations.energy_shares_2045_region(self.simulation_id).round(1)
+        return list(zip(status_quo_data, future_data))
+
+    def get_chart_options(self) -> dict:
+        """Overwrite title and unit."""
+        chart_options = super().get_chart_options()
+        chart_options["title"]["text"] = "Region ABW"
+        chart_options["yAxis"]["name"] = _("%")
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 
@@ -520,7 +540,7 @@ class EnergyCapitaRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("MWh")
         return chart_options
 
@@ -553,9 +573,9 @@ class EnergyCapita2045RegionChart(SimulationChart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("MWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 
@@ -576,7 +596,7 @@ class EnergySquareRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("MWh")
         return chart_options
 
@@ -609,9 +629,9 @@ class EnergySquare2045RegionChart(SimulationChart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("MWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 
@@ -627,7 +647,7 @@ class WindTurbinesRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         return chart_options
 
 
@@ -645,8 +665,8 @@ class WindTurbines2045RegionChart(SimulationChart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
-        del chart_options["title"]["text"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
+        chart_options["title"]["text"] = "Region ABW"
         return chart_options
 
 
@@ -670,8 +690,8 @@ class WindTurbinesSquareRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
-        chart_options["yAxis"]["name"] = "Anzahl Windenergieanlagen"
+        chart_options["title"]["text"] = "Region ABW"
+        chart_options["yAxis"]["name"] = "WEA/km²"
         return chart_options
 
 
@@ -704,9 +724,9 @@ class WindTurbinesSquare2045RegionChart(SimulationChart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = ""
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein Szenario"]
         return chart_options
 
 
@@ -722,7 +742,7 @@ class ElectricityDemandRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("GWh")
         return chart_options
 
@@ -743,9 +763,9 @@ class ElectricityDemand2045RegionChart(SimulationChart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("GWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 
@@ -766,7 +786,7 @@ class ElectricityDemandCapitaRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("kWh")
         return chart_options
 
@@ -801,9 +821,9 @@ class ElectricityDemandCapita2045RegionChart(SimulationChart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("kWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 
@@ -819,7 +839,7 @@ class HeatDemandRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("GWh")
         return chart_options
 
@@ -838,9 +858,9 @@ class HeatDemand2045RegionChart(SimulationChart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("GWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 
@@ -861,7 +881,7 @@ class HeatDemandCapitaRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("kWh")
         return chart_options
 
@@ -896,9 +916,9 @@ class HeatDemandCapita2045RegionChart(SimulationChart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("kWh")
-        chart_options["xAxis"]["data"] = ["Status Quo", "Mein Szenario"]
+        chart_options["xAxis"]["data"] = ["2022", "Dein\nSzenario"]
         return chart_options
 
 
@@ -914,7 +934,7 @@ class BatteriesRegionChart(Chart):
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("Anzahl")
         del chart_options["series"][0]["name"]
         return chart_options
@@ -927,12 +947,12 @@ class BatteriesCapacityRegionChart(Chart):
 
     def get_chart_data(self) -> list:
         """Calculate population for whole region."""
-        return [int(calculations.battery_capacities_per_municipality().sum())]
+        return [calculations.battery_capacities_per_municipality().sum().round(1)]
 
     def get_chart_options(self) -> dict:
         """Overwrite title and unit."""
         chart_options = super().get_chart_options()
-        del chart_options["title"]["text"]
+        chart_options["title"]["text"] = "Region ABW"
         chart_options["yAxis"]["name"] = _("MWh")
         del chart_options["series"][0]["name"]
         return chart_options
@@ -956,6 +976,7 @@ CHARTS: dict[str, type[Chart]] = {
     "energy_statusquo_region": EnergyRegionChart,
     "energy_2045_region": Energy2045RegionChart,
     "energy_share_statusquo_region": EnergyShareRegionChart,
+    "energy_share_2045_region": EnergyShare2045RegionChart,
     "energy_capita_statusquo_region": EnergyCapitaRegionChart,
     "energy_capita_2045_region": EnergyCapita2045RegionChart,
     "energy_square_statusquo_region": EnergySquareRegionChart,
