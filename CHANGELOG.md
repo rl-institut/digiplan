@@ -6,9 +6,17 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Fixed
+
+## [1.0.0] - 2023-11-01
+### Added
 - RES share charts and choropleth for user scenario
 - Battery storages hook to esys model
 - Add note on tech requirements to onboarding modal
+- Version info in doc modal
 
 ### Changed
 - Remove locale EN
