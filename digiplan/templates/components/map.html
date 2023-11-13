@@ -3,60 +3,8 @@
 {%  include "components/onboarding.html" %}
 
 <section class="map-wrap">
-  <div class="steps">
-    <button type="button" id="menu_previous_btn" class="button button--pagination" disabled>
-      <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
-        <path d="m10.794 16.748 1.4961-1.4961-6.7832-6.7832 6.7832-6.7832-1.4961-1.4961-8.2793 8.2793z"/>
-      </svg>
-    </button>
-    <ul class="steps__list nav nav-tabs" role="tablist">
-      <li id="step_1_today" class="steps__item active" role="presentation">
-        <span class="steps__text">{% translate "Region as of today" %}</span>
-      </li>
-      <li class="steps__item steps__item--separator" aria-hidden="true">
-      </li>
-      <li id="step_2_settings" class="steps__item" role="presentation">
-        <span class="steps__text">{% translate "Settings" %}</span>
-      </li>
-      <li class="steps__item steps__item--separator" aria-hidden="true">
-      </li>
-      <li id="step_3_results" class="steps__item" role="presentation">
-        <span class="steps__text">{% translate "Results" %}</span>
-      </li>
-    </ul>
-    <button type="button" id="menu_next_btn" class="button button--pagination">
-      <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
-        <path d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z"/>
-      </svg>
-    </button>
-    <div id="simulation_spinner" class="lds-ring" hidden=""><div></div><div></div><div></div><div></div></div>
-    <div class="view-toggle" hidden="">
-      <ul class="view-toggle__nav-tabs nav nav-tabs" id="myTab" role="tablist">
-        <li class="view-toggle__nav-item" role="presentation">
-          <button class="view-toggle__nav-link active" id="map-view-tab" data-bs-toggle="tab" data-bs-target="#map-view" type="button" role="tab" aria-controls="map-view" aria-selected="true">
-            <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
-              <path d="m16.933 0-5.8208 3.175-5.2917-3.1497-5.8208 3.1497v13.758l5.8208-3.175 5.2917 3.175 5.8208-3.175v-13.758zm-11.642 1.617v11.112l-4.2333 2.3518v-11.112l4.2333-2.3518zm1.0583 0.023254 4.2333 2.5404v11.112l-4.2333-2.5404v-11.112zm9.525 0.47646v11.113l-4.2333 2.1167v-11.112l4.2333-2.1167z"/>
-            </svg>
-            <span class="view-toggle__text">
-              {% translate "Map" %}
-            </span>
-          </button>
-        </li>
-        <li class="view-toggle__nav-item" role="presentation">
-          <button class="view-toggle__nav-link" id="chart-view-tab" data-bs-toggle="tab" data-bs-target="#chart-view" type="button" role="tab" aria-controls="chart-view" aria-selected="false">
-            <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
-              <path d="m12.7 0.025321v13.733h1.0583v-13.733h-1.0583zm-5.2917 4.208v9.525h1.0583v-9.525h-1.0583zm-5.2917 2.1167v7.4083h1.0583v-7.4083h-1.0583zm-2.1167 9.4821v1.1012h16.933v-1.1012h-16.933z"/>
-            </svg>
-            <span class="view-toggle__text">
-              {% translate "Charts" %}
-            </span>
-          </button>
-        </li>
-      </ul>
-    </div>
-  </div>
 
   <!-- Toggle map/results views -->
   {% include 'components/toggle_view.html' %}
-
+  
 </section>

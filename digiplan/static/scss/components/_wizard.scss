@@ -1,0 +1,7 @@
+.wizard {
+  @extend .w-100;
+  @extend .position-relative;
+  height: $wizard-height;
+  box-shadow: $box-shadow-sm;
+  z-index: 1000;
+}

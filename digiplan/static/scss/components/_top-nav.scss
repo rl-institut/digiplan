@@ -1,6 +1,6 @@
 .top-nav {
   height: $top-nav-height;
-  box-shadow: $box-shadow-sm;
+  border-bottom: 1px solid $border-color;
   z-index: 1000;
 
   .container-fluid {

@@ -2,7 +2,7 @@
   @extend .d-flex;
   @extend .flex-column;
   @extend .flex-md-row;
-  height: calc(100vh - #{$top-nav-height});
+  height: calc(100vh - #{$top-nav-height} - #{$wizard-height});
   overflow-x: hidden;
 }
 
