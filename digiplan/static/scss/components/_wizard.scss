@@ -4,4 +4,98 @@
   height: $wizard-height;
   box-shadow: $box-shadow-sm;
   z-index: 1000;
+
+  &__wrap {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .justify-content-between;
+  }
+
+  &__back,
+  &__next {
+    width: 3rem;
+
+    span {
+      display: none;
+    }
+
+    @include media-breakpoint-up(md) {
+      width: 8rem;
+      
+      span {
+        display: inline-block;
+      }
+    }
+  }
+
+  &__main {
+    flex: 1;
+  }
+
+  &__list {
+    @extend .d-flex;
+    @extend .justify-content-between;
+    @extend .p-0;
+    @extend .m-0;
+    @extend .border-0;
+    list-style: none;
+
+    &-item {
+      @extend .d-flex;
+      @extend .flex-column;
+      @extend .align-items-center;
+      @extend .position-relative;
+      @extend .py-1;
+      @extend .px-0;
+      flex-grow: 1;
+
+      .wizard__list-number {
+        @extend .d-block;
+        @extend .rounded-circle;
+        @extend .text-center;
+        @extend .bg-white;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 1px solid $gray-600;
+        font-size: $font-size-small;
+        z-index: 2000;
+      }
+
+      .wizard__list-text {
+        display: none;
+      }
+
+      &.active {
+        @extend .text-info;
+
+        .wizard__list-number {
+          @extend .bg-info;
+          @extend .text-white;
+          @extend .border-info;
+          @extend .fw-bold;
+        }
+      }
+    }
+  }
+    
+  @include media-breakpoint-up(md) {
+    .wizard__list {
+      .wizard__list-item {
+        .wizard__list-text {
+          display: block;
+          font-size: $font-size-small;
+        }
+
+        &:not(:last-child)::after {
+          content: '';
+          position: absolute;
+          top: 34%;
+          right: 0;
+          transform: translate(52%, -50%);
+          width: 100%;
+          border-top: 4px solid $gray-200;
+        }
+      }
+    }
+  }
 }

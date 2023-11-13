@@ -58,7 +58,48 @@
     </nav>
 
     <section class="wizard">
-      Steps
+      <div class="wizard__wrap">
+        <div class="wizard__back">
+          <button type="button" id="menu_previous_btn" class="button button--secondary" disabled>
+            <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
+              <path d="m10.794 16.748 1.4961-1.4961-6.7832-6.7832 6.7832-6.7832-1.4961-1.4961-8.2793 8.2793z"/>
+            </svg>
+            <span>Zurück</span>
+          </button>
+        </div>
+        <div class="wizard__main">
+          <ul class="wizard__list nav nav-tabs" role="tablist">
+            <li id="step_1_today" class="wizard__list-item active" role="presentation">
+              <span class="wizard__list-number">1</span>
+              <span class="wizard__list-text">Herausforderungen</span>
+            </li>
+            <li id="step_2_settings" class="wizard__list-item" role="presentation">
+              <span class="wizard__list-number">2</span>
+              <span class="wizard__list-text">Region heute</span>
+            </li>
+            <li id="step_3_results" class="wizard__list-item" role="presentation">
+              <span class="wizard__list-number">3</span>
+              <span class="wizard__list-text">Szenarien</span>
+            </li>
+            <li id="" class="wizard__list-item" role="presentation">
+              <span class="wizard__list-number">4</span>
+              <span class="wizard__list-text">Einstellungen</span>
+            </li>
+            <li id="" class="wizard__list-item" role="presentation">
+              <span class="wizard__list-number">5</span>
+              <span class="wizard__list-text">Ergebnisse</span>
+            </li>
+          </ul>
+        </div>
+        <div class="wizard__next">
+          <button type="button" id="menu_next_btn" class="button button--secondary">
+            <span>Weiter</span>
+            <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933" xmlns="http://www.w3.org/2000/svg">
+              <path d="m6.1387 0.1875-1.4961 1.4961 6.7832 6.7832-6.7832 6.7832 1.4961 1.4961 8.2793-8.2793z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
     </section>
 
     <section class="map-content">
