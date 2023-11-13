@@ -65,7 +65,7 @@
     @extend .overflow-auto;
     width: $map-layers-box-width;
     height: calc(100vh - #{$top-nav-height} - #{$steps-height} - #{$map-legend-box-height} - #{$map-legend-box-padding-bottom} - (2 * #{$map-items-padding}));
-    top: calc(#{$steps-height} + #{$map-items-padding});
+    top: $map-items-padding;
     right: $map-items-padding;
     z-index: $map-layers-box-z-index;
   }

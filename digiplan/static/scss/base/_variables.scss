@@ -74,7 +74,7 @@ $map-control-position: absolute;
 $map-control-img-size: 3rem;
 $map-control-text-height: 1rem;
 $map-control-total-height: calc((#{$padding-small} * 2) + #{$map-control-img-size} + #{$map-control-text-height});
-$map-control-position-top: calc(#{$steps-height} + #{$map-items-padding});
+$map-control-position-top: $map-items-padding;
 $map-control-position-right: 1rem;
 $map-control-position-left: 1rem;
 $map-control-z-index: 9;
