@@ -2,8 +2,6 @@ import {resultsTabs, futureDropdown} from "./elements.js";
 
 const menuNextBtn = document.getElementById("menu_next_btn");
 const menuPreviousBtn = document.getElementById("menu_previous_btn");
-const mapTab = document.getElementById("map-view-tab");
-const chartTab = document.getElementById("chart-view-tab");
 const regionChart = document.getElementById("region_chart_2045");
 
 menuNextBtn.addEventListener("click", function () {
@@ -15,23 +13,16 @@ menuPreviousBtn.addEventListener("click", function() {
     PubSub.publish(eventTopics.MENU_CHANGED);
 });
 
-mapTab.addEventListener("click", function () {
-    PubSub.publish(eventTopics.MAP_VIEW_SELECTED);
-});
-
-chartTab.addEventListener("click", function () {
-    PubSub.publish(eventTopics.CHART_VIEW_SELECTED);
-});
-
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, setMapChartViewVisibility);
-PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, showMapView);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hidePotentialLayers);
+PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hideEmpowerplanScenarios);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, setMapChartViewVisibility);
-PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, showMapView);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, deactivateChoropleth);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, terminateSimulation);
+PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, hideEmpowerplanScenarios);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hidePotentialLayers);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showEmpowerplanScenarios);
 PubSub.subscribe(eventTopics.MAP_VIEW_SELECTED, setResultsView);
 PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, setResultsView);
 
@@ -79,13 +70,6 @@ function getCurrentMenuTab() {
     return document.querySelector("#js-panel-container > .panel__content > .tab-content > .active");
 }
 
-
-function showMapView(msg) {
-    bootstrap.Tab.getInstance(mapTab).show();
-    PubSub.publish(eventTopics.MAP_VIEW_SELECTED);
-    return logMessage(msg);
-}
-
 function setMapChartViewVisibility(msg) {
     const view_toggle = document.getElementsByClassName("view-toggle")[0];
     view_toggle.hidden = msg !== eventTopics.MENU_RESULTS_SELECTED;
@@ -117,5 +101,21 @@ function terminateSimulation(msg) {
         });
         document.getElementById("simulation_spinner").hidden = true;
     }
+    return logMessage(msg);
+}
+
+function showEmpowerplanScenarios(msg) {
+    const map_wrap = document.getElementsByClassName("map-wrap")[0];
+    document.getElementsByClassName("map-wrap")[0].style.alignItems = "center";
+    document.getElementsByClassName("map-wrap")[0].style.padding = "3rem";
+    map_wrap.getElementsByTagName("img")[0].hidden = false;
+    return logMessage(msg);
+}
+
+function hideEmpowerplanScenarios(msg) {
+    const map_wrap = document.getElementsByClassName("map-wrap")[0];
+    document.getElementsByClassName("map-wrap")[0].style.alignItems = null;
+    document.getElementsByClassName("map-wrap")[0].style.padding = "0rem";
+    map_wrap.getElementsByTagName("img")[0].hidden = true;
     return logMessage(msg);
 }

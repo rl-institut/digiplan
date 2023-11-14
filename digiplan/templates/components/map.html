@@ -2,7 +2,7 @@
 
 {%  include "components/onboarding.html" %}
 
-<section class="map-wrap" style="display: flex; justify-content: start; align-items: center; padding-top: 3rem;">
-  <img width="862" height="487" src="{% static 'images/sketches/scenarios-main.png' %}" alt="">
+<section class="map-wrap">
+  <img hidden width="862" height="487" src="{% static 'images/sketches/scenarios-main.png' %}" alt="">
+  {% include 'components/toggle_view.html' %}
 </section>
-
