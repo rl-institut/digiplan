@@ -109,6 +109,7 @@ function showEmpowerplanScenarios(msg) {
     document.getElementsByClassName("map-wrap")[0].style.alignItems = "center";
     document.getElementsByClassName("map-wrap")[0].style.padding = "3rem";
     map_wrap.getElementsByTagName("img")[0].hidden = false;
+    document.getElementById("mainTabContent").hidden = true;
     return logMessage(msg);
 }
 
@@ -117,5 +118,6 @@ function hideEmpowerplanScenarios(msg) {
     document.getElementsByClassName("map-wrap")[0].style.alignItems = null;
     document.getElementsByClassName("map-wrap")[0].style.padding = "0rem";
     map_wrap.getElementsByTagName("img")[0].hidden = true;
+    document.getElementById("mainTabContent").hidden = false;
     return logMessage(msg);
 }
