@@ -5,19 +5,19 @@
   <section class="panel__content">
     <div class="tab-content">
       <div class="tab-pane active" id="panel_1_challenges" role="tabpanel" aria-labelledby="panel_1_today_tab">
-
+        {% include 'components/panel_1_challenges.html' %}
       </div>
       <div class="tab-pane" id="panel_2_today" role="tabpanel" aria-labelledby="panel_2_settings_tab">
-        {% include 'components/panel_1_today.html' %}
+        {% include 'components/panel_2_today.html' %}
       </div>
       <div class="tab-pane" id="panel_3_scenarios" role="tabpanel" aria-labelledby="panel_3_results_tab">
-
+        {% include 'components/panel_3_scenarios.html' %}
       </div>
       <div class="tab-pane" id="panel_4_settings" role="tabpanel" aria-labelledby="panel_3_results_tab">
-        {% include 'components/panel_2_settings.html' %}
+        {% include 'components/panel_4_settings.html' %}
       </div>
       <div class="tab-pane" id="panel_5_results" role="tabpanel" aria-labelledby="panel_3_results_tab">
-        {% include 'components/panel_3_results.html' %}
+        {% include 'components/panel_5_results.html' %}
       </div>
     </div>
   </section>

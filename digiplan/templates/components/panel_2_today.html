@@ -1,0 +1,120 @@
+{% load static i18n %}
+
+<!--<div class="panel__goal">-->
+<!--&lt;!&ndash;  <div class="panel__goal-header">&ndash;&gt;-->
+<!--&lt;!&ndash;    <span>{% translate "Goals 2045" %}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--  <div class="panel__charts">-->
+<!--    <div class="panel__chart">-->
+<!--      <div class="panel__chart-title">-->
+<!--        {% translate "Anteil EE am Stromverbrauch" %} (%)-->
+<!--      </div>-->
+<!--      <div class="panel__chart-content">-->
+<!--        <div id="renewable_share_goal_chart" class="goal-chart"></div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="panel__chart">-->
+<!--      <div class="panel__chart-title">-->
+<!--        {% translate "THG-Reduktion ggü. 2019 (%)" %}-->
+<!--      </div>-->
+<!--      <div class="panel__chart-content">-->
+<!--        <div id="co2_emissions_goal_chart" class="goal-chart"></div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<div class="panel__settings panel__settings--padding">
+  <div class="panel-item">
+    <h2 class="panel-item__heading panel-item__heading--nopadding">
+      <svg width="16" height="16" version="1.1" fill="currentColor" viewBox="0 0 16.933 16.933"
+           xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="m6.2265 0.10542c-3.4031 0-6.1738 2.7707-6.1738 6.1738 1e-8 3.4031 2.7707 6.1738 6.1738 6.1738 1.5629 0 2.9918-0.58449 4.0804-1.5462l5.3868 5.3883 0.74776-0.74828-5.4038-5.4059c0.85078-1.0584 1.3606-2.4017 1.3606-3.8618 0-3.4031-2.7687-6.1738-6.1717-6.1738zm0 1.0589c2.8311 0 5.1154 2.2838 5.1154 5.1149s-2.2843 5.1154-5.1154 5.1154c-2.8311 0-5.1149-2.2843-5.1149-5.1154s2.2838-5.1149 5.1149-5.1149z">
+      </svg>
+      {% translate "Situation today" %}
+    </h2>
+    <div class="panel-item__form">
+      <select class="form-select" aria-label="Default select example" id="situation_today">
+        <option value="" title="{% translate "Keine Auswahl" %}" selected>{% translate "Keine Auswahl" %}</option>
+        <optgroup label="{% translate "Planning Region" %}">
+          <option value="population_statusquo" title="{% translate "EinwohnerInnen - Historische Daten, heute und Zukunftsprognosen" %}">{% translate "Population" %}</option>
+          <option value="population_density_statusquo"
+                  title="{% translate "Bevölkerung im Jahr 2022 in EinwohnerInnen je km². 2021 betrug die Bevölkerungsdichte in Deutschland 238 und in Sachsen-Anhalt 106." %}">
+            {% translate "Population Density" %}
+          </option>
+          <option value="employees_statusquo" title="{% translate "Anzahl der sozialversicherungspflichtig Beschäftigten im Jahr 2022." %}">{% translate "Beschäftigte" %}</option>
+          <option value="companies_statusquo" title="{%  translate "Anzahl der Betriebsstätten im Jahr 2022." %}">{% translate "Betriebe" %}</option>
+        </optgroup>
+        <optgroup label="{% translate "Renewable Energies (RE)" %}">
+          <option value="energy_share_statusquo"
+                  title="{% translate "Annual balance sheet share of renewable energy (wind energy, photovoltaic, hydroelectric power) in the electricity demand of the sectors agriculture, GHG (trade, commerce, services), households and industry in percent. The demand is the net electricity consumption, i.e. transmission losses and power plant consumption are not taken into account. 49.7% of the electricity demand in Germany was covered by renewable energies in 2022." %}">
+                  {% translate "Renewable Energy Share of Demand" %} (%)
+          </option>
+          <option value="energy_statusquo"
+                  title="{% translate "Annual amount of energy fed into the grid from renewable plants in gigawatt hours (wind energy, photovoltaic, hydro power)." %}">
+            {% translate "Renewable Electricity Production (GWh)" %}</option>
+          <option value="energy_capita_statusquo"
+                  title="{% translate "Annual amount of energy fed in from renewable plants (wind energy, photovoltaic, hydro power) in relation to the number of inhabitants in megawatt hours per inhabitant." %}">
+            {% translate "Renewable Electricity Production per Capita (MWh)" %}
+          </option>
+          <option value="energy_square_statusquo"
+                  title="{% translate "Annual amount of energy fed in from renewable plants (wind energy, photovoltaic, hydro power) related to the area in megawatt hours per km²." %}">
+            {% translate "Renewable Electricity Production per km² (MWh)" %}
+          </option>
+          <option value="capacity_statusquo"
+                  title="{% translate "Installed capacity from renewable energy plants (wind energy, photovoltaic, hydro power, biomass and biogas) in megawatts." %}">
+            {% translate "Installed Renewable Capacity (MW)" %}
+          </option>
+          <option value="capacity_square_statusquo"
+                  title="{% translate "Installed capacity from renewable energy plants (wind energy, photovoltaic, hydro power, biomass and biogas) in megawatts per km²." %}">
+            {% translate "Installed Renewable Capacity (MW/km²)" %}
+          </option>
+          <option value="wind_turbines_statusquo"
+                  title="{% translate "Number of Wind Turbines" %}">
+            {% translate "Number of Wind Turbines" %}
+          </option>
+          <option value="wind_turbines_square_statusquo"
+                  title="{% translate "Number of Wind Turbines per km²" %}">
+            {% translate "Number of Wind Turbines per km²" %}
+          </option>
+        </optgroup>
+        <optgroup label="{% translate "Energy Demand" %}">
+          <option value="electricity_demand_statusquo"
+                  title="{% translate "Annual electricity demand in gigawatt hours of the sectors, households, tertiary sector (trade, commerce, services), agriculture and industry. This is the net electricity consumption." %}">
+            {% translate "Electricity Demand (GWh)" %}
+          </option>
+          <option value="electricity_demand_capita_statusquo"
+                  title="{% translate "Annual electricity demand in gigawatt hours of the sectors, households, tertiary sector (trade, commerce, services), agriculture and industry per inhabitant This is the net electricity consumption." %}">
+            {% translate "Electricity Demand per Capita (kWh)" %}
+          </option>
+          <option value="heat_demand_statusquo"
+                  title="{% translate "Annual heat consumption for space heating and domestic hot water in gigawatt hours in the household, commercial, trade and services, and agriculture (excluding industry) sectors." %}">
+            {% translate "Heat Demand (GWh)" %}
+          </option>
+          <option value="heat_demand_capita_statusquo"
+                  title="{% translate "Annual heat consumption per inhabitant for space heating and domestic hot water in gigawatt hours in the household, commercial, trade and services, and agriculture (excluding industry) sectors." %}">
+            {% translate "Heat Demand per Capita (kWh)" %}
+          </option>
+          <option value="batteries_statusquo" title="{% translate "Anzahl Batteriespeicher" %}">{% translate "Anzahl Batteriespeicher" %}</option>
+          <option value="batteries_capacity_statusquo" title="{%  translate 'Kapazität Batteriespeicher' %}">{% translate "Kapazität Batteriespeicher" %}</option>
+        </optgroup>
+      </select>
+      <img src="{% static 'images/icons/i_info.svg' %}" id="info_tooltip" alt="Info Icon" class="i-icon" data-bs-toggle="tooltip" title="{% translate "Keine Auswahl" %}">
+    </div>
+  </div>
+  <div class="panel-item">
+    <div class="panel-item__padding">
+      <div id="region_chart_statusquo" class="panel-item__chart"></div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript code -->
+<script>
+  const select = document.getElementById("situation_today");
+  const image = document.getElementById("info_tooltip");
+
+  select.addEventListener("change", function() {
+    image.title = select.options[select.selectedIndex].title;
+  });
+</script>

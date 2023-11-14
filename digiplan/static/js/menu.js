@@ -45,7 +45,8 @@ PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, terminateSimulation);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, hideEmpowerplanScenarios);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hidePotentialLayers);
-PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, showEmpowerplanScenarios);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideEmpowerplanScenarios);
+PubSub.subscribe(eventTopics.MENU_SCENARIOS_SELECTED, showEmpowerplanScenarios);
 PubSub.subscribe(eventTopics.MAP_VIEW_SELECTED, setResultsView);
 PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, setResultsView);
 
