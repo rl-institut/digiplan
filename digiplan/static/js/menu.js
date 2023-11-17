@@ -142,6 +142,9 @@ function hideEmpowerplanContent(msg) {
         content.style.alignItems = null;
         content.style.padding = "0rem";
     }
+    if (msg === "MENU_SETTINGS_SELECTED") {
+        document.getElementById("map-view-tab").click();
+    }
     document.getElementById("mainTabContent").hidden = false;
     map.resize();
     return logMessage(msg);

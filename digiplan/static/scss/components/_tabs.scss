@@ -54,16 +54,21 @@
 
 .view-toggle {
   @extend .position-absolute;
-  @extend .fs-7;
+  @extend .start-50;
+  @extend .translate-middle;
+  @extend .bg-white;
   @extend .rounded;
-  background-color: #EDF1FC;
-  top: 9px;
-  right: $padding-large;
+  @extend .fs-7;
+  top: 5rem;
+  z-index: 100;
+
+  @include media-breakpoint-down(sm) {
+    font-size: $font-size-xsmall;
+  }
 
   &__nav-tabs {
     @extend .nav;
     @extend .nav-tabs;
-    @extend .border-0;
   }
 
   &__nav-item {
