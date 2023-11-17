@@ -3,9 +3,24 @@
 {%  include "components/onboarding.html" %}
 
 <section class="map-wrap">
-  <div id="challenges">
-    Challenges content
+  <div class="main-content" id="challenges">
+    <h2>Energiewende in Oderland-Spree</h2>
+    <div class="carousel">
+      <div class="carousel__item">
+        <div class="carousel__image">
+          <img width="320" height="509" src="{% static 'images/oderland_map.png' %}" alt="Karte von Oderland-Spree">
+        </div>
+        <div class="carousel__text">
+          <p>Deutschland soll bis <b>2045</b> klimaneutral werden. Um dieses Ziel zu erreichen muss der Ausbau der Erneuerbaren Energien massiv beschleunigt werden. Bereits bis <b>2030</b> ist das Ziel, mindestens <b>80 Prozent des Stromverbrauchs aus Erneuerbaren Energien</b> – vor allem aus Wind- und Solarenergie zu decken.</p>
+          <p>Den Sektorzielen des Klimaschutzgesetzes folgend hat auch Brandenburg Strategien der Klima- und Energiepolitik erarbeitet und im Rahmen der <b>Energiestrategie 2040</b> entsprechende Leitplanken veröffentlicht.</p>
+          <p>Auch die Region <b>Oderland-Spree</b> steht vor der großen Aufgabe, diese Ziele zu verfolgen und entsprechende Strategien der Energieeinsparung und -erzeugung auf den Weg zu bringen. Diese Strategien sind die Leitplanken für die strategische Ausrichtung der energiebezogenen Aufgaben der Regionalen Planungsgemeinschaft Oderland-Spree (RPG).</p>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: row; justify-content: center; padding-top: 1rem;">
+      <img width="103" height="53" src="{% static 'images/arrows-placeholder.png' %}" alt="">
+    </div>
   </div>
-  <div id="scenarios" hidden><img width="862" height="487" src="{% static 'images/sketches/scenario_main.svg' %}" alt=""></div>
+  <div class="main-content" id="scenarios" hidden><img width="862" height="487" src="{% static 'images/sketches/scenario_main.svg' %}" alt=""></div>
   {% include 'components/toggle_view.html' %}
 </section>

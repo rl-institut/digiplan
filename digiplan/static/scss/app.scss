@@ -9,6 +9,7 @@
 @import 'base/mixins';
 
 @import 'components/buttons';
+@import 'components/carousel';
 @import 'components/charts';
 @import 'components/controls';
 @import 'components/loader';
@@ -24,5 +25,6 @@
 @import 'components/wizard';
 
 @import 'layouts/general';
+@import 'layouts/main';
 @import 'layouts/panel';
 @import 'layouts/results';

@@ -1,0 +1,23 @@
+.carousel {
+  @extend .w-100;
+  height: 60vh;
+
+  &__item {
+    @extend .d-flex;
+    @extend .flex-row;
+    @extend .w-100;
+    @extend .h-100;
+    @extend .bg-light;
+  }
+
+  &__image {
+    img {
+      @extend .h-100;
+      @extend .w-auto;
+    }
+  }
+
+  &__text {
+    @extend .p-4;
+  }
+}
