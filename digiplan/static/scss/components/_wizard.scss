@@ -24,7 +24,7 @@
 
     @include media-breakpoint-up(md) {
       width: 8rem;
-      
+
       span {
         display: inline-block;
       }
@@ -85,7 +85,7 @@
       }
     }
   }
-    
+
   @include media-breakpoint-up(md) {
     .wizard__list {
       .wizard__list-item {
