@@ -36,17 +36,18 @@ menuPreviousBtn.addEventListener("click", function() {
     PubSub.publish(eventTopics.MENU_CHANGED);
 });
 
+PubSub.subscribe(eventTopics.MENU_CHALLENGES_SELECTED, showEmpowerplanContent);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hidePotentialLayers);
-PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hideEmpowerplanScenarios);
+PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hideEmpowerplanContent);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, deactivateChoropleth);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, terminateSimulation);
-PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, hideEmpowerplanScenarios);
+PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, hideEmpowerplanContent);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hidePotentialLayers);
-PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideEmpowerplanScenarios);
-PubSub.subscribe(eventTopics.MENU_SCENARIOS_SELECTED, showEmpowerplanScenarios);
+PubSub.subscribe(eventTopics.MENU_RESULTS_SELECTED, hideEmpowerplanContent);
+PubSub.subscribe(eventTopics.MENU_SCENARIOS_SELECTED, showEmpowerplanContent);
 PubSub.subscribe(eventTopics.MAP_VIEW_SELECTED, setResultsView);
 PubSub.subscribe(eventTopics.CHART_VIEW_SELECTED, setResultsView);
 
@@ -124,20 +125,24 @@ function terminateSimulation(msg) {
     return logMessage(msg);
 }
 
-function showEmpowerplanScenarios(msg) {
-    const map_wrap = document.getElementsByClassName("map-wrap")[0];
-    document.getElementsByClassName("map-wrap")[0].style.alignItems = "center";
-    document.getElementsByClassName("map-wrap")[0].style.padding = "3rem";
-    map_wrap.getElementsByTagName("img")[0].hidden = false;
+function showEmpowerplanContent(msg) {
+    const contentID = msg === "MENU_CHALLENGES_SELECTED" ? "challenges" : "scenarios";
+    const content = document.getElementById(contentID);
+    content.hidden = false;
+    content.style.alignItems = "center";
+    content.style.padding = "3rem";
     document.getElementById("mainTabContent").hidden = true;
     return logMessage(msg);
 }
 
-function hideEmpowerplanScenarios(msg) {
-    const map_wrap = document.getElementsByClassName("map-wrap")[0];
-    document.getElementsByClassName("map-wrap")[0].style.alignItems = null;
-    document.getElementsByClassName("map-wrap")[0].style.padding = "0rem";
-    map_wrap.getElementsByTagName("img")[0].hidden = true;
+function hideEmpowerplanContent(msg) {
+    for (const contentID of ["challenges", "scenarios"]) {
+        const content = document.getElementById(contentID);
+        content.hidden = true;
+        content.style.alignItems = null;
+        content.style.padding = "0rem";
+    }
     document.getElementById("mainTabContent").hidden = false;
+    map.resize();
     return logMessage(msg);
 }
