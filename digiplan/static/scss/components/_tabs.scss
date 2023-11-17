@@ -59,8 +59,8 @@
   @extend .bg-white;
   @extend .rounded;
   @extend .fs-7;
-  top: 5rem;
-  z-index: 100;
+  top: 2rem;
+  z-index: 10000;
 
   @include media-breakpoint-down(sm) {
     font-size: $font-size-xsmall;
@@ -114,8 +114,8 @@
     &.active {
       @extend .active;
       @extend .border-1;
-      @extend .bg-white;
       @extend .fw-semibold;
+      background-color: #EDF1FC !important;
     }
 
     svg {
