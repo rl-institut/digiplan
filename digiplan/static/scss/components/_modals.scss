@@ -118,20 +118,21 @@
       }
     }
 
+    .carousel__bottomtext {
+      font-size: 0.875rem;
+      color: grey;
+      width: 50%;
+      padding-top: 3rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
     .carousel__logo {
       @extend .col-4;
       @extend .col-xl-2;
       @extend .d-flex;
       @extend .align-items-center;
       @extend .justify-content-center;
-
-      &--rli img {
-        height: 4rem;
-      }
-
-      &--eaa img {
-        height: 5rem;
-      }
 
       &--gestalten img {
         height: 5rem;
@@ -142,12 +143,9 @@
       }
 
       &--bmwsb img {
-        height: 9rem;
+        height: 10rem;
       }
 
-      &--bmi img {
-        height: 9rem;
-      }
     }
   }
 

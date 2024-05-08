@@ -37,6 +37,7 @@ section.offcanvas {
     @extend .flex-row;
     @extend .justify-content-between;
     @extend .pt-4;
+    @extend .pb-4;
   }
 
   .offcanvas-view__logo {
@@ -60,10 +61,6 @@ section.offcanvas {
 
     &--bmwsb img {
       width: 12.5rem;
-    }
-
-    &--bmi img {
-      width: 10rem;
     }
   }
 
