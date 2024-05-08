@@ -11,6 +11,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - update packages to latest versions in poetry lockfile
 
 ### Fixed
+- show choropleth on revisit of status quo
 
 ## [1.0.1] - 2023-11-01
 ### Added
