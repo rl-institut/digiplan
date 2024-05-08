@@ -9,6 +9,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ### Changed
 - update packages to latest versions in poetry lockfile
+- update funding information
 
 ### Fixed
 
