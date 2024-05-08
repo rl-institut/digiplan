@@ -13,6 +13,7 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ### Fixed
 - show choropleth on revisit of status quo
+- fix empty popup on doubleclick
 
 ## [1.0.1] - 2023-11-01
 ### Added
