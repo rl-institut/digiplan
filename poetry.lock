@@ -1160,7 +1160,7 @@ libsass = ">=0.7.0,<1"
 
 [[package]]
 name = "django-mapengine"
-version = "0.16.0"
+version = "0.18.3"
 description = "Map engine for maplibre in django"
 optional = false
 python-versions = ">=3.9,<3.12"
@@ -1170,7 +1170,7 @@ develop = false
 [package.dependencies]
 colorbrewer = {git = "https://github.com/henhuy/colorbrewer-python.git"}
 django-appconf = "^1.0.5"
-django-environ = "^0.10.0"
+django-environ = ">=0.10.0"
 django-geojson = "^3.1.0"
 djangorestframework = "^3.14.0"
 djangorestframework-mvt = "^0.2.5"
@@ -1179,8 +1179,8 @@ range-key-dict = "^1.1.0"
 [package.source]
 type = "git"
 url = "https://github.com/rl-institut/django-mapengine.git"
-reference = "v0.16.0"
-resolved_reference = "77f26d0e533e4465c597f7704839a7f83980863a"
+reference = "v0.18.3"
+resolved_reference = "cc4a61f0530cf446db35b79c4064fb89cf8e03cf"
 
 [[package]]
 name = "django-oemof"
@@ -3785,4 +3785,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "8dc3d6aaed5164939c43dde3b7a31c4d17ceca9c54db9e8de3366263cbc4bc26"
+content-hash = "0d5bf730b5b09df4f5af6054cfa327440798ed8e84785fa5a6a4ba52d559e0a2"

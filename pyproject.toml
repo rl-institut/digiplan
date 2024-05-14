@@ -40,7 +40,7 @@ django-geojson = "^3.1.0"
 # Custom apps
 # ------------------------------------------------------------------------------
 django-oemof = {git = "https://github.com/rl-institut/django-oemof.git", rev = "v0.18.0"}
-django-mapengine = {git = "https://github.com/rl-institut/django-mapengine.git", tag="v0.16.0"}
+django-mapengine = {git = "https://github.com/rl-institut/django-mapengine.git", tag="v0.18.3"}
 geojson = "^3.0.1"
 oemof-network = "0.5.0a1"
 oemof-tabular = {git = "https://github.com/oemof/oemof-tabular.git", rev = "0b17194eedf4940aa3abdbdb53cdcddb81880d12"}
