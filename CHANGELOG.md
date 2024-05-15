@@ -8,6 +8,13 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 ### Added
 
 ### Changed
+
+### Fixed
+
+## [1.1.0] - 2024-05-15
+### Added
+
+### Changed
 - update packages to latest versions in poetry lockfile
 - update funding information
 
