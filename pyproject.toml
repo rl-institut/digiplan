@@ -13,7 +13,7 @@ authors = [
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.12"
-gunicorn = "^20.0.4"  # https://github.com/benoitc/gunicorn
+gunicorn = "^22.0.0"  # https://github.com/benoitc/gunicorn
 rcssmin = "^1.0.6"  # https://github.com/ndparker/rcssmin
 argon2-cffi = "^20.1.0"  # https://github.com/hynek/argon2_cffi
 whitenoise = "^5.2.0"  # https://github.com/evansd/whitenoise
