@@ -495,6 +495,38 @@ MAP_ENGINE_CHOROPLETHS = [
 
 MAP_ENGINE_POPUPS = [
     setup.Popup(
+        "wind",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "pvground",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "pvroof",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "hydro",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "biomass",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "combustion",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "gsgk",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
+        "storage",
+        popup_at_default_layer=True,
+    ),
+    setup.Popup(
         "municipality",
         popup_at_default_layer=False,
         choropleths=[
@@ -529,37 +561,5 @@ MAP_ENGINE_POPUPS = [
             "batteries_statusquo",
             "batteries_capacity_statusquo",
         ],
-    ),
-    setup.Popup(
-        "wind",
-        popup_at_default_layer=True,
-    ),
-    setup.Popup(
-        "pvground",
-        popup_at_default_layer=True,
-    ),
-    setup.Popup(
-        "pvroof",
-        popup_at_default_layer=True,
-    ),
-    setup.Popup(
-        "hydro",
-        popup_at_default_layer=True,
-    ),
-    setup.Popup(
-        "biomass",
-        popup_at_default_layer=True,
-    ),
-    setup.Popup(
-        "combustion",
-        popup_at_default_layer=True,
-    ),
-    setup.Popup(
-        "gsgk",
-        popup_at_default_layer=True,
-    ),
-    setup.Popup(
-        "storage",
-        popup_at_default_layer=True,
     ),
 ]
