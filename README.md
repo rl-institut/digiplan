@@ -3,6 +3,8 @@
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg)](https://github.com/pydanny/cookiecutter-django/)
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
+App for Digiplan project. The data pipeline can be found here: [Digipipe](https://github.com/rl-institut/digipipe/)
+
 # Getting started
 
 First you have to decide, wether you want to run the application via Docker or simply

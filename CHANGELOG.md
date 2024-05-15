@@ -11,6 +11,21 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 
 ### Fixed
 
+## [1.1.0] - 2024-05-15
+### Added
+
+### Changed
+- update packages to latest versions in poetry lockfile
+- update funding information
+
+### Fixed
+- show choropleth on revisit of status quo
+- fix empty popup on doubleclick
+- keep detail panel open on slider value change
+- change slider callback events to "onFinish" to reduce callbacks due to rapid
+  changing
+- hide result choropleths on revisit
+
 ## [1.0.1] - 2023-11-01
 ### Added
 - RES share charts and choropleth for user scenario

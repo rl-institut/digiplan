@@ -1,4 +1,4 @@
-import {resultsTabs, futureDropdown} from "./elements.js";
+import {resultsTabs, statusquoDropdown, futureDropdown} from "./elements.js";
 
 const menuNextBtn = document.getElementById("menu_next_btn");
 const menuPreviousBtn = document.getElementById("menu_previous_btn");
@@ -26,6 +26,7 @@ chartTab.addEventListener("click", function () {
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, showMapView);
 PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, hidePotentialLayers);
+PubSub.subscribe(eventTopics.MENU_STATUS_QUO_SELECTED, reactivateChoropleth);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, setMapChartViewVisibility);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, showMapView);
 PubSub.subscribe(eventTopics.MENU_SETTINGS_SELECTED, deactivateChoropleth);
@@ -89,6 +90,23 @@ function showMapView(msg) {
 function setMapChartViewVisibility(msg) {
     const view_toggle = document.getElementsByClassName("view-toggle")[0];
     view_toggle.hidden = msg !== eventTopics.MENU_RESULTS_SELECTED;
+    return logMessage(msg);
+}
+
+function reactivateChoropleth(msg) {
+    let choropleth = "";
+    let infoToolTip = "";
+    if (msg === eventTopics.MENU_STATUS_QUO_SELECTED) {
+        choropleth = statusquoDropdown.value;
+        infoToolTip = statusquoDropdown.options[statusquoDropdown.selectedIndex].title;
+    } else {
+        choropleth = futureDropdown.value;
+        infoToolTip = futureDropdown.options[futureDropdown.selectedIndex].title;
+    }
+    if (choropleth !== "") {
+        PubSub.publish(mapEvent.CHOROPLETH_SELECTED, choropleth);
+    }
+    document.getElementById("info_tooltip_results").title = statusquoDropdown.options[statusquoDropdown.selectedIndex].title;
     return logMessage(msg);
 }
 
