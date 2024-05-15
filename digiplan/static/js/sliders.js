@@ -38,7 +38,7 @@ Array.from(Object.keys(SETTINGS_DEPENDENCY_MAP)).forEach(dependent_name => {
   const dependency_names = SETTINGS_DEPENDENCY_MAP[dependent_name];
   Array.from(dependency_names).forEach(dependency_name => {
     $("#id_" + dependency_name).ionRangeSlider({
-        onChange: function (data) {
+        onFinish: function (data) {
           const msg = eventTopics.DEPENDENCY_PANEL_SLIDER_CHANGE;
           PubSub.publish(msg, {
             dependent: dependent_name,
@@ -51,7 +51,7 @@ Array.from(Object.keys(SETTINGS_DEPENDENCY_MAP)).forEach(dependent_name => {
   });
 });
 $(".js-slider.js-slider-panel.js-power-mix").ionRangeSlider({
-    onChange: function (data) {
+    onFinish: function (data) {
       PubSub.publish(eventTopics.POWER_PANEL_SLIDER_CHANGE, data);
     }
   }
@@ -60,21 +60,14 @@ $(potentialWindSwitches).on("change", function () {
   PubSub.publish(eventTopics.WIND_CONTROL_ACTIVATED);
 });
 $(".js-slider.js-slider-panel").ionRangeSlider({
-    onChange: function (data) {
+    onFinish: function (data) {
       PubSub.publish(eventTopics.PANEL_SLIDER_CHANGE, data);
     }
   }
 );
 $(sectorSlider).ionRangeSlider({
-    onChange: function (data) {
+    onFinish: function (data) {
       calculate_slider_value(data);
-    }
-  }
-);
-
-$(".js-slider.js-slider-panel").ionRangeSlider({
-    onChange: function (data) {
-      PubSub.publish(eventTopics.PANEL_SLIDER_CHANGE, data);
     }
   }
 );
@@ -84,37 +77,37 @@ $(".form-check-input").on(
     }
 );
 $("#id_s_w_5_1").ionRangeSlider({
-    onChange: function (data) {
+    onFinish: function (data) {
       calculate_max_wind();
     }
   }
 );
 $("#id_s_w_5_2").ionRangeSlider({
-    onChange: function (data) {
+    onFinish: function (data) {
       calculate_max_wind();
     }
   }
 );
 $("#id_s_pv_ff_3").ionRangeSlider({
-    onChange: function (data) {
+    onFinish: function (data) {
       calculate_max_pv_ff();
     }
   }
 );
 $("#id_s_pv_ff_4").ionRangeSlider({
-    onChange: function (data) {
+    onFinish: function (data) {
       calculate_max_pv_ff();
     }
   }
 );
 $("#id_s_pv_d_3").ionRangeSlider({
-    onChange: function (data) {
+    onFinish: function (data) {
       calculate_max_pv_d();
     }
   }
 );
 $("#id_v_iv_3").ionRangeSlider({
-    onChange: function (data) {
+    onFinish: function (data) {
       $(`#id_v_iv_1`).data("ionRangeSlider").update({from:data.from});
     }
   }
