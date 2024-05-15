@@ -15,6 +15,8 @@ and this project tries to adhere to [Semantic Versioning](https://semver.org/spe
 - show choropleth on revisit of status quo
 - fix empty popup on doubleclick
 - keep detail panel open on slider value change
+- change slider callback events to "onFinish" to reduce callbacks due to rapid
+  changing
 
 ## [1.0.1] - 2023-11-01
 ### Added
