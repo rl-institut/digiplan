@@ -46,7 +46,7 @@ oemof-network = "0.5.0a1"
 oemof-tabular = {git = "https://github.com/oemof/oemof-tabular.git", rev = "0b17194eedf4940aa3abdbdb53cdcddb81880d12"}
 
 [tool.poetry.group.dev.dependencies]
-Werkzeug = "^2.0.1" # https://github.com/pallets/werkzeug
+Werkzeug = "^3.0.3" # https://github.com/pallets/werkzeug
 ipdb = "^0.13.7"  # https://github.com/gotcha/ipdb
 sphinx = "^5.3.0"  # https://github.com/sphinx-doc/sphinx
 sphinx-material = "^0.0.35"
